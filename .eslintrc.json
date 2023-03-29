@@ -1,5 +1,6 @@
 {
   "root": true,
+  "parser": "@typescript-eslint/parser",
   "ignorePatterns": ["**/*"],
   "plugins": ["@nrwl/nx"],
   "overrides": [
@@ -26,10 +27,15 @@
       "extends": [
         "plugin:@nrwl/nx/typescript",
         "airbnb-base",
-        "airbnb-typescript/base",
+        "airbnb-typescript",
         "prettier"
       ],
-      "rules": {}
+      "rules": {},
+      "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "project": "tsconfig.base.json",
+        "sourceType": "module"
+      }
     },
     {
       "files": ["*.js", "*.jsx"],

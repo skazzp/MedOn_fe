@@ -4,7 +4,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 import translationEn from './translation/en/translation.json';
 
-export const resources = {
+const resources = {
   en: {
     translation: translationEn,
   },

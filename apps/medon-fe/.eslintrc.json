@@ -8,8 +8,7 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "rules": {},
-      "extends": ["airbnb-base", "airbnb-typescript/base", "prettier"]
+      "rules": {}
     },
     {
       "files": ["*.js", "*.jsx"],

@@ -1,22 +1,15 @@
 import { useForm } from 'react-hook-form';
-import { Form } from './styles';
 import { useTranslation } from 'react-i18next';
-
-interface IProps {}
+import { Form } from './styles';
 
 type FormData = {
   firstName: string;
   lastName: string;
 };
 
-export default function ExampleForm({}: IProps) {
+export default function ExampleForm() {
   const { t } = useTranslation();
-  const {
-    register,
-    setValue,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>();
+  const { register, setValue, handleSubmit } = useForm<FormData>();
 
   const onSubmit = handleSubmit((data) => console.log(data));
 
