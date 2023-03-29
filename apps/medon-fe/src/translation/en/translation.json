@@ -1,0 +1,9 @@
+{
+  "title": "Hello World!",
+  "form": {
+    "label1": "First Name",
+    "label2": "Last Name",
+    "btn-set": "Set Value",
+    "btn-submit": "Submit"
+  }
+}
