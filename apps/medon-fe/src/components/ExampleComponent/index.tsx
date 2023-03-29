@@ -1,9 +1,7 @@
-import { Container, Title } from './styles';
 import { useTranslation } from 'react-i18next';
+import { Container, Title } from './styles';
 
-interface IProps {}
-
-export default function ExampleComponent({}: IProps) {
+export default function ExampleComponent() {
   const { t } = useTranslation();
 
   return (
