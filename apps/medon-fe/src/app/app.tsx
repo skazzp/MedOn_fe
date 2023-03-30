@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import ExamplePage from '../pages/ExamplePage';
 
-export function App() {
+function App() {
   return (
     <Routes>
       <Route index path="/" element={<ExamplePage />} />

@@ -17,7 +17,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "medon-fe": ["apps/medon-fe/src"]
+      "pages/*": ["apps/medon-fe/src/pages/*"],
+      "components/*": ["apps/medon-fe/src/components/*"],
+      "assets/*": ["apps/medon-fe/src/assets/*"],
+      "redux/*": ["apps/medon-fe/src/redux/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
