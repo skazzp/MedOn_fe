@@ -1,5 +1,6 @@
 import ExampleComponent from 'components/ExampleComponent';
 import ExampleCounter from 'components/ExampleCounter';
+import ExampleFetchData from 'components/ExampleFetchData';
 import ExampleForm from 'components/ExampleForm';
 
 export default function ExamplePage() {
@@ -8,6 +9,7 @@ export default function ExamplePage() {
       <ExampleComponent />
       <ExampleForm />
       <ExampleCounter />
+      <ExampleFetchData />
     </>
   );
 }
