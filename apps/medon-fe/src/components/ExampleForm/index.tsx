@@ -2,10 +2,10 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Form } from './styles';
 
-type FormData = {
+interface FormData {
   firstName: string;
   lastName: string;
-};
+}
 
 export default function ExampleForm() {
   const { t } = useTranslation();
