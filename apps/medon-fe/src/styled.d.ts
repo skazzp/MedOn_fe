@@ -19,6 +19,7 @@ declare module 'styled-components' {
       blue_500: string;
       blue_700: string;
       blue_900: string;
+      gray_100: string;
       gray_200: string;
       gray_300: string;
       gray_400: string;
