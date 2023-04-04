@@ -22,6 +22,7 @@ export const theme = {
     GRAY_600: '#808080',
     GRAY_700: '#585858',
     WHITE: '#ffffff',
+    BLACK_87: '#000000DE',
     BLACK: '#000000',
   },
   fontFamily: {

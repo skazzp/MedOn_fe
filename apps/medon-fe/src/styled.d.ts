@@ -27,6 +27,7 @@ declare module 'styled-components' {
       GRAY_600: string;
       GRAY_700: string;
       WHITE: string;
+      BLACK_87: string;
       BLACK: string;
     };
     fontFamily: {
