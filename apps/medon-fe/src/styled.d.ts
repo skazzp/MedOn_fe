@@ -4,7 +4,7 @@ import 'styled-components';
 // and extend them!
 declare module 'styled-components' {
   export interface DefaultTheme {
-    COLORS: {
+    colors: {
       RED_300: string;
       RED_500: string;
       RED_700: string;

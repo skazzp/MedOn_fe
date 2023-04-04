@@ -1,5 +1,5 @@
 export const theme = {
-  COLORS: {
+  colors: {
     RED_300: '#FEEAE8',
     RED_500: '#E9380D',
     RED_700: '#660F0A',
