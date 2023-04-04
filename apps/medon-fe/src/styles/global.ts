@@ -1,12 +1,15 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-  * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+  html,body {
+    margin: 0;
+    padding: 0;
+    background-color: ${({ theme }) => theme.colors.GRAY_100};
+    box-sizing: border-box;
   }
-  body{
-    background-color: ${({ theme }) => theme.colors.gray_100};
+
+  *, *:before, *:after {
+    box-sizing: inherit;
   }
 `;
