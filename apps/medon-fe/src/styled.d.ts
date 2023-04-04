@@ -4,36 +4,34 @@ import 'styled-components';
 // and extend them!
 declare module 'styled-components' {
   export interface DefaultTheme {
-    colors: {
-      red_300: string;
-      red_500: string;
-      red_700: string;
-      yellow_300: string;
-      yellow_500: string;
-      yellow_700: string;
-      green_300: string;
-      green_500: string;
-      green_700: string;
-      blue_100: string;
-      blue_300: string;
-      blue_500: string;
-      blue_700: string;
-      blue_900: string;
-      gray_100: string;
-      gray_200: string;
-      gray_300: string;
-      gray_400: string;
-      gray_500: string;
-      gray_600: string;
-      gray_700: string;
-      white: string;
-      black: string;
+    COLORS: {
+      RED_300: string;
+      RED_500: string;
+      RED_700: string;
+      YELLOW_300: string;
+      YELLOW_500: string;
+      YELLOW_700: string;
+      GREEN_300: string;
+      GREEN_500: string;
+      GREEN_700: string;
+      BLUE_100: string;
+      BLUE_300: string;
+      BLUE_500: string;
+      BLUE_700: string;
+      BLUE_900: string;
+      GRAY_100: string;
+      GRAY_200: string;
+      GRAY_300: string;
+      GRAY_400: string;
+      GRAY_500: string;
+      GRAY_600: string;
+      GRAY_700: string;
+      WHITE: string;
+      BLACK: string;
     };
-    typography: {
-      fontFamily: {
-        roboto: string;
-        sf_pro_text: string;
-      };
+    fontFamily: {
+      roboto: string;
+      sf_pro_text: string;
     };
   }
 }
