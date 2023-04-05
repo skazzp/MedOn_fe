@@ -8,14 +8,35 @@
   },
   "reset-password": {
     "send-email": {
-      "title": "Reset Password",
+      "title": "Reset your Password",
       "subtitle": "Type in your registered email address to reset password",
       "button": "NEXT",
-      "home-link": "BACK HOME"
+      "home-link": "BACK TO LOGIN",
+      "email-error-required": "Please Insert a Valid Email",
+      "email-error-pattern": "The Email is not Valid"
+    },
+    "after-email": {
+      "title": "Recovery Email Sent!",
+      "subtitle": "Please check your email for next steps to reset your password.",
+      "button": "RESEND LINK",
+      "home-link": "BACK TO LOGIN"
+    },
+    "update-password": {
+      "title": "Reset your Password",
+      "subtitle": "Type in your new password",
+      "button": "RESET",
+      "home-link": "BACK TO LOGIN",
+      "password-error-required": "Please Insert a Valid Password",
+      "password-error-pattern": "Password must include at least one capital letter, one small letter, one special character and one number",
+      "password-match-error": "Passwords do not match"
+    },
+    "after-password": {
+      "title": "Password Updated!",
+      "subtitle": "Your password has been successfully updated."
     },
     "footer": {
-      "span1": "Terms and conditions",
-      "span2": "Privacy policy"
+      "linkTerm": "Terms and conditions",
+      "linkPrivacy": "Privacy policy"
     }
   }
 }
