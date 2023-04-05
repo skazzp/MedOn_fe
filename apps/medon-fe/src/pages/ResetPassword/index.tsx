@@ -6,15 +6,41 @@ import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
 import Logo from 'assets/svgs/logo_medon.svg';
 
 import { useTheme } from 'styled-components';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useState } from 'react';
 
-import { Container, Content, Footer, Form, Header } from './styles';
+import {
+  Container,
+  Content,
+  ErrorNotification,
+  Footer,
+  Form,
+  Header,
+} from './styles';
+import { SubmitResetPasswordForm } from './ResetPasswordTypes';
 
 export default function ResetPassword() {
+  const [isPasswordUpdated, setIsPasswordUpdated] = useState(false);
+
   const theme = useTheme();
-  const [isEmailSent, setIsEmailSent] = useState(false);
   const { t } = useTranslation();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<SubmitResetPasswordForm>();
+
+  const password = watch('newPassword', '');
+  const confirmPassword = watch('confirmNewPassword', '');
+
+  const handleSentEmail: SubmitHandler<SubmitResetPasswordForm> = (data) => {
+    // logic to send email
+    setIsPasswordUpdated(true);
+  };
 
   return (
     <Container>
@@ -22,45 +48,73 @@ export default function ResetPassword() {
         <img src={Logo} alt="medon logo" />
       </Header>
       <Content>
-        <Form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setIsEmailSent(true);
-          }}
-        >
-          {isEmailSent ? (
-            <h1>Test</h1>
-          ) : (
+        <Form onSubmit={handleSubmit(handleSentEmail)}>
+          {!isPasswordUpdated ? (
             <>
-              <h1>{t('reset-password.send-email.title')}</h1>
-              <h3>{t('reset-password.send-email.subtitle')}</h3>
+              <h1>{t('reset-password.update-password.title')}</h1>
+              <h3>{t('reset-password.update-password.subtitle')}</h3>
               <Input
-                placeholder="Email Address *"
-                type="email"
-                min={10}
-                required
+                placeholder="New Password *"
+                type="password"
+                {...register('newPassword', {
+                  required: true,
+                  pattern:
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-+@$!%*?&])[A-Za-z\d-+@$!%*?&]{6,}$/,
+                })}
               />
+              <Input
+                placeholder="Retry New Password *"
+                type="password"
+                {...register('confirmNewPassword', {
+                  required: true,
+                  pattern:
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-+@$!%*?&])[A-Za-z\d-+@$!%*?&]{6,}$/,
+                })}
+              />
+
+              {errors.newPassword && errors.newPassword.type === 'required' && (
+                <ErrorNotification>
+                  {t('reset-password.update-password.password-error-required')}
+                </ErrorNotification>
+              )}
+              {errors.newPassword && errors.newPassword.type === 'pattern' && (
+                <ErrorNotification>
+                  {t('reset-password.update-password.password-error-pattern')}
+                </ErrorNotification>
+              )}
+              {password !== confirmPassword && confirmPassword && (
+                <ErrorNotification>
+                  {t('reset-password.update-password.password-match-error')}
+                </ErrorNotification>
+              )}
+
               <Button
-                bgColor={theme.colors.BLUE_500}
-                textColor={theme.colors.WHITE}
+                bgcolor={theme.colors.BLUE_500}
+                textcolor={theme.colors.WHITE}
               >
-                {t('reset-password.send-email.button')}
+                {t('reset-password.update-password.button')}
                 <img src={RightArrow} alt="arrow pointing right" />
               </Button>
+            </>
+          ) : (
+            <>
+              <h1>{t('reset-password.after-password.title')}</h1>
+              <h3>{t('reset-password.after-password.subtitle')}</h3>
             </>
           )}
         </Form>
         <LinkHome
-          bgColor={theme.colors.BLACK}
-          textColor={theme.colors.WHITE}
-          isFullWidth
+          bgcolor={theme.colors.BLACK}
+          textcolor={theme.colors.WHITE}
+          to="/"
+          isfullwidth="true"
         >
           {t('reset-password.send-email.home-link')}
         </LinkHome>
       </Content>
       <Footer>
-        <span>{t('reset-password.footer.span1')}</span>
-        <span>{t('reset-password.footer.span2')}</span>
+        <Link to="#">{t('reset-password.footer.linkTerm')}</Link>
+        <Link to="#">{t('reset-password.footer.linkPrivacy')}</Link>
       </Footer>
     </Container>
   );

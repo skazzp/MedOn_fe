@@ -60,4 +60,14 @@ export const Footer = styled.footer`
   justify-content: center;
   width: 100%;
   height: 3.125rem;
+  > a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.BLACK_87};
+  }
+`;
+
+export const ErrorNotification = styled.span`
+  display: inline-block;
+  color: ${({ theme }) => theme.colors.RED_500};
+  font-size: 0.8rem;
 `;
