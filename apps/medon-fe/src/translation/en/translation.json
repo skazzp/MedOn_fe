@@ -11,16 +11,51 @@
     "instruction": "Please, create your medical account and become a member"
   },
   "regForm": {
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "email": "Email",
-    "password": "Password",
-    "passwordRepeat": "Repeat Password",
-    "role": "Role",
-    "speciality": "Speciality",
-    "birthday": "Birthday",
-    "country": "Country",
-    "city": "City",
-    "timezone": "Time zone"
+    "firstName": {
+      "label": "First Name",
+      "placeholder": "Enter your first name"
+    },
+    "lastName": {
+      "label": "Last Name",
+      "placeholder": "Enter your last name"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter your email"
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter your password"
+    },
+    "passwordRepeat": {
+      "label": "Repeat Password",
+      "placeholder": "Repeat your password"
+    },
+    "role": {
+      "label": "Role",
+      "placeholder": "Select your role"
+    },
+    "speciality": {
+      "label": "Speciality",
+      "placeholder": "Select your speciality"
+    },
+    "birthday": {
+      "label": "Birthday",
+      "placeholder": "DD/MM/YYYY"
+    },
+    "country": {
+      "label": "Country",
+      "placeholder": "Enter your country"
+    },
+    "city": {
+      "label": "City",
+      "placeholder": "Enter your city"
+    },
+    "timezone": {
+      "label": "Time zone",
+      "placeholder": "Select your time zone"
+    },
+    "submitBtn": "Sign Up",
+    "backBtn": "Back to Login"
   }
 }

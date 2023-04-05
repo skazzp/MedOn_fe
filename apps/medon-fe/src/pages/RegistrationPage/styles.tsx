@@ -25,7 +25,7 @@ export const Title = styled.h1`
 `;
 
 export const Text = styled.p`
-  margin-left: 2rem;
+  margin-left: 1.5rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
   font-family: ${(p) => p.theme.typography.fontFamily.sf_pro_text};

@@ -31,7 +31,7 @@ interface FormData {
   email: string;
   password: string;
   passwordRepeat: string;
-  role: string;
+  role: string | null;
   speciality: string | null;
   birthday: Dayjs | null;
   country: string | null;
@@ -51,7 +51,7 @@ export default function RegistrationForm() {
     defaultValues: {
       firstName: '',
       lastName: '',
-      role: '',
+      role: null,
       speciality: null,
       birthday: null,
       country: null,
@@ -83,14 +83,14 @@ export default function RegistrationForm() {
       <Form onSubmit={onSubmit}>
         <InputContainer>
           <LabelShort htmlFor="firstName">
-            <LabelText>{t('regForm.firstName')}</LabelText>
+            <LabelText>{t('regForm.firstName.label')}</LabelText>
             <Controller
               name="firstName"
               control={control}
               render={({ field }) => (
                 <Input
                   status={errors.firstName?.message ? 'error' : undefined}
-                  placeholder="Enter your first name"
+                  placeholder={`${t('regForm.firstName.placeholder')}`}
                   {...field}
                 />
               )}
@@ -98,14 +98,14 @@ export default function RegistrationForm() {
             <ErrorMsg>{errors.firstName?.message}</ErrorMsg>
           </LabelShort>
           <LabelShort htmlFor="lastName">
-            <LabelText>{t('regForm.lastName')}</LabelText>
+            <LabelText>{t('regForm.lastName.label')}</LabelText>
             <Controller
               name="lastName"
               control={control}
               render={({ field }) => (
                 <Input
                   status={errors.lastName?.message ? 'error' : undefined}
-                  placeholder="Enter your last name"
+                  placeholder={`${t('regForm.lastName.placeholder')}`}
                   {...field}
                 />
               )}
@@ -114,14 +114,14 @@ export default function RegistrationForm() {
           </LabelShort>
         </InputContainer>
         <Label htmlFor="email">
-          <LabelText>{t('regForm.email')}</LabelText>
+          <LabelText>{t('regForm.email.label')}</LabelText>
           <Controller
             name="email"
             control={control}
             render={({ field }) => (
               <Input
                 status={errors.email?.message ? 'error' : undefined}
-                placeholder="Enter your email"
+                placeholder={`${t('regForm.email.placeholder')}`}
                 {...field}
               />
             )}
@@ -131,21 +131,21 @@ export default function RegistrationForm() {
         <PasswordContainer>
           <InputContainer>
             <LabelShort htmlFor="password">
-              <LabelText>{t('regForm.password')}</LabelText>
+              <LabelText>{t('regForm.password.label')}</LabelText>
               <Controller
                 name="password"
                 control={control}
                 render={({ field }) => (
                   <Input.Password
                     status={errors.password?.message ? 'error' : undefined}
-                    placeholder="Enter your password"
+                    placeholder={`${t('regForm.password.placeholder')}`}
                     {...field}
                   />
                 )}
               />
             </LabelShort>
             <LabelShort htmlFor="password">
-              <LabelText>{t('regForm.passwordRepeat')}</LabelText>
+              <LabelText>{t('regForm.passwordRepeat.label')}</LabelText>
               <Controller
                 name="passwordRepeat"
                 control={control}
@@ -154,7 +154,7 @@ export default function RegistrationForm() {
                     status={
                       errors.passwordRepeat?.message ? 'error' : undefined
                     }
-                    placeholder="Repeat your password"
+                    placeholder={`${t('regForm.passwordRepeat.placeholder')}`}
                     {...field}
                   />
                 )}
@@ -168,13 +168,13 @@ export default function RegistrationForm() {
           </PassErrorMsg>
         </PasswordContainer>
         <Label htmlFor="role">
-          <LabelText>{t('regForm.role')}</LabelText>
+          <LabelText>{t('regForm.role.label')}</LabelText>
           <Controller
             name="role"
             control={control}
             render={({ field }) => (
               <StyledSelect
-                placeholder="Select your time zone"
+                placeholder={`${t('regForm.role.placeholder')}`}
                 status={errors.role?.message ? 'error' : undefined}
                 optionFilterProp="children"
                 filterOption={(input, option) =>
@@ -184,8 +184,8 @@ export default function RegistrationForm() {
                 }
                 {...field}
                 options={[
-                  { value: 'local', label: 'Local doctor' },
-                  { value: 'remote', label: 'Remote doctor' },
+                  { value: ROLES.LOCAL, label: 'Local doctor' },
+                  { value: ROLES.REMOTE, label: 'Remote doctor' },
                 ]}
               />
             )}
@@ -194,14 +194,14 @@ export default function RegistrationForm() {
         </Label>
         {role === ROLES.REMOTE && (
           <Label htmlFor="speciality">
-            <LabelText>{t('regForm.speciality')}</LabelText>
+            <LabelText>{t('regForm.speciality.label')}</LabelText>
             <Controller
               name="speciality"
               rules={{ required: true }}
               control={control}
               render={({ field }) => (
                 <StyledSelect
-                  placeholder="Select your speciality"
+                  placeholder={`${t('regForm.speciality.placeholder')}`}
                   status={errors.speciality?.message ? 'error' : undefined}
                   optionFilterProp="children"
                   filterOption={(input, option) =>
@@ -225,14 +225,14 @@ export default function RegistrationForm() {
         )}
 
         <Label htmlFor="birthday">
-          <LabelText>{t('regForm.birthday')}</LabelText>
+          <LabelText>{t('regForm.birthday.label')}</LabelText>
           <Controller
             name="birthday"
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
               <StyledDatePicker
-                placeholder="DD/MM/YYYY"
+                placeholder={`${t('regForm.birthday.placeholder')}`}
                 format="DD/MM/YYYY"
                 allowClear={false}
                 status={errors.birthday?.message ? 'error' : undefined}
@@ -252,7 +252,7 @@ export default function RegistrationForm() {
         </Label>
         <InputContainer>
           <LabelShort htmlFor="country">
-            <LabelText>{t('regForm.country')}</LabelText>
+            <LabelText>{t('regForm.country.label')}</LabelText>
             <Controller
               name="country"
               control={control}
@@ -260,7 +260,7 @@ export default function RegistrationForm() {
               render={({ field }) => (
                 <StyledSelect
                   showSearch
-                  placeholder="Select your country"
+                  placeholder={`${t('regForm.country.placeholder')}`}
                   status={errors.country?.message ? 'error' : undefined}
                   optionFilterProp="children"
                   filterOption={(input, option) =>
@@ -276,14 +276,14 @@ export default function RegistrationForm() {
             <ErrorMsg>{errors.country?.message}</ErrorMsg>
           </LabelShort>
           <LabelShort htmlFor="city">
-            <LabelText>{t('regForm.city')}</LabelText>
+            <LabelText>{t('regForm.city.label')}</LabelText>
             <Controller
               name="city"
               control={control}
               render={({ field }) => (
                 <Input
                   status={errors.city?.message ? 'error' : undefined}
-                  placeholder="Enter your city"
+                  placeholder={`${t('regForm.city.placeholder')}`}
                   {...field}
                 />
               )}
@@ -292,7 +292,7 @@ export default function RegistrationForm() {
           </LabelShort>
         </InputContainer>
         <Label htmlFor="timezone">
-          <LabelText>{t('regForm.timezone')}</LabelText>
+          <LabelText>{t('regForm.timezone.label')}</LabelText>
           <Controller
             name="timezone"
             control={control}
@@ -300,7 +300,7 @@ export default function RegistrationForm() {
             render={({ field }) => (
               <StyledSelect
                 showSearch
-                placeholder="Select your time zone"
+                placeholder={`${t('regForm.timezone.placeholder')}`}
                 defaultValue={'(UTC) Coordinated Universal Time'}
                 status={errors.timezone?.message ? 'error' : undefined}
                 optionFilterProp="children"
@@ -321,11 +321,11 @@ export default function RegistrationForm() {
         </Label>
         <BtnContainer>
           <Btn type="primary" htmlType="submit">
-            Sign Up
+            {t('regForm.submitBtn')}
           </Btn>
           <NavLink to="/">
             <BackBtn type="primary" htmlType="button">
-              Back to Login
+              {t('regForm.backBtn')}
             </BackBtn>
           </NavLink>
         </BtnContainer>
