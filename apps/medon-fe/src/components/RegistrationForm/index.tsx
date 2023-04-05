@@ -75,7 +75,6 @@ export default function RegistrationForm() {
     };
     return option;
   });
-  // (data) => console.log(data));
 
   const onSubmit = handleSubmit(() => {});
   return (
