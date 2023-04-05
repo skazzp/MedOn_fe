@@ -23,11 +23,7 @@ export const registrationFormSchema = yup.object({
   passwordConfirm: yup
     .string()
     .oneOf([yup.ref('password')], 'Passwords must match')
-    .matches(
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+-])[0-9a-zA-Z!@#$%^&()_+-]{6,}$/,
-      'Password must include at least one capital letter, one small letter, one special character and one number'
-    )
-    .required('Password is required'),
+    .required('Please confirm your password'),
   role: yup.string().required('Choose a role'),
   speciality: yup.string().when('role', {
     is: 'remote',

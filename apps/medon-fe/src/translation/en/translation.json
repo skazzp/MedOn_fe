@@ -5,5 +5,23 @@
     "label2": "Last Name",
     "btn-set": "Set Value",
     "btn-submit": "Submit"
+  },
+  "regPage": {
+    "title": "Registration",
+    "instruction": "Please, create your medical account and become a member"
+  },
+  "regForm": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "password": "Password",
+    "repeatPassword": "Repeat Password",
+    "role": "Role",
+    "speciality": "Speciality",
+    "birthday": "Birthday",
+    "country": "Country",
+    "city": "City",
+    "timezone": "Time zone"
   }
+
 }

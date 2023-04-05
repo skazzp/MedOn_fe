@@ -2,6 +2,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Select, DatePicker, Input } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useTranslation } from 'react-i18next';
 import { registrationFormSchema } from '../../validation/registrationFormSchema';
 import countries from '../../utils/countries.json';
 import timezones from '../../utils/timezones.json';
@@ -22,6 +23,7 @@ interface FormData {
 }
 
 export default function RegistrationForm() {
+  const { t } = useTranslation();
   const {
     control,
     handleSubmit,
@@ -44,6 +46,7 @@ export default function RegistrationForm() {
     const option = { value: country.name, label: country.name };
     return option;
   });
+
   const timezoneOptions = timezones.map((timezone) => {
     const option = {
       value: timezone.text,
@@ -59,13 +62,14 @@ export default function RegistrationForm() {
     <Form onSubmit={onSubmit}>
       <InputContainer>
         <NameLabel htmlFor="firstName">
-          <p>First name</p>
+          <p>{t('regForm.firstName')}</p>
           <Controller
             name="firstName"
             control={control}
             render={({ field }) => (
               <Input
                 style={{ width: 190 }}
+                status={errors.firstName?.message ? 'error' : undefined}
                 placeholder="Enter your first name"
                 {...field}
               />
@@ -74,13 +78,14 @@ export default function RegistrationForm() {
           <p>{errors.firstName?.message}</p>
         </NameLabel>
         <NameLabel htmlFor="lastName">
-          <p>Last name</p>
+          <p>{t('regForm.lastName')}</p>
           <Controller
             name="lastName"
             control={control}
             render={({ field }) => (
               <Input
                 style={{ width: 190 }}
+                status={errors.lastName?.message ? 'error' : undefined}
                 placeholder="Enter your last name"
                 {...field}
               />
@@ -90,13 +95,14 @@ export default function RegistrationForm() {
         </NameLabel>
       </InputContainer>
       <label htmlFor="email">
-        <p>Email</p>
+        <p>{t('regForm.email')}</p>
         <Controller
           name="email"
           control={control}
           render={({ field }) => (
             <Input
               style={{ width: 400 }}
+              status={errors.email?.message ? 'error' : undefined}
               placeholder="Enter your email"
               {...field}
             />
@@ -107,13 +113,14 @@ export default function RegistrationForm() {
       <div>
         <InputContainer>
           <label htmlFor="password">
-            <p>Password</p>
+            <p>{t('regForm.password')}</p>
             <Controller
               name="password"
               control={control}
               render={({ field }) => (
                 <Input.Password
                   style={{ width: 190 }}
+                  status={errors.password?.message ? 'error' : undefined}
                   placeholder="Enter your password"
                   {...field}
                 />
@@ -121,13 +128,14 @@ export default function RegistrationForm() {
             />
           </label>
           <label htmlFor="password">
-            <p>Repeat password</p>
+            <p>{t('regForm.passwordConfirm')}</p>
             <Controller
               name="passwordConfirm"
               control={control}
               render={({ field }) => (
                 <Input.Password
                   style={{ width: 190 }}
+                  status={errors.passwordConfirm?.message ? 'error' : undefined}
                   placeholder="Repeat your password"
                   {...field}
                 />
@@ -142,7 +150,7 @@ export default function RegistrationForm() {
         </p>
       </div>
       <label htmlFor="role">
-        <p>Role</p>
+        <p>{t('regForm.role')}</p>
         <Controller
           name="role"
           control={control}
@@ -150,6 +158,7 @@ export default function RegistrationForm() {
             <Select
               style={{ width: 400 }}
               placeholder="Select your time zone"
+              status={errors.role?.message ? 'error' : undefined}
               optionFilterProp="children"
               filterOption={(input, option) =>
                 (option?.label ?? '')
@@ -167,7 +176,7 @@ export default function RegistrationForm() {
         <p>{errors.role?.message}</p>
       </label>
       <label htmlFor="speciality">
-        <p>Speciality</p>
+        <p>{t('regForm.speciality')}</p>
         <Controller
           name="speciality"
           rules={{ required: true }}
@@ -176,6 +185,7 @@ export default function RegistrationForm() {
             <Select
               style={{ width: 400 }}
               placeholder="Select your speciality"
+              status={errors.speciality?.message ? 'error' : undefined}
               optionFilterProp="children"
               filterOption={(input, option) =>
                 (option?.label ?? '')
@@ -196,7 +206,7 @@ export default function RegistrationForm() {
         <p>{errors.speciality?.message}</p>
       </label>
       <label htmlFor="birthday">
-        <p>Birthday</p>
+        <p>{t('regForm.birthday')}</p>
         <Controller
           name="birthday"
           control={control}
@@ -213,9 +223,6 @@ export default function RegistrationForm() {
               onBlur={field.onBlur}
               value={field.value ? dayjs(field.value) : null}
               onChange={(date) => {
-                if (date) {
-                  console.log(date.valueOf());
-                }
                 field.onChange(
                   date ? new Date(date.valueOf()).toUTCString() : null
                 );
@@ -227,7 +234,7 @@ export default function RegistrationForm() {
       </label>
       <InputContainer>
         <label htmlFor="country">
-          <p>Country</p>
+          <p>{t('regForm.country')}</p>
           <Controller
             name="country"
             control={control}
@@ -237,6 +244,7 @@ export default function RegistrationForm() {
                 showSearch
                 style={{ width: 190 }}
                 placeholder="Select your country"
+                status={errors.country?.message ? 'error' : undefined}
                 optionFilterProp="children"
                 filterOption={(input, option) =>
                   (option?.label ?? '')
@@ -251,13 +259,14 @@ export default function RegistrationForm() {
           <p>{errors.country?.message}</p>
         </label>
         <label htmlFor="city">
-          <p>City</p>
+          <p>{t('regForm.city')}</p>
           <Controller
             name="city"
             control={control}
             render={({ field }) => (
               <Input
                 style={{ width: 190 }}
+                status={errors.city?.message ? 'error' : undefined}
                 placeholder="Enter your city"
                 {...field}
               />
@@ -267,7 +276,7 @@ export default function RegistrationForm() {
         </label>
       </InputContainer>
       <label htmlFor="timezone">
-        <p>Time zone</p>
+        <p>{t('regForm.timezone')}</p>
         <Controller
           name="timezone"
           control={control}
@@ -278,6 +287,7 @@ export default function RegistrationForm() {
               defaultValue="(UTC) Coordinated Universal Time"
               style={{ width: 400 }}
               placeholder="Select your time zone"
+              status={errors.timezone?.message ? 'error' : undefined}
               optionFilterProp="children"
               filterOption={(input, option) =>
                 (option?.label ?? '')
@@ -286,9 +296,6 @@ export default function RegistrationForm() {
               }
               // {...field}
               onChange={(data) => {
-                if (data) {
-                  console.log(data);
-                }
                 field.onChange(data);
               }}
               options={timezoneOptions}
