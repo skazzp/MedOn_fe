@@ -11,10 +11,10 @@ export const StyledButton = styled.button<ButtonStyleProps>`
   font-weight: 500;
   font-size: 1rem;
   cursor: pointer;
-  background-color: ${({ bgColor }) => bgColor};
-  color: ${({ textColor }) => textColor};
+  background-color: ${({ bgcolor }) => bgcolor};
+  color: ${({ textcolor }) => textcolor};
   padding: 0.75rem 1.25rem;
   border-radius: 0.5rem;
   gap: 0.75rem;
-  width: ${({ isFullWidth }) => (isFullWidth ? '100%' : 'fit-content')};
+  width: ${({ isfullwidth }) => (isfullwidth ? '100%' : 'fit-content')};
 `;

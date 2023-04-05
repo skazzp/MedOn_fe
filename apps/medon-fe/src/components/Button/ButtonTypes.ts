@@ -4,7 +4,7 @@ export interface ButtonProps extends ButtonStyleProps {
 
 export interface ButtonStyleProps
   extends React.HTMLAttributes<HTMLButtonElement> {
-  bgColor?: string;
-  textColor?: string;
-  isFullWidth?: boolean;
+  bgcolor?: string;
+  textcolor?: string;
+  isfullwidth?: string;
 }
