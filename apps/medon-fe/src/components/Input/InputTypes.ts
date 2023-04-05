@@ -1,3 +1,1 @@
-export interface InputProps {
-  props: React.InputHTMLAttributes<HTMLInputElement>;
-}
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
