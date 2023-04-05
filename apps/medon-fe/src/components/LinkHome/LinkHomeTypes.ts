@@ -6,7 +6,8 @@ export interface LinkHomeProps extends LinkHomeStyledProps {
 
 export interface LinkHomeStyledProps
   extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  bgColor?: string;
-  textColor?: string;
-  isFullWidth?: boolean;
+  bgcolor?: string;
+  textcolor?: string;
+  isfullwidth?: string;
+  to: string;
 }
