@@ -1,19 +1,36 @@
 import { Controller, useForm } from 'react-hook-form';
-import { Select, DatePicker, Input } from 'antd';
+import { Input } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
+import { NavLink } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
-import { registrationFormSchema } from '../../validation/registrationFormSchema';
-import countries from '../../utils/countries.json';
-import timezones from '../../utils/timezones.json';
-import { Form, InputContainer, NameLabel } from './styles';
+import { registrationFormSchema } from 'validation/registrationFormSchema';
+import countries from 'utils/countries.json';
+import timezones from 'utils/timezones.json';
+import { ROLES } from 'utils/constants/roles';
+import {
+  BackBtn,
+  Btn,
+  BtnContainer,
+  Container,
+  ErrorMsg,
+  Form,
+  InputContainer,
+  Label,
+  LabelShort,
+  LabelText,
+  PassErrorMsg,
+  PasswordContainer,
+  StyledDatePicker,
+  StyledSelect,
+} from './styles';
 
 interface FormData {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
-  passwordConfirm: string;
+  passwordRepeat: string;
   role: string;
   speciality: string | null;
   birthday: Dayjs | null;
@@ -27,6 +44,7 @@ export default function RegistrationForm() {
   const {
     control,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(registrationFormSchema),
@@ -38,9 +56,11 @@ export default function RegistrationForm() {
       birthday: null,
       country: null,
       city: '',
-      timezone: null,
+      timezone: '(UTC) Coordinated Universal Time',
     },
   });
+
+  const role = watch('role');
 
   const countryOptions = countries.map((country) => {
     const option = { value: country.name, label: country.name };
@@ -55,196 +75,107 @@ export default function RegistrationForm() {
     };
     return option;
   });
+  // (data) => console.log(data));
 
-  const onSubmit = handleSubmit((data) => console.log(data));
-
+  const onSubmit = handleSubmit(() => {});
   return (
-    <Form onSubmit={onSubmit}>
-      <InputContainer>
-        <NameLabel htmlFor="firstName">
-          <p>{t('regForm.firstName')}</p>
-          <Controller
-            name="firstName"
-            control={control}
-            render={({ field }) => (
-              <Input
-                style={{ width: 190 }}
-                status={errors.firstName?.message ? 'error' : undefined}
-                placeholder="Enter your first name"
-                {...field}
-              />
-            )}
-          />
-          <p>{errors.firstName?.message}</p>
-        </NameLabel>
-        <NameLabel htmlFor="lastName">
-          <p>{t('regForm.lastName')}</p>
-          <Controller
-            name="lastName"
-            control={control}
-            render={({ field }) => (
-              <Input
-                style={{ width: 190 }}
-                status={errors.lastName?.message ? 'error' : undefined}
-                placeholder="Enter your last name"
-                {...field}
-              />
-            )}
-          />
-          <p>{errors.lastName?.message}</p>
-        </NameLabel>
-      </InputContainer>
-      <label htmlFor="email">
-        <p>{t('regForm.email')}</p>
-        <Controller
-          name="email"
-          control={control}
-          render={({ field }) => (
-            <Input
-              style={{ width: 400 }}
-              status={errors.email?.message ? 'error' : undefined}
-              placeholder="Enter your email"
-              {...field}
-            />
-          )}
-        />
-        <p>{errors.email?.message}</p>
-      </label>
-      <div>
+    <Container>
+      <Form onSubmit={onSubmit}>
         <InputContainer>
-          <label htmlFor="password">
-            <p>{t('regForm.password')}</p>
+          <LabelShort htmlFor="firstName">
+            <LabelText>{t('regForm.firstName')}</LabelText>
             <Controller
-              name="password"
+              name="firstName"
               control={control}
               render={({ field }) => (
-                <Input.Password
-                  style={{ width: 190 }}
-                  status={errors.password?.message ? 'error' : undefined}
-                  placeholder="Enter your password"
+                <Input
+                  status={errors.firstName?.message ? 'error' : undefined}
+                  placeholder="Enter your first name"
                   {...field}
                 />
               )}
             />
-          </label>
-          <label htmlFor="password">
-            <p>{t('regForm.passwordConfirm')}</p>
+            <ErrorMsg>{errors.firstName?.message}</ErrorMsg>
+          </LabelShort>
+          <LabelShort htmlFor="lastName">
+            <LabelText>{t('regForm.lastName')}</LabelText>
             <Controller
-              name="passwordConfirm"
+              name="lastName"
               control={control}
               render={({ field }) => (
-                <Input.Password
-                  style={{ width: 190 }}
-                  status={errors.passwordConfirm?.message ? 'error' : undefined}
-                  placeholder="Repeat your password"
+                <Input
+                  status={errors.lastName?.message ? 'error' : undefined}
+                  placeholder="Enter your last name"
                   {...field}
                 />
               )}
             />
-          </label>
+            <ErrorMsg>{errors.lastName?.message}</ErrorMsg>
+          </LabelShort>
         </InputContainer>
-        <p>
-          {errors.password?.message
-            ? errors.password?.message
-            : errors.passwordConfirm?.message}
-        </p>
-      </div>
-      <label htmlFor="role">
-        <p>{t('regForm.role')}</p>
-        <Controller
-          name="role"
-          control={control}
-          render={({ field }) => (
-            <Select
-              style={{ width: 400 }}
-              placeholder="Select your time zone"
-              status={errors.role?.message ? 'error' : undefined}
-              optionFilterProp="children"
-              filterOption={(input, option) =>
-                (option?.label ?? '')
-                  .toLowerCase()
-                  .includes(input.toLowerCase())
-              }
-              {...field}
-              options={[
-                { value: 'local', label: 'Local doctor' },
-                { value: 'remote', label: 'Remote doctor' },
-              ]}
-            />
-          )}
-        />
-        <p>{errors.role?.message}</p>
-      </label>
-      <label htmlFor="speciality">
-        <p>{t('regForm.speciality')}</p>
-        <Controller
-          name="speciality"
-          rules={{ required: true }}
-          control={control}
-          render={({ field }) => (
-            <Select
-              style={{ width: 400 }}
-              placeholder="Select your speciality"
-              status={errors.speciality?.message ? 'error' : undefined}
-              optionFilterProp="children"
-              filterOption={(input, option) =>
-                (option?.label ?? '')
-                  .toLowerCase()
-                  .includes(input.toLowerCase())
-              }
-              {...field}
-              options={[
-                { value: 'surgeon', label: 'Surgeon' },
-                { value: 'neurologist', label: 'Neurologist' },
-                { value: 'plastic', label: 'Plastic surgeon' },
-                { value: 'ophthalmologist', label: 'Ophthalmologist' },
-                { value: 'dermatologist', label: 'Dermatologist' },
-              ]}
-            />
-          )}
-        />
-        <p>{errors.speciality?.message}</p>
-      </label>
-      <label htmlFor="birthday">
-        <p>{t('regForm.birthday')}</p>
-        <Controller
-          name="birthday"
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <DatePicker
-              style={{ width: 400 }}
-              placeholder="DD/MM/YYYY"
-              format="DD/MM/YYYY"
-              allowClear={false}
-              status={errors.birthday?.message ? 'error' : undefined}
-              ref={field.ref}
-              name={field.name}
-              onBlur={field.onBlur}
-              value={field.value ? dayjs(field.value) : null}
-              onChange={(date) => {
-                field.onChange(
-                  date ? new Date(date.valueOf()).toUTCString() : null
-                );
-              }}
-            />
-          )}
-        />
-        <p>{errors.birthday?.message}</p>
-      </label>
-      <InputContainer>
-        <label htmlFor="country">
-          <p>{t('regForm.country')}</p>
+        <Label htmlFor="email">
+          <LabelText>{t('regForm.email')}</LabelText>
           <Controller
-            name="country"
+            name="email"
             control={control}
-            rules={{ required: true }}
             render={({ field }) => (
-              <Select
-                showSearch
-                style={{ width: 190 }}
-                placeholder="Select your country"
-                status={errors.country?.message ? 'error' : undefined}
+              <Input
+                status={errors.email?.message ? 'error' : undefined}
+                placeholder="Enter your email"
+                {...field}
+              />
+            )}
+          />
+          <ErrorMsg>{errors.email?.message}</ErrorMsg>
+        </Label>
+        <PasswordContainer>
+          <InputContainer>
+            <LabelShort htmlFor="password">
+              <LabelText>{t('regForm.password')}</LabelText>
+              <Controller
+                name="password"
+                control={control}
+                render={({ field }) => (
+                  <Input.Password
+                    status={errors.password?.message ? 'error' : undefined}
+                    placeholder="Enter your password"
+                    {...field}
+                  />
+                )}
+              />
+            </LabelShort>
+            <LabelShort htmlFor="password">
+              <LabelText>{t('regForm.passwordRepeat')}</LabelText>
+              <Controller
+                name="passwordRepeat"
+                control={control}
+                render={({ field }) => (
+                  <Input.Password
+                    status={
+                      errors.passwordRepeat?.message ? 'error' : undefined
+                    }
+                    placeholder="Repeat your password"
+                    {...field}
+                  />
+                )}
+              />
+            </LabelShort>
+          </InputContainer>
+          <PassErrorMsg>
+            {errors.password?.message
+              ? errors.password?.message
+              : errors.passwordRepeat?.message}
+          </PassErrorMsg>
+        </PasswordContainer>
+        <Label htmlFor="role">
+          <LabelText>{t('regForm.role')}</LabelText>
+          <Controller
+            name="role"
+            control={control}
+            render={({ field }) => (
+              <StyledSelect
+                placeholder="Select your time zone"
+                status={errors.role?.message ? 'error' : undefined}
                 optionFilterProp="children"
                 filterOption={(input, option) =>
                   (option?.label ?? '')
@@ -252,60 +183,153 @@ export default function RegistrationForm() {
                     .includes(input.toLowerCase())
                 }
                 {...field}
-                options={countryOptions}
+                options={[
+                  { value: 'local', label: 'Local doctor' },
+                  { value: 'remote', label: 'Remote doctor' },
+                ]}
               />
             )}
           />
-          <p>{errors.country?.message}</p>
-        </label>
-        <label htmlFor="city">
-          <p>{t('regForm.city')}</p>
-          <Controller
-            name="city"
-            control={control}
-            render={({ field }) => (
-              <Input
-                style={{ width: 190 }}
-                status={errors.city?.message ? 'error' : undefined}
-                placeholder="Enter your city"
-                {...field}
-              />
-            )}
-          />
-          <p>{errors.city?.message}</p>
-        </label>
-      </InputContainer>
-      <label htmlFor="timezone">
-        <p>{t('regForm.timezone')}</p>
-        <Controller
-          name="timezone"
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <Select
-              showSearch
-              defaultValue="(UTC) Coordinated Universal Time"
-              style={{ width: 400 }}
-              placeholder="Select your time zone"
-              status={errors.timezone?.message ? 'error' : undefined}
-              optionFilterProp="children"
-              filterOption={(input, option) =>
-                (option?.label ?? '')
-                  .toLowerCase()
-                  .includes(input.toLowerCase())
-              }
-              // {...field}
-              onChange={(data) => {
-                field.onChange(data);
-              }}
-              options={timezoneOptions}
+          <ErrorMsg>{errors.role?.message}</ErrorMsg>
+        </Label>
+        {role === ROLES.REMOTE && (
+          <Label htmlFor="speciality">
+            <LabelText>{t('regForm.speciality')}</LabelText>
+            <Controller
+              name="speciality"
+              rules={{ required: true }}
+              control={control}
+              render={({ field }) => (
+                <StyledSelect
+                  placeholder="Select your speciality"
+                  status={errors.speciality?.message ? 'error' : undefined}
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    (option?.label ?? '')
+                      .toLowerCase()
+                      .includes(input.toLowerCase())
+                  }
+                  {...field}
+                  options={[
+                    { value: 'surgeon', label: 'Surgeon' },
+                    { value: 'neurologist', label: 'Neurologist' },
+                    { value: 'plastic', label: 'Plastic surgeon' },
+                    { value: 'ophthalmologist', label: 'Ophthalmologist' },
+                    { value: 'dermatologist', label: 'Dermatologist' },
+                  ]}
+                />
+              )}
             />
-          )}
-        />
-        <p>{errors.timezone?.message}</p>
-      </label>
+            <ErrorMsg>{errors.speciality?.message}</ErrorMsg>
+          </Label>
+        )}
 
-      <input type="submit" />
-    </Form>
+        <Label htmlFor="birthday">
+          <LabelText>{t('regForm.birthday')}</LabelText>
+          <Controller
+            name="birthday"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <StyledDatePicker
+                placeholder="DD/MM/YYYY"
+                format="DD/MM/YYYY"
+                allowClear={false}
+                status={errors.birthday?.message ? 'error' : undefined}
+                ref={field.ref}
+                name={field.name}
+                onBlur={field.onBlur}
+                value={field.value ? dayjs(field.value) : null}
+                onChange={(date) => {
+                  field.onChange(
+                    date ? new Date(date.valueOf()).toUTCString() : null
+                  );
+                }}
+              />
+            )}
+          />
+          <ErrorMsg>{errors.birthday?.message}</ErrorMsg>
+        </Label>
+        <InputContainer>
+          <LabelShort htmlFor="country">
+            <LabelText>{t('regForm.country')}</LabelText>
+            <Controller
+              name="country"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <StyledSelect
+                  showSearch
+                  placeholder="Select your country"
+                  status={errors.country?.message ? 'error' : undefined}
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    (option?.label ?? '')
+                      .toLowerCase()
+                      .includes(input.toLowerCase())
+                  }
+                  {...field}
+                  options={countryOptions}
+                />
+              )}
+            />
+            <ErrorMsg>{errors.country?.message}</ErrorMsg>
+          </LabelShort>
+          <LabelShort htmlFor="city">
+            <LabelText>{t('regForm.city')}</LabelText>
+            <Controller
+              name="city"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  status={errors.city?.message ? 'error' : undefined}
+                  placeholder="Enter your city"
+                  {...field}
+                />
+              )}
+            />
+            <ErrorMsg>{errors.city?.message}</ErrorMsg>
+          </LabelShort>
+        </InputContainer>
+        <Label htmlFor="timezone">
+          <LabelText>{t('regForm.timezone')}</LabelText>
+          <Controller
+            name="timezone"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <StyledSelect
+                showSearch
+                placeholder="Select your time zone"
+                defaultValue={'(UTC) Coordinated Universal Time'}
+                status={errors.timezone?.message ? 'error' : undefined}
+                optionFilterProp="children"
+                filterOption={(input, option) =>
+                  (option?.label ?? '')
+                    .toLowerCase()
+                    .includes(input.toLowerCase())
+                }
+                // {...field}
+                onChange={(data) => {
+                  field.onChange(data);
+                }}
+                options={timezoneOptions}
+              />
+            )}
+          />
+          <ErrorMsg>{errors.timezone?.message}</ErrorMsg>
+        </Label>
+        <BtnContainer>
+          <Btn type="primary" htmlType="submit">
+            Sign Up
+          </Btn>
+          <NavLink to="/">
+            <BackBtn type="primary" htmlType="button">
+              Back to Login
+            </BackBtn>
+          </NavLink>
+        </BtnContainer>
+      </Form>
+    </Container>
   );
 }

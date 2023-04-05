@@ -3,12 +3,12 @@ import * as yup from 'yup';
 export const registrationFormSchema = yup.object({
   firstName: yup
     .string()
-    .min(3, 'First name must be at least 3 characters')
-    .matches(/^[a-zA-Z]+$/, 'First name must contain only letters')
+    .min(3, 'Length at least 3 characters')
+    .matches(/^[a-zA-Z]+$/, 'First name must have only letters')
     .required('First name is required'),
   lastName: yup
     .string()
-    .min(3, 'Last name must be at least 3 characters')
+    .min(3, 'Length at least 3 characters')
     .matches(/^[a-zA-Z]+$/, 'Last name must contain only letters')
     .required('Last name is required'),
   email: yup.string().email().required('Email is required'),
@@ -17,10 +17,10 @@ export const registrationFormSchema = yup.object({
     .min(6, 'Password must be at least 6 characters')
     .matches(
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+-])[0-9a-zA-Z!@#$%^&()_+-]{6,}$/,
-      'Password must include at least one capital letter, one small letter, one special character and one number'
+      'At least one capital and small letter, special character and number'
     )
     .required('Password is required'),
-  passwordConfirm: yup
+  passwordRepeat: yup
     .string()
     .oneOf([yup.ref('password')], 'Passwords must match')
     .required('Please confirm your password'),
@@ -33,7 +33,7 @@ export const registrationFormSchema = yup.object({
   birthday: yup
     .date()
     .nullable()
-    .default(undefined)
+    .default(null)
     .transform((curr, orig) => (orig === '' ? null : curr))
     .typeError('Birthday is required')
     .required('Birthday is required'),

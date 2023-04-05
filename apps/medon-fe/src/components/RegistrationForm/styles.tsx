@@ -1,15 +1,84 @@
+import { Button, DatePicker, Select } from 'antd';
 import styled from 'styled-components';
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: center;
+  width: 27rem;
+  gap: 1.5rem;
 `;
 export const InputContainer = styled.div`
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
+  width: 100%;
 `;
-export const NameLabel = styled.label`
+
+export const StyledSelect = styled(Select)`
+  width: 100%;
+`;
+
+export const StyledDatePicker = styled(DatePicker)`
+  width: 100%;
+`;
+
+export const PasswordContainer = styled.div`
+  width: 100%;
+`;
+
+export const Label = styled.label`
+  width: 27rem;
+  position: relative;
+`;
+
+export const LabelShort = styled.label`
+  width: 13rem;
+`;
+
+export const LabelText = styled.p`
+  margin-bottom: 0.2rem;
+  font-family: ${(p) => p.theme.typography.fontFamily.sf_pro_text};
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0em;
+`;
+
+export const ErrorMsg = styled.p`
+  position: absolute;
+  margin-top: 0.2rem;
+  width: 13rem;
+  font-family: ${(p) => p.theme.typography.fontFamily.sf_pro_text};
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0em;
+  color: ${(p) => p.theme.colors.red_500};
+`;
+
+export const PassErrorMsg = styled(ErrorMsg)`
+  width: 27rem;
+`;
+
+export const BtnContainer = styled.div`
+  margin-top: 1rem;
   display: flex;
-  flex-direction: column;
+  width: 100%;
+  justify-content: space-evenly;
+`;
+
+export const Btn = styled(Button)`
+  background: linear-gradient(90deg, #085dd7 -28.15%, #4d93f8 76.48%);
+  font-family: ${(p) => p.theme.typography.fontFamily.sf_pro_text};
+  color: ${(p) => p.theme.colors.white};
+  min-width: 10rem;
+`;
+
+export const BackBtn = styled(Btn)`
+  background: ${(p) => p.theme.colors.black};
 `;
