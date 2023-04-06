@@ -10,7 +10,7 @@ export const passwordSchema = yup.object().shape({
     .min(6, 'Must be at least 6 characters')
     .required('Password is required')
     .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_\-+={}[\]|:;"'<,>.?/])[A-Za-z\d!@#$%^&*()_\-+={}[\]|:;"'<,>.?/]{6,}$/,
       'Password must include at least one capital letter, one small letter, one special character and one number'
     ),
   confirmNewPassword: yup
