@@ -44,7 +44,6 @@ export const LabelShort = styled.label`
 
 export const LabelText = styled.p`
   margin-bottom: 0.2rem;
-  /* font-family: ${(p) => p.theme.typography.fontFamily.sf_pro_text}; */
   font-family: ${theme.typography.fontFamily.sf_pro_text};
   font-size: 0.9rem;
   font-weight: 400;
@@ -60,7 +59,6 @@ export const ErrorMsg = styled.p`
   font-size: 0.8rem;
   font-weight: 400;
   letter-spacing: 0em;
-  /* color: ${(p) => p.theme.colors.red_500}; */
   color: ${theme.colors.red_500};
 `;
 
