@@ -1,6 +1,6 @@
 import { Controller, useForm } from 'react-hook-form';
 import { Input } from 'antd';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { NavLink } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +8,7 @@ import { registrationFormSchema } from 'validation/registrationFormSchema';
 import countries from 'utils/countries.json';
 import timezones from 'utils/timezones.json';
 import { ROLES } from 'utils/constants/roles';
+import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
 import {
   BackBtn,
   Btn,
@@ -24,20 +25,7 @@ import {
   StyledDatePicker,
   StyledSelect,
 } from './styles';
-
-interface FormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  passwordRepeat: string;
-  role: string | null;
-  speciality: string | null;
-  birthday: Dayjs | null;
-  country: string | null;
-  city: string;
-  timezone: string | null;
-}
+import { FormData } from './types';
 
 export default function RegistrationForm() {
   const { t } = useTranslation();
@@ -241,7 +229,7 @@ export default function RegistrationForm() {
               <StyledDatePicker
                 id="birthday"
                 placeholder={`${t('regForm.birthday.placeholder')}`}
-                format="DD/MM/YYYY"
+                format={DATE_FORMAT_REG}
                 allowClear={false}
                 status={errors.birthday?.message ? 'error' : undefined}
                 ref={field.ref}
