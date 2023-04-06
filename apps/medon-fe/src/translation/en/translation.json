@@ -6,7 +6,7 @@
     "btn-set": "Set Value",
     "btn-submit": "Submit"
   },
-  "reset-password": {
+  "forget-password": {
     "send-email": {
       "title": "Reset your Password",
       "subtitle": "Type in your registered email address to reset password",
@@ -19,7 +19,7 @@
       "button": "RESEND LINK",
       "home-link": "BACK TO LOGIN"
     },
-    "update-password": {
+    "reset-password": {
       "title": "Reset your Password",
       "subtitle": "Type in your new password",
       "button": "RESET",
