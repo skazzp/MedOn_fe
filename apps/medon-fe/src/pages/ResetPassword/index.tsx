@@ -21,7 +21,7 @@ import {
   Header,
 } from 'pages/ResetPassword/styles';
 
-import { passwordSchema } from 'apps/medon-fe/src/constants/schema/forgot-password';
+import { passwordSchema } from 'validation/forgotPasswordSchema';
 
 export default function ResetPassword() {
   const [isPasswordUpdated, setIsPasswordUpdated] = useState(false);
@@ -37,7 +37,9 @@ export default function ResetPassword() {
     resolver: yupResolver(passwordSchema),
   });
 
-  const handleSentEmail: SubmitHandler<SubmitResetPasswordForm> = (data) => {
+  const handleUpdatePassword: SubmitHandler<SubmitResetPasswordForm> = (
+    data
+  ) => {
     // logic to send email
     setIsPasswordUpdated(true);
   };
@@ -48,11 +50,11 @@ export default function ResetPassword() {
         <img src={Logo} alt="medon logo" draggable={false} />
       </Header>
       <Content>
-        <Form onSubmit={handleSubmit(handleSentEmail)}>
+        <Form onSubmit={handleSubmit(handleUpdatePassword)}>
           {!isPasswordUpdated ? (
             <>
-              <h1>{t('reset-password.update-password.title')}</h1>
-              <h3>{t('reset-password.update-password.subtitle')}</h3>
+              <h1>{t('forget-password.reset-password.title')}</h1>
+              <h3>{t('forget-password.reset-password.subtitle')}</h3>
               <Input
                 placeholder="New Password *"
                 type="password"
@@ -69,14 +71,14 @@ export default function ResetPassword() {
                 bgcolor={theme.colors.blue_500}
                 textcolor={theme.colors.white}
               >
-                {t('reset-password.update-password.button')}
+                {t('forget-password.reset-password.button')}
                 <img src={RightArrow} alt="arrow pointing right" />
               </Button>
             </>
           ) : (
             <>
-              <h1>{t('reset-password.after-password.title')}</h1>
-              <h3>{t('reset-password.after-password.subtitle')}</h3>
+              <h1>{t('forget-password.after-password.title')}</h1>
+              <h3>{t('forget-password.after-password.subtitle')}</h3>
             </>
           )}
         </Form>
@@ -86,12 +88,12 @@ export default function ResetPassword() {
           to="/"
           isfullwidth="true"
         >
-          {t('reset-password.send-email.home-link')}
+          {t('forget-password.send-email.home-link')}
         </LinkHome>
       </Content>
       <Footer>
-        <Link to="#">{t('reset-password.footer.linkTerm')}</Link>
-        <Link to="#">{t('reset-password.footer.linkPrivacy')}</Link>
+        <Link to="#">{t('forget-password.footer.linkTerm')}</Link>
+        <Link to="#">{t('forget-password.footer.linkPrivacy')}</Link>
       </Footer>
     </Container>
   );
