@@ -1,25 +1,27 @@
-import Button from 'components/Button';
-import Input from 'components/Input';
-import LinkHome from 'components/LinkHome';
-import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
-import Logo from 'assets/svgs/logo_medon.svg';
-
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-
 import { useTheme } from 'styled-components';
-import { SubmitSendEmail } from './ForgetPasswordTypes';
+import { yupResolver } from '@hookform/resolvers/yup';
 
+import Button from 'components/Button';
+import Input from 'components/Input';
+import LinkHome from 'components/LinkHome';
+
+import { SubmitSendEmail } from 'pages/ForgetPassword/types';
 import {
   Container,
   Content,
-  ErrorNotification,
   Footer,
   Form,
   Header,
-} from './styles';
+} from 'pages/ForgetPassword/styles';
+
+import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
+import Logo from 'assets/svgs/logo_medon.svg';
+
+import { emailSchema } from 'apps/medon-fe/src/constants/schema/forgot-password';
 
 export default function ResetPassword() {
   const [isEmailSent, setIsEmailSent] = useState(false);
@@ -28,7 +30,9 @@ export default function ResetPassword() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SubmitSendEmail>();
+  } = useForm<SubmitSendEmail>({
+    resolver: yupResolver(emailSchema),
+  });
 
   const theme = useTheme();
   const { t } = useTranslation();
@@ -41,7 +45,7 @@ export default function ResetPassword() {
   return (
     <Container>
       <Header>
-        <img src={Logo} alt="medon logo" />
+        <img src={Logo} alt="medon logo" draggable={false} />
       </Header>
       <Content>
         <Form onSubmit={handleSubmit(handleSentEmail)}>
@@ -52,24 +56,12 @@ export default function ResetPassword() {
               <Input
                 placeholder="Email Address *"
                 type="email"
-                {...register('email', {
-                  required: true,
-                  pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
-                })}
+                errorMessage={errors.email?.message}
+                {...register('email')}
               />
-              {errors.email && errors.email.type === 'required' && (
-                <ErrorNotification>
-                  {t('reset-password.send-email.email-error-required')}
-                </ErrorNotification>
-              )}
-              {errors.email && errors.email.type === 'pattern' && (
-                <ErrorNotification>
-                  {t('reset-password.send-email.email-error-valid')}
-                </ErrorNotification>
-              )}
               <Button
-                bgcolor={theme.colors.BLUE_500}
-                textcolor={theme.colors.WHITE}
+                bgcolor={theme.colors.blue_500}
+                textcolor={theme.colors.white}
               >
                 {t('reset-password.send-email.button')}
                 <img src={RightArrow} alt="arrow pointing right" />
@@ -80,8 +72,8 @@ export default function ResetPassword() {
               <h1>{t('reset-password.after-email.title')}</h1>
               <h3>{t('reset-password.after-email.subtitle')}</h3>
               <Button
-                bgcolor={theme.colors.BLUE_500}
-                textcolor={theme.colors.WHITE}
+                bgcolor={theme.colors.blue_500}
+                textcolor={theme.colors.white}
               >
                 {t('reset-password.after-email.button')}
                 <img src={RightArrow} alt="arrow pointing right" />
@@ -90,8 +82,8 @@ export default function ResetPassword() {
           )}
         </Form>
         <LinkHome
-          bgcolor={theme.colors.BLACK}
-          textcolor={theme.colors.WHITE}
+          bgcolor={theme.colors.black}
+          textcolor={theme.colors.white}
           to="/"
           isfullwidth="true"
         >
@@ -99,8 +91,8 @@ export default function ResetPassword() {
         </LinkHome>
       </Content>
       <Footer>
-        <Link to="#">{t('reset-password.footer.span1')}</Link>
-        <Link to="#">{t('reset-password.footer.span2')}</Link>
+        <Link to="#">{t('reset-password.footer.linkTerm')}</Link>
+        <Link to="#">{t('reset-password.footer.linkPrivacy')}</Link>
       </Footer>
     </Container>
   );
