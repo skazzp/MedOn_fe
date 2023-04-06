@@ -1,3 +1,10 @@
+import { useTheme } from 'styled-components';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import Button from 'components/Button';
 import Input from 'components/Input';
 import LinkHome from 'components/LinkHome';
@@ -5,21 +12,16 @@ import LinkHome from 'components/LinkHome';
 import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
 import Logo from 'assets/svgs/logo_medon.svg';
 
-import { useTheme } from 'styled-components';
-import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { useState } from 'react';
-
+import { SubmitResetPasswordForm } from 'pages/ResetPassword/types';
 import {
   Container,
   Content,
-  ErrorNotification,
   Footer,
   Form,
   Header,
-} from './styles';
-import { SubmitResetPasswordForm } from './ResetPasswordTypes';
+} from 'pages/ResetPassword/styles';
+
+import { passwordSchema } from 'apps/medon-fe/src/constants/schema/forgot-password';
 
 export default function ResetPassword() {
   const [isPasswordUpdated, setIsPasswordUpdated] = useState(false);
@@ -31,11 +33,9 @@ export default function ResetPassword() {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
-  } = useForm<SubmitResetPasswordForm>();
-
-  const password = watch('newPassword', '');
-  const confirmPassword = watch('confirmNewPassword', '');
+  } = useForm<SubmitResetPasswordForm>({
+    resolver: yupResolver(passwordSchema),
+  });
 
   const handleSentEmail: SubmitHandler<SubmitResetPasswordForm> = (data) => {
     // logic to send email
@@ -45,7 +45,7 @@ export default function ResetPassword() {
   return (
     <Container>
       <Header>
-        <img src={Logo} alt="medon logo" />
+        <img src={Logo} alt="medon logo" draggable={false} />
       </Header>
       <Content>
         <Form onSubmit={handleSubmit(handleSentEmail)}>
@@ -56,41 +56,18 @@ export default function ResetPassword() {
               <Input
                 placeholder="New Password *"
                 type="password"
-                {...register('newPassword', {
-                  required: true,
-                  pattern:
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-+@$!%*?&])[A-Za-z\d-+@$!%*?&]{6,}$/,
-                })}
+                errorMessage={errors.newPassword?.message}
+                {...register('newPassword')}
               />
               <Input
                 placeholder="Retry New Password *"
                 type="password"
-                {...register('confirmNewPassword', {
-                  required: true,
-                  pattern:
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-+@$!%*?&])[A-Za-z\d-+@$!%*?&]{6,}$/,
-                })}
+                errorMessage={errors.confirmNewPassword?.message}
+                {...register('confirmNewPassword')}
               />
-
-              {errors.newPassword && errors.newPassword.type === 'required' && (
-                <ErrorNotification>
-                  {t('reset-password.update-password.password-error-required')}
-                </ErrorNotification>
-              )}
-              {errors.newPassword && errors.newPassword.type === 'pattern' && (
-                <ErrorNotification>
-                  {t('reset-password.update-password.password-error-pattern')}
-                </ErrorNotification>
-              )}
-              {password !== confirmPassword && confirmPassword && (
-                <ErrorNotification>
-                  {t('reset-password.update-password.password-match-error')}
-                </ErrorNotification>
-              )}
-
               <Button
-                bgcolor={theme.colors.BLUE_500}
-                textcolor={theme.colors.WHITE}
+                bgcolor={theme.colors.blue_500}
+                textcolor={theme.colors.white}
               >
                 {t('reset-password.update-password.button')}
                 <img src={RightArrow} alt="arrow pointing right" />
@@ -104,8 +81,8 @@ export default function ResetPassword() {
           )}
         </Form>
         <LinkHome
-          bgcolor={theme.colors.BLACK}
-          textcolor={theme.colors.WHITE}
+          bgcolor={theme.colors.black}
+          textcolor={theme.colors.white}
           to="/"
           isfullwidth="true"
         >
