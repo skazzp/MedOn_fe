@@ -3,8 +3,8 @@ import { render, screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
 import { ReactNode } from 'react';
-import LinkHome from '../LinkHome';
-import { theme } from '../../styles/theme';
+import LinkHome from 'components/LinkHome';
+import { theme } from 'styles/theme';
 
 const Wrapper = ({ children }: { children: ReactNode }) => (
   <BrowserRouter>

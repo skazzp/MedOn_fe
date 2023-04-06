@@ -1,10 +1,9 @@
 import React, { ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
-import '@testing-library/jest-dom';
 
-import Input from '../Input';
-import { theme } from '../../styles/theme';
+import Input from 'components/Input';
+import { theme } from 'styles/theme';
 
 const Wrapper = ({ children }: { children: ReactNode }) => (
   <ThemeProvider theme={theme}>{children}</ThemeProvider>
