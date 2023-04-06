@@ -4,14 +4,17 @@ export const registrationFormSchema = yup.object({
   firstName: yup
     .string()
     .min(3, 'Length at least 3 characters')
-    .matches(/^[a-zA-Z]+$/, 'First name must have only letters')
+    .matches(/^[a-zA-Z]+$/, 'First name must consist of only letters')
     .required('First name is required'),
   lastName: yup
     .string()
     .min(3, 'Length at least 3 characters')
-    .matches(/^[a-zA-Z]+$/, 'Last name must contain only letters')
+    .matches(/^[a-zA-Z]+$/, 'Last name must consist of only letters')
     .required('Last name is required'),
-  email: yup.string().email().required('Email is required'),
+  email: yup
+    .string()
+    .email('Please enter correct email')
+    .required('Email is required'),
   password: yup
     .string()
     .min(6, 'Password must be at least 6 characters')

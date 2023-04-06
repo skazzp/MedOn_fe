@@ -1,5 +1,6 @@
 import { Button, DatePicker, Select } from 'antd';
 import styled from 'styled-components';
+import { theme } from '../../styles/theme';
 
 export const Container = styled.div`
   display: flex;
@@ -43,7 +44,8 @@ export const LabelShort = styled.label`
 
 export const LabelText = styled.p`
   margin-bottom: 0.2rem;
-  font-family: ${(p) => p.theme.typography.fontFamily.sf_pro_text};
+  /* font-family: ${(p) => p.theme.typography.fontFamily.sf_pro_text}; */
+  font-family: ${theme.typography.fontFamily.sf_pro_text};
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.5;
@@ -54,11 +56,12 @@ export const ErrorMsg = styled.p`
   position: absolute;
   margin-top: 0.2rem;
   width: 13rem;
-  font-family: ${(p) => p.theme.typography.fontFamily.sf_pro_text};
+  font-family: ${theme.typography.fontFamily.sf_pro_text};
   font-size: 0.8rem;
   font-weight: 400;
   letter-spacing: 0em;
-  color: ${(p) => p.theme.colors.red_500};
+  /* color: ${(p) => p.theme.colors.red_500}; */
+  color: ${theme.colors.red_500};
 `;
 
 export const PassErrorMsg = styled(ErrorMsg)`
@@ -74,11 +77,11 @@ export const BtnContainer = styled.div`
 
 export const Btn = styled(Button)`
   background: linear-gradient(90deg, #085dd7 -28.15%, #4d93f8 76.48%);
-  font-family: ${(p) => p.theme.typography.fontFamily.sf_pro_text};
-  color: ${(p) => p.theme.colors.white};
+  font-family: ${theme.typography.fontFamily.sf_pro_text};
+  color: ${theme.colors.white};
   min-width: 10rem;
 `;
 
 export const BackBtn = styled(Btn)`
-  background: ${(p) => p.theme.colors.black};
+  background: ${theme.colors.black};
 `;

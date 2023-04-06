@@ -6,7 +6,7 @@ function App() {
   return (
     <Routes>
       <Route index path="/" element={<ExamplePage />} />
-      <Route path="/signup" element={<RegistrationPage />} />
+      <Route path="/register" element={<RegistrationPage />} />
       <Route path="*" element={<Navigate to={'/'} />} />
     </Routes>
   );
