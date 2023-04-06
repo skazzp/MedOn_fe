@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ButtonStyleProps } from './ButtonTypes';
+import { ButtonStyleProps } from 'components/Button/types';
 
 export const StyledButton = styled.button<ButtonStyleProps>`
   display: flex;
@@ -9,7 +9,7 @@ export const StyledButton = styled.button<ButtonStyleProps>`
   border: transparent;
   font-family: ${({ theme }) => theme.fontFamily.roboto};
   font-weight: 500;
-  font-size: 1rem;
+  font-size: ${({ theme }) => theme.fontSizes.md};
   cursor: pointer;
   background-color: ${({ bgcolor }) => bgcolor};
   color: ${({ textcolor }) => textcolor};
