@@ -34,11 +34,3 @@ export const Text = styled.p`
   line-height: 1.3;
   letter-spacing: 0em;
 `;
-export const Sidebar = styled.div`
-  width: 100%;
-  height: auto;
-  min-height: 100vh;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url('assets/images/sidebar.jpg');
-`;
