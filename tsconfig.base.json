@@ -22,7 +22,8 @@
       "assets/*": ["apps/medon-fe/src/assets/*"],
       "redux/*": ["apps/medon-fe/src/redux/*"],
       "utils/*": ["apps/medon-fe/src/utils/*"],
-      "validation/*": ["apps/medon-fe/src/validation/*"]
+      "validation/*": ["apps/medon-fe/src/validation/*"],
+      "styles/*": ["apps/medon-fe/src/styles/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
