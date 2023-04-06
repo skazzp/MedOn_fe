@@ -21,7 +21,7 @@ import {
 import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
 import Logo from 'assets/svgs/logo_medon.svg';
 
-import { emailSchema } from 'apps/medon-fe/src/constants/schema/forgot-password';
+import { emailSchema } from 'validation/forgotPasswordSchema';
 
 export default function ResetPassword() {
   const [isEmailSent, setIsEmailSent] = useState(false);
@@ -51,8 +51,8 @@ export default function ResetPassword() {
         <Form onSubmit={handleSubmit(handleSentEmail)}>
           {!isEmailSent ? (
             <>
-              <h1>{t('reset-password.send-email.title')}</h1>
-              <h3>{t('reset-password.send-email.subtitle')}</h3>
+              <h1>{t('forget-password.send-email.title')}</h1>
+              <h3>{t('forget-password.send-email.subtitle')}</h3>
               <Input
                 placeholder="Email Address *"
                 type="email"
@@ -63,19 +63,19 @@ export default function ResetPassword() {
                 bgcolor={theme.colors.blue_500}
                 textcolor={theme.colors.white}
               >
-                {t('reset-password.send-email.button')}
+                {t('forget-password.send-email.button')}
                 <img src={RightArrow} alt="arrow pointing right" />
               </Button>
             </>
           ) : (
             <>
-              <h1>{t('reset-password.after-email.title')}</h1>
-              <h3>{t('reset-password.after-email.subtitle')}</h3>
+              <h1>{t('forget-password.after-email.title')}</h1>
+              <h3>{t('forget-password.after-email.subtitle')}</h3>
               <Button
                 bgcolor={theme.colors.blue_500}
                 textcolor={theme.colors.white}
               >
-                {t('reset-password.after-email.button')}
+                {t('forget-password.after-email.button')}
                 <img src={RightArrow} alt="arrow pointing right" />
               </Button>
             </>
@@ -87,12 +87,12 @@ export default function ResetPassword() {
           to="/"
           isfullwidth="true"
         >
-          {t('reset-password.send-email.home-link')}
+          {t('forget-password.send-email.home-link')}
         </LinkHome>
       </Content>
       <Footer>
-        <Link to="#">{t('reset-password.footer.linkTerm')}</Link>
-        <Link to="#">{t('reset-password.footer.linkPrivacy')}</Link>
+        <Link to="#">{t('forget-password.footer.linkTerm')}</Link>
+        <Link to="#">{t('forget-password.footer.linkPrivacy')}</Link>
       </Footer>
     </Container>
   );
