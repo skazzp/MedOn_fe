@@ -22,6 +22,7 @@ export const theme = {
     gray_700: '#585858',
     white: '#ffffff',
     black: '#000000',
+    title: '#1E293B',
   },
   typography: {
     fontFamily: {
