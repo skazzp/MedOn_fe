@@ -11,9 +11,7 @@
       "title": "Reset your Password",
       "subtitle": "Type in your registered email address to reset password",
       "button": "NEXT",
-      "home-link": "BACK TO LOGIN",
-      "email-error-required": "Please Insert a Valid Email",
-      "email-error-pattern": "The Email is not Valid"
+      "home-link": "BACK TO LOGIN"
     },
     "after-email": {
       "title": "Recovery Email Sent!",
@@ -25,10 +23,7 @@
       "title": "Reset your Password",
       "subtitle": "Type in your new password",
       "button": "RESET",
-      "home-link": "BACK TO LOGIN",
-      "password-error-required": "Please Insert a Valid Password",
-      "password-error-pattern": "Password must include at least one capital letter, one small letter, one special character and one number",
-      "password-match-error": "Passwords do not match"
+      "home-link": "BACK TO LOGIN"
     },
     "after-password": {
       "title": "Password Updated!",
