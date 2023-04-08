@@ -7,7 +7,7 @@ export interface FormData {
   password: string;
   passwordRepeat: string;
   role: string | null;
-  speciality: string | null;
+  speciality: number | null;
   birthday: Dayjs | null;
   country: string | null;
   city: string;

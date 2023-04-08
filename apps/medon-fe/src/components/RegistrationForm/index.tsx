@@ -206,11 +206,11 @@ export default function RegistrationForm() {
                   }
                   {...field}
                   options={[
-                    { value: 'surgeon', label: 'Surgeon' },
-                    { value: 'neurologist', label: 'Neurologist' },
-                    { value: 'plastic', label: 'Plastic surgeon' },
-                    { value: 'ophthalmologist', label: 'Ophthalmologist' },
-                    { value: 'dermatologist', label: 'Dermatologist' },
+                    { value: 1, label: 'Surgeon' },
+                    { value: 2, label: 'Neurologist' },
+                    { value: 3, label: 'Plastic surgeon' },
+                    { value: 4, label: 'Ophthalmologist' },
+                    { value: 5, label: 'Dermatologist' },
                   ]}
                 />
               )}
@@ -308,7 +308,6 @@ export default function RegistrationForm() {
                     .toLowerCase()
                     .includes(input.toLowerCase())
                 }
-                // {...field}
                 onChange={(data) => {
                   field.onChange(data);
                 }}
