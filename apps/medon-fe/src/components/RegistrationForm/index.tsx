@@ -5,8 +5,8 @@ import { NavLink } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { registrationFormSchema } from 'validation/registrationFormSchema';
-import countries from 'utils/countries.json';
-import timezones from 'utils/timezones.json';
+import { countryOptions } from 'utils/countries/countryOptions';
+import { timezoneOptions } from 'utils/timezones/timezoneOptions';
 import { ROLES } from 'utils/constants/roles';
 import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
 import { ROLE } from 'utils/constants/regFormFields';
@@ -50,21 +50,6 @@ export default function RegistrationForm() {
   });
 
   const role = watch(ROLE);
-
-  const countryOptions = countries.map((country) => {
-    const option = { value: country.name, label: country.name };
-    return option;
-  });
-
-  const timezoneOptions = timezones.map((timezone) => {
-    const option = {
-      value: timezone.text,
-      label: timezone.text,
-      offset: timezone.offset,
-    };
-    return option;
-  });
-
   const onSubmit = handleSubmit(() => {});
   return (
     <Container>
