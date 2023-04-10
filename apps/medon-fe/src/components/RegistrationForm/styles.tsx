@@ -44,7 +44,7 @@ export const LabelShort = styled.label`
 
 export const LabelText = styled.p`
   margin-bottom: 0.2rem;
-  font-family: ${theme.typography.fontFamily.sf_pro_text};
+  font-family: ${theme.fontFamily.sf_pro_text};
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.5;
@@ -55,7 +55,7 @@ export const ErrorMsg = styled.p`
   position: absolute;
   margin-top: 0.2rem;
   width: 13rem;
-  font-family: ${theme.typography.fontFamily.sf_pro_text};
+  font-family: ${theme.fontFamily.sf_pro_text};
   font-size: 0.8rem;
   font-weight: 400;
   letter-spacing: 0em;
@@ -75,7 +75,7 @@ export const BtnContainer = styled.div`
 
 export const Btn = styled(Button)`
   background: ${theme.colors.btnGradient};
-  font-family: ${theme.typography.fontFamily.sf_pro_text};
+  font-family: ${theme.fontFamily.sf_pro_text};
   color: ${theme.colors.white};
   min-width: 10rem;
 `;
