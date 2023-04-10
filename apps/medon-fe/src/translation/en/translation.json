@@ -16,5 +16,33 @@
     "password": "Password:",
     "placeholder-password": "Write your password*",
     "placeholder-email": "Write your e-mail*"
+  },
+  "forget-password": {
+    "send-email": {
+      "title": "Reset your Password",
+      "subtitle": "Type in your registered email address to reset password",
+      "button": "NEXT",
+      "home-link": "BACK TO LOGIN"
+    },
+    "after-email": {
+      "title": "Recovery Email Sent!",
+      "subtitle": "Please check your email for next steps to reset your password.",
+      "button": "RESEND LINK",
+      "home-link": "BACK TO LOGIN"
+    },
+    "reset-password": {
+      "title": "Reset your Password",
+      "subtitle": "Type in your new password",
+      "button": "RESET",
+      "home-link": "BACK TO LOGIN"
+    },
+    "after-password": {
+      "title": "Password Updated!",
+      "subtitle": "Your password has been successfully updated."
+    },
+    "footer": {
+      "linkTerm": "Terms and conditions",
+      "linkPrivacy": "Privacy policy"
+    }
   }
 }
