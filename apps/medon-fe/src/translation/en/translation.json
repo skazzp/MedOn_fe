@@ -6,6 +6,17 @@
     "btn-set": "Set Value",
     "btn-submit": "Submit"
   },
+  "login": {
+    "login-title": "Access the platform",
+    "login-text": "Please login into your medical account",
+    "login-forgot-password": "Forgot password?",
+    "dont-have": "Don't have an account? Click here!",
+    "email": "Email:",
+    "login": "Login",
+    "password": "Password:",
+    "placeholder-password": "Write your password*",
+    "placeholder-email": "Write your e-mail*"
+  },
   "forget-password": {
     "send-email": {
       "title": "Reset your Password",

@@ -24,6 +24,7 @@ export const theme = {
     white: '#ffffff',
     black_87: '#000000de',
     black: '#000000',
+    title: '#1E293B',
   },
   fontFamily: {
     roboto: 'Roboto, sans-serif',
