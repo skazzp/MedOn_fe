@@ -37,7 +37,7 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
     defaultValues: { email: "", password: "" },
   });
 
-  const handleFormSubmit = handleSubmit((data) => {
+ const handleFormSubmit = handleSubmit((data) => {
     onSubmit(data);
   });
 
