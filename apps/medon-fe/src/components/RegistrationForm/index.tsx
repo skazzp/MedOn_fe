@@ -9,6 +9,7 @@ import countries from 'utils/countries.json';
 import timezones from 'utils/timezones.json';
 import { ROLES } from 'utils/constants/roles';
 import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
+import { ROLE } from 'utils/constants/regFormFields';
 import {
   BackBtn,
   Btn,
@@ -48,7 +49,7 @@ export default function RegistrationForm() {
     },
   });
 
-  const role = watch('role');
+  const role = watch(ROLE);
 
   const countryOptions = countries.map((country) => {
     const option = { value: country.name, label: country.name };
