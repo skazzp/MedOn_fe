@@ -8,14 +8,11 @@ import { useTranslation } from 'react-i18next';
 import { registrationFormSchema } from 'validation/registrationFormSchema';
 import { toast } from 'react-toastify';
 import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
-import {
-  useRegisterUserMutation,
-} from 'redux/api/authApi';
+import { useRegisterUserMutation } from 'redux/api/authApi';
 import { countryOptions } from 'utils/countries/countryOptions';
 import RegistrationSelect from 'components/RegistrationSelect';
 import { timezoneOptions } from 'utils/timezones/timezoneOptions';
-import { ROLES, ROLE_OPTIONS, SPECIALITY_OPTIONS } from 'utils/constants/roles';
-import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
+import { ROLES, ROLE_OPTIONS } from 'utils/constants/roles';
 import {
   COUNTRY,
   ROLE,
@@ -63,8 +60,6 @@ export default function RegistrationForm() {
   const { specialityOptions } = useSpecOptions();
   const role = watch(ROLE);
   const email = watch('role');
-  
-
 
   const onSubmit = handleSubmit((values: FormData) => {
     const requestData = {
@@ -112,8 +107,6 @@ export default function RegistrationForm() {
       });
     }
   }, [isSuccess, isError, data, error, navigate, email]);
-
-
 
   return (
     <Container>
@@ -224,7 +217,7 @@ export default function RegistrationForm() {
               name={SPECIALITY}
               control={control}
               error={errors.speciality?.message}
-              options={SPECIALITY_OPTIONS}
+              options={specialityOptions}
             />
           </Label>
         )}

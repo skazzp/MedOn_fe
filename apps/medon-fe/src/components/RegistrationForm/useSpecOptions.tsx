@@ -1,5 +1,9 @@
 import { useGetSpecialitiesQuery } from 'redux/api/authApi';
-import { Option } from 'redux/api/types';
+
+interface Option {
+  value: string | number;
+  label: string;
+}
 
 const emptyArray: Option[] = [];
 
