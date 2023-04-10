@@ -13,7 +13,7 @@ export const Form = styled.form`
   flex-direction: column;
   align-items: center;
   width: 27rem;
-  gap: 1.5rem;
+  gap: 1.2rem;
 `;
 export const InputContainer = styled.div`
   display: flex;
@@ -43,6 +43,7 @@ export const LabelShort = styled.label`
 `;
 
 export const LabelText = styled.p`
+  margin-top: 0;
   margin-bottom: 0.2rem;
   font-family: ${theme.fontFamily.sf_pro_text};
   font-size: 0.9rem;
