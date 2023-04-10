@@ -1,14 +1,20 @@
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Input } from 'antd';
 import dayjs from 'dayjs';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { registrationFormSchema } from 'validation/registrationFormSchema';
 import countries from 'utils/countries.json';
 import timezones from 'utils/timezones.json';
 import { ROLES } from 'utils/constants/roles';
+import { toast } from 'react-toastify';
+
 import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
+import {
+  useRegisterUserMutation,
+} from 'redux/api/authApi';
 import {
   BackBtn,
   Btn,
@@ -26,9 +32,11 @@ import {
   StyledSelect,
 } from './styles';
 import { FormData } from './types';
+import useSpecOptions from './useSpecOptions';
 
 export default function RegistrationForm() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
@@ -39,17 +47,17 @@ export default function RegistrationForm() {
     defaultValues: {
       firstName: '',
       lastName: '',
-      role: null,
       speciality: null,
-      birthday: null,
-      country: null,
       city: '',
       timezone: '(UTC) Coordinated Universal Time',
     },
   });
-
+  const [registerUser, { isSuccess, error, isError, data }] =
+    useRegisterUserMutation();
+  const { specialityOptions } = useSpecOptions();
   const role = watch('role');
-
+  const email = watch('role');
+  
   const countryOptions = countries.map((country) => {
     const option = { value: country.name, label: country.name };
     return option;
@@ -64,7 +72,53 @@ export default function RegistrationForm() {
     return option;
   });
 
-  const onSubmit = handleSubmit(() => {});
+  const onSubmit = handleSubmit((values: FormData) => {
+    const requestData = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      password: values.password,
+      dateOfBirth: new Date(values.birthday.valueOf()),
+      role: values.role,
+      specialityId:
+        values.role === ROLES.REMOTE && values.speciality
+          ? +values.speciality
+          : null,
+      country: values.country,
+      city: values.city,
+      timeZone: values.timezone,
+    };
+    // console.log('Form: ', values, 'Requested values: ', requestData);
+    registerUser(requestData);
+  });
+
+  useEffect(() => {
+    if (isSuccess) {
+      // console.log('Response: ', data);
+      if (data && data.message) {
+        navigate('/', {
+          state: {
+            email,
+            message: data.message,
+          },
+        });
+      }
+    }
+    if (isError) {
+      // console.log('Error: ', error);
+      toast.error('Registration error, try again!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: 'light',
+      });
+    }
+  }, [isSuccess, isError, data, error, navigate, email]);
+
   return (
     <Container>
       <Form onSubmit={onSubmit}>
@@ -205,13 +259,14 @@ export default function RegistrationForm() {
                       .includes(input.toLowerCase())
                   }
                   {...field}
-                  options={[
-                    { value: 1, label: 'Surgeon' },
-                    { value: 2, label: 'Neurologist' },
-                    { value: 3, label: 'Plastic surgeon' },
-                    { value: 4, label: 'Ophthalmologist' },
-                    { value: 5, label: 'Dermatologist' },
-                  ]}
+                  // options={[
+                  //   { value: 1, label: 'Surgeon' },
+                  //   { value: 2, label: 'Neurologist' },
+                  //   { value: 3, label: 'Plastic surgeon' },
+                  //   { value: 4, label: 'Ophthalmologist' },
+                  //   { value: 5, label: 'Dermatologist' },
+                  // ]}
+                  options={specialityOptions}
                 />
               )}
             />
@@ -308,8 +363,8 @@ export default function RegistrationForm() {
                     .toLowerCase()
                     .includes(input.toLowerCase())
                 }
-                onChange={(data) => {
-                  field.onChange(data);
+                onChange={(value) => {
+                  field.onChange(value);
                 }}
                 options={timezoneOptions}
               />

@@ -2,11 +2,24 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router-dom';
 import 'translation/i18next';
+import { ThemeProvider } from 'styled-components';
+import { ReactNode } from 'react';
+import { theme } from 'styles/theme';
+import { Provider } from 'react-redux';
+import { store } from 'redux/store';
 import RegistrationForm from './index';
+
+const Wrapper = ({ children }: { children: ReactNode }) => (
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>{children}</BrowserRouter>
+    </ThemeProvider>
+  </Provider>
+);
 
 it('should render successfully', () => {
   const { baseElement } = render(<RegistrationForm />, {
-    wrapper: BrowserRouter,
+    wrapper: Wrapper,
   });
 
   expect(baseElement).toBeTruthy();
@@ -14,7 +27,7 @@ it('should render successfully', () => {
 
 it('should display required error when no value provided', async () => {
   render(<RegistrationForm />, {
-    wrapper: BrowserRouter,
+    wrapper: Wrapper,
   });
   fireEvent.submit(screen.getByRole('button', { name: 'Sign Up' }));
 
@@ -23,7 +36,7 @@ it('should display required error when no value provided', async () => {
 
 it('should display matching error when first name is invalid', async () => {
   render(<RegistrationForm />, {
-    wrapper: BrowserRouter,
+    wrapper: Wrapper,
   });
 
   fireEvent.input(screen.getByRole('textbox', { name: 'First Name' }), {
@@ -44,7 +57,7 @@ it('should display matching error when first name is invalid', async () => {
 
 it('should display matching error when first name is invalid', async () => {
   render(<RegistrationForm />, {
-    wrapper: BrowserRouter,
+    wrapper: Wrapper,
   });
 
   fireEvent.input(screen.getByRole('textbox', { name: /last name/i }), {
@@ -65,7 +78,7 @@ it('should display matching error when first name is invalid', async () => {
 
 it('should display matching error when email is invalid', async () => {
   render(<RegistrationForm />, {
-    wrapper: BrowserRouter,
+    wrapper: Wrapper,
   });
 
   fireEvent.input(screen.getByRole('textbox', { name: 'Email' }), {
@@ -82,7 +95,7 @@ it('should display matching error when email is invalid', async () => {
 
 it('should display error when password is too easy', async () => {
   render(<RegistrationForm />, {
-    wrapper: BrowserRouter,
+    wrapper: Wrapper,
   });
 
   fireEvent.input(screen.getByRole('textbox', { name: /password/i }), {
@@ -105,7 +118,7 @@ it('should display error when password is too easy', async () => {
 
 it('should display error when password is too short', async () => {
   render(<RegistrationForm />, {
-    wrapper: BrowserRouter,
+    wrapper: Wrapper,
   });
 
   fireEvent.input(screen.getByRole('textbox', { name: /password/i }), {

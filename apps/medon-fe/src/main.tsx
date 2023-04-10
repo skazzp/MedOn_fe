@@ -5,11 +5,14 @@ import './translation/i18next';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 
-import App from './app/app';
-import { store } from './redux/store';
-import { GlobalStyle } from './styles/global';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { store } from 'redux/store';
+import { GlobalStyle } from 'styles/global';
 import 'assets/fonts/sf-pro-font/sf-font-face.css';
-import { theme } from './styles/theme';
+import { theme } from 'styles/theme';
+import App from './app/app';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -22,6 +25,7 @@ root.render(
         <BrowserRouter>
           <GlobalStyle />
           <App />
+          <ToastContainer />
         </BrowserRouter>
       </ThemeProvider>
     </Provider>

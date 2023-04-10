@@ -1,4 +1,4 @@
-import  { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 
 export interface FormData {
   firstName: string;
@@ -6,10 +6,10 @@ export interface FormData {
   email: string;
   password: string;
   passwordRepeat: string;
-  role: string | null;
+  role: string;
   speciality: number | null;
-  birthday: Dayjs | null;
-  country: string | null;
+  birthday: Dayjs;
+  country: string;
   city: string;
-  timezone: string | null;
+  timezone: string;
 }
