@@ -74,7 +74,7 @@ export const BtnContainer = styled.div`
 `;
 
 export const Btn = styled(Button)`
-  background: linear-gradient(90deg, #085dd7 -28.15%, #4d93f8 76.48%);
+  background: ${theme.colors.btnGradient};
   font-family: ${theme.typography.fontFamily.sf_pro_text};
   color: ${theme.colors.white};
   min-width: 10rem;

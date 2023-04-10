@@ -22,6 +22,7 @@ export const theme = {
     gray_700: '#585858',
     white: '#ffffff',
     black: '#000000',
+    btnGradient: 'linear-gradient(90deg, #085dd7 -28.15%, #4d93f8 76.48%)',
   },
   typography: {
     fontFamily: {
