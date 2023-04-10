@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, Dispatch } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Input } from 'antd';
 import dayjs from 'dayjs';
@@ -12,9 +12,7 @@ import { ROLES } from 'utils/constants/roles';
 import { toast } from 'react-toastify';
 
 import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
-import {
-  useRegisterUserMutation,
-} from 'redux/api/authApi';
+import { useRegisterUserMutation } from 'redux/api/authApi';
 import {
   BackBtn,
   Btn,
@@ -34,7 +32,11 @@ import {
 import { FormData } from './types';
 import useSpecOptions from './useSpecOptions';
 
-export default function RegistrationForm() {
+interface IProps {
+  setRegSuccess: Dispatch<string>;
+}
+
+export default function RegistrationForm({ setRegSuccess }: IProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const {
@@ -57,7 +59,7 @@ export default function RegistrationForm() {
   const { specialityOptions } = useSpecOptions();
   const role = watch('role');
   const email = watch('role');
-  
+
   const countryOptions = countries.map((country) => {
     const option = { value: country.name, label: country.name };
     return option;
@@ -96,12 +98,7 @@ export default function RegistrationForm() {
     if (isSuccess) {
       // console.log('Response: ', data);
       if (data && data.message) {
-        navigate('/', {
-          state: {
-            email,
-            message: data.message,
-          },
-        });
+        setRegSuccess(email);
       }
     }
     if (isError) {
