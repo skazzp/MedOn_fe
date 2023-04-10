@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
+import '@testing-library/jest-dom';
 
 import Input from 'components/Input';
 import { theme } from 'styles/theme';

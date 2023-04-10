@@ -22,7 +22,7 @@ export const Form = styled.form`
       width: 100%;
     }
     label {
-      font-family: ${theme.typography.fontFamily.sf_pro_text};
+      font-family: ${theme.fontFamily.sf_pro_text};
       font-size: .9rem;
       font-weight: 600;
       line-height: 21px;
@@ -40,7 +40,7 @@ export const SendButton = styled(Input)`
 
 export const StyledErrorMessage = styled.p`
   color: ${theme.colors.red_500};
-  font-family: ${(p) => p.theme.typography.fontFamily.sf_pro_text};
+  font-family: ${(p) => p.theme.fontFamily.sf_pro_text};
   font-size: 0.8rem;
   font-weight: 400;
   position: absolute;

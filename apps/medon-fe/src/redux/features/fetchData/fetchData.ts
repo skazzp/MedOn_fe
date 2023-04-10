@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { User } from './fetchInterface';
+import { User } from 'redux/features/fetchData/fetchInterface';
 
 export const fetchDataApi = createApi({
     reducerPath: 'fetchDataApi',

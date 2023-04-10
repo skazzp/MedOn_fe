@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
-import counterReducer from './features/counter/counterSlice';
-import { fetchDataApi } from './features/fetchData/fetchData';
+import counterReducer from 'redux/features/fetchData/couter/counterSlice';
+import { fetchDataApi } from 'redux/features/fetchData/fetchData';
 
 export const store = configureStore({
     reducer: {
