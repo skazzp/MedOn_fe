@@ -6,10 +6,16 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { registrationFormSchema } from 'validation/registrationFormSchema';
 import { countryOptions } from 'utils/countries/countryOptions';
+import RegistrationSelect from 'components/RegistrationSelect';
 import { timezoneOptions } from 'utils/timezones/timezoneOptions';
-import { ROLES } from 'utils/constants/roles';
+import { ROLES, ROLE_OPTIONS, SPECIALITY_OPTIONS } from 'utils/constants/roles';
 import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
-import { ROLE } from 'utils/constants/regFormFields';
+import {
+  COUNTRY,
+  ROLE,
+  SPECIALITY,
+  TIMEZONE,
+} from 'utils/constants/regFormFields';
 import {
   BackBtn,
   Btn,
@@ -24,7 +30,6 @@ import {
   PassErrorMsg,
   PasswordContainer,
   StyledDatePicker,
-  StyledSelect,
 } from './styles';
 import { FormData } from './types';
 
@@ -48,7 +53,6 @@ export default function RegistrationForm() {
       timezone: '(UTC) Coordinated Universal Time',
     },
   });
-
   const role = watch(ROLE);
   const onSubmit = handleSubmit(() => {});
   return (
@@ -147,64 +151,23 @@ export default function RegistrationForm() {
           </PassErrorMsg>
         </PasswordContainer>
         <Label htmlFor="role">
-          <LabelText>{t('regForm.role.label')}</LabelText>
-          <Controller
-            name="role"
+          <RegistrationSelect
+            name={ROLE}
             control={control}
-            render={({ field }) => (
-              <StyledSelect
-                id="role"
-                placeholder={`${t('regForm.role.placeholder')}`}
-                status={errors.role?.message ? 'error' : undefined}
-                optionFilterProp="children"
-                filterOption={(input, option) =>
-                  (option?.label ?? '')
-                    .toLowerCase()
-                    .includes(input.toLowerCase())
-                }
-                {...field}
-                options={[
-                  { value: ROLES.LOCAL, label: 'Local doctor' },
-                  { value: ROLES.REMOTE, label: 'Remote doctor' },
-                ]}
-              />
-            )}
+            error={errors.role?.message}
+            options={ROLE_OPTIONS}
           />
-          <ErrorMsg role="alert">{errors.role?.message}</ErrorMsg>
         </Label>
         {role === ROLES.REMOTE && (
           <Label htmlFor="speciality">
-            <LabelText>{t('regForm.speciality.label')}</LabelText>
-            <Controller
-              name="speciality"
-              rules={{ required: true }}
+            <RegistrationSelect
+              name={SPECIALITY}
               control={control}
-              render={({ field }) => (
-                <StyledSelect
-                  id="speciality"
-                  placeholder={`${t('regForm.speciality.placeholder')}`}
-                  status={errors.speciality?.message ? 'error' : undefined}
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    (option?.label ?? '')
-                      .toLowerCase()
-                      .includes(input.toLowerCase())
-                  }
-                  {...field}
-                  options={[
-                    { value: 1, label: 'Surgeon' },
-                    { value: 2, label: 'Neurologist' },
-                    { value: 3, label: 'Plastic surgeon' },
-                    { value: 4, label: 'Ophthalmologist' },
-                    { value: 5, label: 'Dermatologist' },
-                  ]}
-                />
-              )}
+              error={errors.speciality?.message}
+              options={SPECIALITY_OPTIONS}
             />
-            <ErrorMsg role="alert">{errors.speciality?.message}</ErrorMsg>
           </Label>
         )}
-
         <Label htmlFor="birthday">
           <LabelText>{t('regForm.birthday.label')}</LabelText>
           <Controller
@@ -234,29 +197,12 @@ export default function RegistrationForm() {
         </Label>
         <InputContainer>
           <LabelShort htmlFor="country">
-            <LabelText>{t('regForm.country.label')}</LabelText>
-            <Controller
-              name="country"
+            <RegistrationSelect
+              name={COUNTRY}
               control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <StyledSelect
-                  showSearch
-                  id="country"
-                  placeholder={`${t('regForm.country.placeholder')}`}
-                  status={errors.country?.message ? 'error' : undefined}
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    (option?.label ?? '')
-                      .toLowerCase()
-                      .includes(input.toLowerCase())
-                  }
-                  {...field}
-                  options={countryOptions}
-                />
-              )}
+              error={errors.country?.message}
+              options={countryOptions}
             />
-            <ErrorMsg role="alert">{errors.country?.message}</ErrorMsg>
           </LabelShort>
           <LabelShort htmlFor="city">
             <LabelText>{t('regForm.city.label')}</LabelText>
@@ -276,32 +222,12 @@ export default function RegistrationForm() {
           </LabelShort>
         </InputContainer>
         <Label htmlFor="timezone">
-          <LabelText>{t('regForm.timezone.label')}</LabelText>
-          <Controller
-            name="timezone"
+          <RegistrationSelect
+            name={TIMEZONE}
             control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <StyledSelect
-                showSearch
-                id="timezone"
-                placeholder={`${t('regForm.timezone.placeholder')}`}
-                defaultValue={'(UTC) Coordinated Universal Time'}
-                status={errors.timezone?.message ? 'error' : undefined}
-                optionFilterProp="children"
-                filterOption={(input, option) =>
-                  (option?.label ?? '')
-                    .toLowerCase()
-                    .includes(input.toLowerCase())
-                }
-                onChange={(data) => {
-                  field.onChange(data);
-                }}
-                options={timezoneOptions}
-              />
-            )}
+            error={errors.timezone?.message}
+            options={timezoneOptions}
           />
-          <ErrorMsg role="alert">{errors.timezone?.message}</ErrorMsg>
         </Label>
         <BtnContainer>
           <Btn type="primary" htmlType="submit">
