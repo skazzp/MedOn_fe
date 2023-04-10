@@ -6,5 +6,5 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   color: ${({ theme }) => theme.colors.blue_500};
-  font-family: ${({ theme }) => theme.typography.fontFamily.roboto};
+  font-family: ${({ theme }) => theme.fontFamily.roboto};
 `;
