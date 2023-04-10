@@ -1,24 +1,14 @@
 import { useTranslation } from 'react-i18next';
-import { Controller, Control, FieldPath } from 'react-hook-form';
-import { FormData } from 'components/RegistrationForm/types';
+import { Controller } from 'react-hook-form';
 import { ErrorMsg, LabelText, StyledSelect } from './styles';
-
-interface Option {
-  value: string | number;
-  label: string;
-}
+import { IProps } from './types';
 
 export default function RegistrationSelect({
   control,
   name,
   options,
   error,
-}: {
-  control: Control<FormData>;
-  name: FieldPath<FormData>;
-  options: Option[];
-  error: string | undefined;
-}) {
+}: IProps) {
   const { t } = useTranslation();
   return (
     <>
