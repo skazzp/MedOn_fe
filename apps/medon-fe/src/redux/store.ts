@@ -1,25 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-
-import { fetchDataApi } from './features/fetchData/fetchData';
 import { authApi } from './api/authApi';
 import { userApi } from './api/userApi';
 import userReducer from './features/userSlice/userSlice';
-import counterReducer from './features/counter/counterSlice';
 
 export const store = configureStore({
   reducer: {
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     userState: userReducer,
-    counter: counterReducer,
-    [fetchDataApi.reducerPath]: fetchDataApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([
-      fetchDataApi.middleware,
-      authApi.middleware,
-    ]),
+    getDefaultMiddleware().concat([authApi.middleware]),
   devTools: process.env.NODE_ENV !== 'production',
 });
 

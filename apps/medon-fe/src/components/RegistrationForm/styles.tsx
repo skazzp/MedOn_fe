@@ -13,7 +13,7 @@ export const Form = styled.form`
   flex-direction: column;
   align-items: center;
   width: 27rem;
-  gap: 1.5rem;
+  gap: 1.2rem;
 `;
 export const InputContainer = styled.div`
   display: flex;
@@ -43,8 +43,9 @@ export const LabelShort = styled.label`
 `;
 
 export const LabelText = styled.p`
+  margin-top: 0;
   margin-bottom: 0.2rem;
-  font-family: ${theme.typography.fontFamily.sf_pro_text};
+  font-family: ${theme.fontFamily.sf_pro_text};
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.5;
@@ -55,7 +56,7 @@ export const ErrorMsg = styled.p`
   position: absolute;
   margin-top: 0.2rem;
   width: 13rem;
-  font-family: ${theme.typography.fontFamily.sf_pro_text};
+  font-family: ${theme.fontFamily.sf_pro_text};
   font-size: 0.8rem;
   font-weight: 400;
   letter-spacing: 0em;
@@ -74,8 +75,8 @@ export const BtnContainer = styled.div`
 `;
 
 export const Btn = styled(Button)`
-  background: linear-gradient(90deg, #085dd7 -28.15%, #4d93f8 76.48%);
-  font-family: ${theme.typography.fontFamily.sf_pro_text};
+  background: ${theme.colors.btnGradient};
+  font-family: ${theme.fontFamily.sf_pro_text};
   color: ${theme.colors.white};
   min-width: 10rem;
 `;

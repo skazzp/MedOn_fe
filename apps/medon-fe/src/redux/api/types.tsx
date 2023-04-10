@@ -34,7 +34,7 @@ export interface UserResponse {
 }
 
 export interface Option {
-  id: number;
+  id: number | string;
   name: string;
 }
 
@@ -42,4 +42,3 @@ export interface LoginRequest {
   username: string;
   password: string;
 }
-

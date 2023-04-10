@@ -14,7 +14,7 @@ export default function RegistrationPage() {
     <Container>
       <RegContainer>
         <div>
-          <img src={logo} alt="MedOn Logo" />
+          <img src={logo} alt={`${t('logoAlt')}`} />
         </div>
         <FormContainer>
           {!email ? (
