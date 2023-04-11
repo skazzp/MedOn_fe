@@ -10,7 +10,10 @@ function App() {
       <Route index path="/" element={<Login />} />
       <Route path="/forget-password" element={<ForgetPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
-      <Route path="/confirm-account" element={<ResendAccountConfirmation />} />
+      <Route
+        path="/re-confirm-account"
+        element={<ResendAccountConfirmation />}
+      />
       <Route path="*" element={<Navigate to={'/'} />} />
     </Routes>
   );
