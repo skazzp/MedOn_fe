@@ -55,7 +55,11 @@ export default function ResetPassword() {
   return (
     <Container>
       <Header>
-        <img src={Logo} alt="medon logo" draggable={false} />
+        <img
+          src={Logo}
+          alt={t('forget-password.alt.logo') as string}
+          draggable={false}
+        />
       </Header>
       <Content>
         <Form onSubmit={handleSubmit(handleSentEmail)}>
@@ -64,7 +68,9 @@ export default function ResetPassword() {
               <h1>{t('forget-password.send-email.title')}</h1>
               <h3>{t('forget-password.send-email.subtitle')}</h3>
               <Input
-                placeholder="Email Address *"
+                placeholder={
+                  t('forget-password.send-email.placeholder-email') as string
+                }
                 type="email"
                 errorMessage={errors.email?.message}
                 {...register('email')}
@@ -75,7 +81,10 @@ export default function ResetPassword() {
                 isLoading={isLoading}
               >
                 {t('forget-password.send-email.button')}
-                <img src={RightArrow} alt="arrow pointing right" />
+                <img
+                  src={RightArrow}
+                  alt={t('forget-password.alt.image') as string}
+                />
               </Button>
             </>
           ) : (
@@ -88,7 +97,10 @@ export default function ResetPassword() {
                 isLoading={isLoading}
               >
                 {t('forget-password.after-email.button')}
-                <img src={RightArrow} alt="arrow pointing right" />
+                <img
+                  src={RightArrow}
+                  alt={t('forget-password.send-email.alt-image') as string}
+                />
               </Button>
             </>
           )}
