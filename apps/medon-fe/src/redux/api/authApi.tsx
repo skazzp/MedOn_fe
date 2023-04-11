@@ -17,10 +17,10 @@ export const authApi = createApi({
         };
       },
     }),
-    verifyEmail: builder.mutation<MessageResponse, string>({
+    resendEmail: builder.mutation<MessageResponse, string>({
       query(email) {
         return {
-          url: `auth/re-verify`,
+          url: `auth/re-confirm`,
           method: 'POST',
           body: { email },
         };
@@ -33,11 +33,20 @@ export const authApi = createApi({
         };
       },
     }),
+
+    verifyEmail: builder.query<MessageResponse, { token: string | null }>({
+      query({ token }) {
+        return {
+          url: `auth/confirm/${token}`,
+        };
+      },
+    }),
   }),
 });
 
 export const {
   useRegisterUserMutation,
-  useVerifyEmailMutation,
+  useResendEmailMutation,
+  useVerifyEmailQuery,
   useGetSpecialitiesQuery,
 } = authApi;

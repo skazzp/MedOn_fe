@@ -2,7 +2,7 @@ import { useEffect, Dispatch } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Input } from 'antd';
 import dayjs from 'dayjs';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { registrationFormSchema } from 'validation/registrationFormSchema';
@@ -18,6 +18,7 @@ import { ROLES, ROLE_OPTIONS } from 'utils/constants/roles';
 import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
 import {
   COUNTRY,
+  EMAIL,
   ROLE,
   SPECIALITY,
   TIMEZONE,
@@ -46,7 +47,6 @@ interface IProps {
 
 export default function RegistrationForm({ setRegSuccess }: IProps) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
@@ -62,11 +62,11 @@ export default function RegistrationForm({ setRegSuccess }: IProps) {
       timezone: DEFAULT_TIMEZONE,
     },
   });
-  const [registerUser, { isSuccess, error, isError, data }] =
+  const [registerUser, { isSuccess, error, isError }] =
     useRegisterUserMutation();
   const { specialityOptions } = useSpecOptions();
   const role = watch(ROLE);
-  const email = watch('role');
+  const email = watch(EMAIL);
 
   const onSubmit = handleSubmit((values: FormData) => {
     const requestData = {
@@ -90,10 +90,7 @@ export default function RegistrationForm({ setRegSuccess }: IProps) {
 
   useEffect(() => {
     if (isSuccess) {
-      // console.log('Response: ', data);
-      if (data && data.message) {
-        setRegSuccess(email);
-      }
+      setRegSuccess(email);
     }
     if (isError) {
       // console.log('Error: ', error);
@@ -108,7 +105,7 @@ export default function RegistrationForm({ setRegSuccess }: IProps) {
         theme: 'light',
       });
     }
-  }, [isSuccess, isError, data, error, navigate, email]);
+  }, [isSuccess, isError, error, email, setRegSuccess]);
 
   return (
     <Container>
