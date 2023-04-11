@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row;
+  background-color: #fafaff;
 `;
 
 export const SidebarContainer = styled.div`
@@ -17,7 +17,7 @@ export const ProfileImage = styled.img`
   height: 150px;
   border-radius: 50%;
   margin-bottom: 20px;
-  background-color: red;
+  background-color: #e6e6e6;
 `;
 
 export const FormContainer = styled.div`
@@ -27,4 +27,5 @@ export const FormContainer = styled.div`
   align-items: center;
   padding: 0 20px;
   flex: 1;
+  height: 100vh;
 `;

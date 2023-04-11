@@ -1,11 +1,16 @@
 import ProfileForm from 'components/ProfileForm';
 import Sidebar from 'components/Sidebar';
 
-import { FormContainer, ProfileImage, SidebarContainer } from './styles';
+import {
+  Container,
+  FormContainer,
+  ProfileImage,
+  SidebarContainer,
+} from './styles';
 
 export default function ProfilePage() {
   return (
-    <>
+    <Container>
       <SidebarContainer>
         <Sidebar />
       </SidebarContainer>
@@ -13,6 +18,6 @@ export default function ProfilePage() {
         <ProfileImage />
         <ProfileForm />
       </FormContainer>
-    </>
+    </Container>
   );
 }
