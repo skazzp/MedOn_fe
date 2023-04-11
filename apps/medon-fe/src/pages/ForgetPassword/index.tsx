@@ -1,9 +1,10 @@
-import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import Button from 'components/Button';
 import Input from 'components/Input';
@@ -22,10 +23,10 @@ import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
 import Logo from 'assets/svgs/logo_medon.svg';
 
 import { emailSchema } from 'validation/forgotPasswordSchema';
+import { usePostForgetPasswordDoctorMutation } from 'redux/features/backend/api';
 
 export default function ResetPassword() {
   const [isEmailSent, setIsEmailSent] = useState(false);
-
   const {
     register,
     handleSubmit,
@@ -36,10 +37,19 @@ export default function ResetPassword() {
 
   const theme = useTheme();
   const { t } = useTranslation();
+  const [sendEmail, { isLoading }] = usePostForgetPasswordDoctorMutation();
 
   const handleSentEmail: SubmitHandler<SubmitSendEmail> = (data) => {
-    // logic to send email
-    setIsEmailSent(true);
+    sendEmail({
+      email: data.email,
+    })
+      .unwrap()
+      .then(() => {
+        setIsEmailSent(true);
+      })
+      .catch((err) => {
+        toast.error(err.data?.message);
+      });
   };
 
   return (
@@ -62,6 +72,7 @@ export default function ResetPassword() {
               <Button
                 bgcolor={theme.colors.blue_500}
                 textcolor={theme.colors.white}
+                isLoading={isLoading}
               >
                 {t('forget-password.send-email.button')}
                 <img src={RightArrow} alt="arrow pointing right" />
@@ -74,6 +85,7 @@ export default function ResetPassword() {
               <Button
                 bgcolor={theme.colors.blue_500}
                 textcolor={theme.colors.white}
+                isLoading={isLoading}
               >
                 {t('forget-password.after-email.button')}
                 <img src={RightArrow} alt="arrow pointing right" />
