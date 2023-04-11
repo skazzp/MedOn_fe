@@ -7,3 +7,4 @@ export const SPECIALITY = 'speciality';
 export const COUNTRY = 'country';
 export const CITY = 'city';
 export const TIMEZONE = 'timezone';
+export const BIRTHDAY = 'birthday';
