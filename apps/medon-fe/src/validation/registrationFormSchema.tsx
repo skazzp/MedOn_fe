@@ -4,37 +4,37 @@ import * as yup from 'yup';
 export const registrationFormSchema = yup.object({
   firstName: yup
     .string()
-    .min(3, 'Length at least 3 characters')
-    .max(20, 'Name must be 20 characters maximum')
-    .matches(/^[a-zA-Z]+$/, 'First name must consist of only letters')
-    .required('First name is required'),
+    .min(3, 'validation.minLength')
+    .max(20, 'validation.maxLength')
+    .matches(/^[a-zA-Z]+$/, 'validation.firstName.matches')
+    .required('validation.firstName.required'),
   lastName: yup
     .string()
-    .min(3, 'Length at least 3 characters')
-    .max(20, 'Name must be 20 characters maximum')
-    .matches(/^[a-zA-Z]+$/, 'Last name must consist of only letters')
-    .required('Last name is required'),
+    .min(3, 'validation.minLength')
+    .max(20, 'validation.maxLength')
+    .matches(/^[a-zA-Z]+$/, 'validation.lastName.matches')
+    .required('validation.lastName.required'),
   email: yup
     .string()
-    .email('Please enter correct email')
-    .required('Email is required'),
+    .email('validation.email.matches')
+    .required('validation.email.required'),
   password: yup
     .string()
-    .min(6, 'Password must be at least 6 characters')
-    .max(20, 'Password must be 20 characters maximum')
+    .min(6, 'validation.password.minLength')
+    .max(20, 'validation.password.minLength')
     .matches(
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+-])[0-9a-zA-Z!@#$%^&()_+-]{6,}$/,
-      'At least one capital and small letter, special character and number'
+      'validation.password.matches'
     )
-    .required('Password is required'),
+    .required('validation.password.required'),
   passwordRepeat: yup
     .string()
-    .oneOf([yup.ref('password')], 'Passwords must match')
-    .required('Please confirm your password'),
-  role: yup.string().required('Choose a role'),
+    .oneOf([yup.ref('password')], 'validation.passwordRepeat.matches')
+    .required('validation.passwordRepeat.required'),
+  role: yup.string().required('validation.role.required'),
   speciality: yup.string().when('role', {
     is: ROLES.REMOTE,
-    then: (schema) => schema.required('Speciality is required'),
+    then: (schema) => schema.required('validation.speciality.required'),
     otherwise: (schema) => schema.nullable(),
   }),
   birthday: yup
@@ -42,9 +42,9 @@ export const registrationFormSchema = yup.object({
     .nullable()
     .default(null)
     .transform((curr, orig) => (orig === '' ? null : curr))
-    .typeError('Birthday is required')
-    .required('Birthday is required'),
-  country: yup.string().required('Country is required'),
-  city: yup.string().required('City is required'),
-  timezone: yup.string().required('Time zone is required'),
+    .typeError('validation.birthday.required')
+    .required('validation.birthday.required'),
+  country: yup.string().required('validation.country.required'),
+  city: yup.string().required('validation.city.required'),
+  timezone: yup.string().required('validation.timezone.required'),
 });

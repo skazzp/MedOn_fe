@@ -76,7 +76,11 @@ export default function RegistrationForm() {
                 />
               )}
             />
-            <ErrorMsg role="alert">{errors.firstName?.message}</ErrorMsg>
+            {errors.firstName?.message && (
+              <ErrorMsg role="alert">
+                {t(`${errors.firstName?.message}`)}
+              </ErrorMsg>
+            )}
           </LabelShort>
           <LabelShort htmlFor="lastName">
             <LabelText>{t('regForm.lastName.label')}</LabelText>
@@ -92,7 +96,11 @@ export default function RegistrationForm() {
                 />
               )}
             />
-            <ErrorMsg role="alert">{errors.lastName?.message}</ErrorMsg>
+            {errors.lastName?.message && (
+              <ErrorMsg role="alert">
+                {t(`${errors.lastName?.message}`)}
+              </ErrorMsg>
+            )}
           </LabelShort>
         </InputContainer>
         <Label htmlFor="email">
@@ -109,7 +117,9 @@ export default function RegistrationForm() {
               />
             )}
           />
-          <ErrorMsg role="alert">{errors.email?.message}</ErrorMsg>
+          {errors.email?.message && (
+            <ErrorMsg role="alert">{t(`${errors.email?.message}`)}</ErrorMsg>
+          )}
         </Label>
         <PasswordContainer>
           <InputContainer>
@@ -147,11 +157,14 @@ export default function RegistrationForm() {
               />
             </LabelShort>
           </InputContainer>
-          <PassErrorMsg>
-            {errors.password?.message
-              ? errors.password?.message
-              : errors.passwordRepeat?.message}
-          </PassErrorMsg>
+          {errors.password?.message ? (
+            <PassErrorMsg>{t(`${errors.password?.message}`)}</PassErrorMsg>
+          ) : (
+            <PassErrorMsg>
+              {errors.passwordRepeat?.message &&
+                t(`${errors.passwordRepeat?.message}`)}
+            </PassErrorMsg>
+          )}
         </PasswordContainer>
         <Label htmlFor="role">
           <RegistrationSelect
@@ -196,7 +209,9 @@ export default function RegistrationForm() {
               />
             )}
           />
-          <ErrorMsg role="alert">{errors.birthday?.message}</ErrorMsg>
+          {errors.birthday?.message && (
+            <ErrorMsg role="alert">{t(`${errors.birthday?.message}`)}</ErrorMsg>
+          )}
         </Label>
         <InputContainer>
           <LabelShort htmlFor="country">
@@ -221,7 +236,9 @@ export default function RegistrationForm() {
                 />
               )}
             />
-            <ErrorMsg role="alert">{errors.city?.message}</ErrorMsg>
+            {errors.city?.message && (
+              <ErrorMsg role="alert">{t(`${errors.city?.message}`)}</ErrorMsg>
+            )}
           </LabelShort>
         </InputContainer>
         <Label htmlFor="timezone">

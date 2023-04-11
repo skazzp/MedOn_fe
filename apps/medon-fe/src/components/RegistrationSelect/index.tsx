@@ -31,7 +31,7 @@ export default function RegistrationSelect({
           />
         )}
       />
-      <ErrorMsg role="alert">{error}</ErrorMsg>
+      {error && <ErrorMsg role="alert">{t(`${error}`)}</ErrorMsg>}
     </>
   );
 }
