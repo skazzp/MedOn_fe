@@ -8,7 +8,7 @@ function App() {
     <Routes>
       <Route index path="/" element={<Login />} />
       <Route path="/forget-password" element={<ForgetPassword />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/reset-password/:token" element={<ResetPassword />} />
       <Route path="*" element={<Navigate to={'/'} />} />
     </Routes>
   );
