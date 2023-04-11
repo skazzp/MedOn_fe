@@ -1,7 +1,9 @@
+import { Container } from './styles';
+
 export default function ProfilePage() {
   return (
-    <div>
+    <Container>
       <h1>Profile Page</h1>
-    </div>
+    </Container>
   );
 }

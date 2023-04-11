@@ -1,7 +1,9 @@
+import { Container } from './styles';
+
 export default function ProfileForm() {
   return (
-    <div>
+    <Container>
       <h1>Profile Form</h1>
-    </div>
+    </Container>
   );
 }
