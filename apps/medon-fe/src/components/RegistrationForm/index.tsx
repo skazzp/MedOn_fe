@@ -7,7 +7,10 @@ import { useTranslation } from 'react-i18next';
 import { registrationFormSchema } from 'validation/registrationFormSchema';
 import { countryOptions } from 'utils/countries/countryOptions';
 import RegistrationSelect from 'components/RegistrationSelect';
-import { timezoneOptions } from 'utils/timezones/timezoneOptions';
+import {
+  DEFAULT_TIMEZONE,
+  timezoneOptions,
+} from 'utils/timezones/timezoneOptions';
 import { ROLES, ROLE_OPTIONS, SPECIALITY_OPTIONS } from 'utils/constants/roles';
 import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
 import {
@@ -50,7 +53,7 @@ export default function RegistrationForm() {
       birthday: null,
       country: null,
       city: '',
-      timezone: '(UTC) Coordinated Universal Time',
+      timezone: DEFAULT_TIMEZONE,
     },
   });
   const role = watch(ROLE);
