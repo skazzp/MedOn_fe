@@ -1,9 +1,11 @@
-import { Container } from './styles';
+import ProfileForm from 'components/ProfileForm';
+import { Container, ProfileImage } from './styles';
 
 export default function ProfilePage() {
   return (
     <Container>
-      <h1>Profile Page</h1>
+      <ProfileImage />
+      <ProfileForm />
     </Container>
   );
 }
