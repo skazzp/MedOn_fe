@@ -1,8 +1,14 @@
 import RegistrationForm from 'components/RegistrationForm';
 import { useTranslation } from 'react-i18next';
-import AuthSidebar from 'components/AuthSidebar';
 import logo from 'assets/images/logo.svg';
-import { Container, FormContainer, RegContainer, Text, Title } from './styles';
+import {
+  Container,
+  FormContainer,
+  RegContainer,
+  Sidebar,
+  Text,
+  Title,
+} from './styles';
 
 export default function RegistrationPage() {
   const { t } = useTranslation();
@@ -18,7 +24,7 @@ export default function RegistrationPage() {
           <RegistrationForm />
         </FormContainer>
       </RegContainer>
-      <AuthSidebar />
+      <Sidebar></Sidebar>;
     </Container>
   );
 }

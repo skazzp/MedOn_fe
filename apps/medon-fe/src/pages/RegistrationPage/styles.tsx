@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { AUTH_PICTURE } from 'utils/constants/urls';
 
 export const Container = styled.div`
   display: flex;
@@ -33,4 +34,13 @@ export const Text = styled.p`
   font-weight: 400;
   line-height: 1.3;
   letter-spacing: 0em;
+`;
+
+export const Sidebar = styled.div`
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(${AUTH_PICTURE});
 `;
