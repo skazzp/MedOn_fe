@@ -1,17 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
-import counterReducer from './features/counter/counterSlice';
-import { fetchDataApi } from './features/fetchData/fetchData';
+import { server } from 'redux/features/backend/api';
 
 export const store = configureStore({
-    reducer: {
-        counter: counterReducer,
-        [fetchDataApi.reducerPath]: fetchDataApi.reducer,
-    },
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(fetchDataApi.middleware),
-    devTools: process.env.NODE_ENV !== 'production',
+  reducer: {
+    [server.reducerPath]: server.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(server.middleware),
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 setupListeners(store.dispatch);
