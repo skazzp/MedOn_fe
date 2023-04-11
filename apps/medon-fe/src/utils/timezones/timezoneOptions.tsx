@@ -8,3 +8,5 @@ export const timezoneOptions = timezones.map((timezone) => {
   };
   return option;
 });
+
+export const DEFAULT_TIMEZONE = '(UTC) Coordinated Universal Time';
