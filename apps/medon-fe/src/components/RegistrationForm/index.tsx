@@ -7,12 +7,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { registrationFormSchema } from 'validation/registrationFormSchema';
 import { toast } from 'react-toastify';
-import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
 import { useRegisterUserMutation } from 'redux/api/authApi';
 import { countryOptions } from 'utils/countries/countryOptions';
 import RegistrationSelect from 'components/RegistrationSelect';
-import { timezoneOptions } from 'utils/timezones/timezoneOptions';
+import {
+  DEFAULT_TIMEZONE,
+  timezoneOptions,
+} from 'utils/timezones/timezoneOptions';
 import { ROLES, ROLE_OPTIONS } from 'utils/constants/roles';
+import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
 import {
   COUNTRY,
   ROLE,
@@ -56,7 +59,7 @@ export default function RegistrationForm({ setRegSuccess }: IProps) {
       lastName: '',
       speciality: null,
       city: '',
-      timezone: '(UTC) Coordinated Universal Time',
+      timezone: DEFAULT_TIMEZONE,
     },
   });
   const [registerUser, { isSuccess, error, isError, data }] =
