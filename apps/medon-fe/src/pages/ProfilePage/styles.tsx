@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  margin-top: 10px;
   background-color: #fafaff;
 `;
 
@@ -27,5 +28,5 @@ export const FormContainer = styled.div`
   align-items: center;
   padding: 0 20px;
   flex: 1;
-  height: 100vh;
+  /* height: 100vh; //add or not, it depends. */
 `;
