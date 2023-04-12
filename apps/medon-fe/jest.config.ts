@@ -8,4 +8,8 @@ export default {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/apps/medon-fe',
-};
+  setupFilesAfterEnv: [
+    "<rootDir>/support/setupTests.js"
+ ],
+}
+  
