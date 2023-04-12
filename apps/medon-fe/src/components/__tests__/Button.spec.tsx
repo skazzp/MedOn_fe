@@ -3,6 +3,8 @@ import { ThemeProvider } from 'styled-components';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { theme } from 'styles/theme';
 import Button from 'components/Button';
+import '@testing-library/jest-dom/extend-expect';
+
 
 const Wrapper = ({ children }: { children: ReactNode }) => (
   <ThemeProvider theme={theme}>{children}</ThemeProvider>
