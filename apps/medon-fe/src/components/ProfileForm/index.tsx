@@ -1,5 +1,4 @@
 import { Input, Button, Form, DatePicker } from 'antd';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useTheme } from 'styled-components';
 import type { DatePickerProps } from 'antd';
 import { Container, Label, ProfileImage, CustomSelect } from './styles';
@@ -78,39 +77,6 @@ export default function ProfileForm() {
             type="email"
             id="email"
             name="email"
-          />
-        </Form.Item>
-
-        <Form.Item
-          name="password"
-          rules={[{ required: true, message: 'Password is required!' }]}
-        >
-          <Label htmlFor="password">Password</Label>
-          <Input.Password
-            className="input-password"
-            placeholder="Password"
-            iconRender={(visible) =>
-              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-            }
-            size="large"
-            type="password"
-            id="password"
-          />
-        </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[{ required: true, message: 'Password is required!' }]}
-        >
-          <Label htmlFor="password">Repeat Password</Label>
-          <Input.Password
-            className="input-password"
-            placeholder="Repeat Password"
-            iconRender={(visible) =>
-              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-            }
-            size="large"
-            type="password"
-            id="password"
           />
         </Form.Item>
         <Label htmlFor="dateOfBirth">Date of Birth</Label>
