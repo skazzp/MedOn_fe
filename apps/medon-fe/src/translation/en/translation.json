@@ -11,6 +11,41 @@
     "title": "Registration",
     "instruction": "Please, create your medical account and become a member"
   },
+  "profileForm": {
+    "profileBtn": "Update Profile",
+    "firstName": {
+      "label": "First Name",
+      "placeholder": "Enter your first name"
+    },
+    "lastName": {
+      "label": "Last Name",
+      "placeholder": "Enter your last name"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter your email"
+    },
+    "role": {
+      "label": "Role",
+      "placeholder": "Select your role"
+    },
+    "birthday": {
+      "label": "Birth Date",
+      "placeholder": "DD/MM/YYYY"
+    },
+    "country": {
+      "label": "Country",
+      "placeholder": "Enter your country"
+    },
+    "city": {
+      "label": "City",
+      "placeholder": "Enter your city"
+    },
+    "timezone": {
+      "label": "Time zone",
+      "placeholder": "Select your time zone"
+    }
+  },
   "regForm": {
     "firstName": {
       "label": "First Name",

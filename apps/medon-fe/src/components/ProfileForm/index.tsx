@@ -43,7 +43,7 @@ export default function ProfileForm() {
       <Form>
         <InputContainer>
           <Label htmlFor="firstName">
-            <LabelText>{t('regForm.firstName.label')}</LabelText>
+            <LabelText>{t('profileForm.firstName.label')}</LabelText>
             <Controller
               name="firstName"
               control={control}
@@ -52,7 +52,7 @@ export default function ProfileForm() {
                   id="firstName"
                   size="large"
                   status={errors.firstName?.message ? 'error' : undefined}
-                  placeholder={`${t('regForm.firstName.placeholder')}`}
+                  placeholder={`${t('profileForm.firstName.placeholder')}`}
                   {...field}
                 />
               )}
@@ -66,7 +66,7 @@ export default function ProfileForm() {
         </InputContainer>
         <InputContainer>
           <Label htmlFor="lastName">
-            <LabelText>{t('regForm.lastName.label')}</LabelText>
+            <LabelText>{t('profileForm.lastName.label')}</LabelText>
             <Controller
               name="lastName"
               control={control}
@@ -75,7 +75,7 @@ export default function ProfileForm() {
                   id="lastName"
                   size="large"
                   status={errors.lastName?.message ? 'error' : undefined}
-                  placeholder={`${t('regForm.lastName.placeholder')}`}
+                  placeholder={`${t('profileForm.lastName.placeholder')}`}
                   {...field}
                 />
               )}
@@ -89,7 +89,7 @@ export default function ProfileForm() {
         </InputContainer>
         <InputContainer>
           <Label htmlFor="email">
-            <LabelText>{t('regForm.email.label')}</LabelText>
+            <LabelText>{t('profileForm.email.label')}</LabelText>
             <Controller
               name="email"
               control={control}
@@ -98,7 +98,7 @@ export default function ProfileForm() {
                   id="email"
                   size="large"
                   status={errors.email?.message ? 'error' : undefined}
-                  placeholder={`${t('regForm.email.placeholder')}`}
+                  placeholder={`${t('profileForm.email.placeholder')}`}
                   {...field}
                 />
               )}
@@ -110,7 +110,7 @@ export default function ProfileForm() {
         </InputContainer>
         <InputContainer>
           <Label htmlFor="birthday">
-            <LabelText>{t('regForm.birthday.label')}</LabelText>
+            <LabelText>{t('profileForm.birthday.label')}</LabelText>
             <Controller
               name="birthday"
               control={control}
@@ -118,7 +118,7 @@ export default function ProfileForm() {
               render={({ field }) => (
                 <StyledDatePicker
                   id="birthday"
-                  placeholder={`${t('regForm.birthday.placeholder')}`}
+                  placeholder={`${t('profileForm.birthday.placeholder')}`}
                   format={DATE_FORMAT_REG}
                   allowClear={false}
                   style={{ width: '100%' }}
@@ -154,7 +154,7 @@ export default function ProfileForm() {
         </InputContainer>
         <InputContainer>
           <Label htmlFor="city">
-            <LabelText>{t('regForm.city.label')}</LabelText>
+            <LabelText>{t('profileForm.city.label')}</LabelText>
             <Controller
               name="city"
               control={control}
@@ -163,7 +163,7 @@ export default function ProfileForm() {
                   id="city"
                   size="large"
                   status={errors.city?.message ? 'error' : undefined}
-                  placeholder={`${t('regForm.city.placeholder')}`}
+                  placeholder={`${t('profileForm.city.placeholder')}`}
                   {...field}
                 />
               )}
@@ -186,8 +186,8 @@ export default function ProfileForm() {
         </InputContainer>
       </Form>
       <ButtonContainer>
-        <StyledButton size="large" htmlType="submit" disabled={false}>
-          Update Profile
+        <StyledButton size="large" htmlType="submit" disabled={true}>
+          {t('profileForm.profileBtn')}
         </StyledButton>
         <StyledButton size="large" htmlType="submit" disabled={false}>
           Change Password
