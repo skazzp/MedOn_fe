@@ -2,11 +2,12 @@ import { Controller, useForm } from 'react-hook-form';
 import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
 import dayjs from 'dayjs';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Input, Select } from 'antd';
+import { ROLE_OPTIONS } from 'utils/constants/roles';
+import { Input } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { timezoneOptions } from 'utils/timezones/timezoneOptions';
 import { countryOptions } from 'utils/countries/countryOptions';
-import { COUNTRY, TIMEZONE } from 'utils/constants/profileFormFields';
+import { COUNTRY, TIMEZONE, ROLE } from 'utils/constants/profileFormFields';
 import { profileFormSchema } from 'validation/profileFormSchema';
 import ProfileSelect from 'components/ProfileSelect';
 import {
@@ -189,15 +190,14 @@ export default function ProfileForm() {
           </Label>
         </InputContainer>
         <InputContainer>
-          <Label htmlFor="role">Role</Label>
-          <Select
-            defaultValue={'Select your role'}
-            size="large"
-            options={[
-              { value: 'Local Doctor', label: 'Local Doctor' },
-              { value: 'Remote Doctor', label: 'Remote Doctor' },
-            ]}
-          />
+          <Label htmlFor="role">
+            <ProfileSelect
+              name={ROLE}
+              control={control}
+              error={errors.role?.message}
+              options={ROLE_OPTIONS}
+            />
+          </Label>
         </InputContainer>
       </Form>
       <ButtonContainer>
