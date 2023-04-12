@@ -1,48 +1,79 @@
-import {
-  Container,
-  Form,
-  Input,
-  Label,
-  Select,
-  SubmitButton,
-  Option,
-  ProfileImage,
-} from './styles';
+import { Input, Button, Form, Select } from 'antd';
+
+import { Container, Label, ProfileImage } from './styles';
+
+const onFinish = (values: any) => {
+  console.log('Success:', values);
+};
+
+const onFinishFailed = (errorInfo: any) => {
+  console.log('Failed:', errorInfo);
+};
+
+const handleChangeSelect = (value: string) => {
+  console.log(`selected ${value}`);
+};
 
 export default function ProfileForm() {
   return (
     <Container>
       <ProfileImage src="https://via.placeholder.com/250" alt="Profile Image" />
-      <Form>
-        <Label htmlFor="firstName">First Name</Label>
-        <Input type="text" id="firstName" name="firstName" />
+      <Form
+        name="basic"
+        wrapperCol={{ span: 32 }}
+        style={{ maxWidth: 600 }}
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <Form.Item>
+          <Label htmlFor="firstName">First Name</Label>
+          <Input type="text" id="firstName" name="firstName" />
+        </Form.Item>
 
-        <Label htmlFor="lastName">Last Name</Label>
-        <Input type="text" id="lastName" name="lastName" />
+        <Form.Item>
+          <Label htmlFor="lastName">Last Name</Label>
+          <Input type="text" id="lastName" name="lastName" />
+        </Form.Item>
 
-        <Label htmlFor="email">Email</Label>
-        <Input type="email" id="email" name="email" />
+        <Form.Item>
+          <Label htmlFor="email">Email</Label>
+          <Input type="email" id="email" name="email" />
+        </Form.Item>
 
-        <Label htmlFor="password">Password</Label>
-        <Input type="password" id="password" name="password" />
-
-        <Label htmlFor="dateOfBirth">Date of Birth</Label>
-        <Input type="date" id="dateOfBirth" name="dateOfBirth" />
-
-        <Label htmlFor="country">Country</Label>
-        <Input type="text" id="country" name="country" />
-
-        <Label htmlFor="city">City</Label>
-        <Input type="text" id="city" name="city" />
-
-        <Label htmlFor="role">Role</Label>
-        <Select id="role" name="role">
-          <Option value="">Select Role</Option>
-          <Option value="localDoctor">Local Doctor</Option>
-          <Option value="remoteDoctor">Remote Doctor</Option>
-        </Select>
+        <Form.Item>
+          <Label htmlFor="password">Password</Label>
+          <Input type="password" id="password" name="password" />
+        </Form.Item>
+        <Form.Item>
+          <Label htmlFor="dateOfBirth">Date of Birth</Label>
+          <Input type="date" id="dateOfBirth" name="dateOfBirth" />
+        </Form.Item>
+        <Form.Item>
+          <Label htmlFor="country">Country</Label>
+          <Input type="text" id="country" name="country" />
+        </Form.Item>
+        <Form.Item>
+          <Label htmlFor="city">City</Label>
+          <Input type="text" id="city" name="city" />
+        </Form.Item>
+        <Form.Item>
+          <Label htmlFor="role">Role</Label>
+          <Select
+            defaultValue="Select a Role"
+            style={{ width: 600 }}
+            onChange={handleChangeSelect}
+            options={[
+              { value: 'Local Doctor', label: 'Local Doctor' },
+              { value: 'Remote Doctor', label: 'Remote Doctor' },
+            ]}
+          />
+        </Form.Item>
+        <Button type="primary" htmlType="submit">
+          UPDATE PROFILE
+        </Button>
       </Form>
-      <SubmitButton type="submit">UPDATE PROFILE</SubmitButton>
     </Container>
   );
 }
