@@ -1,8 +1,24 @@
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Input, Form, DatePicker, Select } from 'antd';
+import { profileFormSchema } from 'validation/profileFormSchema';
 import { Container, Label, ProfileImage, StyledButton } from './styles';
+import { FormProfileData } from './types';
 
 export default function ProfileForm() {
   const FORM_WIDTH = 600;
+  const {} = useForm<FormProfileData>({
+    resolver: yupResolver(profileFormSchema),
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      role: null,
+      birthday: null,
+      country: null,
+      city: '',
+    },
+  });
 
   return (
     <Container>
