@@ -1,7 +1,6 @@
-import { Input, Button, Form, DatePicker } from 'antd';
-import { useTheme } from 'styled-components';
+import { Input, Button, Form, DatePicker, Select } from 'antd';
 import type { DatePickerProps } from 'antd';
-import { Container, Label, ProfileImage, CustomSelect } from './styles';
+import { Container, Label, ProfileImage } from './styles';
 
 const onFinish = (values: any) => {
   console.log('Success:', values);
@@ -20,7 +19,6 @@ const onChange: DatePickerProps['onChange'] = (date, dateString) => {
 };
 
 export default function ProfileForm() {
-  const theme = useTheme();
   const FORM_WIDTH = 600;
   const BUTTON_WIDTH = 300;
   return (
@@ -44,7 +42,6 @@ export default function ProfileForm() {
           <Label htmlFor="firstName">First Name</Label>
           <Input
             placeholder="First name"
-            style={{ backgroundColor: theme.colors.BACKGROUND_PRIMARY }}
             type="text"
             id="firstName"
             size="large"
@@ -58,7 +55,6 @@ export default function ProfileForm() {
           <Label htmlFor="lastName">Last Name</Label>
           <Input
             placeholder="Last name"
-            style={{ backgroundColor: theme.colors.BACKGROUND_PRIMARY }}
             size="large"
             type="text"
             id="lastName"
@@ -72,7 +68,6 @@ export default function ProfileForm() {
           <Label htmlFor="email">Email</Label>
           <Input
             placeholder="Type your email"
-            style={{ backgroundColor: theme.colors.BACKGROUND_PRIMARY }}
             size="large"
             type="email"
             id="email"
@@ -87,7 +82,6 @@ export default function ProfileForm() {
           <DatePicker
             style={{
               width: FORM_WIDTH,
-              backgroundColor: theme.colors.BACKGROUND_PRIMARY,
             }}
             onChange={onChange}
             size="large"
@@ -100,7 +94,6 @@ export default function ProfileForm() {
         >
           <Label htmlFor="country">Country</Label>
           <Input
-            style={{ backgroundColor: theme.colors.BACKGROUND_PRIMARY }}
             size="large"
             type="text"
             id="country"
@@ -113,7 +106,6 @@ export default function ProfileForm() {
         >
           <Label htmlFor="city">City</Label>
           <Input
-            style={{ backgroundColor: theme.colors.BACKGROUND_PRIMARY }}
             size="large"
             type="text"
             id="city"
@@ -125,14 +117,11 @@ export default function ProfileForm() {
           rules={[{ required: true, message: 'A role is mandatory!' }]}
         >
           <Label htmlFor="role">Role</Label>
-          <CustomSelect
+          <Select
             defaultValue={'Select your role'}
             onChange={handleChangeRole}
             style={{
               width: FORM_WIDTH,
-            }}
-            dropdownStyle={{
-              backgroundColor: theme.colors.BACKGROUND_PRIMARY,
             }}
             size="large"
             options={[

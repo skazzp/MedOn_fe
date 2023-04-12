@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Select, SelectProps } from 'antd';
 
 export const Container = styled.div`
   display: flex;
@@ -19,11 +18,4 @@ export const ProfileImage = styled.img`
   border-radius: 50%;
   margin-bottom: 20px;
   background-color: ${({ theme }) => theme.colors.gray_300};
-`;
-
-export const CustomSelect = styled(Select)<SelectProps>`
-  .ant-select-selector {
-    background-color: ${({ theme }) =>
-      theme.colors.BACKGROUND_PRIMARY} !important;
-  }
 `;
