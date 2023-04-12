@@ -25,6 +25,7 @@ export const theme = {
     black_87: '#000000de',
     black: '#000000',
     title: '#1E293B',
+    btnGradient: 'linear-gradient(90deg, #085dd7 -28.15%, #4d93f8 76.48%)',
   },
   fontFamily: {
     roboto: 'Roboto, sans-serif',

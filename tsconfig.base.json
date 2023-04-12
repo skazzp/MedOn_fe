@@ -23,6 +23,7 @@
       "redux/*": ["apps/medon-fe/src/redux/*"],
       "utils/*": ["apps/medon-fe/src/utils/*"],
       "validation/*": ["apps/medon-fe/src/validation/*"],
+      "translation/*": ["apps/medon-fe/src/translation/*"],
       "styles/*": ["apps/medon-fe/src/styles/*"]
     }
   },
