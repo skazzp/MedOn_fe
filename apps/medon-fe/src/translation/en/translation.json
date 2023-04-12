@@ -64,8 +64,10 @@
     "text1": "Please check your email for the next step to signup",
     "text2": "If you have any issues, contact our support",
     "btnResend": "RESEND LINK",
-    "msgSuccess": "Email sent, check your mailbox!",
-    "msgError": "Email sending error, try again!"
+    "msgEmailSuccess": "Email sent, check your mailbox!",
+    "msgEmailError": "Email sending error, try again!",
+    "msgVerifySuccess": "Email verified!",
+    "msgVerifyError": "Email verification error, try again!"
   },
   "login": {
     "login-title": "Access the platform",

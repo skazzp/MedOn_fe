@@ -21,10 +21,10 @@ export default function RegistrationConfirmation({ email }: IProps) {
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success(t('regConfirm.msgSuccess'), toastConfig);
+      toast.success(t('regConfirm.msgEmailSuccess'), toastConfig);
     }
     if (isError) {
-      toast.error(t('regConfirm.msgError'), toastConfig);
+      toast.error(t('regConfirm.msgEmailError'), toastConfig);
     }
   }, [isSuccess, isError, t]);
 
