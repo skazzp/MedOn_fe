@@ -1,8 +1,9 @@
 import { Controller, useForm } from 'react-hook-form';
+import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
+import dayjs from 'dayjs';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input, DatePicker, Select } from 'antd';
 import { useTranslation } from 'react-i18next';
-
 import { profileFormSchema } from 'validation/profileFormSchema';
 import {
   Container,
@@ -14,6 +15,7 @@ import {
   ButtonContainer,
   LabelText,
   ErrorMsg,
+  StyledDatePicker,
 } from './styles';
 import { FormProfileData } from './types';
 
@@ -107,8 +109,39 @@ export default function ProfileForm() {
           </Label>
         </InputContainer>
         <InputContainer>
-          <Label htmlFor="dateOfBirth">Date of Birth</Label>
-          <DatePicker size="large" id="dateOfBirth" />
+          <Label htmlFor="birthday">
+            <LabelText>{t('regForm.birthday.label')}</LabelText>
+            <Controller
+              name="birthday"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <StyledDatePicker
+                  id="birthday"
+                  placeholder={`${t('regForm.birthday.placeholder')}`}
+                  format={DATE_FORMAT_REG}
+                  allowClear={false}
+                  style={{ width: '100%' }}
+                  size="large"
+                  status={errors.birthday?.message ? 'error' : undefined}
+                  ref={field.ref}
+                  name={field.name}
+                  onBlur={field.onBlur}
+                  value={field.value ? dayjs(field.value) : null}
+                  onChange={(date) => {
+                    field.onChange(
+                      date ? new Date(date.valueOf()).toUTCString() : null
+                    );
+                  }}
+                />
+              )}
+            />
+            {errors.birthday?.message && (
+              <ErrorMsg role="alert">
+                {t(`${errors.birthday?.message}`)}
+              </ErrorMsg>
+            )}
+          </Label>
         </InputContainer>
         <InputContainer>
           <Label htmlFor="country">Country</Label>

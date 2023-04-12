@@ -41,7 +41,7 @@
       "placeholder": "Select your speciality"
     },
     "birthday": {
-      "label": "Birthday",
+      "label": "Birth Date",
       "placeholder": "DD/MM/YYYY"
     },
     "country": {

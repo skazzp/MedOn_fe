@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from 'antd';
+import { Button, DatePicker } from 'antd';
 
 export const Container = styled.div`
   display: flex;
@@ -71,4 +71,8 @@ export const ErrorMsg = styled.p`
   font-weight: 400;
   letter-spacing: 0em;
   color: ${({ theme }) => theme.colors.red_500};
+`;
+
+export const StyledDatePicker = styled(DatePicker)`
+  width: 100%;
 `;
