@@ -21,7 +21,8 @@ export default function ProfileSelect({
           <StyledSelect
             showSearch
             id={name}
-            placeholder={`${t(`profile.${name}.placeholder`)}`}
+            size="large"
+            placeholder={`${t(`profileForm.${name}.placeholder`)}`}
             status={error ? 'error' : undefined}
             filterOption={(input, option) =>
               (option?.label ?? '').toLowerCase().includes(input.toLowerCase())

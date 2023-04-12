@@ -4,7 +4,10 @@ import dayjs from 'dayjs';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input, Select } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { countryOptions } from 'utils/countries/countryOptions';
+import { COUNTRY } from 'utils/constants/profileFormFields';
 import { profileFormSchema } from 'validation/profileFormSchema';
+import ProfileSelect from 'components/ProfileSelect';
 import {
   Container,
   Label,
@@ -144,13 +147,14 @@ export default function ProfileForm() {
           </Label>
         </InputContainer>
         <InputContainer>
-          <Label htmlFor="country">Country</Label>
-          <Input
-            size="large"
-            type="text"
-            id="country"
-            placeholder="Type your country"
-          />
+          <Label htmlFor="country">
+            <ProfileSelect
+              name={COUNTRY}
+              control={control}
+              error={errors.country?.message}
+              options={countryOptions}
+            />
+          </Label>
         </InputContainer>
         <InputContainer>
           <Label htmlFor="city">
