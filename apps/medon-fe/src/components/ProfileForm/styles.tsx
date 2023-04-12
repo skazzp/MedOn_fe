@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  flex-direction: column;
 `;
 
 export const Form = styled.form`
@@ -26,3 +27,12 @@ export const Option = styled.option``;
 export const SubmitButton = styled.button`
   margin-top: 20px;
 `;
+
+export const ProfileImage = styled.img`
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  background-color: #e6e6e6;
+`;
+

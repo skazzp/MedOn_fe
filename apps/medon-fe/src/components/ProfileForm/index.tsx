@@ -6,11 +6,13 @@ import {
   Select,
   SubmitButton,
   Option,
+  ProfileImage,
 } from './styles';
 
 export default function ProfileForm() {
   return (
     <Container>
+      <ProfileImage src="https://via.placeholder.com/250" alt="Profile Image" />
       <Form>
         <Label htmlFor="firstName">First Name</Label>
         <Input type="text" id="firstName" name="firstName" />
