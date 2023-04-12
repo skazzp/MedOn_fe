@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { theme } from '../../styles/theme';
+import { Select, SelectProps } from 'antd';
 
 export const Container = styled.div`
   display: flex;
@@ -9,7 +9,7 @@ export const Container = styled.div`
 
 export const Label = styled.label`
   margin-bottom: 5px;
-  font-family: ${theme.typography.fontFamily.sf_pro_text};
+  font-family: ${({ theme }) => theme.typography.fontFamily.sf_pro_text};
   font-size: 12px;
 `;
 
@@ -18,6 +18,12 @@ export const ProfileImage = styled.img`
   height: 250px;
   border-radius: 50%;
   margin-bottom: 20px;
-  background-color: ${theme.colors.gray_300};
+  background-color: ${({ theme }) => theme.colors.gray_300};
 `;
 
+export const CustomSelect = styled(Select)<SelectProps>`
+  .ant-select-selector {
+    background-color: ${({ theme }) =>
+      theme.colors.BACKGROUND_PRIMARY} !important;
+  }
+`;

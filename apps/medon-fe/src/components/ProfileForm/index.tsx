@@ -1,7 +1,7 @@
-import { Input, Button, Form, Select, DatePicker } from 'antd';
+import { Input, Button, Form, DatePicker } from 'antd';
 import { useTheme } from 'styled-components';
 import type { DatePickerProps } from 'antd';
-import { Container, Label, ProfileImage } from './styles';
+import { Container, Label, ProfileImage, CustomSelect } from './styles';
 
 const onFinish = (values: any) => {
   console.log('Success:', values);
@@ -11,7 +11,7 @@ const onFinishFailed = (errorInfo: any) => {
   console.log('Failed:', errorInfo);
 };
 
-const handleChangeRole = (value: string) => {
+const handleChangeRole = (value: any) => {
   console.log(`selected ${value}`);
 };
 
@@ -117,13 +117,15 @@ export default function ProfileForm() {
         </Form.Item>
         <Form.Item>
           <Label htmlFor="role">Role</Label>
-          <Select
-            className="select-role"
+          <CustomSelect
+            defaultValue={'Select your role'}
+            onChange={handleChangeRole}
             style={{
               width: FORM_WIDTH,
             }}
-            dropdownStyle={{ backgroundColor: theme.colors.BACKGROUND_PRIMARY }}
-            onChange={handleChangeRole}
+            dropdownStyle={{
+              backgroundColor: theme.colors.BACKGROUND_PRIMARY,
+            }}
             size="large"
             options={[
               { value: 'Local Doctor', label: 'Local Doctor' },
