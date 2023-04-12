@@ -2,6 +2,7 @@ import Login from 'pages/Login';
 import ForgetPassword from 'pages/ForgetPassword';
 import ResetPassword from 'pages/ResetPassword';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import Navigation from 'components/Navigation';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Route index path="/" element={<Login />} />
       <Route path="/forget-password" element={<ForgetPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/dashboard" element={<Navigation />} />
       <Route path="*" element={<Navigate to={'/'} />} />
     </Routes>
   );
