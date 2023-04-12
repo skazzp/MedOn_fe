@@ -210,7 +210,7 @@ export default function ProfileForm() {
           {t('profileForm.profileBtn')}
         </StyledButton>
         <StyledButton size="large" htmlType="submit">
-          Change Password
+          {t('profileForm.changePasswordBtn')}
         </StyledButton>
       </ButtonContainer>
     </Container>

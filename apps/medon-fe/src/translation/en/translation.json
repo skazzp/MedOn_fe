@@ -13,6 +13,7 @@
   },
   "profileForm": {
     "profileBtn": "Update Profile",
+    "changePasswordBtn": "Change Password",
     "firstName": {
       "label": "First Name",
       "placeholder": "Enter your first name"
