@@ -1,22 +1,5 @@
 import { Input, Form, DatePicker, Select } from 'antd';
-import type { DatePickerProps } from 'antd';
 import { Container, Label, ProfileImage, StyledButton } from './styles';
-
-const onFinish = (values: any) => {
-  console.log('Success:', values);
-};
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo);
-};
-
-const handleChangeRole = (value: any) => {
-  console.log(`selected ${value}`);
-};
-
-const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-  console.log(date, dateString);
-};
 
 export default function ProfileForm() {
   const FORM_WIDTH = 600;
@@ -30,9 +13,6 @@ export default function ProfileForm() {
         style={{
           maxWidth: FORM_WIDTH,
         }}
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Form.Item name="firstName">
@@ -71,7 +51,6 @@ export default function ProfileForm() {
             style={{
               width: FORM_WIDTH,
             }}
-            onChange={onChange}
             size="large"
             id="dateOfBirth"
           />
@@ -98,7 +77,6 @@ export default function ProfileForm() {
           <Label htmlFor="role">Role</Label>
           <Select
             defaultValue={'Select your role'}
-            onChange={handleChangeRole}
             style={{
               width: FORM_WIDTH,
             }}
@@ -111,12 +89,12 @@ export default function ProfileForm() {
         </Form.Item>
         <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
           <StyledButton size="large" htmlType="submit" disabled={false}>
-            UPDATE PROFILE
+            Update Profile
           </StyledButton>
         </Form.Item>
       </Form>
       <StyledButton size="large" htmlType="submit" disabled={false}>
-        UPDATE PASSWORD
+        Change Password
       </StyledButton>
     </Container>
   );
