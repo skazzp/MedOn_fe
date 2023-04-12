@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const AppContainer = styled.div`
+export const ProfilePageContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  height: 100vh;
 `;
 
 export const ContentContainer = styled.div`
@@ -18,7 +18,6 @@ export const ProfileFormWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #f4f6fd;
-  padding: 30px;
-  margin-bottom: 20px;
+  padding: 40px;
 `;
 
