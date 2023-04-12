@@ -20,7 +20,11 @@
       "pages/*": ["apps/medon-fe/src/pages/*"],
       "components/*": ["apps/medon-fe/src/components/*"],
       "assets/*": ["apps/medon-fe/src/assets/*"],
-      "redux/*": ["apps/medon-fe/src/redux/*"]
+      "redux/*": ["apps/medon-fe/src/redux/*"],
+      "utils/*": ["apps/medon-fe/src/utils/*"],
+      "validation/*": ["apps/medon-fe/src/validation/*"],
+      "translation/*": ["apps/medon-fe/src/translation/*"],
+      "styles/*": ["apps/medon-fe/src/styles/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
