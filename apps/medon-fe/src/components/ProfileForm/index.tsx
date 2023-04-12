@@ -149,7 +149,6 @@ export default function ProfileForm() {
                   placeholder={`${t('profileForm.birthday.placeholder')}`}
                   format={DATE_FORMAT_REG}
                   allowClear={false}
-                  style={{ width: '100%' }}
                   size="large"
                   status={errors.birthday?.message ? 'error' : undefined}
                   ref={field.ref}
