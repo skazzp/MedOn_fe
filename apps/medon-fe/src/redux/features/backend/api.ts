@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { IResetPassword, IForgetPassword } from 'redux/features/backend/types';
 
 export const server = createApi({
   reducerPath: 'api',
@@ -6,7 +7,7 @@ export const server = createApi({
     baseUrl: process.env.NX_API_URL,
   }),
   endpoints: (builder) => ({
-    postForgetPasswordDoctor: builder.mutation<string, { email: string }>({
+    postForgetPasswordDoctor: builder.mutation<string, IForgetPassword>({
       query: ({ email }) => ({
         url: 'auth/forget',
         method: 'POST',
@@ -15,10 +16,7 @@ export const server = createApi({
         },
       }),
     }),
-    postResetPasswordDoctor: builder.mutation<
-      string,
-      { newPassword: string; token: string }
-    >({
+    postResetPasswordDoctor: builder.mutation<string, IResetPassword>({
       query: ({ newPassword, token }) => ({
         url: 'auth/reset',
         method: 'POST',
