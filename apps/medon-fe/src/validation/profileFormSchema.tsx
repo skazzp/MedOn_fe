@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-export const registrationFormSchema = yup.object({
+export const profileFormSchema = yup.object({
   firstName: yup
     .string()
     .min(3, 'validation.minLength')
