@@ -97,7 +97,22 @@ export default function ProfileForm() {
             id="password"
           />
         </Form.Item>
-
+        <Form.Item
+          name="password"
+          rules={[{ required: true, message: 'Password is required!' }]}
+        >
+          <Label htmlFor="password">Repeat Password</Label>
+          <Input.Password
+            className="input-password"
+            placeholder="Repeat Password"
+            iconRender={(visible) =>
+              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+            }
+            size="large"
+            type="password"
+            id="password"
+          />
+        </Form.Item>
         <Label htmlFor="dateOfBirth">Date of Birth</Label>
         <Form.Item
           name="dateOfBirth"
