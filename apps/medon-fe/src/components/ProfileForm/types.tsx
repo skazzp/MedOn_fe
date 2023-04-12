@@ -8,4 +8,5 @@ export interface FormProfileData {
   birthday: Dayjs | null;
   country: string | null;
   city: string;
+  timezone: string | null;
 }

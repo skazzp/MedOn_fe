@@ -4,8 +4,9 @@ import dayjs from 'dayjs';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input, Select } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { timezoneOptions } from 'utils/timezones/timezoneOptions';
 import { countryOptions } from 'utils/countries/countryOptions';
-import { COUNTRY } from 'utils/constants/profileFormFields';
+import { COUNTRY, TIMEZONE } from 'utils/constants/profileFormFields';
 import { profileFormSchema } from 'validation/profileFormSchema';
 import ProfileSelect from 'components/ProfileSelect';
 import {
@@ -175,6 +176,16 @@ export default function ProfileForm() {
             {errors.city?.message && (
               <ErrorMsg role="alert">{t(`${errors.city?.message}`)}</ErrorMsg>
             )}
+          </Label>
+        </InputContainer>
+        <InputContainer>
+          <Label htmlFor="timezone">
+            <ProfileSelect
+              name={TIMEZONE}
+              control={control}
+              error={errors.timezone?.message}
+              options={timezoneOptions}
+            />
           </Label>
         </InputContainer>
         <InputContainer>

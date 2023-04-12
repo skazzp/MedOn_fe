@@ -6,3 +6,4 @@ export const ROLE = 'role';
 export const COUNTRY = 'country';
 export const CITY = 'city';
 export const BIRTHDAY = 'birthday';
+export const TIMEZONE = 'timezone';
