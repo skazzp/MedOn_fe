@@ -1,5 +1,5 @@
-import { Input, Button, Form, Select } from 'antd';
-
+import { Input, Button, Form, Select, DatePicker } from 'antd';
+import type { DatePickerProps } from 'antd';
 import { Container, Label, ProfileImage } from './styles';
 
 const onFinish = (values: any) => {
@@ -12,6 +12,10 @@ const onFinishFailed = (errorInfo: any) => {
 
 const handleChangeSelect = (value: string) => {
   console.log(`selected ${value}`);
+};
+
+const onChange: DatePickerProps['onChange'] = (date, dateString) => {
+  console.log(date, dateString);
 };
 
 export default function ProfileForm() {
@@ -46,9 +50,15 @@ export default function ProfileForm() {
           <Label htmlFor="password">Password</Label>
           <Input type="password" id="password" name="password" />
         </Form.Item>
+
+        <Label htmlFor="dateOfBirth">Date of Birth</Label>
         <Form.Item>
-          <Label htmlFor="dateOfBirth">Date of Birth</Label>
-          <Input type="date" id="dateOfBirth" name="dateOfBirth" />
+          <DatePicker
+            style={{ width: 600 }}
+            onChange={onChange}
+            id="dateOfBirth"
+            name="dateOfBirth"
+          />
         </Form.Item>
         <Form.Item>
           <Label htmlFor="country">Country</Label>
