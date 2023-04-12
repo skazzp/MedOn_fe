@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, DatePicker } from 'antd';
+import { Button, DatePicker, Avatar } from 'antd';
 
 export const Container = styled.div`
   display: flex;
@@ -25,11 +25,7 @@ export const InputContainer = styled.div`
   width: 100%;
 `;
 
-export const ProfileImage = styled.img`
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
-  margin-bottom: 20px;
+export const ProfileImage = styled(Avatar)`
   background-color: ${({ theme }) => theme.colors.gray_300};
 `;
 
@@ -50,6 +46,7 @@ export const ButtonContainer = styled.div`
   justify-content: space-between;
   flex-direction: column;
   gap: 16px;
+  margin-top: 16px;
 `;
 
 export const LabelText = styled.p`

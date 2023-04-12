@@ -13,6 +13,7 @@ import { countryOptions } from 'utils/countries/countryOptions';
 import { COUNTRY, TIMEZONE, ROLE } from 'utils/constants/profileFormFields';
 import { profileFormSchema } from 'validation/profileFormSchema';
 import ProfileSelect from 'components/ProfileSelect';
+import { UserOutlined } from '@ant-design/icons';
 import {
   Container,
   Label,
@@ -25,7 +26,9 @@ import {
   ErrorMsg,
   StyledDatePicker,
 } from './styles';
+
 import { FormProfileData } from './types';
+import { AvatarUploader } from './AvatarUploader';
 
 export default function ProfileForm() {
   const { t } = useTranslation();
@@ -46,10 +49,22 @@ export default function ProfileForm() {
       timezone: DEFAULT_TIMEZONE,
     },
   });
+
   const onSubmit = handleSubmit(() => {});
   return (
     <Container>
-      <ProfileImage src="https://via.placeholder.com/250" alt="Profile Image" />
+      <ProfileImage
+        size={{
+          xs: 24,
+          sm: 32,
+          md: 40,
+          lg: 64,
+          xl: 80,
+          xxl: 100,
+        }}
+        icon={<UserOutlined />}
+      />
+      <AvatarUploader />
       <Form onSubmit={onSubmit}>
         <InputContainer>
           <Label htmlFor="firstName">
