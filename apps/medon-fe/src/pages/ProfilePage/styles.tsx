@@ -18,5 +18,7 @@ export const ProfileFormWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #f4f6fd;
+  padding: 30px;
+  margin-bottom: 20px;
 `;
 

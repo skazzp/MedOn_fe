@@ -41,9 +41,8 @@ export default function ProfileForm() {
           <Option value="localDoctor">Local Doctor</Option>
           <Option value="remoteDoctor">Remote Doctor</Option>
         </Select>
-
-        <SubmitButton type="submit">Update Profile</SubmitButton>
       </Form>
+      <SubmitButton type="submit">UPDATE PROFILE</SubmitButton>
     </Container>
   );
 }
