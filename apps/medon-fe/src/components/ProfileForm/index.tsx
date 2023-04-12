@@ -25,6 +25,7 @@ import {
   LabelText,
   ErrorMsg,
   StyledDatePicker,
+  ImageContainer,
 } from './styles';
 
 import { FormProfileData } from './types';
@@ -53,18 +54,20 @@ export default function ProfileForm() {
   const onSubmit = handleSubmit(() => {});
   return (
     <Container>
-      <ProfileImage
-        size={{
-          xs: 24,
-          sm: 32,
-          md: 40,
-          lg: 64,
-          xl: 80,
-          xxl: 100,
-        }}
-        icon={<UserOutlined />}
-      />
-      <AvatarUploader />
+      <ImageContainer>
+        <ProfileImage
+          size={{
+            xs: 24,
+            sm: 32,
+            md: 40,
+            lg: 64,
+            xl: 80,
+            xxl: 100,
+          }}
+          icon={<UserOutlined />}
+        />
+        <AvatarUploader />
+      </ImageContainer>
       <Form onSubmit={onSubmit}>
         <InputContainer>
           <Label htmlFor="firstName">

@@ -4,6 +4,7 @@ import { RcFile, UploadChangeParam } from 'antd/lib/upload/interface';
 import ChangeProfilePictureSvg from 'assets/ReactComponentAssets/ChangeProfileAvatar';
 import { useTheme } from 'styled-components';
 
+
 export const AvatarUploader = () => {
   const [avatarFile, setAvatarFile] = useState<RcFile | undefined>(undefined);
   const theme = useTheme();

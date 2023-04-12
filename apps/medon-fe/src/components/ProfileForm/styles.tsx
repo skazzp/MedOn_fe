@@ -73,3 +73,7 @@ export const ErrorMsg = styled.p`
 export const StyledDatePicker = styled(DatePicker)`
   width: 100%;
 `;
+
+export const ImageContainer = styled.div`
+  display: flex;
+`;
