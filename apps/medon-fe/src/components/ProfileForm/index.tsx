@@ -86,14 +86,25 @@ export default function ProfileForm() {
           </Label>
         </InputContainer>
         <InputContainer>
-          <Label htmlFor="email">Email</Label>
-          <Input
-            placeholder="Type your email"
-            size="large"
-            type="email"
-            id="email"
-            name="email"
-          />
+          <Label htmlFor="email">
+            <LabelText>{t('regForm.email.label')}</LabelText>
+            <Controller
+              name="email"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  id="email"
+                  size="large"
+                  status={errors.email?.message ? 'error' : undefined}
+                  placeholder={`${t('regForm.email.placeholder')}`}
+                  {...field}
+                />
+              )}
+            />
+            {errors.email?.message && (
+              <ErrorMsg role="alert">{t(`${errors.email?.message}`)}</ErrorMsg>
+            )}
+          </Label>
         </InputContainer>
         <InputContainer>
           <Label htmlFor="dateOfBirth">Date of Birth</Label>
