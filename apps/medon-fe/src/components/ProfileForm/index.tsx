@@ -1,6 +1,6 @@
-import { Input, Button, Form, DatePicker, Select } from 'antd';
+import { Input, Form, DatePicker, Select } from 'antd';
 import type { DatePickerProps } from 'antd';
-import { Container, Label, ProfileImage } from './styles';
+import { Container, Label, ProfileImage, StyledButton } from './styles';
 
 const onFinish = (values: any) => {
   console.log('Success:', values);
@@ -20,7 +20,7 @@ const onChange: DatePickerProps['onChange'] = (date, dateString) => {
 
 export default function ProfileForm() {
   const FORM_WIDTH = 600;
-  const BUTTON_WIDTH = 200;
+
   return (
     <Container>
       <ProfileImage src="https://via.placeholder.com/250" alt="Profile Image" />
@@ -35,10 +35,7 @@ export default function ProfileForm() {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Form.Item
-          name="firstName"
-          rules={[{ required: true, message: 'First name is required!' }]}
-        >
+        <Form.Item name="firstName">
           <Label htmlFor="firstName">First Name</Label>
           <Input
             placeholder="First name"
@@ -48,10 +45,7 @@ export default function ProfileForm() {
           />
         </Form.Item>
 
-        <Form.Item
-          name="lastName"
-          rules={[{ required: true, message: 'Last name is required!' }]}
-        >
+        <Form.Item name="lastName">
           <Label htmlFor="lastName">Last Name</Label>
           <Input
             placeholder="Last name"
@@ -61,10 +55,7 @@ export default function ProfileForm() {
           />
         </Form.Item>
 
-        <Form.Item
-          name="email"
-          rules={[{ required: true, message: 'Your email is required!' }]}
-        >
+        <Form.Item name="email">
           <Label htmlFor="email">Email</Label>
           <Input
             placeholder="Type your email"
@@ -75,10 +66,7 @@ export default function ProfileForm() {
           />
         </Form.Item>
         <Label htmlFor="dateOfBirth">Date of Birth</Label>
-        <Form.Item
-          name="dateOfBirth"
-          rules={[{ required: true, message: 'Birth date is required!' }]}
-        >
+        <Form.Item name="dateOfBirth">
           <DatePicker
             style={{
               width: FORM_WIDTH,
@@ -88,10 +76,7 @@ export default function ProfileForm() {
             id="dateOfBirth"
           />
         </Form.Item>
-        <Form.Item
-          name="country"
-          rules={[{ required: true, message: 'Country is required!' }]}
-        >
+        <Form.Item name="country">
           <Label htmlFor="country">Country</Label>
           <Input
             size="large"
@@ -100,10 +85,7 @@ export default function ProfileForm() {
             placeholder="Type your country"
           />
         </Form.Item>
-        <Form.Item
-          name="city"
-          rules={[{ required: true, message: 'City is required!' }]}
-        >
+        <Form.Item name="city">
           <Label htmlFor="city">City</Label>
           <Input
             size="large"
@@ -112,10 +94,7 @@ export default function ProfileForm() {
             placeholder="Type your city"
           />
         </Form.Item>
-        <Form.Item
-          name="role"
-          rules={[{ required: true, message: 'A role is mandatory!' }]}
-        >
+        <Form.Item name="role">
           <Label htmlFor="role">Role</Label>
           <Select
             defaultValue={'Select your role'}
@@ -131,36 +110,14 @@ export default function ProfileForm() {
           />
         </Form.Item>
         <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button
-            style={{
-              padding: '8px',
-              fontSize: '14px',
-              width: BUTTON_WIDTH,
-              fontWeight: 'bold',
-            }}
-            size="large"
-            type="primary"
-            htmlType="submit"
-            disabled={true}
-          >
+          <StyledButton size="large" htmlType="submit" disabled={false}>
             UPDATE PROFILE
-          </Button>
+          </StyledButton>
         </Form.Item>
       </Form>
-      <Button
-        style={{
-          padding: '8px',
-          width: BUTTON_WIDTH,
-          fontSize: '14px',
-          fontWeight: 'bold',
-        }}
-        size="large"
-        type="primary"
-        htmlType="submit"
-        disabled={false}
-      >
+      <StyledButton size="large" htmlType="submit" disabled={false}>
         UPDATE PASSWORD
-      </Button>
+      </StyledButton>
     </Container>
   );
 }

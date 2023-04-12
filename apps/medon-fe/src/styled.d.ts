@@ -28,6 +28,7 @@ declare module 'styled-components' {
       gray_700: string;
       white: string;
       black: string;
+      btnGradient: string,
     };
     typography: {
       fontFamily: {

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from 'antd';
 
 export const Container = styled.div`
   display: flex;
@@ -18,4 +19,15 @@ export const ProfileImage = styled.img`
   border-radius: 50%;
   margin-bottom: 20px;
   background-color: ${({ theme }) => theme.colors.gray_300};
+`;
+
+export const StyledButton = styled(Button)`
+  background: ${({ theme }) => theme.colors.btnGradient};
+  font-family: ${({ theme }) => theme.typography.fontFamily.sf_pro_text};
+  color: ${({ theme }) => theme.colors.white};
+  min-width: 10rem;
+  padding: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  width: 200;
 `;
