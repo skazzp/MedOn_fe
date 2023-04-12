@@ -5,7 +5,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ROLE_OPTIONS } from 'utils/constants/roles';
 import { Input } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { timezoneOptions } from 'utils/timezones/timezoneOptions';
+import {
+  DEFAULT_TIMEZONE,
+  timezoneOptions,
+} from 'utils/timezones/timezoneOptions';
 import { countryOptions } from 'utils/countries/countryOptions';
 import { COUNTRY, TIMEZONE, ROLE } from 'utils/constants/profileFormFields';
 import { profileFormSchema } from 'validation/profileFormSchema';
@@ -28,6 +31,7 @@ export default function ProfileForm() {
   const { t } = useTranslation();
   const {
     control,
+    handleSubmit,
     formState: { errors },
   } = useForm<FormProfileData>({
     resolver: yupResolver(profileFormSchema),
@@ -39,13 +43,14 @@ export default function ProfileForm() {
       birthday: null,
       country: null,
       city: '',
+      timezone: DEFAULT_TIMEZONE,
     },
   });
-
+  const onSubmit = handleSubmit(() => {});
   return (
     <Container>
       <ProfileImage src="https://via.placeholder.com/250" alt="Profile Image" />
-      <Form>
+      <Form onSubmit={onSubmit}>
         <InputContainer>
           <Label htmlFor="firstName">
             <LabelText>{t('profileForm.firstName.label')}</LabelText>
