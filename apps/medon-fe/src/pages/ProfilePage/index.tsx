@@ -1,23 +1,17 @@
 import ProfileForm from 'components/ProfileForm';
 import Sidebar from 'components/Sidebar';
 
-import {
-  Container,
-  FormContainer,
-  ProfileImage,
-  SidebarContainer,
-} from './styles';
+import { AppContainer, ContentContainer, ProfileFormWrapper } from './styles';
 
 export default function ProfilePage() {
   return (
-    <Container>
-      <SidebarContainer>
+    <AppContainer>
+      <ContentContainer>
         <Sidebar />
-      </SidebarContainer>
-      <FormContainer>
-        <ProfileImage />
-        <ProfileForm />
-      </FormContainer>
-    </Container>
+        <ProfileFormWrapper>
+          <ProfileForm />
+        </ProfileFormWrapper>
+      </ContentContainer>
+    </AppContainer>
   );
 }
