@@ -20,7 +20,7 @@ const onChange: DatePickerProps['onChange'] = (date, dateString) => {
 
 export default function ProfileForm() {
   const FORM_WIDTH = 600;
-  const BUTTON_WIDTH = 300;
+  const BUTTON_WIDTH = 200;
   return (
     <Container>
       <ProfileImage src="https://via.placeholder.com/250" alt="Profile Image" />
@@ -133,18 +133,34 @@ export default function ProfileForm() {
         <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
           <Button
             style={{
-              padding: '5px',
+              padding: '8px',
+              fontSize: '14px',
               width: BUTTON_WIDTH,
+              fontWeight: 'bold',
             }}
             size="large"
             type="primary"
             htmlType="submit"
-            disabled={false}
+            disabled={true}
           >
             UPDATE PROFILE
           </Button>
         </Form.Item>
       </Form>
+      <Button
+        style={{
+          padding: '8px',
+          width: BUTTON_WIDTH,
+          fontSize: '14px',
+          fontWeight: 'bold',
+        }}
+        size="large"
+        type="primary"
+        htmlType="submit"
+        disabled={false}
+      >
+        UPDATE PASSWORD
+      </Button>
     </Container>
   );
 }
