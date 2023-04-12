@@ -133,13 +133,15 @@ export default function ProfileForm() {
             ]}
           />
         </Form.Item>
-        <Form.Item>
+        <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
           <Button
-            style={{ maxWidth: BUTTON_WIDTH }}
+            style={{
+              padding: '5px',
+              width: BUTTON_WIDTH,
+            }}
             size="large"
             type="primary"
             htmlType="submit"
-            block
             disabled={false}
           >
             UPDATE PROFILE
