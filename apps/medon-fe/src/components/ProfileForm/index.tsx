@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input, DatePicker, Select } from 'antd';
+import { useTranslation } from 'react-i18next';
+
 import { profileFormSchema } from 'validation/profileFormSchema';
 import {
   Container,
@@ -10,10 +12,12 @@ import {
   Form,
   InputContainer,
   ButtonContainer,
+  LabelText,
 } from './styles';
 import { FormProfileData } from './types';
 
 export default function ProfileForm() {
+  const { t } = useTranslation();
   const {} = useForm<FormProfileData>({
     resolver: yupResolver(profileFormSchema),
     defaultValues: {
@@ -32,13 +36,9 @@ export default function ProfileForm() {
       <ProfileImage src="https://via.placeholder.com/250" alt="Profile Image" />
       <Form>
         <InputContainer>
-          <Label htmlFor="firstName">First Name</Label>
-          <Input
-            placeholder="First name"
-            type="text"
-            id="firstName"
-            size="large"
-          />
+          <Label htmlFor="firstName"></Label>
+          <LabelText>{t('regForm.firstName.label')}</LabelText>
+          <Input type="text" id="firstName" size="large" />
         </InputContainer>
         <InputContainer>
           <Label htmlFor="lastName">Last Name</Label>
