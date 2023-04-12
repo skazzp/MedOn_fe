@@ -44,6 +44,7 @@ export default function ProfileForm() {
         >
           <Label htmlFor="firstName">First Name</Label>
           <Input
+            placeholder="First name"
             style={{ backgroundColor: theme.colors.BACKGROUND_PRIMARY }}
             type="text"
             id="firstName"
@@ -57,6 +58,7 @@ export default function ProfileForm() {
         >
           <Label htmlFor="lastName">Last Name</Label>
           <Input
+            placeholder="Last name"
             style={{ backgroundColor: theme.colors.BACKGROUND_PRIMARY }}
             size="large"
             type="text"
@@ -70,6 +72,7 @@ export default function ProfileForm() {
         >
           <Label htmlFor="email">Email</Label>
           <Input
+            placeholder="Type your email"
             style={{ backgroundColor: theme.colors.BACKGROUND_PRIMARY }}
             size="large"
             type="email"
@@ -84,6 +87,7 @@ export default function ProfileForm() {
         >
           <Label htmlFor="password">Password</Label>
           <Input.Password
+            className="input-password"
             placeholder="Password"
             iconRender={(visible) =>
               visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
@@ -119,6 +123,7 @@ export default function ProfileForm() {
             size="large"
             type="text"
             id="country"
+            placeholder="Type your country"
           />
         </Form.Item>
         <Form.Item
@@ -131,6 +136,7 @@ export default function ProfileForm() {
             size="large"
             type="text"
             id="city"
+            placeholder="Type your city"
           />
         </Form.Item>
         <Form.Item
