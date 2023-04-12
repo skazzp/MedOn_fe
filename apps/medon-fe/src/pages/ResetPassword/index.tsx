@@ -78,7 +78,13 @@ export default function ResetPassword() {
                   ) as string
                 }
                 type="password"
-                errorMessage={errors.newPassword?.message}
+                errorMessage={
+                  errors.newPassword?.message
+                    ? (t(
+                        `forget-password.validation.${errors.newPassword?.message}`
+                      ) as string)
+                    : undefined
+                }
                 {...register('newPassword')}
               />
               <Input
@@ -88,7 +94,13 @@ export default function ResetPassword() {
                   ) as string
                 }
                 type="password"
-                errorMessage={errors.confirmNewPassword?.message}
+                errorMessage={
+                  errors.confirmNewPassword?.message
+                    ? (t(
+                        `forget-password.validation.${errors.confirmNewPassword?.message}`
+                      ) as string)
+                    : undefined
+                }
                 {...register('confirmNewPassword')}
               />
               <Button

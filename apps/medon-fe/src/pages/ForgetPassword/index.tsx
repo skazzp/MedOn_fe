@@ -72,7 +72,13 @@ export default function ResetPassword() {
                   t('forget-password.send-email.placeholder-email') as string
                 }
                 type="email"
-                errorMessage={errors.email?.message}
+                errorMessage={
+                  errors.email?.message
+                    ? (t(
+                        `forget-password.validation.${errors.email?.message}`
+                      ) as string)
+                    : undefined
+                }
                 {...register('email')}
               />
               <Button
