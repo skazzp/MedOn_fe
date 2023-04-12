@@ -30,6 +30,7 @@ declare module 'styled-components' {
       black_87: string;
       black: string;
       title: string;
+      btnGradient: 'linear-gradient(90deg, #085dd7 -28.15%, #4d93f8 76.48%)';
     };
     fontFamily: {
       roboto: string;
@@ -41,6 +42,8 @@ declare module 'styled-components' {
       md: string;
       lg: string;
       xl: string;
+      xxl: string;
+      xxxl: string;
     };
   }
 }
