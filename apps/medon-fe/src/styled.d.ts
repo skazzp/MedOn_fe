@@ -29,6 +29,8 @@ declare module 'styled-components' {
       white: string;
       black_87: string;
       black: string;
+      title: string;
+      btnGradient: string;
     };
     fontFamily: {
       roboto: string;
@@ -40,6 +42,8 @@ declare module 'styled-components' {
       md: string;
       lg: string;
       xl: string;
+      xxl: string;
+      xxxl: string;
     };
   }
 }

@@ -6,24 +6,21 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 3rem;
-  /* padding-left: 3rem; */
 `;
 
 export const Title = styled.h1`
-  /* margin-left: 1.5rem; */
   font-family: ${(p) => p.theme.fontFamily.sf_pro_text};
-  font-size: 1.8rem;
+  font-size: ${(p) => p.theme.fontSizes.xxl};
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: 0em;
 `;
 
 export const Text = styled.p`
-  /* margin-left: 1.5rem; */
   margin-top: 1rem;
   margin-bottom: 2rem;
   font-family: ${(p) => p.theme.fontFamily.sf_pro_text};
-  font-size: 1rem;
+  font-size: ${(p) => p.theme.fontSizes.md};
   font-weight: 400;
   line-height: 1.3;
   letter-spacing: 0em;

@@ -22,6 +22,7 @@ export default function RegistrationPage() {
   const [email, setEmail] = useState<string>('');
   const [registerUser, { isSuccess, error, isError }] =
     useRegisterUserMutation();
+  
   const submitForm = (values: FormData) => {
     const requestData = {
       firstName: values.firstName,
@@ -41,6 +42,7 @@ export default function RegistrationPage() {
     registerUser(requestData);
     setEmail(values.email);
   };
+  
   useEffect(() => {
     if (isError) {
       toast.error('Registration error, try again!', toastConfig);

@@ -9,14 +9,13 @@ const emptyArray: Option[] = [];
 
 const useSpecOptions = () => {
   const specialityOptions = useGetSpecialitiesQuery(null, {
-    skip: false,
     selectFromResult: ({ data }) => ({
       specialityOptions: data
         ? data.map((elem) => ({ value: elem.id, label: elem.name }))
         : emptyArray,
     }),
   });
-  
+
   return specialityOptions;
 };
 
