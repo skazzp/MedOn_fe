@@ -13,23 +13,23 @@ export default function LoginComponent() {
   const { t } = useTranslation();
   const [params] = useSearchParams();
   const token = params.get('token');
-  const { isSuccess, error, data } = useVerifyEmailQuery(
+  const verifyEmail = useVerifyEmailQuery(
     { token },
     {
       skip: !token,
     }
   );
 
-  const handleSubmit = (values: LoginFormValues) => values;
+  const handleSubmit = (data: LoginFormValues) => data;
 
   useEffect(() => {
-    if (isSuccess) {
+    if (verifyEmail.isSuccess) {
       toast.success(t('regConfirm.msgVerifySuccess'), toastConfig);
     }
-    if (error) {
+    if (verifyEmail.error) {
       toast.error(t('regConfirm.msgVerifyError'), toastConfig);
     }
-  }, [isSuccess, data, error, t]);
+  }, [verifyEmail.isSuccess, verifyEmail.error, t]);
 
   return (
     <FormContainer>
