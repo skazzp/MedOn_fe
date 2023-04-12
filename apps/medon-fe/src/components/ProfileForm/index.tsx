@@ -201,10 +201,10 @@ export default function ProfileForm() {
         </InputContainer>
       </Form>
       <ButtonContainer>
-        <StyledButton size="large" htmlType="submit" disabled={true}>
+        <StyledButton size="large" htmlType="submit">
           {t('profileForm.profileBtn')}
         </StyledButton>
-        <StyledButton size="large" htmlType="submit" disabled={false}>
+        <StyledButton size="large" htmlType="submit">
           Change Password
         </StyledButton>
       </ButtonContainer>
