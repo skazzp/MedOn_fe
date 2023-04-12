@@ -1,4 +1,5 @@
 import { Input, Button, Form, DatePicker } from 'antd';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useTheme } from 'styled-components';
 import type { DatePickerProps } from 'antd';
 import { Container, Label, ProfileImage, CustomSelect } from './styles';
@@ -21,7 +22,6 @@ const onChange: DatePickerProps['onChange'] = (date, dateString) => {
 
 export default function ProfileForm() {
   const theme = useTheme();
-
   const FORM_WIDTH = 600;
   const BUTTON_WIDTH = 300;
   return (
@@ -38,29 +38,36 @@ export default function ProfileForm() {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Form.Item>
+        <Form.Item
+          name="firstName"
+          rules={[{ required: true, message: 'First name is required!' }]}
+        >
           <Label htmlFor="firstName">First Name</Label>
           <Input
             style={{ backgroundColor: theme.colors.BACKGROUND_PRIMARY }}
             type="text"
             id="firstName"
-            name="firstName"
             size="large"
           />
         </Form.Item>
 
-        <Form.Item>
+        <Form.Item
+          name="lastName"
+          rules={[{ required: true, message: 'Last name is required!' }]}
+        >
           <Label htmlFor="lastName">Last Name</Label>
           <Input
             style={{ backgroundColor: theme.colors.BACKGROUND_PRIMARY }}
             size="large"
             type="text"
             id="lastName"
-            name="lastName"
           />
         </Form.Item>
 
-        <Form.Item>
+        <Form.Item
+          name="email"
+          rules={[{ required: true, message: 'Your email is required!' }]}
+        >
           <Label htmlFor="email">Email</Label>
           <Input
             style={{ backgroundColor: theme.colors.BACKGROUND_PRIMARY }}
@@ -71,19 +78,27 @@ export default function ProfileForm() {
           />
         </Form.Item>
 
-        <Form.Item>
+        <Form.Item
+          name="password"
+          rules={[{ required: true, message: 'Password is required!' }]}
+        >
           <Label htmlFor="password">Password</Label>
-          <Input
-            style={{ backgroundColor: theme.colors.BACKGROUND_PRIMARY }}
+          <Input.Password
+            placeholder="Password"
+            iconRender={(visible) =>
+              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+            }
             size="large"
             type="password"
             id="password"
-            name="password"
           />
         </Form.Item>
 
         <Label htmlFor="dateOfBirth">Date of Birth</Label>
-        <Form.Item>
+        <Form.Item
+          name="dateOfBirth"
+          rules={[{ required: true, message: 'Birth date is required!' }]}
+        >
           <DatePicker
             style={{
               width: FORM_WIDTH,
@@ -92,30 +107,36 @@ export default function ProfileForm() {
             onChange={onChange}
             size="large"
             id="dateOfBirth"
-            name="dateOfBirth"
           />
         </Form.Item>
-        <Form.Item>
+        <Form.Item
+          name="country"
+          rules={[{ required: true, message: 'Country is required!' }]}
+        >
           <Label htmlFor="country">Country</Label>
           <Input
             style={{ backgroundColor: theme.colors.BACKGROUND_PRIMARY }}
             size="large"
             type="text"
             id="country"
-            name="country"
           />
         </Form.Item>
-        <Form.Item>
+        <Form.Item
+          name="city"
+          rules={[{ required: true, message: 'City is required!' }]}
+        >
           <Label htmlFor="city">City</Label>
           <Input
             style={{ backgroundColor: theme.colors.BACKGROUND_PRIMARY }}
             size="large"
             type="text"
             id="city"
-            name="city"
           />
         </Form.Item>
-        <Form.Item>
+        <Form.Item
+          name="role"
+          rules={[{ required: true, message: 'A role is mandatory!' }]}
+        >
           <Label htmlFor="role">Role</Label>
           <CustomSelect
             defaultValue={'Select your role'}
