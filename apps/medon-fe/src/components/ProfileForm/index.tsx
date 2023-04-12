@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input, DatePicker, Select } from 'antd';
 import { useTranslation } from 'react-i18next';
@@ -13,12 +13,16 @@ import {
   InputContainer,
   ButtonContainer,
   LabelText,
+  ErrorMsg,
 } from './styles';
 import { FormProfileData } from './types';
 
 export default function ProfileForm() {
   const { t } = useTranslation();
-  const {} = useForm<FormProfileData>({
+  const {
+    control,
+    formState: { errors },
+  } = useForm<FormProfileData>({
     resolver: yupResolver(profileFormSchema),
     defaultValues: {
       firstName: '',
@@ -36,18 +40,32 @@ export default function ProfileForm() {
       <ProfileImage src="https://via.placeholder.com/250" alt="Profile Image" />
       <Form>
         <InputContainer>
-          <Label htmlFor="firstName"></Label>
-          <LabelText>{t('regForm.firstName.label')}</LabelText>
-          <Input type="text" id="firstName" size="large" />
+          <Label htmlFor="firstName">
+            <LabelText>{t('regForm.firstName.label')}</LabelText>
+            <Controller
+              name="firstName"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  id="firstName"
+                  size="large"
+                  status={errors.firstName?.message ? 'error' : undefined}
+                  placeholder={`${t('regForm.firstName.placeholder')}`}
+                  {...field}
+                />
+              )}
+            />
+            {errors.firstName?.message && (
+              <ErrorMsg role="alert">
+                {t(`${errors.firstName?.message}`)}
+              </ErrorMsg>
+            )}
+          </Label>
         </InputContainer>
         <InputContainer>
-          <Label htmlFor="lastName">Last Name</Label>
-          <Input
-            placeholder="Last name"
-            size="large"
-            type="text"
-            id="lastName"
-          />
+          <Label htmlFor="lastName"></Label>
+          <LabelText>{t('regForm.lastName.label')}</LabelText>
+          <Input size="large" type="text" id="lastName" />
         </InputContainer>
         <InputContainer>
           <Label htmlFor="email">Email</Label>
