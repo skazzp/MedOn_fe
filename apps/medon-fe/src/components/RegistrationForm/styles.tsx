@@ -13,7 +13,7 @@ export const Form = styled.form`
   flex-direction: column;
   align-items: center;
   width: 27rem;
-  gap: 1.2rem;
+  gap: 1.5rem;
 `;
 export const InputContainer = styled.div`
   display: flex;

@@ -32,7 +32,7 @@ const Wrapper = ({ children }: { children: ReactNode }) => (
 //   });
 //   fireEvent.submit(screen.getByRole('button', { name: 'Sign Up' }));
 
-//   expect(await screen.findAllByRole('alert')).toHaveLength(8);
+//   expect(await screen.findAllByRole('alert')).toHaveLength(7);
 // });
 
 // it('should display matching error when first name is invalid', async () => {
