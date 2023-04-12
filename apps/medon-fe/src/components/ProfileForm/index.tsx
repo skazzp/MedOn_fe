@@ -2,7 +2,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
 import dayjs from 'dayjs';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Input, DatePicker, Select } from 'antd';
+import { Input, Select } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { profileFormSchema } from 'validation/profileFormSchema';
 import {
@@ -153,13 +153,25 @@ export default function ProfileForm() {
           />
         </InputContainer>
         <InputContainer>
-          <Label htmlFor="city">City</Label>
-          <Input
-            size="large"
-            type="text"
-            id="city"
-            placeholder="Type your city"
-          />
+          <Label htmlFor="city">
+            <LabelText>{t('regForm.city.label')}</LabelText>
+            <Controller
+              name="city"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  id="city"
+                  size="large"
+                  status={errors.city?.message ? 'error' : undefined}
+                  placeholder={`${t('regForm.city.placeholder')}`}
+                  {...field}
+                />
+              )}
+            />
+            {errors.city?.message && (
+              <ErrorMsg role="alert">{t(`${errors.city?.message}`)}</ErrorMsg>
+            )}
+          </Label>
         </InputContainer>
         <InputContainer>
           <Label htmlFor="role">Role</Label>
