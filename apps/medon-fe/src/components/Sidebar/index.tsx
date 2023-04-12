@@ -3,7 +3,6 @@ import React from 'react';
 import { CalendarOutlined, MailOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import type { MenuProps } from 'antd/es/menu';
-import { AppSideMenuContainer } from './styles';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -33,21 +32,18 @@ const Sidebar: React.FC = () => {
   ];
 
   return (
-    <AppSideMenuContainer>
-      <Menu
-        style={{
-          height: '100vh',
-          width: 250,
-          backgroundColor: '#E2EDFD',
-        }}
-        defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
-        items={items}
-        // onClick={({ key }) => {
-        //   navigate(key);
-        // }}
-      />
-    </AppSideMenuContainer>
+    <Menu
+      style={{
+        width: 250,
+        backgroundColor: '#E2EDFD',
+      }}
+      defaultSelectedKeys={['1']}
+      defaultOpenKeys={['sub1']}
+      items={items}
+      // onClick={({ key }) => {
+      //   navigate(key);
+      // }}
+    />
   );
 };
 

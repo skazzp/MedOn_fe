@@ -1,5 +1,3 @@
 import styled from 'styled-components';
 
-export const AppSideMenuContainer = styled.nav`
-    display: flex;
-`;
+export const Container = styled.div``
