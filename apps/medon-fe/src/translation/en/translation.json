@@ -44,5 +44,24 @@
       "linkTerm": "Terms and conditions",
       "linkPrivacy": "Privacy policy"
     }
+  },
+  "re-confirm-account": {
+    "logo": {
+      "alt": "Medon logo"
+    },
+    "send-email": {
+      "title": "Confirmation Link",
+      "subtitle": "Enter your registered email address to receive your confirmation link",
+      "button": "NEXT",
+      "home-link": "BACK TO LOGIN"
+    },
+    "after-email": {
+      "title": "Confirmation link was sent!",
+      "subtitle": "Please check your email for next steps to confirm your account"
+    },
+    "footer": {
+      "linkTerm": "Terms and conditions",
+      "linkPrivacy": "Privacy policy"
+    }
   }
 }
