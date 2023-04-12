@@ -18,6 +18,6 @@ export const ProfileImage = styled.img`
   height: 250px;
   border-radius: 50%;
   margin-bottom: 20px;
-  background-color: #e6e6e6;
+  background-color: ${theme.colors.gray_300};
 `;
 
