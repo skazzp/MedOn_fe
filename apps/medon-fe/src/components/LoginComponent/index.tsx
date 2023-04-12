@@ -24,10 +24,10 @@ export default function LoginComponent() {
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success(t('regConfirm.msgEmailSuccess'), toastConfig);
+      toast.success(t('regConfirm.msgVerifySuccess'), toastConfig);
     }
     if (error) {
-      toast.error(t('regConfirm.msgEmailError'), toastConfig);
+      toast.error(t('regConfirm.msgVerifyError'), toastConfig);
     }
   }, [isSuccess, data, error, t]);
 

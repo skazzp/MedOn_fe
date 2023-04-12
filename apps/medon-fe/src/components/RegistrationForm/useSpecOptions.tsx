@@ -12,13 +12,11 @@ const useSpecOptions = () => {
     skip: false,
     selectFromResult: ({ data }) => ({
       specialityOptions: data
-        ? data.map((elem) => {
-            const option = { value: elem.id, label: elem.name };
-            return option;
-          })
+        ? data.map((elem) => ({ value: elem.id, label: elem.name }))
         : emptyArray,
     }),
   });
+  
   return specialityOptions;
 };
 

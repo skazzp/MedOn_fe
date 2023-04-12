@@ -1,4 +1,3 @@
-import { useEffect, Dispatch } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Input } from 'antd';
 import dayjs from 'dayjs';
@@ -6,8 +5,6 @@ import { NavLink } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { registrationFormSchema } from 'validation/registrationFormSchema';
-import { toast } from 'react-toastify';
-import { useRegisterUserMutation } from 'redux/api/authApi';
 import { countryOptions } from 'utils/countries/countryOptions';
 import RegistrationSelect from 'components/RegistrationSelect';
 import {
@@ -18,7 +15,6 @@ import { ROLES, ROLE_OPTIONS } from 'utils/constants/roles';
 import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
 import {
   COUNTRY,
-  EMAIL,
   ROLE,
   SPECIALITY,
   TIMEZONE,
@@ -42,10 +38,10 @@ import { FormData } from './types';
 import useSpecOptions from './useSpecOptions';
 
 interface IProps {
-  setRegSuccess: Dispatch<string>;
+  submitForm: (values: FormData) => void;
 }
 
-export default function RegistrationForm({ setRegSuccess }: IProps) {
+export default function RegistrationForm({ submitForm }: IProps) {
   const { t } = useTranslation();
   const {
     control,
@@ -62,50 +58,9 @@ export default function RegistrationForm({ setRegSuccess }: IProps) {
       timezone: DEFAULT_TIMEZONE,
     },
   });
-  const [registerUser, { isSuccess, error, isError }] =
-    useRegisterUserMutation();
   const { specialityOptions } = useSpecOptions();
   const role = watch(ROLE);
-  const email = watch(EMAIL);
-
-  const onSubmit = handleSubmit((values: FormData) => {
-    const requestData = {
-      firstName: values.firstName,
-      lastName: values.lastName,
-      email: values.email,
-      password: values.password,
-      dateOfBirth: new Date(values.birthday.valueOf()),
-      role: values.role,
-      specialityId:
-        values.role === ROLES.REMOTE && values.speciality
-          ? +values.speciality
-          : null,
-      country: values.country,
-      city: values.city,
-      timeZone: values.timezone,
-    };
-    // console.log('Form: ', values, 'Requested values: ', requestData);
-    registerUser(requestData);
-  });
-
-  useEffect(() => {
-    if (isSuccess) {
-      setRegSuccess(email);
-    }
-    if (isError) {
-      // console.log('Error: ', error);
-      toast.error('Registration error, try again!', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: 'light',
-      });
-    }
-  }, [isSuccess, isError, error, email, setRegSuccess]);
+  const onSubmit = handleSubmit(submitForm);
 
   return (
     <Container>
