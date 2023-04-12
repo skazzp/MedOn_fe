@@ -8,9 +8,21 @@ export const Container = styled.div`
 `;
 
 export const Label = styled.label`
-  margin-bottom: 5px;
   font-family: ${({ theme }) => theme.typography.fontFamily.sf_pro_text};
   font-size: 12px;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 27rem;
+  gap: 1.5rem;
+`;
+
+export const InputContainer = styled.div`
+  display: block;
+  width: 100%;
 `;
 
 export const ProfileImage = styled.img`
@@ -30,4 +42,12 @@ export const StyledButton = styled(Button)`
   font-size: 14px;
   font-weight: bold;
   width: 200;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  padding: 24px;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 16px;
 `;
