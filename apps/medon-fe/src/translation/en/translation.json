@@ -103,22 +103,6 @@
     "footer": {
       "linkTerm": "Terms and conditions",
       "linkPrivacy": "Privacy policy"
-    },
-    "validation": {
-      "email": {
-        "required": "Email is required",
-        "email": "Must be a valid email",
-        "min": "Must be at least 8 characters"
-      },
-      "newpassword": {
-        "required": "Password is required",
-        "min": "Must be at least 6 characters",
-        "matches": "Password must include at least one capital letter, one small letter, one special character and one number"
-      },
-      "confirmpassword": {
-        "required": "Password is required",
-        "oneof": "Password must match"
-      }
     }
   },
   "validation": {

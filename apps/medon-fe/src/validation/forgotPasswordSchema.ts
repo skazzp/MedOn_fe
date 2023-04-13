@@ -1,24 +1,21 @@
 import * as yup from 'yup';
 
 export const emailSchema = yup.object().shape({
-  email: yup
-    .string()
-    .email('email.email')
-    .required('email.required')
-    .min(8, 'email.min'),
+  email: yup.string().required('validation.email.required'),
 });
 
 export const passwordSchema = yup.object().shape({
   newPassword: yup
     .string()
-    .min(6, 'newpassword.min')
-    .required('newpassword.required')
+    .min(6, 'validation.password.minLength')
+    .max(20, 'validation.password.minLength')
     .matches(
-      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_\-+={}[\]|:;"'<,>.?/])[A-Za-z\d!@#$%^&*()_\-+={}[\]|:;"'<,>.?/]{6,}$/,
-      'newpassword.matches'
-    ),
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+-])[0-9a-zA-Z!@#$%^&()_+-]{6,}$/,
+      'validation.password.matches'
+    )
+    .required('validation.password.required'),
   confirmNewPassword: yup
     .string()
-    .oneOf([yup.ref('newPassword')], 'confirmpassword.oneof')
-    .required('confirmpassword.required'),
+    .oneOf([yup.ref('newPassword')], 'validation.passwordRepeat.matches')
+    .required('validation.passwordRepeat.required'),
 });
