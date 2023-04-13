@@ -25,6 +25,7 @@ root.render(
           <ToastContainer autoClose={2000} />
           <GlobalStyle />
           <App />
+          <ToastContainer />
         </BrowserRouter>
       </ThemeProvider>
     </Provider>

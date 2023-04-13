@@ -59,6 +59,16 @@
     "submitBtn": "Sign Up",
     "backBtn": "Back to Login"
   },
+  "regConfirm": {
+    "title": "Confirm your email address",
+    "text1": "Please check your email for the next step to signup",
+    "text2": "If you have any issues, contact our support",
+    "btnResend": "RESEND LINK",
+    "msgEmailSuccess": "Email sent, check your mailbox!",
+    "msgEmailError": "Email sending error, try again!",
+    "msgVerifySuccess": "Email verified!",
+    "msgVerifyError": "Email verification error, try again!"
+  },
   "login": {
     "login-title": "Access the platform",
     "login-text": "Please login into your medical account",

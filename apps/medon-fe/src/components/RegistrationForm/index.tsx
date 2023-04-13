@@ -11,7 +11,7 @@ import {
   DEFAULT_TIMEZONE,
   timezoneOptions,
 } from 'utils/timezones/timezoneOptions';
-import { ROLES, ROLE_OPTIONS, SPECIALITY_OPTIONS } from 'utils/constants/roles';
+import { ROLES, ROLE_OPTIONS } from 'utils/constants/roles';
 import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
 import {
   COUNTRY,
@@ -35,8 +35,13 @@ import {
   StyledDatePicker,
 } from './styles';
 import { FormData } from './types';
+import useSpecOptions from './useSpecOptions';
 
-export default function RegistrationForm() {
+interface IProps {
+  submitForm: (values: FormData) => void;
+}
+
+export default function RegistrationForm({ submitForm }: IProps) {
   const { t } = useTranslation();
   const {
     control,
@@ -48,16 +53,15 @@ export default function RegistrationForm() {
     defaultValues: {
       firstName: '',
       lastName: '',
-      role: null,
       speciality: null,
-      birthday: null,
-      country: null,
       city: '',
       timezone: DEFAULT_TIMEZONE,
     },
   });
+  const { specialityOptions } = useSpecOptions();
   const role = watch(ROLE);
-  const onSubmit = handleSubmit(() => {});
+  const onSubmit = handleSubmit(submitForm);
+
   return (
     <Container>
       <Form onSubmit={onSubmit}>
@@ -180,7 +184,7 @@ export default function RegistrationForm() {
               name={SPECIALITY}
               control={control}
               error={errors.speciality?.message}
-              options={SPECIALITY_OPTIONS}
+              options={specialityOptions}
             />
           </Label>
         )}

@@ -14,6 +14,10 @@ export const FormContainer = styled.div`
   min-width: 27rem;
   width: 50vw;
   background-color: ${(p) => p.theme.colors.white};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 `;
 
 export const Title = styled.h1`
