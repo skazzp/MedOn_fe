@@ -1,9 +1,8 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input } from 'antd';
-
 
 import {
   StyledErrorMessage,
@@ -13,36 +12,37 @@ import {
   SendButton,
 } from 'components/LoginForm/style';
 import { loginFormSchema } from 'components/FormSchema/index';
-
+import { useLoginMutation } from 'redux/api/login.api';
+import { IUser } from 'redux/api/types';
 
 
 export interface LoginFormProps {
-  onSubmit: (data: LoginFormValues) => void;
-}
-
-export interface LoginFormValues {
-  email: string;
-  password: string;
+  onSubmit: (data: IUser) => void;
 }
 
 const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
-
+  const [login, { isLoading, isError, error, data }] = useLoginMutation()
+  
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormValues>({
+  } = useForm<IUser>({
     resolver: yupResolver(loginFormSchema),
     defaultValues: { email: "", password: "" },
   });
 
- const handleFormSubmit = handleSubmit((data) => {
-    onSubmit(data);
-  });
+  const handleFormSubmit = async (formData: IUser) => {
+    try {
+      const response = await login(formData).unwrap();
+    } catch (err) {
+      console.error("Failed to login", err);
+    }
+  };
 
   return (
-      <Form name="contact" method="post" onSubmit={handleFormSubmit}>
+      <Form name="contact" method="post" onSubmit={handleSubmit(handleFormSubmit)}>
       <label
         htmlFor="email">{t("login.email") }
         <Controller
@@ -83,7 +83,7 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
         )}
       </label>
         <ForgotButton type="link">{t('login.login-forgot-password')}</ForgotButton>
-      <SendButton type="submit" value={`${t("login.login")}`} />
+      <SendButton type="submit" value={`${t("login.login")}`} disabled={isLoading}/>
       <DontHaveButton type="link">{t("login.dont-have")}</DontHaveButton>
       </Form>
   );

@@ -11,10 +11,10 @@ import { ReactComponent as LogoutIcon } from 'assets/images/navigation/Sign_Out.
 
 
 export const Links = styled(Link)`
-      text-decoration: none;
-      color: ${theme.colors.navi_text};
-      font-family: ${theme.fontFamily.roboto};
-      font-weight: 700;
+  text-decoration: none;
+  color: ${theme.colors.navi_text};
+  font-family: ${theme.fontFamily.roboto};
+  font-weight: 700;
       &:hover {
         color: ${theme.colors.icon_active};
       }

@@ -1,17 +1,16 @@
 import { t } from 'i18next';
 
-import LoginForm, { LoginFormValues }  from 'components/LoginForm';
+import LoginForm  from 'components/LoginForm';
 import { FormContainer } from 'components/LoginForm/style';
 import Logo from 'components/Logo';
 import { Title, Text } from 'components/LoginComponent/style';
-
+import { IUser } from 'redux/api/types';
 
 
 export default function LoginComponent() {
 
-  const handleSubmit = (data: LoginFormValues) =>  data
+  const handleSubmit = (data: IUser) =>  data
   
-
   return (
     <FormContainer>
       <Logo />

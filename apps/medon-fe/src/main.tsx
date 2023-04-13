@@ -21,7 +21,7 @@ root.render(
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <GlobalStyle />
-          <App />
+            <App />
         </BrowserRouter>
       </ThemeProvider>
     </Provider>

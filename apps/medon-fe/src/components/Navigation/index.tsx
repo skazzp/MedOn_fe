@@ -1,5 +1,8 @@
 import { useTranslation } from 'react-i18next';
-import { Container, HeaderBlock, Ul, Dashboard, Briefcase, Links, Profile, Patient, Help, Logout, UserBlock, UserAvatar, UserName} from 'components/Navigation/styles';
+
+import { 
+  Container, HeaderBlock, Ul, Dashboard, Briefcase, Links, Profile, Patient, Help, Logout, UserBlock, UserAvatar, UserName
+} from 'components/Navigation/styles';
 import profileImagePlaceholder from 'assets/images/Avatar.svg';
 import Logo from 'components/Logo';
 
