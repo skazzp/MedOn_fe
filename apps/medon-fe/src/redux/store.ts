@@ -1,14 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
-import { fetchDataApi } from './features/fetchData/fetchData';
+import { server } from 'redux/features/backend/api';
 
 export const store = configureStore({
   reducer: {
-    [fetchDataApi.reducerPath]: fetchDataApi.reducer,
+    [server.reducerPath]: server.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(fetchDataApi.middleware),
+    getDefaultMiddleware().concat(server.middleware),
   devTools: process.env.NODE_ENV !== 'production',
 });
 

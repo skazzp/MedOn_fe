@@ -4,7 +4,6 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input } from 'antd';
 
-
 import {
   StyledErrorMessage,
   Form,
@@ -13,8 +12,6 @@ import {
   SendButton,
 } from 'components/LoginForm/style';
 import { loginFormSchema } from 'components/FormSchema/index';
-
-
 
 export interface LoginFormProps {
   onSubmit: (data: LoginFormValues) => void;
@@ -34,17 +31,17 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
     formState: { errors },
   } = useForm<LoginFormValues>({
     resolver: yupResolver(loginFormSchema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { email: '', password: '' },
   });
 
- const handleFormSubmit = handleSubmit((data) => {
+  const handleFormSubmit = handleSubmit((data) => {
     onSubmit(data);
   });
 
   return (
-      <Form name="contact" method="post" onSubmit={handleFormSubmit}>
-      <label
-        htmlFor="email">{t("login.email") }
+    <Form name="contact" method="post" onSubmit={handleFormSubmit}>
+      <label htmlFor="email">
+        {t('login.email')}
         <Controller
           name="email"
           control={control}
@@ -54,7 +51,7 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
               {...field}
               id="email"
               type="email"
-              placeholder={`${t("login.placeholder-email")}`}
+              placeholder={`${t('login.placeholder-email')}`}
             />
           )}
         />
@@ -63,8 +60,8 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
         )}
       </label>
 
-      <label
-        htmlFor="password">{t("login.password") }
+      <label htmlFor="password">
+        {t('login.password')}
         <Controller
           name="password"
           control={control}
@@ -74,7 +71,7 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
               {...field}
               id="password"
               type="password"
-              placeholder={`${t("login.placeholder-password")}` }
+              placeholder={`${t('login.placeholder-password')}`}
             />
           )}
         />
@@ -82,10 +79,12 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
           <StyledErrorMessage>{errors.password.message}</StyledErrorMessage>
         )}
       </label>
-        <ForgotButton type="link">{t('login.login-forgot-password')}</ForgotButton>
-      <SendButton type="submit" value={`${t("login.login")}`} />
-      <DontHaveButton type="link">{t("login.dont-have")}</DontHaveButton>
-      </Form>
+      <ForgotButton type="link" href="/forget-password">
+        {t('login.login-forgot-password')}
+      </ForgotButton>
+      <SendButton type="submit" value={`${t('login.login')}`} />
+      <DontHaveButton type="link">{t('login.dont-have')}</DontHaveButton>
+    </Form>
   );
 };
 

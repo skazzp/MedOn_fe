@@ -32,10 +32,12 @@ export const theme = {
     sf_pro_text: 'SF Pro Text, sans-serif',
   },
   fontSizes: {
-    xs: '0.75rem',
-    sm: '0.875rem',
-    md: '1rem',
-    lg: '1.125rem',
-    xl: '1.25rem',
+    xs: '13px',
+    sm: '14px',
+    md: '16px',
+    lg: '18px',
+    xl: '20px',
+    xxl: '24px',
+    xxxl: '32px',
   },
 };

@@ -1,9 +1,9 @@
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useState } from 'react';
 
 import Button from 'components/Button';
 import Input from 'components/Input';
@@ -22,13 +22,13 @@ import {
 } from 'pages/ResetPassword/styles';
 
 import { passwordSchema } from 'validation/forgotPasswordSchema';
+import { usePostResetPasswordDoctorMutation } from 'redux/features/backend/api';
 
 export default function ResetPassword() {
-  const [isPasswordUpdated, setIsPasswordUpdated] = useState(false);
-
+  const [isPasswordSent, setIsPasswordSent] = useState(false);
+  const { token } = useParams();
   const theme = useTheme();
   const { t } = useTranslation();
-
   const {
     register,
     handleSubmit,
@@ -37,42 +37,70 @@ export default function ResetPassword() {
     resolver: yupResolver(passwordSchema),
   });
 
-  const handleUpdatePassword: SubmitHandler<SubmitResetPasswordForm> = (
-    data
-  ) => {
-    // logic to send email
-    setIsPasswordUpdated(true);
+  const [sendPassword, { isLoading }] = usePostResetPasswordDoctorMutation();
+
+  const handleUpdatePassword: SubmitHandler<SubmitResetPasswordForm> = ({
+    newPassword,
+  }) => {
+    sendPassword({
+      newPassword,
+      token,
+    })
+      .unwrap()
+      .then(() => {
+        setIsPasswordSent(true);
+      });
   };
 
   return (
     <Container>
       <Header>
-        <img src={Logo} alt="medon logo" draggable={false} />
+        <img
+          src={Logo}
+          alt={`${t('forget-password.alt.logo')}`}
+          draggable={false}
+        />
       </Header>
       <Content>
         <Form onSubmit={handleSubmit(handleUpdatePassword)}>
-          {!isPasswordUpdated ? (
+          {!isPasswordSent ? (
             <>
               <h1>{t('forget-password.reset-password.title')}</h1>
               <h3>{t('forget-password.reset-password.subtitle')}</h3>
               <Input
-                placeholder="New Password *"
+                placeholder={`${t(
+                  'forget-password.reset-password.placeholder-newpassword'
+                )}`}
                 type="password"
-                errorMessage={errors.newPassword?.message}
+                errorMessage={
+                  errors.newPassword?.message
+                    ? t(`${errors.newPassword?.message}`)
+                    : ''
+                }
                 {...register('newPassword')}
               />
               <Input
-                placeholder="Retry New Password *"
+                placeholder={`${t(
+                  'forget-password.reset-password.placeholder-confirmpassword'
+                )}`}
                 type="password"
-                errorMessage={errors.confirmNewPassword?.message}
+                errorMessage={
+                  errors.confirmNewPassword?.message
+                    ? t(`${errors.confirmNewPassword?.message}`)
+                    : ''
+                }
                 {...register('confirmNewPassword')}
               />
               <Button
-                bgcolor={theme.colors.blue_500}
+                bgcolor={theme.colors.btnGradient}
                 textcolor={theme.colors.white}
+                isLoading={isLoading}
               >
                 {t('forget-password.reset-password.button')}
-                <img src={RightArrow} alt="arrow pointing right" />
+                <img
+                  src={RightArrow}
+                  alt={`${t('forget-password.alt.image')}`}
+                />
               </Button>
             </>
           ) : (

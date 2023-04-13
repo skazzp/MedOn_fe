@@ -1,9 +1,10 @@
-import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import Button from 'components/Button';
 import Input from 'components/Input';
@@ -22,30 +23,46 @@ import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
 import Logo from 'assets/svgs/logo_medon.svg';
 
 import { emailSchema } from 'validation/forgotPasswordSchema';
+import { usePostForgetPasswordDoctorMutation } from 'redux/features/backend/api';
 
 export default function ResetPassword() {
   const [isEmailSent, setIsEmailSent] = useState(false);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SubmitSendEmail>({
     resolver: yupResolver(emailSchema),
+    defaultValues: {
+      email: '',
+    },
   });
 
   const theme = useTheme();
   const { t } = useTranslation();
+  const [sendEmail, { isLoading }] = usePostForgetPasswordDoctorMutation();
 
   const handleSentEmail: SubmitHandler<SubmitSendEmail> = (data) => {
-    // logic to send email
-    setIsEmailSent(true);
+    sendEmail({
+      email: data.email,
+    })
+      .unwrap()
+      .then(() => {
+        setIsEmailSent(true);
+      })
+      .catch((err) => {
+        toast.error(err.data?.message);
+      });
   };
 
   return (
     <Container>
       <Header>
-        <img src={Logo} alt="medon logo" draggable={false} />
+        <img
+          src={Logo}
+          alt={`${t('forget-password.alt.logo')}`}
+          draggable={false}
+        />
       </Header>
       <Content>
         <Form onSubmit={handleSubmit(handleSentEmail)}>
@@ -54,17 +71,25 @@ export default function ResetPassword() {
               <h1>{t('forget-password.send-email.title')}</h1>
               <h3>{t('forget-password.send-email.subtitle')}</h3>
               <Input
-                placeholder="Email Address *"
+                placeholder={`${t(
+                  'forget-password.send-email.placeholder-email'
+                )}`}
                 type="email"
-                errorMessage={errors.email?.message}
+                errorMessage={
+                  errors.email?.message ? t(`${errors.email?.message}`) : ''
+                }
                 {...register('email')}
               />
               <Button
-                bgcolor={theme.colors.blue_500}
+                bgcolor={theme.colors.btnGradient}
                 textcolor={theme.colors.white}
+                isLoading={isLoading}
               >
                 {t('forget-password.send-email.button')}
-                <img src={RightArrow} alt="arrow pointing right" />
+                <img
+                  src={RightArrow}
+                  alt={`${t('forget-password.alt.image')}`}
+                />
               </Button>
             </>
           ) : (
@@ -72,11 +97,15 @@ export default function ResetPassword() {
               <h1>{t('forget-password.after-email.title')}</h1>
               <h3>{t('forget-password.after-email.subtitle')}</h3>
               <Button
-                bgcolor={theme.colors.blue_500}
+                bgcolor={theme.colors.btnGradient}
                 textcolor={theme.colors.white}
+                isLoading={isLoading}
               >
                 {t('forget-password.after-email.button')}
-                <img src={RightArrow} alt="arrow pointing right" />
+                <img
+                  src={RightArrow}
+                  alt={`${t('forget-password.send-email.alt-image')}`}
+                />
               </Button>
             </>
           )}
