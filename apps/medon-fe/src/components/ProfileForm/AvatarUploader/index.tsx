@@ -4,13 +4,18 @@ import { RcFile, UploadChangeParam } from 'antd/lib/upload/interface';
 import ChangeProfilePictureSvg from 'assets/ReactComponentAssets/ChangeProfileAvatar';
 import { useTheme } from 'styled-components';
 
+const FILE_STATUS = {
+  DONE: 'done',
+  SUCCESS: 'success',
+  ERROR: 'error',
+};
 
 export const AvatarUploader = () => {
   const [avatarFile, setAvatarFile] = useState<RcFile | undefined>(undefined);
   const theme = useTheme();
 
   const handleAvatarChange = (info: UploadChangeParam) => {
-    if (info.file.status === 'done') {
+    if (info.file.status === FILE_STATUS.DONE) {
       setAvatarFile(info.file.originFileObj);
     }
   };

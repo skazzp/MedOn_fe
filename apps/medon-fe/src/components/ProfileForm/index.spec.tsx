@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router-dom';
-import '../../translation/i18next';
+import 'translation/i18next';
 import ProfileForm from './index';
 
 it('should render successfully', () => {
