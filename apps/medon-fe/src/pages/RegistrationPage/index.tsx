@@ -2,7 +2,7 @@ import RegistrationForm from 'components/RegistrationForm';
 import { useTranslation } from 'react-i18next';
 import logo from 'assets/images/logo.svg';
 import RegistrationConfirmation from 'components/RegistrationConfirmation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FormData } from 'components/RegistrationForm/types';
 import { ROLES } from 'utils/constants/roles';
 import { useRegisterUserMutation } from 'redux/api/authApi';
@@ -20,10 +20,9 @@ import {
 export default function RegistrationPage() {
   const { t } = useTranslation();
   const [email, setEmail] = useState<string>('');
-  const [registerUser, { isSuccess, error, isError }] =
-    useRegisterUserMutation();
-  
-  const submitForm = (values: FormData) => {
+  const [registerUser, { isSuccess }] = useRegisterUserMutation();
+
+  const submitForm = async (values: FormData) => {
     const requestData = {
       firstName: values.firstName,
       lastName: values.lastName,
@@ -39,15 +38,14 @@ export default function RegistrationPage() {
       city: values.city,
       timeZone: values.timezone,
     };
-    registerUser(requestData);
-    setEmail(values.email);
-  };
-  
-  useEffect(() => {
-    if (isError) {
+    try {
+      await registerUser(requestData).unwrap();
+      setEmail(values.email);
+    } catch (err) {
       toast.error('Registration error, try again!', toastConfig);
     }
-  }, [isError, error]);
+  };
+
   return (
     <Container>
       <RegContainer>

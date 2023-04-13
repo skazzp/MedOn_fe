@@ -23,7 +23,6 @@ export const userApi = createApi({
     getUser: builder.query<IUser, null>({
       query() {
         return {
-          // TODO:
           url: 'user/profile',
         };
       },
