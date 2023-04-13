@@ -4,7 +4,18 @@
     "allowJs": false,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
-    "strict": true
+    "strict": true,
+    "paths": {
+      "pages/*": ["apps/medon-fe/src/pages/*"],
+      "components/*": ["apps/medon-fe/src/components/*"],
+      "assets/*": ["apps/medon-fe/src/assets/*"],
+      "redux/*": ["apps/medon-fe/src/redux/*"],
+      "utils/*": ["apps/medon-fe/src/utils/*"],
+      "validation/*": ["apps/medon-fe/src/validation/*"],
+      "styles/*": ["apps/medon-fe/src/styles/*"],
+      "translation/*": ["apps/medon-fe/src/translation/*"],
+      "app/*": ["apps/medon-fe/src/app/*"]
+    }
   },
   "files": [],
   "include": [],

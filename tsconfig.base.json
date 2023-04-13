@@ -24,7 +24,8 @@
       "utils/*": ["apps/medon-fe/src/utils/*"],
       "validation/*": ["apps/medon-fe/src/validation/*"],
       "translation/*": ["apps/medon-fe/src/translation/*"],
-      "styles/*": ["apps/medon-fe/src/styles/*"]
+      "styles/*": ["apps/medon-fe/src/styles/*"],
+      "app/*": ["apps/medon-fe/src/app/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

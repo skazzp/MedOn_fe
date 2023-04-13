@@ -20,6 +20,7 @@ declare module 'styled-components' {
       blue_500: string;
       blue_700: string;
       blue_900: string;
+      gray_100: string;
       gray_200: string;
       gray_300: string;
       gray_400: string;
@@ -27,14 +28,14 @@ declare module 'styled-components' {
       gray_600: string;
       gray_700: string;
       white: string;
+      black_87: string;
       black: string;
-      btnGradient: string,
+      title: string;
+      btnGradient: string;
     };
-    typography: {
-      fontFamily: {
-        roboto: string;
-        sf_pro_text: string;
-      };
+    fontFamily: {
+      roboto: string;
+      sf_pro_text: string;
     };
     fontSizes: {
       xs: string;
