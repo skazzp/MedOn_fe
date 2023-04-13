@@ -11,7 +11,7 @@ export const StyledButton = styled.button<ButtonStyleProps>`
   font-weight: 500;
   font-size: ${({ theme }) => theme.fontSizes.md};
   cursor: pointer;
-  background-color: ${({ bgcolor }) => bgcolor};
+  background: ${({ bgcolor }) => bgcolor};
   color: ${({ textcolor }) => textcolor};
   padding: 0.75rem 1.25rem;
   border-radius: 0.5rem;

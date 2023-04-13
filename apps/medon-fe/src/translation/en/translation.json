@@ -81,11 +81,16 @@
     "placeholder-email": "Write your e-mail*"
   },
   "forget-password": {
+    "alt": {
+      "image": "arrow pointing right",
+      "logo": "medon logo"
+    },
     "send-email": {
       "title": "Reset your Password",
       "subtitle": "Type in your registered email address to reset password",
       "button": "NEXT",
-      "home-link": "BACK TO LOGIN"
+      "home-link": "BACK TO LOGIN",
+      "placeholder-email": "Email Address *"
     },
     "after-email": {
       "title": "Recovery Email Sent!",
@@ -97,7 +102,9 @@
       "title": "Reset your Password",
       "subtitle": "Type in your new password",
       "button": "RESET",
-      "home-link": "BACK TO LOGIN"
+      "home-link": "BACK TO LOGIN",
+      "placeholder-newpassword": "New Password *",
+      "placeholder-confirmpassword": "Retry New Password *"
     },
     "after-password": {
       "title": "Password Updated!",

@@ -79,7 +79,7 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
           <StyledErrorMessage>{errors.password.message}</StyledErrorMessage>
         )}
       </label>
-      <ForgotButton type="link">
+      <ForgotButton type="link" href="/forget-password">
         {t('login.login-forgot-password')}
       </ForgotButton>
       <SendButton type="submit" value={`${t('login.login')}`} />

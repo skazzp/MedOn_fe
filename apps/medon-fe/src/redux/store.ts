@@ -1,20 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import { server } from 'redux/features/backend/api';
 import { authApi } from './api/authApi';
 import { userApi } from './api/userApi';
 import userReducer from './features/userSlice/userSlice';
-import { fetchDataApi } from './features/fetchData/fetchData';
 
 export const store = configureStore({
   reducer: {
-    [fetchDataApi.reducerPath]: fetchDataApi.reducer,
+    [server.reducerPath]: server.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     userState: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([
-      fetchDataApi.middleware,
+      server.middleware,
       authApi.middleware,
       userApi.middleware,
     ]),
