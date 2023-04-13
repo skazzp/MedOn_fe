@@ -33,6 +33,9 @@ export default function ResetPassword() {
     formState: { errors },
   } = useForm<SubmitSendEmail>({
     resolver: yupResolver(emailSchema),
+    defaultValues: {
+      email: '',
+    },
   });
 
   const theme = useTheme();
@@ -57,7 +60,7 @@ export default function ResetPassword() {
       <Header>
         <img
           src={Logo}
-          alt={t('forget-password.alt.logo') as string}
+          alt={`${t('forget-password.alt.logo')}`}
           draggable={false}
         />
       </Header>
@@ -68,28 +71,24 @@ export default function ResetPassword() {
               <h1>{t('forget-password.send-email.title')}</h1>
               <h3>{t('forget-password.send-email.subtitle')}</h3>
               <Input
-                placeholder={
-                  t('forget-password.send-email.placeholder-email') as string
-                }
+                placeholder={`${t(
+                  'forget-password.send-email.placeholder-email'
+                )}`}
                 type="email"
                 errorMessage={
-                  errors.email?.message
-                    ? (t(
-                        `forget-password.validation.${errors.email?.message}`
-                      ) as string)
-                    : undefined
+                  errors.email?.message ? t(`${errors.email?.message}`) : ''
                 }
                 {...register('email')}
               />
               <Button
-                bgcolor={theme.colors.blue_500}
+                bgcolor={theme.colors.btnGradient}
                 textcolor={theme.colors.white}
                 isLoading={isLoading}
               >
                 {t('forget-password.send-email.button')}
                 <img
                   src={RightArrow}
-                  alt={t('forget-password.alt.image') as string}
+                  alt={`${t('forget-password.alt.image')}`}
                 />
               </Button>
             </>
@@ -98,14 +97,14 @@ export default function ResetPassword() {
               <h1>{t('forget-password.after-email.title')}</h1>
               <h3>{t('forget-password.after-email.subtitle')}</h3>
               <Button
-                bgcolor={theme.colors.blue_500}
+                bgcolor={theme.colors.btnGradient}
                 textcolor={theme.colors.white}
                 isLoading={isLoading}
               >
                 {t('forget-password.after-email.button')}
                 <img
                   src={RightArrow}
-                  alt={t('forget-password.send-email.alt-image') as string}
+                  alt={`${t('forget-password.send-email.alt-image')}`}
                 />
               </Button>
             </>

@@ -28,6 +28,9 @@ export default function ResendConfirmation() {
     formState: { errors },
   } = useForm<SubmitSendEmail>({
     resolver: yupResolver(emailSchema),
+    defaultValues: {
+      email: '',
+    },
   });
 
   const theme = useTheme();
@@ -55,7 +58,9 @@ export default function ResendConfirmation() {
               <Input
                 placeholder="Email Address *"
                 type="email"
-                errorMessage={errors.email?.message}
+                errorMessage={
+                  errors.email?.message ? t(`${errors.email?.message}`) : ''
+                }
                 {...register('email')}
               />
               <Button

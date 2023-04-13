@@ -4,7 +4,6 @@ import { Link, useParams } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 
 import Button from 'components/Button';
 import Input from 'components/Input';
@@ -40,19 +39,16 @@ export default function ResetPassword() {
 
   const [sendPassword, { isLoading }] = usePostResetPasswordDoctorMutation();
 
-  const handleUpdatePassword: SubmitHandler<SubmitResetPasswordForm> = (
-    data
-  ) => {
+  const handleUpdatePassword: SubmitHandler<SubmitResetPasswordForm> = ({
+    newPassword,
+  }) => {
     sendPassword({
-      newPassword: data.newPassword,
-      token: token as string,
+      newPassword,
+      token,
     })
       .unwrap()
       .then(() => {
         setIsPasswordSent(true);
-      })
-      .catch((err) => {
-        toast.error(err.data?.message);
       });
   };
 
@@ -61,7 +57,7 @@ export default function ResetPassword() {
       <Header>
         <img
           src={Logo}
-          alt={t('forget-password.alt.logo') as string}
+          alt={`${t('forget-password.alt.logo')}`}
           draggable={false}
         />
       </Header>
@@ -72,46 +68,38 @@ export default function ResetPassword() {
               <h1>{t('forget-password.reset-password.title')}</h1>
               <h3>{t('forget-password.reset-password.subtitle')}</h3>
               <Input
-                placeholder={
-                  t(
-                    'forget-password.reset-password.placeholder-newpassword'
-                  ) as string
-                }
+                placeholder={`${t(
+                  'forget-password.reset-password.placeholder-newpassword'
+                )}`}
                 type="password"
                 errorMessage={
                   errors.newPassword?.message
-                    ? (t(
-                        `forget-password.validation.${errors.newPassword?.message}`
-                      ) as string)
-                    : undefined
+                    ? t(`${errors.newPassword?.message}`)
+                    : ''
                 }
                 {...register('newPassword')}
               />
               <Input
-                placeholder={
-                  t(
-                    'forget-password.reset-password.placeholder-confirmpassword'
-                  ) as string
-                }
+                placeholder={`${t(
+                  'forget-password.reset-password.placeholder-confirmpassword'
+                )}`}
                 type="password"
                 errorMessage={
                   errors.confirmNewPassword?.message
-                    ? (t(
-                        `forget-password.validation.${errors.confirmNewPassword?.message}`
-                      ) as string)
-                    : undefined
+                    ? t(`${errors.confirmNewPassword?.message}`)
+                    : ''
                 }
                 {...register('confirmNewPassword')}
               />
               <Button
-                bgcolor={theme.colors.blue_500}
+                bgcolor={theme.colors.btnGradient}
                 textcolor={theme.colors.white}
                 isLoading={isLoading}
               >
                 {t('forget-password.reset-password.button')}
                 <img
                   src={RightArrow}
-                  alt={t('forget-password.alt.image') as string}
+                  alt={`${t('forget-password.alt.image')}`}
                 />
               </Button>
             </>
