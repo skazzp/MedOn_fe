@@ -13,7 +13,7 @@ import {
 } from 'components/LoginForm/style';
 import { loginFormSchema } from 'components/FormSchema/index';
 import { useLoginMutation } from 'redux/api/login.api';
-import { IUser, LoginRequest } from 'redux/api/types';
+import { LoginRequest } from 'redux/api/types';
 
 export interface LoginFormProps {
   onSubmit: (data: LoginRequest) => void;
@@ -32,7 +32,7 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
     defaultValues: { email: '', password: '' },
   });
 
-  const handleFormSubmit = async (formData: IUser) => {
+  const handleFormSubmit = async (formData: LoginRequest) => {
     try {
       await login(formData).unwrap();
     } catch (err) {
@@ -85,7 +85,7 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
           <StyledErrorMessage>{errors.password.message}</StyledErrorMessage>
         )}
       </label>
-      <ForgotButton type="link">
+      <ForgotButton type="link" href="/forget-password">
         {t('login.login-forgot-password')}
       </ForgotButton>
       <SendButton
@@ -93,7 +93,9 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
         value={`${t('login.login')}`}
         disabled={isLoading}
       />
-      <DontHaveButton type="link">{t('login.dont-have')}</DontHaveButton>
+      <DontHaveButton type="link" href="/register">
+        {t('login.dont-have')}
+      </DontHaveButton>
     </Form>
   );
 };

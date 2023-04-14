@@ -9,44 +9,42 @@ import { ReactComponent as PatientIcon } from 'assets/images/navigation/Users.sv
 import { ReactComponent as HelpIcon } from 'assets/images/navigation/Question.svg';
 import { ReactComponent as LogoutIcon } from 'assets/images/navigation/Sign_Out.svg';
 
-
 export const Links = styled(Link)`
   text-decoration: none;
   color: ${theme.colors.navi_text};
   font-family: ${theme.fontFamily.roboto};
   font-weight: 700;
-      &:hover {
-        color: ${theme.colors.icon_active};
-      }
-`
-
+  &:hover {
+    color: ${theme.colors.icon_active};
+  }
+`;
 
 export const Container = styled.div`
-    display: flex;
-    height: 100vh;
-    width: 250px;
-  `;
+  display: flex;
+  height: 100vh;
+  width: 250px;
+`;
 
 export const Icon = styled.div`
-    fill: ${theme.colors.icon_common};
-    margin-right: 16px;
-`
+  fill: ${theme.colors.icon_common};
+  margin-right: 16px;
+`;
 
 export const HeaderBlock = styled.header`
-    width: 100%;
-    background-color: ${theme.colors.background_navi};
-  `;
+  width: 100%;
+  background-color: ${theme.colors.background_navi};
+`;
 
 export const Ul = styled.ul`
   list-style-type: none;
-  padding: 0 0 0 25px;
+  padding: 0 20px 0 25px;
   li {
     padding: 10px 15px 10px 10px;
     border-radius: 8px;
     margin-bottom: 16px;
     display: flex;
     align-items: center;
-    transition: all .7s;
+    transition: all 0.7s;
     img {
       margin-right: 16px;
     }
@@ -78,7 +76,6 @@ export const UserName = styled.span`
   font-weight: 500;
   color: ${theme.colors.black};
   font-family: ${theme.fontFamily.sf_pro_text};
-  
 `;
 
 export const Dashboard = styled(Icon).attrs(() => ({
