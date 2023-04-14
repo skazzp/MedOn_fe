@@ -1,7 +1,6 @@
 import { theme } from 'styles/theme';
-import styled from "styled-components";
+import styled from 'styled-components';
 import { Button, Input } from 'antd';
-
 
 export const FormContainer = styled.div`
   display: flex;
@@ -18,18 +17,17 @@ export const Form = styled.form`
   flex-direction: column;
   width: 27rem;
   grid-gap: 1.1rem;
-    input {
-      width: 100%;
-    }
-    label {
-      font-family: ${theme.fontFamily.sf_pro_text};
-      font-size: .9rem;
-      font-weight: 600;
-      line-height: 21px;
-      text-align: left;
-      position: relative;
-    }
-
+  input {
+    width: 100%;
+  }
+  label {
+    font-family: ${theme.fontFamily.sf_pro_text};
+    font-size: ${theme.fontSizes.sm};
+    font-weight: 600;
+    line-height: 21px;
+    text-align: left;
+    position: relative;
+  }
 `;
 
 export const SendButton = styled(Input)`
@@ -41,7 +39,7 @@ export const SendButton = styled(Input)`
 export const StyledErrorMessage = styled.p`
   color: ${theme.colors.red_500};
   font-family: ${(p) => p.theme.fontFamily.sf_pro_text};
-  font-size: 0.8rem;
+  font-size: ${(p) => p.theme.fontSizes.xs};
   font-weight: 400;
   position: absolute;
 `;
@@ -52,6 +50,5 @@ export const ForgotButton = styled(Button)`
 
 export const DontHaveButton = styled(Button)`
   text-align: left;
-  color: ${theme.colors.black}
+  color: ${theme.colors.black};
 `;
-

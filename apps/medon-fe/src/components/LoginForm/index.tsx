@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,38 +13,41 @@ import {
 } from 'components/LoginForm/style';
 import { loginFormSchema } from 'components/FormSchema/index';
 import { useLoginMutation } from 'redux/api/login.api';
-import { IUser } from 'redux/api/types';
-
+import { IUser, LoginRequest } from 'redux/api/types';
 
 export interface LoginFormProps {
-  onSubmit: (data: IUser) => void;
+  onSubmit: (data: LoginRequest) => void;
 }
 
 const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
-  const [login, { isLoading, isError, error, data }] = useLoginMutation()
-  
+  const [login, { isLoading, isError, error, data }] = useLoginMutation();
+
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<IUser>({
+  } = useForm<LoginRequest>({
     resolver: yupResolver(loginFormSchema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { email: '', password: '' },
   });
 
   const handleFormSubmit = async (formData: IUser) => {
     try {
-      const response = await login(formData).unwrap();
+      await login(formData).unwrap();
     } catch (err) {
-      console.error("Failed to login", err);
+      console.error('Failed to login', err);
     }
   };
 
   return (
-      <Form name="contact" method="post" onSubmit={handleSubmit(handleFormSubmit)}>
-      <label
-        htmlFor="email">{t("login.email") }
+    <Form
+      name="contact"
+      method="post"
+      onSubmit={handleSubmit(handleFormSubmit)}
+    >
+      <label htmlFor="email">
+        {t('login.email')}
         <Controller
           name="email"
           control={control}
@@ -54,7 +57,7 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
               {...field}
               id="email"
               type="email"
-              placeholder={`${t("login.placeholder-email")}`}
+              placeholder={`${t('login.placeholder-email')}`}
             />
           )}
         />
@@ -63,8 +66,8 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
         )}
       </label>
 
-      <label
-        htmlFor="password">{t("login.password") }
+      <label htmlFor="password">
+        {t('login.password')}
         <Controller
           name="password"
           control={control}
@@ -74,7 +77,7 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
               {...field}
               id="password"
               type="password"
-              placeholder={`${t("login.placeholder-password")}` }
+              placeholder={`${t('login.placeholder-password')}`}
             />
           )}
         />
@@ -82,10 +85,16 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
           <StyledErrorMessage>{errors.password.message}</StyledErrorMessage>
         )}
       </label>
-        <ForgotButton type="link">{t('login.login-forgot-password')}</ForgotButton>
-      <SendButton type="submit" value={`${t("login.login")}`} disabled={isLoading}/>
-      <DontHaveButton type="link">{t("login.dont-have")}</DontHaveButton>
-      </Form>
+      <ForgotButton type="link">
+        {t('login.login-forgot-password')}
+      </ForgotButton>
+      <SendButton
+        type="submit"
+        value={`${t('login.login')}`}
+        disabled={isLoading}
+      />
+      <DontHaveButton type="link">{t('login.dont-have')}</DontHaveButton>
+    </Form>
   );
 };
 

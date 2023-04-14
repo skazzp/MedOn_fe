@@ -1,15 +1,14 @@
-import styled from "styled-components";
-import { theme } from "styles/theme";
-
+import styled from 'styled-components';
+import { theme } from 'styles/theme';
 
 export const Title = styled.h1`
   color: ${theme.colors.title};
   font-family: ${theme.fontFamily.roboto};
   font-style: normal;
   font-weight: 700;
-  font-size: ${theme.fontSizes.xl};
+  font-size: ${theme.fontSizes.xxxl};
   line-height: 3.5rem;
-  margin-bottom: 1rem
+  margin-bottom: 1rem;
 `;
 
 export const Text = styled.div`
@@ -18,5 +17,5 @@ export const Text = styled.div`
   font-weight: 400;
   line-height: 24px;
   text-align: left;
-  margin-bottom: 2.5rem
+  margin-bottom: 2.5rem;
 `;
