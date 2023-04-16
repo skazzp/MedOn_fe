@@ -1,5 +1,5 @@
 import { Control, FieldPath } from 'react-hook-form';
-import { FormProfileData } from 'components/ProfileForm/types';
+import { FormProfileData, UserData } from 'components/ProfileForm/types';
 
 export interface Option {
   value: string | number;
@@ -10,4 +10,5 @@ export interface IProps {
   name: FieldPath<FormProfileData>;
   options: Option[];
   error: string | undefined;
+  userData: UserData | null;
 }

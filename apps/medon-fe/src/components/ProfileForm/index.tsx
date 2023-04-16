@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Controller, useForm } from 'react-hook-form';
 import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
 import dayjs from 'dayjs';
@@ -13,6 +15,7 @@ import { countryOptions } from 'utils/countries/countryOptions';
 import { COUNTRY, TIMEZONE, ROLE } from 'utils/constants/profileFormFields';
 import { profileFormSchema } from 'validation/profileFormSchema';
 import ProfileSelect from 'components/ProfileSelect';
+import Spinner from 'components/Spinner';
 import { UserOutlined } from '@ant-design/icons';
 import {
   Container,
@@ -28,11 +31,14 @@ import {
   ImageContainer,
 } from './styles';
 
-import { FormProfileData } from './types';
+import { FormProfileData, UserData } from './types';
 import { AvatarUploader } from './AvatarUploader';
 
 export default function ProfileForm() {
   const { t } = useTranslation();
+  const [userData, setUserData] = useState<UserData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
   const {
     control,
     handleSubmit,
@@ -50,6 +56,36 @@ export default function ProfileForm() {
       timezone: DEFAULT_TIMEZONE,
     },
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(
+          process.env.NX_API_URL || 'http://localhost:3333/user/profile'
+        );
+        setUserData(response.data.data);
+      } catch (err) {
+        setError('An error occurred while fetching data.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <Container>
+        <Spinner />
+      </Container>
+    );
+  }
+
+  if (error) {
+    return ''; // show error in a modal ? or just a message
+  }
 
   const onSubmit = handleSubmit(() => {});
   return (
@@ -82,6 +118,7 @@ export default function ProfileForm() {
                   status={errors.firstName?.message ? 'error' : undefined}
                   placeholder={`${t('profileForm.firstName.placeholder')}`}
                   {...field}
+                  value={userData?.firstName || field.value}
                 />
               )}
             />
@@ -105,6 +142,7 @@ export default function ProfileForm() {
                   status={errors.lastName?.message ? 'error' : undefined}
                   placeholder={`${t('profileForm.lastName.placeholder')}`}
                   {...field}
+                  value={userData?.lastName || field.value}
                 />
               )}
             />
@@ -128,6 +166,7 @@ export default function ProfileForm() {
                   status={errors.email?.message ? 'error' : undefined}
                   placeholder={`${t('profileForm.email.placeholder')}`}
                   {...field}
+                  value={userData?.email || field.value}
                 />
               )}
             />
@@ -154,7 +193,11 @@ export default function ProfileForm() {
                   ref={field.ref}
                   name={field.name}
                   onBlur={field.onBlur}
-                  value={field.value ? dayjs(field.value) : null}
+                  value={
+                    userData?.dateOfBirth
+                      ? dayjs(userData?.dateOfBirth)
+                      : field.value
+                  }
                   onChange={(date) => {
                     field.onChange(
                       date ? new Date(date.valueOf()).toUTCString() : null
@@ -177,6 +220,7 @@ export default function ProfileForm() {
               control={control}
               error={errors.country?.message}
               options={countryOptions}
+              userData={userData}
             />
           </Label>
         </InputContainer>
@@ -193,6 +237,7 @@ export default function ProfileForm() {
                   status={errors.city?.message ? 'error' : undefined}
                   placeholder={`${t('profileForm.city.placeholder')}`}
                   {...field}
+                  value={userData?.city || field.value}
                 />
               )}
             />
@@ -208,6 +253,7 @@ export default function ProfileForm() {
               control={control}
               error={errors.timezone?.message}
               options={timezoneOptions}
+              userData={userData}
             />
           </Label>
         </InputContainer>
@@ -218,6 +264,7 @@ export default function ProfileForm() {
               control={control}
               error={errors.role?.message}
               options={ROLE_OPTIONS}
+              userData={userData}
             />
           </Label>
         </InputContainer>
