@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { GoogleLogin } from '@react-oauth/google';
 import { Input, Spin } from 'antd';
 
 import {
@@ -80,7 +81,6 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
           <StyledErrorMessage>{errors.email.message}</StyledErrorMessage>
         )}
       </label>
-
       <label htmlFor="password">
         {t('login.password')}
         <Controller
@@ -103,6 +103,14 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
       <ForgotButton type="link" href="/forget-password">
         {t('login.login-forgot-password')}
       </ForgotButton>
+      <GoogleLogin
+        onSuccess={(credentialResponse) => {
+          console.log(credentialResponse);
+        }}
+        onError={() => {
+          console.log('Login Failed');
+        }}
+      />
       <SendButton
         type="submit"
         value={`${t('login.login')}`}
