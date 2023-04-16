@@ -1,4 +1,4 @@
-import LoginForm, { LoginFormValues } from 'components/LoginForm';
+import LoginForm from 'components/LoginForm';
 import { FormContainer } from 'components/LoginForm/style';
 import Logo from 'components/Logo';
 import { Title, Text } from 'components/LoginComponent/style';
@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { toastConfig } from 'utils/toastConfig';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { LoginRequest } from 'redux/api/types';
 
 export default function LoginComponent() {
   const { t } = useTranslation();
@@ -20,7 +21,7 @@ export default function LoginComponent() {
     }
   );
 
-  const handleSubmit = (data: LoginFormValues) => data;
+  const handleSubmit = (data: LoginRequest) => data;
 
   useEffect(() => {
     if (verifyEmail.isSuccess) {

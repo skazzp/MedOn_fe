@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Input } from 'antd';
+import { Input, Spin } from 'antd';
 
 import {
   StyledErrorMessage,
@@ -12,34 +12,55 @@ import {
   SendButton,
 } from 'components/LoginForm/style';
 import { loginFormSchema } from 'components/FormSchema/index';
+import { useLoginMutation } from 'redux/api/loginApi';
+import { LoginRequest } from 'redux/api/types';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { toastConfig } from 'utils/toastConfig';
 
 export interface LoginFormProps {
-  onSubmit: (data: LoginFormValues) => void;
-}
-
-export interface LoginFormValues {
-  email: string;
-  password: string;
+  onSubmit: (data: LoginRequest) => void;
 }
 
 const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
+  const [login, { isLoading }] = useLoginMutation();
+  const navigate = useNavigate();
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormValues>({
+  } = useForm<LoginRequest>({
     resolver: yupResolver(loginFormSchema),
     defaultValues: { email: '', password: '' },
   });
 
-  const handleFormSubmit = handleSubmit((data) => {
-    onSubmit(data);
-  });
+  const handleFormSubmit = async (formData: LoginRequest) => {
+    try {
+      await login(formData).unwrap();
+      const data = JSON.parse(localStorage.getItem('user') as string);
+      if (data.user && data.user.isVerified) {
+        navigate('/profile');
+      } else {
+        navigate('/re-confirm-account');
+      }
+      onSubmit(formData);
+    } catch (error) {
+      toast.error(t('login.error-msg'), toastConfig);
+    }
+  };
+
+  if (isLoading) {
+    return <Spin />;
+  }
 
   return (
-    <Form name="contact" method="post" onSubmit={handleFormSubmit}>
+    <Form
+      name="contact"
+      method="post"
+      onSubmit={handleSubmit(handleFormSubmit)}
+    >
       <label htmlFor="email">
         {t('login.email')}
         <Controller
@@ -82,8 +103,14 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
       <ForgotButton type="link" href="/forget-password">
         {t('login.login-forgot-password')}
       </ForgotButton>
-      <SendButton type="submit" value={`${t('login.login')}`} />
-      <DontHaveButton type="link">{t('login.dont-have')}</DontHaveButton>
+      <SendButton
+        type="submit"
+        value={`${t('login.login')}`}
+        disabled={isLoading}
+      />
+      <DontHaveButton type="link" href="/register">
+        {t('login.dont-have')}
+      </DontHaveButton>
     </Form>
   );
 };

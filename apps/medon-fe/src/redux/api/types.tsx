@@ -39,6 +39,6 @@ export interface Option {
 }
 
 export interface LoginRequest {
-  username: string;
+  email: string;
   password: string;
 }

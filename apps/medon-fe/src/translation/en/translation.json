@@ -78,7 +78,8 @@
     "login": "Login",
     "password": "Password:",
     "placeholder-password": "Write your password*",
-    "placeholder-email": "Write your e-mail*"
+    "placeholder-email": "Write your e-mail*",
+    "error-msg": "Incorrect password or email"
   },
   "forget-password": {
     "alt": {
