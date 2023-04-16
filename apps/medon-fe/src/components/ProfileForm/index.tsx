@@ -61,8 +61,14 @@ export default function ProfileForm() {
     const fetchData = async () => {
       setIsLoading(true);
       try {
+        const token = (await localStorage.getItem('token')) || '';
         const response = await axios.get(
-          process.env.NX_API_URL || 'http://localhost:3333/user/profile'
+          process.env.NX_API_URL || 'http://localhost:3333/user/profile',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setUserData(response.data.data);
       } catch (err) {
@@ -84,8 +90,12 @@ export default function ProfileForm() {
   }
 
   if (error) {
-    return ''; // show error in a modal ? or just a message
-  }
+    return (
+      <Container>
+        <ErrorMsg>{error}</ErrorMsg>
+      </Container>
+    );
+  } // ##TODO show error in a modal ? or just a message || we need to checkpoint here.
 
   const onSubmit = handleSubmit(() => {});
   return (
