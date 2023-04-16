@@ -1,6 +1,4 @@
-import { Link } from 'react-router-dom';
-
-import { theme } from 'styles/theme';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as DashboardIcon } from 'assets/images/navigation/Elements.svg';
 import { ReactComponent as BriefcaseIcon } from 'assets/images/navigation/Briefcase.svg';
@@ -9,47 +7,65 @@ import { ReactComponent as PatientIcon } from 'assets/images/navigation/Users.sv
 import { ReactComponent as HelpIcon } from 'assets/images/navigation/Question.svg';
 import { ReactComponent as LogoutIcon } from 'assets/images/navigation/Sign_Out.svg';
 
-export const Links = styled(Link)`
+import { theme } from 'styles/theme';
+
+export const NavContainer = styled.nav`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 250px;
+  background-color: ${theme.colors.background_navi};
+`;
+
+export const NavLinkStyled = styled(NavLink)`
   text-decoration: none;
   color: ${theme.colors.navi_text};
   font-family: ${theme.fontFamily.roboto};
   font-weight: 700;
-  &:hover {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px 10px 10px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  transition: all 0.7s;
+
+  &.active{
+    background-color: ${theme.colors.navi_hover};
     color: ${theme.colors.icon_active};
+  }
+  
+  &.active svg {
+    fill: ${theme.colors.icon_active};
+  }
+
+  &:hover {
+    background-color: ${theme.colors.navi_hover};
+    color: ${theme.colors.icon_active};
+  }
+  &:hover svg {
+    fill: ${theme.colors.icon_active};
   }
 `;
 
-export const Container = styled.div`
-  display: flex;
-  height: 100vh;
-  width: 250px;
-`;
-
 export const Icon = styled.div`
-  fill: ${theme.colors.icon_common};
   margin-right: 16px;
+  svg {
+    fill: ${theme.colors.icon_common};
+  }
 `;
 
 export const HeaderBlock = styled.header`
   width: 100%;
-  background-color: ${theme.colors.background_navi};
 `;
 
 export const Ul = styled.ul`
   list-style-type: none;
   padding: 0 20px 0 25px;
   li {
-    padding: 10px 15px 10px 10px;
-    border-radius: 8px;
-    margin-bottom: 16px;
     display: flex;
     align-items: center;
-    transition: all 0.7s;
-    img {
-      margin-right: 16px;
-    }
-    &:hover {
-      background-color: ${theme.colors.navi_hover};
+    div {
+      display: flex;
     }
   }
 `;
@@ -57,9 +73,7 @@ export const Ul = styled.ul`
 export const UserBlock = styled.div`
   display: flex;
   align-items: center;
-  margin-left: auto;
-  margin-top: 175px;
-  margin-top: 175px;
+  margin-top: auto;
   border-top: 1px solid ${theme.colors.gray_400};
   padding: 25px 0 0 25px;
 `;
