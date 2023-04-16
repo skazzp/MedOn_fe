@@ -115,6 +115,14 @@
       "linkPrivacy": "Privacy policy"
     }
   },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "appointments": "Appointments",
+    "profile": "Profile",
+    "patient": "Patients list",
+    "help": "Help",
+    "logout": "Logout"
+  },
   "validation": {
     "minLength": "Length at least 3 characters",
     "maxLength": "Length maximum 20 characters",

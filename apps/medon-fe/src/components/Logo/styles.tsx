@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
 export const StyleLogo = styled.div`
-    margin-top: 60px;
-    margin-right: 400px;
-    margin-bottom: 60px;
+  margin: 60px 400px 60px 15px;
 `;
-
-
