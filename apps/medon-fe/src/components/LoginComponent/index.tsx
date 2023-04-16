@@ -1,4 +1,3 @@
-import { LoginRequest } from 'redux/api/types';
 import LoginForm from 'components/LoginForm';
 import { FormContainer } from 'components/LoginForm/style';
 import Logo from 'components/Logo';
@@ -9,6 +8,7 @@ import { useEffect } from 'react';
 import { toastConfig } from 'utils/toastConfig';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { LoginRequest } from 'redux/api/types';
 
 export default function LoginComponent() {
   const { t } = useTranslation();
@@ -23,6 +23,7 @@ export default function LoginComponent() {
 
   const handleSubmit = (data: LoginRequest) => data;
   
+
   useEffect(() => {
     if (verifyEmail.isSuccess) {
       toast.success(t('regConfirm.msgVerifySuccess'), toastConfig);
