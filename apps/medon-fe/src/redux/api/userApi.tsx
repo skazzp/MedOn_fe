@@ -9,7 +9,7 @@ export interface MessageResponse {
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NX_API_URL,
+    baseUrl: process.env.NX_API_URL || 'http://localhost:3333/',
     prepareHeaders: (headers, { getState }) => {
       const { token } = (getState() as RootState).userState;
       if (token) {

@@ -4,7 +4,7 @@ import { IResetPassword, IForgetPassword } from 'redux/features/backend/types';
 export const server = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NX_API_URL,
+    baseUrl: process.env.NX_API_URL || 'http://localhost:3333/'
   }),
   endpoints: (builder) => ({
     postForgetPasswordDoctor: builder.mutation<string, IForgetPassword>({

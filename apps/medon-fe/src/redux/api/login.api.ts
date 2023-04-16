@@ -5,7 +5,7 @@ import { IUser } from "redux/api/types";
 const loginApi = createApi({
     reducerPath: 'auth/api',
     baseQuery: fetchBaseQuery({
-      baseUrl: process.env.NX_API_URL,
+      baseUrl: process.env.NX_API_URL || 'http://localhost:3333/'
     }),
     endpoints: (build) => ({
       login: build.mutation<IUser, { email: string, password: string }>({

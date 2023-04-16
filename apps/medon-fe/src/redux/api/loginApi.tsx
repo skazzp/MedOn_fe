@@ -9,7 +9,7 @@ interface LoginResponse extends IUser {
 export const loginApi = createApi({
   reducerPath: 'loginApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NX_API_URL,
+    baseUrl: process.env.NX_API_URL || 'http://localhost:3333/',
     prepareHeaders: (headers, { getState }) => {
       const { token } = getState() as LoginResponse;
       if (token) {

@@ -4,7 +4,7 @@ import { MessageResponse, Option, RegisterData } from './types';
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NX_API_URL,
+    baseUrl: process.env.NX_API_URL || 'http://localhost:3333',
   }),
   tagTypes: ['user'],
   endpoints: (builder) => ({
