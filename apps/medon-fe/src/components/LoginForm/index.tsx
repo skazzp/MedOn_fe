@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { GoogleLogin } from '@react-oauth/google';
 import { Input, Spin } from 'antd';
 
 import {
@@ -18,6 +17,7 @@ import { LoginRequest } from 'redux/api/types';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { toastConfig } from 'utils/toastConfig';
+import { GoogleLoginButton } from './GoogleButton';
 
 export interface LoginFormProps {
   onSubmit: (data: LoginRequest) => void;
@@ -103,14 +103,7 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
       <ForgotButton type="link" href="/forget-password">
         {t('login.login-forgot-password')}
       </ForgotButton>
-      <GoogleLogin
-        onSuccess={(credentialResponse) => {
-          console.log(credentialResponse);
-        }}
-        onError={() => {
-          console.log('Login Failed');
-        }}
-      />
+      <GoogleLoginButton />
       <SendButton
         type="submit"
         value={`${t('login.login')}`}
