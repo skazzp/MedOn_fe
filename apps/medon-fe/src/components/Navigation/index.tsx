@@ -54,7 +54,7 @@ export default function Navigation() {
             src={user.photo || profileImagePlaceholder}
             alt="User avatar"
           />
-          <UserName>{`Dr.${user?.name}`}</UserName>
+          <UserName>{`Dr.${user?.lastName}`}</UserName>
         </UserBlock>
       </HeaderBlock>
     </NavContainer>
