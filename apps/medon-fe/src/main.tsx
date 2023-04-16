@@ -12,10 +12,13 @@ import App from 'app/app';
 import { store } from 'redux/store';
 import { GlobalStyle } from 'styles/global';
 import 'assets/fonts/sf-pro-font/sf-font-face.css';
+import { restoreAuth } from 'redux/features/restoreAuth/restoreAuth';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+store.dispatch(restoreAuth());
 
 root.render(
   <StrictMode>

@@ -45,10 +45,10 @@ export const StyledErrorMessage = styled.p`
 `;
 
 export const ForgotButton = styled(Button)`
-  text-align: right;
+  margin-left: 70%;
 `;
 
 export const DontHaveButton = styled(Button)`
-  text-align: left;
   color: ${theme.colors.black};
+  margin-right: 70%;
 `;

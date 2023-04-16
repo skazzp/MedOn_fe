@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Input } from 'antd';
+import { Input, Spin } from 'antd';
 
 import {
   StyledErrorMessage,
@@ -12,8 +12,11 @@ import {
   SendButton,
 } from 'components/LoginForm/style';
 import { loginFormSchema } from 'components/FormSchema/index';
-import { useLoginMutation } from 'redux/api/login.api';
+import { useLoginMutation } from 'redux/api/loginApi';
 import { LoginRequest } from 'redux/api/types';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { toastConfig } from 'utils/toastConfig';
 
 export interface LoginFormProps {
   onSubmit: (data: LoginRequest) => void;
@@ -21,7 +24,8 @@ export interface LoginFormProps {
 
 const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
-  const [login, { isLoading, isError, error, data }] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
+  const navigate = useNavigate();
 
   const {
     control,
@@ -35,10 +39,19 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
   const handleFormSubmit = async (formData: LoginRequest) => {
     try {
       await login(formData).unwrap();
-    } catch (err) {
-      console.error('Failed to login', err);
+      const data = JSON.parse(localStorage.getItem('user') as string);
+      const path =
+        data.user && data.user.isVerified ? '/profile' : '/re-confirm-account';
+      navigate(path);
+      onSubmit(formData);
+    } catch (error) {
+      toast.error(t('login.error-msg'), toastConfig);
     }
   };
+
+  if (isLoading) {
+    return <Spin />;
+  }
 
   return (
     <Form
