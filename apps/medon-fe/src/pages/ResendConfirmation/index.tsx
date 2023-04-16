@@ -18,10 +18,13 @@ import {
 } from 'pages/ResendConfirmation/styles';
 import { SubmitSendEmail } from 'pages/ResendConfirmation/types';
 import { emailSchema } from 'validation/accountConfirmationSchema';
+import { useResendEmailMutation } from 'redux/api/authApi';
+import { toast } from 'react-toastify';
+import { toastConfig } from 'utils/toastConfig';
 
 export default function ResendConfirmation() {
   const [isEmailSent, setIsEmailSent] = useState(false);
-
+  const [resendEmail] = useResendEmailMutation();
   const {
     register,
     handleSubmit,
@@ -36,8 +39,16 @@ export default function ResendConfirmation() {
   const theme = useTheme();
   const { t } = useTranslation();
 
-  const handleSentEmail: SubmitHandler<SubmitSendEmail> = () => {
-    setIsEmailSent(true);
+  const handleSentEmail: SubmitHandler<SubmitSendEmail> = async (
+    data: SubmitSendEmail
+  ) => {
+    try {
+      await resendEmail(data.email).unwrap();
+      setIsEmailSent(true);
+      toast.success(t('regConfirm.msgEmailSuccess'), toastConfig);
+    } catch (error) {
+      toast.error(t('regConfirm.msgEmailError'), toastConfig);
+    }
   };
 
   return (
