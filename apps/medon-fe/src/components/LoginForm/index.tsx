@@ -10,6 +10,7 @@ import {
   DontHaveButton,
   ForgotButton,
   SendButton,
+  StyledGoogle,
 } from 'components/LoginForm/style';
 import { loginFormSchema } from 'components/FormSchema/index';
 import { LoginRequest } from 'redux/api/types';
@@ -19,6 +20,7 @@ import { toastConfig } from 'utils/toastConfig';
 import { useAppDispatch } from 'redux/hooks';
 import { setIsVerified, setToken } from 'redux/features/userSlice/userSlice';
 import { useLoginMutation } from 'redux/api/authApi';
+// import GoogleButton from 'react-google-button';
 
 export interface LoginFormProps {
   onSubmit: (data: LoginRequest) => void;
@@ -44,6 +46,10 @@ const LoginForm: FC<LoginFormProps> = () => {
     } catch (error) {
       toast.error(t('login.error-msg'), toastConfig);
     }
+  };
+
+  const handleGoogleClick = () => {
+    window.location.href = 'http://localhost:3333/auth/google/login';
   };
 
   useEffect(() => {
@@ -105,6 +111,7 @@ const LoginForm: FC<LoginFormProps> = () => {
       <ForgotButton type="link" href="/forget-password">
         {t('login.login-forgot-password')}
       </ForgotButton>
+      <StyledGoogle type="light" onClick={handleGoogleClick} />
       <SendButton
         type="submit"
         value={`${t('login.login')}`}

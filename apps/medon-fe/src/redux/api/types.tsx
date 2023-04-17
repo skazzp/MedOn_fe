@@ -9,7 +9,7 @@ export interface IUser {
   isVerified: boolean;
   country: string | null;
   city: string;
-  time_zone: string | null;
+  timeZone: string | null;
   id: string;
 }
 

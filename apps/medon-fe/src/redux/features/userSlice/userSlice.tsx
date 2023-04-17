@@ -7,7 +7,7 @@ interface IUserState {
   isVerified: boolean;
 }
 
-const initialState: IUserState = {
+export const initialState: IUserState = {
   user: {
     firstName: '',
     lastName: '',
@@ -19,7 +19,7 @@ const initialState: IUserState = {
     isVerified: false,
     country: null,
     city: '',
-    time_zone: null,
+    timeZone: null,
     id: '',
   },
   token: null,

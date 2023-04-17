@@ -19,7 +19,11 @@ import Logo from 'components/Logo';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from 'redux/hooks';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
-import { setToken } from 'redux/features/userSlice/userSlice';
+import {
+  initialState,
+  setToken,
+  setUser,
+} from 'redux/features/userSlice/userSlice';
 
 export default function Navigation() {
   const { t } = useTranslation();
@@ -28,6 +32,7 @@ export default function Navigation() {
   const user = useAppSelector(getUserSelector);
   const dispatch = useDispatch();
   const logout = () => {
+    dispatch(setUser(initialState.user));
     dispatch(setToken(''));
   };
   const navItems = [

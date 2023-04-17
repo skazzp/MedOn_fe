@@ -18,20 +18,18 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-// #TODO dunno why process.env is not working here on clientId 790559126715-933s8ngov6rqllmsssp6jj6co9sqe9s2.apps.googleusercontent.com
-
 root.render(
-  <StrictMode>
-    <GoogleOAuthProvider clientId="790559126715-933s8ngov6rqllmsssp6jj6co9sqe9s2.apps.googleusercontent.com">
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
-            <ToastContainer autoClose={2000} />
-            <GlobalStyle />
-            <App />
-          </BrowserRouter>
-        </ThemeProvider>
-      </Provider>
-    </GoogleOAuthProvider>
-  </StrictMode>
+  // <StrictMode>
+  <GoogleOAuthProvider clientId="790559126715-933s8ngov6rqllmsssp6jj6co9sqe9s2.apps.googleusercontent.com">
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <ToastContainer autoClose={2000} />
+          <GlobalStyle />
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
+  </GoogleOAuthProvider>
+  // </StrictMode>
 );

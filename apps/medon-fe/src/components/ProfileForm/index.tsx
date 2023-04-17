@@ -3,15 +3,15 @@ import { Controller, useForm } from 'react-hook-form';
 import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
 import dayjs from 'dayjs';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ROLE_OPTIONS } from 'utils/constants/roles';
-import { Input, Spin } from 'antd';
+// import { ROLE_OPTIONS } from 'utils/constants/roles';
+import { Spin } from 'antd';
 import { useTranslation } from 'react-i18next';
 import {
   // DEFAULT_TIMEZONE,
   timezoneOptions,
 } from 'utils/timezones/timezoneOptions';
 import { countryOptions } from 'utils/countries/countryOptions';
-import { COUNTRY, TIMEZONE, ROLE } from 'utils/constants/profileFormFields';
+import { COUNTRY, TIMEZONE } from 'utils/constants/profileFormFields';
 import { profileFormSchema } from 'validation/profileFormSchema';
 import ProfileSelect from 'components/ProfileSelect';
 import { UserOutlined } from '@ant-design/icons';
@@ -35,7 +35,7 @@ import {
 } from './styles';
 
 import { FormProfileData } from './types';
-import { AvatarUploader } from './AvatarUploader';
+// import { AvatarUploader } from './AvatarUploader';
 
 export default function ProfileForm() {
   const { t } = useTranslation();
@@ -57,7 +57,7 @@ export default function ProfileForm() {
       birthday: user.dateOfBirth,
       country: user.country,
       city: user.city,
-      timezone: user.time_zone,
+      timezone: user.timeZone,
     },
   });
 
@@ -70,10 +70,12 @@ export default function ProfileForm() {
       setValue('lastName', user.lastName);
       setValue('email', user.email);
       setValue('role', user.role);
-      setValue('birthday', dayjs(user.dateOfBirth));
+      if (user.dateOfBirth) {
+        setValue('birthday', dayjs(user.dateOfBirth));
+      }
       setValue('country', user.country);
       setValue('city', user.city);
-      setValue('timezone', user.time_zone);
+      setValue('timezone', user.timeZone);
     }
   }, [data, dispatch, setValue, user]);
 
@@ -96,7 +98,7 @@ export default function ProfileForm() {
               }}
               icon={<UserOutlined />}
             />
-            <AvatarUploader />
+            {/* <AvatarUploader /> */}
           </ImageContainer>
           <Form onSubmit={onSubmit}>
             <InputContainer>
@@ -241,7 +243,7 @@ export default function ProfileForm() {
                 )}
               </Label>
             </InputContainer>
-            {/* <InputContainer>
+            <InputContainer>
               <Label htmlFor="timezone">
                 <ProfileSelect
                   name={TIMEZONE}
@@ -252,7 +254,7 @@ export default function ProfileForm() {
                 />
               </Label>
             </InputContainer>
-            <InputContainer>
+            {/*   <InputContainer>
               <Label htmlFor="role">
                 <ProfileSelect
                   name={ROLE}
@@ -272,7 +274,7 @@ export default function ProfileForm() {
                 onClick={() => {
                   setDisabled(false);
                 }}
-                disabled={true}
+                // disabled={true}
               >
                 Edit Profile
               </StyledButton>
@@ -281,9 +283,9 @@ export default function ProfileForm() {
                 {t('profileForm.profileBtn')}
               </StyledButton>
             )}
-            <StyledButton size="large" htmlType="submit" disabled={true}>
+            {/* <StyledButton size="large" htmlType="submit" disabled={true}>
               {t('profileForm.changePasswordBtn')}
-            </StyledButton>
+            </StyledButton> */}
           </ButtonContainer>
         </>
       )}

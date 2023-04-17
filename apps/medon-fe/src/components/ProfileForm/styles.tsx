@@ -27,6 +27,11 @@ export const InputContainer = styled.div`
 
 export const ProfileImage = styled(Avatar)`
   background-color: ${({ theme }) => theme.colors.gray_300};
+  width: 150px !important;
+  height: 150px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const StyledButton = styled(Button)`
@@ -80,6 +85,7 @@ export const StyledDatePicker = styled(DatePicker)`
 
 export const ImageContainer = styled.div`
   display: flex;
+  margin-bottom: 2rem;
 `;
 
 export const StyledInput = styled(Input)`

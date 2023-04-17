@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useResendEmailMutation } from 'redux/api/authApi';
 import { toast } from 'react-toastify';
 import { toastConfig } from 'utils/toastConfig';
+import { useEffect } from 'react';
 import { BackBtn, Btn, Container, Text, Title } from './styles';
 
 interface IProps {
@@ -13,6 +14,13 @@ export default function RegistrationConfirmation({ email }: IProps) {
   const { t } = useTranslation();
 
   const [resendEmail] = useResendEmailMutation();
+  const showMessage = () => {
+    toast.success(t('regConfirm.msgEmailSuccess'), toastConfig);
+  };
+
+  useEffect(() => {
+    showMessage();
+  }, []);
 
   const handleResendEmail = async () => {
     try {

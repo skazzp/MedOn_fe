@@ -9,20 +9,22 @@ import { toastConfig } from 'utils/toastConfig';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { LoginRequest } from 'redux/api/types';
+import { useAppDispatch } from 'redux/hooks';
+import { setIsVerified, setToken } from 'redux/features/userSlice/userSlice';
 
 export default function LoginComponent() {
   const { t } = useTranslation();
   const [params] = useSearchParams();
   const token = params.get('token');
+  const authToken = params.get('gtoken');
   const verifyEmail = useVerifyEmailQuery(
     { token },
     {
       skip: !token,
     }
   );
-
+  const dispatch = useAppDispatch();
   const handleSubmit = (data: LoginRequest) => data;
-  
 
   useEffect(() => {
     if (verifyEmail.isSuccess) {
@@ -32,6 +34,13 @@ export default function LoginComponent() {
       toast.error(t('regConfirm.msgVerifyError'), toastConfig);
     }
   }, [verifyEmail.isSuccess, verifyEmail.error, t]);
+
+  useEffect(() => {
+    if (authToken) {
+      dispatch(setIsVerified(true));
+      dispatch(setToken(authToken));
+    }
+  }, [authToken, dispatch]);
 
   return (
     <FormContainer>
