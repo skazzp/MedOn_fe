@@ -124,6 +124,10 @@
       "placeholder-oldpassword": "Current Password *",
       "placeholder-newpassword": "New Password *",
       "placeholder-confirmpassword": "Confirm New Password *"
+    },
+    "footer": {
+      "linkTerm": "Terms and conditions",
+      "linkPrivacy": "Privacy policy"
     }
   },
   "validation": {
@@ -145,7 +149,8 @@
       "minLength": "Password must be at least 6 characters",
       "maxLength": "Password must be 20 characters maximum",
       "matches": "At least one capital and small letter, special character and number",
-      "required": "Password is required"
+      "required": "Password is required",
+      "notEqual": "Current password and new password can't be the same"
     },
     "passwordRepeat": {
       "matches": "Passwords must match",
