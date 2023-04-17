@@ -7,13 +7,15 @@ export const Container = styled.div`
 
 export const RegContainer = styled.div`
   padding: 1.6rem 2rem;
+  /* background-color: ${(p) => p.theme.colors.red_500}; */
 `;
 
 export const FormContainer = styled.div`
   margin-top: 2rem;
   min-width: 27rem;
   width: 50vw;
-  background-color: ${(p) => p.theme.colors.white};
+  /* background-color: ${(p) => p.theme.colors.white}; */
+  background-color: ${(p) => p.theme.colors.BACKGROUND_PRIMARY};
   display: flex;
   align-items: center;
   justify-content: center;
