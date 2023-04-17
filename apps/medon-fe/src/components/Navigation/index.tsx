@@ -16,12 +16,20 @@ import {
 } from 'components/Navigation/styles';
 import profileImagePlaceholder from 'assets/images/Avatar.svg';
 import Logo from 'components/Logo';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from 'redux/hooks';
+import { getUserSelector } from 'redux/features/userSlice/userSelectors';
+import { setToken } from 'redux/features/userSlice/userSlice';
 
 export default function Navigation() {
   const { t } = useTranslation();
-  const storedUser = localStorage.getItem('user');
-  const user = storedUser ? JSON.parse(storedUser) : null;
-
+  // const storedUser = localStorage.getItem('user');
+  // const user = storedUser ? JSON.parse(storedUser) : null;
+  const user = useAppSelector(getUserSelector);
+  const dispatch = useDispatch();
+  const logout = () => {
+    dispatch(setToken(''));
+  };
   const navItems = [
     { to: '/dashboard', icon: <Dashboard />, label: t('navigation.dashboard') },
     {
@@ -32,7 +40,12 @@ export default function Navigation() {
     { to: '/profile', icon: <Profile />, label: t('navigation.profile') },
     { to: '/patient-list', icon: <Patient />, label: t('navigation.patient') },
     { to: '/help', icon: <Help />, label: t('navigation.help') },
-    { to: '/logout', icon: <Logout />, label: t('navigation.logout') },
+    {
+      to: '/logout',
+      icon: <Logout />,
+      label: t('navigation.logout'),
+      onClick: logout,
+    },
   ];
 
   return (
@@ -40,8 +53,8 @@ export default function Navigation() {
       <HeaderBlock>
         <Logo />
         <Ul>
-          {navItems.map(({ to, icon, label }) => (
-            <NavLinkStyled to={to} key={to}>
+          {navItems.map(({ to, icon, label, onClick }) => (
+            <NavLinkStyled to={to} key={to} onClick={onClick}>
               <li>
                 {icon}
                 <div>{label}</div>
