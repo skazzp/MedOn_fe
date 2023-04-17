@@ -1,5 +1,16 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { MessageResponse, Option, RegisterData } from './types';
+import {
+  IUser,
+  LoginRequest,
+  MessageResponse,
+  Option,
+  RegisterData,
+} from './types';
+
+interface LoginResponse {
+  token: string;
+  user: IUser;
+}
 
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -33,11 +44,19 @@ export const authApi = createApi({
         };
       },
     }),
-
     verifyEmail: builder.query<MessageResponse, { token: string | null }>({
       query({ token }) {
         return {
           url: `auth/confirm/${token}`,
+        };
+      },
+    }),
+    login: builder.mutation<LoginResponse, LoginRequest>({
+      query({ email, password }) {
+        return {
+          url: `auth/login`,
+          method: 'POST',
+          body: { email, password },
         };
       },
     }),
@@ -49,4 +68,5 @@ export const {
   useResendEmailMutation,
   useVerifyEmailQuery,
   useGetSpecialitiesQuery,
+  useLoginMutation,
 } = authApi;

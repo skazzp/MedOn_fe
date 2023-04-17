@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,21 +12,23 @@ import {
   SendButton,
 } from 'components/LoginForm/style';
 import { loginFormSchema } from 'components/FormSchema/index';
-import { useLoginMutation } from 'redux/api/loginApi';
 import { LoginRequest } from 'redux/api/types';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { toastConfig } from 'utils/toastConfig';
+import { useAppDispatch } from 'redux/hooks';
+import { setToken, setUser } from 'redux/features/userSlice/userSlice';
+import { useLoginMutation } from 'redux/api/authApi';
 
 export interface LoginFormProps {
   onSubmit: (data: LoginRequest) => void;
 }
 
-const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
+const LoginForm: FC<LoginFormProps> = () => {
   const { t } = useTranslation();
-  const [login, { isLoading }] = useLoginMutation();
+  const [login, { isLoading, data }] = useLoginMutation();
   const navigate = useNavigate();
-
+  const dispatch = useAppDispatch();
   const {
     control,
     handleSubmit,
@@ -39,17 +41,37 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
   const handleFormSubmit = async (formData: LoginRequest) => {
     try {
       await login(formData).unwrap();
-      const data = JSON.parse(localStorage.getItem('user') as string);
+    } catch (error) {
+      toast.error(t('login.error-msg'), toastConfig);
+    }
+  };
+
+  useEffect(() => {
+    // console.log(data);
+    if (data) {
+      dispatch(setToken(data.token));
       if (data.user && data.user.isVerified) {
         navigate('/profile');
       } else {
         navigate('/re-confirm-account');
       }
-      onSubmit(formData);
-    } catch (error) {
-      toast.error(t('login.error-msg'), toastConfig);
     }
-  };
+  }, [data, dispatch, navigate]);
+
+  // const handleFormSubmit = async (formData: LoginRequest) => {
+  //   try {
+  //     await login(formData).unwrap();
+  //     const data = JSON.parse(localStorage.getItem('user') as string);
+  //     if (data.user && data.user.isVerified) {
+  //       navigate('/profile');
+  //     } else {
+  //       navigate('/re-confirm-account');
+  //     }
+  //     onSubmit(formData);
+  //   } catch (error) {
+  //     toast.error(t('login.error-msg'), toastConfig);
+  //   }
+  // };
 
   if (isLoading) {
     return <Spin />;

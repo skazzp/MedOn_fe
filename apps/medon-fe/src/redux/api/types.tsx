@@ -6,7 +6,9 @@ export interface IUser {
   speciality: string | null;
   photo: string;
   dateOfBirth: Date | null;
-  is_verified: boolean;
+  isVerified: boolean;
+  country: string | null;
+  city: string;
   time_zone: string | null;
   id: string;
 }

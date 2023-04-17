@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IUser, LoginRequest } from 'redux/api/types';
-import { setUser } from 'redux/features/userSlice/authSlice';
+// import { setUser } from 'redux/features/userSlice/userSlice';
 
 interface LoginResponse extends IUser {
   token: string;
@@ -29,7 +29,7 @@ export const loginApi = createApi({
       transformResponse: (response: LoginResponse) => {
         localStorage.setItem('token', response.token);
         localStorage.setItem('user', JSON.stringify(response));
-        setUser({ user: response, token: response.token });
+        // setUser({ user: response, token: response.token });
         return response;
       },
     }),
