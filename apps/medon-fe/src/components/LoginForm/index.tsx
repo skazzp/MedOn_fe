@@ -111,12 +111,12 @@ const LoginForm: FC<LoginFormProps> = () => {
       <ForgotButton type="link" href="/forget-password">
         {t('login.login-forgot-password')}
       </ForgotButton>
-      <StyledGoogle type="light" onClick={handleGoogleClick} />
       <SendButton
         type="submit"
         value={`${t('login.login')}`}
         disabled={isLoading}
       />
+      <StyledGoogle type="light" onClick={handleGoogleClick} />
       <DontHaveButton type="link" href="/register">
         {t('login.dont-have')}
       </DontHaveButton>
