@@ -18,7 +18,7 @@ export interface RegisterData {
   lastName: string;
   email: string;
   password: string;
-  dateOfBirth: Date;
+  dateOfBirth: Date | string;
   role: string;
   specialityId: number | null;
   country: string;

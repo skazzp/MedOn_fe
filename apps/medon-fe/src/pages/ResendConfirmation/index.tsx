@@ -21,10 +21,13 @@ import { emailSchema } from 'validation/accountConfirmationSchema';
 import { useResendEmailMutation } from 'redux/api/authApi';
 import { toast } from 'react-toastify';
 import { toastConfig } from 'utils/toastConfig';
+import { useAppDispatch } from 'redux/hooks';
+import { setToken } from 'redux/features/userSlice/userSlice';
 
 export default function ResendConfirmation() {
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [resendEmail] = useResendEmailMutation();
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -94,6 +97,9 @@ export default function ResendConfirmation() {
           textcolor={theme.colors.white}
           to="/"
           isfullwidth="true"
+          onClick={() => {
+            dispatch(setToken(''));
+          }}
         >
           {t('re-confirm-account.send-email.home-link')}
         </LinkHome>

@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { toastConfig } from 'utils/toastConfig';
 import { useAppDispatch } from 'redux/hooks';
-import { setToken, setUser } from 'redux/features/userSlice/userSlice';
+import { setIsVerified, setToken } from 'redux/features/userSlice/userSlice';
 import { useLoginMutation } from 'redux/api/authApi';
 
 export interface LoginFormProps {
@@ -47,31 +47,11 @@ const LoginForm: FC<LoginFormProps> = () => {
   };
 
   useEffect(() => {
-    // console.log(data);
     if (data) {
+      dispatch(setIsVerified(data.user.isVerified));
       dispatch(setToken(data.token));
-      if (data.user && data.user.isVerified) {
-        navigate('/profile');
-      } else {
-        navigate('/re-confirm-account');
-      }
     }
   }, [data, dispatch, navigate]);
-
-  // const handleFormSubmit = async (formData: LoginRequest) => {
-  //   try {
-  //     await login(formData).unwrap();
-  //     const data = JSON.parse(localStorage.getItem('user') as string);
-  //     if (data.user && data.user.isVerified) {
-  //       navigate('/profile');
-  //     } else {
-  //       navigate('/re-confirm-account');
-  //     }
-  //     onSubmit(formData);
-  //   } catch (error) {
-  //     toast.error(t('login.error-msg'), toastConfig);
-  //   }
-  // };
 
   if (isLoading) {
     return <Spin />;

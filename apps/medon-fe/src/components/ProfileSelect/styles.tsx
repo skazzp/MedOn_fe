@@ -3,6 +3,14 @@ import styled from 'styled-components';
 
 export const StyledSelect = styled(Select)`
   width: 100%;
+  /* &:disabled {
+    background-color: #f4f6fd !important;
+    color: black;
+  } */
+  .ant-select-selector {
+    background-color: #f4f6fd !important;
+    color: black !important;
+  }
 `;
 
 export const LabelText = styled.p`

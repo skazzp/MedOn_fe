@@ -8,6 +8,7 @@ import { ROLES } from 'utils/constants/roles';
 import { useRegisterUserMutation } from 'redux/api/authApi';
 import { toast } from 'react-toastify';
 import { toastConfig } from 'utils/toastConfig';
+import dayjs from 'dayjs';
 import {
   Container,
   FormContainer,
@@ -28,7 +29,7 @@ export default function RegistrationPage() {
       lastName: values.lastName,
       email: values.email,
       password: values.password,
-      dateOfBirth: new Date(values.birthday.valueOf()),
+      dateOfBirth: dayjs(values.birthday).format('YYYY-MM-DD'),
       role: values.role,
       specialityId:
         values.role === ROLES.REMOTE && values.speciality

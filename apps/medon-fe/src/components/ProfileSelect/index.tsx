@@ -8,6 +8,7 @@ export default function ProfileSelect({
   name,
   options,
   error,
+  disabled,
 }: IProps) {
   const { t } = useTranslation();
   return (
@@ -21,6 +22,7 @@ export default function ProfileSelect({
           <StyledSelect
             showSearch
             id={name}
+            disabled={disabled}
             size="large"
             placeholder={`${t(`profileForm.${name}.placeholder`)}`}
             status={error ? 'error' : undefined}

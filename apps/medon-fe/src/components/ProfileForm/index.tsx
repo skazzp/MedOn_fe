@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
 import dayjs from 'dayjs';
@@ -31,6 +31,7 @@ import {
   ErrorMsg,
   StyledDatePicker,
   ImageContainer,
+  StyledInput,
 } from './styles';
 
 import { FormProfileData } from './types';
@@ -40,7 +41,7 @@ export default function ProfileForm() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const user = useAppSelector(getUserSelector);
-
+  const [disabled, setDisabled] = useState(true);
   const {
     control,
     handleSubmit,
@@ -64,7 +65,6 @@ export default function ProfileForm() {
 
   useEffect(() => {
     if (data) {
-      // console.log('Profile DATA', data?.data);
       dispatch(setUser(data.data));
       setValue('firstName', user.firstName);
       setValue('lastName', user.lastName);
@@ -75,16 +75,15 @@ export default function ProfileForm() {
       setValue('city', user.city);
       setValue('timezone', user.time_zone);
     }
-    // console.log('USER STATE', user);
   }, [data, dispatch, setValue, user]);
 
   const onSubmit = handleSubmit(() => {});
   return (
-    <span>
+    <Container>
       {isLoading ? (
         <Spin />
       ) : (
-        <Container>
+        <>
           <ImageContainer>
             <ProfileImage
               size={{
@@ -107,9 +106,10 @@ export default function ProfileForm() {
                   name="firstName"
                   control={control}
                   render={({ field }) => (
-                    <Input
+                    <StyledInput
                       id="firstName"
                       size="large"
+                      disabled={disabled}
                       status={errors.firstName?.message ? 'error' : undefined}
                       placeholder={`${t('profileForm.firstName.placeholder')}`}
                       {...field}
@@ -130,9 +130,10 @@ export default function ProfileForm() {
                   name="lastName"
                   control={control}
                   render={({ field }) => (
-                    <Input
+                    <StyledInput
                       id="lastName"
                       size="large"
+                      disabled={disabled}
                       status={errors.lastName?.message ? 'error' : undefined}
                       placeholder={`${t('profileForm.lastName.placeholder')}`}
                       {...field}
@@ -153,9 +154,10 @@ export default function ProfileForm() {
                   name="email"
                   control={control}
                   render={({ field }) => (
-                    <Input
+                    <StyledInput
                       id="email"
                       size="large"
+                      disabled={disabled}
                       status={errors.email?.message ? 'error' : undefined}
                       placeholder={`${t('profileForm.email.placeholder')}`}
                       {...field}
@@ -183,6 +185,7 @@ export default function ProfileForm() {
                       format={DATE_FORMAT_REG}
                       allowClear={false}
                       size="large"
+                      disabled={disabled}
                       status={errors.birthday?.message ? 'error' : undefined}
                       ref={field.ref}
                       name={field.name}
@@ -208,6 +211,7 @@ export default function ProfileForm() {
                 <ProfileSelect
                   name={COUNTRY}
                   control={control}
+                  disabled={disabled}
                   error={errors.country?.message}
                   options={countryOptions}
                 />
@@ -220,9 +224,10 @@ export default function ProfileForm() {
                   name="city"
                   control={control}
                   render={({ field }) => (
-                    <Input
+                    <StyledInput
                       id="city"
                       size="large"
+                      disabled={disabled}
                       status={errors.city?.message ? 'error' : undefined}
                       placeholder={`${t('profileForm.city.placeholder')}`}
                       {...field}
@@ -236,11 +241,12 @@ export default function ProfileForm() {
                 )}
               </Label>
             </InputContainer>
-            <InputContainer>
+            {/* <InputContainer>
               <Label htmlFor="timezone">
                 <ProfileSelect
                   name={TIMEZONE}
                   control={control}
+                  disabled={disabled}
                   error={errors.timezone?.message}
                   options={timezoneOptions}
                 />
@@ -251,22 +257,36 @@ export default function ProfileForm() {
                 <ProfileSelect
                   name={ROLE}
                   control={control}
+                  disabled={disabled}
                   error={errors.role?.message}
                   options={ROLE_OPTIONS}
                 />
               </Label>
-            </InputContainer>
+            </InputContainer> */}
           </Form>
           <ButtonContainer>
-            <StyledButton size="large" htmlType="submit">
-              {t('profileForm.profileBtn')}
-            </StyledButton>
-            <StyledButton size="large" htmlType="submit">
+            {disabled ? (
+              <StyledButton
+                size="large"
+                htmlType="button"
+                onClick={() => {
+                  setDisabled(false);
+                }}
+                disabled={true}
+              >
+                Edit Profile
+              </StyledButton>
+            ) : (
+              <StyledButton size="large" htmlType="submit">
+                {t('profileForm.profileBtn')}
+              </StyledButton>
+            )}
+            <StyledButton size="large" htmlType="submit" disabled={true}>
               {t('profileForm.changePasswordBtn')}
             </StyledButton>
           </ButtonContainer>
-        </Container>
+        </>
       )}
-    </span>
+    </Container>
   );
 }

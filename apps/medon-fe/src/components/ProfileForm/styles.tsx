@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, DatePicker, Avatar } from 'antd';
+import { Button, DatePicker, Avatar, Input } from 'antd';
 
 export const Container = styled.div`
   display: flex;
@@ -72,8 +72,19 @@ export const ErrorMsg = styled.p`
 
 export const StyledDatePicker = styled(DatePicker)`
   width: 100%;
+  input {
+    background-color: #f4f6fd !important;
+    color: black !important;
+  }
 `;
 
 export const ImageContainer = styled.div`
   display: flex;
+`;
+
+export const StyledInput = styled(Input)`
+  &:disabled {
+    background-color: #f4f6fd !important;
+    color: black;
+  }
 `;

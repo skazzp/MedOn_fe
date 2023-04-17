@@ -4,6 +4,7 @@ import { IUser } from 'redux/api/types';
 interface IUserState {
   user: IUser;
   token: string | null;
+  isVerified: boolean;
 }
 
 const initialState: IUserState = {
@@ -22,6 +23,7 @@ const initialState: IUserState = {
     id: '',
   },
   token: null,
+  isVerified: false,
 };
 
 export const userSlice = createSlice({
@@ -35,9 +37,12 @@ export const userSlice = createSlice({
     setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
     },
+    setIsVerified: (state, action: PayloadAction<boolean>) => {
+      state.isVerified = action.payload;
+    },
   },
 });
 
 export default userSlice.reducer;
 
-export const { logout, setUser, setToken } = userSlice.actions;
+export const { logout, setUser, setToken, setIsVerified } = userSlice.actions;

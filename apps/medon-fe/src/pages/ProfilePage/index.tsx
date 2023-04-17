@@ -1,5 +1,7 @@
 import ProfileForm from 'components/ProfileForm';
-// import Navigation from 'components/Navigation';
+import { Navigate } from 'react-router-dom';
+import { useAppSelector } from 'redux/hooks';
+import { getIsVerifiedSelector } from 'redux/features/userSlice/userSelectors';
 import {
   ProfilePageContainer,
   ContentContainer,
@@ -7,13 +9,18 @@ import {
 } from './styles';
 
 export default function ProfilePage() {
+  const isVerified = useAppSelector(getIsVerifiedSelector);
   return (
     <ProfilePageContainer>
-      <ContentContainer>
-        <ProfileFormWrapper>
-          <ProfileForm />
-        </ProfileFormWrapper>
-      </ContentContainer>
+      {isVerified ? (
+        <ContentContainer>
+          <ProfileFormWrapper>
+            <ProfileForm />
+          </ProfileFormWrapper>
+        </ContentContainer>
+      ) : (
+        <Navigate to={'/re-confirm-account'} />
+      )}
     </ProfilePageContainer>
   );
 }
