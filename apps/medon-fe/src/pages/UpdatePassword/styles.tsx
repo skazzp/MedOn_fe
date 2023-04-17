@@ -39,3 +39,16 @@ export const Content = styled.section`
   width: 22rem;
   margin: 0 auto;
 `;
+
+export const Footer = styled.footer`
+  display: flex;
+  gap: 2rem;
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  justify-content: center;
+  width: 100%;
+  height: 3.125rem;
+  > a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.black_87};
+  }
+`;

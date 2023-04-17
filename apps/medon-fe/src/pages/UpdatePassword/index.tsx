@@ -10,9 +10,10 @@ import LinkHome from 'components/LinkHome';
 import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
 
 import { SubmitResetPasswordForm } from 'pages/UpdatePassword/types';
-import { Container, Content, Form } from 'pages/UpdatePassword/styles';
+import { Container, Content, Footer, Form } from 'pages/UpdatePassword/styles';
 
 import { passwordSchema } from 'validation/updatePasswordSchema';
+import { Link } from 'react-router-dom';
 
 export default function UpdatePassword() {
   const theme = useTheme();
@@ -65,11 +66,11 @@ export default function UpdatePassword() {
             )}`}
             type="password"
             errorMessage={
-              errors.confirmPassword?.message
-                ? t(`${errors.confirmPassword?.message}`)
+              errors.confirmNewPassword?.message
+                ? t(`${errors.confirmNewPassword?.message}`)
                 : ''
             }
-            {...register('confirmPassword')}
+            {...register('confirmNewPassword')}
           />
           <Button
             bgcolor={theme.colors.btnGradient}
@@ -88,6 +89,10 @@ export default function UpdatePassword() {
           {t('update-password.reset-password.home-link')}
         </LinkHome>
       </Content>
+      <Footer>
+        <Link to="#">{t('update-password.footer.linkTerm')}</Link>
+        <Link to="#">{t('update-password.footer.linkPrivacy')}</Link>
+      </Footer>
     </Container>
   );
 }
