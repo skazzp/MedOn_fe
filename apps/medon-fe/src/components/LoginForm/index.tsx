@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input, Spin } from 'antd';
+import GoogleButton from 'react-google-button';
 
 import {
   StyledErrorMessage,
@@ -17,7 +18,6 @@ import { LoginRequest } from 'redux/api/types';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { toastConfig } from 'utils/toastConfig';
-import { GoogleLoginButton } from './GoogleButton';
 
 export interface LoginFormProps {
   onSubmit: (data: LoginRequest) => void;
@@ -55,6 +55,10 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
   if (isLoading) {
     return <Spin />;
   }
+
+  const handleGoogleClick = () => {
+    window.location.href = 'http://localhost:3333/auth/google/login';
+  };
 
   return (
     <Form
@@ -103,7 +107,7 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
       <ForgotButton type="link" href="/forget-password">
         {t('login.login-forgot-password')}
       </ForgotButton>
-      <GoogleLoginButton />
+      <GoogleButton type="light" onClick={handleGoogleClick} />
       <SendButton
         type="submit"
         value={`${t('login.login')}`}
