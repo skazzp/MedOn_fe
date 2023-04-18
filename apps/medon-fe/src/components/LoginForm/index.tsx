@@ -15,6 +15,7 @@ import { loginFormSchema } from 'components/FormSchema/index';
 import { useLoginMutation } from 'redux/api/login.api';
 import { LoginRequest } from 'redux/api/types';
 import { toast } from 'react-toastify';
+import { toastConfig } from 'utils/toastConfig';
 
 export interface LoginFormProps {
   onSubmit: (data: LoginRequest) => void;
