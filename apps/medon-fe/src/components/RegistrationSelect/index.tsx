@@ -21,7 +21,6 @@ export default function RegistrationSelect({
           <StyledSelect
             showSearch
             id={name}
-           
             placeholder={`${t(`regForm.${name}.placeholder`)}`}
             status={error ? 'error' : undefined}
             filterOption={(input, option) =>

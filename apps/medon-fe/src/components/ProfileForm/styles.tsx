@@ -10,7 +10,7 @@ export const Container = styled.div`
 
 export const Label = styled.label`
   font-family: ${theme.fontFamily.sf_pro_text};
-  font-size: 12px;
+  font-size: ${theme.fontSizes.xs};
 `;
 
 export const Form = styled.form`
@@ -32,7 +32,7 @@ export const StyledButton = styled(Button)`
   color: ${theme.colors.white};
   min-width: 10rem;
   padding: 8px;
-  font-size: 14px;
+  font-size: ${theme.fontSizes.sm};
   font-weight: bold;
   width: 200;
 `;
@@ -50,7 +50,7 @@ export const LabelText = styled.p`
   margin-top: 0;
   margin-bottom: 0.2rem;
   font-family: ${theme.fontFamily.sf_pro_text};
-  font-size: 0.9rem;
+  font-size: ${theme.fontSizes.sm};
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0em;
