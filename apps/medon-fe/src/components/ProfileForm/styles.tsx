@@ -79,8 +79,6 @@ export const ImageContainer = styled.div`
   margin-bottom: 2rem;
 `;
 
-export const StyledInput = styled(Input)``;
-
 export const AntInputDisabledStyle = {
   backgroundColor: theme.colors.gray_100,
   color: theme.colors.black,

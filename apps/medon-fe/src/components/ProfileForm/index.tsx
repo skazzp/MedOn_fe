@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
 import dayjs from 'dayjs';
+import { Controller, useForm } from 'react-hook-form';
+import { Input, Spin } from 'antd';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Spin } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
 import { ROLES, ROLE_OPTIONS, SPECIALITY_OPTIONS } from 'utils/constants/roles';
 import {
   DEFAULT_TIMEZONE,
@@ -17,9 +17,9 @@ import {
   TIMEZONE,
 } from 'utils/constants/userFormFields';
 import { countryOptions } from 'utils/countries/countryOptions';
+import ProfileSelect from 'components/ProfileSelect';
 import profile_pic from 'assets/images/profile_pic.png';
 import { profileFormSchema } from 'validation/profileFormSchema';
-import ProfileSelect from 'components/ProfileSelect';
 import {
   Container,
   Label,
@@ -31,7 +31,6 @@ import {
   ErrorMsg,
   StyledDatePicker,
   ImageContainer,
-  StyledInput,
   AntInputDisabledStyle,
   AntInputStyle,
 } from './styles';
@@ -82,7 +81,7 @@ export default function ProfileForm() {
                   name="firstName"
                   control={control}
                   render={({ field }) => (
-                    <StyledInput
+                    <Input
                       id="firstName"
                       size="large"
                       style={disabled ? AntInputDisabledStyle : AntInputStyle}
@@ -107,7 +106,7 @@ export default function ProfileForm() {
                   name="lastName"
                   control={control}
                   render={({ field }) => (
-                    <StyledInput
+                    <Input
                       id="lastName"
                       size="large"
                       style={disabled ? AntInputDisabledStyle : AntInputStyle}
@@ -132,7 +131,7 @@ export default function ProfileForm() {
                   name="email"
                   control={control}
                   render={({ field }) => (
-                    <StyledInput
+                    <Input
                       id="email"
                       size="large"
                       style={disabled ? AntInputDisabledStyle : AntInputStyle}
@@ -204,7 +203,7 @@ export default function ProfileForm() {
                   name="city"
                   control={control}
                   render={({ field }) => (
-                    <StyledInput
+                    <Input
                       id="city"
                       size="large"
                       style={disabled ? AntInputDisabledStyle : AntInputStyle}
