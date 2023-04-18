@@ -25,6 +25,11 @@ export const theme = {
     black_87: '#000000de',
     black: '#000000',
     title: '#1E293B',
+    background_navi: '#F4F6FD',
+    icon_common: '#828BAE',
+    icon_active: '#4D84E7',
+    navi_text: '#828BAE',
+    navi_hover: '#E2EDFD',
     btnGradient: 'linear-gradient(90deg, #085dd7 -28.15%, #4d93f8 76.48%)',
   },
   fontFamily: {

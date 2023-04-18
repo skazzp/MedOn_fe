@@ -9,14 +9,14 @@ export const FormContainer = styled.div`
   margin: 0 auto;
   height: 100%;
   align-items: flex-start;
-  margin-left: 20rem;
+  margin-left: 20vw;
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 27rem;
-  grid-gap: 1.1rem;
+  grid-gap: 2rem;
   input {
     width: 100%;
   }
