@@ -128,7 +128,8 @@
     "footer": {
       "linkTerm": "Terms and conditions",
       "linkPrivacy": "Privacy policy"
-    },
+    }
+  },
   "navigation": {
     "dashboard": "Dashboard",
     "appointments": "Appointments",
