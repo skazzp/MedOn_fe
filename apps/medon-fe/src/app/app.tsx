@@ -3,7 +3,7 @@ import Login from 'pages/Login';
 import ForgetPassword from 'pages/ForgetPassword';
 import ResetPassword from 'pages/ResetPassword';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import Navigation from 'components/Navigation';
+import Navigation from 'components/Navigation/index';
 import ResendConfirmation from 'pages/ResendConfirmation';
 
 function App() {

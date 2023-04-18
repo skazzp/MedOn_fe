@@ -8,6 +8,7 @@ import { ReactComponent as HelpIcon } from 'assets/images/navigation/Question.sv
 import { ReactComponent as LogoutIcon } from 'assets/images/navigation/Sign_Out.svg';
 
 import { theme } from 'styles/theme';
+import { logout } from 'redux/features/userSlice/userSlice';
 
 export const NavContainer = styled.nav`
   display: flex;
@@ -115,3 +116,12 @@ export const Help = styled(Icon).attrs(() => ({
 export const Logout = styled(Icon).attrs(() => ({
   children: <LogoutIcon />,
 }))``;
+
+export const navItems = [
+  { to: '/dashboard', icon: <Dashboard />, label: ('navigation.dashboard') },
+  { to: '/appointments', icon: <Briefcase />, label: ('navigation.appointments') },
+  { to: '/profile', icon: <Profile />, label: ('navigation.profile') },
+  { to: '/patient-list', icon: <Patient />, label: ('navigation.patient') },
+  { to: '/help', icon: <Help />, label: ('navigation.help') },
+  { to: '/logout', icon: <Logout />, label: ('navigation.logout'), onClick: logout },
+];
