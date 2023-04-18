@@ -9,7 +9,6 @@ import { ReactComponent as LogoutIcon } from 'assets/images/navigation/Sign_Out.
 
 import { theme } from 'styles/theme';
 
-
 export const NavContainer = styled.nav`
   display: flex;
   flex-direction: column;
@@ -30,11 +29,11 @@ export const NavLinkStyled = styled(NavLink)`
   margin-bottom: 16px;
   transition: all 0.7s;
 
-  &.active{
+  &.active {
     background-color: ${theme.colors.navi_hover};
     color: ${theme.colors.icon_active};
   }
-  
+
   &.active svg {
     fill: ${theme.colors.icon_active};
   }

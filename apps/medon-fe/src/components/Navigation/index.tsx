@@ -24,7 +24,7 @@ import {
   setToken,
   setUser,
 } from 'redux/features/userSlice/userSlice';
-import {navigation} from 'utils/constants/navigation'
+import { navigation } from 'utils/constants/navigation';
 
 export default function Navigation() {
   const { t } = useTranslation();
@@ -37,19 +37,27 @@ export default function Navigation() {
   };
 
   const navItems = [
-    { to: navigation.dashboard, icon: <Dashboard />, label: ('navigation.dashboard') },
+    {
+      to: navigation.dashboard,
+      icon: <Dashboard />,
+      label: 'navigation.dashboard',
+    },
     {
       to: navigation.appointments,
       icon: <Briefcase />,
-      label: ('navigation.appointments'),
+      label: 'navigation.appointments',
     },
-    { to: navigation.profile, icon: <Profile />, label: ('navigation.profile') },
-    { to: navigation.patientList, icon: <Patient />, label: ('navigation.patient') },
-    { to: navigation.help, icon: <Help />, label: ('navigation.help') },
+    { to: navigation.profile, icon: <Profile />, label: 'navigation.profile' },
+    {
+      to: navigation.patientList,
+      icon: <Patient />,
+      label: 'navigation.patient',
+    },
+    { to: navigation.help, icon: <Help />, label: 'navigation.help' },
     {
       to: navigation.exit,
       icon: <Logout />,
-      label: ('navigation.logout'),
+      label: 'navigation.logout',
       onClick: logout,
     },
   ];
@@ -59,8 +67,8 @@ export default function Navigation() {
       <HeaderBlock>
         <Logo />
         <Ul>
-          {navItems.map(({ to, icon, label,  }) => (
-            <NavLinkStyled to={to} key={to} >
+          {navItems.map(({ to, icon, label }) => (
+            <NavLinkStyled to={to} key={to}>
               <li>
                 {icon}
                 <div>{t(label)}</div>
@@ -71,7 +79,7 @@ export default function Navigation() {
         <UserBlock>
           <UserAvatar
             src={user.photo || profileImagePlaceholder}
-            alt="User avatar"
+            alt={t<string>('navigation.img-alt')}
           />
           <UserName>{`Dr.${user?.lastName}`}</UserName>
         </UserBlock>

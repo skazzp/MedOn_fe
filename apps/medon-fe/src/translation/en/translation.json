@@ -121,7 +121,8 @@
     "profile": "Profile",
     "patient": "Patients list",
     "help": "Help",
-    "logout": "Logout"
+    "logout": "Logout",
+    "img-alt": "User avatar"
   },
   "validation": {
     "minLength": "Length at least 3 characters",
