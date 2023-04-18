@@ -18,7 +18,7 @@ import {
   ROLE,
   SPECIALITY,
   TIMEZONE,
-} from 'utils/constants/regFormFields';
+} from 'utils/constants/userFormFields';
 import {
   BackBtn,
   Btn,

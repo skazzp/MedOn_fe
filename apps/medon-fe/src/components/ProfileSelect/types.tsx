@@ -10,4 +10,5 @@ export interface IProps {
   name: FieldPath<FormProfileData>;
   options: Option[];
   error: string | undefined;
+  disabled: boolean;
 }
