@@ -1,14 +1,12 @@
 import Sidebar from 'components/Sidebar';
 
 import { Wrapper } from 'pages/Login/styles';
-import LoginComponent from 'components/LoginComponent/index';
-
-
+import LoginComponent from 'components/LoginComponent';
 
 export default function Login() {
   return (
     <Wrapper>
-      <LoginComponent  />
+      <LoginComponent />
       <Sidebar />
     </Wrapper>
   );

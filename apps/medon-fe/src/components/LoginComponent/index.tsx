@@ -1,4 +1,5 @@
-import LoginForm, { LoginFormValues } from 'components/LoginForm';
+import { LoginRequest } from 'redux/api/types';
+import LoginForm from 'components/LoginForm';
 import { FormContainer } from 'components/LoginForm/style';
 import Logo from 'components/Logo';
 import { Title, Text } from 'components/LoginComponent/style';
@@ -20,8 +21,8 @@ export default function LoginComponent() {
     }
   );
 
-  const handleSubmit = (data: LoginFormValues) => data;
-
+  const handleSubmit = (data: LoginRequest) => data;
+  
   useEffect(() => {
     if (verifyEmail.isSuccess) {
       toast.success(t('regConfirm.msgVerifySuccess'), toastConfig);
