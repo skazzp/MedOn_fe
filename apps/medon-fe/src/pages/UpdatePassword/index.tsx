@@ -2,6 +2,7 @@ import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Link } from 'react-router-dom';
 
 import Button from 'components/Button';
 import Input from 'components/Input';
@@ -11,9 +12,7 @@ import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
 
 import { SubmitResetPasswordForm } from 'pages/UpdatePassword/types';
 import { Container, Content, Footer, Form } from 'pages/UpdatePassword/styles';
-
 import { passwordSchema } from 'validation/updatePasswordSchema';
-import { Link } from 'react-router-dom';
 
 export default function UpdatePassword() {
   const theme = useTheme();
