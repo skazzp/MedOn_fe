@@ -14,6 +14,7 @@ import {
 import { loginFormSchema } from 'components/FormSchema/index';
 import { useLoginMutation } from 'redux/api/login.api';
 import { LoginRequest } from 'redux/api/types';
+import { toast } from 'react-toastify';
 
 export interface LoginFormProps {
   onSubmit: (data: LoginRequest) => void;
@@ -36,7 +37,7 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
     try {
       await login(formData).unwrap();
     } catch (err) {
-      console.error('Failed to login', err);
+      toast.error(t('login.error-msg'), toastConfig);
     }
   };
 
