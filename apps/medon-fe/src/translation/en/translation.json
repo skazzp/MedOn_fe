@@ -186,5 +186,9 @@
       "linkTerm": "Terms and conditions",
       "linkPrivacy": "Privacy policy"
     }
+  },
+  "logout": {
+    "title": "Logout",
+    "description": "Are you sure you want to logout?"
   }
 }
