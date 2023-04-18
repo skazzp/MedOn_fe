@@ -116,6 +116,30 @@
       "linkPrivacy": "Privacy policy"
     }
   },
+  "update-password": {
+    "reset-password": {
+      "title": "Update your Password",
+      "subtitle": "Type in your new password",
+      "button": "RESET",
+      "home-link": "BACK TO PROFILE",
+      "placeholder-oldpassword": "Current Password *",
+      "placeholder-newpassword": "New Password *",
+      "placeholder-confirmpassword": "Confirm New Password *"
+    },
+    "footer": {
+      "linkTerm": "Terms and conditions",
+      "linkPrivacy": "Privacy policy"
+    }
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "appointments": "Appointments",
+    "profile": "Profile",
+    "patient": "Patients list",
+    "help": "Help",
+    "logout": "Logout",
+    "img-alt": "User avatar"
+  },
   "validation": {
     "minLength": "Length at least 3 characters",
     "maxLength": "Length maximum 20 characters",
@@ -135,7 +159,8 @@
       "minLength": "Password must be at least 6 characters",
       "maxLength": "Password must be 20 characters maximum",
       "matches": "At least one capital and small letter, special character and number",
-      "required": "Password is required"
+      "required": "Password is required",
+      "notEqual": "Current password and new password can't be the same"
     },
     "passwordRepeat": {
       "matches": "Passwords must match",
@@ -178,5 +203,9 @@
       "linkTerm": "Terms and conditions",
       "linkPrivacy": "Privacy policy"
     }
+  },
+  "logout": {
+    "title": "Logout",
+    "description": "Are you sure you want to logout?"
   }
 }

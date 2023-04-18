@@ -12,9 +12,8 @@ import {
   SendButton,
 } from 'components/LoginForm/style';
 import { loginFormSchema } from 'components/FormSchema/index';
-import { useLoginMutation } from 'redux/api/loginApi';
+import { useLoginMutation } from 'redux/api/login.api';
 import { LoginRequest } from 'redux/api/types';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { toastConfig } from 'utils/toastConfig';
 
@@ -22,10 +21,9 @@ export interface LoginFormProps {
   onSubmit: (data: LoginRequest) => void;
 }
 
-const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
+const LoginForm: FC<LoginFormProps> = () => {
   const { t } = useTranslation();
   const [login, { isLoading }] = useLoginMutation();
-  const navigate = useNavigate();
 
   const {
     control,
@@ -39,21 +37,10 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
   const handleFormSubmit = async (formData: LoginRequest) => {
     try {
       await login(formData).unwrap();
-      const data = JSON.parse(localStorage.getItem('user') as string);
-      if (data.user && data.user.isVerified) {
-        navigate('/profile');
-      } else {
-        navigate('/re-confirm-account');
-      }
-      onSubmit(formData);
-    } catch (error) {
+    } catch (err) {
       toast.error(t('login.error-msg'), toastConfig);
     }
   };
-
-  if (isLoading) {
-    return <Spin />;
-  }
 
   return (
     <Form
