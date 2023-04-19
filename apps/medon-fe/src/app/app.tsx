@@ -6,6 +6,9 @@ import ResetPassword from 'pages/ResetPassword';
 import ResendConfirmation from 'pages/ResendConfirmation';
 import UpdatePassword from 'pages/UpdatePassword';
 import Navigation from 'components/Navigation/index';
+import { PatientsPage } from 'pages/PatientsPage';
+import { PatientsList } from 'components/PatientsList';
+import { NewPatientForm } from 'components/NewPatientForm';
 
 function App() {
   return (
@@ -18,6 +21,10 @@ function App() {
       <Route path="/reset-password/:token" element={<ResetPassword />} />
       <Route path="/re-confirm-account" element={<ResendConfirmation />} />
       <Route path="/update-password" element={<UpdatePassword />} />
+      <Route path="/patients" element={<PatientsPage />}>
+        <Route index element={<PatientsList />} />
+        <Route path="add-new" element={<NewPatientForm />} />
+      </Route>
       <Route path="*" element={<Navigate to={'/login'} />} />
     </Routes>
   );
