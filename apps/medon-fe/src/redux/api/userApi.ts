@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from 'redux/store';
-import { IUser } from './types';
+import { UpdateProfileData, UserDataResponse } from './types';
 
 export interface MessageResponse {
   message: string;
@@ -20,14 +20,23 @@ export const userApi = createApi({
   }),
   tagTypes: ['user'],
   endpoints: (builder) => ({
-    getUser: builder.query<IUser, null>({
+    getUser: builder.query<UserDataResponse, null>({
       query() {
         return {
           url: 'user/profile',
         };
       },
     }),
+    updateUser: builder.mutation<UserDataResponse, UpdateProfileData>({
+      query(data) {
+        return {
+          url: 'user/update',
+          method: 'POST',
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetUserQuery } = userApi;
+export const { useGetUserQuery, useUpdateUserMutation } = userApi;

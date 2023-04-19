@@ -1,12 +1,13 @@
-import RegistrationForm from 'components/RegistrationForm';
-import { useTranslation } from 'react-i18next';
-import logo from 'assets/images/logo.svg';
-import RegistrationConfirmation from 'components/RegistrationConfirmation';
 import { useState } from 'react';
-import { FormData } from 'components/RegistrationForm/types';
-import { ROLES } from 'utils/constants/roles';
-import { useRegisterUserMutation } from 'redux/api/authApi';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import dayjs from 'dayjs';
+import RegistrationForm from 'components/RegistrationForm';
+import RegistrationConfirmation from 'components/RegistrationConfirmation';
+import { FormData } from 'components/RegistrationForm/types';
+import { useRegisterUserMutation } from 'redux/api/authApi';
+import { ROLES } from 'utils/constants/roles';
+import logo from 'assets/images/logo.svg';
 import { toastConfig } from 'utils/toastConfig';
 import {
   Container,
@@ -28,7 +29,7 @@ export default function RegistrationPage() {
       lastName: values.lastName,
       email: values.email,
       password: values.password,
-      dateOfBirth: new Date(values.birthday.valueOf()),
+      dateOfBirth: dayjs(values.birthday).format('YYYY-MM-DD'),
       role: values.role,
       specialityId:
         values.role === ROLES.REMOTE && values.speciality

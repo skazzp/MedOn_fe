@@ -223,6 +223,10 @@
       "label": "Role",
       "placeholder": "Select your role"
     },
+    "speciality": {
+      "label": "Speciality",
+      "placeholder": "Select your speciality"
+    },
     "birthday": {
       "label": "Birth Date",
       "placeholder": "DD/MM/YYYY"

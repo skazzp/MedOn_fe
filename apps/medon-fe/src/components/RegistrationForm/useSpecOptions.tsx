@@ -1,6 +1,9 @@
 import { useGetSpecialitiesQuery } from 'redux/api/authApi';
+// import { useEffect } from 'react';
+// import { setSpecialities } from 'redux/features/specialitySlice/specialitySlice';
+// import { useAppDispatch } from 'redux/hooks';
 
-interface Option {
+export interface Option {
   value: string | number;
   label: string;
 }
@@ -8,6 +11,7 @@ interface Option {
 const emptyArray: Option[] = [];
 
 const useSpecOptions = () => {
+  // const dispatch = useAppDispatch();
   const specialityOptions = useGetSpecialitiesQuery(null, {
     selectFromResult: ({ data }) => ({
       specialityOptions: data
@@ -15,6 +19,9 @@ const useSpecOptions = () => {
         : emptyArray,
     }),
   });
+  // useEffect(() => {
+  //   dispatch(setSpecialities(specialityOptions.specialityOptions));
+  // }, [dispatch, specialityOptions]);
 
   return specialityOptions;
 };

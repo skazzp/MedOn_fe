@@ -1,15 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { Controller, useForm } from 'react-hook-form';
 import { Input, Spin } from 'antd';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
-import { ROLES, ROLE_OPTIONS, SPECIALITY_OPTIONS } from 'utils/constants/roles';
-import {
-  DEFAULT_TIMEZONE,
-  timezoneOptions,
-} from 'utils/timezones/timezoneOptions';
+import { ROLES, ROLE_OPTIONS } from 'utils/constants/roles';
+import { timezoneOptions } from 'utils/timezones/timezoneOptions';
 import {
   COUNTRY,
   ROLE,
@@ -20,6 +17,10 @@ import { countryOptions } from 'utils/countries/countryOptions';
 import ProfileSelect from 'components/ProfileSelect';
 import profile_pic from 'assets/images/profile_pic.png';
 import { profileFormSchema } from 'validation/profileFormSchema';
+import { useGetUserQuery } from 'redux/api/userApi';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { getUserSelector } from 'redux/features/userSlice/userSelectors';
+import useSpecOptions from 'components/RegistrationForm/useSpecOptions';
 import {
   Container,
   Label,
@@ -36,34 +37,59 @@ import {
 } from './styles';
 import { FormProfileData } from './types';
 
-export default function ProfileForm() {
+interface IProps {
+  submitForm: (values: FormProfileData) => void;
+}
+
+export default function ProfileForm({ submitForm }: IProps) {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const [disabled, setDisabled] = useState(true);
+  const user = useAppSelector(getUserSelector);
   const {
     control,
     handleSubmit,
     watch,
+    // getValues,
+    setValue,
     formState: { errors },
   } = useForm<FormProfileData>({
     resolver: yupResolver(profileFormSchema),
     defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      role: null,
-
-      birthday: null,
-      country: null,
-      city: '',
-      timezone: DEFAULT_TIMEZONE,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      role: user.role,
+      speciality: user.specialityId,
+      birthday: user.dateOfBirth,
+      country: user.country,
+      city: user.city ?? '',
+      timezone: user.timeZone,
     },
   });
+  const { specialityOptions } = useSpecOptions();
   const role = watch(ROLE);
 
-  // default value, will be changed to isLoading from Query in integration
-  const isLoading = false;
+  const { isLoading } = useGetUserQuery(null);
+  useEffect(() => {
+    if (user) {
+      setValue('firstName', user.firstName);
+      setValue('lastName', user.lastName);
+      setValue('email', user.email);
+      setValue('role', user.role);
+      setValue('country', user.country);
+      setValue('city', user.city);
+      setValue('timezone', user.timeZone);
+      setValue('speciality', user.specialityId);
+      if (user.dateOfBirth) {
+        setValue('birthday', dayjs(user.dateOfBirth));
+      }
+      // const currentValues = getValues();
+      // console.log(currentValues);
+    }
+  }, [dispatch, setValue, user]);
 
-  const onSubmit = handleSubmit(() => {});
+  const onSubmit = handleSubmit(submitForm);
   return (
     <Container>
       {isLoading ? (
@@ -245,12 +271,12 @@ export default function ProfileForm() {
             </InputContainer>
             {role === ROLES.REMOTE && (
               <InputContainer>
-                <Label htmlFor="role">
+                <Label htmlFor="speciality">
                   <ProfileSelect
                     name={SPECIALITY}
                     control={control}
                     error={errors.speciality?.message}
-                    options={SPECIALITY_OPTIONS}
+                    options={specialityOptions}
                     disabled={disabled}
                   />
                 </Label>

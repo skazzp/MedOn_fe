@@ -11,3 +11,12 @@ export interface FormProfileData {
   city: string;
   timezone: string | null;
 }
+
+export interface FromDataForUpdate extends FormProfileData {
+  role: string;
+  speciality: number | null;
+  birthday: Dayjs;
+  country: string;
+  city: string;
+  timezone: string;
+}

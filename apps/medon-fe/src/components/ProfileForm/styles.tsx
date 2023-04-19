@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, DatePicker, Input } from 'antd';
+import { Button, DatePicker } from 'antd';
 import { theme } from 'styles/theme';
 
 export const Container = styled.div`
