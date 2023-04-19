@@ -1,10 +1,11 @@
 import ProfileForm from 'components/ProfileForm';
-import { useUpdateUserMutation } from 'redux/api/userApi';
+import { useGetUserQuery, useUpdateUserMutation } from 'redux/api/userApi';
 import { FormProfileData } from 'components/ProfileForm/types';
 import { ROLES } from 'utils/constants/roles';
 import { toast } from 'react-toastify';
 import { toastConfig } from 'utils/toastConfig';
 import dayjs from 'dayjs';
+import { Spin } from 'antd';
 import {
   ProfilePageContainer,
   ContentContainer,
@@ -13,7 +14,7 @@ import {
 
 export default function ProfilePage() {
   const [updateUser] = useUpdateUserMutation();
-
+  const { isLoading } = useGetUserQuery(null);
   const submitForm = async (values: FormProfileData) => {
     const requestData = {
       firstName: values.firstName,
@@ -38,9 +39,13 @@ export default function ProfilePage() {
   return (
     <ProfilePageContainer>
       <ContentContainer>
-        <ProfileFormWrapper>
-          <ProfileForm submitForm={submitForm} />
-        </ProfileFormWrapper>
+        {isLoading ? (
+          <Spin />
+        ) : (
+          <ProfileFormWrapper>
+            <ProfileForm submitForm={submitForm} />
+          </ProfileFormWrapper>
+        )}
       </ContentContainer>
     </ProfilePageContainer>
   );

@@ -207,6 +207,7 @@
     "profilePicAlt": "User's profile avatar",
     "profileBtn": "Update Profile",
     "changePasswordBtn": "Change Password",
+    "editProfileBtn": "Edit Profile",
     "firstName": {
       "label": "First Name",
       "placeholder": "Enter your first name"
