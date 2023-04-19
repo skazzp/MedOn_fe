@@ -1,18 +1,4 @@
-import { Select } from 'antd';
 import styled from 'styled-components';
-
-export const StyledSelect = styled(Select)`
-  width: 100%;
-  .ant-select-selector {
-    color: ${({ theme }) => theme.colors.black} !important;
-    background-color: ${(p) =>
-      p.disabled && p.theme.colors.gray_100} !important;
-    cursor: default !important;
-  }
-  input {
-    cursor: default !important;
-  }
-`;
 
 export const LabelText = styled.p`
   margin-top: 0;
