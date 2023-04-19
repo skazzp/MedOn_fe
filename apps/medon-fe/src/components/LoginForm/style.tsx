@@ -34,6 +34,7 @@ export const SendButton = styled(Input)`
   background: ${theme.colors.blue_300};
   color: ${theme.colors.white};
   cursor: pointer;
+  padding: 16px 24px 16px 24px;
 `;
 
 export const StyledErrorMessage = styled.p`

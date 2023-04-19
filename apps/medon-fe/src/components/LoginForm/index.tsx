@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,11 +11,14 @@ import {
   ForgotButton,
   SendButton,
 } from 'components/LoginForm/style';
-import { loginFormSchema } from 'components/FormSchema/index';
-import { useLoginMutation } from 'redux/api/login.api';
+import { loginFormSchema } from 'validation/loginSchema';
 import { LoginRequest } from 'redux/api/types';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { toastConfig } from 'utils/toastConfig';
+import { useAppDispatch } from 'redux/hooks';
+import { setIsVerified, setToken } from 'redux/features/userSlice/userSlice';
+import { useLoginMutation } from 'redux/api/authApi';
 
 export interface LoginFormProps {
   onSubmit: (data: LoginRequest) => void;
@@ -23,7 +26,9 @@ export interface LoginFormProps {
 
 const LoginForm: FC<LoginFormProps> = () => {
   const { t } = useTranslation();
-  const [login, { isLoading }] = useLoginMutation();
+  const [login, { isLoading, data }] = useLoginMutation();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const {
     control,
@@ -37,10 +42,21 @@ const LoginForm: FC<LoginFormProps> = () => {
   const handleFormSubmit = async (formData: LoginRequest) => {
     try {
       await login(formData).unwrap();
-    } catch (err) {
+    } catch (error) {
       toast.error(t('login.error-msg'), toastConfig);
     }
   };
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setIsVerified(data.isVerified));
+      dispatch(setToken(data.token));
+    }
+  }, [data, dispatch, navigate]);
+
+  if (isLoading) {
+    return <Spin />;
+  }
 
   return (
     <Form

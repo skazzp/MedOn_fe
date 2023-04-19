@@ -6,8 +6,10 @@ export interface IUser {
   speciality: string | null;
   photo: string;
   dateOfBirth: Date | null;
-  is_verified: boolean;
-  time_zone: string | null;
+  isVerified: boolean;
+  country: string | null;
+  city: string;
+  timeZone: string | null;
   id: string;
 }
 
@@ -16,7 +18,7 @@ export interface RegisterData {
   lastName: string;
   email: string;
   password: string;
-  dateOfBirth: Date;
+  dateOfBirth: Date | string;
   role: string;
   specialityId: number | null;
   country: string;
@@ -41,4 +43,9 @@ export interface Option {
 export interface LoginRequest {
   email: string;
   password: string;
+}
+
+export interface LoginResponse {
+  token: string;
+  isVerified: boolean;
 }
