@@ -8,3 +8,29 @@ export const COUNTRY = 'country';
 export const CITY = 'city';
 export const TIMEZONE = 'timezone';
 export const BIRTHDAY = 'birthday';
+
+interface IFormFields {
+  firstName: 'firstName';
+  lastName: 'lastName';
+  password: 'password';
+  email: 'email';
+  role: 'role';
+  speciality: 'speciality';
+  country: 'country';
+  city: 'city';
+  timezone: 'timezone';
+  birthday: 'birthday';
+}
+
+export const formFields: IFormFields = {
+  firstName: 'firstName',
+  lastName: 'lastName',
+  password: 'password',
+  email: 'email',
+  role: 'role',
+  speciality: 'speciality',
+  country: 'country',
+  city: 'city',
+  timezone: 'timezone',
+  birthday: 'birthday',
+};
