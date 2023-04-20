@@ -7,7 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PersistGate } from 'redux-persist/integration/react';
-
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { theme } from 'styles/theme';
 import App from 'app/app';
 import { persistedStore, store } from 'redux/store';
@@ -20,16 +20,18 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistedStore}>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
-            <ToastContainer autoClose={2000} />
-            <GlobalStyle />
-            <App />
-          </BrowserRouter>
-        </ThemeProvider>
-      </PersistGate>
-    </Provider>
+    <GoogleOAuthProvider clientId={`${process.env.NX_GOOGLE_CLIENT_ID}`}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistedStore}>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <ToastContainer autoClose={2000} />
+              <GlobalStyle />
+              <App />
+            </BrowserRouter>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    </GoogleOAuthProvider>
   </StrictMode>
 );

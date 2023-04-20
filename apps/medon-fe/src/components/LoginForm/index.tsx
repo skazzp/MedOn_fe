@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input, Spin } from 'antd';
-
+import GoogleButton from 'react-google-button';
 import {
   StyledErrorMessage,
   Form,
@@ -41,6 +41,11 @@ const LoginForm: FC = () => {
     } catch (error) {
       toast.error(t('login.error-msg'), toastConfig);
     }
+  };
+
+  const handleGoogleClick = () => {
+    // window.location.href = 'http://localhost:3333/auth/google/login';
+    window.location.href = `${process.env.NX_API_URL}${process.env.NX_API_GOOGLE_ROUTE}`;
   };
 
   useEffect(() => {
@@ -107,6 +112,7 @@ const LoginForm: FC = () => {
         value={`${t('login.login')}`}
         disabled={isLoading}
       />
+      <GoogleButton type="light" onClick={handleGoogleClick} />
       <DontHaveButton type="link" href="/register">
         {t('login.dont-have')}
       </DontHaveButton>

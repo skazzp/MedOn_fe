@@ -3,7 +3,12 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from 'redux/hooks';
 
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
-import { logout } from 'redux/features/userSlice/userSlice';
+import {
+  initialState,
+  logout,
+  setToken,
+  setUser,
+} from 'redux/features/userSlice/userSlice';
 import {
   NavContainer,
   HeaderBlock,
@@ -29,7 +34,9 @@ export default function Navigation() {
   const user = useAppSelector(getUserSelector);
   const dispatch = useDispatch();
   const handleLogout = () => {
-    dispatch(logout());
+    // dispatch(logout());
+    // dispatch(setUser(initialState.user));
+    dispatch(setToken(''));
   };
 
   const navItems = [
@@ -54,7 +61,9 @@ export default function Navigation() {
       to: navigation.exit,
       icon: <Logout />,
       label: 'navigation.logout',
-      onClick: handleLogout,
+      onClick: () => {
+        dispatch(setToken(''));
+      },
     },
   ];
 

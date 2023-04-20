@@ -23,7 +23,7 @@ export const initialState: IUserState = {
     timeZone: null,
     id: '',
   },
-  token: null,
+  token: '',
   isVerified: false,
 };
 
