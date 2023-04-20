@@ -15,7 +15,7 @@ describe('Input component', () => {
   it('renders correctly', () => {
     render(
       <Wrapper>
-        <Input />
+        <Input errorMessage="" />
       </Wrapper>
     );
     const inputElement = screen.getByRole('textbox');
@@ -50,7 +50,7 @@ describe('Input component', () => {
   it('does not apply error border if errorMessage prop is not provided', () => {
     render(
       <Wrapper>
-        <Input />
+        <Input errorMessage="" />
       </Wrapper>
     );
     const inputElement = screen.getByRole('textbox');
@@ -65,7 +65,7 @@ describe('Input component', () => {
 
     render(
       <Wrapper>
-        <Input ref={ref} />
+        <Input ref={ref} errorMessage="" />
       </Wrapper>
     );
     const inputElement = screen.getByRole('textbox');
