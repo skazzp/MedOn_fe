@@ -16,7 +16,10 @@ export default function PatientsList() {
     <Content>
       <h2>{t('patient-list.choose')}</h2>
       <Choose>
-        <StyledSearch placeholder="Search" size="large" />
+        <StyledSearch
+          placeholder={`${t('patient-list.placeholder')}`}
+          size="large"
+        />
         <LinkHome
           textcolor={theme.colors.white}
           bgcolor={theme.colors.btnGradient}
