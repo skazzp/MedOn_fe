@@ -1,9 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import { useAppSelector } from 'redux/hooks';
 
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
-import { logout } from 'redux/features/userSlice/userSlice';
 import {
   NavContainer,
   HeaderBlock,
@@ -18,18 +16,21 @@ import {
   UserBlock,
   UserAvatar,
   UserName,
+  SpecName,
+  BlockName,
 } from 'components/Navigation/styles';
 import profileImagePlaceholder from 'assets/images/Avatar.svg';
 import Logo from 'components/Logo';
 import { navigation } from 'utils/constants/navigation';
+import { persistedStore } from 'redux/store';
 
 export default function Navigation() {
   const { t } = useTranslation();
 
   const user = useAppSelector(getUserSelector);
-  const dispatch = useDispatch();
+
   const handleLogout = () => {
-    dispatch(logout());
+    persistedStore.purge();
   };
 
   const navItems = [
@@ -50,12 +51,6 @@ export default function Navigation() {
       label: 'navigation.patient',
     },
     { to: navigation.help, icon: <Help />, label: 'navigation.help' },
-    {
-      to: navigation.exit,
-      icon: <Logout />,
-      label: 'navigation.logout',
-      onClick: handleLogout,
-    },
   ];
 
   return (
@@ -71,13 +66,21 @@ export default function Navigation() {
               </li>
             </NavLinkStyled>
           ))}
+          <NavLinkStyled to={navigation.exit} onClick={() => handleLogout()}>
+            <Logout />
+            <li>{t('navigation.logout')}</li>
+          </NavLinkStyled>
         </Ul>
         <UserBlock>
           <UserAvatar
             src={user.photo || profileImagePlaceholder}
             alt={t<string>('navigation.img-alt')}
           />
-          <UserName>{`Dr.${user?.lastName}`}</UserName>
+          <BlockName>
+            {' '}
+            <UserName>{`Dr.${user?.lastName}`}</UserName>
+            <SpecName>{user?.speciality}</SpecName>
+          </BlockName>
         </UserBlock>
       </HeaderBlock>
     </NavContainer>

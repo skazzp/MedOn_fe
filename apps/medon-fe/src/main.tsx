@@ -13,6 +13,7 @@ import App from 'app/app';
 import { persistedStore, store } from 'redux/store';
 import { GlobalStyle } from 'styles/global';
 import 'assets/fonts/sf-pro-font/sf-font-face.css';
+import { msgTime } from 'utils/constants/toast';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -24,7 +25,7 @@ root.render(
       <PersistGate loading={null} persistor={persistedStore}>
         <ThemeProvider theme={theme}>
           <BrowserRouter>
-            <ToastContainer autoClose={2000} />
+            <ToastContainer autoClose={msgTime} />
             <GlobalStyle />
             <App />
           </BrowserRouter>

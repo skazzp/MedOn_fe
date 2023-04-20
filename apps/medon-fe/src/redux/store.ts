@@ -20,7 +20,7 @@ import userReducer from 'redux/features/userSlice/userSlice';
 const persistConfig = {
   key: 'medon',
   storage,
-  whitelist: ['token']
+  whitelist: ['token', 'isVerified']
 };
 
 const rootReducer = combineReducers({
