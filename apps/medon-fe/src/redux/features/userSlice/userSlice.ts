@@ -24,7 +24,7 @@ const initialState: IUserState = {
   },
   // token: null,
   token:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE2MiwiZW1haWwiOiJza2F6enBAZ21haWwuY29tIiwiaWF0IjoxNjgxOTEzNzY4LCJleHAiOjE2ODE5MjA5Njh9.Prr26ozRZSHwzs_ssBbsZi29qaImluuPDUIib7e2vB8',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE2MiwiZW1haWwiOiJza2F6enBAZ21haWwuY29tIiwiaWF0IjoxNjgxOTg3MDEyLCJleHAiOjE2ODE5OTQyMTJ9.riHd6UZ3h1SwjisGQ9tBNulSYSoIVxFHB6CV6iE3yZw',
   isVerified: false,
 };
 

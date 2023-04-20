@@ -50,8 +50,14 @@ function App() {
         path="/profile"
         element={<PrivateRoute component={<ProfilePage />} />}
       />
-      <Route path="/re-confirm-account" element={<ResendConfirmation />} />
-      <Route path="/update-password" element={<UpdatePassword />} />
+      <Route
+        path="/re-confirm-account"
+        element={<PrivateRoute component={<ResendConfirmation />} />}
+      />
+      <Route
+        path="/update-password"
+        element={<PrivateRoute component={<UpdatePassword />} />}
+      />
       <Route path="*" element={<Navigate to={'/'} />} />
     </Routes>
   );

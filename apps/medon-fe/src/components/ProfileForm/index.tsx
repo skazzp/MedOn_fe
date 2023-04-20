@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import dayjs from 'dayjs';
 import { timezoneOptions } from 'utils/timezones/timezoneOptions';
 import { ROLE, SPECIALITY, formFields } from 'utils/constants/userFormFields';
@@ -12,7 +12,6 @@ import ProfileInput from 'components/ProfileForm/ProfileInput';
 import ProfileDatepicker from 'components/ProfileForm/ProfileDatepicker';
 import profile_pic from 'assets/images/profile_pic.png';
 import { profileFormSchema } from 'validation/profileFormSchema';
-import { useGetUserQuery } from 'redux/api/userApi';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 import useSpecOptions from 'components/RegistrationForm/useSpecOptions';
@@ -30,12 +29,18 @@ import { InputFields } from './ProfileInput/types';
 
 interface IProps {
   submitForm: (values: FormProfileData) => void;
+  disabled: boolean;
+  setDisabled: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function ProfileForm({ submitForm }: IProps) {
+export default function ProfileForm({
+  submitForm,
+  disabled,
+  setDisabled,
+}: IProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const [disabled, setDisabled] = useState(true);
+  // const [disabled, setDisabled] = useState(true);
   const user = useAppSelector(getUserSelector);
   const {
     control,
@@ -61,7 +66,6 @@ export default function ProfileForm({ submitForm }: IProps) {
   const { specialityOptions } = useSpecOptions();
   const role = watch(ROLE);
 
-
   useEffect(() => {
     if (user) {
       setValue('firstName', user.firstName);
@@ -75,12 +79,11 @@ export default function ProfileForm({ submitForm }: IProps) {
       if (user.dateOfBirth) {
         setValue('birthday', dayjs(user.dateOfBirth));
       }
-      // const currentValues = getValues();
-      // console.log(currentValues);
     }
   }, [dispatch, setValue, user]);
 
   const onSubmit = handleSubmit(submitForm);
+
   return (
     <Container>
       <>
@@ -183,27 +186,28 @@ export default function ProfileForm({ submitForm }: IProps) {
               </Label>
             </InputContainer>
           )}
+          <ButtonContainer>
+            {disabled && (
+              <StyledButton
+                size="large"
+                htmlType="button"
+                onClick={() => {
+                  setDisabled(false);
+                }}
+              >
+                {t('profileForm.editProfileBtn')}
+              </StyledButton>
+            )}
+            {!disabled && (
+              <StyledButton size="large" htmlType="submit">
+                {t('profileForm.profileBtn')}
+              </StyledButton>
+            )}
+            <StyledButton size="large" htmlType="button" disabled={true}>
+              {t('profileForm.changePasswordBtn')}
+            </StyledButton>
+          </ButtonContainer>
         </Form>
-        <ButtonContainer>
-          {disabled ? (
-            <StyledButton
-              size="large"
-              htmlType="button"
-              onClick={() => {
-                setDisabled(false);
-              }}
-            >
-              {t('profileForm.editProfileBtn')}
-            </StyledButton>
-          ) : (
-            <StyledButton size="large" htmlType="submit">
-              {t('profileForm.profileBtn')}
-            </StyledButton>
-          )}
-          <StyledButton size="large" htmlType="submit" disabled={true}>
-            {t('profileForm.changePasswordBtn')}
-          </StyledButton>
-        </ButtonContainer>
       </>
     </Container>
   );

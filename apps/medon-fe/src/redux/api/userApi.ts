@@ -31,7 +31,7 @@ export const userApi = createApi({
       query(data) {
         return {
           url: 'user/update',
-          method: 'POST',
+          method: 'PATCH',
           body: data,
         };
       },

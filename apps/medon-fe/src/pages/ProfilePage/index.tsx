@@ -6,6 +6,9 @@ import { toast } from 'react-toastify';
 import { toastConfig } from 'utils/toastConfig';
 import dayjs from 'dayjs';
 import { Spin } from 'antd';
+import { useAppDispatch } from 'redux/hooks';
+import { setUser } from 'redux/features/userSlice/userSlice';
+import { useState } from 'react';
 import {
   ProfilePageContainer,
   ContentContainer,
@@ -13,6 +16,8 @@ import {
 } from './styles';
 
 export default function ProfilePage() {
+  const dispatch = useAppDispatch();
+  const [formDisabled, setFormDisabled] = useState(true);
   const [updateUser] = useUpdateUserMutation();
   const { isLoading } = useGetUserQuery(null);
   const submitForm = async (values: FormProfileData) => {
@@ -31,11 +36,15 @@ export default function ProfilePage() {
       timeZone: values.timezone,
     };
     try {
-      await updateUser(requestData).unwrap();
+      const response = await updateUser(requestData).unwrap();
+      // console.log('RESPONSE', response);
+      dispatch(setUser(response.data));
+      setFormDisabled(true);
     } catch (err) {
       toast.error('Registration error, try again!', toastConfig);
     }
   };
+
   return (
     <ProfilePageContainer>
       <ContentContainer>
@@ -43,7 +52,11 @@ export default function ProfilePage() {
           <Spin />
         ) : (
           <ProfileFormWrapper>
-            <ProfileForm submitForm={submitForm} />
+            <ProfileForm
+              submitForm={submitForm}
+              disabled={formDisabled}
+              setDisabled={setFormDisabled}
+            />
           </ProfileFormWrapper>
         )}
       </ContentContainer>
