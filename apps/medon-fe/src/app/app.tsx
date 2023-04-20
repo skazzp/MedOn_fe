@@ -5,8 +5,9 @@ import ForgetPassword from 'pages/ForgetPassword';
 import ResetPassword from 'pages/ResetPassword';
 import ResendConfirmation from 'pages/ResendConfirmation';
 import UpdatePassword from 'pages/UpdatePassword';
-import Navigation from 'components/Navigation/index';
 import { PatientsPage } from 'pages/PatientsPage';
+
+import Navigation from 'components/Navigation/index';
 import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
 
