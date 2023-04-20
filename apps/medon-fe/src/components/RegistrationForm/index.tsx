@@ -36,7 +36,6 @@ import {
 } from './styles';
 import { FormData } from './types';
 import useSpecOptions from './useSpecOptions';
-import { execFile } from 'child_process';
 
 interface IProps {
   submitForm: (values: FormData) => void;
