@@ -22,6 +22,7 @@ export default function PatientListCard({
   const handleToggle = () => {
     setShowMore(!showMore);
   };
+
   return (
     <Container>
       <Header>

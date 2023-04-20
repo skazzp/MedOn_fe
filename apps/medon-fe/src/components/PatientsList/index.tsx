@@ -12,6 +12,7 @@ import { Choose, Content, StyledSearch, Wrapper } from './styles';
 export default function PatientsList() {
   const theme = useTheme();
   const { t } = useTranslation();
+
   return (
     <Content>
       <h2>{t('patient-list.choose')}</h2>

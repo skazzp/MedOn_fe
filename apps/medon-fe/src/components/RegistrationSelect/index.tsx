@@ -10,6 +10,7 @@ export default function RegistrationSelect({
   error,
 }: IProps) {
   const { t } = useTranslation();
+
   return (
     <>
       <LabelText>{t(`regForm.${name}.label`)}</LabelText>

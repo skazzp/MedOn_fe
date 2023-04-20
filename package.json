@@ -6,7 +6,8 @@
     "start": "nx serve medon-fe",
     "build": "nx build",
     "test": "nx test",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "eslint --fix --ext .tsx,.ts ./apps/medon-fe"
   },
   "private": true,
   "dependencies": {

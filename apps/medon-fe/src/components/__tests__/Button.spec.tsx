@@ -57,6 +57,7 @@ describe('Button', () => {
       </Wrapper>
     );
     const button = getByRole('button');
+
     fireEvent.click(button);
     expect(handleClick).toHaveBeenCalledTimes(1);
   });

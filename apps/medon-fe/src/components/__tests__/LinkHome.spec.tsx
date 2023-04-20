@@ -22,6 +22,7 @@ describe('LinkHome component', () => {
       </Wrapper>
     );
     const link = screen.getByRole('link');
+
     expect(link).toHaveStyle('color: #fff');
     expect(link).toHaveStyle('background-color: #000');
   });
@@ -35,6 +36,7 @@ describe('LinkHome component', () => {
       </Wrapper>
     );
     const link = screen.getByRole('link');
+
     expect(link).toHaveStyle('width: 100%');
   });
 
@@ -45,6 +47,7 @@ describe('LinkHome component', () => {
       </Wrapper>
     );
     const link = screen.getByRole('link');
+
     expect(link).toHaveAttribute('href', '/');
   });
 });

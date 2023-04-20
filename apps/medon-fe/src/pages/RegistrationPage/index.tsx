@@ -38,6 +38,7 @@ export default function RegistrationPage() {
       city: values.city,
       timeZone: values.timezone,
     };
+
     try {
       await registerUser(requestData).unwrap();
       setEmail(values.email);
