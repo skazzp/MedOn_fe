@@ -1,5 +1,5 @@
-import { ReactComponent as ThreeDots } from 'assets/svgs/three_dots.svg';
 import styled from 'styled-components';
+import { ReactComponent as ThreeDots } from 'assets/svgs/three_dots.svg';
 
 export const StyledThreeDots = styled(ThreeDots)`
   margin: 0 1rem;
