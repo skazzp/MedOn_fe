@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { toast } from 'react-toastify';
+import { toastConfig } from 'utils/toastConfig';
+
 import Button from 'components/Button';
 import Input from 'components/Input';
 import LinkHome from 'components/LinkHome';
@@ -19,8 +22,6 @@ import {
 import { SubmitSendEmail } from 'pages/ResendConfirmation/types';
 import { emailSchema } from 'validation/accountConfirmationSchema';
 import { useResendEmailMutation } from 'redux/api/authApi';
-import { toast } from 'react-toastify';
-import { toastConfig } from 'utils/toastConfig';
 
 export default function ResendConfirmation() {
   const [isEmailSent, setIsEmailSent] = useState(false);

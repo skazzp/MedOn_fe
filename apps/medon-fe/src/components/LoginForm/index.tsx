@@ -20,11 +20,7 @@ import { useAppDispatch } from 'redux/hooks';
 import { setIsVerified, setToken } from 'redux/features/userSlice/userSlice';
 import { useLoginMutation } from 'redux/api/authApi';
 
-export interface LoginFormProps {
-  onSubmit: (data: LoginRequest) => void;
-}
-
-const LoginForm: FC<LoginFormProps> = () => {
+const LoginForm: FC = () => {
   const { t } = useTranslation();
   const [login, { isLoading, data }] = useLoginMutation();
   const navigate = useNavigate();
@@ -32,14 +28,14 @@ const LoginForm: FC<LoginFormProps> = () => {
 
   const {
     control,
-    handleSubmit,
+    handleSubmit: handleFormSubmit,
     formState: { errors },
   } = useForm<LoginRequest>({
     resolver: yupResolver(loginFormSchema),
     defaultValues: { email: '', password: '' },
   });
 
-  const handleFormSubmit = async (formData: LoginRequest) => {
+  const onSubmitHandler = async (formData: LoginRequest) => {
     try {
       await login(formData).unwrap();
     } catch (error) {
@@ -62,7 +58,7 @@ const LoginForm: FC<LoginFormProps> = () => {
     <Form
       name="contact"
       method="post"
-      onSubmit={handleSubmit(handleFormSubmit)}
+      onSubmit={handleFormSubmit(onSubmitHandler)}
     >
       <label htmlFor="email">
         {t('login.email')}

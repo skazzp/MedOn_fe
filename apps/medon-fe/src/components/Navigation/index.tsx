@@ -1,12 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from 'redux/hooks';
+
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
-import {
-  initialState,
-  setToken,
-  setUser,
-} from 'redux/features/userSlice/userSlice';
+import { logout } from 'redux/features/userSlice/userSlice';
 import {
   NavContainer,
   HeaderBlock,
@@ -31,9 +28,8 @@ export default function Navigation() {
 
   const user = useAppSelector(getUserSelector);
   const dispatch = useDispatch();
-  const logout = () => {
-    dispatch(setUser(initialState.user));
-    dispatch(setToken(''));
+  const handleLogout = () => {
+    dispatch(logout());
   };
 
   const navItems = [
@@ -58,7 +54,7 @@ export default function Navigation() {
       to: navigation.exit,
       icon: <Logout />,
       label: 'navigation.logout',
-      onClick: logout,
+      onClick: handleLogout,
     },
   ];
 

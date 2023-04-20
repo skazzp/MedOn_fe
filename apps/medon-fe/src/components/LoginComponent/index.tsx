@@ -8,7 +8,6 @@ import { useEffect } from 'react';
 import { toastConfig } from 'utils/toastConfig';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-import { LoginRequest } from 'redux/api/types';
 import { useAppDispatch } from 'redux/hooks';
 import { setIsVerified, setToken } from 'redux/features/userSlice/userSlice';
 
@@ -23,9 +22,8 @@ export default function LoginComponent() {
       skip: !token,
     }
   );
-  const dispatch = useAppDispatch();
 
-  const handleSubmit = (data: LoginRequest) => data;
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (verifyEmail.isSuccess) {
@@ -48,7 +46,7 @@ export default function LoginComponent() {
       <Logo />
       <Title>{t('login.login-title')}</Title>
       <Text>{t('login.login-text')}</Text>
-      <LoginForm onSubmit={handleSubmit} />
+      <LoginForm />
     </FormContainer>
   );
 }
