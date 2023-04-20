@@ -44,19 +44,19 @@ export function NewPatientForm() {
 
   return (
     <>
-      <LinkGoBack>Back to Patients list</LinkGoBack>
+      <LinkGoBack>{t('new-patient.back-link')}</LinkGoBack>
       <Container>
-        <Header>Create new patient card</Header>
+        <Header>{t('new-patient.header')}</Header>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <InputWrapper>
-            <Label>First Name</Label>
+            <Label>{t('new-patient.labels.first-name')}</Label>
             <Controller
               name="firstName"
               control={control}
               render={({ field }) => (
                 <Input
                   {...field}
-                  placeholder="Enter first name"
+                  placeholder={`${t('new-patient.placeholders.first-name')}`}
                   status={errors.birthday ? 'error' : ''}
                 />
               )}
@@ -67,14 +67,14 @@ export function NewPatientForm() {
           </InputWrapper>
 
           <InputWrapper>
-            <Label>Last Name</Label>
+            <Label>{t('new-patient.labels.last-name')}</Label>
             <Controller
               name="lastName"
               control={control}
               render={({ field }) => (
                 <Input
                   {...field}
-                  placeholder="Enter last name"
+                  placeholder={`${t('new-patient.placeholders.last-name')}`}
                   status={errors.lastName ? 'error' : ''}
                 />
               )}
@@ -85,14 +85,14 @@ export function NewPatientForm() {
           </InputWrapper>
 
           <InputWrapper>
-            <Label>Email</Label>
+            <Label>{t('new-patient.labels.email')}</Label>
             <Controller
               name="email"
               control={control}
               render={({ field }) => (
                 <Input
                   {...field}
-                  placeholder="Enter email"
+                  placeholder={`${t('new-patient.placeholders.email')}`}
                   status={errors.email ? 'error' : ''}
                 />
               )}
@@ -103,13 +103,12 @@ export function NewPatientForm() {
           </InputWrapper>
 
           <InputWrapper>
-            <Label>Sex</Label>
+            <Label>{t('new-patient.labels.sex')}</Label>
             <Controller
               name="sex"
               control={control}
               render={({ field }) => (
                 <StyledSelect
-                  placeholder="Enter sex"
                   defaultValue={Sex.Female}
                   {...field}
                   options={[
@@ -122,13 +121,13 @@ export function NewPatientForm() {
           </InputWrapper>
 
           <InputWrapper>
-            <Label>Date of Birth</Label>
+            <Label>{t('new-patient.labels.date-of-birth')}</Label>
             <Controller
               name="dateOfBirth"
               control={control}
               render={({ field }) => (
                 <StyledDatePicker
-                  placeholder="Enter date of birth"
+                  placeholder={`${t('new-patient.placeholders.date-of-birth')}`}
                   format={DATE_FORMAT_REG}
                   allowClear={false}
                   status={errors.dateOfBirth ? 'error' : undefined}
@@ -142,13 +141,13 @@ export function NewPatientForm() {
           </InputWrapper>
 
           <InputWrapper>
-            <Label>Country</Label>
+            <Label>{t('new-patient.labels.country')}</Label>
             <Controller
               name="country"
               control={control}
               render={({ field }) => (
                 <StyledSelect
-                  placeholder="Enter country"
+                  placeholder={`${t('new-patient.placeholders.country')}`}
                   defaultValue="UA"
                   {...field}
                   options={countryOptionsWithCode}
@@ -158,14 +157,14 @@ export function NewPatientForm() {
           </InputWrapper>
 
           <InputWrapper>
-            <Label>Address</Label>
+            <Label>{t('new-patient.labels.address')}</Label>
             <Controller
               name="address"
               control={control}
               render={({ field }) => (
                 <Input
                   {...field}
-                  placeholder="Enter address"
+                  placeholder={`${t('new-patient.placeholders.address')}`}
                   status={errors.address ? 'error' : ''}
                 />
               )}
@@ -176,7 +175,7 @@ export function NewPatientForm() {
           </InputWrapper>
 
           <InputWrapper>
-            <Label>Phone Number</Label>
+            <Label>{t('new-patient.labels.phone-number')}</Label>
             <PhoneInputWithCountry
               name="phoneNumber"
               defaultCountry={getValues('country') || 'UA'}
@@ -188,14 +187,14 @@ export function NewPatientForm() {
           </InputWrapper>
 
           <InputWrapper>
-            <Label>Overview</Label>
+            <Label>{t('new-patient.labels.overview')}</Label>
             <Controller
               name="overview"
               control={control}
               render={({ field }) => (
                 <Input.TextArea
                   {...field}
-                  placeholder="Overview"
+                  placeholder={`${t('new-patient.placeholders.overview')}`}
                   status={errors.overview ? 'error' : ''}
                 />
               )}
@@ -206,7 +205,7 @@ export function NewPatientForm() {
           </InputWrapper>
 
           <StyledButton type="primary" htmlType="submit">
-            Save Patient
+            {t('new-patient.submit-btn')}
           </StyledButton>
         </StyledForm>
       </Container>
