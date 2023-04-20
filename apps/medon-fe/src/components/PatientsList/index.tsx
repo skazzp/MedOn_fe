@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export function PatientsList() {
   const navigate = useNavigate();
+  // TODO: MED-73
   return (
     <div>
       <h1>Patients List</h1>
