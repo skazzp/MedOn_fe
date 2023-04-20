@@ -78,7 +78,8 @@
     "login": "Login",
     "password": "Password:",
     "placeholder-password": "Write your password*",
-    "placeholder-email": "Write your e-mail*"
+    "placeholder-email": "Write your e-mail*",
+    "error-msg": "Incorrect password or email"
   },
   "forget-password": {
     "alt": {
@@ -189,7 +190,7 @@
       "alt": "Medon logo"
     },
     "send-email": {
-      "title": "Confirmation Link",
+      "title": "Your email is not verified!",
       "subtitle": "Enter your registered email address to receive your confirmation link",
       "button": "NEXT",
       "home-link": "BACK TO LOGIN"

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { IUser } from 'redux/api/types';
 
 interface IUserState {
@@ -7,7 +8,7 @@ interface IUserState {
   isVerified: boolean;
 }
 
-const initialState: IUserState = {
+export const initialState: IUserState = {
   user: {
     firstName: '',
     lastName: '',
@@ -22,9 +23,7 @@ const initialState: IUserState = {
     timeZone: null,
     id: '',
   },
-  // token: null,
-  token:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE2MiwiZW1haWwiOiJza2F6enBAZ21haWwuY29tIiwiaWF0IjoxNjgxOTg3MDEyLCJleHAiOjE2ODE5OTQyMTJ9.riHd6UZ3h1SwjisGQ9tBNulSYSoIVxFHB6CV6iE3yZw',
+  token: null,
   isVerified: false,
 };
 
@@ -47,4 +46,4 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { logout, setUser } = userSlice.actions;
+export const { logout, setUser, setToken, setIsVerified } = userSlice.actions;

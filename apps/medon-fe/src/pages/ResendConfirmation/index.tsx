@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { toast } from 'react-toastify';
+import { toastConfig } from 'utils/toastConfig';
+
 import Button from 'components/Button';
 import Input from 'components/Input';
 import LinkHome from 'components/LinkHome';
@@ -18,10 +21,11 @@ import {
 } from 'pages/ResendConfirmation/styles';
 import { SubmitSendEmail } from 'pages/ResendConfirmation/types';
 import { emailSchema } from 'validation/accountConfirmationSchema';
+import { useResendEmailMutation } from 'redux/api/authApi';
 
 export default function ResendConfirmation() {
   const [isEmailSent, setIsEmailSent] = useState(false);
-
+  const [resendEmail] = useResendEmailMutation();
   const {
     register,
     handleSubmit,
@@ -36,8 +40,16 @@ export default function ResendConfirmation() {
   const theme = useTheme();
   const { t } = useTranslation();
 
-  const handleSentEmail: SubmitHandler<SubmitSendEmail> = () => {
-    setIsEmailSent(true);
+  const handleSentEmail: SubmitHandler<SubmitSendEmail> = async (
+    data: SubmitSendEmail
+  ) => {
+    try {
+      await resendEmail(data.email).unwrap();
+      setIsEmailSent(true);
+      toast.success(t('regConfirm.msgEmailSuccess'), toastConfig);
+    } catch (error) {
+      toast.error(t('regConfirm.msgEmailError'), toastConfig);
+    }
   };
 
   return (

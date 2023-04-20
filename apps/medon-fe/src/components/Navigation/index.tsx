@@ -1,4 +1,9 @@
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from 'redux/hooks';
+
+import { getUserSelector } from 'redux/features/userSlice/userSelectors';
+import { logout } from 'redux/features/userSlice/userSlice';
 import {
   NavContainer,
   HeaderBlock,
@@ -20,6 +25,12 @@ import { navigation } from 'utils/constants/navigation';
 
 export default function Navigation() {
   const { t } = useTranslation();
+
+  const user = useAppSelector(getUserSelector);
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   const navItems = [
     {
@@ -43,6 +54,7 @@ export default function Navigation() {
       to: navigation.exit,
       icon: <Logout />,
       label: 'navigation.logout',
+      onClick: handleLogout,
     },
   ];
 
@@ -62,10 +74,10 @@ export default function Navigation() {
         </Ul>
         <UserBlock>
           <UserAvatar
-            src={profileImagePlaceholder}
+            src={user.photo || profileImagePlaceholder}
             alt={t<string>('navigation.img-alt')}
           />
-          <UserName>Dr.Anonymous</UserName>
+          <UserName>{`Dr.${user?.lastName}`}</UserName>
         </UserBlock>
       </HeaderBlock>
     </NavContainer>
