@@ -1,0 +1,42 @@
+import { Input } from 'antd';
+import styled from 'styled-components';
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: ${({ theme }) => theme.fontFamily.sf_pro_text};
+  justify-content: flex-start;
+  width: calc(100% - 100px);
+  margin: 0 auto;
+  min-height: 100vh;
+  height: 100%;
+  > h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+`;
+
+export const Choose = styled.div`
+  flex-shrink: 1;
+  display: flex;
+  width: 100%;
+  gap: 4rem;
+  > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    padding: 0 1.5rem;
+    gap: 1rem;
+  }
+`;
+
+export const StyledSearch = styled(Input.Search)``;
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 3rem;
+`;
