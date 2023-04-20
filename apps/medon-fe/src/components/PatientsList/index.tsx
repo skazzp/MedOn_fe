@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from 'components/Button';
 import { useNavigate } from 'react-router-dom';
+import Button from 'components/Button';
 
 export function PatientsList() {
   const navigate = useNavigate();

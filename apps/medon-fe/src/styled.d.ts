@@ -46,7 +46,7 @@ declare module 'styled-components' {
       xxxl: string;
     };
     fontWeight: {
-      bold: string;
+      medium: string;
     };
   }
 }

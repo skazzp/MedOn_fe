@@ -13,7 +13,7 @@ export const StyledSpan = styled.span`
   color: ${({ theme }) => theme.colors.blue_300};
   font-family: ${({ theme }) => theme.fontFamily.roboto};
   font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.fontWeight.bold};
+  font-weight: ${({ theme }) => theme.fontWeight.medium};
 `;
 
 export const Wrapper = styled.div`
