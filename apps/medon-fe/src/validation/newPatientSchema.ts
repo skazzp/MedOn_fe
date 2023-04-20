@@ -27,7 +27,7 @@ export const newPatientSchema = yup.object({
   phoneNumber: yup
     .string()
     .label('Phone number')
-    .test('phone-number', 'Invalid Phone Number test', (value) =>
+    .test('phone-number', 'Invalid phone number', (value) =>
       value ? isValidPhoneNumber(value) : false
     ),
 });
