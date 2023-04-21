@@ -1,4 +1,7 @@
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from 'redux/hooks';
+
+import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 import {
   NavContainer,
   HeaderBlock,
@@ -13,37 +16,41 @@ import {
   UserBlock,
   UserAvatar,
   UserName,
+  SpecName,
+  BlockName,
 } from 'components/Navigation/styles';
 import profileImagePlaceholder from 'assets/images/Avatar.svg';
 import Logo from 'components/Logo';
-import { navigation } from 'utils/constants/navigation';
+import { routes } from 'utils/constants/routes';
+import { persistedStore } from 'redux/store';
 
 export default function Navigation() {
   const { t } = useTranslation();
 
+  const user = useAppSelector(getUserSelector);
+
+  const handleLogout = () => {
+    persistedStore.purge();
+  };
+
   const navItems = [
     {
-      to: navigation.dashboard,
+      to: routes.dashboard,
       icon: <Dashboard />,
       label: 'navigation.dashboard',
     },
     {
-      to: navigation.appointments,
+      to: routes.appointments,
       icon: <Briefcase />,
       label: 'navigation.appointments',
     },
-    { to: navigation.profile, icon: <Profile />, label: 'navigation.profile' },
+    { to: routes.profile, icon: <Profile />, label: 'navigation.profile' },
     {
-      to: navigation.patientList,
+      to: routes.patientList,
       icon: <Patient />,
       label: 'navigation.patient',
     },
-    { to: navigation.help, icon: <Help />, label: 'navigation.help' },
-    {
-      to: navigation.exit,
-      icon: <Logout />,
-      label: 'navigation.logout',
-    },
+    { to: routes.help, icon: <Help />, label: 'navigation.help' },
   ];
 
   return (
@@ -59,13 +66,21 @@ export default function Navigation() {
               </li>
             </NavLinkStyled>
           ))}
+          <NavLinkStyled to={routes.exit} onClick={() => handleLogout()}>
+            <Logout />
+            <li>{t('navigation.logout')}</li>
+          </NavLinkStyled>
         </Ul>
         <UserBlock>
           <UserAvatar
-            src={profileImagePlaceholder}
+            src={user.photo || profileImagePlaceholder}
             alt={t<string>('navigation.img-alt')}
           />
-          <UserName>Dr.Anonymous</UserName>
+          <BlockName>
+            {' '}
+            <UserName>{`Dr.${user?.lastName}`}</UserName>
+            <SpecName>{user?.speciality}</SpecName>
+          </BlockName>
         </UserBlock>
       </HeaderBlock>
     </NavContainer>

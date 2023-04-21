@@ -32,6 +32,7 @@ export const theme = {
     navi_text: '#828BAE',
     navi_hover: '#E2EDFD',
     btnGradient: 'linear-gradient(90deg, #085dd7 -28.15%, #4d93f8 76.48%)',
+    speciality: '#A6ADBC',
   },
   fontFamily: {
     roboto: 'Roboto, sans-serif',
@@ -45,5 +46,8 @@ export const theme = {
     xl: '20px',
     xxl: '28px',
     xxxl: '32px',
+  },
+  fontWeight: {
+    medium: '500',
   },
 };
