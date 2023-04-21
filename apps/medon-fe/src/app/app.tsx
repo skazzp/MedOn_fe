@@ -1,12 +1,13 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+
 import RegistrationPage from 'pages/RegistrationPage';
 import Login from 'pages/Login';
 import ForgetPassword from 'pages/ForgetPassword';
 import ResetPassword from 'pages/ResetPassword';
 import ResendConfirmation from 'pages/ResendConfirmation';
 import UpdatePassword from 'pages/UpdatePassword';
-import Navigation from 'components/Navigation/index';
 import ProfilePage from 'pages/ProfilePage';
+
 import { navigation } from 'utils/constants/navigation';
 
 function App() {
@@ -15,7 +16,6 @@ function App() {
       <Route path={navigation.login} element={<Login />} />
       <Route path={navigation.register} element={<RegistrationPage />} />
       <Route path={navigation.forgetPassword} element={<ForgetPassword />} />
-      <Route path={navigation.dashboard} element={<Navigation />} />
       <Route path={navigation.profile} element={<ProfilePage />} />
       <Route path={navigation.resetPassword} element={<ResetPassword />} />
       <Route

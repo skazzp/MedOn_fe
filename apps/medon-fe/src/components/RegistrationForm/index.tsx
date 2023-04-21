@@ -3,19 +3,21 @@ import { Input } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
+
+import { InputAntD } from 'components/InputAntD';
+import { SelectAntD } from 'components/SelectAntD';
+import { DatepickerAntD } from 'components/DatepickerAntD';
+
 import { registrationFormSchema } from 'validation/registrationFormSchema';
 import { countryOptions } from 'utils/countries/countryOptions';
-
 import {
   DEFAULT_TIMEZONE,
   timezoneOptions,
 } from 'utils/timezones/timezoneOptions';
 import { ROLES, ROLE_OPTIONS } from 'utils/constants/roles';
-
-import { InputAntD } from 'components/InputAntD';
-import { SelectAntD } from 'components/SelectAntD';
-import { DatepickerAntD } from 'components/DatepickerAntD';
 import { formFields } from 'utils/constants/userFormFields';
+import { FormData } from './types';
+import useSpecOptions from './useSpecOptions';
 import {
   BackBtn,
   Btn,
@@ -29,8 +31,6 @@ import {
   PassErrorMsg,
   PasswordContainer,
 } from './styles';
-import { FormData } from './types';
-import useSpecOptions from './useSpecOptions';
 
 interface IProps {
   submitForm: (values: FormData) => void;
