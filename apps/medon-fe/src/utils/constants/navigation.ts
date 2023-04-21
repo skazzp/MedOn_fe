@@ -1,8 +1,15 @@
 export const navigation = {
-    dashboard: '/dashboard',
-    appointments: '/appointments',
-    profile: '/profile',
-    patientList: '/patient-list',
-    help: '/help',
-    exit: '/logout',
-  };
+  home: '/',
+  login: '/login',
+  register: '/register',
+  forgetPassword: '/forget-assword',
+  dashboard: '/dashboard',
+  appointments: '/appointments',
+  profile: '/profile',
+  resetPassword: '/reset-password/:token',
+  patientList: '/patient-list',
+  help: '/help',
+  exit: '/logout',
+  resendConfirmation: '/re-confirm-account',
+  updatePassword: '/update-password',
+};
