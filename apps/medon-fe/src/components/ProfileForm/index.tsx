@@ -1,7 +1,13 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { InputAntD } from 'components/InputAntD';
+import { SelectAntD } from 'components/SelectAntD';
+import { DatepickerAntD } from 'components/DatepickerAntD';
+
+import profile_pic from 'assets/images/profile_pic.png';
 import { ROLES, ROLE_OPTIONS, SPECIALITY_OPTIONS } from 'utils/constants/roles';
 import {
   DEFAULT_TIMEZONE,
@@ -9,10 +15,6 @@ import {
 } from 'utils/timezones/timezoneOptions';
 import { formFields } from 'utils/constants/userFormFields';
 import { countryOptions } from 'utils/countries/countryOptions';
-import ProfileSelect from 'components/ProfileForm/ProfileSelect';
-import ProfileInput from 'components/ProfileForm/ProfileInput';
-import ProfileDatepicker from 'components/ProfileForm/ProfileDatepicker';
-import profile_pic from 'assets/images/profile_pic.png';
 import { profileFormSchema } from 'validation/profileFormSchema';
 import { FormProfileData } from './types';
 import {
@@ -23,8 +25,8 @@ import {
   InputContainer,
   ButtonContainer,
   ImageContainer,
+  LabelText,
 } from './styles';
-import { InputFields } from './ProfileInput/types';
 
 export default function ProfileForm() {
   const { t } = useTranslation();
@@ -33,7 +35,7 @@ export default function ProfileForm() {
     control,
     handleSubmit,
     watch,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<FormProfileData>({
     resolver: yupResolver(profileFormSchema),
     defaultValues: {
@@ -59,95 +61,114 @@ export default function ProfileForm() {
         <Form onSubmit={onSubmit}>
           <InputContainer>
             <Label htmlFor="firstName">
-              <ProfileInput
-                name={InputFields.firstName}
+              <LabelText>{t('profileForm.firstName.label')}</LabelText>
+              <InputAntD
+                name={formFields.firstName}
                 control={control}
                 disabled={disabled}
-                error={errors.firstName?.message}
+                placeholder={`${t('profileForm.firstName.placeholder')}`}
+                size="large"
               />
             </Label>
           </InputContainer>
           <InputContainer>
             <Label htmlFor="lastName">
-              <ProfileInput
-                name={InputFields.lastName}
+              <LabelText>{t('profileForm.lastName.label')}</LabelText>
+              <InputAntD
+                name={formFields.lastName}
                 control={control}
                 disabled={disabled}
-                error={errors.lastName?.message}
+                placeholder={`${t('profileForm.lastName.placeholder')}`}
+                size="large"
               />
             </Label>
           </InputContainer>
           <InputContainer>
             <Label htmlFor="email">
-              <ProfileInput
-                name={InputFields.email}
+              <LabelText>{t('profileForm.email.label')}</LabelText>
+              <InputAntD
+                name={formFields.email}
                 control={control}
                 disabled={disabled}
-                error={errors.email?.message}
+                placeholder={`${t('profileForm.email.placeholder')}`}
+                size="large"
               />
             </Label>
           </InputContainer>
           <InputContainer>
             <Label htmlFor="birthday">
-              <ProfileDatepicker
+              <LabelText>{t('profileForm.birthday.label')}</LabelText>
+              <DatepickerAntD
+                name={formFields.birthday}
                 control={control}
                 disabled={disabled}
-                error={errors.birthday?.message}
+                placeholder={`${t('profileForm.birthday.placeholder')}`}
+                size="large"
               />
             </Label>
           </InputContainer>
           <InputContainer>
             <Label htmlFor="country">
-              <ProfileSelect
+              <LabelText>{t('profileForm.country.label')}</LabelText>
+              <SelectAntD
                 name={formFields.country}
                 control={control}
                 disabled={disabled}
-                error={errors.country?.message}
+                size="large"
+                placeholder={`${t('profileForm.country.placeholder')}`}
                 options={countryOptions}
               />
             </Label>
           </InputContainer>
           <InputContainer>
             <Label htmlFor="city">
-              <ProfileInput
-                name={InputFields.city}
+              <LabelText>{t('profileForm.city.label')}</LabelText>
+              <InputAntD
+                name={formFields.city}
                 control={control}
                 disabled={disabled}
-                error={errors.city?.message}
+                size="large"
+                placeholder={`${t('profileForm.city.placeholder')}`}
               />
             </Label>
           </InputContainer>
           <InputContainer>
             <Label htmlFor="timezone">
-              <ProfileSelect
+              <LabelText>{t('profileForm.timezone.label')}</LabelText>
+              <SelectAntD
                 name={formFields.timezone}
                 control={control}
                 disabled={disabled}
-                error={errors.timezone?.message}
+                size="large"
+                placeholder={`${t('profileForm.timezone.placeholder')}`}
                 options={timezoneOptions}
               />
             </Label>
           </InputContainer>
           <InputContainer>
             <Label htmlFor="role">
-              <ProfileSelect
+              <LabelText>{t('profileForm.role.label')}</LabelText>
+              <SelectAntD
                 name={formFields.role}
                 control={control}
                 disabled={disabled}
-                error={errors.role?.message}
+                size="large"
+                placeholder={`${t('profileForm.role.placeholder')}`}
                 options={ROLE_OPTIONS}
               />
             </Label>
           </InputContainer>
           {role === ROLES.REMOTE && (
             <InputContainer>
-              <Label htmlFor="role">
-                <ProfileSelect
+              <Label htmlFor="speciality">
+                <LabelText>{t('profileForm.speciality.label')}</LabelText>
+                <SelectAntD
                   name={formFields.speciality}
                   control={control}
-                  error={errors.speciality?.message}
-                  options={SPECIALITY_OPTIONS}
                   disabled={disabled}
+                  size="large"
+                  placeholder={`${t('profileForm.speciality.placeholder')}`}
+                  options={SPECIALITY_OPTIONS}
                 />
               </Label>
             </InputContainer>

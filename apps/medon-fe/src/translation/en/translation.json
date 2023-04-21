@@ -239,6 +239,10 @@
     "timezone": {
       "label": "Time zone",
       "placeholder": "Select your time zone"
+    },
+    "speciality": {
+      "label": "Speciality",
+      "placeholder": "Select your speciality"
     }
   },
   "logout": {
