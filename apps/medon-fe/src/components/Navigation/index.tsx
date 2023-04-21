@@ -21,7 +21,7 @@ import {
 } from 'components/Navigation/styles';
 import profileImagePlaceholder from 'assets/images/Avatar.svg';
 import Logo from 'components/Logo';
-import { navigation } from 'utils/constants/navigation';
+import { routes } from 'utils/constants/routes';
 import { persistedStore } from 'redux/store';
 
 export default function Navigation() {
@@ -35,22 +35,22 @@ export default function Navigation() {
 
   const navItems = [
     {
-      to: navigation.dashboard,
+      to: routes.dashboard,
       icon: <Dashboard />,
       label: 'navigation.dashboard',
     },
     {
-      to: navigation.appointments,
+      to: routes.appointments,
       icon: <Briefcase />,
       label: 'navigation.appointments',
     },
-    { to: navigation.profile, icon: <Profile />, label: 'navigation.profile' },
+    { to: routes.profile, icon: <Profile />, label: 'navigation.profile' },
     {
-      to: navigation.patientList,
+      to: routes.patientList,
       icon: <Patient />,
       label: 'navigation.patient',
     },
-    { to: navigation.help, icon: <Help />, label: 'navigation.help' },
+    { to: routes.help, icon: <Help />, label: 'navigation.help' },
   ];
 
   return (
@@ -66,7 +66,7 @@ export default function Navigation() {
               </li>
             </NavLinkStyled>
           ))}
-          <NavLinkStyled to={navigation.exit} onClick={() => handleLogout()}>
+          <NavLinkStyled to={routes.exit} onClick={() => handleLogout()}>
             <Logout />
             <li>{t('navigation.logout')}</li>
           </NavLinkStyled>

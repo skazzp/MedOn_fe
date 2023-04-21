@@ -47,4 +47,7 @@ export const theme = {
     xxl: '28px',
     xxxl: '32px',
   },
+  fontWeight: {
+    medium: '500',
+  },
 };

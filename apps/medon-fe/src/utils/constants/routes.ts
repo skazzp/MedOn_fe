@@ -1,4 +1,4 @@
-export const navigation = {
+export const routes = {
   home: '/',
   login: '/login',
   register: '/register',
@@ -12,4 +12,6 @@ export const navigation = {
   exit: '/logout',
   resendConfirmation: '/re-confirm-account',
   updatePassword: '/update-password',
+  patients: '/patients',
+  addPatient: '/patients/add-new',
 };
