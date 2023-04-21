@@ -1,0 +1,1 @@
+export const msgTime = 2000;
