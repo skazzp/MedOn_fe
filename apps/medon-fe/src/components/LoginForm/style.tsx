@@ -34,6 +34,7 @@ export const SendButton = styled(Input)`
   background: ${theme.colors.blue_300};
   color: ${theme.colors.white};
   cursor: pointer;
+  padding: 16px 24px 16px 24px;
 `;
 
 export const StyledErrorMessage = styled.p`
@@ -45,10 +46,10 @@ export const StyledErrorMessage = styled.p`
 `;
 
 export const ForgotButton = styled(Button)`
-  text-align: right;
+  margin-left: 70%;
 `;
 
 export const DontHaveButton = styled(Button)`
-  text-align: left;
+  margin-right: 70%;
   color: ${theme.colors.black};
 `;

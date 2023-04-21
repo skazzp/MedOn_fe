@@ -1,4 +1,3 @@
-import { LoginRequest } from 'redux/api/types';
 import LoginForm from 'components/LoginForm';
 import { FormContainer } from 'components/LoginForm/style';
 import Logo from 'components/Logo';
@@ -9,11 +8,14 @@ import { useEffect } from 'react';
 import { toastConfig } from 'utils/toastConfig';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { useAppDispatch } from 'redux/hooks';
+import { setIsVerified, setToken } from 'redux/features/userSlice/userSlice';
 
 export default function LoginComponent() {
   const { t } = useTranslation();
   const [params] = useSearchParams();
   const token = params.get('token');
+  const authToken = params.get('gtoken');
   const verifyEmail = useVerifyEmailQuery(
     { token },
     {
@@ -21,8 +23,8 @@ export default function LoginComponent() {
     }
   );
 
-  const handleSubmit = (data: LoginRequest) => data;
-  
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     if (verifyEmail.isSuccess) {
       toast.success(t('regConfirm.msgVerifySuccess'), toastConfig);
@@ -32,12 +34,19 @@ export default function LoginComponent() {
     }
   }, [verifyEmail.isSuccess, verifyEmail.error, t]);
 
+  useEffect(() => {
+    if (authToken) {
+      dispatch(setIsVerified(true));
+      dispatch(setToken(authToken));
+    }
+  }, [authToken, dispatch]);
+
   return (
     <FormContainer>
       <Logo />
       <Title>{t('login.login-title')}</Title>
       <Text>{t('login.login-text')}</Text>
-      <LoginForm onSubmit={handleSubmit} />
+      <LoginForm />
     </FormContainer>
   );
 }
