@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { InputAntD } from 'components/InputAntD';
-import { SelectAntD } from 'components/SelectAntD';
-import { DatepickerAntD } from 'components/DatepickerAntD';
+import { InputAntD } from 'components/common/InputAntD';
+import { SelectAntD } from 'components/common/SelectAntD';
+import { DatepickerAntD } from 'components/common/DatepickerAntD';
 
 import profile_pic from 'assets/images/profile_pic.png';
 import { ROLES, ROLE_OPTIONS, SPECIALITY_OPTIONS } from 'utils/constants/roles';

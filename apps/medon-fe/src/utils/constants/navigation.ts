@@ -2,7 +2,7 @@ export const navigation = {
   home: '/',
   login: '/login',
   register: '/register',
-  forgetPassword: '/forget-assword',
+  forgetPassword: '/forget-password',
   dashboard: '/dashboard',
   appointments: '/appointments',
   profile: '/profile',
