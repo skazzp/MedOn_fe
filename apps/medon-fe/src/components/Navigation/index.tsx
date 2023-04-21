@@ -16,31 +16,31 @@ import {
 } from 'components/Navigation/styles';
 import profileImagePlaceholder from 'assets/images/Avatar.svg';
 import Logo from 'components/Logo';
-import { navigation } from 'utils/constants/navigation';
+import { routes } from 'utils/constants/routes';
 
 export default function Navigation() {
   const { t } = useTranslation();
 
   const navItems = [
     {
-      to: navigation.dashboard,
+      to: routes.dashboard,
       icon: <Dashboard />,
       label: 'navigation.dashboard',
     },
     {
-      to: navigation.appointments,
+      to: routes.appointments,
       icon: <Briefcase />,
       label: 'navigation.appointments',
     },
-    { to: navigation.profile, icon: <Profile />, label: 'navigation.profile' },
+    { to: routes.profile, icon: <Profile />, label: 'navigation.profile' },
     {
-      to: navigation.patientList,
+      to: routes.patients,
       icon: <Patient />,
       label: 'navigation.patient',
     },
-    { to: navigation.help, icon: <Help />, label: 'navigation.help' },
+    { to: routes.help, icon: <Help />, label: 'navigation.help' },
     {
-      to: navigation.exit,
+      to: routes.exit,
       icon: <Logout />,
       label: 'navigation.logout',
     },
