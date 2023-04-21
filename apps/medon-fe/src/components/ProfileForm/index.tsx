@@ -1,7 +1,5 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import dayjs from 'dayjs';
-import { timezoneOptions } from 'utils/timezones/timezoneOptions';
-import { ROLE, SPECIALITY, formFields } from 'utils/constants/userFormFields';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,11 +9,8 @@ import { SelectAntD } from 'components/common/SelectAntD';
 import { DatepickerAntD } from 'components/common/DatepickerAntD';
 
 import profile_pic from 'assets/images/profile_pic.png';
-import { ROLES, ROLE_OPTIONS, SPECIALITY_OPTIONS } from 'utils/constants/roles';
-import {
-  DEFAULT_TIMEZONE,
-  timezoneOptions,
-} from 'utils/timezones/timezoneOptions';
+import { ROLES, ROLE_OPTIONS } from 'utils/constants/roles';
+import { timezoneOptions } from 'utils/timezones/timezoneOptions';
 import { formFields } from 'utils/constants/userFormFields';
 import { countryOptions } from 'utils/countries/countryOptions';
 import { profileFormSchema } from 'validation/profileFormSchema';
@@ -49,15 +44,8 @@ export default function ProfileForm({
   const dispatch = useAppDispatch();
   // const [disabled, setDisabled] = useState(true);
   const user = useAppSelector(getUserSelector);
-  const {
-    control,
-    handleSubmit,
-    watch,
-    // getValues,
-    setValue,
-    formState: { errors },
-  } = useForm<FormProfileData>({
-      resolver: yupResolver(profileFormSchema),
+  const { control, handleSubmit, watch, setValue } = useForm<FormProfileData>({
+    resolver: yupResolver(profileFormSchema),
     defaultValues: {
       firstName: user.firstName,
       lastName: user.lastName,
@@ -71,7 +59,7 @@ export default function ProfileForm({
     },
   });
   const { specialityOptions } = useSpecOptions();
-  const role = watch(ROLE);
+  const role = watch(formFields.role);
 
   useEffect(() => {
     if (user) {
@@ -207,7 +195,7 @@ export default function ProfileForm({
                   disabled={disabled}
                   size="large"
                   placeholder={`${t('profileForm.speciality.placeholder')}`}
-                  options={SPECIALITY_OPTIONS}
+                  options={specialityOptions}
                 />
               </Label>
             </InputContainer>
