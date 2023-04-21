@@ -5,20 +5,30 @@ import ForgetPassword from 'pages/ForgetPassword';
 import ResetPassword from 'pages/ResetPassword';
 import ResendConfirmation from 'pages/ResendConfirmation';
 import UpdatePassword from 'pages/UpdatePassword';
-import Navigation from 'components/Navigation/index';
+import { PatientsPage } from 'pages/PatientsPage';
+import Navigation from 'components/Navigation';
+import { PatientsList } from 'components/PatientsList';
+import { NewPatientForm } from 'components/NewPatientForm';
+import { routes } from 'utils/constants/routes';
 
 function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<RegistrationPage />} />
-      <Route path="/forget-password" element={<ForgetPassword />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
-      <Route path="/dashboard" element={<Navigation />} />
-      <Route path="/reset-password/:token" element={<ResetPassword />} />
-      <Route path="/re-confirm-account" element={<ResendConfirmation />} />
-      <Route path="/update-password" element={<UpdatePassword />} />
-      <Route path="*" element={<Navigate to={'/login'} />} />
+      <Route path={routes.login} element={<Login />} />
+      <Route path={routes.register} element={<RegistrationPage />} />
+      <Route path={routes.forgetPassword} element={<ForgetPassword />} />
+      <Route path={routes.dashboard} element={<Navigation />} />
+      <Route path={routes.resetPassword} element={<ResetPassword />} />
+      <Route
+        path={routes.resendConfirmation}
+        element={<ResendConfirmation />}
+      />
+      <Route path={routes.updatePassword} element={<UpdatePassword />} />
+      <Route path={routes.patients} element={<PatientsPage />}>
+        <Route index element={<PatientsList />} />
+        <Route path={routes.addPatient} element={<NewPatientForm />} />
+      </Route>
+      <Route path="*" element={<Navigate to={routes.login} />} />
     </Routes>
   );
 }

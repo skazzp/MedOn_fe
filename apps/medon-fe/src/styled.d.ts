@@ -45,5 +45,8 @@ declare module 'styled-components' {
       xxl: string;
       xxxl: string;
     };
+    fontWeight: {
+      medium: string;
+    };
   }
 }
