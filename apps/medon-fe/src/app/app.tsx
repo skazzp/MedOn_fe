@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+
 import RegistrationPage from 'pages/RegistrationPage';
 import Login from 'pages/Login';
 import ForgetPassword from 'pages/ForgetPassword';
@@ -11,22 +12,29 @@ import Navigation from 'components/Navigation/index';
 import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
 
+import { navigation } from 'utils/constants/navigation';
+
 function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<RegistrationPage />} />
-      <Route path="/forget-password" element={<ForgetPassword />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
-      <Route path="/dashboard" element={<Navigation />} />
-      <Route path="/reset-password/:token" element={<ResetPassword />} />
-      <Route path="/re-confirm-account" element={<ResendConfirmation />} />
-      <Route path="/update-password" element={<UpdatePassword />} />
-      <Route path="/patients" element={<PatientsPage />}>
+      <Route path={navigation.login} element={<Login />} />
+      <Route path={navigation.register} element={<RegistrationPage />} />
+      <Route path={navigation.forgetPassword} element={<ForgetPassword />} />
+      <Route path={navigation.dashboard} element={<Navigation />} />
+      <Route path={navigation.resetPassword} element={<ResetPassword />} />
+      <Route
+        path={navigation.resendConfirmation}
+        element={<ResendConfirmation />}
+      />
+      <Route path={navigation.updatePassword} element={<UpdatePassword />} />
+      <Route path={navigation.patientList} element={<PatientsPage />}>
         <Route index element={<PatientsList />} />
-        <Route path="add-new" element={<NewPatientForm />} />
+        <Route
+          path={navigation.patientListAddNew}
+          element={<NewPatientForm />}
+        />
       </Route>
-      <Route path="*" element={<Navigate to={'/login'} />} />
+      <Route path="*" element={<Navigate to={navigation.login} />} />
     </Routes>
   );
 }
