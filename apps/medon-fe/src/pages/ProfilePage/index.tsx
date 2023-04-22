@@ -37,7 +37,6 @@ export default function ProfilePage() {
     };
     try {
       const response = await updateUser(requestData).unwrap();
-      // console.log('RESPONSE', response);
       dispatch(setUser(response.data));
       setFormDisabled(true);
     } catch (err) {
