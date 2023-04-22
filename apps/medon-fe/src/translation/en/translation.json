@@ -124,7 +124,8 @@
       "more": "Show More",
       "less": "Show Less"
     },
-    "placeholder": "Search "
+    "placeholder": "Search ",
+    "no-data": "There's no patient in the list"
   },
   "update-password": {
     "reset-password": {

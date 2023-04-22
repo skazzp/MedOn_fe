@@ -32,9 +32,13 @@ export default function PatientsList() {
       </Choose>
       <h2>{t('patient-list.list')}</h2>
       <Wrapper>
-        {patientList.map((patient) => (
-          <PatientListCard key={patient.id} {...patient} />
-        ))}
+        {patientList.length ? (
+          patientList.map((patient) => (
+            <PatientListCard key={patient.id} {...patient} />
+          ))
+        ) : (
+          <h4>{t('patient-list.no-data')}</h4>
+        )}
       </Wrapper>
     </Content>
   );

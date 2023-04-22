@@ -38,5 +38,14 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
   gap: 3rem;
+  > h4 {
+    display: flex;
+    font-size: ${({ theme }) => theme.fontSizes.xxl};
+    color: ${({ theme }) => theme.colors.blue_500};
+    flex: 0.5;
+    justify-content: center;
+    align-items: center;
+  }
 `;
