@@ -1,16 +1,45 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import Button from 'components/Button';
+import { useTranslation } from 'react-i18next';
+import { useTheme } from 'styled-components';
 
-export function PatientsList() {
-  const navigate = useNavigate();
-  // TODO: MED-73
+import LinkHome from 'components/LinkHome';
+import PatientListCard from 'components/PatientListCard';
+
+import { patientList } from 'utils/mock/patientList';
+import { ReactComponent as Plus } from 'assets/svgs/plus_listcard.svg';
+
+import { Choose, Content, StyledSearch, Wrapper } from './styles';
+
+export default function PatientsList() {
+  const theme = useTheme();
+  const { t } = useTranslation();
+
   return (
-    <div>
-      <h1>Patients List</h1>
-      <Button onClick={() => navigate('/patients/add-new')}>
-        Add new patient
-      </Button>
-    </div>
+    <Content>
+      <h2>{t('patient-list.choose')}</h2>
+      <Choose>
+        <StyledSearch
+          placeholder={`${t('patient-list.placeholder')}`}
+          size="large"
+        />
+        <LinkHome
+          textcolor={theme.colors.white}
+          bgcolor={theme.colors.btnGradient}
+          to="add-new"
+        >
+          {t('patient-list.link')}
+          <Plus />
+        </LinkHome>
+      </Choose>
+      <h2>{t('patient-list.list')}</h2>
+      <Wrapper>
+        {patientList.length ? (
+          patientList.map((patient) => (
+            <PatientListCard key={patient.id} {...patient} />
+          ))
+        ) : (
+          <h4>{t('patient-list.no-data')}</h4>
+        )}
+      </Wrapper>
+    </Content>
   );
 }

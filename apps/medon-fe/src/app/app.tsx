@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+
 import RegistrationPage from 'pages/RegistrationPage';
 import Login from 'pages/Login';
 import ForgetPassword from 'pages/ForgetPassword';
@@ -6,9 +7,9 @@ import ResetPassword from 'pages/ResetPassword';
 import ResendConfirmation from 'pages/ResendConfirmation';
 import UpdatePassword from 'pages/UpdatePassword';
 import { PatientsPage } from 'pages/PatientsPage';
-import Navigation from 'components/Navigation';
-import { PatientsList } from 'components/PatientsList';
+import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
+import Navigation from 'components/Navigation';
 import { routes } from 'utils/constants/routes';
 
 function App() {
