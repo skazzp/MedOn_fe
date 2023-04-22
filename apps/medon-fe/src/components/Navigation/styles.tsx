@@ -6,6 +6,7 @@ import { ReactComponent as ProfileIcon } from 'assets/images/navigation/User_Cir
 import { ReactComponent as PatientIcon } from 'assets/images/navigation/Users.svg';
 import { ReactComponent as HelpIcon } from 'assets/images/navigation/Question.svg';
 import { ReactComponent as LogoutIcon } from 'assets/images/navigation/Sign_Out.svg';
+import { ReactComponent as AvailabilityIcon } from 'assets/images/navigation/Calendar.svg';
 
 import { theme } from 'styles/theme';
 
@@ -92,6 +93,18 @@ export const UserName = styled.span`
   font-family: ${theme.fontFamily.sf_pro_text};
 `;
 
+export const SpecName = styled.span`
+  font-size: ${theme.fontSizes.sm};
+  font-weight: 400;
+  color: ${theme.colors.speciality};
+  font-family: ${theme.fontFamily.sf_pro_text};
+`;
+
+export const BlockName = styled.span`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const Dashboard = styled(Icon).attrs(() => ({
   children: <DashboardIcon />,
 }))``;
@@ -114,4 +127,8 @@ export const Help = styled(Icon).attrs(() => ({
 
 export const Logout = styled(Icon).attrs(() => ({
   children: <LogoutIcon />,
+}))``;
+
+export const Availability = styled(Icon).attrs(() => ({
+  children: <AvailabilityIcon />,
 }))``;

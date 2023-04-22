@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Input } from 'antd';
+import { Input, Spin } from 'antd';
 
 import {
   StyledErrorMessage,
@@ -11,42 +11,54 @@ import {
   ForgotButton,
   SendButton,
 } from 'components/LoginForm/style';
-import { loginFormSchema } from 'components/FormSchema/index';
-import { useLoginMutation } from 'redux/api/login.api';
+import { loginFormSchema } from 'validation/loginSchema';
 import { LoginRequest } from 'redux/api/types';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { toastConfig } from 'utils/toastConfig';
+import { useAppDispatch } from 'redux/hooks';
+import { setIsVerified, setToken } from 'redux/features/userSlice/userSlice';
+import { useLoginMutation } from 'redux/api/authApi';
 
-export interface LoginFormProps {
-  onSubmit: (data: LoginRequest) => void;
-}
-
-const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
+const LoginForm: FC = () => {
   const { t } = useTranslation();
-  const [login, { isLoading, isError, error, data }] = useLoginMutation();
+  const [login, { isLoading, data }] = useLoginMutation();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const {
     control,
-    handleSubmit,
+    handleSubmit: handleFormSubmit,
     formState: { errors },
   } = useForm<LoginRequest>({
     resolver: yupResolver(loginFormSchema),
     defaultValues: { email: '', password: '' },
   });
 
-  const handleFormSubmit = async (formData: LoginRequest) => {
+  const onSubmitHandler = async (formData: LoginRequest) => {
     try {
       await login(formData).unwrap();
-    } catch (err) {
+    } catch (error) {
       toast.error(t('login.error-msg'), toastConfig);
     }
   };
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setIsVerified(data.isVerified));
+      dispatch(setToken(data.token));
+    }
+  }, [data, dispatch, navigate]);
+
+  if (isLoading) {
+    return <Spin />;
+  }
 
   return (
     <Form
       name="contact"
       method="post"
-      onSubmit={handleSubmit(handleFormSubmit)}
+      onSubmit={handleFormSubmit(onSubmitHandler)}
     >
       <label htmlFor="email">
         {t('login.email')}

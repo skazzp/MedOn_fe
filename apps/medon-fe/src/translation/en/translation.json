@@ -78,7 +78,8 @@
     "login": "Login",
     "password": "Password:",
     "placeholder-password": "Write your password*",
-    "placeholder-email": "Write your e-mail*"
+    "placeholder-email": "Write your e-mail*",
+    "error-msg": "Incorrect password or email"
   },
   "forget-password": {
     "alt": {
@@ -149,6 +150,7 @@
     "patient": "Patients list",
     "help": "Help",
     "logout": "Logout",
+    "Availability": "Availability",
     "img-alt": "User avatar"
   },
   "validation": {
@@ -201,7 +203,7 @@
       "alt": "Medon logo"
     },
     "send-email": {
-      "title": "Confirmation Link",
+      "title": "Your email is not verified!",
       "subtitle": "Enter your registered email address to receive your confirmation link",
       "button": "NEXT",
       "home-link": "BACK TO LOGIN"
@@ -218,5 +220,30 @@
   "logout": {
     "title": "Logout",
     "description": "Are you sure you want to logout?"
+  },
+  "new-patient": {
+    "back-link": "Back to Patients list",
+    "header": "Create new patient card",
+    "labels": {
+      "first-name": "First Name",
+      "last-name": "Last Name",
+      "email": "Email",
+      "sex": "Sex",
+      "date-of-birth": "Date of Birth",
+      "country": "Country",
+      "address": "Address",
+      "phone-number": "Phone Number",
+      "overview": "Overview"
+    },
+    "placeholders": {
+      "first-name": "Enter first name",
+      "last-name": "Enter last name",
+      "email": "Enter email",
+      "date-of-birth": "Enter date of birth",
+      "address": "Enter address",
+      "phone-number": "Enter phone number",
+      "overview": "Enter overview"
+    },
+    "submit-btn": "Save Patient"
   }
 }
