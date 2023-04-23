@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { Button, DatePicker, Select } from 'antd';
+import { Button, DatePicker, Select, Input } from 'antd';
 
 export const Container = styled.div`
-  max-width: 400px;
-  min-width: 200px;
-  width: 40%;
+  max-width: 600px;
+  min-width: 400px;
+  width: 80%;
   margin: 40px auto 0px;
   display: flex;
   flex-direction: column;
@@ -23,9 +23,29 @@ export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
 `;
+export const InputWrapper = styled.div``;
 
-export const InputWrapper = styled.div`
-  margin-bottom: 16px;
+export const InputsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+`;
+export const ButtonsWrapper = styled.div`
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 20px;
+
+  button {
+    width: 120px;
+  }
+`;
+export const SectionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-grow: 1;
 `;
 
 export const Label = styled.span`

@@ -20,9 +20,13 @@ export const newPatientSchema = yup.object({
 
   email: yup.string().label('Email').email().required(),
 
+  gender: yup.mixed().label('Gender').oneOf(['male', 'female']).required(),
+
   dateOfBirth: yup.string().label('Date of birth').required(),
 
-  address: yup.string().label('Address').required(),
+  country: yup.string().label('Country').required(),
+
+  city: yup.string().label('City').required(),
 
   phoneNumber: yup
     .string()
