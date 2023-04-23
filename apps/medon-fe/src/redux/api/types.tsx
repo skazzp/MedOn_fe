@@ -1,3 +1,6 @@
+import { HttpStatus } from 'utils/constants/httpStatus';
+import { Gender } from 'utils/constants/gender';
+
 export interface IUser {
   firstName: string;
   lastName: string;
@@ -48,4 +51,28 @@ export interface LoginRequest {
 export interface LoginResponse {
   token: string;
   isVerified: boolean;
+}
+
+export interface ICreatePatient {
+  firstName: string;
+  lastName: string;
+  email: string;
+  city: string;
+  country: string;
+  dateOfBirth: Date;
+  gender: Gender;
+  phoneNumber: string;
+  overview?: string;
+}
+
+export interface IPatient extends ICreatePatient {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface IServerResponse<T = undefined> {
+  statusCode: HttpStatus;
+  message?: string;
+  data?: T;
 }
