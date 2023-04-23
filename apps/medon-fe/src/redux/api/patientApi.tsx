@@ -1,23 +1,19 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { RootState } from 'redux/store';
-import { ICreatePatient, IPatient, IServerResponse } from './types';
+import { prepareHeaders } from 'redux/api/utils/prepareHeaders';
+import { IServerResponse, ICreatePatient, IPatient } from 'interfaces/index';
 
 export const patientApi = createApi({
   reducerPath: 'patientApi',
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NX_API_URL,
-    prepareHeaders: (headers, { getState }) => {
-      const { token } = (getState() as RootState).userState;
-
-      if (token) headers.set('authorization', `Bearer ${token}`);
-    },
+    prepareHeaders,
   }),
   tagTypes: ['patient'],
   endpoints: (builder) => ({
     createPatient: builder.mutation<IServerResponse<IPatient>, ICreatePatient>({
       query(dto: ICreatePatient) {
         return {
-          url: 'patients/add-new',
+          url: 'patients',
           method: 'POST',
           body: dto,
         };

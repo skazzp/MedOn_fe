@@ -1,14 +1,20 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import { toastConfig } from 'utils/toastConfig';
+import dayjs from 'dayjs';
 import { yupResolver } from '@hookform/resolvers/yup';
 import PhoneInputWithCountry from 'react-phone-number-input/react-hook-form';
 import { Input } from 'antd';
 import { LinkGoBack } from 'components/LinkGoBack';
 import { Gender } from 'utils/constants/gender';
+import { CountryCode } from 'libphonenumber-js';
 import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
 import { countryOptionsWithCode } from 'utils/countries/countryOptions';
 import { newPatientSchema } from 'validation/newPatientSchema';
+import { ICreatePatient } from 'interfaces/patients';
+import { useCreatePatientMutation } from 'redux/api/patientApi';
 import {
   Container,
   StyledForm,
@@ -31,17 +37,39 @@ export function NewPatientForm() {
     handleSubmit,
     watch,
     getValues,
+    reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<ICreatePatient>({
     mode: 'onBlur',
     resolver: yupResolver(newPatientSchema),
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      city: '',
+      country: 'UA',
+      dateOfBirth: undefined,
+      gender: undefined,
+      phoneNumber: '',
+      overview: '',
+    },
   });
+
+  const [createPatient] = useCreatePatientMutation();
 
   const { t } = useTranslation();
 
-  function onSubmit() {
-    // TODO: Integration with BackEnd
-  }
+  const submitForm = async (dto: ICreatePatient) => {
+    try {
+      const dateOfBirth = new Date(dto.dateOfBirth);
+
+      await createPatient({ ...dto, dateOfBirth }).unwrap();
+      reset();
+      toast.success('Patient successfully was added!', toastConfig);
+    } catch (e) {
+      toast.error(`Patient wasn't added!`, toastConfig);
+    }
+  };
 
   watch('country');
 
@@ -50,7 +78,7 @@ export function NewPatientForm() {
       <LinkGoBack>{t('new-patient.back-link')}</LinkGoBack>
       <Container>
         <Header>{t('new-patient.header')}</Header>
-        <StyledForm onSubmit={handleSubmit(onSubmit)}>
+        <StyledForm onSubmit={handleSubmit(submitForm)}>
           <InputsWrapper>
             <SectionWrapper>
               <InputWrapper>
@@ -64,7 +92,7 @@ export function NewPatientForm() {
                       placeholder={`${t(
                         'new-patient.placeholders.first-name'
                       )}`}
-                      status={errors.birthday ? 'error' : ''}
+                      status={errors.firstName ? 'error' : ''}
                     />
                   )}
                 />
@@ -143,7 +171,11 @@ export function NewPatientForm() {
                       format={DATE_FORMAT_REG}
                       allowClear={false}
                       status={errors.dateOfBirth ? 'error' : undefined}
-                      {...field}
+                      ref={field.ref}
+                      name={field.name}
+                      onBlur={field.onBlur}
+                      value={field.value ? dayjs(field.value) : null}
+                      onChange={field.onChange}
                     />
                   )}
                 />
@@ -161,7 +193,6 @@ export function NewPatientForm() {
                   control={control}
                   render={({ field }) => (
                     <StyledSelect
-                      placeholder={`${t('new-patient.placeholders.country')}`}
                       defaultValue="UA"
                       {...field}
                       options={countryOptionsWithCode}
@@ -192,7 +223,7 @@ export function NewPatientForm() {
                 <Label>{t('new-patient.labels.phone-number')}</Label>
                 <PhoneInputWithCountry
                   name="phoneNumber"
-                  defaultCountry={getValues('country') || 'UA'}
+                  defaultCountry={(getValues('country') || 'AO') as CountryCode}
                   control={control}
                 />
                 {errors.phoneNumber && (
