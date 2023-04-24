@@ -12,8 +12,8 @@ import { Input } from 'antd';
 import { Gender, DATE_FORMAT_REG, routes } from 'utils/constants/';
 import { toastConfig } from 'utils/toastConfig';
 import { countryOptionsWithCode } from 'utils/countries/countryOptions';
-
 import { newPatientSchema } from 'validation/newPatientSchema';
+import { IServerError } from 'interfaces/serverResponse';
 import { ICreatePatient } from 'interfaces/patients';
 import { useCreatePatientMutation } from 'redux/api/patientApi';
 
@@ -70,8 +70,10 @@ export function NewPatientForm() {
       await createPatient({ ...dto, dateOfBirth }).unwrap();
       reset();
       toast.success(t('new-patient.info.success'), toastConfig);
-    } catch (e) {
-      toast.error(t('new-patient.info.error'), toastConfig);
+    } catch (err) {
+      const msg = (err as IServerError).data.message;
+
+      toast.error(Array.isArray(msg) ? msg[0] : msg, toastConfig);
     }
   };
 
