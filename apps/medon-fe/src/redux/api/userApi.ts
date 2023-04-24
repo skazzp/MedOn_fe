@@ -12,9 +12,11 @@ export const userApi = createApi({
     baseUrl: process.env.NX_API_URL,
     prepareHeaders: (headers, { getState }) => {
       const { token } = (getState() as RootState).userState;
+
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
+
       return headers;
     },
   }),

@@ -16,9 +16,9 @@ import { useGetUserQuery } from 'redux/api/userApi';
 import { logout, setUser } from 'redux/features/userSlice/userSlice';
 
 import { PatientsPage } from 'pages/PatientsPage';
-import Navigation from 'components/Navigation';
-import { PatientsList } from 'components/PatientsList';
+import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
+import Navigation from 'components/Navigation';
 import { routes } from 'utils/constants/routes';
 
 function App() {

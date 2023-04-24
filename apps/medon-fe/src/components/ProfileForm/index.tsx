@@ -42,7 +42,7 @@ export default function ProfileForm({
 }: IProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  // const [disabled, setDisabled] = useState(true);
+  // const [disabled, setDisabled] = useState<boolean>(true);
   const user = useAppSelector(getUserSelector);
   const { control, handleSubmit, watch, setValue } = useForm<FormProfileData>({
     resolver: yupResolver(profileFormSchema),

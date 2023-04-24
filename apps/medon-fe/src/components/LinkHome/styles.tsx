@@ -9,7 +9,7 @@ export const StyledLinkHome = styled(Link)<LinkHomeStyledProps>`
   justify-content: center;
   cursor: pointer;
   font-family: ${({ theme }) => theme.fontFamily.roboto};
-  background-color: ${({ bgcolor }) => bgcolor};
+  background: ${({ bgcolor }) => bgcolor};
   color: ${({ textcolor }) => textcolor};
   padding: 0.75rem 1.25rem;
   border-radius: 0.5rem;
