@@ -1,15 +1,13 @@
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import dayjs from 'dayjs';
 import { CountryCode } from 'libphonenumber-js';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import PhoneInputWithCountry from 'react-phone-number-input/react-hook-form';
-import { Input } from 'antd';
 
-import { Gender, DATE_FORMAT_REG, routes } from 'utils/constants/';
+import { Gender, routes } from 'utils/constants/';
 import { toastConfig } from 'utils/toastConfig';
 import { countryOptionsWithCode } from 'utils/countries/countryOptions';
 import { newPatientSchema } from 'validation/newPatientSchema';
@@ -17,14 +15,19 @@ import { IServerError } from 'interfaces/serverResponse';
 import { ICreatePatient } from 'interfaces/patients';
 import { useCreatePatientMutation } from 'redux/api/patientApi';
 
-import { LinkGoBack } from 'components/common/LinkGoBack';
+import {
+  LinkGoBack,
+  InputAntD,
+  SelectAntD,
+  DatepickerAntD,
+  TextareaAntD,
+} from 'components/common/';
+
 import {
   Container,
   StyledForm,
   ButtonsWrapper,
   Header,
-  StyledSelect,
-  StyledDatePicker,
   ErrorMsg,
   Label,
   StyledButton,
@@ -32,8 +35,6 @@ import {
   InputsWrapper,
   InputWrapper,
 } from './styles';
-import 'react-phone-number-input/style.css';
-import { InputAntD } from 'components/common/InputAntD';
 
 export function NewPatientForm() {
   const {
@@ -99,120 +100,62 @@ export function NewPatientForm() {
 
               <InputWrapper>
                 <Label>{t('new-patient.labels.last-name')}</Label>
-                <Controller
+                <InputAntD
                   name="lastName"
+                  placeholder={`${t('new-patient.placeholders.last-name')}`}
                   control={control}
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      placeholder={`${t('new-patient.placeholders.last-name')}`}
-                      status={errors.lastName ? 'error' : ''}
-                    />
-                  )}
                 />
-                {errors.lastName && (
-                  <ErrorMsg>{errors.lastName?.message?.toString()}</ErrorMsg>
-                )}
               </InputWrapper>
 
               <InputWrapper>
                 <Label>{t('new-patient.labels.email')}</Label>
-                <Controller
+                <InputAntD
                   name="email"
+                  placeholder={`${t('new-patient.placeholders.email')}`}
                   control={control}
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      placeholder={`${t('new-patient.placeholders.email')}`}
-                      status={errors.email ? 'error' : ''}
-                    />
-                  )}
                 />
-                {errors.email && (
-                  <ErrorMsg>{errors.email?.message?.toString()}</ErrorMsg>
-                )}
               </InputWrapper>
 
               <InputWrapper>
                 <Label>{t('new-patient.labels.gender')}</Label>
-                <Controller
+                <SelectAntD
                   name="gender"
                   control={control}
-                  render={({ field }) => (
-                    <StyledSelect
-                      placeholder={`${t('new-patient.placeholders.gender')}`}
-                      {...field}
-                      options={[
-                        { label: 'Female', value: Gender.Female },
-                        { label: 'Male', value: Gender.Male },
-                      ]}
-                    />
-                  )}
+                  placeholder={`${t('new-patient.placeholders.gender')}`}
+                  options={[
+                    { label: 'Female', value: Gender.Female },
+                    { label: 'Male', value: Gender.Male },
+                  ]}
                 />
-                {errors.gender && (
-                  <ErrorMsg>{errors.gender?.message?.toString()}</ErrorMsg>
-                )}
               </InputWrapper>
 
               <InputWrapper>
                 <Label>{t('new-patient.labels.date-of-birth')}</Label>
-                <Controller
+                <DatepickerAntD
                   name="dateOfBirth"
                   control={control}
-                  render={({ field }) => (
-                    <StyledDatePicker
-                      placeholder={`${t(
-                        'new-patient.placeholders.date-of-birth'
-                      )}`}
-                      format={DATE_FORMAT_REG}
-                      allowClear={false}
-                      status={errors.dateOfBirth ? 'error' : undefined}
-                      ref={field.ref}
-                      name={field.name}
-                      onBlur={field.onBlur}
-                      value={field.value ? dayjs(field.value) : null}
-                      onChange={field.onChange}
-                    />
-                  )}
+                  placeholder={`${t('new-patient.placeholders.date-of-birth')}`}
                 />
-                {errors.dateOfBirth && (
-                  <ErrorMsg>{errors.dateOfBirth?.message?.toString()}</ErrorMsg>
-                )}
               </InputWrapper>
             </SectionWrapper>
 
             <SectionWrapper>
               <InputWrapper>
                 <Label>{t('new-patient.labels.country')}</Label>
-                <Controller
+                <SelectAntD
                   name="country"
                   control={control}
-                  render={({ field }) => (
-                    <StyledSelect
-                      defaultValue="UA"
-                      {...field}
-                      options={countryOptionsWithCode}
-                    />
-                  )}
+                  options={countryOptionsWithCode}
                 />
               </InputWrapper>
 
               <InputWrapper>
                 <Label>{t('new-patient.labels.city')}</Label>
-                <Controller
+                <InputAntD
                   name="city"
+                  placeholder={`${t('new-patient.placeholders.city')}`}
                   control={control}
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      placeholder={`${t('new-patient.placeholders.city')}`}
-                      status={errors.city ? 'error' : ''}
-                    />
-                  )}
                 />
-                {errors.city && (
-                  <ErrorMsg>{errors.city?.message?.toString()}</ErrorMsg>
-                )}
               </InputWrapper>
 
               <InputWrapper>
@@ -229,21 +172,11 @@ export function NewPatientForm() {
 
               <InputWrapper>
                 <Label>{t('new-patient.labels.overview')}</Label>
-                <Controller
+                <TextareaAntD
                   name="overview"
                   control={control}
-                  render={({ field }) => (
-                    <Input.TextArea
-                      {...field}
-                      autoSize={{ minRows: 4 }}
-                      placeholder={`${t('new-patient.placeholders.overview')}`}
-                      status={errors.overview ? 'error' : ''}
-                    />
-                  )}
+                  placeholder={`${t('new-patient.placeholders.overview')}`}
                 />
-                {errors.overview && (
-                  <ErrorMsg>{errors.overview?.message?.toString()}</ErrorMsg>
-                )}
               </InputWrapper>
             </SectionWrapper>
           </InputsWrapper>

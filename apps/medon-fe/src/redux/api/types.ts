@@ -1,6 +1,3 @@
-import { HttpStatus } from 'utils/constants/httpStatus';
-import { Gender } from 'utils/constants/gender';
-
 export interface IUser {
   firstName: string;
   lastName: string;

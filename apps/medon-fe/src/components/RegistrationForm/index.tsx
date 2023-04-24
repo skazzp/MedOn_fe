@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import { InputAntD } from 'components/common/InputAntD';
 import { SelectAntD } from 'components/common/SelectAntD';
-import { DatepickerAntD } from 'components/common/DatepickerAntD';
+import { DatepickerAntD } from 'components/common';
 
 import { registrationFormSchema } from 'validation/registrationFormSchema';
 import { countryOptions } from 'utils/countries/countryOptions';
