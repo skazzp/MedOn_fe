@@ -246,6 +246,10 @@
       "overview": "Enter overview"
     },
     "submit-btn": "Save Patient",
-    "cancel-btn": "Cancel"
+    "cancel-btn": "Cancel",
+    "info": {
+      "success": "Patient successfully was added!",
+      "error": "Patient wasn't added!"
+    }
   }
 }

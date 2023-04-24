@@ -38,7 +38,7 @@ export const ButtonsWrapper = styled.div`
   gap: 20px;
 
   button {
-    width: 120px;
+    width: 140px;
   }
 `;
 export const SectionWrapper = styled.div`

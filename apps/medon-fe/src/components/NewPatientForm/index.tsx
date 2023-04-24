@@ -1,20 +1,23 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
-import { toastConfig } from 'utils/toastConfig';
 import dayjs from 'dayjs';
+import { CountryCode } from 'libphonenumber-js';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import PhoneInputWithCountry from 'react-phone-number-input/react-hook-form';
 import { Input } from 'antd';
-import { LinkGoBack } from 'components/LinkGoBack';
-import { Gender } from 'utils/constants/gender';
-import { CountryCode } from 'libphonenumber-js';
-import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
+
+import { Gender, DATE_FORMAT_REG, routes } from 'utils/constants/';
+import { toastConfig } from 'utils/toastConfig';
 import { countryOptionsWithCode } from 'utils/countries/countryOptions';
+
 import { newPatientSchema } from 'validation/newPatientSchema';
 import { ICreatePatient } from 'interfaces/patients';
 import { useCreatePatientMutation } from 'redux/api/patientApi';
+
+import { LinkGoBack } from 'components/LinkGoBack';
 import {
   Container,
   StyledForm,
@@ -55,9 +58,10 @@ export function NewPatientForm() {
     },
   });
 
-  const [createPatient] = useCreatePatientMutation();
+  const [createPatient, { isLoading }] = useCreatePatientMutation();
 
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const submitForm = async (dto: ICreatePatient): Promise<void> => {
     try {
@@ -65,9 +69,9 @@ export function NewPatientForm() {
 
       await createPatient({ ...dto, dateOfBirth }).unwrap();
       reset();
-      toast.success('Patient successfully was added!', toastConfig);
+      toast.success(t('new-patient.info.success'), toastConfig);
     } catch (e) {
-      toast.error(`Patient wasn't added!`, toastConfig);
+      toast.error(t('new-patient.info.error'), toastConfig);
     }
   };
 
@@ -253,10 +257,13 @@ export function NewPatientForm() {
           </InputsWrapper>
 
           <ButtonsWrapper>
-            <StyledButton type="default">
+            <StyledButton
+              type="default"
+              onClick={() => navigate(routes.patients)}
+            >
               {t('new-patient.cancel-btn')}
             </StyledButton>
-            <StyledButton type="primary" htmlType="submit">
+            <StyledButton type="primary" htmlType="submit" loading={isLoading}>
               {t('new-patient.submit-btn')}
             </StyledButton>
           </ButtonsWrapper>
