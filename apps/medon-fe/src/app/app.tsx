@@ -6,6 +6,8 @@ import ForgetPassword from 'pages/ForgetPassword';
 import ResetPassword from 'pages/ResetPassword';
 import ResendConfirmation from 'pages/ResendConfirmation';
 import UpdatePassword from 'pages/UpdatePassword';
+import ProfilePage from 'pages/ProfilePage';
+
 import { PatientsPage } from 'pages/PatientsPage';
 import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
@@ -19,6 +21,7 @@ function App() {
       <Route path={routes.register} element={<RegistrationPage />} />
       <Route path={routes.forgetPassword} element={<ForgetPassword />} />
       <Route path={routes.dashboard} element={<Navigation />} />
+      <Route path={routes.profile} element={<ProfilePage />} />
       <Route path={routes.resetPassword} element={<ResetPassword />} />
       <Route
         path={routes.resendConfirmation}

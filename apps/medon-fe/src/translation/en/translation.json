@@ -217,6 +217,48 @@
       "linkPrivacy": "Privacy policy"
     }
   },
+  "profileForm": {
+    "profilePicAlt": "User's profile avatar",
+    "profileBtn": "Update Profile",
+    "changePasswordBtn": "Change Password",
+    "editProfileBtn": "Edit Profile",
+    "firstName": {
+      "label": "First Name",
+      "placeholder": "Enter your first name"
+    },
+    "lastName": {
+      "label": "Last Name",
+      "placeholder": "Enter your last name"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter your email"
+    },
+    "role": {
+      "label": "Role",
+      "placeholder": "Select your role"
+    },
+    "birthday": {
+      "label": "Birth Date",
+      "placeholder": "DD/MM/YYYY"
+    },
+    "country": {
+      "label": "Country",
+      "placeholder": "Enter your country"
+    },
+    "city": {
+      "label": "City",
+      "placeholder": "Enter your city"
+    },
+    "timezone": {
+      "label": "Time zone",
+      "placeholder": "Select your time zone"
+    },
+    "speciality": {
+      "label": "Speciality",
+      "placeholder": "Select your speciality"
+    }
+  },
   "logout": {
     "title": "Logout",
     "description": "Are you sure you want to logout?"

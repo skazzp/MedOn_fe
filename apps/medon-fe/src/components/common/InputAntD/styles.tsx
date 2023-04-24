@@ -1,10 +1,5 @@
-import { Select } from 'antd';
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
-
-export const StyledSelect = styled(Select)`
-  width: 100%;
-`;
 
 export const LabelText = styled.p`
   margin-top: 0;
@@ -26,3 +21,14 @@ export const ErrorMsg = styled.p`
   letter-spacing: 0em;
   color: ${theme.colors.red_500};
 `;
+
+export const AntInputDisabledStyle = {
+  backgroundColor: theme.colors.gray_100,
+  color: theme.colors.black,
+  cursor: 'default',
+};
+
+export const AntInputStyle = {
+  backgroundColor: theme.colors.white,
+  color: theme.colors.black,
+};
