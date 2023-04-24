@@ -70,7 +70,10 @@ export const ErrorMsg = styled.p`
 export const StyledDatePicker = styled(DatePicker)`
   width: 100%;
   input {
-    cursor: default !important;
+    &:disabled {
+      cursor: default !important;
+      color: ${theme.colors.black} !important;
+    }
   }
 `;
 
