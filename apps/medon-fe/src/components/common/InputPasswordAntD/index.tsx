@@ -7,7 +7,12 @@ import {
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { AntInputDisabledStyle, AntInputStyle, ErrorMsg } from './styles';
+import {
+  AntInputDisabledStyle,
+  AntInputStyle,
+  Container,
+  ErrorMsg,
+} from './styles';
 
 interface IInputAntDProps {
   placeholder?: string;
@@ -32,7 +37,7 @@ export function InputPasswordAntD<
   const { t } = useTranslation();
 
   return (
-    <>
+    <Container>
       <Input.Password
         id={name}
         size={size}
@@ -46,6 +51,6 @@ export function InputPasswordAntD<
       {fieldState.error?.message && (
         <ErrorMsg role="alert">{t(`${fieldState.error?.message}`)}</ErrorMsg>
       )}
-    </>
+    </Container>
   );
 }

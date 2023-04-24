@@ -6,7 +6,7 @@ import {
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { ErrorMsg, StyledSelect } from './styles';
+import { Container, ErrorMsg, StyledSelect } from './styles';
 
 export interface Option {
   value: string | number;
@@ -38,7 +38,7 @@ export function SelectAntD<
   const { t } = useTranslation();
 
   return (
-    <>
+    <Container>
       <StyledSelect
         showSearch
         id={name}
@@ -55,6 +55,6 @@ export function SelectAntD<
       {fieldState.error?.message && (
         <ErrorMsg role="alert">{t(`${fieldState.error?.message}`)}</ErrorMsg>
       )}
-    </>
+    </Container>
   );
 }
