@@ -3,7 +3,6 @@ export * from './gender';
 export * from './httpStatus';
 export * from './navigation';
 export * from './optionsMenuDropdown';
-export * from './regFormFields';
 export * from './roles';
 export * from './routes';
 export * from './toast';

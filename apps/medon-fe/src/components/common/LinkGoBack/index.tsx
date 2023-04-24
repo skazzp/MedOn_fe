@@ -4,7 +4,7 @@ import {
   StyledSpan,
   StyledLink,
   StyledImg,
-} from 'components/LinkGoBack/styles';
+} from 'components/common/LinkGoBack/styles';
 import LeftArrow from 'assets/svgs/arrow/left-arrow.svg';
 
 export function LinkGoBack({ children }: { children: React.ReactNode }) {

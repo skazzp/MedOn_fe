@@ -17,7 +17,7 @@ import { IServerError } from 'interfaces/serverResponse';
 import { ICreatePatient } from 'interfaces/patients';
 import { useCreatePatientMutation } from 'redux/api/patientApi';
 
-import { LinkGoBack } from 'components/LinkGoBack';
+import { LinkGoBack } from 'components/common/LinkGoBack';
 import {
   Container,
   StyledForm,
@@ -33,6 +33,7 @@ import {
   InputWrapper,
 } from './styles';
 import 'react-phone-number-input/style.css';
+import { InputAntD } from 'components/common/InputAntD';
 
 export function NewPatientForm() {
   const {
@@ -89,22 +90,11 @@ export function NewPatientForm() {
             <SectionWrapper>
               <InputWrapper>
                 <Label>{t('new-patient.labels.first-name')}</Label>
-                <Controller
+                <InputAntD
                   name="firstName"
+                  placeholder={`${t('new-patient.placeholders.first-name')}`}
                   control={control}
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      placeholder={`${t(
-                        'new-patient.placeholders.first-name'
-                      )}`}
-                      status={errors.firstName ? 'error' : ''}
-                    />
-                  )}
                 />
-                {errors.firstName && (
-                  <ErrorMsg>{errors.firstName?.message?.toString()}</ErrorMsg>
-                )}
               </InputWrapper>
 
               <InputWrapper>
