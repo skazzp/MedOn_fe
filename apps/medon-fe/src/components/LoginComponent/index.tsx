@@ -27,12 +27,13 @@ export default function LoginComponent() {
 
   useEffect(() => {
     if (verifyEmail.isSuccess) {
+      dispatch(setIsVerified(true));
       toast.success(t('regConfirm.msgVerifySuccess'), toastConfig);
     }
     if (verifyEmail.error) {
       toast.error(t('regConfirm.msgVerifyError'), toastConfig);
     }
-  }, [verifyEmail.isSuccess, verifyEmail.error, t]);
+  }, [verifyEmail.isSuccess, verifyEmail.error, t, dispatch]);
 
   useEffect(() => {
     if (authToken) {

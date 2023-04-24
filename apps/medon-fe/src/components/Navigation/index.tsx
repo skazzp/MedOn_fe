@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useAppSelector } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 import {
@@ -23,14 +23,16 @@ import profileImagePlaceholder from 'assets/images/Avatar.svg';
 import Logo from 'components/Logo';
 import { routes } from 'utils/constants/routes';
 import { persistedStore } from 'redux/store';
+import { logout } from 'redux/features/userSlice/userSlice';
 
 export default function Navigation() {
   const { t } = useTranslation();
-
+  const dispatch = useAppDispatch();
   const user = useAppSelector(getUserSelector);
 
   const handleLogout = () => {
     persistedStore.purge();
+    dispatch(logout());
   };
 
   const navItems = [

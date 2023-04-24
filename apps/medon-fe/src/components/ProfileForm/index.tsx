@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
 
 import { InputAntD } from 'components/common/InputAntD';
 import { SelectAntD } from 'components/common/SelectAntD';
@@ -17,6 +18,7 @@ import { profileFormSchema } from 'validation/profileFormSchema';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 import useSpecOptions from 'components/RegistrationForm/useSpecOptions';
+import { routes } from 'utils/constants/routes';
 import { FormProfileData } from './types';
 import {
   Container,
@@ -42,7 +44,7 @@ export default function ProfileForm({
 }: IProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  // const [disabled, setDisabled] = useState<boolean>(true);
+  const navigate = useNavigate();
   const user = useAppSelector(getUserSelector);
   const { control, handleSubmit, watch, setValue } = useForm<FormProfileData>({
     resolver: yupResolver(profileFormSchema),
@@ -61,6 +63,12 @@ export default function ProfileForm({
   const { specialityOptions } = useSpecOptions();
   const role = watch(formFields.role);
 
+const handleUpdatePassword = () => {
+  navigate(routes.updatePassword);
+};
+
+  const onSubmit = handleSubmit(submitForm);
+
   useEffect(() => {
     if (user) {
       setValue('firstName', user.firstName);
@@ -76,8 +84,6 @@ export default function ProfileForm({
       }
     }
   }, [dispatch, setValue, user]);
-
-  const onSubmit = handleSubmit(submitForm);
 
   return (
     <Container>
@@ -116,12 +122,42 @@ export default function ProfileForm({
               <InputAntD
                 name={formFields.email}
                 control={control}
-                disabled={disabled}
+                disabled={true}
                 placeholder={`${t('profileForm.email.placeholder')}`}
                 size="large"
               />
             </Label>
           </InputContainer>
+          {!user.role && (
+            <InputContainer>
+              <Label htmlFor="role">
+                <LabelText>{t('profileForm.role.label')}</LabelText>
+                <SelectAntD
+                  name={formFields.role}
+                  control={control}
+                  disabled={disabled}
+                  size="large"
+                  placeholder={`${t('profileForm.role.placeholder')}`}
+                  options={ROLE_OPTIONS}
+                />
+              </Label>
+            </InputContainer>
+          )}
+          {role === ROLES.REMOTE && (
+            <InputContainer>
+              <Label htmlFor="speciality">
+                <LabelText>{t('profileForm.speciality.label')}</LabelText>
+                <SelectAntD
+                  name={formFields.speciality}
+                  control={control}
+                  disabled={disabled}
+                  size="large"
+                  placeholder={`${t('profileForm.speciality.placeholder')}`}
+                  options={specialityOptions}
+                />
+              </Label>
+            </InputContainer>
+          )}
           <InputContainer>
             <Label htmlFor="birthday">
               <LabelText>{t('profileForm.birthday.label')}</LabelText>
@@ -172,34 +208,7 @@ export default function ProfileForm({
               />
             </Label>
           </InputContainer>
-          <InputContainer>
-            <Label htmlFor="role">
-              <LabelText>{t('profileForm.role.label')}</LabelText>
-              <SelectAntD
-                name={formFields.role}
-                control={control}
-                disabled={disabled}
-                size="large"
-                placeholder={`${t('profileForm.role.placeholder')}`}
-                options={ROLE_OPTIONS}
-              />
-            </Label>
-          </InputContainer>
-          {role === ROLES.REMOTE && (
-            <InputContainer>
-              <Label htmlFor="speciality">
-                <LabelText>{t('profileForm.speciality.label')}</LabelText>
-                <SelectAntD
-                  name={formFields.speciality}
-                  control={control}
-                  disabled={disabled}
-                  size="large"
-                  placeholder={`${t('profileForm.speciality.placeholder')}`}
-                  options={specialityOptions}
-                />
-              </Label>
-            </InputContainer>
-          )}
+
           <ButtonContainer>
             {disabled && (
               <StyledButton
@@ -217,7 +226,11 @@ export default function ProfileForm({
                 {t('profileForm.profileBtn')}
               </StyledButton>
             )}
-            <StyledButton size="large" htmlType="button" disabled={true}>
+            <StyledButton
+              size="large"
+              htmlType="button"
+              onClick={handleUpdatePassword}
+            >
               {t('profileForm.changePasswordBtn')}
             </StyledButton>
           </ButtonContainer>

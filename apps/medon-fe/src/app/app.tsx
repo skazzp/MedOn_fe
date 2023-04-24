@@ -20,6 +20,8 @@ import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
 import Navigation from 'components/Navigation';
 import { routes } from 'utils/constants/routes';
+// import { ProfileRoute } from 'components/Routes/ProfileRoute';
+import { persistedStore } from 'redux/store';
 
 function App() {
   const isLoggedIn = useAppSelector(getTokenSelector);
@@ -31,12 +33,17 @@ function App() {
       dispatch(setUser(data.data));
     }
     if (error) {
+      persistedStore.purge();
       dispatch(logout());
     }
   }, [data, error, dispatch]);
 
   return (
     <Routes>
+      <Route
+        path={routes.home}
+        element={<PublicRoute component={<Login />} />}
+      />
       <Route
         path={routes.login}
         element={<PublicRoute component={<Login />} />}
@@ -54,18 +61,22 @@ function App() {
         element={<PublicRoute component={<ResetPassword />} />}
       />
 
-      <Route path={routes.dashboard} element={<Navigation />} />
+      <Route
+        path={routes.dashboard}
+        element={<PrivateRoute component={<Navigation />} />}
+      />
       <Route
         path={routes.profile}
         element={<PrivateRoute component={<ProfilePage />} />}
       />
       <Route
         path={routes.resendConfirmation}
-        element={<PrivateRoute component={<ResendConfirmation />} />}
+        element={<ResendConfirmation />}
       />
       <Route
         path={routes.updatePassword}
         element={<PrivateRoute component={<UpdatePassword />} />}
+        // element={<UpdatePassword />}
       />
       <Route
         path={routes.patients}
