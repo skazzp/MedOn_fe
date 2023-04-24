@@ -1,49 +1,15 @@
 import styled from 'styled-components';
-import { Button, DatePicker } from 'antd';
+import { DatePicker } from 'antd';
 import { theme } from 'styles/theme';
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: relative;
+  width: 100%;
 `;
 
 export const Label = styled.label`
   font-family: ${theme.fontFamily.sf_pro_text};
   font-size: ${theme.fontSizes.xs};
-`;
-
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 27rem;
-  gap: 1.5rem;
-`;
-
-export const InputContainer = styled.div`
-  display: block;
-  width: 100%;
-`;
-
-export const StyledButton = styled(Button)`
-  background: ${theme.colors.btnGradient};
-  font-family: ${theme.fontFamily.sf_pro_text};
-  color: ${theme.colors.white};
-  min-width: 10rem;
-  padding: 8px;
-  font-size: ${theme.fontSizes.sm};
-  font-weight: bold;
-  width: 200;
-`;
-
-export const ButtonContainer = styled.div`
-  display: flex;
-  padding: 24px;
-  justify-content: space-between;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 16px;
 `;
 
 export const LabelText = styled.p`
@@ -59,7 +25,6 @@ export const LabelText = styled.p`
 export const ErrorMsg = styled.p`
   position: absolute;
   margin-top: 0.2rem;
-  width: 13rem;
   font-family: ${theme.fontFamily.sf_pro_text};
   font-size: ${theme.fontSizes.xs};
   font-weight: 400;
@@ -75,11 +40,6 @@ export const StyledDatePicker = styled(DatePicker)`
       color: ${theme.colors.black} !important;
     }
   }
-`;
-
-export const ImageContainer = styled.div`
-  display: flex;
-  margin-bottom: 2rem;
 `;
 
 export const AntInputDisabledStyle = {
