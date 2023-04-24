@@ -15,10 +15,11 @@ describe('Input component', () => {
   it('renders correctly', () => {
     render(
       <Wrapper>
-        <Input />
+        <Input errorMessage="" />
       </Wrapper>
     );
     const inputElement = screen.getByRole('textbox');
+
     expect(inputElement).toBeInTheDocument();
   });
 
@@ -29,6 +30,7 @@ describe('Input component', () => {
       </Wrapper>
     );
     const errorElement = screen.getByText('Invalid input');
+
     expect(errorElement).toBeInTheDocument();
   });
 
@@ -39,6 +41,7 @@ describe('Input component', () => {
       </Wrapper>
     );
     const inputElement = screen.getByRole('textbox');
+
     expect(inputElement).toHaveStyle({
       border: `1px solid ${theme.colors.red_500}`,
     });
@@ -47,10 +50,11 @@ describe('Input component', () => {
   it('does not apply error border if errorMessage prop is not provided', () => {
     render(
       <Wrapper>
-        <Input />
+        <Input errorMessage="" />
       </Wrapper>
     );
     const inputElement = screen.getByRole('textbox');
+
     expect(inputElement).toHaveStyle({
       border: `1px solid ${theme.colors.gray_400}`,
     });
@@ -58,12 +62,14 @@ describe('Input component', () => {
 
   it('forwards refs to the input element', () => {
     const ref = React.createRef<HTMLInputElement>();
+
     render(
       <Wrapper>
-        <Input ref={ref} />
+        <Input ref={ref} errorMessage="" />
       </Wrapper>
     );
     const inputElement = screen.getByRole('textbox');
+
     expect(inputElement).toEqual(ref.current);
   });
 });

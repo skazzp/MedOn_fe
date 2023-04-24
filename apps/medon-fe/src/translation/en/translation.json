@@ -116,6 +116,18 @@
       "linkPrivacy": "Privacy policy"
     }
   },
+  "patient-list": {
+    "choose": "Choose Patient",
+    "list": "Latest Patients",
+    "link": "Create Patient",
+    "age-suffix": "y.o.",
+    "show": {
+      "more": "Show More",
+      "less": "Show Less"
+    },
+    "placeholder": "Search ",
+    "no-data": "There's no patient in the list"
+  },
   "update-password": {
     "reset-password": {
       "title": "Update your Password",
