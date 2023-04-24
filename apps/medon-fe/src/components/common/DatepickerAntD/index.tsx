@@ -11,6 +11,7 @@ import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
 import {
   AntInputDisabledStyle,
   AntInputStyle,
+  Container,
   ErrorMsg,
   StyledDatePicker,
 } from './styles';
@@ -38,7 +39,7 @@ export function DatepickerAntD<
   const { t } = useTranslation();
 
   return (
-    <>
+    <Container>
       <StyledDatePicker
         id={name}
         placeholder={placeholder}
@@ -59,6 +60,6 @@ export function DatepickerAntD<
       {fieldState.error?.message && (
         <ErrorMsg role="alert">{t(`${fieldState.error?.message}`)}</ErrorMsg>
       )}
-    </>
+    </Container>
   );
 }
