@@ -18,15 +18,15 @@ export const newPatientSchema = yup.object({
     .matches(/^[a-zA-Z]+$/, { message: 'Only letters are required' })
     .required(),
 
-  email: yup.string().label('Email').email().required(),
+  email: yup.string().label('Email').email().max(40).required(),
 
   gender: yup.mixed().label('Gender').oneOf(['male', 'female']).required(),
 
   dateOfBirth: yup.string().label('Date of birth').required(),
 
-  country: yup.string().label('Country').required(),
+  country: yup.string().label('Country').max(4).required(),
 
-  city: yup.string().label('City').required(),
+  city: yup.string().label('City').max(40).required(),
 
   phoneNumber: yup
     .string()
@@ -34,4 +34,6 @@ export const newPatientSchema = yup.object({
     .test('phone-number', 'Invalid phone number', (value) =>
       value ? isValidPhoneNumber(value) : false
     ),
+
+  overview: yup.string().label('Overview').max(400),
 });

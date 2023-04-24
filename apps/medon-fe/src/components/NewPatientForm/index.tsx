@@ -59,7 +59,7 @@ export function NewPatientForm() {
 
   const { t } = useTranslation();
 
-  const submitForm = async (dto: ICreatePatient) => {
+  const submitForm = async (dto: ICreatePatient): Promise<void> => {
     try {
       const dateOfBirth = new Date(dto.dateOfBirth);
 
