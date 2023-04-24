@@ -44,7 +44,6 @@ const LoginForm: FC = () => {
   };
 
   const handleGoogleClick = () => {
-    // window.location.href = 'http://localhost:3333/auth/google/login';
     window.location.href = `${process.env.NX_API_URL}${process.env.NX_API_GOOGLE_ROUTE}`;
   };
 

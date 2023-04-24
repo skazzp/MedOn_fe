@@ -36,7 +36,3 @@ export const AntInputStyle = {
   backgroundColor: theme.colors.white,
   color: theme.colors.black,
 };
-
-export const Container = styled.div`
-  position: relative;
-`;
