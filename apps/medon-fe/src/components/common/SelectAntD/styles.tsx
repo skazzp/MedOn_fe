@@ -25,14 +25,17 @@ export const ErrorMsg = styled.p`
 
 export const StyledSelect = styled(Select)`
   width: 100%;
+  &.ant-select-disabled {
+    cursor: default !important;
+  }
   .ant-select-selector {
     color: ${theme.colors.black} !important;
     background-color: ${(p) =>
       p.disabled && p.theme.colors.gray_100} !important;
-    cursor: default !important;
+    cursor: inherit !important;
   }
   input {
-    cursor: default !important;
+    cursor: text !important;
   }
 `;
 
@@ -45,4 +48,5 @@ export const AntInputDisabledStyle = {
 export const AntInputStyle = {
   backgroundColor: theme.colors.white,
   color: theme.colors.black,
+  cursor: 'text',
 };
