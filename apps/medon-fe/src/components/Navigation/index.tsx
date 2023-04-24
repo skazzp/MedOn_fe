@@ -79,7 +79,7 @@ export default function Navigation() {
           <BlockName>
             {' '}
             <UserName>{`Dr.${user?.lastName}`}</UserName>
-            <SpecName>{user?.speciality}</SpecName>
+            <SpecName>{user?.specialityId}</SpecName>
           </BlockName>
         </UserBlock>
       </HeaderBlock>

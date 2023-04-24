@@ -37,18 +37,40 @@ function App() {
 
   return (
     <Routes>
-      <Route path={routes.login} element={<Login />} />
-      <Route path={routes.register} element={<RegistrationPage />} />
-      <Route path={routes.forgetPassword} element={<ForgetPassword />} />
+      <Route
+        path={routes.login}
+        element={<PublicRoute component={<Login />} />}
+      />
+      <Route
+        path={routes.register}
+        element={<PublicRoute component={<RegistrationPage />} />}
+      />
+      <Route
+        path={routes.forgetPassword}
+        element={<PublicRoute component={<ForgetPassword />} />}
+      />
+      <Route
+        path={routes.resetPassword}
+        element={<PublicRoute component={<ResetPassword />} />}
+      />
+
       <Route path={routes.dashboard} element={<Navigation />} />
-      <Route path={routes.profile} element={<ProfilePage />} />
-      <Route path={routes.resetPassword} element={<ResetPassword />} />
+      <Route
+        path={routes.profile}
+        element={<PrivateRoute component={<ProfilePage />} />}
+      />
       <Route
         path={routes.resendConfirmation}
-        element={<ResendConfirmation />}
+        element={<PrivateRoute component={<ResendConfirmation />} />}
       />
-      <Route path={routes.updatePassword} element={<UpdatePassword />} />
-      <Route path={routes.patients} element={<PatientsPage />}>
+      <Route
+        path={routes.updatePassword}
+        element={<PrivateRoute component={<UpdatePassword />} />}
+      />
+      <Route
+        path={routes.patients}
+        element={<PrivateRoute component={<PatientsPage />} />}
+      >
         <Route index element={<PatientsList />} />
         <Route path={routes.addPatient} element={<NewPatientForm />} />
       </Route>
