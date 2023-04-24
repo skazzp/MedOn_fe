@@ -30,7 +30,7 @@ import {
 
 export default function ProfileForm() {
   const { t } = useTranslation();
-  const [disabled, setDisabled] = useState(true);
+  const [disabled, setDisabled] = useState<boolean>(true);
   const { control, handleSubmit, watch } = useForm<FormProfileData>({
     resolver: yupResolver(profileFormSchema),
     defaultValues: {
