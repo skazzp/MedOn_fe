@@ -1,6 +1,7 @@
 import { theme } from 'styles/theme';
 import styled from 'styled-components';
 import { Button, Input } from 'antd';
+import GoogleButton from 'react-google-button';
 
 export const FormContainer = styled.div`
   display: flex;
@@ -52,4 +53,8 @@ export const ForgotButton = styled(Button)`
 export const DontHaveButton = styled(Button)`
   margin-right: 70%;
   color: ${theme.colors.black};
+`;
+
+export const StyledGoogleBtn = styled(GoogleButton)`
+  width: 100% !important;
 `;

@@ -10,6 +10,7 @@ import {
   DontHaveButton,
   ForgotButton,
   SendButton,
+  StyledGoogleBtn,
 } from 'components/LoginForm/style';
 import { loginFormSchema } from 'validation/loginSchema';
 import { LoginRequest } from 'redux/api/types';
@@ -113,7 +114,7 @@ const LoginForm: FC = () => {
         value={`${t('login.login')}`}
         disabled={isLoading}
       />
-      <GoogleButton type="light" onClick={handleGoogleClick} />
+      <StyledGoogleBtn type="light" onClick={handleGoogleClick} />
       <DontHaveButton type="link" href="/register">
         {t('login.dont-have')}
       </DontHaveButton>
