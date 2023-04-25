@@ -14,7 +14,6 @@ interface IProps {
 
 export const PrivateRoute = ({ component }: IProps) => {
   const isLoggedIn = useAppSelector(getTokenSelector);
-  // const isVerified = useAppSelector(getIsVerifiedSelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { pathname } = useLocation();
