@@ -1,11 +1,4 @@
 {
-  "title": "Hello World!",
-  "form": {
-    "label1": "First Name",
-    "label2": "Last Name",
-    "btn-set": "Set Value",
-    "btn-submit": "Submit"
-  },
   "logoAlt": "MedOn Logo",
   "regPage": {
     "title": "Registration",
@@ -217,6 +210,10 @@
       "linkPrivacy": "Privacy policy"
     }
   },
+  "profilePage": {
+    "fillProfile": "You need to fill your profile before start working!",
+    "updateError": "Profile update error, try again!"
+  },
   "profileForm": {
     "profilePicAlt": "User's profile avatar",
     "profileBtn": "Update Profile",
@@ -257,10 +254,6 @@
     "timezone": {
       "label": "Time zone",
       "placeholder": "Select your time zone"
-    },
-    "speciality": {
-      "label": "Speciality",
-      "placeholder": "Select your speciality"
     }
   },
   "logout": {

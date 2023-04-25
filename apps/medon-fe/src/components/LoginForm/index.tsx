@@ -19,6 +19,7 @@ import { toastConfig } from 'utils/toastConfig';
 import { useAppDispatch } from 'redux/hooks';
 import { setIsVerified, setToken } from 'redux/features/userSlice/userSlice';
 import { useLoginMutation } from 'redux/api/authApi';
+import { userApi } from 'redux/api/userApi';
 
 const LoginForm: FC = () => {
   const { t } = useTranslation();
@@ -37,6 +38,7 @@ const LoginForm: FC = () => {
 
   const onSubmitHandler = async (formData: LoginRequest) => {
     try {
+      dispatch(userApi.util.invalidateTags(['user']));
       await login(formData).unwrap();
     } catch (error) {
       toast.error(t('login.error-msg'), toastConfig);

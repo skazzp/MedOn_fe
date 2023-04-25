@@ -28,14 +28,14 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (data) {
+    if (isLoggedIn && data) {
       dispatch(setUser(data.data));
     }
     if (error) {
       persistedStore.purge();
       dispatch(logout());
     }
-  }, [data, error, dispatch]);
+  }, [data, error, dispatch, isLoggedIn]);
 
   return (
     <Routes>
@@ -75,7 +75,6 @@ function App() {
       <Route
         path={routes.updatePassword}
         element={<PrivateRoute component={<UpdatePassword />} />}
-        // element={<UpdatePassword />}
       />
       <Route
         path={routes.patients}

@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
-import dayjs from 'dayjs';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -46,44 +45,45 @@ export default function ProfileForm({
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector(getUserSelector);
-  const { control, handleSubmit, watch, setValue } = useForm<FormProfileData>({
-    resolver: yupResolver(profileFormSchema),
-    defaultValues: {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      role: user.role,
-      speciality: user.specialityId,
-      birthday: user.dateOfBirth,
-      country: user.country,
-      city: user.city ?? '',
-      timezone: user.timeZone,
-    },
-  });
+  const { control, handleSubmit, watch, reset, setValue } =
+    useForm<FormProfileData>({
+      resolver: yupResolver(profileFormSchema),
+      defaultValues: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        role: user.role,
+        speciality: user.specialityId,
+        birthday: user.dateOfBirth,
+        country: user.country,
+        city: user.city,
+        timezone: user.timeZone,
+      },
+    });
   const { specialityOptions } = useSpecOptions();
   const role = watch(formFields.role);
 
-const handleUpdatePassword = () => {
-  navigate(routes.updatePassword);
-};
+  const handleUpdatePassword = () => {
+    navigate(routes.updatePassword);
+  };
 
   const onSubmit = handleSubmit(submitForm);
 
   useEffect(() => {
-    if (user) {
-      setValue('firstName', user.firstName);
-      setValue('lastName', user.lastName);
-      setValue('email', user.email);
-      setValue('role', user.role);
-      setValue('country', user.country);
-      setValue('city', user.city);
-      setValue('timezone', user.timeZone);
-      setValue('speciality', user.specialityId);
-      if (user.dateOfBirth) {
-        setValue('birthday', dayjs(user.dateOfBirth));
-      }
+    if (user.email) {
+      reset({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        role: user.role,
+        country: user.country,
+        city: user.city,
+        timezone: user.timeZone,
+        speciality: user.specialityId,
+        birthday: user.dateOfBirth,
+      });
     }
-  }, [dispatch, setValue, user]);
+  }, [dispatch, reset, setValue, user]);
 
   return (
     <Container>
@@ -208,7 +208,6 @@ const handleUpdatePassword = () => {
               />
             </Label>
           </InputContainer>
-
           <ButtonContainer>
             {disabled && (
               <StyledButton

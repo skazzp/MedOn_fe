@@ -28,6 +28,7 @@ export const userApi = createApi({
           url: 'user/profile',
         };
       },
+      providesTags: ['user'],
     }),
     updateUser: builder.mutation<UserDataResponse, UpdateProfileData>({
       query(data) {
@@ -37,6 +38,7 @@ export const userApi = createApi({
           body: data,
         };
       },
+      invalidatesTags: ['user'],
     }),
   }),
 });
