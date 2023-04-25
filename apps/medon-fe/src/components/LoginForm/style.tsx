@@ -1,4 +1,3 @@
-import GoogleButton from 'react-google-button';
 import { Button, Input } from 'antd';
 import { theme } from 'styles/theme';
 import styled from 'styled-components';
@@ -35,6 +34,7 @@ export const SendButton = styled(Input)`
   background: ${theme.colors.blue_300};
   color: ${theme.colors.white};
   cursor: pointer;
+  font-weight: 500;
   padding: 16px 24px 16px 24px;
 `;
 
@@ -55,6 +55,12 @@ export const DontHaveButton = styled(Button)`
   color: ${theme.colors.black};
 `;
 
-export const StyledGoogleBtn = styled(GoogleButton)`
-  width: 100% !important;
+export const GoogleBtn = styled(Button)`
+  border-color: ${theme.colors.blue_300};
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 58px !important;
+  text-decoration: none;
 `;
