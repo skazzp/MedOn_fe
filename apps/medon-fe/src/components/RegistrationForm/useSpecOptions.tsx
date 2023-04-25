@@ -1,6 +1,6 @@
 import { useGetSpecialitiesQuery } from 'redux/api/authApi';
 
-interface Option {
+export interface Option {
   value: string | number;
   label: string;
 }

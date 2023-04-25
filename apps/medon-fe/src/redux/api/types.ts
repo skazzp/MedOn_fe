@@ -1,9 +1,11 @@
+import { Dayjs } from 'dayjs';
+
 export interface IUser {
   firstName: string;
   lastName: string;
   email: string;
   role: string | null;
-  speciality: string | null;
+  specialityId: number | null;
   photo: string;
   dateOfBirth: Date | null;
   isVerified: boolean;
@@ -45,6 +47,21 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface UserDataResponse {
+  data: IUser;
+}
+
+export interface UpdateProfileData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  dateOfBirth: Dayjs | string;
+  role: string | null;
+  specialityId: number | null;
+  country: string | null;
+  city: string | null;
+  timeZone: string | null;
+}
 export interface LoginResponse {
   token: string;
   isVerified: boolean;

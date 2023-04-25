@@ -16,3 +16,5 @@ export const routes = {
   patientCard: '/patients/card',
   addPatient: '/patients/add-new',
 };
+
+export const localDoctorRoutes = [routes.addPatient];

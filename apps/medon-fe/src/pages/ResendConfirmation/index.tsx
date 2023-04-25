@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -22,9 +22,13 @@ import {
 import { SubmitSendEmail } from 'pages/ResendConfirmation/types';
 import { emailSchema } from 'validation/accountConfirmationSchema';
 import { useResendEmailMutation } from 'redux/api/authApi';
+import { persistedStore } from 'redux/store';
+import { useAppDispatch } from 'redux/hooks';
+import { logout } from 'redux/features/userSlice/userSlice';
 
 export default function ResendConfirmation() {
   const [isEmailSent, setIsEmailSent] = useState(false);
+  const dispatch = useAppDispatch();
   const [resendEmail] = useResendEmailMutation();
   const {
     register,
@@ -51,6 +55,11 @@ export default function ResendConfirmation() {
       toast.error(t('regConfirm.msgEmailError'), toastConfig);
     }
   };
+
+  useEffect(() => {
+    persistedStore.purge();
+    dispatch(logout());
+  }, [dispatch]);
 
   return (
     <Container>

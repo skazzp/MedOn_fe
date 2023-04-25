@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
-import { useResendEmailMutation } from 'redux/api/authApi';
 import { toast } from 'react-toastify';
+
+import { useResendEmailMutation } from 'redux/api/authApi';
 import { toastConfig } from 'utils/toastConfig';
 import { BackBtn, Btn, Container, Text, Title } from './styles';
 

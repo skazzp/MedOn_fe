@@ -1,6 +1,6 @@
+import { Button, Input } from 'antd';
 import { theme } from 'styles/theme';
 import styled from 'styled-components';
-import { Button, Input } from 'antd';
 
 export const FormContainer = styled.div`
   display: flex;
@@ -34,6 +34,7 @@ export const SendButton = styled(Input)`
   background: ${theme.colors.blue_300};
   color: ${theme.colors.white};
   cursor: pointer;
+  font-weight: 500;
   padding: 16px 24px 16px 24px;
 `;
 
@@ -52,4 +53,14 @@ export const ForgotButton = styled(Button)`
 export const DontHaveButton = styled(Button)`
   margin-right: 70%;
   color: ${theme.colors.black};
+`;
+
+export const GoogleBtn = styled(Button)`
+  border-color: ${theme.colors.blue_300};
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 58px !important;
+  text-decoration: none;
 `;

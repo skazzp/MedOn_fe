@@ -1,11 +1,4 @@
 {
-  "title": "Hello World!",
-  "form": {
-    "label1": "First Name",
-    "label2": "Last Name",
-    "btn-set": "Set Value",
-    "btn-submit": "Submit"
-  },
   "logoAlt": "MedOn Logo",
   "regPage": {
     "title": "Registration",
@@ -76,6 +69,7 @@
     "dont-have": "Don't have an account? Click here!",
     "email": "Email:",
     "login": "Login",
+    "googleBtn": "Continue with Google",
     "password": "Password:",
     "placeholder-password": "Write your password*",
     "placeholder-email": "Write your e-mail*",
@@ -230,6 +224,53 @@
       "linkPrivacy": "Privacy policy"
     }
   },
+  "profilePage": {
+    "fillProfile": "You need to fill your profile before start working!",
+    "updateError": "Profile update error, try again!",
+    "profileUpdated": "Profile updated!"
+  },
+  "profileForm": {
+    "profilePicAlt": "User's profile avatar",
+    "profileBtn": "Update Profile",
+    "changePasswordBtn": "Change Password",
+    "editProfileBtn": "Edit Profile",
+    "firstName": {
+      "label": "First Name",
+      "placeholder": "Enter your first name"
+    },
+    "lastName": {
+      "label": "Last Name",
+      "placeholder": "Enter your last name"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter your email"
+    },
+    "role": {
+      "label": "Role",
+      "placeholder": "Select your role"
+    },
+    "speciality": {
+      "label": "Speciality",
+      "placeholder": "Select your speciality"
+    },
+    "birthday": {
+      "label": "Birth Date",
+      "placeholder": "DD/MM/YYYY"
+    },
+    "country": {
+      "label": "Country",
+      "placeholder": "Enter your country"
+    },
+    "city": {
+      "label": "City",
+      "placeholder": "Enter your city"
+    },
+    "timezone": {
+      "label": "Time zone",
+      "placeholder": "Select your time zone"
+    }
+  },
   "logout": {
     "title": "Logout",
     "description": "Are you sure you want to logout?"
@@ -241,10 +282,10 @@
       "first-name": "First Name",
       "last-name": "Last Name",
       "email": "Email",
-      "sex": "Sex",
+      "gender": "Gender",
       "date-of-birth": "Date of Birth",
       "country": "Country",
-      "address": "Address",
+      "city": "City",
       "phone-number": "Phone Number",
       "overview": "Overview"
     },
@@ -252,11 +293,17 @@
       "first-name": "Enter first name",
       "last-name": "Enter last name",
       "email": "Enter email",
+      "gender": "Select gender",
       "date-of-birth": "Enter date of birth",
-      "address": "Enter address",
+      "city": "Enter city",
       "phone-number": "Enter phone number",
       "overview": "Enter overview"
     },
-    "submit-btn": "Save Patient"
+    "submit-btn": "Save Patient",
+    "cancel-btn": "Cancel",
+    "info": {
+      "success": "Patient successfully was added!",
+      "error": "Patient wasn't added!"
+    }
   }
 }

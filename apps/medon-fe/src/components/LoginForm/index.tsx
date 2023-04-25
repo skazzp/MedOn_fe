@@ -1,24 +1,28 @@
 import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Controller, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Controller, useForm } from 'react-hook-form';
 import { Input, Spin } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import Icon from '@ant-design/icons/lib/components/Icon';
 
+import { useAppDispatch } from 'redux/hooks';
+import { LoginRequest } from 'redux/api/types';
+import { loginFormSchema } from 'validation/loginSchema';
+import { setIsVerified, setToken } from 'redux/features/userSlice/userSlice';
+import { userApi } from 'redux/api/userApi';
+import { useLoginMutation } from 'redux/api/authApi';
+import { toastConfig } from 'utils/toastConfig';
+import { ReactComponent as googleLogo } from 'assets/svgs/google_logo.svg';
 import {
   StyledErrorMessage,
   Form,
   DontHaveButton,
   ForgotButton,
   SendButton,
+  GoogleBtn,
 } from 'components/LoginForm/style';
-import { loginFormSchema } from 'validation/loginSchema';
-import { LoginRequest } from 'redux/api/types';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { toastConfig } from 'utils/toastConfig';
-import { useAppDispatch } from 'redux/hooks';
-import { setIsVerified, setToken } from 'redux/features/userSlice/userSlice';
-import { useLoginMutation } from 'redux/api/authApi';
 
 const LoginForm: FC = () => {
   const { t } = useTranslation();
@@ -37,6 +41,7 @@ const LoginForm: FC = () => {
 
   const onSubmitHandler = async (formData: LoginRequest) => {
     try {
+      dispatch(userApi.util.invalidateTags(['user']));
       await login(formData).unwrap();
     } catch (error) {
       toast.error(t('login.error-msg'), toastConfig);
@@ -69,6 +74,7 @@ const LoginForm: FC = () => {
             <Input
               status={errors.email ? 'error' : ''}
               {...field}
+              size="large"
               id="email"
               type="email"
               placeholder={`${t('login.placeholder-email')}`}
@@ -89,6 +95,7 @@ const LoginForm: FC = () => {
             <Input.Password
               status={errors.password ? 'error' : ''}
               {...field}
+              size="large"
               id="password"
               type="password"
               placeholder={`${t('login.placeholder-password')}`}
@@ -104,9 +111,17 @@ const LoginForm: FC = () => {
       </ForgotButton>
       <SendButton
         type="submit"
+        size="large"
         value={`${t('login.login')}`}
         disabled={isLoading}
       />
+      <GoogleBtn
+        size="large"
+        href={`${process.env.NX_API_URL}${process.env.NX_API_GOOGLE_ROUTE}`}
+      >
+        <Icon component={googleLogo} />
+        {t('login.googleBtn')}
+      </GoogleBtn>
       <DontHaveButton type="link" href="/register">
         {t('login.dont-have')}
       </DontHaveButton>
