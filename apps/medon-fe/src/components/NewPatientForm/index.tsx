@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import PhoneInputWithCountry from 'react-phone-number-input/react-hook-form';
 
-import { Gender, routes } from 'utils/constants/';
+import { genderOption, routes } from 'utils/constants/';
 import { toastConfig } from 'utils/toastConfig';
 import { countryOptionsWithCode } from 'utils/countries/countryOptions';
 import { newPatientSchema } from 'validation/newPatientSchema';
@@ -122,10 +122,7 @@ export function NewPatientForm() {
                   name="gender"
                   control={control}
                   placeholder={`${t('new-patient.placeholders.gender')}`}
-                  options={[
-                    { label: 'Female', value: Gender.Female },
-                    { label: 'Male', value: Gender.Male },
-                  ]}
+                  options={genderOption}
                 />
               </InputWrapper>
 
