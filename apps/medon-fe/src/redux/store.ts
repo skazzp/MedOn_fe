@@ -16,17 +16,19 @@ import { server } from 'redux/features/backend/api';
 import { authApi } from 'redux/api/authApi';
 import { userApi } from 'redux/api/userApi';
 import userReducer from 'redux/features/userSlice/userSlice';
+import { patientApi } from 'redux/api/patientApi';
 
 const persistConfig = {
   key: 'medon',
   storage,
-  whitelist: ['token', 'isVerified']
+  whitelist: ['token', 'isVerified'],
 };
 
 const rootReducer = combineReducers({
   [server.reducerPath]: server.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
+  [patientApi.reducerPath]: patientApi.reducer,
   userState: persistReducer(persistConfig, userReducer),
 });
 
@@ -41,6 +43,7 @@ export const store = configureStore({
       server.middleware,
       authApi.middleware,
       userApi.middleware,
+      patientApi.middleware,
     ]),
   devTools: process.env.NODE_ENV !== 'production',
 });

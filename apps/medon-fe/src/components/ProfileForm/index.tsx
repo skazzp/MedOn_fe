@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { InputAntD } from 'components/common/InputAntD';
 import { SelectAntD } from 'components/common/SelectAntD';
-import { DatepickerAntD } from 'components/common/DatepickerAntD';
+import { DatepickerAntD } from 'components/common';
 
 import profile_pic from 'assets/images/profile_pic.png';
 import { ROLES, ROLE_OPTIONS, SPECIALITY_OPTIONS } from 'utils/constants/roles';
@@ -47,6 +47,7 @@ export default function ProfileForm() {
   const role = watch(formFields.role);
 
   const onSubmit = handleSubmit(() => {});
+
   return (
     <Container>
       <>

@@ -14,7 +14,8 @@
       "validation/*": ["apps/medon-fe/src/validation/*"],
       "styles/*": ["apps/medon-fe/src/styles/*"],
       "translation/*": ["apps/medon-fe/src/translation/*"],
-      "app/*": ["apps/medon-fe/src/app/*"]
+      "app/*": ["apps/medon-fe/src/app/*"],
+      "interfaces/*": ["apps/medon-fe/src/interfaces/*"]
     }
   },
   "files": [],
