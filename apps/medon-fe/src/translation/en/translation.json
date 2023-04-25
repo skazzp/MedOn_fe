@@ -121,12 +121,25 @@
     "list": "Latest Patients",
     "link": "Create Patient",
     "age-suffix": "y.o.",
-    "show": {
-      "more": "Show More",
-      "less": "Show Less"
-    },
     "placeholder": "Search ",
     "no-data": "There's no patient in the list"
+  },
+  "patient-card": {
+    "button": "Add Patient Note +",
+    "modal": "Add Note",
+    "overview": "Overview",
+    "suffix-age": "years",
+    "link-back": "Back to Patient List",
+    "edit": "Edit profile",
+    "search-input-placeholder": "Search",
+    "notes": {
+      "prefix-doctor": "Dr. ",
+      "empty-notes": "No notes added yet"
+    }
+  },
+  "show": {
+    "more": "Show More",
+    "less": "Show Less"
   },
   "update-password": {
     "reset-password": {
