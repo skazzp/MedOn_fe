@@ -31,7 +31,7 @@ export default function ProfilePage() {
   const { isLoading } = useGetUserQuery(null, { skip: !isLoggedIn });
   const user = useAppSelector(getUserSelector);
   const warnMessage = t('profilePage.fillProfile');
-  
+
   const submitForm = async (values: FormProfileData) => {
     const requestData = {
       firstName: values.firstName,
@@ -53,6 +53,7 @@ export default function ProfilePage() {
 
       dispatch(setUser(response.data));
       setFormDisabled(true);
+      toast.success(t('profilePage.profileUpdated'), toastConfig);
     } catch (err) {
       toast.error(t('profilePage.updateError'), toastConfig);
     }
