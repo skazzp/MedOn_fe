@@ -268,10 +268,10 @@
       "first-name": "First Name",
       "last-name": "Last Name",
       "email": "Email",
-      "sex": "Sex",
+      "gender": "Gender",
       "date-of-birth": "Date of Birth",
       "country": "Country",
-      "address": "Address",
+      "city": "City",
       "phone-number": "Phone Number",
       "overview": "Overview"
     },
@@ -279,11 +279,17 @@
       "first-name": "Enter first name",
       "last-name": "Enter last name",
       "email": "Enter email",
+      "gender": "Select gender",
       "date-of-birth": "Enter date of birth",
-      "address": "Enter address",
+      "city": "Enter city",
       "phone-number": "Enter phone number",
       "overview": "Enter overview"
     },
-    "submit-btn": "Save Patient"
+    "submit-btn": "Save Patient",
+    "cancel-btn": "Cancel",
+    "info": {
+      "success": "Patient successfully was added!",
+      "error": "Patient wasn't added!"
+    }
   }
 }
