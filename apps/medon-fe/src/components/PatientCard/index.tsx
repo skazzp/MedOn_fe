@@ -4,7 +4,7 @@ import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { LinkGoBack } from 'components/LinkGoBack';
+import { LinkGoBack } from 'components/common/LinkGoBack';
 import Button from 'components/Button';
 import PatientCardNotes from 'components/PatientCardNotes';
 
