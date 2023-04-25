@@ -1,3 +1,4 @@
+import { ROLES } from 'utils/constants/roles';
 import * as yup from 'yup';
 
 export const profileFormSchema = yup.object({
@@ -18,6 +19,11 @@ export const profileFormSchema = yup.object({
     .email('validation.email.matches')
     .required('validation.email.required'),
   role: yup.string().required('validation.role.required'),
+  speciality: yup.string().when('role', {
+    is: ROLES.REMOTE,
+    then: (schema) => schema.required('validation.speciality.required'),
+    otherwise: (schema) => schema.nullable(),
+  }),
   birthday: yup
     .date()
     .nullable()

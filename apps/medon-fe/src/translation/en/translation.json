@@ -1,11 +1,4 @@
 {
-  "title": "Hello World!",
-  "form": {
-    "label1": "First Name",
-    "label2": "Last Name",
-    "btn-set": "Set Value",
-    "btn-submit": "Submit"
-  },
   "logoAlt": "MedOn Logo",
   "regPage": {
     "title": "Registration",
@@ -76,6 +69,7 @@
     "dont-have": "Don't have an account? Click here!",
     "email": "Email:",
     "login": "Login",
+    "googleBtn": "Continue with Google",
     "password": "Password:",
     "placeholder-password": "Write your password*",
     "placeholder-email": "Write your e-mail*",
@@ -217,6 +211,11 @@
       "linkPrivacy": "Privacy policy"
     }
   },
+  "profilePage": {
+    "fillProfile": "You need to fill your profile before start working!",
+    "updateError": "Profile update error, try again!",
+    "profileUpdated": "Profile updated!"
+  },
   "profileForm": {
     "profilePicAlt": "User's profile avatar",
     "profileBtn": "Update Profile",
@@ -238,6 +237,10 @@
       "label": "Role",
       "placeholder": "Select your role"
     },
+    "speciality": {
+      "label": "Speciality",
+      "placeholder": "Select your speciality"
+    },
     "birthday": {
       "label": "Birth Date",
       "placeholder": "DD/MM/YYYY"
@@ -253,10 +256,6 @@
     "timezone": {
       "label": "Time zone",
       "placeholder": "Select your time zone"
-    },
-    "speciality": {
-      "label": "Speciality",
-      "placeholder": "Select your speciality"
     }
   },
   "logout": {

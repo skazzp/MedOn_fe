@@ -13,6 +13,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
     "@hookform/resolvers": "^3.0.1",
+    "@react-oauth/google": "^0.10.0",
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/react": "14.0.0",
     "antd": "^5.3.3",
@@ -23,7 +24,6 @@
     "libphonenumber-js": "^1.10.28",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-google-button": "^0.7.2",
     "react-hook-form": "^7.43.8",
     "react-i18next": "^12.2.0",
     "react-is": "18.2.0",

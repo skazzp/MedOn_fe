@@ -14,7 +14,7 @@ export const initialState: IUserState = {
     lastName: '',
     email: '',
     role: null,
-    speciality: null,
+    specialityId: null,
     photo: '',
     dateOfBirth: null,
     isVerified: false,
