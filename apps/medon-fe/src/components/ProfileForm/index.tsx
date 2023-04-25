@@ -7,16 +7,16 @@ import { useNavigate } from 'react-router-dom';
 import { InputAntD } from 'components/common/InputAntD';
 import { SelectAntD } from 'components/common/SelectAntD';
 import { DatepickerAntD } from 'components/common/DatepickerAntD';
+import useSpecOptions from 'components/RegistrationForm/useSpecOptions';
 
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { getUserSelector } from 'redux/features/userSlice/userSelectors';
+import { profileFormSchema } from 'validation/profileFormSchema';
 import profile_pic from 'assets/images/profile_pic.png';
 import { ROLES, ROLE_OPTIONS } from 'utils/constants/roles';
 import { timezoneOptions } from 'utils/timezones/timezoneOptions';
 import { formFields } from 'utils/constants/userFormFields';
 import { countryOptions } from 'utils/countries/countryOptions';
-import { profileFormSchema } from 'validation/profileFormSchema';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { getUserSelector } from 'redux/features/userSlice/userSelectors';
-import useSpecOptions from 'components/RegistrationForm/useSpecOptions';
 import { routes } from 'utils/constants/routes';
 import { FormProfileData } from './types';
 import {

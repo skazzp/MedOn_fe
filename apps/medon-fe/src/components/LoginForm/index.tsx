@@ -1,8 +1,18 @@
 import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Controller, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Controller, useForm } from 'react-hook-form';
 import { Input, Spin } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
+import { useAppDispatch } from 'redux/hooks';
+import { LoginRequest } from 'redux/api/types';
+import { loginFormSchema } from 'validation/loginSchema';
+import { setIsVerified, setToken } from 'redux/features/userSlice/userSlice';
+import { userApi } from 'redux/api/userApi';
+import { useLoginMutation } from 'redux/api/authApi';
+import { toastConfig } from 'utils/toastConfig';
 import {
   StyledErrorMessage,
   Form,
@@ -11,15 +21,6 @@ import {
   SendButton,
   StyledGoogleBtn,
 } from 'components/LoginForm/style';
-import { loginFormSchema } from 'validation/loginSchema';
-import { LoginRequest } from 'redux/api/types';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { toastConfig } from 'utils/toastConfig';
-import { useAppDispatch } from 'redux/hooks';
-import { setIsVerified, setToken } from 'redux/features/userSlice/userSlice';
-import { useLoginMutation } from 'redux/api/authApi';
-import { userApi } from 'redux/api/userApi';
 
 const LoginForm: FC = () => {
   const { t } = useTranslation();

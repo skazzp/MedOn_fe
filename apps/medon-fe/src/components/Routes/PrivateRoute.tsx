@@ -1,8 +1,9 @@
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+
+import Navigation from 'components/Navigation';
 import { useGetUserQuery } from 'redux/api/userApi';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import Navigation from 'components/Navigation';
 import { getTokenSelector } from 'redux/features/userSlice/userSelectors';
 import { localDoctorRoutes, routes } from 'utils/constants/routes';
 import { ROLES } from 'utils/constants/roles';

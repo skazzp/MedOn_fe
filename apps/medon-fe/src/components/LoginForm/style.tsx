@@ -1,7 +1,7 @@
+import GoogleButton from 'react-google-button';
+import { Button, Input } from 'antd';
 import { theme } from 'styles/theme';
 import styled from 'styled-components';
-import { Button, Input } from 'antd';
-import GoogleButton from 'react-google-button';
 
 export const FormContainer = styled.div`
   display: flex;
