@@ -4,9 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 
-import { InputAntD } from 'components/common/InputAntD';
-import { SelectAntD } from 'components/common/SelectAntD';
-import { DatepickerAntD } from 'components/common';
+import { DatepickerAntD, SelectAntD, InputAntD } from 'components/common';
 
 import { registrationFormSchema } from 'validation/registrationFormSchema';
 import { countryOptions } from 'utils/countries/countryOptions';
