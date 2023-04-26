@@ -22,7 +22,7 @@ import {
 } from 'pages/ResetPassword/styles';
 
 import { passwordSchema } from 'validation/forgotPasswordSchema';
-import { usePostResetPasswordDoctorMutation } from 'redux/features/backend/api';
+import { usePostResetPasswordDoctorMutation } from 'redux/api/authApi';
 
 export default function ResetPassword() {
   const [isPasswordSent, setIsPasswordSent] = useState(false);

@@ -12,7 +12,6 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-import { server } from 'redux/features/backend/api';
 import { authApi } from 'redux/api/authApi';
 import { userApi } from 'redux/api/userApi';
 import userReducer from 'redux/features/userSlice/userSlice';
@@ -25,7 +24,6 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  [server.reducerPath]: server.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
   [patientApi.reducerPath]: patientApi.reducer,
@@ -39,12 +37,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat([
-      server.middleware,
-      authApi.middleware,
-      userApi.middleware,
-      patientApi.middleware,
-    ]),
+    }).concat([authApi.middleware, userApi.middleware, patientApi.middleware]),
   devTools: process.env.NODE_ENV !== 'production',
 });
 
