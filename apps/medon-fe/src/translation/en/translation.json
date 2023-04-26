@@ -116,7 +116,8 @@
     "link": "Create Patient",
     "age-suffix": "y.o.",
     "placeholder": "Search ",
-    "no-data": "There's no patient in the list"
+    "no-data": "There's no patient in the list",
+    "load-more": "Load More"
   },
   "patient-card": {
     "button": "Add Patient Note +",

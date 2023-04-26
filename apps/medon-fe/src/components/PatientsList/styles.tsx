@@ -48,4 +48,10 @@ export const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
   }
+  > button {
+    display: flex;
+    border: 1px solid ${({ theme }) => theme.colors.blue_500};
+    margin: 0 auto;
+    padding: 1rem 2rem;
+  }
 `;
