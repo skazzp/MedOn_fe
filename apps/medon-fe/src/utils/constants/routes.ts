@@ -7,7 +7,7 @@ export const routes = {
   appointments: '/appointments',
   profile: '/profile',
   resetPassword: '/reset-password/:token',
-  patientList: '/patient-list',
+  patientList: '/patients',
   help: '/help',
   exit: '/logout',
   resendConfirmation: '/re-confirm-account',
