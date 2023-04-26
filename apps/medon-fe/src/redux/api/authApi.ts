@@ -5,6 +5,8 @@ import {
   MessageResponse,
   Option,
   RegisterData,
+  IForgetPassword,
+  IResetPassword,
 } from 'redux/api/types';
 
 export const authApi = createApi({
@@ -55,6 +57,30 @@ export const authApi = createApi({
         };
       },
     }),
+    postForgetPasswordDoctor: builder.mutation<
+      MessageResponse,
+      IForgetPassword
+    >({
+      query: ({ email }) => ({
+        url: 'auth/forget',
+        method: 'POST',
+        body: {
+          email,
+        },
+      }),
+    }),
+    postResetPasswordDoctor: builder.mutation<MessageResponse, IResetPassword>({
+      query: ({ newPassword, token }) => ({
+        url: 'auth/reset',
+        method: 'POST',
+        body: {
+          newPassword,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -64,4 +90,6 @@ export const {
   useVerifyEmailQuery,
   useGetSpecialitiesQuery,
   useLoginMutation,
+  usePostForgetPasswordDoctorMutation,
+  usePostResetPasswordDoctorMutation,
 } = authApi;

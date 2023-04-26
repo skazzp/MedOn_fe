@@ -21,7 +21,7 @@ import {
 } from 'pages/ResetPassword/styles';
 
 import { passwordSchema } from 'validation/forgotPasswordSchema';
-import { usePostResetPasswordDoctorMutation } from 'redux/features/backend/api';
+import { usePostResetPasswordDoctorMutation } from 'redux/api/authApi';
 import { InputPasswordAntD } from 'components/common';
 
 export default function ResetPassword() {
