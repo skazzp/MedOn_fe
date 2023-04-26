@@ -1,5 +1,3 @@
-import { PatientNote } from 'utils/mock/patientNote';
-
 export interface IPatientCardProps {
   overview: string;
   patient: string;
@@ -11,12 +9,11 @@ export interface IPatientCardProps {
 }
 
 export interface ShowMoreTextHookReturnType {
-  formatedText: string;
+  formatedText?: string;
   showMore: boolean;
   handleShowToggle: () => void;
 }
 
-export interface FormattedPatientNote extends PatientNote {
-  formattedDate: string;
-  formattedTime: string;
+export interface SubmitAddNote {
+  note: string;
 }
