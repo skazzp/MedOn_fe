@@ -131,7 +131,8 @@
       "prefix-doctor": "Dr. ",
       "empty-notes": "No notes added yet",
       "add-button": "Add Note",
-      "cancel-button": "Cancel"
+      "cancel-button": "Cancel",
+      "placeholder": "Add a note about the patient"
     }
   },
   "show": {

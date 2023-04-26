@@ -123,7 +123,7 @@ export default function PatientCard() {
             name="note"
             control={control}
             minRows={6}
-            placeholder="add a note"
+            placeholder={`${t('patient-card.notes.placeholder')}`}
           />
           <Buttons>
             <Button
