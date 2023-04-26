@@ -2,31 +2,52 @@ import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link } from 'react-router-dom';
-
-import Button from 'components/Button';
-import Input from 'components/Input';
-import LinkHome from 'components/LinkHome';
-
-import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { SubmitResetPasswordForm } from 'pages/UpdatePassword/types';
 import { Container, Content, Footer, Form } from 'pages/UpdatePassword/styles';
+
+import Button from 'components/Button';
+import LinkHome from 'components/LinkHome';
+import { InputPasswordAntD } from 'components/common';
+
+import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
+
 import { passwordSchema } from 'validation/updatePasswordSchema';
+import { useUpdateUserPasswordMutation } from 'redux/api/userApi';
+import { toastConfig } from 'utils/toastConfig';
+import { routes } from 'utils/constants';
 
 export default function UpdatePassword() {
   const theme = useTheme();
   const { t } = useTranslation();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SubmitResetPasswordForm>({
+  const { handleSubmit, control, reset } = useForm<SubmitResetPasswordForm>({
     resolver: yupResolver(passwordSchema),
   });
 
-  const handleUpdatePassword: SubmitHandler<SubmitResetPasswordForm> = () => {
-    //  logic
+  const navigate = useNavigate();
+
+  const [sendData, { isLoading }] = useUpdateUserPasswordMutation();
+
+  const handleUpdatePassword: SubmitHandler<SubmitResetPasswordForm> = (
+    data
+  ) => {
+    sendData({
+      currentPassword: data.currentPassword,
+      newPassword: data.newPassword,
+    })
+      .unwrap()
+      .then((res) => {
+        navigate(routes.profile);
+        toast.success(res.message, toastConfig);
+      })
+      .catch((err) => {
+        toast.error(err.data.message, toastConfig);
+      })
+      .finally(() => {
+        reset();
+      });
   };
 
   return (
@@ -35,45 +56,34 @@ export default function UpdatePassword() {
         <Form onSubmit={handleSubmit(handleUpdatePassword)}>
           <h1>{t('update-password.reset-password.title')}</h1>
           <h3>{t('update-password.reset-password.subtitle')}</h3>
-          <Input
+          <InputPasswordAntD
+            control={control}
+            name="currentPassword"
+            size="large"
             placeholder={`${t(
               'update-password.reset-password.placeholder-oldpassword'
             )}`}
-            type="password"
-            errorMessage={
-              errors.currentPassword?.message
-                ? t(`${errors.currentPassword?.message}`)
-                : ''
-            }
-            {...register('currentPassword')}
           />
-          <Input
+          <InputPasswordAntD
+            control={control}
+            name="newPassword"
+            size="large"
             placeholder={`${t(
               'update-password.reset-password.placeholder-newpassword'
             )}`}
-            type="password"
-            errorMessage={
-              errors.newPassword?.message
-                ? t(`${errors.newPassword?.message}`)
-                : ''
-            }
-            {...register('newPassword')}
           />
-          <Input
+          <InputPasswordAntD
+            control={control}
+            name="confirmNewPassword"
+            size="large"
             placeholder={`${t(
               'update-password.reset-password.placeholder-confirmpassword'
             )}`}
-            type="password"
-            errorMessage={
-              errors.confirmNewPassword?.message
-                ? t(`${errors.confirmNewPassword?.message}`)
-                : ''
-            }
-            {...register('confirmNewPassword')}
           />
           <Button
             bgcolor={theme.colors.btnGradient}
             textcolor={theme.colors.white}
+            isLoading={isLoading}
           >
             {t('update-password.reset-password.button')}
             <img src={RightArrow} alt={`${t('update-password.alt.image')}`} />
