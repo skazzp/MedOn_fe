@@ -1,40 +1,22 @@
 // only mock data
 
-export interface Patient {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  dateOfBirth: string;
-  gender: 'male' | 'female';
-  address: string;
-  phoneNumber: string;
-  overview: string;
-  createdAt: string;
-  updatedAt: string;
-}
+import { IPatient, PatientNote } from 'interfaces/patients';
+import { Gender } from 'utils/constants';
 
-export const patient: Patient = {
+export const patient: IPatient = {
   id: 1,
   firstName: 'John',
   lastName: 'Doe',
   email: 'johndoe@example.com',
-  dateOfBirth: '1990-01-01 00:00:00.000000',
-  gender: 'male',
-  address: '123 Main St',
+  dateOfBirth: new Date('2000-01-01'),
+  gender: Gender.Male,
+  city: 'London',
+  country: 'UK',
   phoneNumber: '555-555-5555',
   overview: 'Lorem ipsum dolor sit amet',
-  createdAt: '2022-09-28 13:45:00.000000',
-  updatedAt: '2022-09-28 13:45:00.000000',
+  createdAt: new Date('2022-09-28 13:45:00.000000'),
+  updatedAt: new Date('2022-09-28 13:45:00.000000'),
 };
-
-export interface PatientNote {
-  id: number;
-  note: string;
-  doctor: string;
-  createdAt: string;
-  updatedAt: string;
-}
 
 export const patientNotes: PatientNote[] = [
   {
