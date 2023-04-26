@@ -126,9 +126,12 @@
     "link-back": "Back to Patient List",
     "edit": "Edit profile",
     "search-input-placeholder": "Search",
+    "medical": "Medical History",
     "notes": {
       "prefix-doctor": "Dr. ",
-      "empty-notes": "No notes added yet"
+      "empty-notes": "No notes added yet",
+      "add-button": "Add Note",
+      "cancel-button": "Cancel"
     }
   },
   "show": {
@@ -203,6 +206,11 @@
     },
     "timezone": {
       "required": "Timezone is required"
+    },
+    "note": {
+      "required": "Please add a note about the patient",
+      "minLength": "Note must be at least 10 characters",
+      "maxLength": "Note must be less than 200 characters"
     }
   },
   "re-confirm-account": {
