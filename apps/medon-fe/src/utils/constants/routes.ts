@@ -11,7 +11,7 @@ export const routes = {
   exit: '/logout',
   resendConfirmation: '/re-confirm-account',
   updatePassword: '/update-password',
-  patientList: '/patients',
+  patients: '/patients',
   patientCard: '/patients/card',
   addPatient: '/patients/add-new',
 };

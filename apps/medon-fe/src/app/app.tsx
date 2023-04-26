@@ -80,7 +80,7 @@ function App() {
         element={<PrivateRoute component={<UpdatePassword />} />}
       />
       <Route
-        path={routes.patientList}
+        path={routes.patients}
         element={<PrivateRoute component={<PatientsPage />} />}
       >
         <Route index element={<PatientsList />} />

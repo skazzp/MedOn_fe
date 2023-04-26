@@ -181,7 +181,7 @@ export function NewPatientForm() {
           <ButtonsWrapper>
             <StyledButton
               type="default"
-              onClick={() => navigate(routes.patientList)}
+              onClick={() => navigate(routes.patients)}
             >
               {t('new-patient.cancel-btn')}
             </StyledButton>
