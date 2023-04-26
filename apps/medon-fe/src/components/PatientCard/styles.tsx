@@ -21,6 +21,16 @@ export const Container = styled.div`
     font-weight: 500;
     font-size: ${({ theme }) => theme.fontSizes.xl};
   }
+  > h5 {
+    font-weight: 700;
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+    color: ${({ theme }) => theme.colors.icon_active};
+    text-align: center;
+    border-top: 2px solid ${({ theme }) => theme.colors.gray_300};
+    border-bottom: 2px solid ${({ theme }) => theme.colors.gray_300};
+    padding: 1rem 0;
+    margin: 0;
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -75,5 +85,28 @@ export const Top = styled.div`
     font-weight: 700;
     font-size: ${({ theme }) => theme.fontSizes.sm};
     gap: 0.5rem;
+  }
+`;
+
+export const AddNoteForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  overflow: hidden;
+  transition: height 1s ease-in-out;
+`;
+
+export const Buttons = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  > button:first-child {
+    padding: 0 5rem;
+  }
+  > button:last-child {
+    svg {
+      fill: ${({ theme }) => theme.colors.gray_700};
+    }
   }
 `;
