@@ -23,7 +23,7 @@ import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
 import Logo from 'assets/svgs/logo_medon.svg';
 
 import { emailSchema } from 'validation/forgotPasswordSchema';
-import { usePostForgetPasswordDoctorMutation } from 'redux/features/backend/api';
+import { usePostForgetPasswordDoctorMutation } from 'redux/api/authApi';
 
 export default function ResetPassword() {
   const [isEmailSent, setIsEmailSent] = useState(false);

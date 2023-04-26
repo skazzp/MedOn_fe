@@ -2,7 +2,6 @@ export * from './dateFormat';
 export * from './gender';
 export * from './httpStatus';
 export * from './navigation';
-export * from './optionsMenuDropdown';
 export * from './roles';
 export * from './routes';
 export * from './toast';
