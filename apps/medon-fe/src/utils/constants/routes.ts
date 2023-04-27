@@ -7,12 +7,12 @@ export const routes = {
   appointments: '/appointments',
   profile: '/profile',
   resetPassword: '/reset-password/:token',
-  patientList: '/patient-list',
   help: '/help',
   exit: '/logout',
   resendConfirmation: '/re-confirm-account',
   updatePassword: '/update-password',
   patients: '/patients',
+  patientCard: '/patients/card',
   addPatient: '/patients/add-new',
 };
 

@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import DropdownMenu from 'components/Dropdown';
+import { routes } from 'utils/constants/routes';
 
 import { Body, Container, Header, Options, ProfileIcon, Text } from './styles';
 import { IPatientListCardProps } from './types';
+import { useShowMoreText } from './hooks';
 
 export default function PatientListCard({
   firstName,
@@ -13,15 +13,10 @@ export default function PatientListCard({
   sex,
   age,
   content,
-  maxLength,
 }: IPatientListCardProps) {
-  const [showMore, setShowMore] = useState(false);
-
   const { t } = useTranslation();
 
-  const handleToggle = () => {
-    setShowMore(!showMore);
-  };
+  const { formatedText, handleShowToggle, showMore } = useShowMoreText(content);
 
   return (
     <Container>
@@ -33,16 +28,15 @@ export default function PatientListCard({
           </span>
         </Text>
         <Options>
-          <Link to="#">
+          <Link to={routes.patientCard}>
             <ProfileIcon />
           </Link>
-          <DropdownMenu />
         </Options>
       </Header>
       <Body>
-        <p>{showMore ? content : `${content.slice(0, maxLength)}...`}</p>
-        <button onClick={handleToggle}>
-          {showMore ? t('patient-list.show.less') : t('patient-list.show.more')}
+        <p>{formatedText}</p>
+        <button onClick={handleShowToggle}>
+          {!showMore ? t('show.more') : t('show.less')}
         </button>
       </Body>
     </Container>

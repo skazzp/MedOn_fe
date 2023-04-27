@@ -5,6 +5,7 @@ import {
   FieldPath,
   UseControllerProps,
 } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { Container, ErrorMsg } from './styles';
 
@@ -31,6 +32,8 @@ export function TextareaAntD<
     control,
   });
 
+  const { t } = useTranslation();
+
   return (
     <Container>
       <Input.TextArea
@@ -43,7 +46,7 @@ export function TextareaAntD<
         {...field}
       />
       {fieldState.error?.message && (
-        <ErrorMsg role="alert">{fieldState.error?.message}</ErrorMsg>
+        <ErrorMsg role="alert">{t(`${fieldState.error?.message}`)}</ErrorMsg>
       )}
     </Container>
   );

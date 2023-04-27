@@ -13,6 +13,8 @@ import { theme } from 'styles/theme';
 export const NavContainer = styled.nav`
   display: flex;
   flex-direction: column;
+  position: sticky;
+  top: 0;
   height: 100vh;
   width: 250px;
   background-color: ${theme.colors.background_navi};

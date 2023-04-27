@@ -5,7 +5,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Link } from 'react-router-dom';
 
 import Button from 'components/Button';
-import Input from 'components/Input';
 import LinkHome from 'components/LinkHome';
 
 import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
@@ -13,15 +12,12 @@ import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
 import { SubmitResetPasswordForm } from 'pages/UpdatePassword/types';
 import { Container, Content, Footer, Form } from 'pages/UpdatePassword/styles';
 import { passwordSchema } from 'validation/updatePasswordSchema';
+import { InputPasswordAntD } from 'components/common';
 
 export default function UpdatePassword() {
   const theme = useTheme();
   const { t } = useTranslation();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SubmitResetPasswordForm>({
+  const { control, handleSubmit } = useForm<SubmitResetPasswordForm>({
     resolver: yupResolver(passwordSchema),
   });
 
@@ -35,41 +31,29 @@ export default function UpdatePassword() {
         <Form onSubmit={handleSubmit(handleUpdatePassword)}>
           <h1>{t('update-password.reset-password.title')}</h1>
           <h3>{t('update-password.reset-password.subtitle')}</h3>
-          <Input
+          <InputPasswordAntD
+            name="currentPassword"
+            control={control}
+            size="large"
             placeholder={`${t(
               'update-password.reset-password.placeholder-oldpassword'
             )}`}
-            type="password"
-            errorMessage={
-              errors.currentPassword?.message
-                ? t(`${errors.currentPassword?.message}`)
-                : ''
-            }
-            {...register('currentPassword')}
           />
-          <Input
+          <InputPasswordAntD
+            name="currentPassword"
+            size="large"
+            control={control}
             placeholder={`${t(
               'update-password.reset-password.placeholder-newpassword'
             )}`}
-            type="password"
-            errorMessage={
-              errors.newPassword?.message
-                ? t(`${errors.newPassword?.message}`)
-                : ''
-            }
-            {...register('newPassword')}
           />
-          <Input
+          <InputPasswordAntD
+            name="newPassword"
+            size="large"
+            control={control}
             placeholder={`${t(
               'update-password.reset-password.placeholder-confirmpassword'
             )}`}
-            type="password"
-            errorMessage={
-              errors.confirmNewPassword?.message
-                ? t(`${errors.confirmNewPassword?.message}`)
-                : ''
-            }
-            {...register('confirmNewPassword')}
           />
           <Button
             bgcolor={theme.colors.btnGradient}

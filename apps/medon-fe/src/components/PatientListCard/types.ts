@@ -7,3 +7,9 @@ export interface IPatientListCardProps {
   content: string;
   maxLength: number;
 }
+
+export interface ShowMoreTextHookReturnType {
+  formatedText: string;
+  showMore: boolean;
+  handleShowToggle: () => void;
+}

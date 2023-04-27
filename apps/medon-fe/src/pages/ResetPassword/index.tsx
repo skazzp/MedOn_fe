@@ -6,7 +6,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 
 import Button from 'components/Button';
-import Input from 'components/Input';
 import LinkHome from 'components/LinkHome';
 
 import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
@@ -22,18 +21,15 @@ import {
 } from 'pages/ResetPassword/styles';
 
 import { passwordSchema } from 'validation/forgotPasswordSchema';
-import { usePostResetPasswordDoctorMutation } from 'redux/features/backend/api';
+import { usePostResetPasswordDoctorMutation } from 'redux/api/authApi';
+import { InputPasswordAntD } from 'components/common';
 
 export default function ResetPassword() {
   const [isPasswordSent, setIsPasswordSent] = useState(false);
   const { token } = useParams();
   const theme = useTheme();
   const { t } = useTranslation();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SubmitResetPasswordForm>({
+  const { handleSubmit, control } = useForm<SubmitResetPasswordForm>({
     resolver: yupResolver(passwordSchema),
   });
 
@@ -67,29 +63,21 @@ export default function ResetPassword() {
             <>
               <h1>{t('forget-password.reset-password.title')}</h1>
               <h3>{t('forget-password.reset-password.subtitle')}</h3>
-              <Input
+              <InputPasswordAntD
+                name="newPassword"
+                size="large"
+                control={control}
                 placeholder={`${t(
                   'forget-password.reset-password.placeholder-newpassword'
                 )}`}
-                type="password"
-                errorMessage={
-                  errors.newPassword?.message
-                    ? t(`${errors.newPassword?.message}`)
-                    : ''
-                }
-                {...register('newPassword')}
               />
-              <Input
+              <InputPasswordAntD
+                name="confirmNewPassword"
+                size="large"
+                control={control}
                 placeholder={`${t(
                   'forget-password.reset-password.placeholder-confirmpassword'
                 )}`}
-                type="password"
-                errorMessage={
-                  errors.confirmNewPassword?.message
-                    ? t(`${errors.confirmNewPassword?.message}`)
-                    : ''
-                }
-                {...register('confirmNewPassword')}
               />
               <Button
                 bgcolor={theme.colors.btnGradient}

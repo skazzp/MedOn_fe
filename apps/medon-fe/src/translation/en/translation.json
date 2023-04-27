@@ -115,12 +115,30 @@
     "list": "Latest Patients",
     "link": "Create Patient",
     "age-suffix": "y.o.",
-    "show": {
-      "more": "Show More",
-      "less": "Show Less"
-    },
     "placeholder": "Search ",
-    "no-data": "There's no patient in the list"
+    "no-data": "There's no patient in the list",
+    "load-more": "Load More"
+  },
+  "patient-card": {
+    "button": "Add Patient Note +",
+    "modal": "Add Note",
+    "overview": "Overview",
+    "suffix-age": "years",
+    "link-back": "Back to Patient List",
+    "edit": "Edit profile",
+    "search-input-placeholder": "Search",
+    "medical": "Medical History",
+    "notes": {
+      "prefix-doctor": "Dr. ",
+      "empty-notes": "No notes added yet",
+      "add-button": "Add Note",
+      "cancel-button": "Cancel",
+      "placeholder": "Add a note about the patient"
+    }
+  },
+  "show": {
+    "more": "Show More",
+    "less": "Show Less"
   },
   "update-password": {
     "reset-password": {
@@ -190,6 +208,11 @@
     },
     "timezone": {
       "required": "Timezone is required"
+    },
+    "note": {
+      "required": "Please add a note about the patient",
+      "minLength": "Note must be at least 10 characters",
+      "maxLength": "Note must be less than 200 characters"
     }
   },
   "re-confirm-account": {

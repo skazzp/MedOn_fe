@@ -3,6 +3,7 @@ import { useTheme } from 'styled-components';
 
 import LinkHome from 'components/LinkHome';
 import PatientListCard from 'components/PatientListCard';
+import Button from 'components/Button';
 
 import { patientList } from 'utils/mock/patientList';
 import { ReactComponent as Plus } from 'assets/svgs/plus_listcard.svg';
@@ -39,6 +40,12 @@ export default function PatientsList() {
         ) : (
           <h4>{t('patient-list.no-data')}</h4>
         )}
+        <Button
+          textcolor={theme.colors.blue_500}
+          bgcolor={theme.colors.blue_100}
+        >
+          {t('patient-list.load-more')}
+        </Button>
       </Wrapper>
     </Content>
   );
