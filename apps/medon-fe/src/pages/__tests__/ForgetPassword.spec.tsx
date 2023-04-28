@@ -1,9 +1,9 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { TestWrapper } from 'utils/tests/TestWrapper';
+import ForgetPassword from 'pages/ForgetPassword';
 
-import ForgetPassword from '../ForgetPassword';
+import { TestWrapper } from 'utils/tests/TestWrapper';
 
 describe('ForgetPassword', () => {
   beforeEach(() => {

@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
+
+import ProfilePage from 'pages/ProfilePage';
+
 import { TestWrapper } from 'utils/tests/TestWrapper';
-import ProfilePage from '../ProfilePage';
 
 describe('ProfilePage component', () => {
   it('renders profile form', () => {
