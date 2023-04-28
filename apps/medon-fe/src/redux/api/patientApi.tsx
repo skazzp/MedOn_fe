@@ -29,7 +29,6 @@ export const patientApi = createApi({
       providesTags: (result, error, arg) => [
         { type: 'PatientsQuery', page: arg.page },
         { type: 'PatientsQuery', limit: arg.limit },
-        { type: 'PatientsQuery', search: arg.searchPhrase },
       ],
     }),
   }),

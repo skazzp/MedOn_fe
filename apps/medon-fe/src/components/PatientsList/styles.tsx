@@ -1,4 +1,3 @@
-import { Input } from 'antd';
 import styled from 'styled-components';
 
 export const Content = styled.div`
@@ -32,8 +31,6 @@ export const Choose = styled.div`
   }
 `;
 
-export const StyledSearch = styled(Input.Search)``;
-
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -48,4 +45,11 @@ export const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
   }
+`;
+
+export const SpinWrapper = styled.div`
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

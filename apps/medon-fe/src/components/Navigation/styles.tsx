@@ -136,7 +136,7 @@ export const Availability = styled(Icon).attrs(() => ({
 }))``;
 
 export const UserRole = styled.span`
-  color: ${theme.colors.green_700};
+  color: ${theme.colors.green_500};
   font-family: ${theme.fontFamily.roboto};
   font-size: ${theme.fontSizes.md};
   font-weight: ${theme.fontWeight.medium};

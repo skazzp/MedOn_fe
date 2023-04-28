@@ -15,7 +15,8 @@
       "styles/*": ["apps/medon-fe/src/styles/*"],
       "translation/*": ["apps/medon-fe/src/translation/*"],
       "app/*": ["apps/medon-fe/src/app/*"],
-      "interfaces/*": ["apps/medon-fe/src/interfaces/*"]
+      "interfaces/*": ["apps/medon-fe/src/interfaces/*"],
+      "hooks/*": ["apps/medon-fe/src/hooks/*"]
     }
   },
   "files": [],

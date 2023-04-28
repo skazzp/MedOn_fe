@@ -1,16 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
-
+import { Input, Pagination, Spin } from 'antd';
 import LinkHome from 'components/LinkHome';
 import PatientListCard from 'components/PatientListCard';
-import { Button, Pagination } from 'antd';
-
 import { ReactComponent as Plus } from 'assets/svgs/plus_listcard.svg';
-
 import { useGetPatientsQuery } from 'redux/api/patientApi';
-import { useState } from 'react';
-import Spinner from 'components/Spinner';
-import { Choose, Content, StyledSearch, Wrapper } from './styles';
+import React, { useState } from 'react';
+import { useDebounce } from 'hooks/useDebounce';
+import { Choose, Content, Wrapper, SpinWrapper } from './styles';
 
 export default function PatientsList() {
   const theme = useTheme();
@@ -18,11 +15,12 @@ export default function PatientsList() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
   const [searchPhrase, setSearchPhrase] = useState('');
+  const debouncedSearch = useDebounce<string>(searchPhrase);
 
-  const { data, error, isLoading } = useGetPatientsQuery({
+  const { data, isFetching } = useGetPatientsQuery({
     page,
     limit,
-    searchPhrase,
+    searchPhrase: debouncedSearch,
   });
 
   function handlePaginationChange(page: number, pageSize: number): void {
@@ -34,9 +32,13 @@ export default function PatientsList() {
     <Content>
       <h2>{t('patient-list.choose')}</h2>
       <Choose>
-        <StyledSearch
+        <Input.Search
           placeholder={`${t('patient-list.placeholder')}`}
           size="large"
+          loading={isFetching}
+          value={searchPhrase}
+          onChange={(e) => setSearchPhrase(e.target.value)}
+          onBlur={() => setSearchPhrase('')}
         />
         <LinkHome
           textcolor={theme.colors.white}
@@ -48,8 +50,10 @@ export default function PatientsList() {
         </LinkHome>
       </Choose>
       <h2>{t('patient-list.list')}</h2>
-      {isLoading ? (
-        <Spinner />
+      {isFetching ? (
+        <SpinWrapper>
+          <Spin size="large" />
+        </SpinWrapper>
       ) : (
         <Wrapper>
           {data && data.total > 0 ? (
