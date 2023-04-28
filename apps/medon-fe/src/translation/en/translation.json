@@ -163,7 +163,8 @@
     "help": "Help",
     "logout": "Logout",
     "Availability": "Availability",
-    "img-alt": "User avatar"
+    "img-alt": "User avatar",
+    "choose-role": "Role isn't assigned"
   },
   "validation": {
     "minLength": "Length at least 3 characters",
