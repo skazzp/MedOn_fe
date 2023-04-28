@@ -134,16 +134,3 @@ export const Logout = styled(Icon).attrs(() => ({
 export const Availability = styled(Icon).attrs(() => ({
   children: <AvailabilityIcon />,
 }))``;
-
-export const UserRole = styled.span`
-  color: ${theme.colors.green_500};
-  font-family: ${theme.fontFamily.roboto};
-  font-size: ${theme.fontSizes.md};
-  font-weight: ${theme.fontWeight.medium};
-`;
-
-export const NoRoleMsg = styled.span`
-  color: ${theme.colors.red_500};
-  font-family: ${theme.fontFamily.roboto};
-  font-size: ${theme.fontSizes.sm};
-`;

@@ -18,8 +18,6 @@ import {
   UserName,
   SpecName,
   BlockName,
-  UserRole,
-  NoRoleMsg,
 } from 'components/Navigation/styles';
 import profileImagePlaceholder from 'assets/images/Avatar.svg';
 import Logo from 'components/Logo';
@@ -83,11 +81,6 @@ export default function Navigation() {
           <BlockName>
             <UserName>{`Dr.${user?.lastName}`}</UserName>
             <SpecName>{user?.specialityId}</SpecName>
-            {user.role ? (
-              <UserRole>{user.role}</UserRole>
-            ) : (
-              <NoRoleMsg>{t('navigation.choose-role')}</NoRoleMsg>
-            )}
           </BlockName>
         </UserBlock>
       </HeaderBlock>
