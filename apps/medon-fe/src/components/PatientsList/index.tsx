@@ -3,16 +3,27 @@ import { useTheme } from 'styled-components';
 
 import LinkHome from 'components/LinkHome';
 import PatientListCard from 'components/PatientListCard';
-import Button from 'components/Button';
+import { Button } from 'antd';
 
-import { patientList } from 'utils/mock/patientList';
 import { ReactComponent as Plus } from 'assets/svgs/plus_listcard.svg';
 
+import { useGetPatientsQuery } from 'redux/api/patientApi';
+import { useEffect, useState } from 'react';
+import Spinner from 'components/Spinner';
 import { Choose, Content, StyledSearch, Wrapper } from './styles';
 
 export default function PatientsList() {
   const theme = useTheme();
   const { t } = useTranslation();
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(5);
+  const [searchPhrase, setSearchPhrase] = useState('');
+
+  const { data, error, isLoading } = useGetPatientsQuery({
+    page,
+    limit,
+    searchPhrase,
+  });
 
   return (
     <Content>
@@ -32,21 +43,28 @@ export default function PatientsList() {
         </LinkHome>
       </Choose>
       <h2>{t('patient-list.list')}</h2>
-      <Wrapper>
-        {patientList.length ? (
-          patientList.map((patient) => (
-            <PatientListCard key={patient.id} {...patient} />
-          ))
-        ) : (
-          <h4>{t('patient-list.no-data')}</h4>
-        )}
-        <Button
-          textcolor={theme.colors.blue_500}
-          bgcolor={theme.colors.blue_100}
-        >
-          {t('patient-list.load-more')}
-        </Button>
-      </Wrapper>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <Wrapper>
+          {data && data.total > 0 ? (
+            data.patients.map((patient) => (
+              <PatientListCard
+                id={patient.id}
+                key={patient.id}
+                firstName={patient.firstName}
+                lastName={patient.lastName}
+                gender={patient.gender}
+                dateOfBirth={patient.dateOfBirth.toString()}
+                overview={patient.overview ? patient.overview : undefined}
+              />
+            ))
+          ) : (
+            <h4>{t('patient-list.no-data')}</h4>
+          )}
+          <Button onClick={() => setPage(page + 1)}>Load More</Button>
+        </Wrapper>
+      )}
     </Content>
   );
 }
