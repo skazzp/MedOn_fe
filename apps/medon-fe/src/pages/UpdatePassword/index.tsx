@@ -65,7 +65,7 @@ export default function UpdatePassword() {
             )}`}
           />
           <InputPasswordAntD
-            name="currentPassword"
+            name="newPassword"
             size="large"
             control={control}
             placeholder={`${t(
@@ -73,7 +73,7 @@ export default function UpdatePassword() {
             )}`}
           />
           <InputPasswordAntD
-            name="newPassword"
+            name="confirmNewPassword"
             size="large"
             control={control}
             placeholder={`${t(
