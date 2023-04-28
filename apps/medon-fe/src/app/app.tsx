@@ -9,6 +9,8 @@ import ResendConfirmation from 'pages/ResendConfirmation';
 import UpdatePassword from 'pages/UpdatePassword';
 import ProfilePage from 'pages/ProfilePage';
 import { PatientsPage } from 'pages/PatientsPage';
+
+import PatientCard from 'components/PatientCard';
 import { PublicRoute } from 'components/Routes/PublicRoute';
 import { PrivateRoute } from 'components/Routes/PrivateRoute';
 import PatientsList from 'components/PatientsList';
@@ -20,6 +22,7 @@ import { getTokenSelector } from 'redux/features/userSlice/userSelectors';
 import { useGetUserQuery } from 'redux/api/userApi';
 import { logout, setUser } from 'redux/features/userSlice/userSlice';
 import { persistedStore } from 'redux/store';
+
 import { routes } from 'utils/constants/routes';
 
 function App() {
@@ -82,6 +85,7 @@ function App() {
       >
         <Route index element={<PatientsList />} />
         <Route path={routes.addPatient} element={<NewPatientForm />} />
+        <Route path={routes.patientCard} element={<PatientCard />} />
       </Route>
       <Route path="*" element={<Navigate to={routes.login} />} />
     </Routes>

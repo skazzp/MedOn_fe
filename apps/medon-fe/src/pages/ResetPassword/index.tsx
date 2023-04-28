@@ -65,16 +65,16 @@ export default function ResetPassword() {
               <h3>{t('forget-password.reset-password.subtitle')}</h3>
               <InputPasswordAntD
                 name="newPassword"
-                control={control}
                 size="large"
+                control={control}
                 placeholder={`${t(
                   'forget-password.reset-password.placeholder-newpassword'
                 )}`}
               />
               <InputPasswordAntD
-                control={control}
                 name="confirmNewPassword"
                 size="large"
+                control={control}
                 placeholder={`${t(
                   'forget-password.reset-password.placeholder-confirmpassword'
                 )}`}

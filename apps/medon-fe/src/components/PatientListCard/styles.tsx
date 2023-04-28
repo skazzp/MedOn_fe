@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { ReactComponent as Profile } from 'assets/svgs/profile_listcard.svg';
 
 export const Container = styled.section`

@@ -32,6 +32,7 @@ declare module 'styled-components' {
       black: string;
       title: string;
       btnGradient: string;
+      icon_active: string;
     };
     fontFamily: {
       roboto: string;

@@ -48,7 +48,7 @@ export default function Navigation() {
     },
     { to: routes.profile, icon: <Profile />, label: 'navigation.profile' },
     {
-      to: routes.patientList,
+      to: routes.patients,
       icon: <Patient />,
       label: 'navigation.patient',
     },

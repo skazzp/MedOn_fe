@@ -57,25 +57,25 @@ export default function UpdatePassword() {
           <h1>{t('update-password.reset-password.title')}</h1>
           <h3>{t('update-password.reset-password.subtitle')}</h3>
           <InputPasswordAntD
-            control={control}
             name="currentPassword"
+            control={control}
             size="large"
             placeholder={`${t(
               'update-password.reset-password.placeholder-oldpassword'
             )}`}
           />
           <InputPasswordAntD
-            control={control}
-            name="newPassword"
+            name="currentPassword"
             size="large"
+            control={control}
             placeholder={`${t(
               'update-password.reset-password.placeholder-newpassword'
             )}`}
           />
           <InputPasswordAntD
-            control={control}
-            name="confirmNewPassword"
+            name="newPassword"
             size="large"
+            control={control}
             placeholder={`${t(
               'update-password.reset-password.placeholder-confirmpassword'
             )}`}

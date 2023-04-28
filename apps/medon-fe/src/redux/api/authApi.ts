@@ -57,7 +57,10 @@ export const authApi = createApi({
         };
       },
     }),
-    postForgetPasswordDoctor: builder.mutation<string, IForgetPassword>({
+    postForgetPasswordDoctor: builder.mutation<
+      MessageResponse,
+      IForgetPassword
+    >({
       query: ({ email }) => ({
         url: 'auth/forget',
         method: 'POST',
@@ -66,7 +69,7 @@ export const authApi = createApi({
         },
       }),
     }),
-    postResetPasswordDoctor: builder.mutation<string, IResetPassword>({
+    postResetPasswordDoctor: builder.mutation<MessageResponse, IResetPassword>({
       query: ({ newPassword, token }) => ({
         url: 'auth/reset',
         method: 'POST',
