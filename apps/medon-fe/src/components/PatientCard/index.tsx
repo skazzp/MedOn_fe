@@ -1,10 +1,10 @@
-import { Input } from 'antd';
+import { Input, Skeleton } from 'antd';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import AnimateHeight, { Height } from 'react-animate-height';
 
 import { LinkGoBack } from 'components/common/LinkGoBack';
@@ -15,8 +15,7 @@ import { TextareaAntD } from 'components/common';
 import { addPatientNoteSchema } from 'validation/addPatientNoteSchema';
 
 import { options } from 'utils/constants/options/patientCardSelect';
-import { patient, patientNotes } from 'utils/mock/patientNote';
-import { formatTime, formatDate, formatPatientCard } from 'utils/functions';
+import { formatTime, formatDate, formatAge } from 'utils/functions';
 
 import { PatientNote } from 'interfaces/patients';
 
@@ -30,6 +29,7 @@ import {
   AddNote,
   Close,
 } from 'assets/svgs/patientCard';
+import { useGetPatientByIdQuery } from 'redux/api/patientApi';
 
 import {
   AddNoteForm,
@@ -41,6 +41,7 @@ import {
   StyledSelect,
   Top,
   Wrapper,
+  SkeletonContainer,
 } from './styles';
 import { SubmitAddNote } from './types';
 import { useShowMoreText } from './hooks';
@@ -48,11 +49,13 @@ import { useShowMoreText } from './hooks';
 export default function PatientCard() {
   const [height, setHeight] = useState<Height>(0);
 
+  const { id } = useParams();
+  const { data, isLoading } = useGetPatientByIdQuery({ id });
+
   const { formatedText, showMore, handleShowToggle } = useShowMoreText(
-    patient.overview
+    data?.data?.overview
   );
-  const { formattedGender, formattedName, formattedAge } =
-    formatPatientCard(patient);
+  const { formattedAge } = formatAge(data?.data?.dateOfBirth);
 
   const { handleSubmit, control } = useForm<SubmitAddNote>({
     resolver: yupResolver(addPatientNoteSchema),
@@ -65,6 +68,17 @@ export default function PatientCard() {
     // add logic here
   };
 
+  if (isLoading)
+    return (
+      <SkeletonContainer>
+        <Skeleton active avatar round />
+        <Skeleton active title />
+        <Skeleton active paragraph />
+        <Skeleton active paragraph />
+        <Skeleton active paragraph />
+      </SkeletonContainer>
+    );
+
   return (
     <Container>
       <Top>
@@ -74,21 +88,23 @@ export default function PatientCard() {
           <Edit />
         </Link>
       </Top>
-      <h1>{formattedName}</h1>
+      <h1>
+        {data?.data?.firstName} {data?.data?.lastName}
+      </h1>
       <Wrapper>
         <Info>
           <Phone />
-          {patient.phoneNumber}
+          {data?.data?.phoneNumber}
         </Info>
         <Info>
           <Mail />
-          {patient.email}
+          {data?.data?.email}
         </Info>
       </Wrapper>
       <Wrapper>
         <Info>
           <MaleSex />
-          {formattedGender}
+          {data?.data?.gender}
         </Info>
         <Info>
           <Age />
@@ -96,7 +112,7 @@ export default function PatientCard() {
         </Info>
         <Info>
           <Location />
-          {patient.city} {patient.country}
+          {data?.data?.city} {data?.data?.country}
         </Info>
       </Wrapper>
       <h4>{t('patient-card.overview')}</h4>
@@ -153,8 +169,8 @@ export default function PatientCard() {
         />
         <StyledSelect defaultValue="latest" options={options} size="large" />
       </Wrapper>
-      {patientNotes.length ? (
-        patientNotes.map((note: PatientNote) => (
+      {data?.data?.notes.length ? (
+        data?.data?.notes.map((note: PatientNote) => (
           <PatientCardNotes
             key={note.id}
             note={note.note}
