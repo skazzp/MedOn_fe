@@ -9,23 +9,23 @@ import ResendConfirmation from 'pages/ResendConfirmation';
 import UpdatePassword from 'pages/UpdatePassword';
 import ProfilePage from 'pages/ProfilePage';
 import { PatientsPage } from 'pages/PatientsPage';
+import { DashboardPage } from 'pages/Dashboard';
 
 import PatientCard from 'components/PatientCard';
 import { PublicRoute } from 'components/Routes/PublicRoute';
 import { PrivateRoute } from 'components/Routes/PrivateRoute';
+import PatientsList from 'components/PatientsList';
+import { NewPatientForm } from 'components/NewPatientForm';
+import Dashboard from 'components/Dashboard';
+import WithoutAppointments from 'components/WithoutAppointments';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { getTokenSelector } from 'redux/features/userSlice/userSelectors';
 import { useGetUserQuery } from 'redux/api/userApi';
 import { logout, setUser } from 'redux/features/userSlice/userSlice';
 import { persistedStore } from 'redux/store';
-import { DashboardPage } from 'pages/Dashboard';
-import PatientsList from 'components/PatientsList';
-import { NewPatientForm } from 'components/NewPatientForm';
 
 import { routes } from 'utils/constants/routes';
-import Dashboard from 'components/Dashboard';
-import WithoutAppointments from 'components/WithoutAppointments';
 
 function App() {
   const isLoggedIn = useAppSelector(getTokenSelector);
