@@ -1,6 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { prepareHeaders } from 'redux/api/utils/prepareHeaders';
-import { IServerResponse, ICreatePatient, IPatient } from 'interfaces/index';
+import {
+  IServerResponse,
+  ICreatePatient,
+  IPatient,
+  IPatientWithNotes,
+} from 'interfaces/index';
 
 export const patientApi = createApi({
   reducerPath: 'patientApi',
@@ -19,7 +24,10 @@ export const patientApi = createApi({
         };
       },
     }),
+    getPatientById: builder.query<IPatientWithNotes, { id?: string }>({
+      query: ({ id }) => `patients/${id}`,
+    }),
   }),
 });
 
-export const { useCreatePatientMutation } = patientApi;
+export const { useCreatePatientMutation, useGetPatientByIdQuery } = patientApi;
