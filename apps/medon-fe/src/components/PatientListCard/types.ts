@@ -9,3 +9,9 @@ export interface IPatientListCardProps {
   doctor: string;
   time: string;
 }
+
+export interface ShowMoreTextHookReturnType {
+  formatedText: string;
+  showMore: boolean;
+  handleShowToggle: () => void;
+}

@@ -9,6 +9,8 @@ import ResendConfirmation from 'pages/ResendConfirmation';
 import UpdatePassword from 'pages/UpdatePassword';
 import ProfilePage from 'pages/ProfilePage';
 import { PatientsPage } from 'pages/PatientsPage';
+
+import PatientCard from 'components/PatientCard';
 import { PublicRoute } from 'components/Routes/PublicRoute';
 import { PrivateRoute } from 'components/Routes/PrivateRoute';
 
@@ -20,6 +22,7 @@ import { persistedStore } from 'redux/store';
 import { DashboardPage } from 'pages/Dashboard';
 import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
+
 import { routes } from 'utils/constants/routes';
 import Dashboard from 'components/Dashboard';
 import WithoutAppointments from 'components/WithoutAppointments';
@@ -90,6 +93,7 @@ function App() {
       >
         <Route index element={<PatientsList />} />
         <Route path={routes.addPatient} element={<NewPatientForm />} />
+        <Route path={routes.patientCard} element={<PatientCard />} />
       </Route>
       <Route path="*" element={<Navigate to={routes.login} />} />
     </Routes>

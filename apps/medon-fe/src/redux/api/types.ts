@@ -66,3 +66,12 @@ export interface LoginResponse {
   token: string;
   isVerified: boolean;
 }
+
+export interface IResetPassword {
+  token?: string;
+  newPassword: string;
+}
+
+export interface IForgetPassword {
+  email: string;
+}

@@ -17,3 +17,11 @@ export interface IPatient extends ICreatePatient {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface PatientNote {
+  id: number;
+  note: string;
+  doctor: string;
+  createdAt: string;
+  updatedAt: string;
+}
