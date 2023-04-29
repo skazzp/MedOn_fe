@@ -16,7 +16,8 @@ export default function PatientListCard({
 }: IPatientListCardProps) {
   const { t } = useTranslation();
 
-  const { formatedText, handleShowToggle, showMore } = useShowMoreText(content);
+  const { formatedText, handleShowToggle, showMore, isShowMorePossible } =
+    useShowMoreText(content);
 
   return (
     <Container>
@@ -35,9 +36,11 @@ export default function PatientListCard({
       </Header>
       <Body>
         <p>{formatedText}</p>
-        <button onClick={handleShowToggle}>
-          {!showMore ? t('show.more') : t('show.less')}
-        </button>
+        {isShowMorePossible && (
+          <button onClick={handleShowToggle}>
+            {!showMore ? t('show.more') : t('show.less')}
+          </button>
+        )}
       </Body>
     </Container>
   );

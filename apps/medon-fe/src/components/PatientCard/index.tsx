@@ -52,9 +52,8 @@ export default function PatientCard() {
   const { id } = useParams();
   const { data, isLoading } = useGetPatientByIdQuery({ id });
 
-  const { formatedText, showMore, handleShowToggle } = useShowMoreText(
-    data?.data?.overview
-  );
+  const { formatedText, showMore, handleShowToggle, isShowMorePossible } =
+    useShowMoreText(data?.data?.overview);
   const { formattedAge } = formatAge(data?.data?.dateOfBirth);
 
   const { handleSubmit, control } = useForm<SubmitAddNote>({
@@ -118,9 +117,11 @@ export default function PatientCard() {
       <h4>{t('patient-card.overview')}</h4>
       <Overview>
         <p>{formatedText}</p>
-        <button onClick={handleShowToggle}>
-          {!showMore ? t('show.more') : t('show.less')}
-        </button>
+        {isShowMorePossible && (
+          <button onClick={handleShowToggle}>
+            {!showMore ? t('show.more') : t('show.less')}
+          </button>
+        )}
       </Overview>
       {/* TODO: add calendar here */}
       <Calendar>Calendar</Calendar>
