@@ -27,15 +27,15 @@ export const Text = styled.p`
 `;
 
 export const Btn = styled(Button)`
-  background: linear-gradient(90deg, #085dd7 -28.15%, #4d93f8 76.48%);
+  background: ${(p) => p.theme.colors.btnGradient};
   font-family: ${(p) => p.theme.fontFamily.sf_pro_text};
   color: ${(p) => p.theme.colors.white};
   min-width: 10rem;
   width: fit-content;
+  margin-bottom: 4rem;
 `;
 
 export const BackBtn = styled(Btn)`
   background: ${(p) => p.theme.colors.black};
   width: 100%;
-  margin-top: 4rem;
 `;
