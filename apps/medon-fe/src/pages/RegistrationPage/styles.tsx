@@ -10,7 +10,7 @@ export const RegContainer = styled.div`
 `;
 
 export const FormContainer = styled.div`
-  margin-top: 2rem;
+  margin-top: 1rem;
   min-width: 27rem;
   width: 50vw;
   background-color: ${(p) => p.theme.colors.white};
@@ -21,7 +21,6 @@ export const FormContainer = styled.div`
 `;
 
 export const Title = styled.h1`
-  margin-left: 1.5rem;
   font-family: ${(p) => p.theme.fontFamily.sf_pro_text};
   font-size: ${(p) => p.theme.fontSizes.xxxl};
   font-weight: 700;
