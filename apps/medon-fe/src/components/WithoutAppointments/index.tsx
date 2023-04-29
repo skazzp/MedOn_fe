@@ -11,6 +11,7 @@ import {
   Manage,
   IconUnion,
   Wrapper,
+  TextWrap,
 } from 'components/WithoutAppointments/styles';
 import { routes } from 'utils/constants';
 
@@ -30,15 +31,19 @@ export function WithoutAppointments() {
         <Wrapper>
           <IconCircle />
           {user.role === 'remote' ? (
-            <Manage to={routes.availability}>
-              {t('dashboard.manage')}
-              <IconUnion />
-            </Manage>
+            <TextWrap>
+              <Manage to={routes.availability}>
+                {t('dashboard.manage')}
+                <IconUnion />
+              </Manage>
+            </TextWrap>
           ) : (
-            <Manage to={routes.appointments}>
-              {t('dashboard.book')}
-              <IconUnion />
-            </Manage>
+            <TextWrap>
+              <Manage to={routes.appointments}>
+                {t('dashboard.book')}
+                <IconUnion />
+              </Manage>
+            </TextWrap>
           )}
         </Wrapper>
       </Block>

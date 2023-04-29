@@ -84,10 +84,13 @@ export const Manage = styled(Link)`
   line-height: 20px;
   display: flex;
   justify-content: center;
-  grid-column-start: 2;
-  grid-row-start: 3;
   text-decoration: none;
   color: ${theme.colors.icon_active};
+`;
+
+export const TextWrap = styled.div`
+  grid-column-start: 2;
+  grid-row-start: 3;
 `;
 
 export const UserIcon = styled(Icon).attrs(() => ({
