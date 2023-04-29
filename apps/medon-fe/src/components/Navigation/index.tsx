@@ -18,17 +18,23 @@ import {
   UserName,
   SpecName,
   BlockName,
+  Availability,
 } from 'components/Navigation/styles';
 import profileImagePlaceholder from 'assets/images/Avatar.svg';
 import Logo from 'components/Logo';
 import { routes } from 'utils/constants/routes';
 import { persistedStore } from 'redux/store';
 import { logout } from 'redux/features/userSlice/userSlice';
+import useSpecOptions from 'components/RegistrationForm/useSpecOptions';
 
 export default function Navigation() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const user = useAppSelector(getUserSelector);
+  const { specialityOptions } = useSpecOptions();
+  const userSpeciality =
+    specialityOptions.find((spec) => spec.value === user?.specialityId)
+      ?.label ?? '';
 
   const handleLogout = () => {
     persistedStore.purge();
@@ -48,10 +54,19 @@ export default function Navigation() {
     },
     { to: routes.profile, icon: <Profile />, label: 'navigation.profile' },
     {
-      to: routes.patientList,
+      to: routes.patients,
       icon: <Patient />,
       label: 'navigation.patient',
     },
+    ...(user.role === 'remote'
+      ? [
+          {
+            to: routes.availability,
+            icon: <Availability />,
+            label: 'navigation.availability',
+          },
+        ]
+      : []),
     { to: routes.help, icon: <Help />, label: 'navigation.help' },
   ];
 
@@ -81,7 +96,7 @@ export default function Navigation() {
           <BlockName>
             {' '}
             <UserName>{`Dr.${user?.lastName}`}</UserName>
-            <SpecName>{user?.specialityId}</SpecName>
+            <SpecName>{userSpeciality}</SpecName>
           </BlockName>
         </UserBlock>
       </HeaderBlock>

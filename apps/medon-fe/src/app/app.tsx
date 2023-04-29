@@ -11,16 +11,18 @@ import ProfilePage from 'pages/ProfilePage';
 import { PatientsPage } from 'pages/PatientsPage';
 import { PublicRoute } from 'components/Routes/PublicRoute';
 import { PrivateRoute } from 'components/Routes/PrivateRoute';
-import PatientsList from 'components/PatientsList';
-import { NewPatientForm } from 'components/NewPatientForm';
-import Navigation from 'components/Navigation';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { getTokenSelector } from 'redux/features/userSlice/userSelectors';
 import { useGetUserQuery } from 'redux/api/userApi';
 import { logout, setUser } from 'redux/features/userSlice/userSlice';
 import { persistedStore } from 'redux/store';
+import { DashboardPage } from 'pages/Dashboard';
+import PatientsList from 'components/PatientsList';
+import { NewPatientForm } from 'components/NewPatientForm';
 import { routes } from 'utils/constants/routes';
+import Dashboard from 'components/Dashboard';
+import WithoutAppointments from 'components/WithoutAppointments';
 
 function App() {
   const isLoggedIn = useAppSelector(getTokenSelector);
@@ -62,8 +64,14 @@ function App() {
 
       <Route
         path={routes.dashboard}
-        element={<PrivateRoute component={<Navigation />} />}
-      />
+        element={<PrivateRoute component={<DashboardPage />} />}
+      >
+        <Route index element={<Dashboard />} />
+        <Route
+          path={routes.withoutAppointments}
+          element={<WithoutAppointments />}
+        />
+      </Route>
       <Route
         path={routes.profile}
         element={<PrivateRoute component={<ProfilePage />} />}

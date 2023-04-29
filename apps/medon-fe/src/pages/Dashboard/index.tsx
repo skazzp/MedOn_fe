@@ -1,7 +1,8 @@
+import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { Wrapper, Container } from 'pages/PatientsPage/styles';
+import { Wrapper, Container } from 'pages/Dashboard/styles';
 
-export function PatientsPage() {
+export function DashboardPage() {
   return (
     <Wrapper>
       <Container>

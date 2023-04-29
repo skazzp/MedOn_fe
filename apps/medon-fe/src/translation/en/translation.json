@@ -144,7 +144,7 @@
     "patient": "Patients list",
     "help": "Help",
     "logout": "Logout",
-    "Availability": "Availability",
+    "availability": "Availability",
     "img-alt": "User avatar"
   },
   "validation": {
@@ -292,5 +292,16 @@
       "success": "Patient successfully was added!",
       "error": "Patient wasn't added!"
     }
+  },
+  "dashboard": {
+    "welcome": "Welcome",
+    "latest": "Latest Appointments",
+    "show": "Full list",
+    "appointments": "Appointments:",
+    "manage": "Manage Availability",
+    "book": "Book an appointment"
+  },
+  "attention": {
+    "call-time-left": "You will have a video-call in 5 minutes with:"
   }
 }

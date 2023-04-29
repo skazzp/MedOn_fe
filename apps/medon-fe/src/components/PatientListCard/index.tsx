@@ -1,11 +1,21 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import DropdownMenu from 'components/Dropdown';
-
-import { Body, Container, Header, Options, ProfileIcon, Text } from './styles';
+import {
+  Body,
+  CameraIcon,
+  Container,
+  Header,
+  Options,
+  ProfileIcon,
+  Text,
+} from './styles';
 import { IPatientListCardProps } from './types';
+
+interface IPatientListCardPropsWithDoctorName extends IPatientListCardProps {
+  doctorName?: string;
+}
 
 export default function PatientListCard({
   firstName,
@@ -14,14 +24,27 @@ export default function PatientListCard({
   age,
   content,
   maxLength,
-}: IPatientListCardProps) {
+  doctor,
+}: IPatientListCardPropsWithDoctorName) {
   const [showMore, setShowMore] = useState(false);
 
   const { t } = useTranslation();
+  const location = useLocation();
 
   const handleToggle = () => {
     setShowMore(!showMore);
   };
+
+  let doctorLink = null;
+
+  if (location.pathname === '/dashboard' && doctor) {
+    doctorLink = (
+      <div>
+        <CameraIcon />
+        <p>Remote </p> <span>{doctor}</span>
+      </div>
+    );
+  }
 
   return (
     <Container>
@@ -31,12 +54,12 @@ export default function PatientListCard({
           <span>
             {sex}, {age} {t('patient-list.age-suffix')}
           </span>
+          {doctorLink}
         </Text>
         <Options>
           <Link to="#">
             <ProfileIcon />
           </Link>
-          <DropdownMenu />
         </Options>
       </Header>
       <Body>

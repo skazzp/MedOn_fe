@@ -6,4 +6,6 @@ export interface IPatientListCardProps {
   age: string;
   content: string;
   maxLength: number;
+  doctor: string;
+  time: string;
 }
