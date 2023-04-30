@@ -33,7 +33,7 @@ export default function PatientListCard({
           </span>
         </Text>
         <Options>
-          <Link to={routes.patientCard + '/' + id}>
+          <Link to={'/patients/card/' + id}>
             <ProfileIcon />
           </Link>
         </Options>

@@ -13,7 +13,7 @@ export const routes = {
   resendConfirmation: '/re-confirm-account',
   updatePassword: '/update-password',
   patients: '/patients',
-  patientCard: '/patients/card',
+  patientCard: '/patients/card/:id',
   addPatient: '/patients/add-new',
   withoutAppointments: '/dashboard/withoutAppointments',
 };
