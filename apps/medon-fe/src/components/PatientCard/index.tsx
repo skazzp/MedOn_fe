@@ -73,7 +73,7 @@ export default function PatientCard() {
     useShowMoreText(data?.data?.overview);
   const { formattedAge } = formatAge(data?.data?.dateOfBirth);
 
-  const { handleSubmit, control } = useForm<SubmitAddNote>({
+  const { handleSubmit, control, reset } = useForm<SubmitAddNote>({
     resolver: yupResolver(addPatientNoteSchema),
   });
 
@@ -85,6 +85,7 @@ export default function PatientCard() {
       .unwrap()
       .then(() => {
         toast.success(t('patient-card.toast.success'), toastConfig);
+        reset();
       })
       .catch((err) => {
         toast.error(err.data.message, toastConfig);

@@ -15,7 +15,7 @@ export const patientApi = createApi({
     baseUrl: process.env.NX_API_URL,
     prepareHeaders,
   }),
-  tagTypes: ['patient'],
+  tagTypes: ['patient', 'notes'],
   endpoints: (builder) => ({
     createPatient: builder.mutation<IServerResponse<IPatient>, ICreatePatient>({
       query(dto: ICreatePatient) {
@@ -41,6 +41,7 @@ export const patientApi = createApi({
           body: dto,
         };
       },
+      invalidatesTags: ['notes'],
     }),
     getPatientNotes: builder.query<
       IServerResponse<GetPatientNotes>,
@@ -48,6 +49,7 @@ export const patientApi = createApi({
     >({
       query: ({ text, order, id, limit, page }) =>
         `patient-notes/${id}?text=${text}&order=${order}&limit=${limit}&page=${page}`,
+      providesTags: ['notes'],
     }),
   }),
 });
