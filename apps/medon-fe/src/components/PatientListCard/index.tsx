@@ -25,7 +25,9 @@ export default function PatientListCard({
     <Container>
       <Header>
         <Text>
-          <span>{`${firstName} ${lastName}`}</span>
+          <Link to={'/patients/card/' + id}>
+            <span>{`${firstName} ${lastName}`}</span>
+          </Link>
           <span>
             {gender},{' '}
             {getAgeByDateOfBirth(dateOfBirth || new Date().toISOString())}

@@ -8,6 +8,10 @@ import { useGetPatientsQuery } from 'redux/api/patientApi';
 import React, { useState } from 'react';
 import { useDebounce } from 'hooks/useDebounce';
 import { Choose, Content, Wrapper, SpinWrapper } from './styles';
+import { useGetUserQuery } from 'redux/api/userApi';
+import { useAppSelector } from 'redux/hooks';
+import { getUserSelector } from 'redux/features/userSlice/userSelectors';
+import { ROLES } from 'utils/constants';
 
 export default function PatientsList() {
   const theme = useTheme();
@@ -16,6 +20,8 @@ export default function PatientsList() {
   const [limit, setLimit] = useState(5);
   const [searchPhrase, setSearchPhrase] = useState('');
   const debouncedSearch = useDebounce<string>(searchPhrase);
+
+  const user = useAppSelector(getUserSelector);
 
   const { data, isFetching } = useGetPatientsQuery({
     page,
@@ -40,14 +46,16 @@ export default function PatientsList() {
           onChange={(e) => setSearchPhrase(e.target.value)}
           onBlur={() => setSearchPhrase('')}
         />
-        <LinkHome
-          textcolor={theme.colors.white}
-          bgcolor={theme.colors.btnGradient}
-          to="add-new"
-        >
-          {t('patient-list.link')}
-          <Plus />
-        </LinkHome>
+        {user.role === ROLES.LOCAL && (
+          <LinkHome
+            textcolor={theme.colors.white}
+            bgcolor={theme.colors.btnGradient}
+            to="add-new"
+          >
+            {t('patient-list.link')}
+            <Plus />
+          </LinkHome>
+        )}
       </Choose>
       <h2>{t('patient-list.list')}</h2>
       {isFetching ? (
