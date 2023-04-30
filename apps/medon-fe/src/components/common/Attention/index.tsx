@@ -12,7 +12,7 @@ import {
   InfoButton,
 } from 'components/common/Attention/styles';
 import { patientList } from 'utils/mock/patientList';
-import { attention } from 'utils/constants/attention';
+import { Gender, addressing, routes } from 'utils/constants';
 
 export function Attention() {
   const navigate = useNavigate();
@@ -27,17 +27,15 @@ export function Attention() {
           <p>{t('attention.call-time-left')}</p>
           <p>
             <Name>{`${
-              patientList[0].sex === attention.gender
-                ? attention.mr
-                : attention.ms
+              patientList[0].sex === Gender.Male ? addressing.mr : addressing.ms
             } ${patientList[0].lastName} `}</Name>
-            and
+            {t('attention.and')}
             <Name> Dr. {`${user.lastName || 'Anonymous'}`}</Name>
           </p>
         </InfoText>
       </Wrapper>
-      <InfoButton onClick={() => navigate('/dashboard/patients-card')}>
-        Detail
+      <InfoButton onClick={() => navigate(routes.patientCard)}>
+        {t('attention.detail')}
       </InfoButton>
     </Call>
   );

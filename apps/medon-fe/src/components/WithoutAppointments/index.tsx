@@ -13,7 +13,7 @@ import {
   Wrapper,
   TextWrap,
 } from 'components/WithoutAppointments/styles';
-import { routes } from 'utils/constants';
+import { roles, routes } from 'utils/constants';
 
 export function WithoutAppointments() {
   const { t } = useTranslation();
@@ -30,7 +30,7 @@ export function WithoutAppointments() {
       <Block>
         <Wrapper>
           <IconCircle />
-          {user.role === 'remote' ? (
+          {user.role === roles.remote ? (
             <TextWrap>
               <Manage to={routes.availability}>
                 {t('dashboard.manage')}

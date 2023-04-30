@@ -12,6 +12,7 @@ import {
   ShowMore,
 } from 'components/Appointments/styles';
 import { timeMessages } from 'components/Appointments/types';
+import { roles } from 'utils/constants';
 
 export default function AppointmentsList() {
   const { t } = useTranslation();
@@ -19,7 +20,7 @@ export default function AppointmentsList() {
 
   const sortedPatientList = patientList
     .filter((patient) =>
-      user.role === 'remote' ? patient.doctor === user.lastName : true
+      user.role === roles.remote ? patient.doctor === user.lastName : true
     )
     .sort((a, b) => a.time.localeCompare(b.time));
 

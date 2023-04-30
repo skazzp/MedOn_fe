@@ -12,6 +12,7 @@ import {
   UserIcon,
 } from 'components/AppointmentsScore/styles';
 import { patientList } from 'utils/mock/patientList';
+import { roles, routes } from 'utils/constants';
 
 export default function AppointmentsScore() {
   const user = useAppSelector(getUserSelector);
@@ -27,24 +28,24 @@ export default function AppointmentsScore() {
         <h2>{t('dashboard.latest')}</h2>
         <UserIcon />
         <p>
-          {user.role === 'remote'
+          {user.role === roles.remote
             ? sortedPatientList.length
             : patientList.length}
         </p>
       </CountList>
-      {user.role === 'remote' ? (
+      {user.role === roles.remote ? (
         <>
           <Radio>
             <input type="radio" name="choice" id="list" checked={true} />
             <label htmlFor="list" data-checked={true}>
-              List
+              {t('dashboard.list')}
             </label>
             <input type="radio" name="choice" id="month" />
-            <label htmlFor="month">Month</label>
+            <label htmlFor="month">{t('dashboard.month')}</label>
           </Radio>
 
-          <Availability to={'#'}>
-            Manage availability
+          <Availability to={routes.availability}>
+            {t('dashboard.manage')}
             <IconCalendar />
           </Availability>
         </>
