@@ -102,3 +102,8 @@ export interface IPatientsResponse {
   total: number;
   patients: IPatient[];
 }
+
+export interface UpdatePasswordData {
+  currentPassword: string;
+  newPassword: string;
+}

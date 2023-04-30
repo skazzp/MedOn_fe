@@ -2,27 +2,52 @@ import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link } from 'react-router-dom';
-
-import Button from 'components/Button';
-import LinkHome from 'components/LinkHome';
-
-import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { SubmitResetPasswordForm } from 'pages/UpdatePassword/types';
 import { Container, Content, Footer, Form } from 'pages/UpdatePassword/styles';
-import { passwordSchema } from 'validation/updatePasswordSchema';
+
+import Button from 'components/Button';
+import LinkHome from 'components/LinkHome';
 import { InputPasswordAntD } from 'components/common';
+
+import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
+
+import { passwordSchema } from 'validation/updatePasswordSchema';
+import { useUpdateUserPasswordMutation } from 'redux/api/userApi';
+import { toastConfig } from 'utils/toastConfig';
+import { routes } from 'utils/constants';
 
 export default function UpdatePassword() {
   const theme = useTheme();
   const { t } = useTranslation();
-  const { control, handleSubmit } = useForm<SubmitResetPasswordForm>({
+  const { handleSubmit, control, reset } = useForm<SubmitResetPasswordForm>({
     resolver: yupResolver(passwordSchema),
   });
 
-  const handleUpdatePassword: SubmitHandler<SubmitResetPasswordForm> = () => {
-    //  logic
+  const navigate = useNavigate();
+
+  const [sendData, { isLoading }] = useUpdateUserPasswordMutation();
+
+  const handleUpdatePassword: SubmitHandler<SubmitResetPasswordForm> = (
+    data
+  ) => {
+    sendData({
+      currentPassword: data.currentPassword,
+      newPassword: data.newPassword,
+    })
+      .unwrap()
+      .then((res) => {
+        navigate(routes.profile);
+        toast.success(res.message, toastConfig);
+      })
+      .catch((err) => {
+        toast.error(err.data.message, toastConfig);
+      })
+      .finally(() => {
+        reset();
+      });
   };
 
   return (
@@ -40,7 +65,7 @@ export default function UpdatePassword() {
             )}`}
           />
           <InputPasswordAntD
-            name="currentPassword"
+            name="newPassword"
             size="large"
             control={control}
             placeholder={`${t(
@@ -48,7 +73,7 @@ export default function UpdatePassword() {
             )}`}
           />
           <InputPasswordAntD
-            name="newPassword"
+            name="confirmNewPassword"
             size="large"
             control={control}
             placeholder={`${t(
@@ -58,6 +83,7 @@ export default function UpdatePassword() {
           <Button
             bgcolor={theme.colors.btnGradient}
             textcolor={theme.colors.white}
+            isLoading={isLoading}
           >
             {t('update-password.reset-password.button')}
             <img src={RightArrow} alt={`${t('update-password.alt.image')}`} />

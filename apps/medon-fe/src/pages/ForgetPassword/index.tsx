@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import Button from 'components/Button';
-import Input from 'components/Input';
+import { InputPasswordAntD } from 'components/common/InputPasswordAntD';
 import LinkHome from 'components/LinkHome';
 
 import { SubmitSendEmail } from 'pages/ForgetPassword/types';
@@ -25,13 +25,9 @@ import Logo from 'assets/svgs/logo_medon.svg';
 import { emailSchema } from 'validation/forgotPasswordSchema';
 import { usePostForgetPasswordDoctorMutation } from 'redux/api/authApi';
 
-export default function ResetPassword() {
+export default function ForgetPassword() {
   const [isEmailSent, setIsEmailSent] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SubmitSendEmail>({
+  const { handleSubmit, control } = useForm<SubmitSendEmail>({
     resolver: yupResolver(emailSchema),
     defaultValues: {
       email: '',
@@ -70,15 +66,13 @@ export default function ResetPassword() {
             <>
               <h1>{t('forget-password.send-email.title')}</h1>
               <h3>{t('forget-password.send-email.subtitle')}</h3>
-              <Input
+              <InputPasswordAntD
+                control={control}
+                name="email"
+                size="large"
                 placeholder={`${t(
                   'forget-password.send-email.placeholder-email'
                 )}`}
-                type="email"
-                errorMessage={
-                  errors.email?.message ? t(`${errors.email?.message}`) : ''
-                }
-                {...register('email')}
               />
               <Button
                 bgcolor={theme.colors.btnGradient}
