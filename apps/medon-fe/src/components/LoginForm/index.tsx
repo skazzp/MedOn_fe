@@ -52,12 +52,9 @@ const LoginForm: FC = () => {
     if (data) {
       dispatch(setIsVerified(data.isVerified));
       dispatch(setToken(data.token));
+      navigate('/dashboard');
     }
   }, [data, dispatch, navigate]);
-
-  if (isLoading) {
-    return <Spin />;
-  }
 
   return (
     <Form
@@ -109,12 +106,17 @@ const LoginForm: FC = () => {
       <ForgotButton type="link" href="/forget-password">
         {t('login.login-forgot-password')}
       </ForgotButton>
-      <SendButton
-        type="submit"
-        size="large"
-        value={`${t('login.login')}`}
-        disabled={isLoading}
-      />
+      {isLoading ? (
+        <Spin />
+      ) : (
+        <SendButton
+          type="submit"
+          size="large"
+          value={`${t('login.login')}`}
+          disabled={isLoading}
+        />
+      )}
+
       <GoogleBtn
         size="large"
         href={`${process.env.NX_API_URL}${process.env.NX_API_GOOGLE_ROUTE}`}

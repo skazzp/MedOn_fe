@@ -26,7 +26,8 @@ export default function PatientListCard({
         <Text>
           <span>{`${firstName} ${lastName}`}</span>
           <span>
-            {gender}, {getAgeByDateOfBirth(dateOfBirth)}{' '}
+            {gender},{' '}
+            {getAgeByDateOfBirth(dateOfBirth || new Date().toISOString())}
             {t('patient-list.age-suffix')}
           </span>
         </Text>

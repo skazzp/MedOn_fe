@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useAppSelector } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 import {
@@ -17,15 +17,21 @@ import {
   UserName,
   SpecName,
   BlockName,
+  Availability,
 } from 'components/Navigation/styles';
 import profileImagePlaceholder from 'assets/images/Avatar.svg';
 import Logo from 'components/Logo';
 import { routes } from 'utils/constants/routes';
 import LogOut from 'components/LogOut';
+import useSpecOptions from 'components/RegistrationForm/useSpecOptions';
 
 export default function Navigation() {
   const { t } = useTranslation();
   const user = useAppSelector(getUserSelector);
+  const { specialityOptions } = useSpecOptions();
+  const userSpeciality =
+    specialityOptions.find((spec) => spec.value === user?.specialityId)
+      ?.label ?? '';
 
   const navItems = [
     {
@@ -44,6 +50,15 @@ export default function Navigation() {
       icon: <Patient />,
       label: 'navigation.patient',
     },
+    ...(user.role === 'remote'
+      ? [
+          {
+            to: routes.availability,
+            icon: <Availability />,
+            label: 'navigation.availability',
+          },
+        ]
+      : []),
     { to: routes.help, icon: <Help />, label: 'navigation.help' },
   ];
 
@@ -70,8 +85,9 @@ export default function Navigation() {
             alt={t<string>('navigation.img-alt')}
           />
           <BlockName>
+            {' '}
             <UserName>{`Dr.${user?.lastName}`}</UserName>
-            <SpecName>{user?.specialityId}</SpecName>
+            <SpecName>{userSpeciality}</SpecName>
           </BlockName>
         </UserBlock>
       </HeaderBlock>

@@ -9,13 +9,15 @@ import ResendConfirmation from 'pages/ResendConfirmation';
 import UpdatePassword from 'pages/UpdatePassword';
 import ProfilePage from 'pages/ProfilePage';
 import { PatientsPage } from 'pages/PatientsPage';
+import { DashboardPage } from 'pages/Dashboard';
 
 import PatientCard from 'components/PatientCard';
 import { PublicRoute } from 'components/Routes/PublicRoute';
 import { PrivateRoute } from 'components/Routes/PrivateRoute';
 import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
-import Navigation from 'components/Navigation';
+import Dashboard from 'components/Dashboard';
+import WithoutAppointments from 'components/WithoutAppointments';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { getTokenSelector } from 'redux/features/userSlice/userSelectors';
@@ -65,8 +67,14 @@ function App() {
 
       <Route
         path={routes.dashboard}
-        element={<PrivateRoute component={<Navigation />} />}
-      />
+        element={<PrivateRoute component={<DashboardPage />} />}
+      >
+        <Route index element={<Dashboard />} />
+        <Route
+          path={routes.withoutAppointments}
+          element={<WithoutAppointments />}
+        />
+      </Route>
       <Route
         path={routes.profile}
         element={<PrivateRoute component={<ProfilePage />} />}

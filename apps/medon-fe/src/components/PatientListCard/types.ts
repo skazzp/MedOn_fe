@@ -2,8 +2,10 @@ export interface IPatientListCardProps {
   id: number;
   firstName: string;
   lastName: string;
-  gender: string;
-  dateOfBirth: string;
+  gender?: string;
+  sex?: string;
+  age?: string;
+  dateOfBirth?: string;
   overview?: string;
 }
 
