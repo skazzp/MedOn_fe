@@ -169,11 +169,11 @@
     "minLength": "Length at least 3 characters",
     "maxLength": "Length maximum 20 characters",
     "firstName": {
-      "matches": "First name must consist of only letters",
+      "matches": "Must consist only of Latin letters",
       "required": "First name is required"
     },
     "lastName": {
-      "matches": "Last name must consist of only letters",
+      "matches": "Must consist only of Latin letters",
       "required": "Last name is required"
     },
     "email": {
@@ -198,6 +198,7 @@
       "required": "Speciality is required"
     },
     "birthday": {
+      "max": "You should be at least 18 years old",
       "required": "Birthday is required"
     },
     "country": {

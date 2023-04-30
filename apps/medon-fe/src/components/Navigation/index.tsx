@@ -70,7 +70,7 @@ export default function Navigation() {
             alt={t<string>('navigation.img-alt')}
           />
           <BlockName>
-            <UserName>{`Dr.${user?.lastName}`}</UserName>
+            <UserName>{`Dr. ${user?.lastName}`}</UserName>
             <SpecName>{user?.specialityId}</SpecName>
           </BlockName>
         </UserBlock>
