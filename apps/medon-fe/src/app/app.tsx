@@ -16,7 +16,6 @@ import { PublicRoute } from 'components/Routes/PublicRoute';
 import { PrivateRoute } from 'components/Routes/PrivateRoute';
 import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
-import Dashboard from 'components/Dashboard';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { getTokenSelector } from 'redux/features/userSlice/userSelectors';
@@ -67,9 +66,7 @@ function App() {
       <Route
         path={routes.dashboard}
         element={<PrivateRoute component={<DashboardPage />} />}
-      >
-        <Route index element={<Dashboard />} />
-      </Route>
+      />
       <Route
         path={routes.profile}
         element={<PrivateRoute component={<ProfilePage />} />}
