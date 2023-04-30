@@ -8,4 +8,7 @@ export default {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/apps/medon-fe',
+  moduleNameMapper: {
+    '\\.svg$': '<rootDir>/src/components/__tests__/svg.js',
+  },
 };
