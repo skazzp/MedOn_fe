@@ -9,7 +9,8 @@ export default function PatientCardNotes({
   note,
   doctor,
 }: IPatientCardNotes) {
-  const { formatedText, handleShowToggle, showMore } = useShowMoreText(note);
+  const { formatedText, handleShowToggle, showMore, isShowMorePossible } =
+    useShowMoreText(note);
 
   const { t } = useTranslation();
 
@@ -21,12 +22,14 @@ export default function PatientCardNotes({
       </Top>
       <Overview>
         {formatedText}
-        <button onClick={handleShowToggle}>
-          {!showMore ? t('show.more') : t('show.less')}
-        </button>
+        {isShowMorePossible && (
+          <button onClick={handleShowToggle}>
+            {!showMore ? t('show.more') : t('show.less')}
+          </button>
+        )}
       </Overview>
       <Doctor>
-        {t('patient-card.notes.prefix-doctor')} {doctor}
+        {t('patient-card.notes.prefix-doctor')} {doctor.lastName}
       </Doctor>
     </Container>
   );
