@@ -75,3 +75,16 @@ export interface IResetPassword {
 export interface IForgetPassword {
   email: string;
 }
+
+export interface ICreatePatientNotes {
+  patientId?: string;
+  note: string;
+}
+
+export interface IGetPatientNotes {
+  id?: string;
+  order?: string;
+  text?: string;
+  page?: number;
+  limit?: number;
+}

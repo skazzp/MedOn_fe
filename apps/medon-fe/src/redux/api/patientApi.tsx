@@ -4,8 +4,10 @@ import {
   IServerResponse,
   ICreatePatient,
   IPatient,
-  IPatientWithNotes,
+  PatientNote,
+  GetPatientNotes,
 } from 'interfaces/index';
+import { ICreatePatientNotes, IGetPatientNotes } from './types';
 
 export const patientApi = createApi({
   reducerPath: 'patientApi',
@@ -24,10 +26,35 @@ export const patientApi = createApi({
         };
       },
     }),
-    getPatientById: builder.query<IPatientWithNotes, { id?: string }>({
+    getPatientById: builder.query<IServerResponse<IPatient>, { id?: string }>({
       query: ({ id }) => `patients/${id}`,
+    }),
+
+    createPatientNote: builder.mutation<
+      IServerResponse<PatientNote>,
+      ICreatePatientNotes
+    >({
+      query(dto: ICreatePatientNotes) {
+        return {
+          url: 'patient-notes/create',
+          method: 'POST',
+          body: dto,
+        };
+      },
+    }),
+    getPatientNotes: builder.query<
+      IServerResponse<GetPatientNotes>,
+      IGetPatientNotes
+    >({
+      query: ({ text, order, id, limit, page }) =>
+        `patient-notes/${id}?text=${text}&order=${order}&limit=${limit}&page=${page}`,
     }),
   }),
 });
 
-export const { useCreatePatientMutation, useGetPatientByIdQuery } = patientApi;
+export const {
+  useCreatePatientMutation,
+  useGetPatientByIdQuery,
+  useCreatePatientNoteMutation,
+  useGetPatientNotesQuery,
+} = patientApi;

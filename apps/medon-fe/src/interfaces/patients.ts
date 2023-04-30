@@ -18,16 +18,18 @@ export interface IPatient extends ICreatePatient {
   updatedAt: Date;
 }
 
-export interface IPatientWithNotes {
-  data?: IPatient & {
-    notes: PatientNote[];
-  };
-}
-
 export interface PatientNote {
   id: number;
   note: string;
-  doctor: string;
+  doctor: {
+    firstName?: string;
+    lastName: string;
+  };
   createdAt: string;
   updatedAt: string;
+}
+
+export interface GetPatientNotes {
+  notes: PatientNote[];
+  total: number;
 }
