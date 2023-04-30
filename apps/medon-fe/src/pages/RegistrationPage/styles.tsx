@@ -13,7 +13,7 @@ export const FormContainer = styled.div`
   margin-top: 1rem;
   min-width: 27rem;
   width: 50vw;
-  background-color: ${(p) => p.theme.colors.white};
+  background-color: ${(p) => p.theme.colors.background_main};
   display: flex;
   align-items: center;
   justify-content: center;
