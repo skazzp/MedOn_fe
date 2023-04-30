@@ -10,8 +10,9 @@ export interface IPatientCardProps {
 
 export interface ShowMoreTextHookReturnType {
   formatedText?: string;
-  showMore: boolean;
-  handleShowToggle: () => void;
+  showMore?: boolean;
+  isShowMorePossible?: boolean;
+  handleShowToggle?: () => void;
 }
 
 export interface SubmitAddNote {

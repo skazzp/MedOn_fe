@@ -9,6 +9,7 @@ import { IPatientListCardProps } from './types';
 import { useShowMoreText } from './hooks';
 
 export default function PatientListCard({
+  id,
   firstName,
   lastName,
   gender,
@@ -17,7 +18,7 @@ export default function PatientListCard({
 }: IPatientListCardProps) {
   const { t } = useTranslation();
 
-  const { formattedText, handleShowToggle, showMore } =
+  const { formattedText, handleShowToggle, showMore, isShowMorePossible } =
     useShowMoreText(overview);
 
   return (
@@ -32,19 +33,19 @@ export default function PatientListCard({
           </span>
         </Text>
         <Options>
-          <Link to={routes.patientCard}>
+          <Link to={routes.patientCard + '/' + id}>
             <ProfileIcon />
           </Link>
         </Options>
       </Header>
-      {overview && (
-        <Body>
-          <p>{formattedText}</p>
+      <Body>
+        <p>{formattedText}</p>
+        {isShowMorePossible && (
           <button onClick={handleShowToggle}>
             {!showMore ? t('show.more') : t('show.less')}
           </button>
-        </Body>
-      )}
+        )}
+      </Body>
     </Container>
   );
 }

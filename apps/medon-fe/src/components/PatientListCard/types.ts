@@ -12,5 +12,6 @@ export interface IPatientListCardProps {
 export interface ShowMoreTextHookReturnType {
   formattedText: string;
   showMore: boolean;
+  isShowMorePossible?: boolean;
   handleShowToggle: () => void;
 }

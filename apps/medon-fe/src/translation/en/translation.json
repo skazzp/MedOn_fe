@@ -128,6 +128,7 @@
     "edit": "Edit profile",
     "search-input-placeholder": "Search",
     "medical": "Medical History",
+    "toast.success": "Note added successfully",
     "notes": {
       "prefix-doctor": "Dr. ",
       "empty-notes": "No notes added yet",

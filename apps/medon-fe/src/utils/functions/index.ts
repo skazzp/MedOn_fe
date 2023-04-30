@@ -1,5 +1,5 @@
 import { formatTime } from './formatTime';
 import { formatDate } from './formatDate';
-import { formatPatientCard } from './formatPatientCard';
+import { formatAge } from './formatAge';
 
-export { formatTime, formatPatientCard, formatDate };
+export { formatTime, formatAge, formatDate };

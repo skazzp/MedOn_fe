@@ -42,12 +42,6 @@ export const StyledSelect = styled(Select)`
   width: 300px;
 `;
 
-export const Info = styled.span`
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-`;
-
 export const Overview = styled.div`
   > button {
     background-color: transparent;
@@ -109,4 +103,15 @@ export const Buttons = styled.div`
       fill: ${({ theme }) => theme.colors.gray_700};
     }
   }
+`;
+
+export const SkeletonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 `;
