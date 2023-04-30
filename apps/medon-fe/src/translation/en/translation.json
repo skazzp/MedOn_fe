@@ -198,6 +198,7 @@
       "required": "Speciality is required"
     },
     "birthday": {
+      "max": "You should be at least 18 years old",
       "required": "Birthday is required"
     },
     "country": {

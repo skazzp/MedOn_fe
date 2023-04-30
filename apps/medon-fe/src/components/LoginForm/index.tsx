@@ -56,7 +56,7 @@ const LoginForm: FC = () => {
   }, [data, dispatch, navigate]);
 
   if (isLoading) {
-    return <Spin />;
+    return <Spin tip="Loading" size="large" />;
   }
 
   return (
