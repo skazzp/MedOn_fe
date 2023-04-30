@@ -42,12 +42,6 @@ export const StyledSelect = styled(Select)`
   width: 300px;
 `;
 
-export const Info = styled.span`
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-`;
-
 export const Overview = styled.div`
   > button {
     background-color: transparent;
