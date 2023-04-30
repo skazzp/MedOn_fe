@@ -38,4 +38,5 @@ export const Btn = styled(Button)`
 export const BackBtn = styled(Btn)`
   background: ${(p) => p.theme.colors.black};
   width: 100%;
+  margin-bottom: 0;
 `;
