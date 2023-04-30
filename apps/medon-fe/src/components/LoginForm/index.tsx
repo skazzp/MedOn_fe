@@ -52,7 +52,6 @@ const LoginForm: FC = () => {
     if (data) {
       dispatch(setIsVerified(data.isVerified));
       dispatch(setToken(data.token));
-      navigate('/dashboard');
     }
   }, [data, dispatch, navigate]);
 

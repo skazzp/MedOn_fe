@@ -1,12 +1,11 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
 import { Wrapper, Container } from 'pages/Dashboard/styles';
+import Dashboard from 'components/Dashboard';
 
 export function DashboardPage() {
   return (
     <Wrapper>
       <Container>
-        <Outlet />
+        <Dashboard />
       </Container>
     </Wrapper>
   );

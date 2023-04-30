@@ -29,6 +29,7 @@ import {
   ImageContainer,
   LabelText,
 } from './styles';
+import { CheckOutlined } from '@ant-design/icons';
 
 interface IProps {
   submitForm: (values: FormProfileData) => void;
@@ -222,6 +223,7 @@ export default function ProfileForm({
             )}
             {!disabled && (
               <StyledButton size="large" htmlType="submit">
+                <CheckOutlined />
                 {t('profileForm.profileBtn')}
               </StyledButton>
             )}

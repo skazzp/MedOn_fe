@@ -12,6 +12,7 @@ import {
   InfoButton,
 } from 'components/common/Attention/styles';
 import { patientList } from 'utils/mock/patientList';
+import { attention } from 'utils/constants/attention';
 
 export function Attention() {
   const navigate = useNavigate();
@@ -25,9 +26,11 @@ export function Attention() {
         <InfoText>
           <p>{t('attention.call-time-left')}</p>
           <p>
-            <Name>{`${patientList[0].sex === 'Male' ? 'Mr.' : 'Ms.'} ${
-              patientList[0].lastName
-            } `}</Name>
+            <Name>{`${
+              patientList[0].sex === attention.gender
+                ? attention.mr
+                : attention.ms
+            } ${patientList[0].lastName} `}</Name>
             and
             <Name> Dr. {`${user.lastName || 'Anonymous'}`}</Name>
           </p>

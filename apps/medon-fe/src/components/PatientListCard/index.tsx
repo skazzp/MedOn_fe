@@ -30,7 +30,7 @@ export default function PatientListCard({
 
   let doctorLink = null;
 
-  if (location.pathname === '/dashboard' && doctor) {
+  if (location.pathname === routes.dashboard && doctor) {
     doctorLink = (
       <div>
         <CameraIcon />

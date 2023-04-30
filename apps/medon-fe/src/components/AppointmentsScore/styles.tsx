@@ -56,7 +56,7 @@ export const Radio = styled.div`
 `;
 
 export const Availability = styled(Link)`
-  background: linear-gradient(90deg, #085dd7 -28.15%, #4d93f8 76.48%);
+  background: ${theme.colors.btnGradient};
   border-radius: 4px;
   align-items: center;
   padding: 8px 12px;

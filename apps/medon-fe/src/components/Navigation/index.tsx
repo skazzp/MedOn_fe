@@ -94,7 +94,6 @@ export default function Navigation() {
             alt={t<string>('navigation.img-alt')}
           />
           <BlockName>
-            {' '}
             <UserName>{`Dr.${user?.lastName}`}</UserName>
             <SpecName>{userSpeciality}</SpecName>
           </BlockName>
