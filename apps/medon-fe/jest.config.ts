@@ -9,7 +9,7 @@ export default {
   coverageDirectory: '../../coverage/apps/medon-fe',
   setupFilesAfterEnv: [
     '@testing-library/jest-dom/extend-expect',
-    './jest-setup.ts',
+    './jest.setup.ts',
   ],
   moduleNameMapper: {
     '~/(.*)': '<rootDir>/src/$1',
