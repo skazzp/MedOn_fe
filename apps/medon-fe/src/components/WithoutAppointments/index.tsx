@@ -39,7 +39,7 @@ export function WithoutAppointments() {
             </TextWrap>
           ) : (
             <TextWrap>
-              <Manage to={routes.appointments}>
+              <Manage to="/dashboard/appointments">
                 {t('dashboard.book')}
                 <IconUnion />
               </Manage>

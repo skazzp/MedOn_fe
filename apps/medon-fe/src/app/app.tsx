@@ -69,11 +69,8 @@ function App() {
         path={routes.dashboard}
         element={<PrivateRoute component={<DashboardPage />} />}
       >
-        <Route index element={<Dashboard />} />
-        <Route
-          path={routes.withoutAppointments}
-          element={<WithoutAppointments />}
-        />
+        <Route index element={<WithoutAppointments />} />
+        <Route path="/dashboard/appointments" element={<Dashboard />} />
       </Route>
       <Route
         path={routes.profile}
