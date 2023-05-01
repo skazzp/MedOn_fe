@@ -4,5 +4,5 @@ export const formatDate = (dateTimeStr: string): string => {
   const day = dateTime.getDate();
   const year = dateTime.getFullYear();
 
-  return `${month} ${day}, ${year}`;
+  return `May ${day}, ${year}`;
 };
