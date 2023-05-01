@@ -12,7 +12,7 @@ export function ShowMore({ text }: IShowMoreProps) {
     <Container>
       <p>{formatedText}</p>
       {isShowMorePossible && (
-        <button onClick={handleShowToggle}>
+        <button type="button" onClick={handleShowToggle}>
           {!showMore ? t('show.more') : t('show.less')}
         </button>
       )}
