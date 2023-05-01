@@ -1,4 +1,4 @@
-import { Input, Pagination, Skeleton } from 'antd';
+import { Input, Skeleton } from 'antd';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -11,17 +11,16 @@ import { toast } from 'react-toastify';
 
 import { LinkGoBack } from 'components/common/LinkGoBack';
 import Button from 'components/Button';
-import PatientCardNotes from 'components/PatientCardNotes';
 import { TextareaAntD } from 'components/common';
+import { PatientNotes } from 'components/PatientNotes';
 import PatientCardInfo from 'components/PatientCardInfo';
+import { ShowMore } from 'components/ShowMore';
 
 import { addPatientNoteSchema } from 'validation/addPatientNoteSchema';
 
 import { toastConfig } from 'utils/toastConfig';
 import { options } from 'utils/constants/options/patientCardSelect';
-import { formatTime, formatDate, formatAge } from 'utils/functions';
-
-import { PatientNote } from 'interfaces/patients';
+import { formatAge } from 'utils/functions';
 
 import { Edit, AddNote, Close } from 'assets/svgs/patientCard';
 import {
@@ -35,14 +34,12 @@ import {
   Buttons,
   Calendar,
   Container,
-  Overview,
   StyledSelect,
   Top,
   Wrapper,
   SkeletonContainer,
 } from './styles';
 import { SubmitAddNote } from './types';
-import { useShowMoreText } from './hooks';
 
 export default function PatientCard() {
   const [height, setHeight] = useState<Height>(0);
@@ -69,8 +66,6 @@ export default function PatientCard() {
   const [sendData, { isLoading: isNoteSending }] =
     useCreatePatientNoteMutation();
 
-  const { formatedText, showMore, handleShowToggle, isShowMorePossible } =
-    useShowMoreText(data?.data?.overview);
   const { formattedAge } = formatAge(data?.data?.dateOfBirth);
 
   const { handleSubmit, control, reset } = useForm<SubmitAddNote>({
@@ -117,14 +112,7 @@ export default function PatientCard() {
       </h1>
       <PatientCardInfo data={data?.data} formattedAge={formattedAge} />
       <h4>{t('patient-card.overview')}</h4>
-      <Overview>
-        <p>{formatedText}</p>
-        {isShowMorePossible && (
-          <button onClick={handleShowToggle}>
-            {!showMore ? t('show.more') : t('show.less')}
-          </button>
-        )}
-      </Overview>
+      <ShowMore text={data?.data?.overview} />
       {/* TODO: add calendar here */}
       <Calendar>Calendar</Calendar>
       {/* TODO: add calendar here */}
@@ -184,32 +172,15 @@ export default function PatientCard() {
           }}
         />
       </Wrapper>
-      {isFetching && <Skeleton active />}
-      {!isFetching && notes?.data?.notes.length ? (
-        <>
-          {notes?.data?.notes.map((note: PatientNote) => (
-            <PatientCardNotes
-              key={note.id}
-              note={note.note}
-              date={formatDate(note.createdAt)}
-              time={formatTime(note.createdAt)}
-              doctor={note.doctor}
-            />
-          ))}
-          <Pagination
-            total={notes?.data.total}
-            current={pageValue}
-            pageSize={pageSizeValue}
-            defaultCurrent={1}
-            onChange={(page, pageSize) => {
-              setPageValue(page);
-              setPageSizeValue(pageSize);
-            }}
-          />
-        </>
-      ) : (
-        <span>{!isFetching ? t('patient-card.notes.empty-notes') : null}</span>
-      )}
+      <PatientNotes
+        isFetching={isFetching}
+        notes={notes?.data?.notes}
+        total={notes?.data?.total}
+        pageSizeValue={pageSizeValue}
+        pageValue={pageValue}
+        setPageSizeValue={setPageSizeValue}
+        setPageValue={setPageValue}
+      />
     </Container>
   );
 }

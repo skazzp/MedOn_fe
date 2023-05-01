@@ -42,23 +42,6 @@ export const StyledSelect = styled(Select)`
   width: 300px;
 `;
 
-export const Overview = styled.div`
-  > button {
-    background-color: transparent;
-    border: transparent;
-    text-align: left;
-    margin-top: -1rem;
-    padding: 0;
-    color: ${({ theme }) => theme.colors.blue_500};
-    font-weight: 700;
-    font-size: ${({ theme }) => theme.fontSizes.sm};
-    cursor: pointer;
-  }
-  > p {
-    margin: 0;
-  }
-`;
-
 export const Calendar = styled.div`
   display: flex;
   align-items: center;
