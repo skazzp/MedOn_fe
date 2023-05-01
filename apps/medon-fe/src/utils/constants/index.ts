@@ -6,4 +6,3 @@ export * from './roles';
 export * from './routes';
 export * from './toast';
 export * from './urls';
-export * from './attention';

@@ -1,4 +1,4 @@
-import { ROLES } from 'utils/constants/roles';
+import { roles } from 'utils/constants/roles';
 import { bDayValidation } from 'utils/functions/bDayValidation';
 import * as yup from 'yup';
 
@@ -34,7 +34,7 @@ export const registrationFormSchema = yup.object({
     .required('validation.passwordRepeat.required'),
   role: yup.string().required('validation.role.required'),
   speciality: yup.string().when('role', {
-    is: ROLES.REMOTE,
+    is: roles.remote,
     then: (schema) => schema.required('validation.speciality.required'),
     otherwise: (schema) => schema.nullable(),
   }),
