@@ -55,21 +55,6 @@ export const Body = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 1rem;
+  padding: 1rem 0;
   border-top: 1px solid ${({ theme }) => theme.colors.gray_300};
-  > p {
-    line-height: 1.5;
-    font-size: ${({ theme }) => theme.fontSizes.sm};
-  }
-  > button {
-    background-color: transparent;
-    border: transparent;
-    text-align: left;
-    margin-top: -0.5rem;
-    margin-bottom: 0.5rem;
-    padding: 0;
-    color: ${({ theme }) => theme.colors.blue_500};
-    font-weight: 700;
-    font-size: ${({ theme }) => theme.fontSizes.sm};
-    cursor: pointer;
-  }
 `;

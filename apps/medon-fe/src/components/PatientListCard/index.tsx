@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import { ShowMore } from 'components/ShowMore';
+
 import { routes } from 'utils/constants/routes';
 
 import { Body, Container, Header, Options, ProfileIcon, Text } from './styles';
 import { IPatientListCardProps } from './types';
-import { useShowMoreText } from './hooks';
 
 export default function PatientListCard({
   firstName,
@@ -15,9 +16,6 @@ export default function PatientListCard({
   content,
 }: IPatientListCardProps) {
   const { t } = useTranslation();
-
-  const { formatedText, handleShowToggle, showMore, isShowMorePossible } =
-    useShowMoreText(content);
 
   return (
     <Container>
@@ -35,12 +33,7 @@ export default function PatientListCard({
         </Options>
       </Header>
       <Body>
-        <p>{formatedText}</p>
-        {isShowMorePossible && (
-          <button onClick={handleShowToggle}>
-            {!showMore ? t('show.more') : t('show.less')}
-          </button>
-        )}
+        <ShowMore text={content} />
       </Body>
     </Container>
   );
