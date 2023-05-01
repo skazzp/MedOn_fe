@@ -9,6 +9,6 @@ export default {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/apps/medon-fe',
   moduleNameMapper: {
-    '\\.svg$': '<rootDir>/src/components/__tests__/svg.js',
+    '\\.svg$': '<rootDir>/src/components/__tests__/__mocks__/svg.ts',
   },
 };
