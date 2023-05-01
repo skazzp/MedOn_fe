@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
+import { CheckOutlined } from '@ant-design/icons';
 
 import { InputAntD } from 'components/common/InputAntD';
 import { SelectAntD } from 'components/common/SelectAntD';
@@ -29,7 +30,6 @@ import {
   ImageContainer,
   LabelText,
 } from './styles';
-import { CheckOutlined } from '@ant-design/icons';
 
 interface IProps {
   submitForm: (values: FormProfileData) => void;
