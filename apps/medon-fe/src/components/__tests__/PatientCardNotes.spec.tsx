@@ -1,6 +1,8 @@
 import { render } from '@testing-library/react';
+
+import PatientCardNotes from 'components/PatientCardNotes';
+
 import { TestWrapper } from 'utils/tests/TestWrapper';
-import PatientCardNotes from '../PatientCardNotes';
 
 describe('PatientCardNotes component', () => {
   const props = {
