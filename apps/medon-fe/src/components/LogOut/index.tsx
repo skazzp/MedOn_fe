@@ -1,10 +1,15 @@
 import { useState } from 'react';
-import { Button, Modal } from 'antd';
+import { Modal } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { Logout } from 'components/Navigation/styles';
+import { persistedStore } from 'redux/store';
+import { useAppDispatch } from 'redux/hooks';
+import { logout } from 'redux/features/userSlice/userSlice';
+import { BtnStyled } from './style';
 
 export default function LogOut() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
   const showModal = () => {
@@ -13,6 +18,8 @@ export default function LogOut() {
 
   const handleOk = () => {
     setIsModalOpen(false);
+    persistedStore.purge();
+    dispatch(logout());
   };
 
   const handleCancel = () => {
@@ -21,11 +28,13 @@ export default function LogOut() {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
-        Open Modal
-      </Button>
+      <BtnStyled onClick={showModal}>
+        <Logout />
+        {t('navigation.logout')}
+      </BtnStyled>
       <Modal
         title={t('logout.title')}
+        centered
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
