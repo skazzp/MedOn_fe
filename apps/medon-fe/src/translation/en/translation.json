@@ -139,7 +139,10 @@
   },
   "show": {
     "more": "Show More",
-    "less": "Show Less"
+    "less": "Show Less",
+    "prefix": {
+      "note": "Note: "
+    }
   },
   "update-password": {
     "reset-password": {
@@ -316,5 +319,10 @@
       "success": "Patient successfully was added!",
       "error": "Patient wasn't added!"
     }
+  },
+  "select-options": {
+    "sortBy": "Sort By: ",
+    "dateOldest": "Date (Oldest)",
+    "dateLatest": "Date (Latest)"
   }
 }
