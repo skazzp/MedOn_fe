@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
+import { CheckOutlined } from '@ant-design/icons';
 
 import { InputAntD } from 'components/common/InputAntD';
 import { SelectAntD } from 'components/common/SelectAntD';
@@ -18,7 +19,6 @@ import { timezoneOptions } from 'utils/timezones/timezoneOptions';
 import { formFields } from 'utils/constants/userFormFields';
 import { countryOptions } from 'utils/countries/countryOptions';
 import { routes } from 'utils/constants/routes';
-import { CheckOutlined } from '@ant-design/icons';
 import { FormProfileData } from './types';
 import {
   Container,

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { useAppSelector } from 'redux/hooks';
 
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 import {
@@ -12,7 +12,6 @@ import {
   Profile,
   Patient,
   Help,
-  Logout,
   UserBlock,
   UserAvatar,
   UserName,
@@ -23,23 +22,16 @@ import {
 import profileImagePlaceholder from 'assets/images/Avatar.svg';
 import Logo from 'components/Logo';
 import { routes } from 'utils/constants/routes';
-import { persistedStore } from 'redux/store';
-import { logout } from 'redux/features/userSlice/userSlice';
 import useSpecOptions from 'components/RegistrationForm/useSpecOptions';
+import LogOut from 'components/LogOut';
 
 export default function Navigation() {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
   const user = useAppSelector(getUserSelector);
   const { specialityOptions } = useSpecOptions();
   const userSpeciality =
     specialityOptions.find((spec) => spec.value === user?.specialityId)
       ?.label ?? '';
-
-  const handleLogout = () => {
-    persistedStore.purge();
-    dispatch(logout());
-  };
 
   const navItems = [
     {
@@ -83,10 +75,9 @@ export default function Navigation() {
               </li>
             </NavLinkStyled>
           ))}
-          <NavLinkStyled to={routes.exit} onClick={() => handleLogout()}>
-            <Logout />
-            <li>{t('navigation.logout')}</li>
-          </NavLinkStyled>
+          <li>
+            <LogOut />
+          </li>
         </Ul>
         <UserBlock>
           <UserAvatar

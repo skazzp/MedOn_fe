@@ -61,6 +61,7 @@ export const remoteDoc = styled.div`
   display: flex;
   align-items: center;
 `;
+
 export const ProfileIcon = styled(Profile)`
   display: flex;
   align-items: center;
