@@ -18,7 +18,7 @@ export default function PatientCardNotes({
         <Time>{time}</Time>
       </Top>
       <Overview>
-        <ShowMore text={note} />
+        <ShowMore text={note} prefix={`${t('show.prefix.note')}`} />
       </Overview>
       <Doctor>
         {t('patient-card.notes.prefix-doctor')} {doctor.lastName}

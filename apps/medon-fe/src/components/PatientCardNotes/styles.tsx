@@ -22,9 +22,11 @@ export const Time = styled.span`
   color: ${({ theme }) => theme.colors.gray_500};
 `;
 
-export const Overview = styled.p`
+export const Overview = styled.div`
+  display: flex;
   line-height: 1.5;
   padding: 1rem 0;
+  margin: 1rem 0;
   border-top: 1px solid ${({ theme }) => theme.colors.gray_400};
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray_400};
 `;

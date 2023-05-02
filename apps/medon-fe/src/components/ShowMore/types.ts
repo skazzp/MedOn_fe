@@ -7,4 +7,5 @@ export interface ShowMoreTextHookReturnType {
 
 export interface IShowMoreProps {
   text?: string;
+  prefix?: string;
 }
