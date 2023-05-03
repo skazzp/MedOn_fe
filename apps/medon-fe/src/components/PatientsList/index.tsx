@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 import { Input, Pagination, Spin } from 'antd';
@@ -5,16 +6,20 @@ import LinkHome from 'components/LinkHome';
 import PatientListCard from 'components/PatientListCard';
 import { ReactComponent as Plus } from 'assets/svgs/plus_listcard.svg';
 import { useGetPatientsQuery } from 'redux/api/patientApi';
-import React, { useState } from 'react';
+import {
+  defaultPageSize,
+  defaultPage,
+  pageSizeOptions,
+} from 'utils/constants/pagination';
 import { useDebounce } from 'hooks/useDebounce';
 import { Choose, Content, Wrapper, SpinWrapper } from './styles';
 
 export default function PatientsList() {
   const theme = useTheme();
   const { t } = useTranslation();
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(5);
-  const [searchPhrase, setSearchPhrase] = useState('');
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(5);
+  const [searchPhrase, setSearchPhrase] = useState<string>('');
   const debouncedSearch = useDebounce<string>(searchPhrase);
 
   const { data, isFetching } = useGetPatientsQuery({
@@ -73,9 +78,9 @@ export default function PatientsList() {
                 pageSize={limit}
                 total={data.total}
                 showSizeChanger={true}
-                defaultCurrent={1}
-                defaultPageSize={5}
-                pageSizeOptions={[5, 10, 20]}
+                defaultCurrent={defaultPage}
+                defaultPageSize={defaultPageSize}
+                pageSizeOptions={pageSizeOptions}
                 onChange={handlePaginationChange}
               />
             </>

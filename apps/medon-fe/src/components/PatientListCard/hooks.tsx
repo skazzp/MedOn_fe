@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { ShowMoreTextHookReturnType } from './types';
 
 export function useShowMoreText(
-  initialText: string | undefined,
+  initialText?: string,
   maxChars = 200
 ): ShowMoreTextHookReturnType {
   const [showMore, setShowMore] = useState(false);
