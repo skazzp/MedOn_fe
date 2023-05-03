@@ -80,7 +80,7 @@ export const Availability = styled(Link)`
     opacity: 0.1;
   }
   span {
-    color: #fff;
+    color: ${theme.colors.white};
     transition: opacity 250ms;
     opacity: 0;
   }

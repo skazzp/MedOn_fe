@@ -21,9 +21,10 @@ import {
 } from 'components/Navigation/styles';
 import profileImagePlaceholder from 'assets/images/Avatar.svg';
 import Logo from 'components/Logo';
-import { routes } from 'utils/constants/routes';
 import useSpecOptions from 'components/RegistrationForm/useSpecOptions';
 import LogOut from 'components/LogOut';
+import { roles } from 'utils/constants';
+import { routes } from 'utils/constants/routes';
 
 export default function Navigation() {
   const { t } = useTranslation();
@@ -50,7 +51,7 @@ export default function Navigation() {
       icon: <Patient />,
       label: 'navigation.patient',
     },
-    ...(user.role === 'remote'
+    ...(user.role === roles.remote
       ? [
           {
             to: routes.availability,
