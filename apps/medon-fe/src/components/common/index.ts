@@ -4,3 +4,4 @@ export * from './DatepickerAntD';
 export * from './InputPasswordAntD';
 export * from './LinkGoBack';
 export * from './SelectAntD';
+export * from './InputPhoneNumber';

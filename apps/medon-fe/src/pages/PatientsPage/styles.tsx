@@ -7,6 +7,6 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  padding: 20px;
+  padding: 20px 40px 100px 20px;
   flex-grow: 1;
 `;
