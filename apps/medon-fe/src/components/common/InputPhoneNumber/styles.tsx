@@ -20,10 +20,10 @@ export const ErrorMsg = styled.p`
 export const StyledPhoneNumberInput = styled(PhoneNumberInput)`
   font-size: 16px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid ${theme.colors.gray_400};
   border-radius: 5px;
   width: 100%;
-  background: #fff;
+  background: ${theme.colors.white};
 
   input {
     border: none;
