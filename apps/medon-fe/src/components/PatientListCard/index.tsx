@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { routes } from 'utils/constants/routes';
+import { getAgeByDateOfBirth } from 'utils/functions/getAgeByDateOfBirth';
 import {
   Body,
   CameraIcon,
@@ -16,17 +17,19 @@ import { IPatientListCardProps } from './types';
 import { useShowMoreText } from './hooks';
 
 export default function PatientListCard({
+  id,
   firstName,
   lastName,
-  sex,
-  age,
-  content,
   doctor,
+  gender,
+  dateOfBirth,
+  overview,
 }: IPatientListCardProps) {
   const { t } = useTranslation();
   const location = useLocation();
 
-  const { formatedText, handleShowToggle, showMore } = useShowMoreText(content);
+  const { formattedText, handleShowToggle, showMore } =
+    useShowMoreText(overview);
 
   let doctorLink = null;
 
@@ -43,24 +46,32 @@ export default function PatientListCard({
     <Container>
       <Header>
         <Text>
-          <span>{`${firstName.charAt(0)}. ${lastName}`}</span>
+          <Link to={`${routes.patientCard}/${id}`}>
+            <span>{`${firstName} ${lastName}`}</span>
+          </Link>
           <span>
-            {sex}, {age} {t('patient-list.age-suffix')}
+            {gender}, {getAgeByDateOfBirth(dateOfBirth)}{' '}
+            {t('patient-list.age-suffix')}
           </span>
           {doctorLink}
         </Text>
         <Options>
-          <Link to={routes.patientCard}>
+          <Link to={`${routes.patientCard}/${id}`}>
             <ProfileIcon />
           </Link>
         </Options>
       </Header>
-      <Body>
-        <p>{formatedText}</p>
-        <button onClick={handleShowToggle}>
-          {!showMore ? t('show.more') : t('show.less')}
-        </button>
-      </Body>
+      {overview && (
+        <Body>
+          <p>
+            <strong>{t('patient-list.overview')}</strong>
+            {formattedText}
+          </p>
+          <button onClick={handleShowToggle}>
+            {!showMore ? t('show.more') : t('show.less')}
+          </button>
+        </Body>
+      )}
     </Container>
   );
 }

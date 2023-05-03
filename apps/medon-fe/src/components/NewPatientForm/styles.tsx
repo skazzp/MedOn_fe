@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Button } from 'antd';
+import PhoneNumberInput from 'react-phone-number-input';
 
 export const Container = styled.div`
   max-width: 600px;
@@ -28,7 +29,7 @@ export const InputWrapper = styled.div``;
 export const InputsWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 40px;
 `;
 export const ButtonsWrapper = styled.div`
   margin-top: 40px;

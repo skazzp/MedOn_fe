@@ -44,6 +44,9 @@ export const Text = styled.div`
   span {
     color: ${({ theme }) => theme.colors.blue_500};
   }
+  a {
+    text-decoration: none;
+  }
 `;
 
 export const Options = styled.div`

@@ -116,8 +116,9 @@
     "link": "Create Patient",
     "age-suffix": "y.o.",
     "placeholder": "Search ",
-    "no-data": "There's no patient in the list",
-    "load-more": "Load More"
+    "no-data": "No patients are registered",
+    "load-more": "Load More",
+    "overview": "Overview: "
   },
   "patient-card": {
     "button": "Add Patient Note +",
@@ -163,7 +164,8 @@
     "help": "Help",
     "logout": "Logout",
     "availability": "Availability",
-    "img-alt": "User avatar"
+    "img-alt": "User avatar",
+    "choose-role": "Role isn't assigned"
   },
   "validation": {
     "minLength": "Length at least 3 characters",
