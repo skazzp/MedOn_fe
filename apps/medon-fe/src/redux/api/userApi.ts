@@ -1,6 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from 'redux/store';
-import { UpdateProfileData, UserDataResponse } from './types';
+import {
+  UpdatePasswordData,
+  UpdateProfileData,
+  UserDataResponse,
+} from './types';
 
 export interface MessageResponse {
   message: string;
@@ -40,7 +44,21 @@ export const userApi = createApi({
       },
       invalidatesTags: ['user'],
     }),
+    updateUserPassword: builder.mutation<MessageResponse, UpdatePasswordData>({
+      query(data) {
+        return {
+          url: 'user/update-password',
+          method: 'PATCH',
+          body: data,
+        };
+      },
+      invalidatesTags: ['user'],
+    }),
   }),
 });
 
-export const { useGetUserQuery, useUpdateUserMutation } = userApi;
+export const {
+  useGetUserQuery,
+  useUpdateUserMutation,
+  useUpdateUserPasswordMutation,
+} = userApi;

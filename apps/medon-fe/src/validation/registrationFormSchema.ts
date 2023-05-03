@@ -1,4 +1,5 @@
 import { ROLES } from 'utils/constants/roles';
+import { bDayValidation } from 'utils/functions/bDayValidation';
 import * as yup from 'yup';
 
 export const registrationFormSchema = yup.object({
@@ -40,6 +41,7 @@ export const registrationFormSchema = yup.object({
   birthday: yup
     .date()
     .nullable()
+    .max(bDayValidation(), 'validation.birthday.max')
     .default(null)
     .transform((curr, orig) => (orig === '' ? null : curr))
     .typeError('validation.birthday.required')

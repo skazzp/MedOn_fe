@@ -34,14 +34,16 @@ export const StyledButton = styled(Button)`
   padding: 8px;
   font-size: ${theme.fontSizes.sm};
   font-weight: bold;
-  width: 200;
+  width: 200px;
+  &:hover {
+    color: ${theme.colors.white} !important;
+  }
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
   padding: 24px;
   justify-content: space-between;
-  flex-direction: column;
   gap: 16px;
   margin-top: 16px;
 `;

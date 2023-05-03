@@ -70,7 +70,7 @@ export default function ProfilePage() {
     <ProfilePageContainer>
       <ContentContainer>
         {isLoading ? (
-          <Spin />
+          <Spin tip="Loading" size="large" />
         ) : (
           <ProfileFormWrapper>
             <ProfileForm

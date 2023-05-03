@@ -10,6 +10,7 @@ export const ProfilePageContainer = styled.div`
 export const ContentContainer = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
 `;
 
 export const ProfileFormWrapper = styled.div`
