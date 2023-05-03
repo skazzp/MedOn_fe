@@ -13,6 +13,8 @@ const resources = {
 i18next.use(LanguageDetector).use(initReactI18next).init({
   fallbackLng: 'en',
   lng: 'en',
-  debug: true,
+  debug: false,
   resources,
 });
+
+export default i18next;

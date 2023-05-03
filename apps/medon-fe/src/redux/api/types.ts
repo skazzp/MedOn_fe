@@ -75,3 +75,8 @@ export interface IResetPassword {
 export interface IForgetPassword {
   email: string;
 }
+
+export interface UpdatePasswordData {
+  currentPassword: string;
+  newPassword: string;
+}
