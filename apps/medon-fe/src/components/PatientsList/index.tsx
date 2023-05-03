@@ -49,7 +49,6 @@ export default function PatientsList() {
           <Plus />
         </LinkHome>
       </Choose>
-      <h2>{t('patient-list.list')}</h2>
       {isFetching ? (
         <SpinWrapper>
           <Spin size="large" />

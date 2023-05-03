@@ -21,6 +21,7 @@ export const Choose = styled.div`
   display: flex;
   width: 100%;
   gap: 4rem;
+  margin-bottom: 4rem;
   > a {
     display: flex;
     align-items: center;

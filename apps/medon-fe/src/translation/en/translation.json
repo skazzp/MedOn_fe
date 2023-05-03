@@ -117,7 +117,8 @@
     "age-suffix": "y.o.",
     "placeholder": "Search ",
     "no-data": "No patients are registered",
-    "load-more": "Load More"
+    "load-more": "Load More",
+    "overview": "Overview: "
   },
   "patient-card": {
     "button": "Add Patient Note +",
