@@ -24,6 +24,7 @@ import { logout, setUser } from 'redux/features/userSlice/userSlice';
 import { persistedStore } from 'redux/store';
 
 import { routes } from 'utils/constants/routes';
+import AvailabilityPage from 'pages/AvailabilityPage';
 
 function App() {
   const isLoggedIn = useAppSelector(getTokenSelector);
@@ -62,7 +63,6 @@ function App() {
         path={routes.resetPassword}
         element={<PublicRoute component={<ResetPassword />} />}
       />
-
       <Route
         path={routes.dashboard}
         element={<PrivateRoute component={<Navigation />} />}
@@ -70,6 +70,10 @@ function App() {
       <Route
         path={routes.profile}
         element={<PrivateRoute component={<ProfilePage />} />}
+      />
+      <Route
+        path={routes.availability}
+        element={<PrivateRoute component={<AvailabilityPage />} />}
       />
       <Route
         path={routes.resendConfirmation}
