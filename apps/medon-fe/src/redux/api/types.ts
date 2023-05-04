@@ -1,4 +1,5 @@
 import { Dayjs } from 'dayjs';
+import { Gender } from 'utils/constants';
 
 export interface IUser {
   firstName: string;
@@ -74,6 +75,37 @@ export interface IResetPassword {
 
 export interface IForgetPassword {
   email: string;
+}
+
+export interface IPatientsParams {
+  page?: number;
+  limit?: number;
+  searchPhrase?: string;
+}
+
+interface IPatient {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  gender: Gender;
+  dateOfBirth: Date;
+  country: string;
+  city: string;
+  phoneNumber: string;
+  overview: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface IPatientsResponse {
+  total: number;
+  patients: IPatient[];
+}
+
+export interface UpdatePasswordData {
+  currentPassword: string;
+  newPassword: string;
 }
 
 export interface ICreatePatientNotes {

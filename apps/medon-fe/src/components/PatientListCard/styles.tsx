@@ -32,6 +32,10 @@ export const Text = styled.div`
     font-size: ${({ theme }) => theme.fontSizes.sm};
     font-weight: 500;
   }
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 export const Options = styled.div`

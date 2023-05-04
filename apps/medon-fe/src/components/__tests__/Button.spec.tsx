@@ -1,64 +1,75 @@
-import { ReactNode } from 'react';
-import { ThemeProvider } from 'styled-components';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { theme } from 'styles/theme';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import Button from 'components/Button';
-import '@testing-library/jest-dom';
 
-const Wrapper = ({ children }: { children: ReactNode }) => (
-  <ThemeProvider theme={theme}>{children}</ThemeProvider>
-);
+import { TestWrapper } from 'utils/tests/TestWrapper';
 
 describe('Button', () => {
   it('renders the button with the correct text content', () => {
     render(
-      <Wrapper>
-        <Button>Hello</Button>
-      </Wrapper>
+      <TestWrapper>
+        <Button textcolor="white" bgcolor="blue" isfullwidth="true">
+          Hello
+        </Button>
+      </TestWrapper>
     );
-
     expect(screen.getByRole('button')).toHaveTextContent('Hello');
   });
 
   it('renders the button with the correct background color', () => {
     render(
-      <Wrapper>
-        <Button bgcolor="blue">Hello</Button>
-      </Wrapper>
+      <TestWrapper>
+        <Button textcolor="white" bgcolor="blue" isfullwidth="true">
+          Hello
+        </Button>
+      </TestWrapper>
     );
-
     expect(screen.getByRole('button')).toHaveStyle('background-color: blue');
   });
 
   it('renders the button with the correct text color', () => {
     render(
-      <Wrapper>
-        <Button textcolor="white">Hello</Button>
-      </Wrapper>
+      <TestWrapper>
+        <Button textcolor="white" bgcolor="blue" isfullwidth="true">
+          Hello
+        </Button>
+      </TestWrapper>
     );
-
     expect(screen.getByRole('button')).toHaveStyle('color: white');
   });
 
   it('renders the button as full width when isfullwidth prop is true', () => {
     render(
-      <Wrapper>
-        <Button isfullwidth="true">Hello</Button>
-      </Wrapper>
+      <TestWrapper>
+        <Button textcolor="white" bgcolor="blue" isfullwidth="true">
+          Hello
+        </Button>
+      </TestWrapper>
     );
     expect(screen.getByRole('button')).toHaveStyle('width: 100%');
   });
 
-  it('calls the onClick function when clicked', () => {
+  it('calls the onClick function when clicked', async () => {
     const handleClick = jest.fn();
-    const { getByRole } = render(
-      <Wrapper>
-        <Button onClick={handleClick}>Hello</Button>
-      </Wrapper>
+
+    render(
+      <TestWrapper>
+        <Button
+          textcolor="white"
+          bgcolor="blue"
+          isfullwidth="true"
+          onClick={handleClick}
+        >
+          Hello
+        </Button>
+      </TestWrapper>
     );
-    const button = getByRole('button');
+    const button = screen.getByRole('button', {
+      name: /Hello/i,
+    });
 
     fireEvent.click(button);
-    expect(handleClick).toHaveBeenCalledTimes(1);
+    await waitFor(async () => {
+      expect(handleClick).toHaveBeenCalledTimes(1);
+    });
   });
 });

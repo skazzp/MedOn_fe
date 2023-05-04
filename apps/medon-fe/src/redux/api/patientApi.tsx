@@ -7,7 +7,12 @@ import {
   PatientNote,
   GetPatientNotes,
 } from 'interfaces/index';
-import { ICreatePatientNotes, IGetPatientNotes } from './types';
+import {
+  ICreatePatientNotes,
+  IGetPatientNotes,
+  IPatientsParams,
+  IPatientsResponse,
+} from './types';
 
 export const patientApi = createApi({
   reducerPath: 'patientApi',
@@ -15,7 +20,7 @@ export const patientApi = createApi({
     baseUrl: process.env.NX_API_URL,
     prepareHeaders,
   }),
-  tagTypes: ['patient', 'notes'],
+  tagTypes: ['PatientsQuery', 'notes'],
   endpoints: (builder) => ({
     createPatient: builder.mutation<IServerResponse<IPatient>, ICreatePatient>({
       query(dto: ICreatePatient) {
@@ -25,6 +30,16 @@ export const patientApi = createApi({
           body: dto,
         };
       },
+    }),
+    getPatients: builder.query<IPatientsResponse, IPatientsParams>({
+      query: ({ page = 1, limit = 5, searchPhrase = '' }) => ({
+        url: 'patients/',
+        params: { page, limit, searchPhrase },
+      }),
+      providesTags: (result, error, arg) => [
+        { type: 'PatientsQuery', page: arg.page },
+        { type: 'PatientsQuery', limit: arg.limit },
+      ],
     }),
     getPatientById: builder.query<IServerResponse<IPatient>, { id?: string }>({
       query: ({ id }) => `patients/${id}`,
@@ -56,6 +71,7 @@ export const patientApi = createApi({
 
 export const {
   useCreatePatientMutation,
+  useGetPatientsQuery,
   useGetPatientByIdQuery,
   useCreatePatientNoteMutation,
   useGetPatientNotesQuery,

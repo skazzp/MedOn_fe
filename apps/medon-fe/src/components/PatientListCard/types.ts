@@ -1,15 +1,14 @@
 export interface IPatientListCardProps {
-  id?: number;
+  id: number;
   firstName: string;
   lastName: string;
-  sex: string;
-  age: string;
-  content: string;
-  maxLength: number;
+  gender: string;
+  dateOfBirth: string;
+  overview?: string;
 }
 
 export interface ShowMoreTextHookReturnType {
-  formatedText?: string;
+  formattedText?: string;
   showMore?: boolean;
   isShowMorePossible?: boolean;
   handleShowToggle?: () => void;

@@ -1,4 +1,3 @@
-import { Input } from 'antd';
 import styled from 'styled-components';
 
 export const Content = styled.div`
@@ -22,6 +21,7 @@ export const Choose = styled.div`
   display: flex;
   width: 100%;
   gap: 4rem;
+  margin-bottom: 4rem;
   > a {
     display: flex;
     align-items: center;
@@ -31,8 +31,6 @@ export const Choose = styled.div`
     gap: 1rem;
   }
 `;
-
-export const StyledSearch = styled(Input.Search)``;
 
 export const Wrapper = styled.div`
   display: flex;
@@ -48,10 +46,11 @@ export const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
   }
-  > button {
-    display: flex;
-    border: 1px solid ${({ theme }) => theme.colors.blue_500};
-    margin: 0 auto;
-    padding: 1rem 2rem;
-  }
+`;
+
+export const SpinWrapper = styled.div`
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

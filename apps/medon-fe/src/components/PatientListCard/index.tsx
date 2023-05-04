@@ -5,15 +5,17 @@ import { ShowMore } from 'components/ShowMore';
 
 import { routes } from 'utils/constants/routes';
 
+import { getAgeByDateOfBirth } from 'utils/functions/getAgeByDateOfBirth';
 import { Body, Container, Header, Options, ProfileIcon, Text } from './styles';
 import { IPatientListCardProps } from './types';
 
 export default function PatientListCard({
+  id,
   firstName,
   lastName,
-  sex,
-  age,
-  content,
+  gender,
+  dateOfBirth,
+  overview,
 }: IPatientListCardProps) {
   const { t } = useTranslation();
 
@@ -21,19 +23,22 @@ export default function PatientListCard({
     <Container>
       <Header>
         <Text>
-          <span>{`${firstName.charAt(0)}. ${lastName}`}</span>
+          <Link to={`${routes.patientCard}/${id}`}>
+            <span>{`${firstName} ${lastName}`}</span>
+          </Link>
           <span>
-            {sex}, {age} {t('patient-list.age-suffix')}
+            {gender}, {getAgeByDateOfBirth(dateOfBirth)}{' '}
+            {t('patient-list.age-suffix')}
           </span>
         </Text>
         <Options>
-          <Link to={routes.patientCard}>
+          <Link to={`${routes.patientCard}/${id}`}>
             <ProfileIcon />
           </Link>
         </Options>
       </Header>
       <Body>
-        <ShowMore text={content} />
+        <ShowMore text={overview} />
       </Body>
     </Container>
   );

@@ -116,8 +116,9 @@
     "link": "Create Patient",
     "age-suffix": "y.o.",
     "placeholder": "Search ",
-    "no-data": "There's no patient in the list",
-    "load-more": "Load More"
+    "no-data": "No patients are registered",
+    "load-more": "Load More",
+    "overview": "Overview: "
   },
   "patient-card": {
     "button": "Add Patient Note +",
@@ -167,17 +168,18 @@
     "help": "Help",
     "logout": "Logout",
     "Availability": "Availability",
-    "img-alt": "User avatar"
+    "img-alt": "User avatar",
+    "choose-role": "Role isn't assigned"
   },
   "validation": {
     "minLength": "Length at least 3 characters",
     "maxLength": "Length maximum 20 characters",
     "firstName": {
-      "matches": "First name must consist of only letters",
+      "matches": "Must consist only of Latin letters",
       "required": "First name is required"
     },
     "lastName": {
-      "matches": "Last name must consist of only letters",
+      "matches": "Must consist only of Latin letters",
       "required": "Last name is required"
     },
     "email": {
@@ -202,6 +204,7 @@
       "required": "Speciality is required"
     },
     "birthday": {
+      "max": "You should be at least 18 years old",
       "required": "Birthday is required"
     },
     "country": {
