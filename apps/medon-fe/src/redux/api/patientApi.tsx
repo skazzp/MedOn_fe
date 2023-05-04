@@ -62,8 +62,10 @@ export const patientApi = createApi({
       IServerResponse<GetPatientNotes>,
       IGetPatientNotes
     >({
-      query: ({ text, order, id, limit, page }) =>
-        `patient-notes/${id}?text=${text}&order=${order}&limit=${limit}&page=${page}`,
+      query: ({ text, order, id, limit, page }: IGetPatientNotes) => ({
+        url: `patient-notes/${id}/`,
+        params: { text, order, limit, page },
+      }),
       providesTags: ['notes'],
     }),
   }),

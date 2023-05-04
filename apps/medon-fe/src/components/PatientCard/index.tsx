@@ -3,8 +3,8 @@ import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import AnimateHeight, { Height } from 'react-animate-height';
 import { toast } from 'react-toastify';
 
@@ -43,11 +43,28 @@ import { SubmitAddNote } from './types';
 
 export default function PatientCard() {
   const [height, setHeight] = useState<Height>(0);
-  const [order, setOrder] = useState<string>('DESC');
-  const [text, setText] = useState<string>('');
-  const [pageValue, setPageValue] = useState<number>(1);
-  const [pageSizeValue, setPageSizeValue] = useState<number>(5);
-  const value = useDebounce(text, 1000);
+  const [textValue, setTextValue] = useState<string>('');
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [page, setPage] = useState<number>(
+    Number(searchParams.get('page')) || 1
+  );
+  const [limit, setLimit] = useState<number>(
+    Number(searchParams.get('limit')) || 5
+  );
+  const [order, setOrder] = useState<string>(
+    searchParams.get('order') || 'DESC'
+  );
+
+  useEffect(() => {
+    setSearchParams({
+      page: page.toString(),
+      limit: limit.toString(),
+      order,
+    });
+  }, [order, limit, page, setSearchParams]);
+
+  const text = useDebounce(textValue, 1000);
 
   const { id } = useParams();
   const { data: patient, isLoading: isPatientLoading } = useGetPatientByIdQuery(
@@ -60,9 +77,9 @@ export default function PatientCard() {
   } = useGetPatientNotesQuery({
     id,
     order,
-    text: value,
-    page: pageValue,
-    limit: pageSizeValue,
+    text,
+    page,
+    limit,
   });
 
   const [sendData, { isLoading: isNoteSending }] =
@@ -156,12 +173,12 @@ export default function PatientCard() {
           size="large"
           placeholder={`${t('patient-card.search-input-placeholder')}`}
           onChange={(e) => {
-            setText(e.target.value);
+            setTextValue(e.target.value);
           }}
           loading={isFetching}
         />
         <StyledSelect
-          defaultValue="DESC"
+          defaultValue={order}
           options={options}
           size="large"
           onChange={(changeText) => {
@@ -173,10 +190,10 @@ export default function PatientCard() {
         isFetching={isFetching}
         notes={notes?.data?.notes}
         total={notes?.data?.total}
-        pageSizeValue={pageSizeValue}
-        pageValue={pageValue}
-        setPageSizeValue={setPageSizeValue}
-        setPageValue={setPageValue}
+        limit={limit}
+        page={page}
+        setLimit={setLimit}
+        setPage={setPage}
       />
     </Container>
   );

@@ -8,10 +8,10 @@ import { IPatientNotesProps } from './types';
 export function PatientNotes({
   notes,
   isFetching,
-  pageValue,
-  pageSizeValue,
-  setPageValue,
-  setPageSizeValue,
+  page,
+  limit,
+  setPage,
+  setLimit,
   total,
 }: IPatientNotesProps) {
   const { t } = useTranslation();
@@ -37,13 +37,14 @@ export function PatientNotes({
       ))}
       <Pagination
         total={total}
-        current={pageValue}
-        pageSize={pageSizeValue}
+        current={page}
+        pageSize={limit}
         defaultCurrent={1}
-        onChange={(page, pageSize) => {
-          setPageValue(page);
-          setPageSizeValue(pageSize);
+        onChange={(pageValue, pageSize) => {
+          setPage(pageValue);
+          setLimit(pageSize);
         }}
+        showSizeChanger={true}
       />
     </>
   );
