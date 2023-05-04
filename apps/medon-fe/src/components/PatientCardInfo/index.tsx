@@ -1,37 +1,52 @@
 import { useTranslation } from 'react-i18next';
 
 import { Age, Location, Mail, MaleSex, Phone } from 'assets/svgs/patientCard';
+import { getAgeByDateOfBirth } from 'utils/functions/getAgeByDateOfBirth';
 
 import { Info, Wrapper } from './styles';
 import { IPatientCardInfoProps } from './types';
 
-export default function PatientCardInfo(data: IPatientCardInfoProps) {
+export default function PatientCardInfo({
+  phoneNumber,
+  email,
+  city,
+  dateOfBirth,
+  gender,
+  country,
+  firstName,
+  lastName,
+}: IPatientCardInfoProps) {
   const { t } = useTranslation();
 
   return (
     <>
+      <h1>
+        {firstName} {lastName}
+      </h1>
       <Wrapper>
         <Info>
           <Phone />
-          {data?.data?.phoneNumber}
+          {phoneNumber}
         </Info>
         <Info>
           <Mail />
-          {data?.data?.email}
+          {email}
         </Info>
       </Wrapper>
       <Wrapper>
         <Info>
           <MaleSex />
-          {data?.data?.gender}
+          {gender}
         </Info>
         <Info>
           <Age />
-          {`${data.formattedAge} ${t('patient-card.suffix-age')}`}
+          {`${getAgeByDateOfBirth(String(dateOfBirth))} ${t(
+            'patient-card.suffix-age'
+          )}`}
         </Info>
         <Info>
           <Location />
-          {data?.data?.city} {data?.data?.country}
+          {city} {country}
         </Info>
       </Wrapper>
     </>

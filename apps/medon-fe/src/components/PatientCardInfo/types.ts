@@ -1,6 +1,10 @@
-import { IPatient } from 'interfaces/patients';
-
 export interface IPatientCardInfoProps {
-  data?: IPatient;
-  formattedAge?: number;
+  dateOfBirth?: Date;
+  phoneNumber?: string;
+  email?: string;
+  gender?: string;
+  city?: string;
+  country?: string;
+  firstName?: string;
+  lastName?: string;
 }

@@ -6,7 +6,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import AnimateHeight, { Height } from 'react-animate-height';
-import { useDebounce } from 'use-debounce';
 import { toast } from 'react-toastify';
 
 import { LinkGoBack } from 'components/common/LinkGoBack';
@@ -20,7 +19,6 @@ import { addPatientNoteSchema } from 'validation/addPatientNoteSchema';
 
 import { toastConfig } from 'utils/toastConfig';
 import { options } from 'utils/constants/options/patientCardSelect';
-import { formatAge } from 'utils/functions';
 
 import { Edit, AddNote, Close } from 'assets/svgs/patientCard';
 import {
@@ -28,6 +26,8 @@ import {
   useGetPatientByIdQuery,
   useGetPatientNotesQuery,
 } from 'redux/api/patientApi';
+
+import { useDebounce } from 'hooks/useDebounce';
 
 import {
   AddNoteForm,
@@ -47,10 +47,12 @@ export default function PatientCard() {
   const [text, setText] = useState<string>('');
   const [pageValue, setPageValue] = useState<number>(1);
   const [pageSizeValue, setPageSizeValue] = useState<number>(5);
-  const [value] = useDebounce(text, 1000);
+  const value = useDebounce(text, 1000);
 
   const { id } = useParams();
-  const { data, isLoading: isPatientLoading } = useGetPatientByIdQuery({ id });
+  const { data: patient, isLoading: isPatientLoading } = useGetPatientByIdQuery(
+    { id }
+  );
   const {
     data: notes,
     isLoading: isNotesLoading,
@@ -65,8 +67,6 @@ export default function PatientCard() {
 
   const [sendData, { isLoading: isNoteSending }] =
     useCreatePatientNoteMutation();
-
-  const { formattedAge } = formatAge(data?.data?.dateOfBirth);
 
   const { handleSubmit, control, reset } = useForm<SubmitAddNote>({
     resolver: yupResolver(addPatientNoteSchema),
@@ -107,12 +107,9 @@ export default function PatientCard() {
           <Edit />
         </Link>
       </Top>
-      <h1>
-        {data?.data?.firstName} {data?.data?.lastName}
-      </h1>
-      <PatientCardInfo data={data?.data} formattedAge={formattedAge} />
+      <PatientCardInfo {...patient?.data} />
       <h4>{t('patient-card.overview')}</h4>
-      <ShowMore text={data?.data?.overview} />
+      <ShowMore text={patient?.data?.overview} />
       {/* TODO: add calendar here */}
       <Calendar>Calendar</Calendar>
       {/* TODO: add calendar here */}
