@@ -36,28 +36,22 @@ import {
 } from './styles';
 
 export function NewPatientForm() {
-  const {
-    control,
-    handleSubmit,
-    watch,
-    getValues,
-    reset,
-    formState: { errors },
-  } = useForm<ICreatePatient>({
-    mode: 'onBlur',
-    resolver: yupResolver(newPatientSchema),
-    defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      city: '',
-      country: 'UA',
-      dateOfBirth: undefined,
-      gender: undefined,
-      phoneNumber: '',
-      overview: '',
-    },
-  });
+  const { control, handleSubmit, watch, getValues, reset } =
+    useForm<ICreatePatient>({
+      mode: 'onBlur',
+      resolver: yupResolver(newPatientSchema),
+      defaultValues: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        city: '',
+        country: 'UA',
+        dateOfBirth: undefined,
+        gender: undefined,
+        phoneNumber: '',
+        overview: '',
+      },
+    });
 
   const [createPatient, { isLoading }] = useCreatePatientMutation();
 
