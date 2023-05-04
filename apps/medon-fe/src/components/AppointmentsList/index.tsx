@@ -4,7 +4,6 @@ import { useMemo, useState } from 'react';
 import { useAppSelector } from 'redux/hooks';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 import PatientListCard from 'components/PatientListCard';
-import { patientList } from 'utils/mock/patientList';
 import {
   TimeIcon,
   Wrapper,
@@ -12,22 +11,14 @@ import {
   ShowMore,
 } from 'components/AppointmentsList/styles';
 import { timeMessages } from 'components/AppointmentsList/types';
-import { roles } from 'utils/constants';
+import { getSortedPatientList } from 'utils/functions/sort';
 
 export default function AppointmentsList() {
   const { t } = useTranslation();
   const user = useAppSelector(getUserSelector);
   const [visibleCount, setVisibleCount] = useState<number>(3);
 
-  const sortedPatientList = useMemo(
-    () =>
-      patientList
-        .filter((patient) =>
-          user.role === roles.remote ? patient.doctor === user.lastName : true
-        )
-        .sort((a, b) => a.time.localeCompare(b.time)),
-    [user]
-  );
+  const sortedPatientList = useMemo(() => getSortedPatientList(user), [user]);
 
   return (
     <Wrapper>

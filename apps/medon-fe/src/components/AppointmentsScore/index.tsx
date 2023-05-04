@@ -14,20 +14,13 @@ import {
 } from 'components/AppointmentsScore/styles';
 import { patientList } from 'utils/mock/patientList';
 import { roles, routes } from 'utils/constants';
+import { getSortedPatientList } from 'utils/functions/sort';
 
 export default function AppointmentsScore() {
   const user = useAppSelector(getUserSelector);
   const { t } = useTranslation();
 
-  const sortedPatientList = useMemo(
-    () =>
-      patientList
-        .filter((patient) =>
-          user.role === roles.remote ? patient.doctor === user.lastName : true
-        )
-        .sort((a, b) => a.time.localeCompare(b.time)),
-    [user]
-  );
+  const sortedPatientList = useMemo(() => getSortedPatientList(user), [user]);
 
   return (
     <Appointments>
