@@ -27,7 +27,9 @@ export function Attention() {
           <p>{t('attention.call-time-left')}</p>
           <p>
             <Name>{`${
-              patientList[0].sex === Gender.Male ? addressing.mr : addressing.ms
+              patientList[0].gender === Gender.Male
+                ? addressing.mr
+                : addressing.ms
             } ${patientList[0].lastName} `}</Name>
             {t('attention.and')}
             <Name> Dr. {`${user.lastName || 'Anonymous'}`}</Name>

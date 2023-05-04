@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { useAppSelector } from 'redux/hooks';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
@@ -18,11 +18,15 @@ export default function AppointmentsList() {
   const { t } = useTranslation();
   const user = useAppSelector(getUserSelector);
 
-  const sortedPatientList = patientList
-    .filter((patient) =>
-      user.role === roles.remote ? patient.doctor === user.lastName : true
-    )
-    .sort((a, b) => a.time.localeCompare(b.time));
+  const sortedPatientList = useMemo(
+    () =>
+      patientList
+        .filter((patient) =>
+          user.role === roles.remote ? patient.doctor === user.lastName : true
+        )
+        .sort((a, b) => a.time.localeCompare(b.time)),
+    [user]
+  );
 
   const [visibleCount, setVisibleCount] = useState(3);
 

@@ -24,12 +24,13 @@ export default function PatientListCard({
   gender,
   dateOfBirth,
   overview,
+  content,
 }: IPatientListCardProps) {
   const { t } = useTranslation();
   const location = useLocation();
 
   const { formattedText, handleShowToggle, showMore } =
-    useShowMoreText(overview);
+    useShowMoreText(content);
 
   let doctorLink = null;
 
@@ -61,11 +62,12 @@ export default function PatientListCard({
           </Link>
         </Options>
       </Header>
-      {overview && (
+      {overview || (
         <Body>
           <p>
             <strong>{t('patient-list.overview')}</strong>
             {formattedText}
+            {content}
           </p>
           <button onClick={handleShowToggle}>
             {!showMore ? t('show.more') : t('show.less')}

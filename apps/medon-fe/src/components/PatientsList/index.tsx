@@ -71,6 +71,10 @@ export default function PatientsList() {
                   gender={patient.gender}
                   dateOfBirth={patient.dateOfBirth.toString()}
                   overview={patient.overview ? patient.overview : undefined}
+                  content={''}
+                  doctor={''}
+                  maxLength={0}
+                  time={''}
                 />
               ))}
               <Pagination
