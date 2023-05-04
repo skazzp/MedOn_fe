@@ -10,13 +10,14 @@ import {
   Wrapper,
   TextTime,
   ShowMore,
-} from 'components/Appointments/styles';
-import { timeMessages } from 'components/Appointments/types';
+} from 'components/AppointmentsList/styles';
+import { timeMessages } from 'components/AppointmentsList/types';
 import { roles } from 'utils/constants';
 
 export default function AppointmentsList() {
   const { t } = useTranslation();
   const user = useAppSelector(getUserSelector);
+  const [visibleCount, setVisibleCount] = useState<number>(3);
 
   const sortedPatientList = useMemo(
     () =>
@@ -27,8 +28,6 @@ export default function AppointmentsList() {
         .sort((a, b) => a.time.localeCompare(b.time)),
     [user]
   );
-
-  const [visibleCount, setVisibleCount] = useState(3);
 
   return (
     <Wrapper>

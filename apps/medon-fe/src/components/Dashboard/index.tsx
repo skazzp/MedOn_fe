@@ -6,7 +6,7 @@ import { Container } from 'components/Dashboard/styles';
 import WithoutAppointments from 'components/WithoutAppointments';
 import Attention from 'components/common/Attention';
 import AppointmentsScore from 'components/AppointmentsScore';
-import AppointmentsList from 'components/Appointments';
+import AppointmentsList from 'components/AppointmentsList';
 import { patientList } from 'utils/mock/patientList';
 
 export default function Dashboard() {

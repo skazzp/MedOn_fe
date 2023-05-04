@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
@@ -18,9 +19,15 @@ export default function AppointmentsScore() {
   const user = useAppSelector(getUserSelector);
   const { t } = useTranslation();
 
-  const sortedPatientList = patientList
-    .filter((patient) => patient.doctor === user.lastName)
-    .sort((a, b) => a.time.localeCompare(b.time));
+  const sortedPatientList = useMemo(
+    () =>
+      patientList
+        .filter((patient) =>
+          user.role === roles.remote ? patient.doctor === user.lastName : true
+        )
+        .sort((a, b) => a.time.localeCompare(b.time)),
+    [user]
+  );
 
   return (
     <Appointments>
