@@ -67,7 +67,6 @@ export default function PatientListCard({
           <p>
             <strong>{t('patient-list.overview')}</strong>
             {formattedText}
-            {content}
           </p>
           <button onClick={handleShowToggle}>
             {!showMore ? t('show.more') : t('show.less')}
