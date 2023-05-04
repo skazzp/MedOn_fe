@@ -324,5 +324,6 @@
     "sortBy": "Sort By: ",
     "dateOldest": "Date (Oldest)",
     "dateLatest": "Date (Latest)"
-  }
+  },
+  "defaultLanguage": "en-US"
 }
