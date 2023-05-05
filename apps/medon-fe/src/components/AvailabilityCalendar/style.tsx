@@ -39,6 +39,9 @@ export const StyledCalendar = styled(Calendar)`
   .rbc-month-row {
     padding: 5px;
   }
+  .rbc-toolbar {
+    flex-direction: row-reverse;
+  }
   .rbc-toolbar-label {
     font-size: ${(p) => p.theme.fontSizes.lg};
     font-weight: ${(p) => p.theme.fontWeight.medium};
