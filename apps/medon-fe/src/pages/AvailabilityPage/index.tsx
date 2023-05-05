@@ -1,5 +1,5 @@
-import CalendarRBC from 'components/CalendarRBC';
+import AvailabilityCalendar from 'components/AvailabilityCalendar';
 
 export default function AvailabilityPage() {
-  return <CalendarRBC />;
+  return <AvailabilityCalendar />;
 }
