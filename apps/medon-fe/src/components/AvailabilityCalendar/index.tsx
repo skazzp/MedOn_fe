@@ -11,7 +11,7 @@ import {
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { SelectAntD } from 'components/common';
 import { endHours, startHours } from 'utils/constants/options/hourOptions';
-import { useCalendar } from './useCalendar';
+import { useCalendar } from './hooks';
 import {
   AddTimeBox,
   BtnContainer,

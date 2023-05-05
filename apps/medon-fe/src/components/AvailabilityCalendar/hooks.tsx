@@ -9,11 +9,7 @@ import { useForm } from 'react-hook-form';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { hoursSchema } from 'validation/selectHourRangeSchema';
 import { toastConfig } from 'utils/toastConfig';
-
-interface SelectHours {
-  start: number;
-  end: number;
-}
+import { SelectHours } from './types';
 
 export function useCalendar() {
   const { t } = useTranslation();
