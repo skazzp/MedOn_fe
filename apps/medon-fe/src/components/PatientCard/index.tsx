@@ -3,7 +3,7 @@ import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import AnimateHeight, { Height } from 'react-animate-height';
 import { toast } from 'react-toastify';
@@ -28,6 +28,7 @@ import {
 } from 'redux/api/patientApi';
 
 import { useDebounce } from 'hooks/useDebounce';
+import { defaultOrder, defaultPage, defaultPageSize } from 'utils/constants';
 
 import {
   AddNoteForm,
@@ -46,23 +47,9 @@ export default function PatientCard() {
   const [textValue, setTextValue] = useState<string>('');
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const [page, setPage] = useState<number>(
-    Number(searchParams.get('page')) || 1
-  );
-  const [limit, setLimit] = useState<number>(
-    Number(searchParams.get('limit')) || 5
-  );
-  const [order, setOrder] = useState<string>(
-    searchParams.get('order') || 'DESC'
-  );
-
-  useEffect(() => {
-    setSearchParams({
-      page: page.toString(),
-      limit: limit.toString(),
-      order,
-    });
-  }, [order, limit, page, setSearchParams]);
+  const page = Number(searchParams.get('page')) || defaultPage;
+  const limit = Number(searchParams.get('limit')) || defaultPageSize;
+  const order = searchParams.get('order') || defaultOrder;
 
   const text = useDebounce(textValue, 1000);
 
@@ -178,11 +165,11 @@ export default function PatientCard() {
           loading={isFetching}
         />
         <StyledSelect
-          defaultValue={order}
+          defaultValue={defaultOrder}
           options={options}
           size="large"
           onChange={(changeText) => {
-            setOrder(changeText as string);
+            setSearchParams({ order: changeText as string });
           }}
         />
       </Wrapper>
@@ -190,10 +177,6 @@ export default function PatientCard() {
         isFetching={isFetching}
         notes={notes?.data?.notes}
         total={notes?.data?.total}
-        limit={limit}
-        page={page}
-        setLimit={setLimit}
-        setPage={setPage}
       />
     </Container>
   );

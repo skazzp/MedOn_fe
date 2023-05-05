@@ -1,23 +1,10 @@
-import i18n from 'i18next';
-import { Prefix } from './stylesPatientCard';
-
 export const options = [
   {
     value: 'ASC',
-    label: (
-      <>
-        <Prefix>{i18n.t('select-options.sortBy')}: </Prefix>
-        <span>{i18n.t('select-options.dateOldest')}</span>
-      </>
-    ),
+    label: 'Sort By: Date (Oldest)',
   },
   {
     value: 'DESC',
-    label: (
-      <>
-        <Prefix>{i18n.t('select-options.sortBy')}: </Prefix>
-        <span>{i18n.t('select-options.dateLatest')}</span>
-      </>
-    ),
+    label: 'Sort By: Date (Latest)',
   },
 ];

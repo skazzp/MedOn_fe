@@ -1,20 +1,18 @@
 import { Pagination, Skeleton } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
+
 import PatientCardNotes from 'components/PatientCardNotes';
 import { PatientNote } from 'interfaces/patients';
+
 import { formatDate, formatTime } from 'utils/functions';
+import { defaultPage, defaultPageSize, pageSizeOptions } from 'utils/constants';
+
 import { IPatientNotesProps } from './types';
 
-export function PatientNotes({
-  notes,
-  isFetching,
-  page,
-  limit,
-  setPage,
-  setLimit,
-  total,
-}: IPatientNotesProps) {
+export function PatientNotes({ notes, isFetching, total }: IPatientNotesProps) {
   const { t } = useTranslation();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   if (isFetching) {
     return <Skeleton active />;
@@ -37,14 +35,17 @@ export function PatientNotes({
       ))}
       <Pagination
         total={total}
-        current={page}
-        pageSize={limit}
+        current={Number(searchParams.get('page')) || defaultPage}
+        pageSize={Number(searchParams.get('limit')) || defaultPageSize}
         defaultCurrent={1}
         onChange={(pageValue, pageSize) => {
-          setPage(pageValue);
-          setLimit(pageSize);
+          setSearchParams({
+            page: pageValue.toString(),
+            limit: pageSize.toString(),
+          });
         }}
-        showSizeChanger={true}
+        showSizeChanger
+        pageSizeOptions={pageSizeOptions}
       />
     </>
   );
