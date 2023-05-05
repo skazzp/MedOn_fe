@@ -1,15 +1,17 @@
 import { momentLocalizer, Views } from 'react-big-calendar';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
 import {
   CheckOutlined,
   CloseOutlined,
   DeleteOutlined,
   EditOutlined,
 } from '@ant-design/icons';
+
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { SelectAntD } from 'components/common';
 import { endHours, startHours } from 'utils/constants/options/hourOptions';
+import { useCalendar } from './useCalendar';
 import {
   AddTimeBox,
   BtnContainer,
@@ -22,7 +24,6 @@ import {
   Text,
   Title,
 } from './style';
-import { useCalendar } from './useCalendar';
 
 export default function AvailabilityCalendar() {
   const localizer = momentLocalizer(moment);
@@ -30,23 +31,23 @@ export default function AvailabilityCalendar() {
   const {
     handleSelectDay,
     handleSelectEvent,
-    submitEvent,
+    handleSubmitEvent,
     handleRemove,
     handleCancel,
     control,
     handleSubmit,
     editIndex,
     selectedDay,
-    myEvents,
+    timeSlots,
     dateInText,
   } = useCalendar();
 
   return (
-    <Container onClick={(e) => console.log(e.target, e.currentTarget)}>
+    <Container>
       <Title>{t('availability.title')}</Title>
       <StyledCalendar
         defaultView={Views.MONTH}
-        events={myEvents}
+        events={timeSlots}
         localizer={localizer}
         onSelectEvent={handleSelectEvent}
         onSelectSlot={handleSelectDay}
@@ -60,7 +61,7 @@ export default function AvailabilityCalendar() {
         {!selectedDay ? (
           <DateText>{t('availability.message')}</DateText>
         ) : (
-          <Form onSubmit={handleSubmit(submitEvent)}>
+          <Form onSubmit={handleSubmit(handleSubmitEvent)}>
             <DateText>{dateInText}</DateText>
             <InputContainer>
               <SelectAntD

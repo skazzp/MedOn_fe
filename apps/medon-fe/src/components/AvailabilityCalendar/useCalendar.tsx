@@ -21,16 +21,23 @@ export function useCalendar() {
     resolver: yupResolver(hoursSchema),
     defaultValues: { start: 0, end: 1 },
   });
-  const [myEvents, setEvents] = useState<Event[]>([]);
+  const [timeSlots, setTimeSlots] = useState<Event[]>([]);
   const [selectedDay, setSelectedDay] = useState<Date | undefined>(undefined);
   const [editIndex, setEditIndex] = useState<number | null>(null);
+
   const handleSelectDay = useCallback(
     (event: Event) => {
       setEditIndex(null);
-      setSelectedDay(event.start);
-      reset();
+      if (moment(event.start).isSameOrBefore(moment())) {
+        toast.warning(t('availability.badDate'), toastConfig);
+        setSelectedDay(undefined);
+      } else {
+        setEditIndex(null);
+        setSelectedDay(event.start);
+        reset();
+      }
     },
-    [reset]
+    [reset, t]
   );
   const dateInText = moment(selectedDay).format('dddd, MMMM, Do, YYYY');
 
@@ -66,7 +73,7 @@ export function useCalendar() {
 
   const handleSelectEvent = useCallback(
     (event: Event) => {
-      const index = myEvents.findIndex(
+      const index = timeSlots.findIndex(
         (object) =>
           moment(object.start).isSame(event.start) &&
           moment(object.end).isSame(event.end)
@@ -77,7 +84,7 @@ export function useCalendar() {
       setValue('start', moment(event.start).hours());
       setValue('end', moment(event.end).hours());
     },
-    [myEvents, setValue]
+    [timeSlots, setValue]
   );
 
   const handleCancel = () => {
@@ -85,12 +92,12 @@ export function useCalendar() {
   };
 
   const handleRemove = () => {
-    setEvents((prev) => [...prev.filter((e, i) => i !== editIndex)]);
+    setTimeSlots((prev) => [...prev.filter((e, i) => i !== editIndex)]);
     setSelectedDay(undefined);
     setEditIndex(null);
   };
 
-  const submitEvent = (data: SelectHours) => {
+  const handleSubmitEvent = (data: SelectHours) => {
     const title = `${moment()
       .hours(data.start)
       .minutes(0)
@@ -108,14 +115,14 @@ export function useCalendar() {
     const datesCross = checkDates(
       newEvent.start,
       newEvent.end,
-      myEvents,
+      timeSlots,
       editIndex
     );
 
     if (datesCross) {
       toast.error(t('availability.timeUsed'), toastConfig);
     } else {
-      setEvents((prev) => {
+      setTimeSlots((prev) => {
         if (editIndex !== null) {
           prev.splice(editIndex, 1);
         }
@@ -130,7 +137,7 @@ export function useCalendar() {
   return {
     handleSelectDay,
     handleSelectEvent,
-    submitEvent,
+    handleSubmitEvent,
     handleRemove,
     handleCancel,
     control,
@@ -139,7 +146,7 @@ export function useCalendar() {
     reset,
     editIndex,
     selectedDay,
-    myEvents,
+    timeSlots,
     dateInText,
   };
 }

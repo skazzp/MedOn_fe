@@ -324,6 +324,7 @@
   "availability": {
     "title": "Availability schedule:",
     "message": "Select day or availability slot to start editing",
-    "timeUsed": "That time is already used"
+    "timeUsed": "That time is already used",
+    "badDate": "Select a day in the future"
   }
 }
