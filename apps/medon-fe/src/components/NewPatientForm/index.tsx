@@ -5,7 +5,6 @@ import { CountryCode } from 'libphonenumber-js';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
-import PhoneInputWithCountry from 'react-phone-number-input/react-hook-form';
 
 import { genderOption, routes } from 'utils/constants/';
 import { toastConfig } from 'utils/toastConfig';
@@ -21,6 +20,7 @@ import {
   SelectAntD,
   DatepickerAntD,
   TextareaAntD,
+  InputPhoneNumber,
 } from 'components/common/';
 
 import {
@@ -28,7 +28,6 @@ import {
   StyledForm,
   ButtonsWrapper,
   Header,
-  ErrorMsg,
   Label,
   StyledButton,
   SectionWrapper,
@@ -92,6 +91,7 @@ export function NewPatientForm() {
               <InputWrapper>
                 <Label>{t('new-patient.labels.first-name')}</Label>
                 <InputAntD
+                  size="large"
                   name="firstName"
                   placeholder={`${t('new-patient.placeholders.first-name')}`}
                   control={control}
@@ -101,6 +101,7 @@ export function NewPatientForm() {
               <InputWrapper>
                 <Label>{t('new-patient.labels.last-name')}</Label>
                 <InputAntD
+                  size="large"
                   name="lastName"
                   placeholder={`${t('new-patient.placeholders.last-name')}`}
                   control={control}
@@ -110,6 +111,7 @@ export function NewPatientForm() {
               <InputWrapper>
                 <Label>{t('new-patient.labels.email')}</Label>
                 <InputAntD
+                  size="large"
                   name="email"
                   placeholder={`${t('new-patient.placeholders.email')}`}
                   control={control}
@@ -119,6 +121,7 @@ export function NewPatientForm() {
               <InputWrapper>
                 <Label>{t('new-patient.labels.gender')}</Label>
                 <SelectAntD
+                  size="large"
                   name="gender"
                   control={control}
                   placeholder={`${t('new-patient.placeholders.gender')}`}
@@ -129,6 +132,7 @@ export function NewPatientForm() {
               <InputWrapper>
                 <Label>{t('new-patient.labels.date-of-birth')}</Label>
                 <DatepickerAntD
+                  size="large"
                   name="dateOfBirth"
                   control={control}
                   placeholder={`${t('new-patient.placeholders.date-of-birth')}`}
@@ -140,6 +144,7 @@ export function NewPatientForm() {
               <InputWrapper>
                 <Label>{t('new-patient.labels.country')}</Label>
                 <SelectAntD
+                  size="large"
                   name="country"
                   control={control}
                   options={countryOptionsWithCode}
@@ -149,6 +154,7 @@ export function NewPatientForm() {
               <InputWrapper>
                 <Label>{t('new-patient.labels.city')}</Label>
                 <InputAntD
+                  size="large"
                   name="city"
                   placeholder={`${t('new-patient.placeholders.city')}`}
                   control={control}
@@ -157,19 +163,18 @@ export function NewPatientForm() {
 
               <InputWrapper>
                 <Label>{t('new-patient.labels.phone-number')}</Label>
-                <PhoneInputWithCountry
+                <InputPhoneNumber
                   name="phoneNumber"
+                  placeholder={`${t('new-patient.placeholders.phone-number')}`}
                   defaultCountry={(getValues('country') || 'AO') as CountryCode}
                   control={control}
                 />
-                {errors.phoneNumber && (
-                  <ErrorMsg>{errors.phoneNumber?.message?.toString()}</ErrorMsg>
-                )}
               </InputWrapper>
 
               <InputWrapper>
                 <Label>{t('new-patient.labels.overview')}</Label>
                 <TextareaAntD
+                  size="large"
                   name="overview"
                   control={control}
                   placeholder={`${t('new-patient.placeholders.overview')}`}
@@ -180,12 +185,18 @@ export function NewPatientForm() {
 
           <ButtonsWrapper>
             <StyledButton
+              size="large"
               type="default"
               onClick={() => navigate(routes.patients)}
             >
               {t('new-patient.cancel-btn')}
             </StyledButton>
-            <StyledButton type="primary" htmlType="submit" loading={isLoading}>
+            <StyledButton
+              type="primary"
+              htmlType="submit"
+              loading={isLoading}
+              size="large"
+            >
               {t('new-patient.submit-btn')}
             </StyledButton>
           </ButtonsWrapper>
