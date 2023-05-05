@@ -1,6 +1,7 @@
 {
   "logoAlt": "MedOn Logo",
   "save": "Save",
+  "edit": "Edit",
   "regPage": {
     "title": "Registration",
     "instruction": "Please, create your medical account and become a member"
@@ -317,5 +318,9 @@
       "success": "Patient successfully was added!",
       "error": "Patient wasn't added!"
     }
+  },
+  "availability": {
+    "title": "Availability schedule:",
+    "message": "Select day or availability slot to start editing"
   }
 }

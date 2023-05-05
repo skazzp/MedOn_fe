@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,7 +33,9 @@ export const StyledCalendar = styled(Calendar)`
     font-weight: ${(p) => p.theme.fontWeight.medium};
     padding: 5px 10px !important;
   }
-
+  .rbc-month-view {
+    background-color: ${(p) => p.theme.colors.white};
+  }
   .rbc-month-row {
     padding: 5px;
   }
@@ -43,29 +44,40 @@ export const StyledCalendar = styled(Calendar)`
     font-weight: ${(p) => p.theme.fontWeight.medium};
   }
   .rbc-event {
-    text-align: center;
+    padding-left: 10px;
     background-color: ${(p) => p.theme.colors.blue_300};
   }
   button {
     font-size: ${(p) => p.theme.fontSizes.md};
+    font-family: ${(p) => p.theme.fontFamily.sf_pro_text};
   }
   .rbc-button-link {
     cursor: default;
+  }
+  .rbc-agenda-date-cell {
+    border: 1px solid ${(p) => p.theme.colors.gray_400};
+    background-color: ${(p) => p.theme.colors.gray_100};
+  }
+  .rbc-agenda-empty {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding-top: 30px;
   }
 `;
 
 export const AddTimeBox = styled.div`
   width: calc(100% - 50px);
   height: 90px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
   margin-top: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-radius: 8px;
   border: 1px solid ${(p) => p.theme.colors.gray_400};
-  background-color: ${(p) => p.theme.colors.gray_100};
+  background-color: ${(p) => p.theme.colors.white};
 `;
 
 export const DateText = styled.p`
@@ -91,10 +103,18 @@ export const Form = styled.form`
 export const InputContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 200px;
+  width: 250px;
+  gap: 10px;
+`;
+
+export const BtnContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 290px;
   gap: 10px;
 `;
 
 export const StyledButton = styled(Button)`
-  min-width: 85px;
+  min-width: 90px;
 `;
