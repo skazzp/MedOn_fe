@@ -13,7 +13,6 @@ import { loginFormSchema } from 'validation/loginSchema';
 import { setIsVerified, setToken } from 'redux/features/userSlice/userSlice';
 import { userApi } from 'redux/api/userApi';
 import { useLoginMutation } from 'redux/api/authApi';
-import { toastConfig } from 'utils/toastConfig';
 import { ReactComponent as googleLogo } from 'assets/svgs/google_logo.svg';
 import {
   StyledErrorMessage,
@@ -23,6 +22,8 @@ import {
   SendButton,
   GoogleBtn,
 } from 'components/LoginForm/style';
+import { routes } from 'utils/constants';
+import { toastConfig } from 'utils/toastConfig';
 
 const LoginForm: FC = () => {
   const { t } = useTranslation();
@@ -43,6 +44,7 @@ const LoginForm: FC = () => {
     try {
       dispatch(userApi.util.invalidateTags(['user']));
       await login(formData).unwrap();
+      navigate(routes.dashboard);
     } catch (error) {
       toast.error(t('login.error-msg'), toastConfig);
     }
