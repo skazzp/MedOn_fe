@@ -318,5 +318,8 @@
       "success": "Patient successfully was added!",
       "error": "Patient wasn't added!"
     }
+  },
+  "appointment": {
+    "availableDr": "Available Dr: "
   }
 }
