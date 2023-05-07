@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Input, Select } from 'antd';
+import { theme } from 'styles/theme';
 
 const { Search } = Input;
 
@@ -82,13 +83,22 @@ export const List = styled.ul`
 export const ListItem = styled.li`
   width: 100%;
   display: flex;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   border-top: 1px solid ${(p) => p.theme.colors.gray_300};
   border-bottom: 1px solid ${(p) => p.theme.colors.gray_300};
+`;
+
+export const ItemWrap = styled.div`
+  cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  border-radius: 8px;
+  border: 1px solid transparent;
   transition: all 0.3s ease-in-out;
   &:hover {
-    border-color: ${(p) => p.theme.colors.icon_active};
+    border: 1px solid ${(p) => p.theme.colors.icon_active};
     background-color: ${(p) => p.theme.colors.white};
   }
 `;
@@ -98,3 +108,9 @@ export const DoctorPic = styled.img`
   height: 25px;
   margin-right: 15px;
 `;
+
+export const SlotActive = {
+  backgroundColor: theme.colors.blue_300,
+  borderColor: theme.colors.blue_300,
+  color: theme.colors.white,
+};

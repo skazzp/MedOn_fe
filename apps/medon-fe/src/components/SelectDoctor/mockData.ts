@@ -1,5 +1,6 @@
 export const mockDoctors = [
   {
+    id: 1,
     firstName: 'John',
     lastName: 'Smith',
     country: 'United States',
@@ -8,6 +9,7 @@ export const mockDoctors = [
     photo: '',
   },
   {
+    id: 2,
     firstName: 'Maryna',
     lastName: '',
     country: 'Ukraine',
@@ -16,6 +18,7 @@ export const mockDoctors = [
     photo: '',
   },
   {
+    id: 3,
     firstName: 'Edward',
     lastName: 'Jenner',
     country: 'Germany',

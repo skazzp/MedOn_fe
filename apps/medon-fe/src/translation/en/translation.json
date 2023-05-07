@@ -318,5 +318,17 @@
       "success": "Patient successfully was added!",
       "error": "Patient wasn't added!"
     }
+  },
+  "appointment": {
+    "availableDr": "Available Dr: ",
+    "searchPlaceholder": "Find a doctor by name...",
+    "filterLabel": "Speciality:",
+    "columns": {
+      "name": "Name",
+      "speciality": "Speciality",
+      "located": "Located"
+    },
+    "visited": "You previously visited:",
+    "prefix-doctor": "Dr. "
   }
 }
