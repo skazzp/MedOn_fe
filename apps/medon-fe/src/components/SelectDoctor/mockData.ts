@@ -11,7 +11,7 @@ export const mockDoctors = [
   {
     id: 2,
     firstName: 'Maryna',
-    lastName: '',
+    lastName: 'Novikova',
     country: 'Ukraine',
     city: 'Kyiv',
     specialityId: 2,
