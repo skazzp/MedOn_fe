@@ -328,7 +328,9 @@
       "speciality": "Speciality",
       "located": "Located"
     },
+    "allLabel": "All doctors",
     "visited": "You previously visited:",
-    "prefix-doctor": "Dr. "
+    "prefix-doctor": "Dr. ",
+    "doctorPicAlt": "Doctor photo"
   }
 }

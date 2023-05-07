@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Spin } from 'antd';
 import useSpecOptions from 'components/RegistrationForm/useSpecOptions';
 import doctorImagePlaceholder from 'assets/images/Avatar.svg';
 import {
@@ -52,7 +51,7 @@ export default function SelectDoctor() {
             onChange={() => {}}
             size="large"
             options={[
-              { value: 'all', label: 'All doctors' },
+              { value: 'all', label: t('appointment.allLabel') },
               ...specialityOptions,
             ]}
           />
@@ -76,7 +75,7 @@ export default function SelectDoctor() {
               <ColumnText>
                 <DoctorPic
                   src={doctor.photo || doctorImagePlaceholder}
-                  alt=""
+                  alt={`${t('appointment.doctorPicAlt')}`}
                 />
                 {t('appointment.prefix-doctor')}
                 {doctor.firstName[0]}. {doctor.lastName}
