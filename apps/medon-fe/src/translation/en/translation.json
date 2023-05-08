@@ -338,6 +338,9 @@
     "detail": "Detail",
     "and": "and"
   },
+  "appointment": {
+    "availableDr": "Available Dr:"
+  },
   "select-options": {
     "sortBy": "Sort By: ",
     "dateOldest": "Date (Oldest)",
