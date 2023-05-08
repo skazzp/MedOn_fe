@@ -51,12 +51,8 @@ export default function PatientCard() {
   const limit = Number(searchParams.get('limit')) || defaultPageSize;
   const order = searchParams.get('order') || defaultOrder;
 
-  const text = useDebounce(textValue, 1000);
-
   const { id } = useParams();
-  const { data: patient, isLoading: isPatientLoading } = useGetPatientByIdQuery(
-    { id }
-  );
+  const text = useDebounce(textValue, 1000);
   const {
     data: notes,
     isLoading: isNotesLoading,
@@ -68,16 +64,16 @@ export default function PatientCard() {
     page,
     limit,
   });
-
+  const { data: patient, isLoading: isPatientLoading } = useGetPatientByIdQuery(
+    { id }
+  );
   const [sendData, { isLoading: isNoteSending }] =
     useCreatePatientNoteMutation();
-
+  const { t } = useTranslation();
+  const theme = useTheme();
   const { handleSubmit, control, reset } = useForm<SubmitAddNote>({
     resolver: yupResolver(addPatientNoteSchema),
   });
-
-  const { t } = useTranslation();
-  const theme = useTheme();
 
   const handleAddNote: SubmitHandler<SubmitAddNote> = ({ note }) => {
     sendData({ note, patientId: id })
