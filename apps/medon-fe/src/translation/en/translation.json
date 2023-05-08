@@ -131,6 +131,7 @@
     "edit": "Edit profile",
     "search-input-placeholder": "Search",
     "medical": "Medical History",
+    "toast.success": "Note added successfully",
     "notes": {
       "prefix-doctor": "Dr. ",
       "empty-notes": "No notes added yet",
@@ -141,7 +142,10 @@
   },
   "show": {
     "more": "Show More",
-    "less": "Show Less"
+    "less": "Show Less",
+    "prefix": {
+      "note": "Note: "
+    }
   },
   "update-password": {
     "reset-password": {
@@ -327,5 +331,14 @@
     "timeUsed": "That time is already used",
     "badDate": "Select a day in the future",
     "validationTime": "Wrong time"
-  }
+  },
+  "appointment": {
+    "availableDr": "Available Dr:"
+  },
+  "select-options": {
+    "sortBy": "Sort By: ",
+    "dateOldest": "Date (Oldest)",
+    "dateLatest": "Date (Latest)"
+  },
+  "defaultLanguage": "en-US"
 }
