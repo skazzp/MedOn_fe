@@ -1,4 +1,10 @@
 export const options = [
-  { value: 'alphabetically', label: 'Alphabetically' },
-  { value: 'latest', label: 'Latest' },
+  {
+    value: 'ASC',
+    label: 'Sort By: Date (Oldest)',
+  },
+  {
+    value: 'DESC',
+    label: 'Sort By: Date (Latest)',
+  },
 ];
