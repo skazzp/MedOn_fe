@@ -25,6 +25,7 @@ import { logout, setUser } from 'redux/features/userSlice/userSlice';
 import { persistedStore } from 'redux/store';
 
 import { routes } from 'utils/constants/routes';
+import SelectTimeSlot from 'components/SelectTimeSlot';
 
 function App() {
   const isLoggedIn = useAppSelector(getTokenSelector);
@@ -63,7 +64,6 @@ function App() {
         path={routes.resetPassword}
         element={<PublicRoute component={<ResetPassword />} />}
       />
-
       <Route
         path={routes.dashboard}
         element={<PrivateRoute component={<Navigation />} />}
@@ -75,6 +75,10 @@ function App() {
       <Route
         path={routes.resendConfirmation}
         element={<ResendConfirmation />}
+      />
+      <Route
+        path={routes.appointments}
+        element={<PrivateRoute component={<SelectTimeSlot />} />}
       />
       <Route
         path={routes.updatePassword}
@@ -90,7 +94,7 @@ function App() {
       >
         <Route index element={<PatientsList />} />
         <Route path={routes.addPatient} element={<NewPatientForm />} />
-        <Route path={routes.patientCard} element={<PatientCard />} />
+        <Route path={`${routes.patientCard}/:id`} element={<PatientCard />} />
       </Route>
       <Route path="*" element={<Navigate to={routes.login} />} />
     </Routes>

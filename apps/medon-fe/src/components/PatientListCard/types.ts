@@ -8,7 +8,8 @@ export interface IPatientListCardProps {
 }
 
 export interface ShowMoreTextHookReturnType {
-  formattedText: string;
-  showMore: boolean;
-  handleShowToggle: () => void;
+  formattedText?: string;
+  showMore?: boolean;
+  isShowMorePossible?: boolean;
+  handleShowToggle?: () => void;
 }

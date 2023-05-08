@@ -21,7 +21,15 @@ export interface IPatient extends ICreatePatient {
 export interface PatientNote {
   id: number;
   note: string;
-  doctor: string;
+  doctor: {
+    firstName?: string;
+    lastName: string;
+  };
   createdAt: string;
   updatedAt: string;
+}
+
+export interface GetPatientNotes {
+  notes: PatientNote[];
+  total: number;
 }
