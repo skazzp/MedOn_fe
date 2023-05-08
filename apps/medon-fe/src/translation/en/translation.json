@@ -325,15 +325,26 @@
       "error": "Patient wasn't added!"
     }
   },
+  "appointment": {
+    "availableDr": "Available Dr:",
+    "searchPlaceholder": "Find a doctor by name...",
+    "filterLabel": "Speciality:",
+    "columns": {
+      "name": "Name",
+      "speciality": "Speciality",
+      "located": "Located"
+    },
+    "allLabel": "All doctors",
+    "visited": "You previously visited:",
+    "prefix-doctor": "Dr. ",
+    "doctorPicAlt": "Doctor photo"
+  },
   "availability": {
     "title": "Availability schedule:",
     "message": "Select day or availability slot to start editing",
     "timeUsed": "That time is already used",
     "badDate": "Select a day in the future",
     "validationTime": "Wrong time"
-  },
-  "appointment": {
-    "availableDr": "Available Dr:"
   },
   "select-options": {
     "sortBy": "Sort By: ",

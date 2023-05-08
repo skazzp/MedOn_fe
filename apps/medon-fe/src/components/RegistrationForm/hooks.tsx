@@ -8,7 +8,7 @@ export interface Option {
 const emptyArray: Option[] = [];
 
 const useSpecOptions = () => {
-  const specialityOptions = useGetSpecialitiesQuery(null, {
+  const { specialityOptions } = useGetSpecialitiesQuery(null, {
     selectFromResult: ({ data }) => ({
       specialityOptions: data
         ? data.map((elem) => ({ value: elem.id, label: elem.name }))
@@ -16,7 +16,7 @@ const useSpecOptions = () => {
     }),
   });
 
-  return specialityOptions;
+  return { specialityOptions };
 };
 
 export default useSpecOptions;

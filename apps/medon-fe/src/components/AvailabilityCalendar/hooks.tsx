@@ -3,16 +3,15 @@ import { Event } from 'react-big-calendar';
 import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
-
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+
 import { hoursSchema } from 'validation/selectHourRangeSchema';
 import { toastConfig } from 'utils/toastConfig';
-import { SelectHours } from './types';
 import { timeFormat } from 'utils/constants/timeFormat';
+import { SelectHours } from './types';
 
 dayjs.extend(isBetween);
 
