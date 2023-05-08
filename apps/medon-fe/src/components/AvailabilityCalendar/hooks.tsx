@@ -1,7 +1,9 @@
 import { useCallback, useState } from 'react';
 import { Event } from 'react-big-calendar';
 import { useTranslation } from 'react-i18next';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import isBetween from 'dayjs/plugin/isBetween';
+
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -10,6 +12,8 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { hoursSchema } from 'validation/selectHourRangeSchema';
 import { toastConfig } from 'utils/toastConfig';
 import { SelectHours } from './types';
+
+dayjs.extend(isBetween);
 
 export function useCalendar() {
   const { t } = useTranslation();
@@ -24,7 +28,7 @@ export function useCalendar() {
   const handleSelectDay = useCallback(
     (event: Event) => {
       setEditIndex(null);
-      if (moment(event.start).isSameOrBefore(moment())) {
+      if (!dayjs(event.start).isAfter(dayjs())) {
         toast.warning(t('availability.badDate'), toastConfig);
         setSelectedDay(undefined);
       } else {
@@ -35,7 +39,7 @@ export function useCalendar() {
     },
     [reset, t]
   );
-  const dateInText = moment(selectedDay).format('dddd, MMMM, Do, YYYY');
+  const dateInText = dayjs(selectedDay).format('dddd, MMMM, Do, YYYY');
 
   const checkDates = (
     start: Date,
@@ -50,19 +54,14 @@ export function useCalendar() {
     }
 
     return eventArray.find((event) => {
-      const eventStart = moment(event.start).valueOf();
-      const eventEnd = moment(event.end).valueOf();
-      const newEventStart = moment(start).valueOf();
-      const newEventEnd = moment(end).valueOf();
+      const eventStart = dayjs(event.start).valueOf();
+      const eventEnd = dayjs(event.end).valueOf();
+      const newEventStart = dayjs(start).valueOf();
+      const newEventEnd = dayjs(end).valueOf();
 
       return (
-        moment(newEventStart).isBetween(
-          eventStart,
-          eventEnd,
-          undefined,
-          '[)'
-        ) ||
-        moment(newEventEnd).isBetween(eventStart, eventEnd, undefined, '(]')
+        dayjs(newEventStart).isBetween(eventStart, eventEnd, undefined, '[)') ||
+        dayjs(newEventEnd).isBetween(eventStart, eventEnd, undefined, '(]')
       );
     });
   };
@@ -71,14 +70,14 @@ export function useCalendar() {
     (event: Event) => {
       const index = timeSlots.findIndex(
         (object) =>
-          moment(object.start).isSame(event.start) &&
-          moment(object.end).isSame(event.end)
+          dayjs(object.start).isSame(event.start) &&
+          dayjs(object.end).isSame(event.end)
       );
 
       setSelectedDay(event.start);
       setEditIndex(index);
-      setValue('start', moment(event.start).hours());
-      setValue('end', moment(event.end).hours());
+      setValue('start', dayjs(event.start).hour());
+      setValue('end', dayjs(event.end).hour());
     },
     [timeSlots, setValue]
   );
@@ -94,18 +93,15 @@ export function useCalendar() {
   };
 
   const handleSubmitEvent = (data: SelectHours) => {
-    const title = `${moment()
-      .hours(data.start)
-      .minutes(0)
-      .format('HH:mm')} - ${moment()
-      .hours(data.end)
-      .minutes(0)
-      .format('HH:mm')}`;
+    const title = `${dayjs()
+      .hour(data.start)
+      .minute(0)
+      .format('HH:mm')} - ${dayjs().hour(data.end).minute(0).format('HH:mm')}`;
 
     const newEvent = {
       title,
-      start: moment(selectedDay).hours(data.start).minutes(0).toDate(),
-      end: moment(selectedDay).hours(data.end).minutes(0).toDate(),
+      start: dayjs(selectedDay).hour(data.start).minute(0).toDate(),
+      end: dayjs(selectedDay).hour(data.end).minute(0).toDate(),
     };
 
     const datesCross = checkDates(

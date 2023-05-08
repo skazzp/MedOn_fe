@@ -1,6 +1,6 @@
-import { momentLocalizer, Views } from 'react-big-calendar';
+import { dayjsLocalizer, Views } from 'react-big-calendar';
 import { useTranslation } from 'react-i18next';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import {
   CheckOutlined,
   CloseOutlined,
@@ -26,7 +26,7 @@ import {
 } from './style';
 
 export default function AvailabilityCalendar() {
-  const localizer = momentLocalizer(moment);
+  const localizer = dayjsLocalizer(dayjs);
   const { t } = useTranslation();
   const {
     handleSelectDay,
