@@ -12,6 +12,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { hoursSchema } from 'validation/selectHourRangeSchema';
 import { toastConfig } from 'utils/toastConfig';
 import { SelectHours } from './types';
+import { timeFormat } from 'utils/constants/timeFormat';
 
 dayjs.extend(isBetween);
 
@@ -96,7 +97,10 @@ export function useCalendar() {
     const title = `${dayjs()
       .hour(data.start)
       .minute(0)
-      .format('HH:mm')} - ${dayjs().hour(data.end).minute(0).format('HH:mm')}`;
+      .format(timeFormat)} - ${dayjs()
+      .hour(data.end)
+      .minute(0)
+      .format(timeFormat)}`;
 
     const newEvent = {
       title,
