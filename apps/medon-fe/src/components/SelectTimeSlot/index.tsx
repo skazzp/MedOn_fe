@@ -1,7 +1,7 @@
-import { timeSlots } from 'utils/constants/options/hourOptions';
-import { Container, DrText, SlotActive, TimeSlot, TimeText } from './styles';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { timeSlots } from 'utils/constants/options/hourOptions';
+import { Container, DrText, SlotActive, TimeSlot, TimeText } from './styles';
 
 export default function SelectTimeSlot() {
   const { t } = useTranslation();
@@ -23,7 +23,10 @@ export default function SelectTimeSlot() {
           style={isActive === timeSlot ? SlotActive : {}}
         >
           <TimeText>{timeSlot}</TimeText>
-          <DrText>{t('appointment.availableDr')}5</DrText>
+          <DrText>
+            <span>{t('appointment.availableDr')}</span>
+            <span> 0</span> {/* value will come from db */}
+          </DrText>
         </TimeSlot>
       ))}
     </Container>
