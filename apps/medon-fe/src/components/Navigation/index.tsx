@@ -21,7 +21,7 @@ import {
 } from 'components/Navigation/styles';
 import profileImagePlaceholder from 'assets/images/Avatar.svg';
 import Logo from 'components/Logo';
-import useSpecOptions from 'components/RegistrationForm/useSpecOptions';
+import useSpecOptions from 'components/RegistrationForm/hooks';
 import LogOut from 'components/LogOut';
 import { roles } from 'utils/constants';
 import { routes } from 'utils/constants/routes';

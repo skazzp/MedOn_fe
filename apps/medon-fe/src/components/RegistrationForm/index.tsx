@@ -15,7 +15,7 @@ import {
 import { roles, rolesOptions } from 'utils/constants/roles';
 import { formFields } from 'utils/constants/userFormFields';
 import { FormData } from './types';
-import useSpecOptions from './useSpecOptions';
+import useSpecOptions from './hooks';
 import {
   BackBtn,
   Btn,

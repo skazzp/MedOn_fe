@@ -8,7 +8,7 @@ import { CheckOutlined } from '@ant-design/icons';
 import { InputAntD } from 'components/common/InputAntD';
 import { SelectAntD } from 'components/common/SelectAntD';
 import { DatepickerAntD } from 'components/common/DatepickerAntD';
-import useSpecOptions from 'components/RegistrationForm/useSpecOptions';
+import useSpecOptions from 'components/RegistrationForm/hooks';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
