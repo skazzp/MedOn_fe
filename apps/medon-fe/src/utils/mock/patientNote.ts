@@ -22,35 +22,50 @@ export const patientNotes: PatientNote[] = [
   {
     id: 1,
     note: 'Patient has a history of heart disease',
-    doctor: 'Lucas',
+    doctor: {
+      firstName: 'John',
+      lastName: 'Doe',
+    },
     createdAt: '2021-10-01 10:00:00',
     updatedAt: '2021-10-01 10:00:00',
   },
   {
     id: 2,
     note: 'Patient is allergic to penicillin',
-    doctor: 'Matheus',
+    doctor: {
+      firstName: 'John',
+      lastName: 'Doe',
+    },
     createdAt: '2021-10-02 11:00:00',
     updatedAt: '2021-10-02 11:00:00',
   },
   {
     id: 3,
     note: 'Patient has a broken arm',
-    doctor: 'Lucas',
+    doctor: {
+      firstName: 'John',
+      lastName: 'Doe',
+    },
     createdAt: '2021-10-03 12:00:00',
     updatedAt: '2021-10-03 12:00:00',
   },
   {
     id: 4,
     note: 'Patient recently had surgery',
-    doctor: 'Matheus',
+    doctor: {
+      firstName: 'John',
+      lastName: 'Doe',
+    },
     createdAt: '2021-10-04 13:00:00',
     updatedAt: '2021-10-04 13:00:00',
   },
   {
     id: 5,
     note: 'Patient is pregnant',
-    doctor: 'Maria',
+    doctor: {
+      firstName: 'John',
+      lastName: 'Doe',
+    },
     createdAt: '2021-10-05 14:00:00',
     updatedAt: '2021-10-05 14:00:00',
   },

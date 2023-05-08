@@ -13,7 +13,7 @@ export default {
   ],
   moduleNameMapper: {
     '~/(.*)': '<rootDir>/src/$1',
-    '\\.svg$': '<rootDir>/src/components/__tests__/__mocks__/svg.ts'
+    '\\.svg$': '<rootDir>/src/components/__tests__/__mocks__/svg.ts',
   },
   roots: ['<rootDir>/src'],
   modulePaths: ['<rootDir>/src'],

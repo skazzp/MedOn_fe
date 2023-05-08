@@ -1,0 +1,33 @@
+name: Deploy WebSite
+on:
+  push:
+    branches:
+      - deploy-client
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Create env file
+        run: |
+          touch ./apps/medon-fe/.env
+          echo NX_API_URL=${{ vars.NX_API_URL }} >> ./apps/medon-fe/.env
+          echo NX_API_GOOGLE_ROUTE=${{ vars.NX_API_GOOGLE_ROUTE }} >> ./apps/medon-fe/.env
+          cat ./apps/medon-fe/.env
+      - name: Build
+        run: npm run build
+
+
+      - name: Deploy to S3
+        uses: jakejarvis/s3-sync-action@master
+        env:
+          AWS_S3_BUCKET: ${{ vars.S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SOURCE_DIR: 'dist/apps/medon-fe'
