@@ -10,7 +10,7 @@ export const Container = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
-  margin-top: 20px; // remove after combined with page components
+  margin-top: 20px; // TODO: remove after combined with page components
 `;
 
 export const TimeSlot = styled.div`
