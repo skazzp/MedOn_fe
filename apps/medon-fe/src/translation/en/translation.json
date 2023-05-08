@@ -323,6 +323,9 @@
       "error": "Patient wasn't added!"
     }
   },
+  "appointment": {
+    "availableDr": "Available Dr:"
+  },
   "select-options": {
     "sortBy": "Sort By: ",
     "dateOldest": "Date (Oldest)",
