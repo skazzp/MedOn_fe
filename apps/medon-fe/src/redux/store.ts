@@ -12,10 +12,11 @@ import {
   REGISTER,
 } from 'redux-persist';
 
+import userReducer from 'redux/features/userSlice/userSlice';
 import { authApi } from 'redux/api/authApi';
 import { userApi } from 'redux/api/userApi';
-import userReducer from 'redux/features/userSlice/userSlice';
 import { patientApi } from 'redux/api/patientApi';
+import { availabilityApi } from './api/availabilityApi';
 
 const persistConfig = {
   key: 'medon',
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
   [patientApi.reducerPath]: patientApi.reducer,
+  [availabilityApi.reducerPath]: availabilityApi.reducer,
   userState: persistReducer(persistConfig, userReducer),
 });
 
@@ -37,7 +39,12 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat([authApi.middleware, userApi.middleware, patientApi.middleware]),
+    }).concat([
+      authApi.middleware,
+      userApi.middleware,
+      patientApi.middleware,
+      availabilityApi.middleware,
+    ]),
   devTools: process.env.NODE_ENV !== 'production',
 });
 

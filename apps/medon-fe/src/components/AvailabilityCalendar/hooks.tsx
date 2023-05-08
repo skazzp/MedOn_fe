@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Event } from 'react-big-calendar';
 import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
@@ -8,10 +8,16 @@ import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
+import {
+  useCreateAvailabilityMutation,
+  useGetAvailabilityQuery,
+} from 'redux/api/availabilityApi';
+import { IAvailability } from 'redux/api/types';
 import { hoursSchema } from 'validation/selectHourRangeSchema';
 import { toastConfig } from 'utils/toastConfig';
 import { timeFormat } from 'utils/constants/timeFormat';
-import { SelectHours } from './types';
+import { dateToTextFormat } from 'utils/constants';
+import { CalendarSlot, SelectHours } from './types';
 
 dayjs.extend(isBetween);
 
@@ -24,6 +30,8 @@ export function useCalendar() {
   const [timeSlots, setTimeSlots] = useState<Event[]>([]);
   const [selectedDay, setSelectedDay] = useState<Date | undefined>(undefined);
   const [editIndex, setEditIndex] = useState<number | null>(null);
+  const [createSlot, { isSuccess }] = useCreateAvailabilityMutation();
+  const { data: availabilityResponse } = useGetAvailabilityQuery(null);
 
   const handleSelectDay = useCallback(
     (event: Event) => {
@@ -39,7 +47,8 @@ export function useCalendar() {
     },
     [reset, t]
   );
-  const dateInText = dayjs(selectedDay).format('dddd, MMMM, Do, YYYY');
+
+  const dateInText = dayjs(selectedDay).format(dateToTextFormat);
 
   const checkDates = (
     start: Date,
@@ -65,6 +74,15 @@ export function useCalendar() {
       );
     });
   };
+
+  const dayPropGetter = useCallback(
+    (date: Date) => ({
+      ...(dayjs(date).isSame(selectedDay) && {
+        className: 'av-selected-day',
+      }),
+    }),
+    [selectedDay]
+  );
 
   const handleSelectEvent = useCallback(
     (event: Event) => {
@@ -92,6 +110,43 @@ export function useCalendar() {
     setEditIndex(null);
   };
 
+  const convertSlotToArray = (timeSlot: CalendarSlot) => {
+    const startHour = dayjs(timeSlot.start).hour();
+    const endHour = dayjs(timeSlot.end).hour();
+    const availabilityArray = [];
+
+    if (endHour - startHour === 1) {
+      return [
+        {
+          startTime: timeSlot.start,
+          endTime: timeSlot.end,
+          title: timeSlot.title,
+        },
+      ];
+    }
+    for (let i = startHour; i < endHour; i += 1) {
+      availabilityArray.push({
+        startTime: dayjs(timeSlot.start).hour(i).toDate(),
+        endTime: dayjs(timeSlot.start)
+          .hour(i + 1)
+          .toDate(),
+        title: timeSlot.title,
+      });
+    }
+
+    return availabilityArray;
+  };
+
+  const convertResponse = (response: IAvailability[]) => {
+    const newAvailability = response.map((elem) => ({
+      title: elem.title,
+      start: elem.startTime,
+      end: elem.endTime,
+    }));
+
+    return newAvailability;
+  };
+
   const handleSubmitEvent = (data: SelectHours) => {
     const title = `${dayjs()
       .hour(data.start)
@@ -117,6 +172,11 @@ export function useCalendar() {
     if (datesCross) {
       toast.error(t('availability.timeUsed'), toastConfig);
     } else {
+      console.log(newEvent);
+      const newAvailability = convertSlotToArray(newEvent);
+
+      createSlot(newAvailability);
+
       setTimeSlots((prev) => {
         if (editIndex !== null) {
           prev.splice(editIndex, 1);
@@ -128,6 +188,16 @@ export function useCalendar() {
       setSelectedDay(undefined);
     }
   };
+
+  useEffect(() => {
+    if (availabilityResponse?.data) {
+      console.log(availabilityResponse);
+      console.log(convertResponse(availabilityResponse.data));
+      const currentAvailability = convertResponse(availabilityResponse.data);
+
+      setTimeSlots(currentAvailability);
+    }
+  }, [availabilityResponse]);
 
   return {
     handleSelectDay,
@@ -143,5 +213,6 @@ export function useCalendar() {
     selectedDay,
     timeSlots,
     dateInText,
+    dayPropGetter,
   };
 }

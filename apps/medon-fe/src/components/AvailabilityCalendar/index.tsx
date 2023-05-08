@@ -25,6 +25,7 @@ import {
   Title,
 } from './style';
 
+
 export default function AvailabilityCalendar() {
   const localizer = dayjsLocalizer(dayjs);
   const { t } = useTranslation();
@@ -40,6 +41,7 @@ export default function AvailabilityCalendar() {
     selectedDay,
     timeSlots,
     dateInText,
+    dayPropGetter,
   } = useCalendar();
 
   return (
@@ -50,6 +52,7 @@ export default function AvailabilityCalendar() {
         events={timeSlots}
         localizer={localizer}
         onSelectEvent={handleSelectEvent}
+        dayPropGetter={dayPropGetter}
         onSelectSlot={handleSelectDay}
         views={[Views.MONTH, Views.AGENDA]}
         selectable
