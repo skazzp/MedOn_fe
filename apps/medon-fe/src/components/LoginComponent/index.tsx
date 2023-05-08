@@ -45,6 +45,7 @@ export default function LoginComponent() {
   return (
     <FormContainer>
       <Logo />
+      <div>Hi Matheus!</div>
       <Title>{t('login.login-title')}</Title>
       <Text>{t('login.login-text')}</Text>
       <LoginForm />
