@@ -1,5 +1,7 @@
 {
   "logoAlt": "MedOn Logo",
+  "save": "Save",
+  "edit": "Edit",
   "regPage": {
     "title": "Registration",
     "instruction": "Please, create your medical account and become a member"
@@ -338,7 +340,25 @@
     "step": "Step"
   },
   "appointment": {
-    "availableDr": "Available Dr:"
+    "availableDr": "Available Dr:",
+    "searchPlaceholder": "Find a doctor by name...",
+    "filterLabel": "Speciality:",
+    "columns": {
+      "name": "Name",
+      "speciality": "Speciality",
+      "located": "Located"
+    },
+    "allLabel": "All doctors",
+    "visited": "You previously visited:",
+    "prefix-doctor": "Dr. ",
+    "doctorPicAlt": "Doctor photo"
+  },
+  "availability": {
+    "title": "Availability schedule:",
+    "message": "Select day or availability slot to start editing",
+    "timeUsed": "That time is already used",
+    "badDate": "Select a day in the future",
+    "validationTime": "Wrong time"
   },
   "select-options": {
     "sortBy": "Sort By: ",
