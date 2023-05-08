@@ -49,5 +49,6 @@ export const theme = {
   },
   fontWeight: {
     medium: '500',
+    bold: '700',
   },
 };

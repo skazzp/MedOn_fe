@@ -318,5 +318,19 @@
       "success": "Patient successfully was added!",
       "error": "Patient wasn't added!"
     }
+  },
+  "patient-info": {
+    "back": "Back to Dashboard",
+    "none": "Choose date on calendar",
+    "day": "Select a day of appointment",
+    "time": "Select a time of appointment",
+    "remote-doctor": "Select a Remote Doctor",
+    "previous": "Previous step",
+    "next": "Next step",
+    "booking": "Booking Appointment",
+    "date": "Date:",
+    "select": "You selected:",
+    "cancel": "Cancel",
+    "step": "Step"
   }
 }

@@ -9,6 +9,7 @@ import ResendConfirmation from 'pages/ResendConfirmation';
 import UpdatePassword from 'pages/UpdatePassword';
 import ProfilePage from 'pages/ProfilePage';
 import { PatientsPage } from 'pages/PatientsPage';
+import BookAppointment from 'pages/BookAppointment';
 
 import PatientCard from 'components/PatientCard';
 import { PublicRoute } from 'components/Routes/PublicRoute';
@@ -78,6 +79,10 @@ function App() {
       <Route
         path={routes.updatePassword}
         element={<PrivateRoute component={<UpdatePassword />} />}
+      />
+      <Route
+        path={routes.appointments}
+        element={<PrivateRoute component={<BookAppointment />} />}
       />
       <Route
         path={routes.patients}
