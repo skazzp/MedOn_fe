@@ -9,6 +9,7 @@ import ResendConfirmation from 'pages/ResendConfirmation';
 import UpdatePassword from 'pages/UpdatePassword';
 import ProfilePage from 'pages/ProfilePage';
 import { PatientsPage } from 'pages/PatientsPage';
+import AvailabilityPage from 'pages/AvailabilityPage';
 
 import PatientCard from 'components/PatientCard';
 import { PublicRoute } from 'components/Routes/PublicRoute';
@@ -16,6 +17,7 @@ import { PrivateRoute } from 'components/Routes/PrivateRoute';
 import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
 import Navigation from 'components/Navigation';
+import SelectTimeSlot from 'components/SelectTimeSlot';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { getTokenSelector } from 'redux/features/userSlice/userSelectors';
@@ -24,7 +26,6 @@ import { logout, setUser } from 'redux/features/userSlice/userSlice';
 import { persistedStore } from 'redux/store';
 
 import { routes } from 'utils/constants/routes';
-import SelectTimeSlot from 'components/SelectTimeSlot';
 
 function App() {
   const isLoggedIn = useAppSelector(getTokenSelector);
@@ -70,6 +71,10 @@ function App() {
       <Route
         path={routes.profile}
         element={<PrivateRoute component={<ProfilePage />} />}
+      />
+      <Route
+        path={routes.availability}
+        element={<PrivateRoute component={<AvailabilityPage />} />}
       />
       <Route
         path={routes.resendConfirmation}
