@@ -26,7 +26,6 @@ import { logout, setUser } from 'redux/features/userSlice/userSlice';
 import { persistedStore } from 'redux/store';
 
 import { routes } from 'utils/constants/routes';
-import SelectDoctor from 'components/SelectDoctor';
 
 function App() {
   const isLoggedIn = useAppSelector(getTokenSelector);
