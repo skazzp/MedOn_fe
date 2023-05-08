@@ -2,7 +2,6 @@ import { Calendar } from 'react-big-calendar';
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
 
-// export const dateCellWrapper = styled.div``;
 export const StyledCalendar = styled(Calendar)`
   width: calc(100% - 50px);
   min-height: 600px;
@@ -13,32 +12,33 @@ export const StyledCalendar = styled(Calendar)`
   padding: 5px;
   margin: 0 auto;
 
-  .selected-slot {
-    background-color: yellow;
-  }
-
   .rbc-header {
     font-size: ${theme.fontSizes.md};
     font-weight: ${theme.fontWeight.medium};
     padding: 5px 10px !important;
   }
+
   .rbc-month-row {
     padding: 5px;
   }
+
   .rbc-toolbar {
     flex-direction: row-reverse;
     display: flex;
     justify-content: space-between;
   }
+
   .rbc-toolbar-label {
     font-size: ${theme.fontSizes.lg};
     font-weight: ${theme.fontWeight.medium};
     display: inherit;
   }
+
   button {
     font-size: ${theme.fontSizes.md};
     font-family: ${theme.fontFamily.sf_pro_text};
   }
+
   .rbc-button-link {
     cursor: default;
   }
@@ -46,6 +46,7 @@ export const StyledCalendar = styled(Calendar)`
     padding-left: 5px;
     text-align: left;
   }
+
   .rbc-btn-group {
     display: flex;
     align-items: center;
@@ -72,6 +73,7 @@ export const StyledCalendar = styled(Calendar)`
         background-color: transparent;
       }
     }
+
     button:last-child {
       font-size: 0;
       background-image: url(assets/svgs/arrow/circleArrowRight.svg);
@@ -90,5 +92,3 @@ export const StyledCalendar = styled(Calendar)`
     }
   }
 `;
-
-export const PickDate = styled.div``;

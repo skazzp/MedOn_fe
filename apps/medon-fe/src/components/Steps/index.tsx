@@ -6,7 +6,13 @@ import {
   positionNext,
   positionPrevious,
 } from 'utils/constants/position';
-import { Button, Cancel, Selected, StepsScore, Wrapper } from './styles';
+import {
+  Button,
+  Cancel,
+  Selected,
+  StepsScore,
+  Wrapper,
+} from 'components/Steps/styles';
 
 interface StepsProps {
   selectedDate: Date | null;
