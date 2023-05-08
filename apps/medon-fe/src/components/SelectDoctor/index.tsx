@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import useSpecOptions from 'components/RegistrationForm/useSpecOptions';
+import useSpecOptions from 'components/RegistrationForm/hooks';
 import doctorImagePlaceholder from 'assets/images/Avatar.svg';
 import {
   ColumnName,

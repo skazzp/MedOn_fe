@@ -22,22 +22,13 @@ export const Time = styled.span`
   color: ${({ theme }) => theme.colors.gray_500};
 `;
 
-export const Overview = styled.p`
+export const Overview = styled.div`
+  display: flex;
   line-height: 1.5;
   padding: 1rem 0;
+  margin: 1rem 0;
   border-top: 1px solid ${({ theme }) => theme.colors.gray_400};
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray_400};
-  > button {
-    display: block;
-    background-color: transparent;
-    border: transparent;
-    text-align: left;
-    padding: 0;
-    color: ${({ theme }) => theme.colors.blue_500};
-    font-weight: 700;
-    font-size: ${({ theme }) => theme.fontSizes.sm};
-    cursor: pointer;
-  }
 `;
 
 export const Doctor = styled.span`

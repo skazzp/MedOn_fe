@@ -9,6 +9,7 @@ import ResendConfirmation from 'pages/ResendConfirmation';
 import UpdatePassword from 'pages/UpdatePassword';
 import ProfilePage from 'pages/ProfilePage';
 import { PatientsPage } from 'pages/PatientsPage';
+import AvailabilityPage from 'pages/AvailabilityPage';
 
 import PatientCard from 'components/PatientCard';
 import { PublicRoute } from 'components/Routes/PublicRoute';
@@ -16,6 +17,7 @@ import { PrivateRoute } from 'components/Routes/PrivateRoute';
 import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
 import Navigation from 'components/Navigation';
+import SelectTimeSlot from 'components/SelectTimeSlot';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { getTokenSelector } from 'redux/features/userSlice/userSelectors';
@@ -63,7 +65,6 @@ function App() {
         path={routes.resetPassword}
         element={<PublicRoute component={<ResetPassword />} />}
       />
-
       <Route
         path={routes.dashboard}
         element={<PrivateRoute component={<Navigation />} />}
@@ -73,12 +74,16 @@ function App() {
         element={<PrivateRoute component={<ProfilePage />} />}
       />
       <Route
-        path={routes.appointments}
-        element={<PrivateRoute component={<SelectDoctor />} />}
+        path={routes.availability}
+        element={<PrivateRoute component={<AvailabilityPage />} />}
       />
       <Route
         path={routes.resendConfirmation}
         element={<ResendConfirmation />}
+      />
+      <Route
+        path={routes.appointments}
+        element={<PrivateRoute component={<SelectTimeSlot />} />}
       />
       <Route
         path={routes.updatePassword}
@@ -90,7 +95,7 @@ function App() {
       >
         <Route index element={<PatientsList />} />
         <Route path={routes.addPatient} element={<NewPatientForm />} />
-        <Route path={routes.patientCard} element={<PatientCard />} />
+        <Route path={`${routes.patientCard}/:id`} element={<PatientCard />} />
       </Route>
       <Route path="*" element={<Navigate to={routes.login} />} />
     </Routes>
