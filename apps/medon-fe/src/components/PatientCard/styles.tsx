@@ -42,29 +42,6 @@ export const StyledSelect = styled(Select)`
   width: 300px;
 `;
 
-export const Info = styled.span`
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-`;
-
-export const Overview = styled.div`
-  > button {
-    background-color: transparent;
-    border: transparent;
-    text-align: left;
-    margin-top: -1rem;
-    padding: 0;
-    color: ${({ theme }) => theme.colors.blue_500};
-    font-weight: 700;
-    font-size: ${({ theme }) => theme.fontSizes.sm};
-    cursor: pointer;
-  }
-  > p {
-    margin: 0;
-  }
-`;
-
 export const Calendar = styled.div`
   display: flex;
   align-items: center;
@@ -109,4 +86,15 @@ export const Buttons = styled.div`
       fill: ${({ theme }) => theme.colors.gray_700};
     }
   }
+`;
+
+export const SkeletonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 `;

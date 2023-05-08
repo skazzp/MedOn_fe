@@ -89,7 +89,7 @@ function App() {
       >
         <Route index element={<PatientsList />} />
         <Route path={routes.addPatient} element={<NewPatientForm />} />
-        <Route path={routes.patientCard} element={<PatientCard />} />
+        <Route path={`${routes.patientCard}/:id`} element={<PatientCard />} />
       </Route>
       <Route path="*" element={<Navigate to={routes.login} />} />
     </Routes>

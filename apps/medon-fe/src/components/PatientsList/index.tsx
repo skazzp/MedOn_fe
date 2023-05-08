@@ -11,7 +11,9 @@ import {
   defaultPage,
   pageSizeOptions,
 } from 'utils/constants/pagination';
+import { ROLES, routes } from 'utils/constants';
 import { useDebounce } from 'hooks/useDebounce';
+import { useAppSelector } from 'redux/hooks';
 import { Choose, Content, Wrapper, SpinWrapper } from './styles';
 
 export default function PatientsList() {
@@ -22,14 +24,16 @@ export default function PatientsList() {
   const [searchPhrase, setSearchPhrase] = useState<string>('');
   const debouncedSearch = useDebounce<string>(searchPhrase);
 
+  const { role } = useAppSelector((state) => state.userState.user);
+
   const { data, isFetching } = useGetPatientsQuery({
     page,
     limit,
     searchPhrase: debouncedSearch,
   });
 
-  function handlePaginationChange(page: number, pageSize: number): void {
-    setPage(page);
+  function handlePaginationChange(pageNumber: number, pageSize: number): void {
+    setPage(pageNumber);
     setLimit(pageSize);
   }
 
@@ -45,14 +49,16 @@ export default function PatientsList() {
           onChange={(e) => setSearchPhrase(e.target.value)}
           onBlur={() => setSearchPhrase('')}
         />
-        <LinkHome
-          textcolor={theme.colors.white}
-          bgcolor={theme.colors.btnGradient}
-          to="add-new"
-        >
-          {t('patient-list.link')}
-          <Plus />
-        </LinkHome>
+        {role === ROLES.LOCAL ? (
+          <LinkHome
+            textcolor={theme.colors.white}
+            bgcolor={theme.colors.btnGradient}
+            to={routes.addPatient}
+          >
+            {t('patient-list.link')}
+            <Plus />
+          </LinkHome>
+        ) : null}
       </Choose>
       {isFetching ? (
         <SpinWrapper>

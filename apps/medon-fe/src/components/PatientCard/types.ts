@@ -8,12 +8,6 @@ export interface IPatientCardProps {
   location: string;
 }
 
-export interface ShowMoreTextHookReturnType {
-  formatedText?: string;
-  showMore: boolean;
-  handleShowToggle: () => void;
-}
-
 export interface SubmitAddNote {
   note: string;
 }
