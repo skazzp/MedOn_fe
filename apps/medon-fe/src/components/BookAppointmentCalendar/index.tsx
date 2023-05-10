@@ -1,9 +1,14 @@
 import { useCallback, useMemo } from 'react';
-import { DateLocalizer, dayjsLocalizer } from 'react-big-calendar';
-import dayjs from 'dayjs';
+import { DateLocalizer, Views, dayjsLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { toast } from 'react-toastify';
+import dayjs from 'dayjs';
+import { t } from 'i18next';
+
 import { StyledCalendar } from 'components/BookAppointmentCalendar/styles';
 import { BookAppointmentCalendarProps } from 'components/BookAppointmentCalendar/types';
+
+import { toastConfig } from 'utils/toastConfig';
 
 const mLocalizer = dayjsLocalizer(dayjs);
 
@@ -14,7 +19,6 @@ function BookAppointmentCalendar({
   const { formats } = useMemo(
     () => ({
       formats: {
-        dateFormat: 'D',
         weekdayFormat: (
           date: Date,
           culture: string | undefined,
@@ -65,6 +69,8 @@ function BookAppointmentCalendar({
         } else {
           setSelectedDate(slotInfo.start);
         }
+      } else if (!dayjs(slotInfo.start).isAfter(dayjs())) {
+        toast.warning(t('availability.badDate'), toastConfig);
       }
     },
     [selectedDate, setSelectedDate]
@@ -81,8 +87,7 @@ function BookAppointmentCalendar({
     <div>
       <StyledCalendar
         localizer={mLocalizer}
-        defaultView="month"
-        views={['month']}
+        views={[Views.MONTH]}
         onSelectSlot={onSelectSlot}
         selectable
         formats={formats}

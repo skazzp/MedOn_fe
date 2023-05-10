@@ -1,5 +1,6 @@
 import { Calendar } from 'react-big-calendar';
 import styled from 'styled-components';
+
 import { theme } from 'styles/theme';
 import { arrowRight } from 'utils/constants';
 
@@ -44,9 +45,6 @@ export const StyledCalendar = styled(Calendar)`
     font-family: ${theme.fontFamily.sf_pro_text};
   }
 
-  .rbc-button-link {
-    cursor: default;
-  }
   .rbc-date-cell {
     padding-left: 10px;
     text-align: left;

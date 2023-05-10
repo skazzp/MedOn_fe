@@ -1,7 +1,15 @@
 import { useTranslation } from 'react-i18next';
+
+import { SelectTimeSlotProps } from 'components/SelectTimeSlot/types';
+import {
+  Container,
+  DrText,
+  SlotActive,
+  TimeSlot,
+  TimeText,
+} from 'components/SelectTimeSlot/styles';
+
 import { timeSlots } from 'utils/constants/options/hourOptions';
-import { Container, DrText, SlotActive, TimeSlot, TimeText } from './styles';
-import { SelectTimeSlotProps } from './types';
 
 export default function SelectTimeSlot({
   selectedTime,

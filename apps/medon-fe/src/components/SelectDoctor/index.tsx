@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
+
 import useSpecOptions from 'components/RegistrationForm/hooks';
-import doctorImagePlaceholder from 'assets/images/Avatar.svg';
 import {
   ColumnName,
   ColumnText,
@@ -17,9 +17,11 @@ import {
   StyledSelect,
   Text,
   TitleBox,
-} from './styles';
-import { mockDoctors } from './mockData';
-import { SelectDoctorProps } from './types';
+} from 'components/SelectDoctor/styles';
+import { mockDoctors } from 'components/SelectDoctor/mockData';
+import { SelectDoctorProps } from 'components/SelectDoctor/types';
+
+import doctorImagePlaceholder from 'assets/images/Avatar.svg';
 
 export default function SelectDoctor({
   selectDoctorAppointments,
