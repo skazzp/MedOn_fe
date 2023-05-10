@@ -14,5 +14,5 @@ export const Choose = styled.div`
   position: relative;
   border-radius: 8px;
   border: 1px solid ${theme.colors.gray_400};
-  padding-bottom: 80px;
+  padding-bottom: 160px;
 `;

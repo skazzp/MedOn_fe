@@ -1,16 +1,27 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { timeSlots } from 'utils/constants/options/hourOptions';
 import { Container, DrText, SlotActive, TimeSlot, TimeText } from './styles';
+import { SelectTimeSlotProps } from './types';
 
-export default function SelectTimeSlot() {
+export default function SelectTimeSlot({
+  selectedTime,
+  setIsActive,
+  isActive,
+  selectTimeAppointments,
+}: SelectTimeSlotProps) {
   const { t } = useTranslation();
-  const [isActive, setIsActive] = useState<string>('');
-  const selectTime = (key: string) => {
-    if (key === isActive) {
+
+  const selectTime = (time: string) => {
+    if (time === selectedTime) {
+      selectTimeAppointments('');
+    } else {
+      selectTimeAppointments(time);
+    }
+
+    if (time === isActive) {
       setIsActive('');
     } else {
-      setIsActive(key);
+      setIsActive(time);
     }
   };
 

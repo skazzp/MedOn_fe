@@ -1,6 +1,7 @@
 import { Calendar } from 'react-big-calendar';
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
+import { arrowRight } from 'utils/constants';
 
 export const StyledCalendar = styled(Calendar)`
   width: calc(100% - 50px);
@@ -11,6 +12,10 @@ export const StyledCalendar = styled(Calendar)`
   background-color: ${theme.colors.gray_100};
   padding: 5px;
   margin: 0 auto;
+
+  .selected-day {
+    background-color: ${theme.colors.icon_active};
+  }
 
   .rbc-header {
     font-size: ${theme.fontSizes.md};
@@ -43,8 +48,16 @@ export const StyledCalendar = styled(Calendar)`
     cursor: default;
   }
   .rbc-date-cell {
-    padding-left: 5px;
+    padding-left: 10px;
     text-align: left;
+    font-family: ${theme.fontFamily.roboto};
+    font-style: normal;
+    font-weight: ${theme.fontWeight.bold};
+    font-size: 16px;
+  }
+
+  .rbc-selected-cell {
+    background-color: rgba(0, 0, 0, 0);
   }
 
   .rbc-btn-group {
@@ -56,7 +69,7 @@ export const StyledCalendar = styled(Calendar)`
     }
     button:nth-of-type(2) {
       font-size: 0;
-      background-image: url(assets/svgs/arrow/circleArrowRight.svg);
+      background-image: url(${arrowRight});
       background-repeat: no-repeat;
       border: 0 solid ${theme.colors.white};
       padding: 14px;
@@ -76,7 +89,7 @@ export const StyledCalendar = styled(Calendar)`
 
     button:last-child {
       font-size: 0;
-      background-image: url(assets/svgs/arrow/circleArrowRight.svg);
+      background-image: url(${arrowRight});
       background-repeat: no-repeat;
       border: 0 solid ${theme.colors.white};
       padding: 14px;

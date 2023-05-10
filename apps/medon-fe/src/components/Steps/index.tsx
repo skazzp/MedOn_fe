@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -13,30 +12,39 @@ import {
   StepsScore,
   Wrapper,
 } from 'components/Steps/styles';
-
-interface StepsProps {
-  selectedDate: Date | null;
-  setSelectedDate: (date: Date | null) => void;
-}
+import { StepsProps } from 'components/BookAppointmentCalendar/types';
+import { mockDoctors } from 'components/SelectDoctor/mockData';
+import useSpecOptions from 'components/RegistrationForm/hooks';
 
 function Steps(props: StepsProps) {
-  const [currentStep, setCurrentStep] = useState<number>(1);
-  const { selectedDate, setSelectedDate } = props;
+  const {
+    selectedDate,
+    setSelectedDate,
+    currentStep,
+    onCurrentStepChange,
+    selectedTime,
+    selectedDoctor,
+    isActiveDoc,
+    selectTimeAppointments,
+    selectDoctorAppointments,
+  } = props;
   const { t } = useTranslation();
+  const { specialityOptions } = useSpecOptions();
 
   const handleNextStep = () => {
-    setCurrentStep((prevStep) => prevStep + 1);
+    onCurrentStepChange(currentStep + 1);
   };
 
   const handlePreviousStep = () => {
-    setCurrentStep((prevStep) => prevStep - 1);
+    onCurrentStepChange(currentStep - 1);
   };
 
   const handleCancel = () => {
     if (selectedDate) {
-      setCurrentStep(1);
       setSelectedDate(null);
-      // add cancel all what we need
+      onCurrentStepChange(1);
+      selectTimeAppointments('');
+      selectDoctorAppointments(null);
     }
   };
 
@@ -57,11 +65,24 @@ function Steps(props: StepsProps) {
     }
   };
 
+  const getDoctorFullName = (doctorId: number) => {
+    const doctor = mockDoctors.find((doctors) => doctors.id === doctorId);
+
+    if (doctor) {
+      return `${doctor.firstName} ${doctor.lastName} ${
+        specialityOptions[doctor.specialityId].label
+      } ${doctor.city} ${doctor.country}`;
+    }
+
+    return '';
+  };
+
   return (
     <Wrapper>
       <StepsScore>
         <div>
-          {t('patient-info.step')} {currentStep} / 3
+          {currentStep}
+          {t('patient-info.end-steps')}
         </div>
         <div>{renderStepContent()}</div>
       </StepsScore>
@@ -77,7 +98,10 @@ function Steps(props: StepsProps) {
       {currentStep < 3 ? (
         <Button
           buttonType="next"
-          disabled={!selectedDate}
+          disabled={
+            (currentStep === 1 && !selectedDate) ||
+            (currentStep === 2 && !selectedTime)
+          }
           position={positionNext}
           onClick={handleNextStep}
         >
@@ -89,6 +113,7 @@ function Steps(props: StepsProps) {
           buttonType="booking"
           position={positionBooking}
           onClick={handleBooking}
+          disabled={currentStep === 3 && !isActiveDoc}
         >
           {t('patient-info.booking')}
         </Button>
@@ -97,6 +122,8 @@ function Steps(props: StepsProps) {
         <div>{t('patient-info.select')}</div>
         {t('patient-info.date')}
         {selectedDate ? selectedDate.toDateString() : t('patient-info.none')}
+        {selectedTime ? `, ${selectedTime}` : ''}
+        {selectedDoctor ? `, ${getDoctorFullName(selectedDoctor)}` : ''}
       </Selected>
       <Cancel disabled={!selectedDate} onClick={handleCancel}>
         {t('patient-info.cancel')}
