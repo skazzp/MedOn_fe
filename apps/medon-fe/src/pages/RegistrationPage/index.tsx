@@ -6,7 +6,7 @@ import RegistrationForm from 'components/RegistrationForm';
 import RegistrationConfirmation from 'components/RegistrationConfirmation';
 import { FormData } from 'components/RegistrationForm/types';
 import { useRegisterUserMutation } from 'redux/api/authApi';
-import { ROLES } from 'utils/constants/roles';
+import { roles } from 'utils/constants/roles';
 import logo from 'assets/images/logo.svg';
 import { toastConfig } from 'utils/toastConfig';
 import {
@@ -32,7 +32,7 @@ export default function RegistrationPage() {
       dateOfBirth: dayjs(values.birthday).format('YYYY-MM-DD'),
       role: values.role,
       specialityId:
-        values.role === ROLES.REMOTE && values.speciality
+        values.role === roles.remote && values.speciality
           ? +values.speciality
           : null,
       country: values.country,

@@ -13,7 +13,6 @@ import { loginFormSchema } from 'validation/loginSchema';
 import { setIsVerified, setToken } from 'redux/features/userSlice/userSlice';
 import { userApi } from 'redux/api/userApi';
 import { useLoginMutation } from 'redux/api/authApi';
-import { toastConfig } from 'utils/toastConfig';
 import { ReactComponent as googleLogo } from 'assets/svgs/google_logo.svg';
 import {
   StyledErrorMessage,
@@ -23,6 +22,8 @@ import {
   SendButton,
   GoogleBtn,
 } from 'components/LoginForm/style';
+import { routes } from 'utils/constants';
+import { toastConfig } from 'utils/toastConfig';
 
 const LoginForm: FC = () => {
   const { t } = useTranslation();
@@ -43,6 +44,7 @@ const LoginForm: FC = () => {
     try {
       dispatch(userApi.util.invalidateTags(['user']));
       await login(formData).unwrap();
+      navigate(routes.dashboard);
     } catch (error) {
       toast.error(t('login.error-msg'), toastConfig);
     }
@@ -54,10 +56,6 @@ const LoginForm: FC = () => {
       dispatch(setToken(data.token));
     }
   }, [data, dispatch, navigate]);
-
-  if (isLoading) {
-    return <Spin tip="Loading" size="large" />;
-  }
 
   return (
     <Form
@@ -109,12 +107,17 @@ const LoginForm: FC = () => {
       <ForgotButton type="link" href="/forget-password">
         {t('login.login-forgot-password')}
       </ForgotButton>
-      <SendButton
-        type="submit"
-        size="large"
-        value={`${t('login.login')}`}
-        disabled={isLoading}
-      />
+      {isLoading ? (
+        <Spin />
+      ) : (
+        <SendButton
+          type="submit"
+          size="large"
+          value={`${t('login.login')}`}
+          disabled={isLoading}
+        />
+      )}
+
       <GoogleBtn
         size="large"
         href={`${process.env.NX_API_URL}${process.env.NX_API_GOOGLE_ROUTE}`}
