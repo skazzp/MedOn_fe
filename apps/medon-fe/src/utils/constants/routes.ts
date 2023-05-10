@@ -9,12 +9,13 @@ export const routes = {
   resetPassword: '/reset-password/:token',
   help: '/help',
   exit: '/logout',
+  availability: '/availability',
   resendConfirmation: '/re-confirm-account',
   updatePassword: '/update-password',
   patients: '/patients',
   patientCard: '/patients/card',
   addPatient: '/patients/add-new',
-  availability: '/availability',
+  withoutAppointments: '/dashboard/withoutAppointments',
 };
 
 export const localDoctorRoutes = [routes.addPatient];

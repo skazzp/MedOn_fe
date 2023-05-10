@@ -6,7 +6,7 @@ import { useGetUserQuery } from 'redux/api/userApi';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { getTokenSelector } from 'redux/features/userSlice/userSelectors';
 import { localDoctorRoutes, routes } from 'utils/constants/routes';
-import { ROLES } from 'utils/constants/roles';
+import { roles } from 'utils/constants/roles';
 import Container from './styles';
 
 interface IProps {
@@ -29,7 +29,7 @@ export const PrivateRoute = ({ component }: IProps) => {
         navigate(routes.profile);
       }
       if (
-        response.data.role === ROLES.REMOTE &&
+        response.data.role === roles.remote &&
         localDoctorRoutes.includes(pathname)
       ) {
         navigate(routes.dashboard);

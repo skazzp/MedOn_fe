@@ -14,7 +14,7 @@ import {
   getTokenSelector,
   getUserSelector,
 } from 'redux/features/userSlice/userSelectors';
-import { ROLES } from 'utils/constants/roles';
+import { roles } from 'utils/constants/roles';
 import { toastConfig } from 'utils/toastConfig';
 import {
   ProfilePageContainer,
@@ -40,7 +40,7 @@ export default function ProfilePage() {
       dateOfBirth: dayjs(values.birthday).format('YYYY-MM-DD'),
       role: values.role,
       specialityId:
-        values.role === ROLES.REMOTE && values.speciality
+        values.role === roles.remote && values.speciality
           ? +values.speciality
           : null,
       country: values.country,

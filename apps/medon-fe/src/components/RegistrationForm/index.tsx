@@ -12,7 +12,7 @@ import {
   DEFAULT_TIMEZONE,
   timezoneOptions,
 } from 'utils/timezones/timezoneOptions';
-import { ROLES, ROLE_OPTIONS } from 'utils/constants/roles';
+import { roles, rolesOptions } from 'utils/constants/roles';
 import { formFields } from 'utils/constants/userFormFields';
 import { FormData } from './types';
 import useSpecOptions from './hooks';
@@ -135,10 +135,10 @@ export default function RegistrationForm({ submitForm }: IProps) {
             name={formFields.role}
             control={control}
             placeholder={`${t('regForm.role.placeholder')}`}
-            options={ROLE_OPTIONS}
+            options={rolesOptions}
           />
         </Label>
-        {role === ROLES.REMOTE && (
+        {role === roles.remote && (
           <Label htmlFor="speciality">
             <LabelText>{t('regForm.speciality.label')}</LabelText>
             <SelectAntD

@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 import { profileFormSchema } from 'validation/profileFormSchema';
 import profile_pic from 'assets/images/profile_pic.png';
-import { ROLES, ROLE_OPTIONS } from 'utils/constants/roles';
+import { roles, rolesOptions } from 'utils/constants/roles';
 import { timezoneOptions } from 'utils/timezones/timezoneOptions';
 import { formFields } from 'utils/constants/userFormFields';
 import { countryOptions } from 'utils/countries/countryOptions';
@@ -139,12 +139,12 @@ export default function ProfileForm({
                   disabled={disabled}
                   size="large"
                   placeholder={`${t('profileForm.role.placeholder')}`}
-                  options={ROLE_OPTIONS}
+                  options={rolesOptions}
                 />
               </Label>
             </InputContainer>
           )}
-          {role === ROLES.REMOTE && (
+          {role === roles.remote && (
             <InputContainer>
               <Label htmlFor="speciality">
                 <LabelText>{t('profileForm.speciality.label')}</LabelText>

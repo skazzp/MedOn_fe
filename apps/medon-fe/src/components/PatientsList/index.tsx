@@ -11,7 +11,7 @@ import {
   defaultPage,
   pageSizeOptions,
 } from 'utils/constants/pagination';
-import { ROLES, routes } from 'utils/constants';
+import { roles, routes } from 'utils/constants';
 import { useDebounce } from 'hooks/useDebounce';
 import { useAppSelector } from 'redux/hooks';
 import { Choose, Content, Wrapper, SpinWrapper } from './styles';
@@ -49,7 +49,7 @@ export default function PatientsList() {
           onChange={(e) => setSearchPhrase(e.target.value)}
           onBlur={() => setSearchPhrase('')}
         />
-        {role === ROLES.LOCAL ? (
+        {role === roles.local ? (
           <LinkHome
             textcolor={theme.colors.white}
             bgcolor={theme.colors.btnGradient}
@@ -77,6 +77,9 @@ export default function PatientsList() {
                   gender={patient.gender}
                   dateOfBirth={patient.dateOfBirth.toString()}
                   overview={patient.overview ? patient.overview : undefined}
+                  doctor={''}
+                  maxLength={0}
+                  time={''}
                 />
               ))}
               <Pagination
