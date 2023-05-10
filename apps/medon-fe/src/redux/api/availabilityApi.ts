@@ -29,21 +29,24 @@ export const availabilityApi = createApi({
       IServerResponse,
       { dto: AvailabilitySlot[]; timezone: string }
     >({
-      query(data: { dto: AvailabilitySlot[]; timezone: string }) {
+      query(body: { dto: AvailabilitySlot[]; timezone: string }) {
         return {
           url: 'availability',
           method: 'POST',
-          body: data,
+          body,
         };
       },
       invalidatesTags: ['availability'],
     }),
-    removeAvailability: builder.mutation<IServerResponse, AvailabilitySlot[]>({
-      query(dto: AvailabilitySlot[]) {
+    removeAvailability: builder.mutation<
+      IServerResponse,
+      { dto: AvailabilitySlot[]; timezone: string }
+    >({
+      query(body: { dto: AvailabilitySlot[]; timezone: string }) {
         return {
           url: 'availability',
           method: 'DELETE',
-          body: dto,
+          body,
         };
       },
       invalidatesTags: ['availability'],

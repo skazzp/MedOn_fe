@@ -40,7 +40,7 @@ export default function AvailabilityCalendar() {
     selectedDay,
     timeSlots,
     dateInText,
-    dayPropGetter,
+    // dayPropGetter,
   } = useCalendar();
 
   return (

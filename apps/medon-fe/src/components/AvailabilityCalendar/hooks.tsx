@@ -100,13 +100,12 @@ export function useCalendar() {
     }
 
     ranges.push(currentRange);
-    // console.log(ranges);
 
-     const resultArray = ranges.map((elem) => ({
-       start: dayjs(elem.start).toDate(),
-       end: dayjs(elem.end).toDate(),
-       title: elem.title,
-     }));
+    const resultArray = ranges.map((elem) => ({
+      start: dayjs(elem.start).toDate(),
+      end: dayjs(elem.end).toDate(),
+      title: elem.title,
+    }));
 
     return resultArray;
   }
@@ -165,11 +164,14 @@ export function useCalendar() {
 
   const handleSelectEvent = useCallback(
     (event: Event) => {
+      // console.log('event', event, 'timeslots', timeSlots);
       const index = timeSlots.findIndex(
         (object) =>
           dayjs(object.start).isSame(event.start) &&
           dayjs(object.end).isSame(event.end)
       );
+
+      // console.log('INDEX', index);
 
       setSelectedDay(event.start);
       setEditIndex(index);
@@ -184,16 +186,14 @@ export function useCalendar() {
   };
 
   const handleRemove = () => {
-    if (editIndex && typeof timeSlots[editIndex]) {
-      console.log('slot to del', timeSlots[editIndex]);
+    if (editIndex !== null && timeSlots[editIndex]) {
       const arrayToRemove = convertSlotToArray(
         timeSlots[editIndex] as CalendarSlot
       ).map((e) => ({ startTime: e.startTime, endTime: e.endTime }));
 
-      console.log('arrayToRemove', arrayToRemove);
-      // removeSlot(arrayToRemove);
-      // setSelectedDay(undefined);
-      // setEditIndex(null);
+      removeSlot({ dto: arrayToRemove, timezone: tZone });
+      setSelectedDay(undefined);
+      setEditIndex(null);
     }
   };
 
@@ -234,14 +234,10 @@ export function useCalendar() {
   };
 
   useEffect(() => {
-    if (availabilityResponse?.data?.length) {
-      // console.log(availabilityResponse.data);
-      const joined = joinConsecutiveDates(availabilityResponse.data);
-      // const newArray = joined.map((elem) => ({
-      //   start: dayjs(elem.start).toDate(),
-      //   end: dayjs(elem.end).toDate(),
-      //   title: elem.title,
-      // }));
+    if (availabilityResponse?.data) {
+      const joined = availabilityResponse?.data.length
+        ? joinConsecutiveDates(availabilityResponse.data)
+        : [];
 
       setTimeSlots(joined);
     }
