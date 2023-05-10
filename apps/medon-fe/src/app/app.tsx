@@ -9,6 +9,7 @@ import ResendConfirmation from 'pages/ResendConfirmation';
 import UpdatePassword from 'pages/UpdatePassword';
 import ProfilePage from 'pages/ProfilePage';
 import { PatientsPage } from 'pages/PatientsPage';
+import { DashboardPage } from 'pages/Dashboard';
 import AvailabilityPage from 'pages/AvailabilityPage';
 
 import PatientCard from 'components/PatientCard';
@@ -16,7 +17,6 @@ import { PublicRoute } from 'components/Routes/PublicRoute';
 import { PrivateRoute } from 'components/Routes/PrivateRoute';
 import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
-import Navigation from 'components/Navigation';
 import SelectTimeSlot from 'components/SelectTimeSlot';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
@@ -66,7 +66,7 @@ function App() {
       />
       <Route
         path={routes.dashboard}
-        element={<PrivateRoute component={<Navigation />} />}
+        element={<PrivateRoute component={<DashboardPage />} />}
       />
       <Route
         path={routes.profile}

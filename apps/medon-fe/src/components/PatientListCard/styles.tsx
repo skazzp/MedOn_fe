@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { ReactComponent as Profile } from 'assets/svgs/profile_listcard.svg';
+import { ReactComponent as Camera } from 'assets/images/Camera.svg';
 
 export const Container = styled.section`
   display: flex;
@@ -32,7 +33,17 @@ export const Text = styled.div`
     font-size: ${({ theme }) => theme.fontSizes.sm};
     font-weight: 500;
   }
-
+  div {
+    display: flex;
+    align-items: center;
+    margin-left: 20vw;
+  }
+  p {
+    margin: 0 10px 0 0;
+  }
+  span {
+    color: ${({ theme }) => theme.colors.blue_500};
+  }
   a {
     text-decoration: none;
   }
@@ -43,6 +54,15 @@ export const Options = styled.div`
   align-items: center;
   gap: 1rem;
   padding: 0 1rem;
+`;
+
+export const CameraIcon = styled(Camera)`
+  margin-right: 10px;
+`;
+
+export const remoteDoc = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const ProfileIcon = styled(Profile)`

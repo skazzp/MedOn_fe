@@ -169,7 +169,7 @@
     "patient": "Patients list",
     "help": "Help",
     "logout": "Logout",
-    "Availability": "Availability",
+    "availability": "Availability",
     "img-alt": "User avatar",
     "choose-role": "Role isn't assigned"
   },
@@ -324,6 +324,21 @@
       "success": "Patient successfully was added!",
       "error": "Patient wasn't added!"
     }
+  },
+  "dashboard": {
+    "welcome": "Welcome",
+    "latest": "Latest Appointments",
+    "show": "Full list",
+    "appointments": "Appointments:",
+    "manage": "Manage Availability",
+    "book": "Book an appointment",
+    "month": "Month",
+    "list": "List"
+  },
+  "attention": {
+    "call-time-left": "You will have a video-call in 5 minutes with:",
+    "detail": "Detail",
+    "and": "and"
   },
   "appointment": {
     "availableDr": "Available Dr:",

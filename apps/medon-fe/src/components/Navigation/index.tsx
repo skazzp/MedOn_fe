@@ -17,15 +17,22 @@ import {
   UserName,
   SpecName,
   BlockName,
+  Availability,
 } from 'components/Navigation/styles';
 import profileImagePlaceholder from 'assets/images/Avatar.svg';
 import Logo from 'components/Logo';
-import { routes } from 'utils/constants/routes';
+import useSpecOptions from 'components/RegistrationForm/hooks';
 import LogOut from 'components/LogOut';
+import { roles } from 'utils/constants';
+import { routes } from 'utils/constants/routes';
 
 export default function Navigation() {
   const { t } = useTranslation();
   const user = useAppSelector(getUserSelector);
+  const { specialityOptions } = useSpecOptions();
+  const userSpeciality =
+    specialityOptions.find((spec) => spec.value === user?.specialityId)
+      ?.label ?? '';
 
   const navItems = [
     {
@@ -44,6 +51,15 @@ export default function Navigation() {
       icon: <Patient />,
       label: 'navigation.patient',
     },
+    ...(user.role === roles.remote
+      ? [
+          {
+            to: routes.availability,
+            icon: <Availability />,
+            label: 'navigation.availability',
+          },
+        ]
+      : []),
     { to: routes.help, icon: <Help />, label: 'navigation.help' },
   ];
 
@@ -70,8 +86,8 @@ export default function Navigation() {
             alt={t<string>('navigation.img-alt')}
           />
           <BlockName>
-            <UserName>{`Dr. ${user?.lastName}`}</UserName>
-            <SpecName>{user?.specialityId}</SpecName>
+            <UserName>{`Dr.${user?.lastName}`}</UserName>
+            <SpecName>{userSpeciality}</SpecName>
           </BlockName>
         </UserBlock>
       </HeaderBlock>
