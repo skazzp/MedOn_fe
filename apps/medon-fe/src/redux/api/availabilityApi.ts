@@ -12,24 +12,47 @@ export const availabilityApi = createApi({
   }),
   tagTypes: ['availability'],
   endpoints: (builder) => ({
-    createAvailability: builder.mutation<IServerResponse, AvailabilitySlot[]>({
-      query(dto: AvailabilitySlot[]) {
+    getAvailability: builder.query<
+      IServerResponse<IAvailability[]>,
+      { timezone?: string }
+    >({
+      query(dto: { timezone?: string }) {
         return {
-          url: 'availability',
+          url: 'availability/all',
           method: 'POST',
           body: dto,
         };
       },
+      providesTags: ['availability'],
     }),
-    getAvailability: builder.query<IServerResponse<IAvailability[]>, null>({
-      query() {
+    createAvailability: builder.mutation<
+      IServerResponse,
+      { dto: AvailabilitySlot[]; timezone: string }
+    >({
+      query(data: { dto: AvailabilitySlot[]; timezone: string }) {
         return {
           url: 'availability',
+          method: 'POST',
+          body: data,
         };
       },
+      invalidatesTags: ['availability'],
+    }),
+    removeAvailability: builder.mutation<IServerResponse, AvailabilitySlot[]>({
+      query(dto: AvailabilitySlot[]) {
+        return {
+          url: 'availability',
+          method: 'DELETE',
+          body: dto,
+        };
+      },
+      invalidatesTags: ['availability'],
     }),
   }),
 });
 
-export const { useCreateAvailabilityMutation, useGetAvailabilityQuery } =
-  availabilityApi;
+export const {
+  useCreateAvailabilityMutation,
+  useGetAvailabilityQuery,
+  useRemoveAvailabilityMutation,
+} = availabilityApi;

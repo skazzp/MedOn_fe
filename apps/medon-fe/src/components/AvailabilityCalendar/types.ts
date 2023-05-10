@@ -10,7 +10,7 @@ export interface CalendarSlot {
 }
 
 export interface AvailabilitySlot {
-  startTime: Date;
-  endTime: Date;
-  title: string;
+  startTime: Date | string;
+  endTime: Date | string;
+  title?: string;
 }

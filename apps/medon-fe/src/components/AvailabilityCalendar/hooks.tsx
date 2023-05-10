@@ -3,6 +3,9 @@ import { Event } from 'react-big-calendar';
 import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
+import dayOfYear from 'dayjs/plugin/dayOfYear';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,6 +14,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import {
   useCreateAvailabilityMutation,
   useGetAvailabilityQuery,
+  useRemoveAvailabilityMutation,
 } from 'redux/api/availabilityApi';
 import { IAvailability } from 'redux/api/types';
 import { hoursSchema } from 'validation/selectHourRangeSchema';
@@ -20,6 +24,9 @@ import { dateToTextFormat } from 'utils/constants';
 import { CalendarSlot, SelectHours } from './types';
 
 dayjs.extend(isBetween);
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.extend(dayOfYear);
 
 export function useCalendar() {
   const { t } = useTranslation();
@@ -30,23 +37,79 @@ export function useCalendar() {
   const [timeSlots, setTimeSlots] = useState<Event[]>([]);
   const [selectedDay, setSelectedDay] = useState<Date | undefined>(undefined);
   const [editIndex, setEditIndex] = useState<number | null>(null);
-  const [createSlot, { isSuccess }] = useCreateAvailabilityMutation();
-  const { data: availabilityResponse } = useGetAvailabilityQuery(null);
+  const [createSlot] = useCreateAvailabilityMutation();
+  const [removeSlot] = useRemoveAvailabilityMutation();
 
-  const handleSelectDay = useCallback(
-    (event: Event) => {
-      setEditIndex(null);
-      if (!dayjs(event.start).isAfter(dayjs())) {
-        toast.warning(t('availability.badDate'), toastConfig);
-        setSelectedDay(undefined);
+  const tZone = dayjs.tz.guess();
+  const { data: availabilityResponse } = useGetAvailabilityQuery({
+    timezone: tZone,
+  });
+
+  const convertSlotToArray = (timeSlot: CalendarSlot) => {
+    const startHour = dayjs(timeSlot.start).hour();
+    const endHour = dayjs(timeSlot.end).hour();
+    const availabilityArray = [];
+
+    if (endHour - startHour === 1) {
+      return [
+        {
+          startTime: dayjs(timeSlot.start).toDate(),
+          endTime: dayjs(timeSlot.end).toDate(),
+          title: timeSlot.title,
+        },
+      ];
+    }
+    for (let i = startHour; i < endHour; i += 1) {
+      availabilityArray.push({
+        startTime: dayjs(timeSlot.start).hour(i).toDate(),
+        endTime: dayjs(timeSlot.start)
+          .hour(i + 1)
+          .toDate(),
+        title: timeSlot.title,
+      });
+    }
+
+    return availabilityArray;
+  };
+
+  function joinConsecutiveDates(dates: IAvailability[]) {
+    const ranges = [];
+    let currentRange = {
+      start: dates[0].startTime,
+      end: dates[0].endTime,
+      title: dates[0].title,
+    };
+
+    for (let i = 1; i < dates.length; i += 1) {
+      const current = dates[i];
+      const previous = dates[i - 1];
+
+      if (
+        new Date(current.startTime).getDate() ===
+        new Date(previous.endTime).getDate()
+      ) {
+        currentRange.end = current.endTime;
       } else {
-        setEditIndex(null);
-        setSelectedDay(event.start);
-        reset();
+        ranges.push(currentRange);
+        currentRange = {
+          start: current.startTime,
+          end: current.endTime,
+          title: current.title,
+        };
       }
-    },
-    [reset, t]
-  );
+    }
+
+    ranges.push(currentRange);
+    // console.log(ranges);
+
+     const resultArray = ranges.map((elem) => ({
+       start: dayjs(elem.start).toDate(),
+       end: dayjs(elem.end).toDate(),
+       title: elem.title,
+     }));
+
+    return resultArray;
+  }
 
   const dateInText = dayjs(selectedDay).format(dateToTextFormat);
 
@@ -84,6 +147,22 @@ export function useCalendar() {
     [selectedDay]
   );
 
+  const handleSelectDay = useCallback(
+    (event: Event) => {
+      setEditIndex(null);
+      // console.log(timeSlots);
+      if (!dayjs(event.start).isAfter(dayjs())) {
+        toast.warning(t('availability.badDate'), toastConfig);
+        setSelectedDay(undefined);
+      } else {
+        setEditIndex(null);
+        setSelectedDay(event.start);
+        reset();
+      }
+    },
+    [reset, t]
+  );
+
   const handleSelectEvent = useCallback(
     (event: Event) => {
       const index = timeSlots.findIndex(
@@ -105,46 +184,17 @@ export function useCalendar() {
   };
 
   const handleRemove = () => {
-    setTimeSlots((prev) => [...prev.filter((e, i) => i !== editIndex)]);
-    setSelectedDay(undefined);
-    setEditIndex(null);
-  };
+    if (editIndex && typeof timeSlots[editIndex]) {
+      console.log('slot to del', timeSlots[editIndex]);
+      const arrayToRemove = convertSlotToArray(
+        timeSlots[editIndex] as CalendarSlot
+      ).map((e) => ({ startTime: e.startTime, endTime: e.endTime }));
 
-  const convertSlotToArray = (timeSlot: CalendarSlot) => {
-    const startHour = dayjs(timeSlot.start).hour();
-    const endHour = dayjs(timeSlot.end).hour();
-    const availabilityArray = [];
-
-    if (endHour - startHour === 1) {
-      return [
-        {
-          startTime: timeSlot.start,
-          endTime: timeSlot.end,
-          title: timeSlot.title,
-        },
-      ];
+      console.log('arrayToRemove', arrayToRemove);
+      // removeSlot(arrayToRemove);
+      // setSelectedDay(undefined);
+      // setEditIndex(null);
     }
-    for (let i = startHour; i < endHour; i += 1) {
-      availabilityArray.push({
-        startTime: dayjs(timeSlot.start).hour(i).toDate(),
-        endTime: dayjs(timeSlot.start)
-          .hour(i + 1)
-          .toDate(),
-        title: timeSlot.title,
-      });
-    }
-
-    return availabilityArray;
-  };
-
-  const convertResponse = (response: IAvailability[]) => {
-    const newAvailability = response.map((elem) => ({
-      title: elem.title,
-      start: elem.startTime,
-      end: elem.endTime,
-    }));
-
-    return newAvailability;
   };
 
   const handleSubmitEvent = (data: SelectHours) => {
@@ -172,30 +222,28 @@ export function useCalendar() {
     if (datesCross) {
       toast.error(t('availability.timeUsed'), toastConfig);
     } else {
-      console.log(newEvent);
       const newAvailability = convertSlotToArray(newEvent);
 
-      createSlot(newAvailability);
+      console.log(newAvailability);
 
-      setTimeSlots((prev) => {
-        if (editIndex !== null) {
-          prev.splice(editIndex, 1);
-        }
+      createSlot({ dto: newAvailability, timezone: tZone });
 
-        return [...prev, newEvent];
-      });
       setEditIndex(null);
       setSelectedDay(undefined);
     }
   };
 
   useEffect(() => {
-    if (availabilityResponse?.data) {
-      console.log(availabilityResponse);
-      console.log(convertResponse(availabilityResponse.data));
-      const currentAvailability = convertResponse(availabilityResponse.data);
+    if (availabilityResponse?.data?.length) {
+      // console.log(availabilityResponse.data);
+      const joined = joinConsecutiveDates(availabilityResponse.data);
+      // const newArray = joined.map((elem) => ({
+      //   start: dayjs(elem.start).toDate(),
+      //   end: dayjs(elem.end).toDate(),
+      //   title: elem.title,
+      // }));
 
-      setTimeSlots(currentAvailability);
+      setTimeSlots(joined);
     }
   }, [availabilityResponse]);
 
