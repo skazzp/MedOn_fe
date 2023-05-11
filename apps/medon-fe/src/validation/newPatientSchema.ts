@@ -22,7 +22,11 @@ export const newPatientSchema = yup.object({
 
   gender: yup.mixed().label('Gender').oneOf(['male', 'female']).required(),
 
-  dateOfBirth: yup.string().label('Date of birth').required(),
+  dateOfBirth: yup
+    .date()
+    .max(new Date(), 'Date of birth must be in the past')
+    .label('Date of birth')
+    .required(),
 
   country: yup.string().label('Country').max(4).required(),
 
