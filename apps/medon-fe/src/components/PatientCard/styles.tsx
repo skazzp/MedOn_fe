@@ -1,5 +1,6 @@
 import { Select } from 'antd';
 import styled from 'styled-components';
+import { Calendar } from 'react-big-calendar';
 
 export const Container = styled.div`
   display: flex;
@@ -29,7 +30,7 @@ export const Container = styled.div`
     border-top: 2px solid ${({ theme }) => theme.colors.gray_300};
     border-bottom: 2px solid ${({ theme }) => theme.colors.gray_300};
     padding: 1rem 0;
-    margin: 0;
+    margin: auto;
   }
 `;
 
@@ -40,14 +41,6 @@ export const Wrapper = styled.div`
 
 export const StyledSelect = styled(Select)`
   width: 300px;
-`;
-
-export const Calendar = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 300px;
 `;
 
 export const Top = styled.div`
@@ -97,4 +90,54 @@ export const SkeletonContainer = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+`;
+
+export const StyledCalendar = styled(Calendar)`
+  width: calc(100% - 50px);
+  height: 400px;
+  font-family: ${(p) => p.theme.fontFamily.sf_pro_text};
+
+  border-radius: 8px;
+  border: 1px solid ${(p) => p.theme.colors.gray_400};
+  background-color: ${(p) => p.theme.colors.gray_100};
+  padding: 5px;
+  .rbc-header {
+    font-size: ${(p) => p.theme.fontSizes.md};
+    font-weight: ${(p) => p.theme.fontWeight.medium};
+    padding: 5px 10px !important;
+  }
+  .rbc-month-view {
+    background-color: ${(p) => p.theme.colors.white};
+  }
+  .rbc-month-row {
+    padding: 5px;
+  }
+  .rbc-toolbar {
+    flex-direction: row-reverse;
+  }
+  .rbc-toolbar-label {
+    font-size: ${(p) => p.theme.fontSizes.lg};
+    font-weight: ${(p) => p.theme.fontWeight.medium};
+  }
+  .rbc-event {
+    padding-left: 10px;
+    background-color: ${(p) => p.theme.colors.blue_300};
+  }
+  button {
+    font-size: ${(p) => p.theme.fontSizes.md};
+    font-family: ${(p) => p.theme.fontFamily.sf_pro_text};
+  }
+  .rbc-button-link {
+    cursor: default;
+  }
+  .rbc-agenda-date-cell {
+    border: 1px solid ${(p) => p.theme.colors.gray_400};
+    background-color: ${(p) => p.theme.colors.gray_100};
+  }
+  .rbc-agenda-empty {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding-top: 30px;
+  }
 `;

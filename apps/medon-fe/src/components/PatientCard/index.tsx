@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import AnimateHeight, { Height } from 'react-animate-height';
 import { toast } from 'react-toastify';
+import { Views, dayjsLocalizer } from 'react-big-calendar';
+import dayjs from 'dayjs';
 
 import { LinkGoBack } from 'components/common/LinkGoBack';
 import Button from 'components/Button';
@@ -33,12 +35,12 @@ import { defaultOrder, defaultPage, defaultPageSize } from 'utils/constants';
 import {
   AddNoteForm,
   Buttons,
-  Calendar,
   Container,
   StyledSelect,
   Top,
   Wrapper,
   SkeletonContainer,
+  StyledCalendar,
 } from './styles';
 import { SubmitAddNote } from './types';
 
@@ -75,6 +77,8 @@ export default function PatientCard() {
     resolver: yupResolver(addPatientNoteSchema),
   });
 
+  const localizer = dayjsLocalizer(dayjs);
+
   const handleAddNote: SubmitHandler<SubmitAddNote> = ({ note }) => {
     sendData({ note, patientId: id })
       .unwrap()
@@ -110,9 +114,12 @@ export default function PatientCard() {
       <PatientCardInfo {...patient?.data} />
       <h4>{t('patient-card.overview')}</h4>
       <ShowMore text={patient?.data?.overview} />
-      {/* TODO: add calendar here */}
-      <Calendar>Calendar</Calendar>
-      {/* TODO: add calendar here */}
+      <StyledCalendar
+        localizer={localizer}
+        defaultView="month"
+        views={[Views.MONTH, Views.WEEK]}
+        style={{ height: '1000px' }}
+      />
       <Button
         isfullwidth="true"
         textcolor={theme.colors.blue_500}
