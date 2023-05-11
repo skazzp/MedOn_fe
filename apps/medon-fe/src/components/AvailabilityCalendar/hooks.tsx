@@ -25,7 +25,7 @@ import {
   dayFormat,
   weekdayFormat,
 } from 'utils/constants';
-import { CalendarSlot, SelectHours } from './types';
+import { CalendarSlot, IDateRange, SelectHours } from './types';
 import { checkDates, convertSlotToArray, joinConsecutiveDates } from './utils';
 
 dayjs.extend(isBetween);
@@ -81,7 +81,7 @@ export function useCalendar() {
           return '';
         },
         agendaTimeRangeFormat: (
-          { start, end }: { start: Date; end: Date },
+          { start, end }: IDateRange,
           culture: string | undefined,
           localizer: DateLocalizer | undefined
         ) => {

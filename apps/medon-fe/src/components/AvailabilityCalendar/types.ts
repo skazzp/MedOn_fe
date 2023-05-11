@@ -20,3 +20,8 @@ export interface UpdateAvailabilityDTO {
   toCreate: AvailabilitySlot[];
   timezone: string;
 }
+
+export interface IDateRange {
+  start: Date;
+  end: Date;
+}
