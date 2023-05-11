@@ -1,5 +1,3 @@
-import { DateLocalizer } from "react-big-calendar";
-
 export interface SelectHours {
   start: number;
   end: number;
@@ -21,9 +19,4 @@ export interface UpdateAvailabilityDTO {
   toDelete: AvailabilitySlot[];
   toCreate: AvailabilitySlot[];
   timezone: string;
-}
-export interface RBCFormatProps {
-  date: Date;
-  culture: string | undefined;
-  localizer: DateLocalizer | undefined;
 }
