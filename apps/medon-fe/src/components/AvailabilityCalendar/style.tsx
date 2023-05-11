@@ -28,6 +28,7 @@ export const StyledCalendar = styled(Calendar)`
   border: 1px solid ${(p) => p.theme.colors.gray_400};
   background-color: ${(p) => p.theme.colors.gray_100};
   padding: 5px;
+  
   .rbc-header {
     font-size: ${(p) => p.theme.fontSizes.md};
     font-weight: ${(p) => p.theme.fontWeight.medium};
@@ -35,9 +36,6 @@ export const StyledCalendar = styled(Calendar)`
   }
   .rbc-month-view {
     background-color: ${(p) => p.theme.colors.white};
-  }
-  .rbc-month-row {
-    padding: 5px;
   }
   .rbc-toolbar {
     flex-direction: row-reverse;

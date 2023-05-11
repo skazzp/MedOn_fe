@@ -1,7 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { prepareHeaders } from 'redux/api/utils/prepareHeaders';
 import { IServerResponse } from 'interfaces/index';
-import { AvailabilitySlot } from 'components/AvailabilityCalendar/types';
+import {
+  AvailabilitySlot,
+  UpdateAvailabilityDTO,
+} from 'components/AvailabilityCalendar/types';
 import { IAvailability } from './types';
 
 export const availabilityApi = createApi({
@@ -51,6 +54,19 @@ export const availabilityApi = createApi({
       },
       invalidatesTags: ['availability'],
     }),
+    updateAvailability: builder.mutation<
+      IServerResponse,
+      UpdateAvailabilityDTO
+    >({
+      query(body: UpdateAvailabilityDTO) {
+        return {
+          url: 'availability',
+          method: 'PATCH',
+          body,
+        };
+      },
+      invalidatesTags: ['availability'],
+    }),
   }),
 });
 
@@ -58,4 +74,5 @@ export const {
   useCreateAvailabilityMutation,
   useGetAvailabilityQuery,
   useRemoveAvailabilityMutation,
+  useUpdateAvailabilityMutation,
 } = availabilityApi;
