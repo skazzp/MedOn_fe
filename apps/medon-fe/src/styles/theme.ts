@@ -38,6 +38,7 @@ export const theme = {
     lightBlue: '#4D92FF',
     grayBack: '#F2F2F2',
     grayBorder: '#d8dbe8',
+    invisible: 'rgba(0, 0, 0, 0)',
   },
   fontFamily: {
     roboto: 'Roboto, sans-serif',

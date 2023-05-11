@@ -55,7 +55,7 @@ export const StyledCalendar = styled(Calendar)`
   }
 
   .rbc-selected-cell {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: ${theme.colors.invisible};
   }
 
   .rbc-btn-group {

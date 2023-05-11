@@ -28,7 +28,7 @@ export const Cancel = styled.button`
   font-weight: ${theme.fontWeight.bold};
   font-size: ${theme.fontSizes.md};
   line-height: 20px;
-  color: #ffffff;
+  color: ${theme.colors.white};
   background-image: url(${cross});
   background-repeat: no-repeat;
   background-position-y: center;
@@ -55,7 +55,7 @@ export const Selected = styled.div`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  color: #b3b3b3;
+  color: ${theme.colors.gray_500};
 `;
 
 export const Button = styled.button<ButtonProps>`
