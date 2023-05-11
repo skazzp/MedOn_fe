@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
+import { cross, smallArrowRight, union } from 'utils/constants';
 import { ButtonProps } from './types';
 
 export const Wrapper = styled.div`
@@ -28,14 +29,14 @@ export const Cancel = styled.button`
   font-size: ${theme.fontSizes.md};
   line-height: 20px;
   color: #ffffff;
-  background-image: url(/assets/svgs/cross.svg);
+  background-image: url(${cross});
   background-repeat: no-repeat;
   background-position-y: center;
   background-position-x: 5px;
   transition: all 0.7s;
   :hover {
     background: ${theme.colors.blue_700};
-    background-image: url(/assets/svgs/cross.svg);
+    background-image: url(${cross});
     background-repeat: no-repeat;
     background-position-y: center;
     background-position-x: 5px;
@@ -87,7 +88,7 @@ export const Button = styled.button<ButtonProps>`
   ${(props) =>
     props.buttonType === 'next' &&
     `
-    background-image: url(/assets/svgs/appointments/arrowRight.svg);
+    background-image: url(${smallArrowRight});
     background-position-x: 85px;
     padding-right: 30px;
       &[disabled] {
@@ -97,7 +98,7 @@ export const Button = styled.button<ButtonProps>`
   ${(props) =>
     props.buttonType === 'previous' &&
     `
-    background-image: url(/assets/svgs/appointments/union.svg);
+    background-image: url(${union});
     background-position-x: 10px;
     padding-left: 35px;
   `}

@@ -9,6 +9,12 @@ import { StyledCalendar } from 'components/BookAppointmentCalendar/styles';
 import { BookAppointmentCalendarProps } from 'components/BookAppointmentCalendar/types';
 
 import { toastConfig } from 'utils/toastConfig';
+import {
+  dateFormatCalendar,
+  dayFormat,
+  timeGutterFormat,
+  weekdayFormat,
+} from 'utils/constants/dateFormat';
 
 const mLocalizer = dayjsLocalizer(dayjs);
 
@@ -19,13 +25,14 @@ function BookAppointmentCalendar({
   const { formats } = useMemo(
     () => ({
       formats: {
+        dateFormat: dateFormatCalendar,
         weekdayFormat: (
           date: Date,
           culture: string | undefined,
           localizer: DateLocalizer | undefined
         ) => {
           if (localizer) {
-            return localizer.format(date, 'dddd', culture);
+            return localizer.format(date, weekdayFormat, culture);
           }
 
           return '';
@@ -36,7 +43,7 @@ function BookAppointmentCalendar({
           localizer: DateLocalizer | undefined
         ) => {
           if (localizer) {
-            return localizer.format(date, 'dddd Do', culture);
+            return localizer.format(date, dayFormat, culture);
           }
 
           return '';
@@ -47,7 +54,7 @@ function BookAppointmentCalendar({
           localizer: DateLocalizer | undefined
         ) => {
           if (localizer) {
-            return localizer.format(date, 'hh:mm a', culture);
+            return localizer.format(date, timeGutterFormat, culture);
           }
 
           return '';

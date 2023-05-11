@@ -13,6 +13,7 @@ import SelectDoctor from 'components/SelectDoctor';
 
 import { patient } from 'utils/mock/patientNote';
 import { roles } from 'utils/constants';
+import { steps } from 'utils/constants/steps';
 
 export default function BookAppointment() {
   const user = useAppSelector(getUserSelector);
@@ -63,13 +64,13 @@ export default function BookAppointment() {
               selectTimeAppointments={handleSelectTime}
               selectDoctorAppointments={handleSelectDoctor}
             />
-            {currentStep === 1 && (
+            {currentStep === steps.one && (
               <BookAppointmentCalendar
                 setSelectedDate={setSelectedDate}
                 selectedDate={selectedDate}
               />
             )}
-            {currentStep === 2 && (
+            {currentStep === steps.two && (
               <SelectTimeSlot
                 selectedTime={selectedTime}
                 selectTimeAppointments={handleSelectTime}
@@ -77,7 +78,7 @@ export default function BookAppointment() {
                 setIsActive={setIsActive}
               />
             )}
-            {currentStep === 3 && (
+            {currentStep === steps.three && (
               <SelectDoctor
                 selectDoctorAppointments={handleSelectDoctor}
                 selectedDoctor={selectedDoctor}

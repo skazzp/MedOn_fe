@@ -15,6 +15,7 @@ import {
 import { StepsProps } from 'components/BookAppointmentCalendar/types';
 import { mockDoctors } from 'components/SelectDoctor/mockData';
 import useSpecOptions from 'components/RegistrationForm/hooks';
+import { steps } from 'utils/constants/steps';
 
 function Steps(props: StepsProps) {
   const {
@@ -32,17 +33,17 @@ function Steps(props: StepsProps) {
   const { specialityOptions } = useSpecOptions();
 
   const handleNextStep = () => {
-    onCurrentStepChange(currentStep + 1);
+    onCurrentStepChange(currentStep + steps.one);
   };
 
   const handlePreviousStep = () => {
-    onCurrentStepChange(currentStep - 1);
+    onCurrentStepChange(currentStep - steps.one);
   };
 
   const handleCancel = () => {
     if (selectedDate) {
       setSelectedDate(null);
-      onCurrentStepChange(1);
+      onCurrentStepChange(steps.one);
       selectTimeAppointments('');
       selectDoctorAppointments(null);
     }
@@ -54,11 +55,11 @@ function Steps(props: StepsProps) {
 
   const renderStepContent = () => {
     switch (currentStep) {
-      case 1:
+      case steps.one:
         return <div>{t('patient-info.day')}</div>;
-      case 2:
+      case steps.two:
         return <div>{t('patient-info.time')}</div>;
-      case 3:
+      case steps.three:
         return <div>{t('patient-info.remote-doctor')}</div>;
       default:
         return null;
@@ -86,7 +87,7 @@ function Steps(props: StepsProps) {
         </div>
         <div>{renderStepContent()}</div>
       </StepsScore>
-      {currentStep > 1 && (
+      {currentStep > steps.one && (
         <Button
           buttonType="previous"
           position={positionPrevious}
@@ -95,12 +96,12 @@ function Steps(props: StepsProps) {
           {t('patient-info.previous')}
         </Button>
       )}
-      {currentStep < 3 ? (
+      {currentStep < steps.three ? (
         <Button
           buttonType="next"
           disabled={
-            (currentStep === 1 && !selectedDate) ||
-            (currentStep === 2 && !selectedTime)
+            (currentStep === steps.one && !selectedDate) ||
+            (currentStep === steps.two && !selectedTime)
           }
           position={positionNext}
           onClick={handleNextStep}
@@ -113,7 +114,7 @@ function Steps(props: StepsProps) {
           buttonType="booking"
           position={positionBooking}
           onClick={handleBooking}
-          disabled={currentStep === 3 && !isActiveDoc}
+          disabled={currentStep === steps.three && !isActiveDoc}
         >
           {t('patient-info.booking')}
         </Button>
