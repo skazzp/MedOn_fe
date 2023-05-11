@@ -3,7 +3,9 @@ import { RootState } from 'redux/store';
 import {
   UpdatePasswordData,
   UpdateProfileData,
+  UpdateProfileResponse,
   UserDataResponse,
+  UserResponse,
 } from './types';
 
 export interface MessageResponse {
@@ -34,7 +36,7 @@ export const userApi = createApi({
       },
       providesTags: ['user'],
     }),
-    updateUser: builder.mutation<UserDataResponse, UpdateProfileData>({
+    updateUser: builder.mutation<UpdateProfileResponse, UpdateProfileData>({
       query(data) {
         return {
           url: 'user/update',

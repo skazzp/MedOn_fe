@@ -63,6 +63,11 @@ export interface UpdateProfileData {
   city: string | null;
   timeZone: string | null;
 }
+
+export interface UpdateProfileResponse {
+  data: UserResponse;
+}
+
 export interface LoginResponse {
   token: string;
   isVerified: boolean;

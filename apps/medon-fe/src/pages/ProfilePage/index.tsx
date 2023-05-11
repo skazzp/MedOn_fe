@@ -8,7 +8,7 @@ import ProfileForm from 'components/ProfileForm';
 import { FormProfileData } from 'components/ProfileForm/types';
 
 import { useGetUserQuery, useUpdateUserMutation } from 'redux/api/userApi';
-import { setUser } from 'redux/features/userSlice/userSlice';
+import { setToken } from 'redux/features/userSlice/userSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import {
   getTokenSelector,
@@ -49,9 +49,9 @@ export default function ProfilePage() {
     };
 
     try {
-      const response = await updateUser(requestData).unwrap();
+      const { data: response } = await updateUser(requestData).unwrap();
 
-      dispatch(setUser(response.data));
+      dispatch(setToken(response.token));
       setFormDisabled(true);
       toast.success(t('profilePage.profileUpdated'), toastConfig);
     } catch (err) {
