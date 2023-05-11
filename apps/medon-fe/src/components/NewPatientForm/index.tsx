@@ -62,8 +62,11 @@ export function NewPatientForm() {
     try {
       const dateOfBirth = new Date(dto.dateOfBirth);
 
-      await createPatient({ ...dto, dateOfBirth }).unwrap();
-      reset();
+      const { data } = await createPatient({
+        ...dto,
+        dateOfBirth,
+      }).unwrap();
+      if (data) navigate(routes.patientCard + `/${data.id}`);
       toast.success(t('new-patient.info.success'), toastConfig);
     } catch (err) {
       const msg = (err as IServerError).data.message;
