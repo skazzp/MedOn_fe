@@ -80,7 +80,7 @@ export interface IForgetPassword {
 export interface IPatientsParams {
   page?: number;
   limit?: number;
-  searchPhrase?: string;
+  name?: string;
 }
 
 interface IPatient {
