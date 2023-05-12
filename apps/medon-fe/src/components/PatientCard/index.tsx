@@ -7,8 +7,6 @@ import { useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import AnimateHeight, { Height } from 'react-animate-height';
 import { toast } from 'react-toastify';
-import { Views, dayjsLocalizer } from 'react-big-calendar';
-import dayjs from 'dayjs';
 
 import { LinkGoBack } from 'components/common/LinkGoBack';
 import Button from 'components/Button';
@@ -16,6 +14,7 @@ import { TextareaAntD } from 'components/common';
 import { PatientNotes } from 'components/PatientNotes';
 import PatientCardInfo from 'components/PatientCardInfo';
 import { ShowMore } from 'components/ShowMore';
+import { PatientCardCalendar } from 'components/PatientCardCalendar';
 
 import { addPatientNoteSchema } from 'validation/addPatientNoteSchema';
 
@@ -40,7 +39,6 @@ import {
   Top,
   Wrapper,
   SkeletonContainer,
-  StyledCalendar,
 } from './styles';
 import { SubmitAddNote } from './types';
 
@@ -77,8 +75,6 @@ export default function PatientCard() {
     resolver: yupResolver(addPatientNoteSchema),
   });
 
-  const localizer = dayjsLocalizer(dayjs);
-
   const handleAddNote: SubmitHandler<SubmitAddNote> = ({ note }) => {
     sendData({ note, patientId: id })
       .unwrap()
@@ -114,12 +110,7 @@ export default function PatientCard() {
       <PatientCardInfo {...patient?.data} />
       <h4>{t('patient-card.overview')}</h4>
       <ShowMore text={patient?.data?.overview} />
-      <StyledCalendar
-        localizer={localizer}
-        defaultView="month"
-        views={[Views.MONTH, Views.WEEK]}
-        style={{ height: '1000px' }}
-      />
+      <PatientCardCalendar />
       <Button
         isfullwidth="true"
         textcolor={theme.colors.blue_500}
