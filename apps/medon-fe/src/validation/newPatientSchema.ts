@@ -39,5 +39,5 @@ export const newPatientSchema = yup.object({
       value ? isValidPhoneNumber(value) : false
     ),
 
-  overview: yup.string().label('Overview').max(400),
+  overview: yup.string().label('Overview').max(400).required(),
 });
