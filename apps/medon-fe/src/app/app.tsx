@@ -27,6 +27,7 @@ import { logout, setUser } from 'redux/features/userSlice/userSlice';
 import { persistedStore } from 'redux/store';
 
 import { routes } from 'utils/constants/routes';
+import { AppointmentPage } from 'pages/AppointmentPage';
 
 function App() {
   const isLoggedIn = useAppSelector(getTokenSelector);
@@ -87,7 +88,7 @@ function App() {
       />
       <Route
         path={routes.appointments}
-        element={<PrivateRoute component={<BookAppointment />} />}
+        element={<PrivateRoute component={<AppointmentPage />} />}
       />
       <Route
         path={routes.patients}
@@ -99,7 +100,7 @@ function App() {
           <Route index element={<PatientCardCalendar />} />
           <Route
             path={routes.patientCardAppointment}
-            element={<SelectTimeSlot />}
+            element={<BookAppointment />}
           />
         </Route>
       </Route>

@@ -6,14 +6,15 @@ import { t } from 'i18next';
 import { Wrapper, Choose } from 'pages/BookAppointment/styles';
 
 import BookAppointmentCalendar from 'components/BookAppointmentCalendar';
-import PatientInfo from 'components/PatientInfo';
+// import PatientInfo from 'components/PatientInfo';
 import Steps from 'components/Steps';
 import SelectTimeSlot from 'components/SelectTimeSlot';
 import SelectDoctor from 'components/SelectDoctor';
 
-import { patient } from 'utils/mock/patientNote';
+// import { patient } from 'utils/mock/patientNote';
 import { roles } from 'utils/constants';
 import { steps } from 'utils/constants/steps';
+import { useParams } from 'react-router-dom';
 
 export default function BookAppointment() {
   const user = useAppSelector(getUserSelector);
@@ -23,6 +24,11 @@ export default function BookAppointment() {
   const [isActive, setIsActive] = useState<string>('');
   const [selectedDoctor, setSelectedDoctor] = useState<number | null>(null);
   const [isActiveDoc, setIsActiveDoc] = useState<number | null>(null);
+
+  const { id } = useParams();
+
+  // WORKS!!!
+  console.log('patientId', id);
 
   const handleCurrentStepChange = (step: number) => {
     setCurrentStep(step);
@@ -42,7 +48,7 @@ export default function BookAppointment() {
     <Wrapper>
       {user.role === roles.local ? (
         <>
-          <PatientInfo
+          {/* <PatientInfo
             firstName={patient.firstName}
             lastName={patient.lastName}
             phoneNumber={patient.phoneNumber}
@@ -51,7 +57,7 @@ export default function BookAppointment() {
             dateOfBirth={patient.dateOfBirth.toString()}
             city={patient.city}
             country={patient.country}
-          />
+          /> */}
           <Choose>
             <Steps
               selectedDate={selectedDate}
