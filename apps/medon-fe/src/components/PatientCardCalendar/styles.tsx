@@ -103,3 +103,14 @@ export const StyledModal = styled(Modal)`
     }
   }
 `;
+
+export const Title = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  > a {
+    display: flex;
+    white-space: nowrap;
+    gap: 0.5rem;
+  }
+`;
