@@ -44,6 +44,7 @@ declare module 'styled-components' {
       lightBlue: string;
       grayBack: string;
       grayBorder: string;
+      transparent: string;
     };
     fontFamily: {
       roboto: string;
