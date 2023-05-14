@@ -18,6 +18,7 @@ import { PrivateRoute } from 'components/Routes/PrivateRoute';
 import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
 import SelectTimeSlot from 'components/SelectTimeSlot';
+import { PatientCardCalendar } from 'components/PatientCardCalendar';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { getTokenSelector } from 'redux/features/userSlice/userSelectors';
@@ -94,7 +95,13 @@ function App() {
       >
         <Route index element={<PatientsList />} />
         <Route path={routes.addPatient} element={<NewPatientForm />} />
-        <Route path={`${routes.patientCard}/:id`} element={<PatientCard />} />
+        <Route path={`${routes.patientCard}/:id`} element={<PatientCard />}>
+          <Route index element={<PatientCardCalendar />} />
+          <Route
+            path={routes.patientCardAppointment}
+            element={<SelectTimeSlot />}
+          />
+        </Route>
       </Route>
       <Route path="*" element={<Navigate to={routes.login} />} />
     </Routes>
