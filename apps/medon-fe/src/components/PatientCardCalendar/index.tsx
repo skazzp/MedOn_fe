@@ -1,83 +1,73 @@
-import dayjs, { Dayjs } from 'dayjs';
+import { useState } from 'react';
+import dayjs from 'dayjs';
 import { Views, dayjsLocalizer, Event } from 'react-big-calendar';
 import { useTheme } from 'styled-components';
+import { Link } from 'react-router-dom';
 
-import { StyledCalendar } from './styles';
+import { eventsCard } from 'utils/mock/patientCalendar';
+import { getDateAndHourEvent } from 'utils/functions/getDateAndHourEvent';
+import { getDayPropGetter } from 'utils/functions/getDayPropGetter';
+import { getEventPropGetter } from 'utils/functions/getEventPropGetter';
 
-// type
-
-interface CustomEvent {
-  title: string;
-  start: Date | Dayjs;
-  end: Date | Dayjs;
-}
-
-// mock
-
-const events: CustomEvent[] = [
-  {
-    title: 'Event 1',
-    start: new Date('2023-05-15T10:00:00'),
-    end: new Date('2023-05-15T11:00:00'),
-  },
-  {
-    title: 'Event 2',
-    start: new Date('2023-05-15T11:00:00'),
-    end: new Date('2023-05-15T12:00:00'),
-  },
-  {
-    title: 'Event 3',
-    start: new Date('2023-05-15T12:00:00'),
-    end: new Date('2023-05-15T13:00:00'),
-  },
-];
+import { StyledCalendar, StyledModal } from './styles';
+import { useModal } from './hooks';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 export function PatientCardCalendar() {
+  const [event, setEvent] = useState<Event>();
+
   const theme = useTheme();
+
+  const { hideModal, isVisible, showModal } = useModal(false);
 
   const localizer = dayjsLocalizer(dayjs);
 
-  const dayPropGetter = (date: Date) => {
-    const today = dayjs();
-    const isPast = dayjs(date).isBefore(today, 'date');
-    const isToday = dayjs(date).isSame(today, 'date');
-    const bgColor = {
-      past: theme.colors.gray_200,
-      today: theme.colors.gray_400,
-      future: 'white',
-    };
-    const style = { backgroundColor: bgColor.future };
+  const dayPropGetter = getDayPropGetter(theme);
+  const eventPropGetter = getEventPropGetter(theme);
 
-    if (isPast) {
-      style.backgroundColor = bgColor.past;
-    } else if (isToday) {
-      style.backgroundColor = bgColor.today;
-    }
-
-    return { style };
-  };
-
-  function handleEventSelect(event: Event) {
-    console.log(
-      `Selected event: title ${
-        event.title
-      }, start time ${event.start?.toLocaleString()}, end time: ${event.end?.toLocaleString()}`
-    );
-    // Add your code here to do something when the user clicks on an event
+  function handleEventSelect(eventValue: Event) {
+    showModal();
+    setEvent(eventValue);
   }
 
   return (
-    <StyledCalendar
-      localizer={localizer}
-      defaultView="month"
-      views={[Views.MONTH, Views.WEEK]}
-      events={events}
-      dayPropGetter={dayPropGetter}
-      onSelectEvent={handleEventSelect}
-      popup
-      selectable
-      step={60}
-      timeslots={2}
-    />
+    <>
+      <StyledCalendar
+        localizer={localizer}
+        defaultView="month"
+        views={[Views.MONTH, Views.WEEK]}
+        // mock
+        events={eventsCard}
+        dayPropGetter={dayPropGetter}
+        eventPropGetter={eventPropGetter}
+        onSelectEvent={handleEventSelect}
+        popup
+        selectable
+        step={60}
+      />
+      <StyledModal
+        title={`Appointment ${event?.title}`}
+        open={isVisible}
+        onOk={showModal}
+        onCancel={hideModal}
+      >
+        <p>
+          <strong>Title: </strong>
+          {event?.title}
+        </p>
+        <p>
+          <strong>Start Appointment: </strong>
+          {getDateAndHourEvent(event?.start)}
+        </p>
+        <p>
+          <strong>End Appointment: </strong>
+          {getDateAndHourEvent(event?.end)}
+        </p>
+        <p>
+          <strong>Zoom Link: </strong>
+          <Link to={event?.resource.link}>Link</Link>
+        </p>
+      </StyledModal>
+    </>
   );
 }
