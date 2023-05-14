@@ -27,6 +27,7 @@ import {
 } from 'utils/constants';
 import { CalendarSlot, IDateRange, SelectHours } from './types';
 import { checkDates, convertSlotToArray, joinConsecutiveDates } from './utils';
+import { endOfDayHour } from 'utils/constants/options/hourOptions';
 
 dayjs.extend(isBetween);
 dayjs.extend(utc);
@@ -128,7 +129,10 @@ export function useCalendar() {
       setSelectedDay(event.start);
       setEditIndex(index);
       setValue('start', dayjs(event.start).hour());
-      setValue('end', dayjs(event.end).hour());
+      setValue(
+        'end',
+        dayjs(event.end).hour() ? dayjs(event.end).hour() : endOfDayHour
+      );
     },
     [timeSlots, setValue]
   );

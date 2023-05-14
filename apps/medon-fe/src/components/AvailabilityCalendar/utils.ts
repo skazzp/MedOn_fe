@@ -1,13 +1,17 @@
 import dayjs from 'dayjs';
 import { Event } from 'react-big-calendar';
 
-import { timeFormat } from 'utils/constants';
 import { IAvailability } from 'redux/api/types';
+import { timeFormat } from 'utils/constants';
+import { endOfDayHour } from 'utils/constants/options/hourOptions';
 import { CalendarSlot } from './types';
 
 export const convertSlotToArray = (timeSlot: CalendarSlot) => {
   const startHour = dayjs(timeSlot.start).hour();
-  const endHour = dayjs(timeSlot.end).hour();
+  const endHour =
+    dayjs(timeSlot.end).hour() !== 0
+      ? dayjs(timeSlot.end).hour()
+      : endOfDayHour;
   const availabilityArray = [];
 
   if (endHour - startHour === 1) {
@@ -20,11 +24,11 @@ export const convertSlotToArray = (timeSlot: CalendarSlot) => {
     ];
   }
   for (let i = startHour; i < endHour; i += 1) {
+    const startTime = dayjs(timeSlot.start).hour(i).toDate();
+
     availabilityArray.push({
-      startTime: dayjs(timeSlot.start).hour(i).toDate(),
-      endTime: dayjs(timeSlot.start)
-        .hour(i + 1)
-        .toDate(),
+      startTime,
+      endTime: dayjs(startTime).add(1, 'hour').toDate(),
       title: timeSlot.title,
     });
   }
@@ -33,20 +37,29 @@ export const convertSlotToArray = (timeSlot: CalendarSlot) => {
 };
 
 export const joinConsecutiveDates = (dates: IAvailability[]) => {
+  const sortedDates = dates
+    .slice()
+    .sort(
+      (a, b) =>
+        new Date(a.startTime).getTime() - new Date(b.startTime).getTime()
+    );
+
   const ranges = [];
   let currentRange = {
-    start: dates[0].startTime,
-    end: dates[0].endTime,
-    title: dates[0].title,
+    start: sortedDates[0].startTime,
+    end: sortedDates[0].endTime,
+    title: sortedDates[0].title,
   };
 
-  for (let i = 1; i < dates.length; i += 1) {
-    const current = dates[i];
-    const previous = dates[i - 1];
+  for (let i = 1; i < sortedDates.length; i += 1) {
+    const current = sortedDates[i];
+    const previous = sortedDates[i - 1];
 
     if (
+      new Date(current.startTime).getTime() ===
+        new Date(previous.endTime).getTime() &&
       new Date(current.startTime).getDate() ===
-      new Date(previous.endTime).getDate()
+        new Date(previous.startTime).getDate()
     ) {
       currentRange.end = current.endTime;
     } else {
