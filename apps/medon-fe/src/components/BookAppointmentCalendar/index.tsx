@@ -23,11 +23,16 @@ function BookAppointmentCalendar({
   setSelectedDate,
   selectedDate,
 }: BookAppointmentCalendarProps) {
-  // const dayString = dayjs.tz(new Date(), timezone).endOf('day').toISOString();
-  const { data: availabilityList = [] } = useGetAvailabilityByDayQuery({
-    dayString: new Date(),
-    timezone: 'America/New_York',
-  });
+  const day = selectedDate;
+
+  const { data: availabilityList } = useGetAvailabilityByDayQuery(
+    {
+      day: dayjs(day).toDate().toISOString(),
+      timezone: 'America/New_York',
+    },
+    { skip: !selectedDate }
+  );
+
   const { formats } = useMemo(
     () => ({
       formats: {
@@ -81,7 +86,7 @@ function BookAppointmentCalendar({
           setSelectedDate(null);
         } else {
           setSelectedDate(slotInfo.start);
-          console.log();
+          console.log('data', availabilityList);
         }
       } else if (!dayjs(slotInfo.start).isAfter(dayjs())) {
         toast.warning(t('availability.badDate'), toastConfig);

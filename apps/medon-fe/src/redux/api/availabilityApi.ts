@@ -67,12 +67,12 @@ export const availabilityApi = createApi({
       },
       invalidatesTags: ['availability'],
     }),
-    getAvailabilityByDay: builder.query<IServerResponse<IAvailability[]>, { dayString: Date; timezone?: string }>({
-      query({ dayString, timezone }) {
+    getAvailabilityByDay: builder.query<IServerResponse<IAvailability[]>, { day: string; timezone?: string }>({
+      query({ day, timezone }) {
         return {
           url: 'availability/day',
           method: 'POST',
-          body: { dayString, timezone },
+          body: { day, timezone },
         };
       },
       providesTags: ['availability'],
