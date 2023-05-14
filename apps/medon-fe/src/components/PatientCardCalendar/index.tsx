@@ -2,14 +2,17 @@ import { useState } from 'react';
 import dayjs from 'dayjs';
 import { Views, dayjsLocalizer, Event } from 'react-big-calendar';
 import { useTheme } from 'styled-components';
-import { Link } from 'react-router-dom';
+
+import Link from 'components/Link';
 
 import { eventsCard } from 'utils/mock/patientCalendar';
 import { getDateAndHourEvent } from 'utils/functions/getDateAndHourEvent';
 import { getDayPropGetter } from 'utils/functions/getDayPropGetter';
 import { getEventPropGetter } from 'utils/functions/getEventPropGetter';
 
-import { StyledCalendar, StyledModal } from './styles';
+import Plus from 'assets/svgs/plus_listcard.svg';
+
+import { StyledCalendar, StyledModal, Title } from './styles';
 import { useModal } from './hooks';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
@@ -32,6 +35,17 @@ export function PatientCardCalendar() {
 
   return (
     <>
+      <Title>
+        <h2>Calendar</h2>
+        <Link
+          to="#"
+          bgcolor={theme.colors.btnGradient}
+          textcolor={theme.colors.white}
+        >
+          Book Appointment
+          <img src={Plus} alt="Plus svg" />
+        </Link>
+      </Title>
       <StyledCalendar
         localizer={localizer}
         defaultView="month"
@@ -65,7 +79,13 @@ export function PatientCardCalendar() {
         </p>
         <p>
           <strong>Zoom Link: </strong>
-          <Link to={event?.resource.link}>Link</Link>
+          <Link
+            bgcolor={theme.colors.transparent}
+            textcolor={theme.colors.blue_300}
+            to={event?.resource.link}
+          >
+            Link
+          </Link>
         </p>
       </StyledModal>
     </>
