@@ -120,3 +120,14 @@ export interface IGetPatientNotes {
   page?: number;
   limit?: number;
 }
+
+export interface IAvailability {
+  id: number;
+  startTime: Date;
+  endTime: Date;
+  title: string;
+  doctorId: number;
+  isAvailable: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}

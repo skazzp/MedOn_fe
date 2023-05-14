@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import useSpecOptions from 'components/RegistrationForm/hooks';
-import doctorImagePlaceholder from 'assets/images/Avatar.svg';
 import {
   ColumnName,
   ColumnText,
@@ -17,20 +16,34 @@ import {
   StyledSearch,
   StyledSelect,
   Text,
-  TextBox,
   TitleBox,
-} from './styles';
-import { mockDoctors } from './mockData';
+} from 'components/SelectDoctor/styles';
+import { mockDoctors } from 'components/SelectDoctor/mockData';
+import { SelectDoctorProps } from 'components/SelectDoctor/types';
 
-export default function SelectDoctor() {
+import doctorImagePlaceholder from 'assets/images/Avatar.svg';
+
+export default function SelectDoctor({
+  selectDoctorAppointments,
+  selectedDoctor,
+  isActiveDoc,
+  setIsActiveDoc,
+}: SelectDoctorProps) {
   const { t } = useTranslation();
-  const [isActive, setIsActive] = useState<number | null>(null);
+
   const { specialityOptions } = useSpecOptions();
+
   const selectDoctor = (key: number) => {
-    if (key === isActive) {
-      setIsActive(null);
+    if (key === selectedDoctor) {
+      selectDoctorAppointments(null);
     } else {
-      setIsActive(key);
+      selectDoctorAppointments(key);
+    }
+
+    if (key === isActiveDoc) {
+      setIsActiveDoc(null);
+    } else {
+      setIsActiveDoc(key);
     }
   };
 
@@ -62,15 +75,12 @@ export default function SelectDoctor() {
         <ColumnName>{t('appointment.columns.speciality')}</ColumnName>
         <ColumnName>{t('appointment.columns.located')}</ColumnName>
       </TitleBox>
-      <TextBox>
-        <Text>{t('appointment.visited')}</Text>
-      </TextBox>
       <List>
         {mockDoctors.map((doctor) => (
           <ListItem key={doctor.id}>
             <ItemWrap
               onClick={() => selectDoctor(doctor.id)}
-              style={isActive === doctor.id ? SlotActive : {}}
+              style={isActiveDoc === doctor.id ? SlotActive : {}}
             >
               <ColumnText>
                 <DoctorPic

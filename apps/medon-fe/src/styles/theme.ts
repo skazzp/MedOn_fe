@@ -40,6 +40,7 @@ export const theme = {
     grayBack: '#F2F2F2',
     grayBorder: '#d8dbe8',
     transparent: 'transparent',
+    invisible: 'rgba(0, 0, 0, 0)',
   },
   fontFamily: {
     roboto: 'Roboto, sans-serif',
