@@ -37,6 +37,7 @@ function BookAppointmentCalendar({
   useEffect(() => {
     if (selectedDate) {
       handleFetchAvailability();
+      console.log(data?.data);
     }
   }, [selectedDate, handleFetchAvailability]);
 
@@ -93,13 +94,12 @@ function BookAppointmentCalendar({
           setSelectedDate(null);
         } else {
           setSelectedDate(slotInfo.start);
-          console.log(data);
         }
       } else if (!dayjs(slotInfo.start).isAfter(dayjs())) {
         toast.warning(t('availability.badDate'), toastConfig);
       }
     },
-    [data, selectedDate, setSelectedDate]
+    [selectedDate, setSelectedDate]
   );
 
   const DayPropGetter = useCallback(
