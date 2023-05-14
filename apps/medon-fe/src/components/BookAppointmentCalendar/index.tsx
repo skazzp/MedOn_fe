@@ -25,9 +25,9 @@ function BookAppointmentCalendar({
 }: BookAppointmentCalendarProps) {
   const day = selectedDate;
 
-  const { data: availabilityList } = useGetAvailabilityByDayQuery(
+  const { data } = useGetAvailabilityByDayQuery(
     {
-      day: dayjs(day).toDate().toISOString(),
+      day: dayjs(day).toDate(),
       timezone: 'America/New_York',
     },
     { skip: !selectedDate }
@@ -86,13 +86,13 @@ function BookAppointmentCalendar({
           setSelectedDate(null);
         } else {
           setSelectedDate(slotInfo.start);
-          console.log('data', availabilityList);
+          console.log(data);
         }
       } else if (!dayjs(slotInfo.start).isAfter(dayjs())) {
         toast.warning(t('availability.badDate'), toastConfig);
       }
     },
-    [selectedDate, setSelectedDate]
+    [data, selectedDate, setSelectedDate]
   );
 
   const DayPropGetter = useCallback(
