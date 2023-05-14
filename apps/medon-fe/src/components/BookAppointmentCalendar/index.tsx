@@ -15,6 +15,7 @@ import {
   timeFormat,
   weekdayFormat,
 } from 'utils/constants/dateFormat';
+import { useGetAvailabilityByDayQuery } from 'redux/api/availabilityApi';
 
 const mLocalizer = dayjsLocalizer(dayjs);
 
@@ -22,6 +23,11 @@ function BookAppointmentCalendar({
   setSelectedDate,
   selectedDate,
 }: BookAppointmentCalendarProps) {
+  // const dayString = dayjs.tz(new Date(), timezone).endOf('day').toISOString();
+  const { data: availabilityList = [] } = useGetAvailabilityByDayQuery({
+    dayString: new Date(),
+    timezone: 'America/New_York',
+  });
   const { formats } = useMemo(
     () => ({
       formats: {
@@ -75,6 +81,7 @@ function BookAppointmentCalendar({
           setSelectedDate(null);
         } else {
           setSelectedDate(slotInfo.start);
+          console.log();
         }
       } else if (!dayjs(slotInfo.start).isAfter(dayjs())) {
         toast.warning(t('availability.badDate'), toastConfig);
