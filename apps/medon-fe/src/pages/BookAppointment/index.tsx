@@ -23,6 +23,7 @@ export default function BookAppointment() {
   const [isActive, setIsActive] = useState<string>('');
   const [selectedDoctor, setSelectedDoctor] = useState<number | null>(null);
   const [isActiveDoc, setIsActiveDoc] = useState<number | null>(null);
+  const [data, setData] = useState<object>([]);
 
   const handleCurrentStepChange = (step: number) => {
     setCurrentStep(step);
@@ -63,6 +64,8 @@ export default function BookAppointment() {
               isActiveDoc={isActiveDoc}
               selectTimeAppointments={handleSelectTime}
               selectDoctorAppointments={handleSelectDoctor}
+              data={data}
+              setData={setData}
             />
             {currentStep === steps.one && (
               <BookAppointmentCalendar
@@ -76,6 +79,9 @@ export default function BookAppointment() {
                 selectTimeAppointments={handleSelectTime}
                 isActive={isActive}
                 setIsActive={setIsActive}
+                endTime={''}
+                startTime={''}
+                data={data}
               />
             )}
             {currentStep === steps.three && (
