@@ -24,88 +24,91 @@ function BookAppointmentCalendar({
   selectedDate,
 }: BookAppointmentCalendarProps) {
   // const dayString = dayjs.tz(new Date(), timezone).endOf('day').toISOString();
-  const { data: availabilityList = [] } = useGetAvailabilityByDayQuery({
-    dayString: new Date(),
+  const { data } = useGetAvailabilityByDayQuery({
+    day: dayjs('2023-10-02').toDate().toISOString(),
     timezone: 'America/New_York',
   });
-  const { formats } = useMemo(
-    () => ({
-      formats: {
-        dateFormat: dateFormatCalendar,
-        weekdayFormat: (
-          date: Date,
-          culture: string | undefined,
-          localizer: DateLocalizer | undefined
-        ) => {
-          if (localizer) {
-            return localizer.format(date, weekdayFormat, culture);
-          }
 
-          return '';
-        },
-        dayFormat: (
-          date: Date,
-          culture: string | undefined,
-          localizer: DateLocalizer | undefined
-        ) => {
-          if (localizer) {
-            return localizer.format(date, dayFormat, culture);
-          }
+  console.log('data', data);
 
-          return '';
-        },
-        timeGutterFormat: (
-          date: Date,
-          culture: string | undefined,
-          localizer: DateLocalizer | undefined
-        ) => {
-          if (localizer) {
-            return localizer.format(date, timeFormat, culture);
-          }
+  // const { formats } = useMemo(
+  //   () => ({
+  //     formats: {
+  //       dateFormat: dateFormatCalendar,
+  //       weekdayFormat: (
+  //         date: Date,
+  //         culture: string | undefined,
+  //         localizer: DateLocalizer | undefined
+  //       ) => {
+  //         if (localizer) {
+  //           return localizer.format(date, weekdayFormat, culture);
+  //         }
 
-          return '';
-        },
-      },
-    }),
-    []
-  );
+  //         return '';
+  //       },
+  //       dayFormat: (
+  //         date: Date,
+  //         culture: string | undefined,
+  //         localizer: DateLocalizer | undefined
+  //       ) => {
+  //         if (localizer) {
+  //           return localizer.format(date, dayFormat, culture);
+  //         }
 
-  const onSelectSlot = useCallback(
-    (slotInfo: { start: Date | null }) => {
-      const currentDate = new Date();
+  //         return '';
+  //       },
+  //       timeGutterFormat: (
+  //         date: Date,
+  //         culture: string | undefined,
+  //         localizer: DateLocalizer | undefined
+  //       ) => {
+  //         if (localizer) {
+  //           return localizer.format(date, timeFormat, culture);
+  //         }
 
-      currentDate.setDate(currentDate.getDate() - 1);
+  //         return '';
+  //       },
+  //     },
+  //   }),
+  //   []
+  // );
 
-      if (slotInfo.start && slotInfo.start >= currentDate) {
-        if (dayjs(slotInfo.start).isSame(selectedDate, 'day')) {
-          setSelectedDate(null);
-        } else {
-          setSelectedDate(slotInfo.start);
-          console.log();
-        }
-      } else if (!dayjs(slotInfo.start).isAfter(dayjs())) {
-        toast.warning(t('availability.badDate'), toastConfig);
-      }
-    },
-    [selectedDate, setSelectedDate]
-  );
+  // const onSelectSlot = useCallback(
+  //   (slotInfo: { start: Date | null }) => {
+  //     const currentDate = new Date();
 
-  const DayPropGetter = useCallback(
-    (date: Date) => ({
-      className: dayjs(date).isSame(selectedDate, 'day') ? 'selected-day' : '',
-    }),
-    [selectedDate]
-  );
+  //     currentDate.setDate(currentDate.getDate() - 1);
+
+  //     if (slotInfo.start && slotInfo.start >= currentDate) {
+  //       if (dayjs(slotInfo.start).isSame(selectedDate, 'day')) {
+  //         setSelectedDate(null);
+  //       } else {
+  //         setSelectedDate(slotInfo.start);
+  //         console.log();
+  //       }
+  //     } else if (!dayjs(slotInfo.start).isAfter(dayjs())) {
+  //       toast.warning(t('availability.badDate'), toastConfig);
+  //     }
+  //   },
+  //   [selectedDate, setSelectedDate]
+  // );
+
+  // const DayPropGetter = useCallback(
+  //   (date: Date) => ({
+  //     className: dayjs(date).isSame(selectedDate, 'day') ? 'selected-day' : '',
+  //   }),
+  //   [selectedDate]
+  // );
 
   return (
     <div>
       <StyledCalendar
         localizer={mLocalizer}
         views={[Views.MONTH]}
-        onSelectSlot={onSelectSlot}
+        // onSelectSlot={onSelectSlot}
         selectable
-        formats={formats}
-        dayPropGetter={DayPropGetter}
+        // formats={formats}
+        // dayPropGetter={DayPropGetter}
       />
     </div>
   );

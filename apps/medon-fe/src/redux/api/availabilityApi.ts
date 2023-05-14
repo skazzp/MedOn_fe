@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
 import { prepareHeaders } from 'redux/api/utils/prepareHeaders';
 import { IServerResponse } from 'interfaces/index';
 import {
@@ -14,6 +15,7 @@ export const availabilityApi = createApi({
     prepareHeaders,
   }),
   tagTypes: ['availability'],
+
   endpoints: (builder) => ({
     getAvailability: builder.query<
       IServerResponse<IAvailability[]>,
@@ -67,12 +69,15 @@ export const availabilityApi = createApi({
       },
       invalidatesTags: ['availability'],
     }),
-    getAvailabilityByDay: builder.query<IServerResponse<IAvailability[]>, { dayString: Date; timezone?: string }>({
-      query({ dayString, timezone }) {
+    getAvailabilityByDay: builder.query<
+      IServerResponse<IAvailability[]>,
+      { day: string; timezone?: string }
+    >({
+      query({ day, timezone }) {
         return {
           url: 'availability/day',
           method: 'POST',
-          body: { dayString, timezone },
+          body: { day, timezone },
         };
       },
       providesTags: ['availability'],
