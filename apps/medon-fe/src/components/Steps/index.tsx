@@ -16,6 +16,8 @@ import { StepsProps } from 'components/BookAppointmentCalendar/types';
 import { mockDoctors } from 'components/SelectDoctor/mockData';
 import useSpecOptions from 'components/RegistrationForm/hooks';
 import { steps } from 'utils/constants/steps';
+import { dateToTextFormat } from 'utils/constants';
+import dayjs from 'dayjs';
 
 function Steps(props: StepsProps) {
   const {
@@ -31,6 +33,7 @@ function Steps(props: StepsProps) {
   } = props;
   const { t } = useTranslation();
   const { specialityOptions } = useSpecOptions();
+  const dateInText = dayjs(selectedDate).format(dateToTextFormat);
 
   const handleNextStep = () => {
     onCurrentStepChange(currentStep + steps.one);
@@ -122,7 +125,7 @@ function Steps(props: StepsProps) {
       <Selected>
         <div>{t('patient-info.select')}</div>
         {t('patient-info.date')}
-        {selectedDate ? selectedDate.toDateString() : t('patient-info.none')}
+        {selectedDate ? dateInText : t('patient-info.none')}
         {selectedTime ? `, ${selectedTime}` : ''}
         {selectedDoctor ? `, ${getDoctorFullName(selectedDoctor)}` : ''}
       </Selected>

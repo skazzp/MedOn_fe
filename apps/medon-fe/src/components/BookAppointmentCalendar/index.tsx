@@ -12,7 +12,7 @@ import { toastConfig } from 'utils/toastConfig';
 import {
   dateFormatCalendar,
   dayFormat,
-  timeGutterFormat,
+  timeFormat,
   weekdayFormat,
 } from 'utils/constants/dateFormat';
 
@@ -54,7 +54,7 @@ function BookAppointmentCalendar({
           localizer: DateLocalizer | undefined
         ) => {
           if (localizer) {
-            return localizer.format(date, timeGutterFormat, culture);
+            return localizer.format(date, timeFormat, culture);
           }
 
           return '';
