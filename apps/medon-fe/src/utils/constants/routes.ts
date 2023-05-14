@@ -14,6 +14,7 @@ export const routes = {
   updatePassword: '/update-password',
   patients: '/patients',
   patientCard: '/patients/card',
+  patientCardAppointment: 'appointment',
   addPatient: '/patients/add-new',
   withoutAppointments: '/dashboard/withoutAppointments',
 };

@@ -18,6 +18,7 @@ import { PublicRoute } from 'components/Routes/PublicRoute';
 import { PrivateRoute } from 'components/Routes/PrivateRoute';
 import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
+import { PatientCardCalendar } from 'components/PatientCardCalendar';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { getTokenSelector } from 'redux/features/userSlice/userSelectors';
@@ -26,6 +27,7 @@ import { logout, setUser } from 'redux/features/userSlice/userSlice';
 import { persistedStore } from 'redux/store';
 
 import { routes } from 'utils/constants/routes';
+import { AppointmentPage } from 'pages/AppointmentPage';
 
 function App() {
   const isLoggedIn = useAppSelector(getTokenSelector);
@@ -86,7 +88,7 @@ function App() {
       />
       <Route
         path={routes.appointments}
-        element={<PrivateRoute component={<BookAppointment />} />}
+        element={<PrivateRoute component={<AppointmentPage />} />}
       />
       <Route
         path={routes.patients}
@@ -94,7 +96,13 @@ function App() {
       >
         <Route index element={<PatientsList />} />
         <Route path={routes.addPatient} element={<NewPatientForm />} />
-        <Route path={`${routes.patientCard}/:id`} element={<PatientCard />} />
+        <Route path={`${routes.patientCard}/:id`} element={<PatientCard />}>
+          <Route index element={<PatientCardCalendar />} />
+          <Route
+            path={routes.patientCardAppointment}
+            element={<BookAppointment />}
+          />
+        </Route>
       </Route>
       <Route path="*" element={<Navigate to={routes.login} />} />
     </Routes>
