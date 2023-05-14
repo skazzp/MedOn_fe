@@ -25,9 +25,9 @@ import {
   dayFormat,
   weekdayFormat,
 } from 'utils/constants';
+import { endOfDayHour } from 'utils/constants/options/hourOptions';
 import { CalendarSlot, IDateRange, SelectHours } from './types';
 import { checkDates, convertSlotToArray, joinConsecutiveDates } from './utils';
-import { endOfDayHour } from 'utils/constants/options/hourOptions';
 
 dayjs.extend(isBetween);
 dayjs.extend(utc);
