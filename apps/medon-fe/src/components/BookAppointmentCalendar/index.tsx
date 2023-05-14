@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { DateLocalizer, Views, dayjsLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { toast } from 'react-toastify';
@@ -15,7 +15,6 @@ import {
   timeFormat,
   weekdayFormat,
 } from 'utils/constants/dateFormat';
-import { useGetAvailabilityByDayMutation } from 'redux/api/availabilityApi';
 
 const mLocalizer = dayjsLocalizer(dayjs);
 
@@ -23,24 +22,6 @@ function BookAppointmentCalendar({
   setSelectedDate,
   selectedDate,
 }: BookAppointmentCalendarProps) {
-  const [getAvailabilityByDay, { data }] = useGetAvailabilityByDayMutation();
-
-  const handleFetchAvailability = useCallback(() => {
-    if (selectedDate) {
-      getAvailabilityByDay({
-        day: dayjs(selectedDate).toDate(),
-        timezone: 'America/New_York',
-      });
-    }
-  }, [selectedDate, getAvailabilityByDay]);
-
-  useEffect(() => {
-    if (selectedDate) {
-      handleFetchAvailability();
-      console.log(data?.data);
-    }
-  }, [selectedDate, handleFetchAvailability]);
-
   const { formats } = useMemo(
     () => ({
       formats: {

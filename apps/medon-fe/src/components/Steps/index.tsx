@@ -18,6 +18,8 @@ import useSpecOptions from 'components/RegistrationForm/hooks';
 import { steps } from 'utils/constants/steps';
 import { dateToTextFormat } from 'utils/constants';
 import dayjs from 'dayjs';
+import { useGetAvailabilityByDayMutation } from 'redux/api/availabilityApi';
+import { useCallback, useEffect, useState } from 'react';
 
 function Steps(props: StepsProps) {
   const {
@@ -34,6 +36,49 @@ function Steps(props: StepsProps) {
   const { t } = useTranslation();
   const { specialityOptions } = useSpecOptions();
   const dateInText = dayjs(selectedDate).format(dateToTextFormat);
+  const [isSlotAvailable, setIsSlotAvailable] = useState<boolean>(false);
+
+  const userTimezone = dayjs.tz.guess();
+  const [getAvailabilityByDay, { data }] = useGetAvailabilityByDayMutation();
+
+  const handleFetchAvailability = useCallback(() => {
+    if (selectedDate) {
+      getAvailabilityByDay({
+        day: dayjs(selectedDate).toDate(),
+        timezone: userTimezone,
+      });
+    }
+  }, [selectedDate, getAvailabilityByDay, userTimezone]);
+
+  useEffect(() => {
+    if (selectedDate) {
+      handleFetchAvailability();
+    }
+  }, [selectedDate, handleFetchAvailability]);
+  /////
+  useEffect(() => {
+    if (selectedDate && data && data.data) {
+      const selectedDay = dayjs(selectedDate).startOf('day');
+      const isSlotAvailable = data.data.some((slot) => {
+        const slotStartTime = dayjs(slot.startTime);
+        const slotEndTime = dayjs(slot.endTime);
+        const slotDay = slotStartTime.startOf('day');
+
+        return slotDay.isSame(selectedDay, 'day');
+      });
+
+      setIsSlotAvailable(isSlotAvailable);
+    }
+  }, [selectedDate, data]);
+
+  const isButtonActive = Boolean(
+    selectedDate && isSlotAvailable && isSlotAvailable && isSlotAvailable
+  );
+  const noMeetingsMessage = !isSlotAvailable
+    ? ' No meetings available on this day'
+    : '';
+
+  /////
 
   const handleNextStep = () => {
     onCurrentStepChange(currentStep + steps.one);
@@ -104,6 +149,7 @@ function Steps(props: StepsProps) {
           buttonType="next"
           disabled={
             (currentStep === steps.one && !selectedDate) ||
+            !isButtonActive ||
             (currentStep === steps.two && !selectedTime)
           }
           position={positionNext}
@@ -128,6 +174,13 @@ function Steps(props: StepsProps) {
         {selectedDate ? dateInText : t('patient-info.none')}
         {selectedTime ? `, ${selectedTime}` : ''}
         {selectedDoctor ? `, ${getDoctorFullName(selectedDoctor)}` : ''}
+        {selectedDate && (
+          <div>
+            {isButtonActive
+              ? ' There are doctors available for that day'
+              : noMeetingsMessage}
+          </div>
+        )}
       </Selected>
       <Cancel disabled={!selectedDate} onClick={handleCancel}>
         {t('patient-info.cancel')}
