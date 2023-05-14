@@ -9,6 +9,7 @@ import ResendConfirmation from 'pages/ResendConfirmation';
 import UpdatePassword from 'pages/UpdatePassword';
 import ProfilePage from 'pages/ProfilePage';
 import { PatientsPage } from 'pages/PatientsPage';
+import BookAppointment from 'pages/BookAppointment';
 import { DashboardPage } from 'pages/Dashboard';
 import AvailabilityPage from 'pages/AvailabilityPage';
 
@@ -17,7 +18,6 @@ import { PublicRoute } from 'components/Routes/PublicRoute';
 import { PrivateRoute } from 'components/Routes/PrivateRoute';
 import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
-import SelectTimeSlot from 'components/SelectTimeSlot';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { getTokenSelector } from 'redux/features/userSlice/userSelectors';
@@ -81,12 +81,12 @@ function App() {
         element={<ResendConfirmation />}
       />
       <Route
-        path={routes.appointments}
-        element={<PrivateRoute component={<SelectTimeSlot />} />}
-      />
-      <Route
         path={routes.updatePassword}
         element={<PrivateRoute component={<UpdatePassword />} />}
+      />
+      <Route
+        path={routes.appointments}
+        element={<PrivateRoute component={<BookAppointment />} />}
       />
       <Route
         path={routes.patients}
