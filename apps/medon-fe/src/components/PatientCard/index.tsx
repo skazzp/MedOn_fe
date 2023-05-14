@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { Link, Outlet, useParams, useSearchParams } from 'react-router-dom';
 import AnimateHeight, { Height } from 'react-animate-height';
 import { toast } from 'react-toastify';
 
@@ -33,7 +33,6 @@ import { defaultOrder, defaultPage, defaultPageSize } from 'utils/constants';
 import {
   AddNoteForm,
   Buttons,
-  Calendar,
   Container,
   StyledSelect,
   Top,
@@ -110,9 +109,7 @@ export default function PatientCard() {
       <PatientCardInfo {...patient?.data} />
       <h4>{t('patient-card.overview')}</h4>
       <ShowMore text={patient?.data?.overview} />
-      {/* TODO: add calendar here */}
-      <Calendar>Calendar</Calendar>
-      {/* TODO: add calendar here */}
+      <Outlet />
       <Button
         isfullwidth="true"
         textcolor={theme.colors.blue_500}
