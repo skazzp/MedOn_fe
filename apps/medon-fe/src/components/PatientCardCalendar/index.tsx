@@ -10,7 +10,7 @@ import { eventsCard } from 'utils/mock/patientCalendar';
 import { getDateAndHourEvent } from 'utils/functions/getDateAndHourEvent';
 import { getDayPropGetter } from 'utils/functions/getDayPropGetter';
 import { getEventPropGetter } from 'utils/functions/getEventPropGetter';
-import { roles } from 'utils/constants';
+import { roles, routes } from 'utils/constants';
 
 import { useAppSelector } from 'redux/hooks';
 
@@ -44,7 +44,7 @@ export function PatientCardCalendar() {
         <h2>{t('patient-card.calendar.title')}</h2>
         {role === roles.local && (
           <Link
-            to="#"
+            to={`${routes.patientCardAppointment}`}
             bgcolor={theme.colors.btnGradient}
             textcolor={theme.colors.white}
           >
