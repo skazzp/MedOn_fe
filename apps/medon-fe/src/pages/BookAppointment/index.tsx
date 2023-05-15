@@ -25,11 +25,13 @@ export default function BookAppointment() {
   const [selectedDoctor, setSelectedDoctor] = useState<number | null>(null);
   const [isActiveDoc, setIsActiveDoc] = useState<number | null>(null);
   const [data, setData] = useState<object>([]);
+  const [uniqDocId, setUniqDocId] = useState<any>();
 
   const { id } = useParams();
 
   // WORKS!!!
   console.log('patientId', id);
+  console.log('uniqDocId', uniqDocId);
 
   const handleCurrentStepChange = (step: number) => {
     setCurrentStep(step);
@@ -88,6 +90,7 @@ export default function BookAppointment() {
                 endTime={''}
                 startTime={''}
                 data={data}
+                setUniqDocId={setUniqDocId}
               />
             )}
             {currentStep === steps.three && (
@@ -96,6 +99,7 @@ export default function BookAppointment() {
                 selectedDoctor={selectedDoctor}
                 isActiveDoc={isActiveDoc}
                 setIsActiveDoc={setIsActiveDoc}
+                uniqDocId={uniqDocId}
               />
             )}
           </Choose>

@@ -3,4 +3,5 @@ export interface SelectDoctorProps {
     selectDoctorAppointments: (key: number | null) => void;
     isActiveDoc: number | null;
     setIsActiveDoc: (key: number | null) => void;
+    uniqDocId: any;
 }

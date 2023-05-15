@@ -28,10 +28,13 @@ export default function SelectDoctor({
   selectedDoctor,
   isActiveDoc,
   setIsActiveDoc,
+  uniqDocId,
 }: SelectDoctorProps) {
   const { t } = useTranslation();
 
   const { specialityOptions } = useSpecOptions();
+
+  console.log(uniqDocId);
 
   const selectDoctor = (key: number) => {
     if (key === selectedDoctor) {

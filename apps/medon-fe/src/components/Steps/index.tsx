@@ -16,13 +16,15 @@ import { StepsProps } from 'components/BookAppointmentCalendar/types';
 import { mockDoctors } from 'components/SelectDoctor/mockData';
 import useSpecOptions from 'components/RegistrationForm/hooks';
 import { steps } from 'utils/constants/steps';
-import { dateToTextFormat } from 'utils/constants';
+import { dateToTextFormat, routes } from 'utils/constants';
 import dayjs from 'dayjs';
 import { useGetAvailabilityByDayMutation } from 'redux/api/availabilityApi';
 import { useCallback, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function Steps(props: StepsProps) {
   const {
+    setData,
     selectedDate,
     setSelectedDate,
     currentStep,
@@ -34,6 +36,8 @@ function Steps(props: StepsProps) {
     selectDoctorAppointments,
   } = props;
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { id } = useParams();
   const { specialityOptions } = useSpecOptions();
   const dateInText = dayjs(selectedDate).format(dateToTextFormat);
   const [isSlotAvailable, setIsSlotAvailable] = useState<boolean>(false);
@@ -67,13 +71,12 @@ function Steps(props: StepsProps) {
         return slotDay.isSame(selectedDay, 'day');
       });
 
+      setData(data);
       setIsSlotAvailable(isSlotAvailable);
     }
-  }, [selectedDate, data]);
+  }, [selectedDate, data, setData]);
 
-  const isButtonActive = Boolean(
-    selectedDate && isSlotAvailable && isSlotAvailable && isSlotAvailable
-  );
+  const isButtonActive = Boolean(selectedDate && isSlotAvailable);
   const noMeetingsMessage = !isSlotAvailable
     ? ' No meetings available on this day'
     : '';
@@ -94,6 +97,7 @@ function Steps(props: StepsProps) {
       onCurrentStepChange(steps.one);
       selectTimeAppointments('');
       selectDoctorAppointments(null);
+      navigate(`${routes.patientCard}/${id}`);
     }
   };
 

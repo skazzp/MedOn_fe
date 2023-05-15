@@ -11,4 +11,6 @@ export interface StepsProps extends BookAppointmentCalendarProps {
     isActiveDoc: number | null;
     selectTimeAppointments: (time: string) => void;
     selectDoctorAppointments: (key: number | null) => void;
+    data: any;
+    setData: React.Dispatch<React.SetStateAction<any>>;
 }
