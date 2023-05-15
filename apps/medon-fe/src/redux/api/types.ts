@@ -125,3 +125,10 @@ export interface IGetPatientNotes {
   page?: number;
   limit?: number;
 }
+
+export interface Appointment {
+  id: number;
+  date: Date;
+  time: string;
+  doctorId: number;
+}
