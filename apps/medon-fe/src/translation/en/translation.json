@@ -133,6 +133,16 @@
     "search-input-placeholder": "Search",
     "medical": "Medical History",
     "toast.success": "Note added successfully",
+    "calendar": {
+      "title": "Calendar",
+      "prefix-modal": "Appointment",
+      "link": "Book Appointment",
+      "modal-title": "Title: ",
+      "modal-start": "Start Appointment:",
+      "modal-end": "End Appointment:",
+      "modal-link": "Zoom Link:",
+      "modal-name-link": "Link"
+    },
     "notes": {
       "prefix-doctor": "Dr. ",
       "empty-notes": "No notes added yet",
