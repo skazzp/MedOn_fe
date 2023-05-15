@@ -61,8 +61,8 @@ export function useCalendar() {
         dateFormat: dateFormatCalendar,
         weekdayFormat: (
           date: Date,
-          culture: string | undefined,
-          localizer: DateLocalizer | undefined
+          culture?: string,
+          localizer?: DateLocalizer
         ) => {
           if (localizer) {
             return localizer.format(date, weekdayFormat, culture);
@@ -72,8 +72,8 @@ export function useCalendar() {
         },
         dayFormat: (
           date: Date,
-          culture: string | undefined,
-          localizer: DateLocalizer | undefined
+          culture?: string,
+          localizer?: DateLocalizer
         ) => {
           if (localizer) {
             return localizer.format(date, dayFormat, culture);
@@ -83,8 +83,8 @@ export function useCalendar() {
         },
         agendaTimeRangeFormat: (
           { start, end }: IDateRange,
-          culture: string | undefined,
-          localizer: DateLocalizer | undefined
+          culture?: string,
+          localizer?: DateLocalizer
         ) => {
           if (localizer) {
             return `${localizer.format(

@@ -4,9 +4,11 @@ import { Event } from 'react-big-calendar';
 import { IAvailability } from 'redux/api/types';
 import { timeFormat } from 'utils/constants';
 import { endOfDayHour } from 'utils/constants/options/hourOptions';
-import { CalendarSlot } from './types';
+import { AvailabilitySlot, CalendarSlot } from './types';
 
-export const convertSlotToArray = (timeSlot: CalendarSlot) => {
+export const convertSlotToArray = (
+  timeSlot: CalendarSlot
+): AvailabilitySlot[] => {
   const startHour = dayjs(timeSlot.start).hour();
   const endHour =
     dayjs(timeSlot.end).hour() !== 0
@@ -36,7 +38,14 @@ export const convertSlotToArray = (timeSlot: CalendarSlot) => {
   return availabilityArray;
 };
 
-export const joinConsecutiveDates = (dates: IAvailability[]) => {
+// this function is used to combine parts of array of availability slots from DB
+// like [01:00 - 02:00, 02:00 - 03:00, 03:00 - 04:00]
+// (because we store them in DB as 1 hour slots)
+// into ranges 01:00 - 04:00, because it doesn't have that functionality by default,
+// so in calendar, if some time slots are consecutive, they will be shown as one slot
+// because in this calendar if you have many events in 1 day it doesn't look user-friendly
+// also there's a check not to combine time slots from different days
+export const joinConsecutiveDates = (dates: IAvailability[]): Event[] => {
   const sortedDates = dates
     .slice()
     .sort(
@@ -90,14 +99,14 @@ export const checkDates = (
   end: Date,
   eventArray: Event[],
   indexToFilter: number | null
-) => {
+): Event | undefined => {
   if (typeof indexToFilter === 'number') {
     eventArray = [...eventArray].filter(
       (elem, index) => index !== indexToFilter
     );
   }
 
-  return eventArray.find((event) => {
+  return eventArray.find((event): boolean => {
     const eventStart = dayjs(event.start).valueOf();
     const eventEnd = dayjs(event.end).valueOf();
     const newEventStart = dayjs(start).valueOf();

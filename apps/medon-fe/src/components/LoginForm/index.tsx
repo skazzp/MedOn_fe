@@ -24,6 +24,7 @@ import {
 } from 'components/LoginForm/style';
 import { routes } from 'utils/constants';
 import { toastConfig } from 'utils/toastConfig';
+import { availabilityApi } from 'redux/api/availabilityApi';
 
 const LoginForm: FC = () => {
   const { t } = useTranslation();
@@ -43,6 +44,7 @@ const LoginForm: FC = () => {
   const onSubmitHandler = async (formData: LoginRequest) => {
     try {
       dispatch(userApi.util.invalidateTags(['user']));
+      dispatch(availabilityApi.util.invalidateTags(['availability']));
       await login(formData).unwrap();
       navigate(routes.dashboard);
     } catch (error) {
