@@ -30,8 +30,8 @@ export default function BookAppointment() {
   const { id } = useParams();
 
   // WORKS!!!
-  console.log('patientId', id);
-  console.log('uniqDocId', uniqDocId);
+  // console.log('patientId', id);
+  // console.log('uniqDocId', uniqDocId);
 
   const handleCurrentStepChange = (step: number) => {
     setCurrentStep(step);
@@ -100,6 +100,7 @@ export default function BookAppointment() {
                 isActiveDoc={isActiveDoc}
                 setIsActiveDoc={setIsActiveDoc}
                 uniqDocId={uniqDocId}
+                data={data}
               />
             )}
           </Choose>

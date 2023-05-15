@@ -47,7 +47,8 @@ function Steps(props: StepsProps) {
 
   // DOCTORS!!!
   const doctors = data?.data?.map((availa) => availa.doctor);
-  console.log('doctors', doctors);
+
+  // console.log('doctors', doctors);
 
   const handleFetchAvailability = useCallback(() => {
     if (selectedDate) {
@@ -122,8 +123,9 @@ function Steps(props: StepsProps) {
     }
   };
 
-  const getDoctorFullName = (doctorId: number) => {
-    const doctor = mockDoctors.find((doctors) => doctors.id === doctorId);
+  const getDoctorFullName = (doctorId: any) => {
+    const doctor =
+      doctors && doctors.find((doctores) => doctores.id === doctorId);
 
     if (doctor) {
       return `${doctor.firstName} ${doctor.lastName} ${

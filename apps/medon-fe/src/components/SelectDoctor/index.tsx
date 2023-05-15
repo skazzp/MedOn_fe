@@ -18,7 +18,7 @@ import {
   Text,
   TitleBox,
 } from 'components/SelectDoctor/styles';
-import { mockDoctors } from 'components/SelectDoctor/mockData';
+// import { mockDoctors } from 'components/SelectDoctor/mockData';
 import { SelectDoctorProps } from 'components/SelectDoctor/types';
 
 import doctorImagePlaceholder from 'assets/images/Avatar.svg';
@@ -29,14 +29,22 @@ export default function SelectDoctor({
   isActiveDoc,
   setIsActiveDoc,
   uniqDocId,
+  data,
 }: SelectDoctorProps) {
   const { t } = useTranslation();
 
   const { specialityOptions } = useSpecOptions();
+  const doctors = data?.data?.map((availa: any) => availa.doctor);
+  const uniqueDoctors = doctors.filter(
+    (doctor: any, index: any, self: any) =>
+      index === self.findIndex((d: any) => d.id === doctor.id)
+  );
 
+  console.log('doctors', doctors);
   console.log(uniqDocId);
+  console.log(uniqueDoctors);
 
-  const selectDoctor = (key: number) => {
+  const selectDoctor = (key: any) => {
     if (key === selectedDoctor) {
       selectDoctorAppointments(null);
     } else {
@@ -79,31 +87,32 @@ export default function SelectDoctor({
         <ColumnName>{t('appointment.columns.located')}</ColumnName>
       </TitleBox>
       <List>
-        {mockDoctors.map((doctor) => (
-          <ListItem key={doctor.id}>
-            <ItemWrap
-              onClick={() => selectDoctor(doctor.id)}
-              style={isActiveDoc === doctor.id ? SlotActive : {}}
-            >
-              <ColumnText>
-                <DoctorPic
-                  src={doctor.photo || doctorImagePlaceholder}
-                  alt={`${t('appointment.doctorPicAlt')}`}
-                />
-                {t('appointment.prefix-doctor')}
-                {doctor.firstName[0]}. {doctor.lastName}
-              </ColumnText>
-              <ColumnText>
-                {specialityOptions.length
-                  ? specialityOptions[doctor.specialityId].label
-                  : ''}
-              </ColumnText>
-              <ColumnText>
-                {doctor.country}, {doctor.city}
-              </ColumnText>
-            </ItemWrap>
-          </ListItem>
-        ))}
+        {doctors &&
+          uniqueDoctors.map((doctor: any) => (
+            <ListItem key={doctor.id}>
+              <ItemWrap
+                onClick={() => selectDoctor(doctor.id)}
+                style={isActiveDoc === doctor.id ? SlotActive : {}}
+              >
+                <ColumnText>
+                  <DoctorPic
+                    src={doctor.photo || doctorImagePlaceholder}
+                    alt={`${t('appointment.doctorPicAlt')}`}
+                  />
+                  {t('appointment.prefix-doctor')}
+                  {doctor.firstName[0]}. {doctor.lastName}
+                </ColumnText>
+                <ColumnText>
+                  {specialityOptions.length
+                    ? specialityOptions[doctor.specialityId]?.label
+                    : ''}
+                </ColumnText>
+                <ColumnText>
+                  {doctor.country}, {doctor.city}
+                </ColumnText>
+              </ItemWrap>
+            </ListItem>
+          ))}
       </List>
     </Container>
   );

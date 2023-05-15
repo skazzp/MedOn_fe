@@ -22,7 +22,8 @@ export default function SelectTimeSlot({
     [doctorId: number]: boolean[];
   }>({});
   const hours = data.data;
-  const doctorIds = hours.map((slot: any) => slot.doctorId);
+
+  const doctorIds = hours.map((slot: any) => slot.doctor.id);
 
   useEffect(() => {
     const DocId = new Set(doctorIds);
@@ -31,16 +32,16 @@ export default function SelectTimeSlot({
       const availability: { [doctorId: number]: boolean[] } = {};
 
       hours.forEach((slot: any) => {
-        const { doctorId } = slot;
+        const { doctor } = slot;
         const startTime = new Date(slot.startTime).getHours();
         const endTime = new Date(slot.endTime).getHours();
 
-        if (!availability[doctorId]) {
-          availability[doctorId] = timeSlots.map(() => false);
+        if (!availability[doctor.id]) {
+          availability[doctor.id] = timeSlots.map(() => false);
         }
 
         for (let i = startTime; i < endTime; i += 1) {
-          availability[doctorId][i] = true;
+          availability[doctor.id][i] = true;
         }
       });
       setUniqDocId(DocId);
