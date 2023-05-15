@@ -90,3 +90,16 @@ export const SkeletonContainer = styled.div`
   height: 100%;
   overflow: hidden;
 `;
+
+export const EditBtn = styled.button`
+  padding: 0;
+  border: none;
+  background-color: ${(p) => p.theme.colors.background_main};
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.blue_300};
+  font-family: ${({ theme }) => theme.fontFamily.roboto};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.fontWeight.medium};
+`;
