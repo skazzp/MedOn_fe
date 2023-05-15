@@ -3,7 +3,7 @@ import { Calendar } from 'react-big-calendar';
 import styled from 'styled-components';
 
 export const StyledCalendar = styled(Calendar)`
-  width: calc(100% - 50px);
+  width: 100%;
   height: 40rem;
   font-family: ${(p) => p.theme.fontFamily.sf_pro_text};
 
