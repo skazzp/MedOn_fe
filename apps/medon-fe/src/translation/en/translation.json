@@ -120,7 +120,8 @@
     "placeholder": "Search ",
     "no-data": "No patients are registered",
     "load-more": "Load More",
-    "overview": "Overview: "
+    "overview": "Overview: ",
+    "preffix-remote": "Remote "
   },
   "patient-card": {
     "button": "Add Patient Note +",

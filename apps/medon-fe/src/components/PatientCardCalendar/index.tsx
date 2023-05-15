@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
 import { Views, dayjsLocalizer, Event } from 'react-big-calendar';
 import { useTheme } from 'styled-components';
 
@@ -9,6 +10,9 @@ import { eventsCard } from 'utils/mock/patientCalendar';
 import { getDateAndHourEvent } from 'utils/functions/getDateAndHourEvent';
 import { getDayPropGetter } from 'utils/functions/getDayPropGetter';
 import { getEventPropGetter } from 'utils/functions/getEventPropGetter';
+import { roles } from 'utils/constants';
+
+import { useAppSelector } from 'redux/hooks';
 
 import Plus from 'assets/svgs/plus_listcard.svg';
 
@@ -20,11 +24,12 @@ export function PatientCardCalendar() {
   const [event, setEvent] = useState<Event>();
 
   const theme = useTheme();
+  const { t } = useTranslation();
+  const { role } = useAppSelector((state) => state.userState.user);
 
   const { hideModal, isVisible, showModal } = useModal(false);
 
   const localizer = dayjsLocalizer(dayjs);
-
   const dayPropGetter = getDayPropGetter(theme);
   const eventPropGetter = getEventPropGetter(theme);
 
@@ -36,15 +41,17 @@ export function PatientCardCalendar() {
   return (
     <>
       <Title>
-        <h2>Calendar</h2>
-        <Link
-          to="#"
-          bgcolor={theme.colors.btnGradient}
-          textcolor={theme.colors.white}
-        >
-          Book Appointment
-          <img src={Plus} alt="Plus svg" />
-        </Link>
+        <h2>{t('patient-card.calendar.title')}</h2>
+        {role === roles.local && (
+          <Link
+            to="#"
+            bgcolor={theme.colors.btnGradient}
+            textcolor={theme.colors.white}
+          >
+            {t('patient-card.calendar.link')}
+            <img src={Plus} alt="Plus svg" />
+          </Link>
+        )}
       </Title>
       <StyledCalendar
         localizer={localizer}
@@ -60,31 +67,31 @@ export function PatientCardCalendar() {
         step={60}
       />
       <StyledModal
-        title={`Appointment ${event?.title}`}
+        title={`${t('patient-card.calendar.prefix-modal')} ${event?.title}`}
         open={isVisible}
         onOk={showModal}
         onCancel={hideModal}
       >
         <p>
-          <strong>Title: </strong>
+          <strong>{t('patient-card.calendar.modal-title')} </strong>
           {event?.title}
         </p>
         <p>
-          <strong>Start Appointment: </strong>
+          <strong>{t('patient-card.calendar.modal-start')} </strong>
           {getDateAndHourEvent(event?.start)}
         </p>
         <p>
-          <strong>End Appointment: </strong>
+          <strong>{t('patient-card.calendar.modal-end')} </strong>
           {getDateAndHourEvent(event?.end)}
         </p>
         <p>
-          <strong>Zoom Link: </strong>
+          <strong>{t('patient-card.calendar.modal-link')} </strong>
           <Link
             bgcolor={theme.colors.transparent}
             textcolor={theme.colors.blue_300}
             to={event?.resource.link}
           >
-            Link
+            {t('patient-card.calendar.modal-name-link')}
           </Link>
         </p>
       </StyledModal>
