@@ -10,24 +10,20 @@ import {
 import { timeSlots } from 'utils/constants/options/hourOptions';
 import { useEffect, useState } from 'react';
 
-export default function SelectTimeSlot({
+export const SelectTimeSlot = ({
   setIsActive,
   isActive,
   selectTimeAppointments,
   data,
   setUniqDocId,
-}: SelectTimeSlotProps) {
+}: SelectTimeSlotProps) => {
   const { t } = useTranslation();
   const [timeSlotsAvailability, setTimeSlotsAvailability] = useState<{
     [doctorId: number]: boolean[];
   }>({});
   const hours = data.data;
 
-  const doctorIds = hours.map((slot: any) => slot.doctor.id);
-
   useEffect(() => {
-    const DocId = new Set(doctorIds);
-
     if (hours && Array.isArray(hours)) {
       const availability: { [doctorId: number]: boolean[] } = {};
 
@@ -44,10 +40,15 @@ export default function SelectTimeSlot({
           availability[doctor.id][i] = true;
         }
       });
-      setUniqDocId(DocId);
+
+      const uniqueDoctorIds = [
+        ...new Set(hours.map((slot: any) => slot.doctor.id)),
+      ];
+
+      setUniqDocId(uniqueDoctorIds);
       setTimeSlotsAvailability(availability);
     }
-  }, [doctorIds, hours, setUniqDocId]);
+  }, [hours, setUniqDocId]);
 
   const selectTime = (time: string) => {
     const doctorAvailability = Object.values(timeSlotsAvailability);
@@ -90,4 +91,6 @@ export default function SelectTimeSlot({
       ))}
     </Container>
   );
-}
+};
+
+export default SelectTimeSlot;

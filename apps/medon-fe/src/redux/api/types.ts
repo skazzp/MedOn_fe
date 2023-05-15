@@ -63,6 +63,11 @@ export interface UpdateProfileData {
   city: string | null;
   timeZone: string | null;
 }
+
+export interface UpdateProfileResponse {
+  data: UserResponse;
+}
+
 export interface LoginResponse {
   token: string;
   isVerified: boolean;
@@ -80,7 +85,7 @@ export interface IForgetPassword {
 export interface IPatientsParams {
   page?: number;
   limit?: number;
-  searchPhrase?: string;
+  name?: string;
 }
 
 interface IPatient {
@@ -146,4 +151,10 @@ export interface IAvailability {
       name: string;
     };
   };
+}
+export interface Appointment {
+  id: number;
+  date: Date;
+  time: string;
+  doctorId: number;
 }

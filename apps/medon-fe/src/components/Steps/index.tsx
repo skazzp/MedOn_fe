@@ -13,7 +13,6 @@ import {
   Wrapper,
 } from 'components/Steps/styles';
 import { StepsProps } from 'components/BookAppointmentCalendar/types';
-import { mockDoctors } from 'components/SelectDoctor/mockData';
 import useSpecOptions from 'components/RegistrationForm/hooks';
 import { steps } from 'utils/constants/steps';
 import { dateToTextFormat, routes } from 'utils/constants';
@@ -21,6 +20,8 @@ import dayjs from 'dayjs';
 import { useGetAvailabilityByDayMutation } from 'redux/api/availabilityApi';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useCreateAppointmentMutation } from 'redux/api/appointmentsApi';
+import { toast } from 'react-toastify';
 
 function Steps(props: StepsProps) {
   const {
@@ -44,6 +45,7 @@ function Steps(props: StepsProps) {
 
   const userTimezone = dayjs.tz.guess();
   const [getAvailabilityByDay, { data }] = useGetAvailabilityByDayMutation();
+  const [createAppointment] = useCreateAppointmentMutation();
 
   // DOCTORS!!!
   const doctors = data?.data?.map((availa) => availa.doctor);
@@ -94,6 +96,8 @@ function Steps(props: StepsProps) {
 
   const handlePreviousStep = () => {
     onCurrentStepChange(currentStep - steps.one);
+    selectDoctorAppointments(null);
+    selectTimeAppointments('');
   };
 
   const handleCancel = () => {
@@ -106,8 +110,18 @@ function Steps(props: StepsProps) {
     }
   };
 
-  const handleBooking = () => {
-    // add function when will be booking
+  const handleBooking = async () => {
+    try {
+      const appointmentData = {};
+      const response = await createAppointment(appointmentData);
+
+      toast.success('Appointment created successfully');
+      console.log(response);
+      navigate(`${routes.dashboard}`);
+    } catch (error) {
+      toast.error('Failed to create appointment. Please try again.');
+      console.error('Error creating appointment:', error);
+    }
   };
 
   const renderStepContent = () => {

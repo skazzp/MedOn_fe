@@ -49,7 +49,7 @@ export function PatientCardCalendar() {
           <img src={Plus} alt="Plus svg" />
         </Link>
       </Title>
-      <StyledCalendar
+      {/* <StyledCalendar
         localizer={localizer}
         defaultView="month"
         views={[Views.MONTH, Views.WEEK]}
@@ -90,7 +90,7 @@ export function PatientCardCalendar() {
             {t('patient-card.calendar.modal-name-link')}
           </Link>
         </p>
-      </StyledModal>
+      </StyledModal> */}
     </>
   );
 }

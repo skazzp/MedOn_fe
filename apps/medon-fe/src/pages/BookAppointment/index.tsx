@@ -32,6 +32,7 @@ export default function BookAppointment() {
   // WORKS!!!
   // console.log('patientId', id);
   // console.log('uniqDocId', uniqDocId);
+  // console.log('selectedTime', selectedTime);
 
   const handleCurrentStepChange = (step: number) => {
     setCurrentStep(step);
@@ -101,6 +102,7 @@ export default function BookAppointment() {
                 setIsActiveDoc={setIsActiveDoc}
                 uniqDocId={uniqDocId}
                 data={data}
+                selectedTime={selectedTime}
               />
             )}
           </Choose>

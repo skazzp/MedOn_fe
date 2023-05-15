@@ -4,6 +4,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
 import { t } from 'i18next';
+import { useGetAppointmentsQuery } from 'redux/api/appointmentsApi';
 
 import { StyledCalendar } from 'components/BookAppointmentCalendar/styles';
 import { BookAppointmentCalendarProps } from 'components/BookAppointmentCalendar/types';
@@ -22,6 +23,8 @@ function BookAppointmentCalendar({
   setSelectedDate,
   selectedDate,
 }: BookAppointmentCalendarProps) {
+  // const { data: appointments = [] } = useGetAppointmentsQuery();
+
   const { formats } = useMemo(
     () => ({
       formats: {
@@ -99,6 +102,7 @@ function BookAppointmentCalendar({
         selectable
         formats={formats}
         dayPropGetter={DayPropGetter}
+        // events={appointments}
       />
     </div>
   );

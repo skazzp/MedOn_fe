@@ -4,5 +4,6 @@ export interface SelectDoctorProps {
     isActiveDoc: number | null;
     setIsActiveDoc: (key: number | null) => void;
     uniqDocId: any;
-    data: any
+    data: any;
+    selectedTime: any;
 }

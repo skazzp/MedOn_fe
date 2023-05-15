@@ -32,9 +32,9 @@ export const patientApi = createApi({
       },
     }),
     getPatients: builder.query<IPatientsResponse, IPatientsParams>({
-      query: ({ page = 1, limit = 5, searchPhrase = '' }) => ({
+      query: ({ page = 1, limit = 5, name = '' }) => ({
         url: 'patients/',
-        params: { page, limit, searchPhrase },
+        params: { page, limit, name },
       }),
       providesTags: (result, error, arg) => [
         { type: 'PatientsQuery', page: arg.page },
