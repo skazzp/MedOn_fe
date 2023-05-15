@@ -33,3 +33,7 @@ export interface GetPatientNotes {
   notes: PatientNote[];
   total: number;
 }
+
+export interface IUpdatePatient extends ICreatePatient {
+  id: number;
+}
