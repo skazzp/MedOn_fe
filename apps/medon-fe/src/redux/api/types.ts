@@ -123,11 +123,24 @@ export interface IGetPatientNotes {
 
 export interface IAvailability {
   id: number;
+  title: string;
   startTime: Date;
   endTime: Date;
-  title: string;
-  doctorId: number;
   isAvailable: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  doctor: {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    city: string;
+    country: string;
+    photo: string | null;
+    dateOfBirth: string;
+    role: string;
+    isVerified: boolean;
+    timeZone: string;
+    specialityId: number;
+    createdAt: string;
+    updatedAt: string;
+  };
 }

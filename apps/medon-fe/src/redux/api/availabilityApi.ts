@@ -80,7 +80,6 @@ export const availabilityApi = createApi({
       }),
       invalidatesTags: ['availability'],
     }),
-
   }),
 });
 
