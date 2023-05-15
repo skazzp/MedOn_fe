@@ -142,5 +142,8 @@ export interface IAvailability {
     specialityId: number;
     createdAt: string;
     updatedAt: string;
+    speciality: {
+      name: string;
+    };
   };
 }

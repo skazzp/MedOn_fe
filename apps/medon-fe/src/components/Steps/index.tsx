@@ -45,6 +45,10 @@ function Steps(props: StepsProps) {
   const userTimezone = dayjs.tz.guess();
   const [getAvailabilityByDay, { data }] = useGetAvailabilityByDayMutation();
 
+  // DOCTORS!!!
+  const doctors = data?.data?.map((availa) => availa.doctor);
+  console.log('doctors', doctors);
+
   const handleFetchAvailability = useCallback(() => {
     if (selectedDate) {
       getAvailabilityByDay({
