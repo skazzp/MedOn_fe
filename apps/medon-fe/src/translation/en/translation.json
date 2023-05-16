@@ -141,7 +141,10 @@
       "modal-start": "Start Appointment:",
       "modal-end": "End Appointment:",
       "modal-link": "Zoom Link:",
-      "modal-name-link": "Link"
+      "modal-name-link": "Link",
+      "legend-title": "Legend:",
+      "appointment-you": "Appointments with you",
+      "appointment-others": "Appointments with other doctors"
     },
     "notes": {
       "prefix-doctor": "Dr. ",

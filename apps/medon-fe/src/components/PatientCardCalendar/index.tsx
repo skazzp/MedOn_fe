@@ -16,7 +16,15 @@ import { useAppSelector } from 'redux/hooks';
 
 import Plus from 'assets/svgs/plus_listcard.svg';
 
-import { StyledCalendar, StyledModal, Title } from './styles';
+import {
+  Dot,
+  Legend,
+  StyledCalendar,
+  StyledModal,
+  Subtitle,
+  TextSubtitle,
+  Title,
+} from './styles';
 import { useModal } from './hooks';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
@@ -67,6 +75,21 @@ export function PatientCardCalendar() {
         timeslots={1}
         step={60}
       />
+      <Legend>
+        <legend>{t('patient-card.calendar.legend-title')}</legend>
+        <Subtitle>
+          <Dot color={theme.colors.purple} />
+          <TextSubtitle>
+            {t('patient-card.calendar.appointment-you')}
+          </TextSubtitle>
+        </Subtitle>
+        <Subtitle>
+          <Dot color={theme.colors.blue_500} />
+          <TextSubtitle>
+            {t('patient-card.calendar.appointment-others')}
+          </TextSubtitle>
+        </Subtitle>
+      </Legend>
       <StyledModal
         title={`${t('patient-card.calendar.prefix-modal')} ${event?.title}`}
         open={isVisible}
