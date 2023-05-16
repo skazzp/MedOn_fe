@@ -29,7 +29,7 @@ export default function PatientsList() {
   const { data, isFetching } = useGetPatientsQuery({
     page,
     limit,
-    searchPhrase: debouncedSearch,
+    name: debouncedSearch,
   });
 
   function handlePaginationChange(pageNumber: number, pageSize: number): void {

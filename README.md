@@ -21,3 +21,16 @@ Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and 
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+## Deployment
+- Locally remove branch "deploy-client" if it exists: <br/>
+  ```git branch -D deploy-client```
+
+- Go to the branch from where you want to make build for deployment: <br/>
+  example: ```git checkout develop```
+
+- Create branch "deploy-client" from current branch: <br/>
+  ```git checkout -b deploy-client```
+
+- Push this branch to the repo with --force (to rewrite it): <br/>
+  ```git push origin deploy-client --force```

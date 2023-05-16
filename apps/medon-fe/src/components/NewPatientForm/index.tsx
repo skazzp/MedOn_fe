@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { CountryCode } from 'libphonenumber-js';
@@ -11,8 +11,11 @@ import { toastConfig } from 'utils/toastConfig';
 import { countryOptionsWithCode } from 'utils/countries/countryOptions';
 import { newPatientSchema } from 'validation/newPatientSchema';
 import { IServerError } from 'interfaces/serverResponse';
-import { ICreatePatient } from 'interfaces/patients';
-import { useCreatePatientMutation } from 'redux/api/patientApi';
+import { ICreatePatient, IPatient } from 'interfaces/patients';
+import {
+  useCreatePatientMutation,
+  useUpdatePatientMutation,
+} from 'redux/api/patientApi';
 
 import {
   LinkGoBack,
@@ -35,7 +38,12 @@ import {
   InputWrapper,
 } from './styles';
 
-export function NewPatientForm() {
+interface Props {
+  patient?: IPatient;
+  setEditInfo?: (value: boolean) => void;
+}
+
+export function NewPatientForm({ patient, setEditInfo }: Props) {
   const { control, handleSubmit, watch, getValues, reset } =
     useForm<ICreatePatient>({
       mode: 'onBlur',
@@ -54,6 +62,8 @@ export function NewPatientForm() {
     });
 
   const [createPatient, { isLoading }] = useCreatePatientMutation();
+  const [updatePatient, { isLoading: updateLoading }] =
+    useUpdatePatientMutation();
 
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -62,8 +72,12 @@ export function NewPatientForm() {
     try {
       const dateOfBirth = new Date(dto.dateOfBirth);
 
-      await createPatient({ ...dto, dateOfBirth }).unwrap();
-      reset();
+      const { data } = await createPatient({
+        ...dto,
+        dateOfBirth,
+      }).unwrap();
+
+      if (data) navigate(`${routes.patientCard}/${data.id}`);
       toast.success(t('new-patient.info.success'), toastConfig);
     } catch (err) {
       const msg = (err as IServerError).data.message;
@@ -72,14 +86,55 @@ export function NewPatientForm() {
     }
   };
 
+  const submitUpdate = async (dto: ICreatePatient): Promise<void> => {
+    if (patient) {
+      try {
+        const dateOfBirth = new Date(dto.dateOfBirth);
+
+        const { data } = await updatePatient({
+          ...dto,
+          dateOfBirth,
+          id: patient.id,
+        }).unwrap();
+
+        if (data && setEditInfo) setEditInfo(false);
+        toast.success(t('new-patient.info.updateSuccess'), toastConfig);
+      } catch (err) {
+        const msg = (err as IServerError).data.message;
+
+        toast.error(Array.isArray(msg) ? msg[0] : msg, toastConfig);
+      }
+    }
+  };
+
   watch('country');
+
+  useEffect(() => {
+    if (patient) {
+      reset({
+        firstName: patient.firstName,
+        lastName: patient.lastName,
+        email: patient.email,
+        city: patient.city,
+        country: patient.country,
+        dateOfBirth: patient.dateOfBirth,
+        gender: patient.gender,
+        phoneNumber: patient.phoneNumber,
+        overview: patient.overview,
+      });
+    }
+  }, [patient, reset]);
 
   return (
     <>
       <LinkGoBack>{t('new-patient.back-link')}</LinkGoBack>
       <Container>
-        <Header>{t('new-patient.header')}</Header>
-        <StyledForm onSubmit={handleSubmit(submitForm)}>
+        <Header>
+          {!patient ? t('new-patient.header') : t('new-patient.updateHeader')}
+        </Header>
+        <StyledForm
+          onSubmit={handleSubmit(!patient ? submitForm : submitUpdate)}
+        >
           <InputsWrapper>
             <SectionWrapper>
               <InputWrapper>
@@ -181,14 +236,16 @@ export function NewPatientForm() {
             <StyledButton
               size="large"
               type="default"
-              onClick={() => navigate(routes.patients)}
+              onClick={() =>
+                !setEditInfo ? navigate(routes.patients) : setEditInfo(false)
+              }
             >
               {t('new-patient.cancel-btn')}
             </StyledButton>
             <StyledButton
               type="primary"
               htmlType="submit"
-              loading={isLoading}
+              loading={isLoading || updateLoading}
               size="large"
             >
               {t('new-patient.submit-btn')}

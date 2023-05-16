@@ -128,7 +128,7 @@
     "modal": "Add Note",
     "overview": "Overview",
     "suffix-age": "years",
-    "link-back": "Back to Patient List",
+    "link-back": "Back to Patients list",
     "edit": "Edit profile",
     "search-input-placeholder": "Search",
     "medical": "Medical History",
@@ -308,6 +308,7 @@
   "new-patient": {
     "back-link": "Back to Patients list",
     "header": "Create new patient card",
+    "updateHeader": "Edit patient card",
     "labels": {
       "first-name": "First Name",
       "last-name": "Last Name",
@@ -333,7 +334,8 @@
     "cancel-btn": "Cancel",
     "info": {
       "success": "Patient successfully was added!",
-      "error": "Patient wasn't added!"
+      "error": "Patient wasn't added!",
+      "updateSuccess": "Patient card updated successfully!"
     }
   },
   "dashboard": {
