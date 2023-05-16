@@ -32,7 +32,7 @@ export const eventsCard: Event[] = [
     allDay: true,
   },
   {
-    title: 'Appointment1',
+    title: 'Appointment',
     start: new Date('2023-05-15T13:00:00'),
     end: new Date('2023-05-15T14:00:00'),
     resource: {
