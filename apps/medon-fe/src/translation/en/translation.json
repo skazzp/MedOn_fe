@@ -354,7 +354,8 @@
     "allLabel": "All doctors",
     "visited": "You previously visited:",
     "prefix-doctor": "Dr. ",
-    "doctorPicAlt": "Doctor photo"
+    "doctorPicAlt": "Doctor photo",
+    "errorAsync": "Error occured while changing availability schedule, try again!"
   },
   "availability": {
     "title": "Availability schedule:",
