@@ -3,10 +3,9 @@ import { Calendar } from 'react-big-calendar';
 import styled from 'styled-components';
 
 export const StyledCalendar = styled(Calendar)`
-  width: calc(100% - 50px);
-  height: 40rem;
+  width: 100%;
+  height: 173px;
   font-family: ${(p) => p.theme.fontFamily.sf_pro_text};
-
   border-radius: 8px;
   border: 1px solid ${(p) => p.theme.colors.gray_400};
   background-color: ${(p) => p.theme.colors.gray_100};
@@ -21,11 +20,9 @@ export const StyledCalendar = styled(Calendar)`
       text-decoration: underline;
     }
   }
-
   .rbc-header {
     font-size: ${(p) => p.theme.fontSizes.md};
-    font-weight: ${(p) => p.theme.fontWeight.medium};
-    padding: 5px 10px !important;
+    font-weight: ${(p) => p.theme.fontWeight.bold};
   }
   .rbc-month-view {
     background-color: ${(p) => p.theme.colors.white};
@@ -66,6 +63,14 @@ export const StyledCalendar = styled(Calendar)`
     width: 100%;
     text-align: center;
     padding-top: 30px;
+  }
+  .rbc-time-content {
+    display: none;
+    visibility: hidden;
+  }
+  .rbc-time-header-gutter {
+    display: none;
+    visibility: hidden;
   }
 `;
 

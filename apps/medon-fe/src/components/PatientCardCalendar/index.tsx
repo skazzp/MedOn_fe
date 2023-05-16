@@ -55,8 +55,8 @@ export function PatientCardCalendar() {
       </Title>
       <StyledCalendar
         localizer={localizer}
-        defaultView="month"
-        views={[Views.MONTH, Views.WEEK]}
+        defaultView={Views.WEEK}
+        views={[Views.WEEK]}
         // mock
         events={eventsCard}
         dayPropGetter={dayPropGetter}
@@ -64,6 +64,7 @@ export function PatientCardCalendar() {
         onSelectEvent={handleEventSelect}
         popup
         selectable
+        timeslots={1}
         step={60}
       />
       <StyledModal
