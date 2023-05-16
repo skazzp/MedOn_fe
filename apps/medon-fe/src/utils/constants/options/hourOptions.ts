@@ -52,6 +52,8 @@ export const endHours = [
   { value: 24, label: '00:00' },
 ];
 
+export const endOfDayHour = 24;
+
 export const timeSlots = [
   '00:00 - 01:00',
   '01:00 - 02:00',

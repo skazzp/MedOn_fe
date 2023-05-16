@@ -6,6 +6,7 @@ import {
   IPatient,
   PatientNote,
   GetPatientNotes,
+  IUpdatePatient,
 } from 'interfaces/index';
 import {
   ICreatePatientNotes,
@@ -20,7 +21,7 @@ export const patientApi = createApi({
     baseUrl: process.env.NX_API_URL,
     prepareHeaders,
   }),
-  tagTypes: ['PatientsQuery', 'notes'],
+  tagTypes: ['PatientsQuery', 'notes', 'patientInfo'],
   endpoints: (builder) => ({
     createPatient: builder.mutation<IServerResponse<IPatient>, ICreatePatient>({
       query(dto: ICreatePatient) {
@@ -32,9 +33,9 @@ export const patientApi = createApi({
       },
     }),
     getPatients: builder.query<IPatientsResponse, IPatientsParams>({
-      query: ({ page = 1, limit = 5, searchPhrase = '' }) => ({
+      query: ({ page = 1, limit = 5, name = '' }) => ({
         url: 'patients/',
-        params: { page, limit, searchPhrase },
+        params: { page, limit, name },
       }),
       providesTags: (result, error, arg) => [
         { type: 'PatientsQuery', page: arg.page },
@@ -43,6 +44,7 @@ export const patientApi = createApi({
     }),
     getPatientById: builder.query<IServerResponse<IPatient>, { id?: string }>({
       query: ({ id }) => `patients/${id}`,
+      providesTags: ['patientInfo'],
     }),
 
     createPatientNote: builder.mutation<
@@ -68,6 +70,16 @@ export const patientApi = createApi({
       }),
       providesTags: ['notes'],
     }),
+    updatePatient: builder.mutation<IServerResponse<IPatient>, IUpdatePatient>({
+      query(dto: IUpdatePatient) {
+        return {
+          url: `patients/update/${dto.id}`,
+          method: 'PATCH',
+          body: dto,
+        };
+      },
+      invalidatesTags: ['patientInfo'],
+    }),
   }),
 });
 
@@ -77,4 +89,5 @@ export const {
   useGetPatientByIdQuery,
   useCreatePatientNoteMutation,
   useGetPatientNotesQuery,
+  useUpdatePatientMutation,
 } = patientApi;
