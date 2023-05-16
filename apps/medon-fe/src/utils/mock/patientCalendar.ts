@@ -9,6 +9,7 @@ export const eventsCard: Event[] = [
       link: 'https://www.google.com',
       isColor: false,
     },
+    allDay: true,
   },
   {
     title: 'Appointment 2',
@@ -18,6 +19,7 @@ export const eventsCard: Event[] = [
       link: 'https://www.google.com',
       isColor: true,
     },
+    allDay: true,
   },
   {
     title: 'Appointment 3',
@@ -27,6 +29,7 @@ export const eventsCard: Event[] = [
       link: 'https://www.google.com',
       isColor: false,
     },
+    allDay: true,
   },
   {
     title: 'Appointment 11',
@@ -36,6 +39,7 @@ export const eventsCard: Event[] = [
       link: 'https://www.google.com',
       isColor: false,
     },
+    allDay: true,
   },
   {
     title: 'Appointment 4',
@@ -45,6 +49,7 @@ export const eventsCard: Event[] = [
       link: 'https://www.google.com',
       isColor: false,
     },
+    allDay: true,
   },
   {
     title: 'Appointment 5',
@@ -54,6 +59,7 @@ export const eventsCard: Event[] = [
       link: 'https://www.google.com',
       isColor: true,
     },
+    allDay: true,
   },
   {
     title: 'Appointment 6',
@@ -63,6 +69,7 @@ export const eventsCard: Event[] = [
       link: 'https://www.google.com',
       isColor: false,
     },
+    allDay: true,
   },
   {
     title: 'Appointment 7',
@@ -72,6 +79,7 @@ export const eventsCard: Event[] = [
       link: 'https://www.google.com',
       isColor: false,
     },
+    allDay: true,
   },
   {
     title: 'Appointment 8',
@@ -81,6 +89,7 @@ export const eventsCard: Event[] = [
       link: 'https://www.google.com',
       isColor: true,
     },
+    allDay: true,
   },
   {
     title: 'Appointment 9',
@@ -90,6 +99,7 @@ export const eventsCard: Event[] = [
       link: 'https://www.google.com',
       isColor: true,
     },
+    allDay: true,
   },
   {
     title: 'Appointment 10',
@@ -99,5 +109,6 @@ export const eventsCard: Event[] = [
       link: 'https://www.google.com',
       isColor: true,
     },
+    allDay: true,
   },
 ];
