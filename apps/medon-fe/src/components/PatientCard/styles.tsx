@@ -1,4 +1,3 @@
-import { Select } from 'antd';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -38,10 +37,6 @@ export const Wrapper = styled.div`
   gap: 0.5rem;
 `;
 
-export const StyledSelect = styled(Select)`
-  width: 300px;
-`;
-
 export const Top = styled.div`
   display: flex;
   justify-content: space-between;
@@ -54,29 +49,6 @@ export const Top = styled.div`
     font-weight: 700;
     font-size: ${({ theme }) => theme.fontSizes.sm};
     gap: 0.5rem;
-  }
-`;
-
-export const AddNoteForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-  overflow: hidden;
-  transition: height 1s ease-in-out;
-`;
-
-export const Buttons = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  > button:first-child {
-    padding: 0 5rem;
-  }
-  > button:last-child {
-    svg {
-      fill: ${({ theme }) => theme.colors.gray_700};
-    }
   }
 `;
 

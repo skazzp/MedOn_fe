@@ -1,4 +1,4 @@
-import { Modal } from 'antd';
+import { Modal, Select } from 'antd';
 import { Calendar } from 'react-big-calendar';
 import styled from 'styled-components';
 
@@ -118,4 +118,36 @@ export const Title = styled.div`
     white-space: nowrap;
     gap: 0.5rem;
   }
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
+export const AddNoteForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  overflow: hidden;
+  transition: height 1s ease-in-out;
+`;
+
+export const Buttons = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  > button:first-child {
+    padding: 0 5rem;
+  }
+  > button:last-child {
+    svg {
+      fill: ${({ theme }) => theme.colors.gray_700};
+    }
+  }
+`;
+
+export const StyledSelect = styled(Select)`
+  width: 300px;
 `;
