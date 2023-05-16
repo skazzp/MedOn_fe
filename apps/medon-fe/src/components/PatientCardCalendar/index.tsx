@@ -45,9 +45,13 @@ import { addPatientNoteSchema } from 'validation/addPatientNoteSchema';
 import {
   AddNoteForm,
   Buttons,
+  Dot,
+  Legend,
   StyledCalendar,
   StyledModal,
   StyledSelect,
+  Subtitle,
+  TextSubtitle,
   Title,
   Wrapper,
 } from './styles';
@@ -133,6 +137,21 @@ export function PatientCardCalendar() {
         selectable
         step={60}
       />
+      <Legend>
+        <legend>{t('patient-card.calendar.legend-title')}</legend>
+        <Subtitle>
+          <Dot color={theme.colors.purple} />
+          <TextSubtitle>
+            {t('patient-card.calendar.appointment-you')}
+          </TextSubtitle>
+        </Subtitle>
+        <Subtitle>
+          <Dot color={theme.colors.blue_500} />
+          <TextSubtitle>
+            {t('patient-card.calendar.appointment-others')}
+          </TextSubtitle>
+        </Subtitle>
+      </Legend>
       <StyledModal
         title={`${t('patient-card.calendar.prefix-modal')} ${event?.title}`}
         open={isVisible}
