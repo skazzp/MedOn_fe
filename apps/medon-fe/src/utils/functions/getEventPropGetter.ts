@@ -1,13 +1,10 @@
 import { Event } from 'react-big-calendar';
 import { theme } from 'styles/theme';
 
-export function getEventPropGetter(myTheme: typeof theme) {
-  return function eventPropGetter(eventProps: Event) {
-    const bgColor = eventProps.resource.isColor
-      ? myTheme.colors.purple
-      : myTheme.colors.blue_500;
-    const style = { backgroundColor: bgColor };
+export function getEventPropGetter({ resource }: Event) {
+  const { colors } = theme;
+  const bgColor = (resource.isColor && colors.purple) || colors.blue_500;
+  const style = { backgroundColor: bgColor };
 
-    return { style };
-  };
+  return { style };
 }

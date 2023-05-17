@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import dayjs from 'dayjs';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Views, dayjsLocalizer, Event } from 'react-big-calendar';
 import { useTheme } from 'styled-components';
@@ -26,7 +26,6 @@ import {
   Title,
 } from './styles';
 import { useModal } from './hooks';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 export function PatientCardCalendar() {
   const [event, setEvent] = useState<Event>();
@@ -37,14 +36,10 @@ export function PatientCardCalendar() {
 
   const { hideModal, isVisible, showModal } = useModal(false);
 
-  const localizer = dayjsLocalizer(dayjs);
-  const dayPropGetter = getDayPropGetter(theme);
-  const eventPropGetter = getEventPropGetter(theme);
-
-  function handleEventSelect(eventValue: Event) {
+  const handleEventSelect = (eventValue: Event) => {
     showModal();
     setEvent(eventValue);
-  }
+  };
 
   return (
     <>
@@ -62,13 +57,13 @@ export function PatientCardCalendar() {
         )}
       </Title>
       <StyledCalendar
-        localizer={localizer}
+        localizer={dayjsLocalizer(dayjs)}
         defaultView={Views.WEEK}
         views={[Views.WEEK]}
         // mock
         events={eventsCard}
-        dayPropGetter={dayPropGetter}
-        eventPropGetter={eventPropGetter}
+        dayPropGetter={getDayPropGetter}
+        eventPropGetter={getEventPropGetter}
         onSelectEvent={handleEventSelect}
         popup
         selectable
