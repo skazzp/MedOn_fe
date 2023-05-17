@@ -6,7 +6,7 @@ import { StyledDivProps } from 'pages/AppointmentsPage/types';
 import { Calendar } from 'react-big-calendar';
 
 export const Container = styled.div`
-  font-family: ${theme.fontFamily.roboto};
+  font-family: ${theme.fontFamily.sf_pro_text};
   flex-grow: 1;
   padding: 40px;
 `;
