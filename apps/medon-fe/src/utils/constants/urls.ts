@@ -1,1 +1,1 @@
-export const AUTH_PICTURE = 'assets/images/sidebar.jpg';
+export const authPicture = 'assets/images/sidebar.jpg';

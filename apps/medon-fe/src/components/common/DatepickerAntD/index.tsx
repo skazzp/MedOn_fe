@@ -7,7 +7,7 @@ import {
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { DATE_FORMAT_REG } from 'utils/constants/dateFormat';
+import { dateInputFormat } from 'utils/constants/dateFormat';
 import {
   AntInputDisabledStyle,
   AntInputStyle,
@@ -43,7 +43,7 @@ export function DatepickerAntD<
       <StyledDatePicker
         id={name}
         placeholder={placeholder}
-        format={DATE_FORMAT_REG}
+        format={dateInputFormat}
         allowClear={false}
         size={size}
         style={disabled ? AntInputDisabledStyle : AntInputStyle}
