@@ -8,7 +8,7 @@ export const StyledLinkHome = styled(Link)<LinkHomeStyledProps>`
   display: flex;
   justify-content: center;
   cursor: pointer;
-  font-family: ${({ theme }) => theme.fontFamily.roboto};
+  font-family: ${({ theme }) => theme.fontFamily.sf_pro_text};
   background: ${({ bgcolor }) => bgcolor};
   color: ${({ textcolor }) => textcolor};
   padding: 0.75rem 1.25rem;

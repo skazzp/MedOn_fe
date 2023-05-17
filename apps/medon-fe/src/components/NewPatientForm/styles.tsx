@@ -9,11 +9,11 @@ export const Container = styled.div`
   margin: 40px auto 0px;
   display: flex;
   flex-direction: column;
-  font-family: ${({ theme }) => theme.fontFamily.roboto};
+  font-family: ${({ theme }) => theme.fontFamily.sf_pro_text};
 `;
 
 export const Header = styled.h1`
-  font-family: ${({ theme }) => theme.fontFamily.roboto};
+  font-family: ${({ theme }) => theme.fontFamily.sf_pro_text};
   font-size: ${({ theme }) => theme.fontSizes.xxl};
   font-weight: 400;
   margin-bottom: 40px;

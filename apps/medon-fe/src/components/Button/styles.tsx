@@ -7,7 +7,7 @@ export const StyledButton = styled.button<ButtonStyleProps>`
   justify-content: center;
   align-items: center;
   border: transparent;
-  font-family: ${({ theme }) => theme.fontFamily.roboto};
+  font-family: ${({ theme }) => theme.fontFamily.sf_pro_text};
   font-weight: 500;
   font-size: ${({ theme }) => theme.fontSizes.md};
   cursor: pointer;

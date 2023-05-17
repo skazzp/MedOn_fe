@@ -4,6 +4,11 @@ import { theme } from 'styles/theme';
 export const Container = styled.div`
   position: relative;
   width: 100%;
+  textarea {
+    font-family: ${theme.fontFamily.sf_pro_text} !important;
+    font-size: ${theme.fontSizes.md} !important;
+    height: 122px !important;
+  }
 `;
 
 export const ErrorMsg = styled.p`

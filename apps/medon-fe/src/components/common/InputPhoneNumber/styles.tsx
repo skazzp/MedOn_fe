@@ -5,6 +5,9 @@ import PhoneNumberInput from 'react-phone-number-input';
 export const Container = styled.div`
   position: relative;
   width: 100%;
+  .PhoneInput {
+    padding: 9px 11px 8px 11px !important;
+  }
 `;
 
 export const ErrorMsg = styled.p`
@@ -18,14 +21,22 @@ export const ErrorMsg = styled.p`
 `;
 
 export const StyledPhoneNumberInput = styled(PhoneNumberInput)`
-  font-size: 16px;
+  font-family: ${theme.fontFamily.sf_pro_text};
+  font-size: ${theme.fontSizes.md};
   padding: 10px;
   border: 1px solid ${theme.colors.gray_400};
-  border-radius: 5px;
+  border-radius: 8px;
   width: 100%;
   background: ${theme.colors.white};
 
+  &:hover {
+    border: 1px solid ${theme.colors.primary_hover} !important;
+    cursor: text;
+  }
+
   input {
+    font-family: ${theme.fontFamily.sf_pro_text};
+    font-size: ${theme.fontSizes.md};
     border: none;
     outline: none;
     ::placeholder {

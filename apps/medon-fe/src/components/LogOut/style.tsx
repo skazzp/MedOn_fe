@@ -4,7 +4,7 @@ import { theme } from 'styles/theme';
 export const BtnStyled = styled.button`
   text-decoration: none;
   color: ${theme.colors.navi_text};
-  font-family: ${theme.fontFamily.roboto};
+  font-family: ${theme.fontFamily.sf_pro_text};
   font-size: ${theme.fontSizes.md};
   margin: 0;
   cursor: pointer;

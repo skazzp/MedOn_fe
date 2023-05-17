@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: flex-start;
   justify-content: center;
   min-height: 100vh;
-  font-family: ${({ theme }) => theme.fontFamily.roboto};
+  font-family: ${({ theme }) => theme.fontFamily.sf_pro_text};
 `;
 
 export const Form = styled.form`
