@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 import { UseModalReturn } from './types';
 
-export function useModal(initialValue = false): UseModalReturn {
-  const [isVisible, setIsVisible] = useState(initialValue);
+export function useModal(initialValue: boolean): UseModalReturn {
+  const [isVisible, setIsVisible] = useState<boolean>(initialValue);
 
   function showModal() {
     setIsVisible(true);
