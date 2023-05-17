@@ -57,7 +57,7 @@ export function PatientCardCalendar() {
             textcolor={theme.colors.white}
           >
             {t('patient-card.calendar.link')}
-            <img src={Plus} alt="Plus svg" />
+            <img src={Plus} alt={`${t('patient-card.alt-image')}`} />
           </Link>
         )}
       </Title>
