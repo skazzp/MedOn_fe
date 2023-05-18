@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { theme } from 'styles/theme';
 
-export function getDayPropGetter(date: Date) {
+export function getDayPropGetter(date: Date): { style: React.CSSProperties } {
   const dateObj = dayjs(date);
   const today = dayjs();
   const isPast = dateObj.isBefore(today, 'date');
