@@ -1,8 +1,7 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { useState } from 'react';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
-import { Modal } from 'antd';
-import { dayjsLocalizer, Views } from 'react-big-calendar';
+import { dayjsLocalizer, Views, Event } from 'react-big-calendar';
 import AppointmentsList from 'components/AppointmentsList';
 import {
   Container,
@@ -12,6 +11,10 @@ import {
   ViewItem,
   Title,
   StyledCalendar,
+  StyledModal,
+  Details,
+  ProfileIcon,
+  Entity,
 } from './styles';
 
 const AppointmentsPage = () => {
@@ -19,17 +22,10 @@ const AppointmentsPage = () => {
   const { t } = useTranslation();
   const [isMonthView, setIsMonthView] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [selectedEvent, setSelectedEvent] = useState<SyntheticEvent<
-    HTMLElement,
-    Event
-  > | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
-  const handleEventClick = (
-    event: object,
-    e: SyntheticEvent<HTMLElement, Event>
-  ) => {
-    console.log(e);
-    setSelectedEvent(e);
+  const handleEventClick = (event: Event) => {
+    setSelectedEvent(event);
     setIsModalOpen(true);
   };
 
@@ -41,52 +37,76 @@ const AppointmentsPage = () => {
     <Container>
       <Header>
         <Title>
-          <h2>Appointments</h2>
+          <h2>{t('appointments.title')}</h2>
           <UserIcon />
+          {
+            //TODO: MED-133 populate with real events from db
+          }
+          <span>20</span>
         </Title>
         <View>
           <ViewItem
             isActive={!isMonthView}
             onClick={() => setIsMonthView(false)}
           >
-            List
+            {t('appointments.view.list')}
           </ViewItem>
           <ViewItem isActive={isMonthView} onClick={() => setIsMonthView(true)}>
-            Month
+            {t('appointments.view.month')}
           </ViewItem>
         </View>
       </Header>
       {!isMonthView && <AppointmentsList />}
-      {isMonthView && (
-        <>
-          <StyledCalendar
-            defaultView={Views.MONTH}
-            events={[
+
+      {
+        //TODO: MED-133 populate with real events from db
+        isMonthView && (
+          <>
+            <StyledCalendar
+              defaultView={Views.MONTH}
+              events={[
+                {
+                  start: dayjs('2023-05-18T10:00:00').toDate(),
+                  end: dayjs('2023-05-18T11:00:00').toDate(),
+                  title: 'Appointment title',
+                },
+              ]}
+              localizer={localizer}
+              views={[Views.MONTH]}
+              selectable
+              popup
+              step={60}
+              timeslots={1}
+              onSelectEvent={handleEventClick}
+            />
+            <StyledModal
+              title={selectedEvent?.title}
+              centered
+              open={isModalOpen}
+              onOk={handleCloseModal}
+              onCancel={handleCloseModal}
+            >
               {
-                start: dayjs('2023-05-18T10:00:00').toDate(),
-                end: dayjs('2023-05-18T11:00:00').toDate(),
-                title: 'Appointment',
-              },
-            ]}
-            localizer={localizer}
-            views={[Views.MONTH]}
-            selectable
-            popup
-            step={60}
-            timeslots={1}
-            onSelectEvent={handleEventClick}
-          />
-          <Modal
-            title="title"
-            centered
-            open={isModalOpen}
-            onOk={handleCloseModal}
-            onCancel={handleCloseModal}
-          >
-            <span>{'additional'}</span>
-          </Modal>
-        </>
-      )}
+                //TODO: MED-133 integrate with real data
+              }
+              <Details>
+                <span>{t('appointments.details.patient')}</span>
+                <Entity>
+                  <p>Adam Smith</p>
+                  <ProfileIcon />
+                </Entity>
+                <span>{t('appointments.details.doctor')}</span>
+                <p>Local/Dr.Martines</p>
+                <span>{t('appointments.details.date')}</span>
+                <p>
+                  {new Date('2023-05-18T10:00:00').toDateString()}{' '}
+                  {t('appointments.details.starts')} 10:00
+                </p>
+              </Details>
+            </StyledModal>
+          </>
+        )
+      }
     </Container>
   );
 };
