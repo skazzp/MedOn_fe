@@ -7,8 +7,8 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import Button from 'components/Button';
-import { InputPasswordAntD } from 'components/common/InputPasswordAntD';
 import LinkHome from 'components/LinkHome';
+import { InputAntD } from 'components/common';
 
 import { SubmitSendEmail } from 'pages/ForgetPassword/types';
 import {
@@ -66,7 +66,7 @@ export default function ForgetPassword() {
             <>
               <h1>{t('forget-password.send-email.title')}</h1>
               <h3>{t('forget-password.send-email.subtitle')}</h3>
-              <InputPasswordAntD
+              <InputAntD
                 control={control}
                 name="email"
                 size="large"

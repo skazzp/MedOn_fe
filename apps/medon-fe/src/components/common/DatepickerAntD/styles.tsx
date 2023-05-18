@@ -34,7 +34,10 @@ export const ErrorMsg = styled.p`
 
 export const StyledDatePicker = styled(DatePicker)`
   width: 100%;
+
   input {
+    font-family: ${theme.fontFamily.sf_pro_text} !important;
+    font-size: ${theme.fontSizes.md} !important;
     &:disabled {
       cursor: default !important;
       color: ${theme.colors.black} !important;
@@ -46,9 +49,13 @@ export const AntInputDisabledStyle = {
   backgroundColor: theme.colors.gray_100,
   color: theme.colors.black,
   cursor: 'default',
+  fontFamily: theme.fontFamily.sf_pro_text,
+  fontSize: theme.fontSizes.md,
 };
 
 export const AntInputStyle = {
   backgroundColor: theme.colors.white,
   color: theme.colors.black,
+  fontFamily: theme.fontFamily.sf_pro_text,
+  fontSize: theme.fontSizes.md,
 };

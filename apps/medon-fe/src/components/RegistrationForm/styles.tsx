@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { theme } from 'styles/theme';
 
 export const Container = styled.div`
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,6 +15,7 @@ export const Form = styled.form`
   width: 27rem;
   gap: 1.5rem;
 `;
+
 export const InputContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -41,6 +41,10 @@ export const Label = styled.label`
 
 export const LabelShort = styled.label`
   width: 13rem;
+  input {
+    font-family: ${theme.fontFamily.sf_pro_text};
+    font-size: ${theme.fontSizes.md};
+  }
 `;
 
 export const LabelText = styled.p`

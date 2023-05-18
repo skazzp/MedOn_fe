@@ -7,7 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   width: 100%;
   min-height: 100vh;
-  font-family: ${({ theme }) => theme.fontFamily.roboto};
+  font-family: ${({ theme }) => theme.fontFamily.sf_pro_text};
 `;
 
 export const Form = styled.form`

@@ -30,6 +30,10 @@ export const Choose = styled.div`
     padding: 0 1.5rem;
     gap: 1rem;
   }
+  input {
+    font-size: ${({ theme }) => theme.fontSizes.md};
+    font-family: ${({ theme }) => theme.fontFamily.sf_pro_text};
+  }
 `;
 
 export const Wrapper = styled.div`

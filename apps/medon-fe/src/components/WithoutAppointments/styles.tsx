@@ -19,7 +19,7 @@ export const Score = styled.div`
   display: flex;
   font-weight: ${theme.fontWeight.bold};
   font-size: ${theme.fontSizes.xxl};
-  font-family: ${theme.fontFamily.roboto};
+  font-family: ${theme.fontFamily.sf_pro_text};
   line-height: 26px;
   div {
     margin-left: 15px;
@@ -80,7 +80,7 @@ export const Wrapper = styled.div`
 export const Manage = styled(Link)`
   font-weight: ${theme.fontWeight.bold};
   font-size: ${theme.fontSizes.xxl};
-  font-family: ${theme.fontFamily.roboto};
+  font-family: ${theme.fontFamily.sf_pro_text};
   line-height: 20px;
   display: flex;
   justify-content: center;
