@@ -22,6 +22,7 @@ export const theme = {
     gray_500: '#b3b3b3',
     gray_600: '#808080',
     gray_700: '#585858',
+    purple: '#B84CFF',
     white: '#ffffff',
     black_87: '#000000de',
     black: '#000000',
@@ -39,6 +40,7 @@ export const theme = {
     grayBack: '#F2F2F2',
     grayBorder: '#d8dbe8',
     invisible: 'rgba(0, 0, 0, 0)',
+    transparent: 'transparent',
     primary_hover: '#4096ff',
   },
   fontFamily: {

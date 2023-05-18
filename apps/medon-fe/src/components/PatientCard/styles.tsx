@@ -29,7 +29,7 @@ export const Container = styled.div`
     border-top: 2px solid ${({ theme }) => theme.colors.gray_300};
     border-bottom: 2px solid ${({ theme }) => theme.colors.gray_300};
     padding: 1rem 0;
-    margin: 0;
+    margin: auto;
   }
 `;
 
@@ -40,14 +40,6 @@ export const Wrapper = styled.div`
 
 export const StyledSelect = styled(Select)`
   width: 300px;
-`;
-
-export const Calendar = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 300px;
 `;
 
 export const Top = styled.div`
