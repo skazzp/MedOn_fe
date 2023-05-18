@@ -4,6 +4,10 @@ import { theme } from 'styles/theme';
 export const Container = styled.div`
   position: relative;
   width: 100%;
+  input {
+    font-family: ${theme.fontFamily.sf_pro_text};
+    font-size: ${theme.fontSizes.md};
+  }
 `;
 
 export const LabelText = styled.p`
@@ -30,9 +34,13 @@ export const AntInputDisabledStyle = {
   backgroundColor: theme.colors.gray_100,
   color: theme.colors.black,
   cursor: 'default',
+  fontFamily: theme.fontFamily.sf_pro_text,
+  fontSize: theme.fontSizes.md,
 };
 
 export const AntInputStyle = {
   backgroundColor: theme.colors.white,
   color: theme.colors.black,
+  fontFamily: theme.fontFamily.sf_pro_text,
+  fontSize: theme.fontSizes.md,
 };

@@ -26,10 +26,14 @@ import { logout, setUser } from 'redux/features/userSlice/userSlice';
 import { persistedStore } from 'redux/store';
 
 import { routes } from 'utils/constants/routes';
+import { Skeleton } from 'antd';
+import { SkeletonContainer } from 'components/PatientCard/styles';
 
 function App() {
   const isLoggedIn = useAppSelector(getTokenSelector);
-  const { data, error } = useGetUserQuery(null, { skip: !isLoggedIn });
+  const { data, error, isLoading } = useGetUserQuery(null, {
+    skip: !isLoggedIn,
+  });
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -41,6 +45,17 @@ function App() {
       dispatch(logout());
     }
   }, [data, error, dispatch, isLoggedIn]);
+
+  if (isLoading)
+    return (
+      <SkeletonContainer>
+        <Skeleton active avatar round />
+        <Skeleton active title />
+        <Skeleton active paragraph />
+        <Skeleton active paragraph />
+        <Skeleton active paragraph />
+      </SkeletonContainer>
+    );
 
   return (
     <Routes>

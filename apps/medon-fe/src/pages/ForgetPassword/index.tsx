@@ -6,8 +6,8 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import Button from 'components/Button';
-import { InputPasswordAntD } from 'components/common/InputPasswordAntD';
-import Link from 'components/Link';
+import LinkHome from 'components/Link';
+import { InputAntD } from 'components/common';
 
 import { SubmitSendEmail } from 'pages/ForgetPassword/types';
 import {
@@ -65,7 +65,7 @@ export default function ForgetPassword() {
             <>
               <h1>{t('forget-password.send-email.title')}</h1>
               <h3>{t('forget-password.send-email.subtitle')}</h3>
-              <InputPasswordAntD
+              <InputAntD
                 control={control}
                 name="email"
                 size="large"
@@ -103,30 +103,30 @@ export default function ForgetPassword() {
             </>
           )}
         </Form>
-        <Link
+        <LinkHome
           bgcolor={theme.colors.black}
           textcolor={theme.colors.white}
           to="/"
           isfullwidth="true"
         >
           {t('forget-password.send-email.home-link')}
-        </Link>
+        </LinkHome>
       </Content>
       <Footer>
-        <Link
+        <LinkHome
           bgcolor={theme.colors.transparent}
           textcolor={theme.colors.blue_300}
           to="#"
         >
           {t('forget-password.footer.linkTerm')}
-        </Link>
-        <Link
+        </LinkHome>
+        <LinkHome
           bgcolor={theme.colors.transparent}
           textcolor={theme.colors.blue_300}
           to="#"
         >
           {t('forget-password.footer.linkPrivacy')}
-        </Link>
+        </LinkHome>
       </Footer>
     </Container>
   );

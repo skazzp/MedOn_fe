@@ -3,7 +3,7 @@ import { theme } from 'styles/theme';
 
 export const Title = styled.h1`
   color: ${theme.colors.title};
-  font-family: ${theme.fontFamily.roboto};
+  font-family: ${theme.fontFamily.sf_pro_text};
   font-style: normal;
   font-weight: 700;
   font-size: ${theme.fontSizes.xxxl};

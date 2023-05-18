@@ -26,6 +26,8 @@ export const Title = styled.h1`
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: 0em;
+  margin-top: 0px;
+  margin-bottom: 10px;
 `;
 
 export const Text = styled.p`
