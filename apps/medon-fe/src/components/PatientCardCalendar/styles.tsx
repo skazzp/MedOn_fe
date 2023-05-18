@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export const StyledCalendar = styled(Calendar)`
   width: 100%;
-  height: 173px;
+  min-height: 173px;
   font-family: ${(p) => p.theme.fontFamily.sf_pro_text};
   border-radius: 8px;
   border: 1px solid ${(p) => p.theme.colors.gray_400};
@@ -67,6 +67,9 @@ export const StyledCalendar = styled(Calendar)`
   .rbc-time-content {
     display: none;
     visibility: hidden;
+  }
+  .rbc-time-header {
+    height: 116px;
   }
   .rbc-time-header-gutter {
     display: none;
