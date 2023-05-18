@@ -68,6 +68,9 @@ export const StyledCalendar = styled(Calendar)`
     display: none;
     visibility: hidden;
   }
+  .rbc-time-header {
+    height: 116px;
+  }
   .rbc-time-header-gutter {
     display: none;
     visibility: hidden;

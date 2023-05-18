@@ -47,7 +47,6 @@ declare module 'styled-components' {
       transparent: string;
     };
     fontFamily: {
-      roboto: string;
       sf_pro_text: string;
     };
     fontSizes: {

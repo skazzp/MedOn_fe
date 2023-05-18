@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Link from 'components/Link';
+import { Link } from 'components/Link';
 import { TestWrapper } from 'utils/tests/TestWrapper';
 
 describe('Link component', () => {

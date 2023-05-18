@@ -6,6 +6,7 @@ import {
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
+import { theme } from 'styles/theme';
 import { Container, ErrorMsg, StyledSelect } from './styles';
 
 export interface Option {
@@ -43,6 +44,14 @@ export function SelectAntD<
         showSearch
         id={name}
         size={size}
+        style={{
+          fontFamily: theme.fontFamily.sf_pro_text,
+          fontSize: theme.fontSizes.md,
+        }}
+        dropdownStyle={{
+          fontFamily: theme.fontFamily.sf_pro_text,
+          fontSize: theme.fontSizes.md,
+        }}
         disabled={disabled}
         status={fieldState.error ? 'error' : undefined}
         placeholder={placeholder}

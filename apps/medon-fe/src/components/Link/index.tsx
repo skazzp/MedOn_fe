@@ -1,6 +1,6 @@
-import { LinkHomeProps } from 'components/Link/types';
+import { LinkProps } from 'components/Link/types';
 import { StyledLink } from 'components/Link/styles';
 
-export default function LinkHome({ children, ...rest }: LinkHomeProps) {
+export function Link({ children, ...rest }: LinkProps) {
   return <StyledLink {...rest}>{children}</StyledLink>;
 }

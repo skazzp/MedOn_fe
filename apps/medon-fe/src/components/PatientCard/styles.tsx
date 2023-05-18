@@ -71,7 +71,7 @@ export const EditBtn = styled.button`
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.colors.blue_300};
-  font-family: ${({ theme }) => theme.fontFamily.roboto};
+  font-family: ${({ theme }) => theme.fontFamily.sf_pro_text};
   font-size: ${({ theme }) => theme.fontSizes.sm};
   font-weight: ${({ theme }) => theme.fontWeight.medium};
 `;

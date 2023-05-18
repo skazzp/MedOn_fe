@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Views, dayjsLocalizer, Event } from 'react-big-calendar';
@@ -6,14 +7,13 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Input } from 'antd';
-import dayjs from 'dayjs';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTheme } from 'styled-components';
 
 import { AddNote, Close } from 'assets/svgs/patientCard';
 import Plus from 'assets/svgs/plus_listcard.svg';
 
-import Link from 'components/Link';
+import { Link } from 'components/Link';
 import { PatientNotes } from 'components/PatientNotes';
 import Button from 'components/Button';
 import { TextareaAntD } from 'components/common';
@@ -88,14 +88,10 @@ export function PatientCardCalendar() {
     resolver: yupResolver(addPatientNoteSchema),
   });
 
-  const localizer = dayjsLocalizer(dayjs);
-  const dayPropGetter = getDayPropGetter(theme);
-  const eventPropGetter = getEventPropGetter(theme);
-
-  function handleEventSelect(eventValue: Event) {
+  const handleEventSelect = (eventValue: Event) => {
     showModal();
     setEvent(eventValue);
-  }
+  };
 
   const handleAddNote: SubmitHandler<SubmitAddNote> = ({ note }) => {
     sendData({ note, patientId: id })
@@ -120,21 +116,22 @@ export function PatientCardCalendar() {
             textcolor={theme.colors.white}
           >
             {t('patient-card.calendar.link')}
-            <img src={Plus} alt="Plus svg" />
+            <img src={Plus} alt={`${t('patient-card.alt-image')}`} />
           </Link>
         )}
       </Title>
       <StyledCalendar
-        localizer={localizer}
+        localizer={dayjsLocalizer(dayjs)}
         defaultView={Views.WEEK}
         views={[Views.WEEK]}
         // mock
         events={eventsCard}
-        dayPropGetter={dayPropGetter}
-        eventPropGetter={eventPropGetter}
+        dayPropGetter={getDayPropGetter}
+        eventPropGetter={getEventPropGetter}
         onSelectEvent={handleEventSelect}
         popup
         selectable
+        timeslots={1}
         step={60}
       />
       <Legend>

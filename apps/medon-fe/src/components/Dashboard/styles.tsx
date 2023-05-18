@@ -9,5 +9,5 @@ export const Container = styled.div`
   margin: 0 auto;
   min-height: 100vh;
   height: 100%;
-  font-family: ${theme.fontFamily.roboto};
+  font-family: ${theme.fontFamily.sf_pro_text};
 `;
