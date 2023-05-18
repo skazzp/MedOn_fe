@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { LinkHomeStyledProps } from 'components/LinkHome/types';
+import { LinkStyledProps } from 'components/Link/types';
 
-export const StyledLinkHome = styled(Link)<LinkHomeStyledProps>`
+export const StyledLink = styled(Link)<LinkStyledProps>`
   text-decoration: transparent;
   display: flex;
   justify-content: center;

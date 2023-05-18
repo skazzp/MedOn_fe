@@ -1,13 +1,12 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import Button from 'components/Button';
-import LinkHome from 'components/LinkHome';
+import { Link } from 'components/Link';
 import { InputAntD } from 'components/common';
 
 import { SubmitSendEmail } from 'pages/ForgetPassword/types';
@@ -104,18 +103,30 @@ export default function ForgetPassword() {
             </>
           )}
         </Form>
-        <LinkHome
+        <Link
           bgcolor={theme.colors.black}
           textcolor={theme.colors.white}
           to="/"
           isfullwidth="true"
         >
           {t('forget-password.send-email.home-link')}
-        </LinkHome>
+        </Link>
       </Content>
       <Footer>
-        <Link to="#">{t('forget-password.footer.linkTerm')}</Link>
-        <Link to="#">{t('forget-password.footer.linkPrivacy')}</Link>
+        <Link
+          bgcolor={theme.colors.transparent}
+          textcolor={theme.colors.blue_300}
+          to="#"
+        >
+          {t('forget-password.footer.linkTerm')}
+        </Link>
+        <Link
+          bgcolor={theme.colors.transparent}
+          textcolor={theme.colors.blue_300}
+          to="#"
+        >
+          {t('forget-password.footer.linkPrivacy')}
+        </Link>
       </Footer>
     </Container>
   );

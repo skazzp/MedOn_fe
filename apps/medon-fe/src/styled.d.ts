@@ -27,12 +27,24 @@ declare module 'styled-components' {
       gray_500: string;
       gray_600: string;
       gray_700: string;
+      purple: string;
       white: string;
       black_87: string;
       black: string;
       title: string;
-      btnGradient: string;
+      background_navi: string;
+      icon_common: string;
       icon_active: string;
+      navi_text: string;
+      navi_hover: string;
+      btnGradient: string;
+      speciality: string;
+      attentionSuccess: string;
+      attentionBnt: string;
+      lightBlue: string;
+      grayBack: string;
+      grayBorder: string;
+      transparent: string;
     };
     fontFamily: {
       sf_pro_text: string;
@@ -48,6 +60,7 @@ declare module 'styled-components' {
     };
     fontWeight: {
       medium: string;
+      bold: string;
     };
   }
 }

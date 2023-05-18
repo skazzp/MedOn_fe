@@ -2,14 +2,14 @@ import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { SubmitResetPasswordForm } from 'pages/UpdatePassword/types';
 import { Container, Content, Footer, Form } from 'pages/UpdatePassword/styles';
 
 import Button from 'components/Button';
-import LinkHome from 'components/LinkHome';
+import { Link } from 'components/Link';
 import { InputPasswordAntD } from 'components/common';
 
 import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
@@ -89,18 +89,30 @@ export default function UpdatePassword() {
             <img src={RightArrow} alt={`${t('update-password.alt.image')}`} />
           </Button>
         </Form>
-        <LinkHome
+        <Link
           bgcolor={theme.colors.black}
           textcolor={theme.colors.white}
           to="/"
           isfullwidth="true"
         >
           {t('update-password.reset-password.home-link')}
-        </LinkHome>
+        </Link>
       </Content>
       <Footer>
-        <Link to="#">{t('update-password.footer.linkTerm')}</Link>
-        <Link to="#">{t('update-password.footer.linkPrivacy')}</Link>
+        <Link
+          bgcolor={theme.colors.transparent}
+          textcolor={theme.colors.blue_300}
+          to="#"
+        >
+          {t('update-password.footer.linkTerm')}
+        </Link>
+        <Link
+          bgcolor={theme.colors.transparent}
+          textcolor={theme.colors.blue_300}
+          to="#"
+        >
+          {t('update-password.footer.linkPrivacy')}
+        </Link>
       </Footer>
     </Container>
   );

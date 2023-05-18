@@ -120,7 +120,8 @@
     "placeholder": "Search ",
     "no-data": "No patients are registered",
     "load-more": "Load More",
-    "overview": "Overview: "
+    "overview": "Overview: ",
+    "preffix-remote": "Remote "
   },
   "patient-card": {
     "button": "Add Patient Note +",
@@ -128,10 +129,24 @@
     "overview": "Overview",
     "suffix-age": "years",
     "link-back": "Back to Patients list",
+    "alt-image": "Plus svg",
     "edit": "Edit profile",
     "search-input-placeholder": "Search",
     "medical": "Medical History",
     "toast.success": "Note added successfully",
+    "calendar": {
+      "title": "Calendar",
+      "prefix-modal": "Appointment",
+      "link": "Book Appointment",
+      "modal-title": "Title: ",
+      "modal-start": "Start Appointment:",
+      "modal-end": "End Appointment:",
+      "modal-link": "Zoom Link:",
+      "modal-name-link": "Link",
+      "legend-title": "Legend:",
+      "appointment-you": "Appointments with you",
+      "appointment-others": "Appointments with other doctors"
+    },
     "notes": {
       "prefix-doctor": "Dr. ",
       "empty-notes": "No notes added yet",

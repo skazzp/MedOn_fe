@@ -1,10 +1,10 @@
 import { AnchorHTMLAttributes } from 'react';
 
-export interface LinkHomeProps extends LinkHomeStyledProps {
+export interface LinkProps extends LinkStyledProps {
   children: React.ReactNode;
 }
 
-export interface LinkHomeStyledProps
+export interface LinkStyledProps
   extends AnchorHTMLAttributes<HTMLAnchorElement> {
   bgcolor?: string;
   textcolor?: string;

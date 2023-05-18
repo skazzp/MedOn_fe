@@ -35,7 +35,7 @@ export default function PatientListCard({
     doctorLink = (
       <div>
         <CameraIcon />
-        <p>Remote </p> <span>{doctor}</span>
+        <p>{t('patient-list.preffix-remote')} </p> <span>{doctor}</span>
       </div>
     );
   }

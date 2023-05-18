@@ -27,7 +27,7 @@ export default function AppointmentsScore() {
       <CountList>
         <h2>{t('dashboard.latest')}</h2>
         <UserIcon />
-        <p>
+        <p data-testid="patient-count">
           {user.role === roles.remote
             ? sortedPatientList.length
             : patientList.length}
@@ -37,10 +37,10 @@ export default function AppointmentsScore() {
         <>
           <Radio>
             <input type="radio" name="choice" id="list" checked={true} />
-            <label htmlFor="list" data-checked={true}>
+            <label htmlFor="list" data-checked={true} data-testid="list">
               {t('dashboard.list')}
             </label>
-            <input type="radio" name="choice" id="month" />
+            <input type="radio" name="choice" id="month" data-testid="month" />
             <label htmlFor="month">{t('dashboard.month')}</label>
           </Radio>
 
