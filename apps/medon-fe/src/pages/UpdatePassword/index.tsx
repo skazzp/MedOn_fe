@@ -9,7 +9,7 @@ import { SubmitResetPasswordForm } from 'pages/UpdatePassword/types';
 import { Container, Content, Footer, Form } from 'pages/UpdatePassword/styles';
 
 import Button from 'components/Button';
-import Link from 'components/Link';
+import { Link } from 'components/Link';
 import { InputPasswordAntD } from 'components/common';
 
 import RightArrow from 'assets/svgs/arrow/right-arrow.svg';

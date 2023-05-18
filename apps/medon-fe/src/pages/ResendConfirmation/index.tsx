@@ -8,7 +8,7 @@ import { toastConfig } from 'utils/toastConfig';
 
 import Button from 'components/Button';
 import Input from 'components/Input';
-import Link from 'components/Link';
+import { Link } from 'components/Link';
 import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
 import Logo from 'assets/svgs/logo_medon.svg';
 import {

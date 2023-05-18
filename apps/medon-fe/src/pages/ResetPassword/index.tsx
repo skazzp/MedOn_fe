@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 
 import Button from 'components/Button';
-import Link from 'components/Link';
+import { Link } from 'components/Link';
 
 import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
 import Logo from 'assets/svgs/logo_medon.svg';

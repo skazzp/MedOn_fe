@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Views, dayjsLocalizer, Event } from 'react-big-calendar';
 import { useTheme } from 'styled-components';
 
-import Link from 'components/Link';
+import { Link } from 'components/Link';
 
 import { eventsCard } from 'utils/mock/patientCalendar';
 import { getDateAndHourEvent } from 'utils/functions/getDateAndHourEvent';

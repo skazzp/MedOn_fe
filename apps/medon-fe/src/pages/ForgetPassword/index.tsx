@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import Button from 'components/Button';
-import LinkHome from 'components/Link';
+import { Link } from 'components/Link';
 import { InputAntD } from 'components/common';
 
 import { SubmitSendEmail } from 'pages/ForgetPassword/types';
@@ -103,30 +103,30 @@ export default function ForgetPassword() {
             </>
           )}
         </Form>
-        <LinkHome
+        <Link
           bgcolor={theme.colors.black}
           textcolor={theme.colors.white}
           to="/"
           isfullwidth="true"
         >
           {t('forget-password.send-email.home-link')}
-        </LinkHome>
+        </Link>
       </Content>
       <Footer>
-        <LinkHome
+        <Link
           bgcolor={theme.colors.transparent}
           textcolor={theme.colors.blue_300}
           to="#"
         >
           {t('forget-password.footer.linkTerm')}
-        </LinkHome>
-        <LinkHome
+        </Link>
+        <Link
           bgcolor={theme.colors.transparent}
           textcolor={theme.colors.blue_300}
           to="#"
         >
           {t('forget-password.footer.linkPrivacy')}
-        </LinkHome>
+        </Link>
       </Footer>
     </Container>
   );

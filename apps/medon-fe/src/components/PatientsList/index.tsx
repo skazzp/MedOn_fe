@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 import { Input, Pagination, Spin } from 'antd';
-import Link from 'components/Link';
+import { Link } from 'components/Link';
 import PatientListCard from 'components/PatientListCard';
 import { ReactComponent as Plus } from 'assets/svgs/plus_listcard.svg';
 import { useGetPatientsQuery } from 'redux/api/patientApi';
