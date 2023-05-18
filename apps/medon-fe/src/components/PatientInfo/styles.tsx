@@ -45,7 +45,7 @@ export const Back = styled(Link)`
 `;
 
 export const Patient = styled.div`
-  font-family: ${theme.fontFamily.roboto};
+  font-family: ${theme.fontFamily.sf_pro_text};
   font-style: normal;
   margin-top: 25px;
 `;

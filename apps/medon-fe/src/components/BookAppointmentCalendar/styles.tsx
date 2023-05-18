@@ -48,7 +48,7 @@ export const StyledCalendar = styled(Calendar)`
   .rbc-date-cell {
     padding-left: 10px;
     text-align: left;
-    font-family: ${theme.fontFamily.roboto};
+    font-family: ${theme.fontFamily.sf_pro_text};
     font-style: normal;
     font-weight: ${theme.fontWeight.bold};
     font-size: 16px;
