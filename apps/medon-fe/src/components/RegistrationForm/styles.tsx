@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { theme } from 'styles/theme';
 
 export const Container = styled.div`
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,6 +40,10 @@ export const Label = styled.label`
 
 export const LabelShort = styled.label`
   width: 13rem;
+  input {
+    font-family: ${theme.fontFamily.sf_pro_text};
+    font-size: ${theme.fontSizes.md};
+  }
 `;
 
 export const LabelText = styled.p`

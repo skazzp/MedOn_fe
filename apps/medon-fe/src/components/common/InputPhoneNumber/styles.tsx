@@ -28,7 +28,7 @@ export const StyledPhoneNumberInput = styled(PhoneNumberInput)`
   border-radius: 8px;
   width: 100%;
   background: ${theme.colors.white};
-
+  transition: all 0.2s;
   &:hover {
     border: 1px solid ${theme.colors.primary_hover} !important;
     cursor: text;

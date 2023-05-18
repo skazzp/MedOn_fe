@@ -48,6 +48,10 @@ export function SelectAntD<
           fontFamily: theme.fontFamily.sf_pro_text,
           fontSize: theme.fontSizes.md,
         }}
+        dropdownStyle={{
+          fontFamily: theme.fontFamily.sf_pro_text,
+          fontSize: theme.fontSizes.md,
+        }}
         disabled={disabled}
         status={fieldState.error ? 'error' : undefined}
         placeholder={placeholder}

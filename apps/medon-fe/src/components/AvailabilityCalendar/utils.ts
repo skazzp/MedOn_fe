@@ -106,7 +106,7 @@ export const checkDates = (
     );
   }
 
-  return eventArray.find((event): boolean => {
+return eventArray.find((event): boolean => {
     const eventStart = dayjs(event.start).valueOf();
     const eventEnd = dayjs(event.end).valueOf();
     const newEventStart = dayjs(start).valueOf();
@@ -114,7 +114,8 @@ export const checkDates = (
 
     return (
       dayjs(newEventStart).isBetween(eventStart, eventEnd, undefined, '[)') ||
-      dayjs(newEventEnd).isBetween(eventStart, eventEnd, undefined, '(]')
+      dayjs(newEventEnd).isBetween(eventStart, eventEnd, undefined, '(]') ||
+      (newEventStart < eventStart && newEventEnd > eventEnd)
     );
   });
 };
