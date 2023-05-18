@@ -2,6 +2,7 @@
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
 import { cross, smallArrowRight, union } from 'utils/constants';
+import { steps } from 'utils/constants/steps';
 import { ButtonProps } from './types';
 
 export const Wrapper = styled.div`
@@ -10,7 +11,7 @@ export const Wrapper = styled.div`
   padding: 20px;
 `;
 export const StepsScore = styled.div`
-  font-family: ${theme.fontFamily.roboto};
+  font-family: ${theme.fontFamily.sf_pro_text};
   font-style: normal;
   font-weight: ${theme.fontWeight.medium};
   font-size: ${theme.fontSizes.md};
@@ -23,7 +24,7 @@ export const Cancel = styled.button`
   border-radius: 4px;
   background: ${theme.colors.blue_300};
   padding: 8px 14px 8px 25px;
-  font-family: ${theme.fontFamily.roboto};
+  font-family: ${theme.fontFamily.sf_pro_text};
   font-style: normal;
   font-weight: ${theme.fontWeight.bold};
   font-size: ${theme.fontSizes.md};
@@ -69,7 +70,7 @@ export const Button = styled.button<ButtonProps>`
   border: 1px solid ${theme.colors.white};
   border-radius: 4px;
   padding: 8px;
-  font-family: ${theme.fontFamily.roboto};
+  font-family: ${theme.fontFamily.sf_pro_text};
   font-style: normal;
   font-weight: ${theme.fontWeight.bold};
   font-size: ${theme.fontSizes.md};
@@ -78,15 +79,15 @@ export const Button = styled.button<ButtonProps>`
   &:hover {
     background-color: ${theme.colors.blue_700};
     background-position-x: ${({ buttonType }) =>
-      buttonType === 'next'
+      buttonType === steps.next
         ? '90px'
-        : buttonType === 'previous'
+        : buttonType === steps.previous
         ? '5px'
         : '155px'};
   }
 
   ${(props) =>
-    props.buttonType === 'next' &&
+    props.buttonType === steps.next &&
     `
     background-image: url(${smallArrowRight});
     background-position-x: 85px;
@@ -96,16 +97,15 @@ export const Button = styled.button<ButtonProps>`
   }
   `}
   ${(props) =>
-    props.buttonType === 'previous' &&
+    props.buttonType === steps.previous &&
     `
     background-image: url(${union});
     background-position-x: 10px;
     padding-left: 35px;
   `}
   ${(props) =>
-    props.buttonType === 'booking' &&
+    props.buttonType === steps.booking &&
     `
-
     background-position-x: 155px;
     padding-right: 24px;
     font-size: 14px;

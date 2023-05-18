@@ -13,9 +13,10 @@ import {
   Wrapper,
 } from 'components/Steps/styles';
 import { StepsProps } from 'components/BookAppointmentCalendar/types';
-import { mockDoctors } from 'components/SelectDoctor/mockData';
-import useSpecOptions from 'components/RegistrationForm/hooks';
 import { steps } from 'utils/constants/steps';
+import { useNavigate } from 'react-router-dom';
+import { routes } from 'utils/constants';
+import getDoctorFullName from './hook';
 
 function Steps(props: StepsProps) {
   const {
@@ -30,7 +31,7 @@ function Steps(props: StepsProps) {
     selectDoctorAppointments,
   } = props;
   const { t } = useTranslation();
-  const { specialityOptions } = useSpecOptions();
+  const navigate = useNavigate();
 
   const handleNextStep = () => {
     onCurrentStepChange(currentStep + steps.one);
@@ -38,6 +39,8 @@ function Steps(props: StepsProps) {
 
   const handlePreviousStep = () => {
     onCurrentStepChange(currentStep - steps.one);
+    selectDoctorAppointments(null);
+    selectTimeAppointments('');
   };
 
   const handleCancel = () => {
@@ -46,6 +49,7 @@ function Steps(props: StepsProps) {
       onCurrentStepChange(steps.one);
       selectTimeAppointments('');
       selectDoctorAppointments(null);
+      navigate(routes.patientCard);
     }
   };
 
@@ -64,18 +68,6 @@ function Steps(props: StepsProps) {
       default:
         return null;
     }
-  };
-
-  const getDoctorFullName = (doctorId: number) => {
-    const doctor = mockDoctors.find((doctors) => doctors.id === doctorId);
-
-    if (doctor) {
-      return `${doctor.firstName} ${doctor.lastName} ${
-        specialityOptions[doctor.specialityId].label
-      } ${doctor.city} ${doctor.country}`;
-    }
-
-    return '';
   };
 
   return (
