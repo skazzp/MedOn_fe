@@ -15,6 +15,7 @@ export const Form = styled.form`
   width: 27rem;
   gap: 1.5rem;
 `;
+
 export const InputContainer = styled.div`
   display: flex;
   justify-content: space-between;

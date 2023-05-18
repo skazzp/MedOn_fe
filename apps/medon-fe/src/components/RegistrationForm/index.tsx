@@ -42,6 +42,7 @@ export default function RegistrationForm({ submitForm }: IProps) {
     watch,
     formState: { errors },
   } = useForm<FormData>({
+    mode: 'onBlur',
     resolver: yupResolver(registrationFormSchema),
     defaultValues: {
       firstName: '',

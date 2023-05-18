@@ -4,6 +4,10 @@ import { theme } from 'styles/theme';
 export const Container = styled.div`
   position: relative;
   width: 100%;
+  input {
+    font-family: ${theme.fontFamily.sf_pro_text};
+    font-size: ${theme.fontSizes.md};
+  }
 `;
 
 export const LabelText = styled.p`
