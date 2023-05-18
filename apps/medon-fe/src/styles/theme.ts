@@ -39,9 +39,9 @@ export const theme = {
     grayBack: '#F2F2F2',
     grayBorder: '#d8dbe8',
     invisible: 'rgba(0, 0, 0, 0)',
+    primary_hover: '#4096ff',
   },
   fontFamily: {
-    roboto: 'Roboto, sans-serif',
     sf_pro_text: 'SF Pro Text, sans-serif',
   },
   fontSizes: {

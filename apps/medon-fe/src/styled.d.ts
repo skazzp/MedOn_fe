@@ -35,7 +35,6 @@ declare module 'styled-components' {
       icon_active: string;
     };
     fontFamily: {
-      roboto: string;
       sf_pro_text: string;
     };
     fontSizes: {

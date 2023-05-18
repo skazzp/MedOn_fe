@@ -30,9 +30,13 @@ export const AntInputDisabledStyle = {
   backgroundColor: theme.colors.gray_100,
   color: theme.colors.black,
   cursor: 'default',
+  fontFamily: theme.fontFamily.sf_pro_text,
+  fontSize: theme.fontSizes.md,
 };
 
 export const AntInputStyle = {
   backgroundColor: theme.colors.white,
   color: theme.colors.black,
+  fontFamily: theme.fontFamily.sf_pro_text,
+  fontSize: theme.fontSizes.md,
 };

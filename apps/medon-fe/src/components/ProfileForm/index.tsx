@@ -48,6 +48,7 @@ export default function ProfileForm({
   const user = useAppSelector(getUserSelector);
   const { control, handleSubmit, watch, reset, setValue } =
     useForm<FormProfileData>({
+      mode: 'onBlur',
       resolver: yupResolver(profileFormSchema),
       defaultValues: {
         firstName: user.firstName,

@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   gap: 1rem;
-  font-family: ${theme.fontFamily.roboto};
+  font-family: ${theme.fontFamily.sf_pro_text};
 `;
 
 export const ShowMore = styled(Button)`

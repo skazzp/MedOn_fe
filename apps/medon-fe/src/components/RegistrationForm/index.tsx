@@ -42,6 +42,7 @@ export default function RegistrationForm({ submitForm }: IProps) {
     watch,
     formState: { errors },
   } = useForm<FormData>({
+    mode: 'onBlur',
     resolver: yupResolver(registrationFormSchema),
     defaultValues: {
       firstName: '',
@@ -64,6 +65,7 @@ export default function RegistrationForm({ submitForm }: IProps) {
             <InputAntD
               name={formFields.firstName}
               control={control}
+              size="large"
               placeholder={`${t('regForm.firstName.placeholder')}`}
             />
           </LabelShort>
@@ -72,6 +74,7 @@ export default function RegistrationForm({ submitForm }: IProps) {
             <InputAntD
               name={formFields.lastName}
               control={control}
+              size="large"
               placeholder={`${t('regForm.lastName.placeholder')}`}
             />
           </LabelShort>
@@ -81,6 +84,7 @@ export default function RegistrationForm({ submitForm }: IProps) {
           <InputAntD
             name={formFields.email}
             control={control}
+            size="large"
             placeholder={`${t('regForm.email.placeholder')}`}
           />
         </Label>
@@ -95,6 +99,7 @@ export default function RegistrationForm({ submitForm }: IProps) {
                   <Input.Password
                     id="password"
                     role="textbox"
+                    size="large"
                     status={errors.password?.message ? 'error' : undefined}
                     placeholder={`${t('regForm.password.placeholder')}`}
                     {...field}
@@ -110,6 +115,7 @@ export default function RegistrationForm({ submitForm }: IProps) {
                 render={({ field }) => (
                   <Input.Password
                     id="passwordRepeat"
+                    size="large"
                     status={
                       errors.passwordRepeat?.message ? 'error' : undefined
                     }
@@ -134,6 +140,7 @@ export default function RegistrationForm({ submitForm }: IProps) {
           <SelectAntD
             name={formFields.role}
             control={control}
+            size="large"
             placeholder={`${t('regForm.role.placeholder')}`}
             options={rolesOptions}
           />
@@ -144,6 +151,7 @@ export default function RegistrationForm({ submitForm }: IProps) {
             <SelectAntD
               name={formFields.speciality}
               control={control}
+              size="large"
               placeholder={`${t('regForm.speciality.placeholder')}`}
               options={specialityOptions}
             />
@@ -154,6 +162,7 @@ export default function RegistrationForm({ submitForm }: IProps) {
           <DatepickerAntD
             name={formFields.birthday}
             control={control}
+            size="large"
             placeholder={`${t('regForm.birthday.placeholder')}`}
           />
         </Label>
@@ -163,6 +172,7 @@ export default function RegistrationForm({ submitForm }: IProps) {
             <SelectAntD
               name={formFields.country}
               control={control}
+              size="large"
               placeholder={`${t('regForm.country.placeholder')}`}
               options={countryOptions}
             />
@@ -172,14 +182,17 @@ export default function RegistrationForm({ submitForm }: IProps) {
             <InputAntD
               name={formFields.city}
               control={control}
+              size="large"
               placeholder={`${t('regForm.city.placeholder')}`}
             />
           </LabelShort>
         </InputContainer>
         <Label htmlFor="timezone">
+          <LabelText>{t('regForm.timezone.label')}</LabelText>
           <SelectAntD
             name={formFields.timezone}
             control={control}
+            size="large"
             placeholder={`${t('regForm.timezone.placeholder')}`}
             options={timezoneOptions}
           />

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { AUTH_PICTURE } from 'utils/constants/urls';
+import { authPicture } from 'utils/constants/urls';
 
 export const Container = styled.div`
   display: flex;
@@ -26,6 +26,8 @@ export const Title = styled.h1`
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: 0em;
+  margin-top: 0px;
+  margin-bottom: 10px;
 `;
 
 export const Text = styled.p`
@@ -45,5 +47,5 @@ export const Sidebar = styled.div`
   min-height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url(${AUTH_PICTURE});
+  background-image: url(${authPicture});
 `;

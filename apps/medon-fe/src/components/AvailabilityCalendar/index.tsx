@@ -6,6 +6,7 @@ import {
   CloseOutlined,
   DeleteOutlined,
   EditOutlined,
+  LoadingOutlined,
 } from '@ant-design/icons';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -32,6 +33,7 @@ export default function AvailabilityCalendar() {
     handleSelectDay,
     handleSelectEvent,
     handleSubmitEvent,
+    handleEditEvent,
     handleRemove,
     handleCancel,
     control,
@@ -40,6 +42,11 @@ export default function AvailabilityCalendar() {
     selectedDay,
     timeSlots,
     dateInText,
+    createLoading,
+    updateLoading,
+    removeLoading,
+    disabledBtns,
+    formats,
   } = useCalendar();
 
   return (
@@ -52,6 +59,7 @@ export default function AvailabilityCalendar() {
         onSelectEvent={handleSelectEvent}
         onSelectSlot={handleSelectDay}
         views={[Views.MONTH, Views.AGENDA]}
+        formats={formats}
         selectable
         popup
         step={60}
@@ -61,7 +69,11 @@ export default function AvailabilityCalendar() {
         {!selectedDay ? (
           <DateText>{t('availability.message')}</DateText>
         ) : (
-          <Form onSubmit={handleSubmit(handleSubmitEvent)}>
+          <Form
+            onSubmit={handleSubmit(
+              editIndex === null ? handleSubmitEvent : handleEditEvent
+            )}
+          >
             <DateText>{dateInText}</DateText>
             <InputContainer>
               <SelectAntD
@@ -79,15 +91,20 @@ export default function AvailabilityCalendar() {
               />
             </InputContainer>
             <BtnContainer>
-              <StyledButton type="primary" htmlType="submit" size="large">
+              <StyledButton
+                type="primary"
+                htmlType="submit"
+                size="large"
+                disabled={disabledBtns}
+              >
                 {editIndex === null ? (
                   <>
-                    <CheckOutlined />
+                    {!createLoading ? <CheckOutlined /> : <LoadingOutlined />}
                     &nbsp;{t('save')}
                   </>
                 ) : (
                   <>
-                    <EditOutlined />
+                    {!updateLoading ? <EditOutlined /> : <LoadingOutlined />}
                     &nbsp;{t('edit')}
                   </>
                 )}
@@ -99,8 +116,9 @@ export default function AvailabilityCalendar() {
                   size="large"
                   danger
                   onClick={handleRemove}
+                  disabled={disabledBtns}
                 >
-                  <DeleteOutlined />
+                  {!removeLoading ? <DeleteOutlined /> : <LoadingOutlined />}
                 </StyledButton>
               )}
               <StyledButton
@@ -108,6 +126,7 @@ export default function AvailabilityCalendar() {
                 htmlType="button"
                 size="large"
                 onClick={handleCancel}
+                disabled={disabledBtns}
               >
                 <CloseOutlined />
               </StyledButton>

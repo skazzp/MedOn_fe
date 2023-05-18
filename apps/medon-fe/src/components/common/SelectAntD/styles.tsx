@@ -5,6 +5,15 @@ import { theme } from 'styles/theme';
 export const Container = styled.div`
   position: relative;
   width: 100%;
+  .ant-select-item-option-content {
+    font-family: ${theme.fontFamily.sf_pro_text} !important;
+    font-size: ${theme.fontSizes.sm} !important;
+  }
+
+  .ant-select-item-option-content {
+    font-family: ${theme.fontFamily.sf_pro_text} !important;
+    font-size: ${theme.fontSizes.sm} !important;
+  }
 `;
 
 export const LabelText = styled.p`
@@ -38,7 +47,17 @@ export const StyledSelect = styled(Select)`
       p.disabled && p.theme.colors.gray_100} !important;
     cursor: inherit !important;
   }
+  span {
+    font-family: ${theme.fontFamily.sf_pro_text} !important;
+    font-size: ${theme.fontSizes.md} !important;
+  }
   input {
     cursor: text !important;
+    font-family: ${theme.fontFamily.sf_pro_text} !important;
+    font-size: ${theme.fontSizes.md} !important;
+  }
+  .ant-select-dropdown {
+    font-family: ${theme.fontFamily.sf_pro_text} !important;
+    font-size: ${theme.fontSizes.md} !important;
   }
 `;
