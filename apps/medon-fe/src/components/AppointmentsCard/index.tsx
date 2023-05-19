@@ -114,7 +114,11 @@ export function AppointmentsCard({
           onOk={handleSubmit(addLinkSubmit)}
           onCancel={hideModal}
         >
-          <InputAntD control={control} name="link" />
+          <InputAntD
+            control={control}
+            name="link"
+            placeholder={`${t('appointment.modal-placeholder')}`}
+          />
         </Modal>
       </Container>
     </>
