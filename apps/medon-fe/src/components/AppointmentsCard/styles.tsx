@@ -1,14 +1,13 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { IAppointmentsCardProps } from './types';
 
 export const Container = styled.div<IAppointmentsCardProps>`
   font-family: ${({ theme }) => theme.fontFamily.sf_pro_text};
-  background-color: ${({ theme, isAssigned }) =>
-    isAssigned ? theme.colors.blue_200 : theme.colors.white};
+  background-color: ${({ theme, isLinkAdded }) =>
+    isLinkAdded ? theme.colors.blue_200 : theme.colors.white};
   border: 2px solid
-    ${({ theme, isAssigned }) =>
-      isAssigned ? theme.colors.blue_250 : theme.colors.gray_300};
+    ${({ theme, isLinkAdded }) =>
+      isLinkAdded ? theme.colors.blue_250 : theme.colors.gray_300};
   padding: 0.875rem 0.75rem;
   border-radius: 0.5rem;
   > div:first-child {
@@ -18,9 +17,6 @@ export const Container = styled.div<IAppointmentsCardProps>`
     strong {
       color: ${({ theme }) => theme.colors.blue_900};
     }
-    button {
-      color: ${({ theme }) => theme.colors.blue_300};
-    }
   }
 `;
 
@@ -29,6 +25,11 @@ export const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid ${({ theme }) => theme.colors.gray_300};
+  > button {
+    width: fit-content;
+    height: fit-content;
+    padding: 0.25rem 0.5rem;
+  }
 `;
 
 export const Number = styled.span`
@@ -59,18 +60,8 @@ export const Name = styled.span`
   font-weight: ${({ theme }) => theme.fontWeight.bold};
 `;
 
-export const NotRemoteDoctor = styled(Link)`
-  text-decoration: none;
-  color: ${({ theme }) => theme.colors.black};
-`;
-
 export const Body = styled.div`
   display: flex;
   justify-content: space-between;
   padding-top: 0.5rem;
-  > button {
-    width: fit-content;
-    height: fit-content;
-    padding: 0.25rem 0.5rem;
-  }
 `;

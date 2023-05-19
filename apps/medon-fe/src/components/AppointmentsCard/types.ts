@@ -8,7 +8,7 @@ export interface IAppointmentsCardProps {
   remoteDoctor?: {
     lastName?: string;
   };
-  isAssigned?: boolean;
+  isLinkAdded?: boolean;
   // I NEED TO ADD THIS
   // PATIENT
   patient?: {
@@ -18,4 +18,8 @@ export interface IAppointmentsCardProps {
     gender?: string;
     overview?: string;
   };
+}
+
+export interface AddLink {
+  link: string;
 }
