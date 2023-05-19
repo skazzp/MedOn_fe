@@ -354,6 +354,7 @@
     "appointments": "Appointments:",
     "manage": "Manage Availability",
     "book": "Book an appointment",
+    "prefix-doctor": "Dr. ",
     "month": "Month",
     "list": "List"
   },

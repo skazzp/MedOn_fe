@@ -17,20 +17,27 @@ export default function Dashboard() {
   return (
     <Container>
       <h1>
-        {t('dashboard.welcome')}, Dr. {`${user.lastName || 'Anonymous'}`}
+        {t('dashboard.welcome')}, {t('dashboard.prefix-doctor')}
+        {`${user.lastName || 'Anonymous'}`}
       </h1>
       {appointmentCardMock.length ? (
         <>
           <Attention />
           <AppointmentsScore quantity={appointmentCardMock.length} />
           <AppointmentContainer>
-            {appointmentCardMock.map((appointment) => (
-              <AppointmentsCard
-                key={appointment.id}
-                isLinkAdded={appointment.link === ''}
-                {...appointment}
-              />
-            ))}
+            {appointmentCardMock
+              .sort(
+                (a, b) =>
+                  Number(a.startTime?.getHours()) -
+                  Number(b.startTime?.getHours())
+              )
+              .map((appointment) => (
+                <AppointmentsCard
+                  key={appointment.id}
+                  isLinkAdded={appointment.link === ''}
+                  {...appointment}
+                />
+              ))}
           </AppointmentContainer>
         </>
       ) : (
