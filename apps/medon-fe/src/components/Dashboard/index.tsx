@@ -27,7 +27,7 @@ export default function Dashboard() {
             {appointmentCardMock.map((appointment) => (
               <AppointmentsCard
                 key={appointment.id}
-                isAssigned={appointment.remoteDoctor !== undefined}
+                isLinkAdded={appointment.link === ''}
                 {...appointment}
               />
             ))}

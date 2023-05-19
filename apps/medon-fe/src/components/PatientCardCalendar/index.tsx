@@ -16,6 +16,8 @@ import { useAppSelector } from 'redux/hooks';
 
 import Plus from 'assets/svgs/plus_listcard.svg';
 
+import { useModal } from 'hooks/useModal';
+
 import {
   Dot,
   Legend,
@@ -25,7 +27,6 @@ import {
   TextSubtitle,
   Title,
 } from './styles';
-import { useModal } from './hooks';
 
 export function PatientCardCalendar() {
   const [event, setEvent] = useState<Event>();
