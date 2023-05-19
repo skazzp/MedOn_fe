@@ -237,6 +237,11 @@
       "required": "Please add a note about the patient",
       "minLength": "Note must be at least 10 characters",
       "maxLength": "Note must be less than 200 characters"
+    },
+    "link": {
+      "required": "Link is required",
+      "url": "Please enter a valid URL",
+      "min": "URL must be at least 8 characters long"
     }
   },
   "re-confirm-account": {

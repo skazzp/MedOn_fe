@@ -3,13 +3,13 @@ import { IAppointmentsCardProps } from 'components/AppointmentsCard/types';
 export const appointmentCardMock: IAppointmentsCardProps[] = [
   {
     id: 123,
-    link: 'http://example.com',
+    link: '',
     startTime: new Date('2022-03-01T10:00:00Z'),
     endTime: new Date('2022-03-01T11:00:00Z'),
     localDoctorId: 456,
-    // remoteDoctor: {
-    //   lastName: 'Smith',
-    // },
+    remoteDoctor: {
+      lastName: 'Smith',
+    },
     patient: {
       dateOfBirth: new Date('1980-01-01'),
       firstName: 'John',
@@ -20,7 +20,7 @@ export const appointmentCardMock: IAppointmentsCardProps[] = [
   },
   {
     id: 124,
-    link: 'http://example.com',
+    link: '',
     startTime: new Date('2022-03-01T10:00:00Z'),
     endTime: new Date('2022-03-01T11:00:00Z'),
     localDoctorId: 456,
@@ -41,9 +41,9 @@ export const appointmentCardMock: IAppointmentsCardProps[] = [
     startTime: new Date('2022-03-01T10:00:00Z'),
     endTime: new Date('2022-03-01T11:00:00Z'),
     localDoctorId: 456,
-    // remoteDoctor: {
-    //   lastName: 'Smith',
-    // },
+    remoteDoctor: {
+      lastName: 'Smith',
+    },
     patient: {
       dateOfBirth: new Date('1980-01-01'),
       firstName: 'John',
@@ -54,7 +54,7 @@ export const appointmentCardMock: IAppointmentsCardProps[] = [
   },
   {
     id: 126,
-    link: 'http://example.com',
+    link: '',
     startTime: new Date('2022-03-01T10:00:00Z'),
     endTime: new Date('2022-03-01T11:00:00Z'),
     localDoctorId: 456,
@@ -71,13 +71,13 @@ export const appointmentCardMock: IAppointmentsCardProps[] = [
   },
   {
     id: 127,
-    link: 'http://example.com',
+    link: '',
     startTime: new Date('2022-03-01T10:00:00Z'),
     endTime: new Date('2022-03-01T11:00:00Z'),
     localDoctorId: 456,
-    // remoteDoctor: {
-    //   lastName: 'Smith',
-    // },
+    remoteDoctor: {
+      lastName: 'Smith',
+    },
     patient: {
       dateOfBirth: new Date('1980-01-01'),
       firstName: 'John',
