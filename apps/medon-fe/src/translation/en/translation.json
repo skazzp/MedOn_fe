@@ -377,7 +377,11 @@
     "doctorPicAlt": "Doctor photo",
     "errorAsync": "Error occured while changing availability schedule, try again!",
     "preffix-id": "# ",
-    "suffix-age": "y.o."
+    "preffix-overview": "Overview: ",
+    "preffix-remote": "Remote - ",
+    "suffix-age": "y.o.",
+    "add-link": "Add Link",
+    "modal-title": "Add Link to Zoom Call"
   },
   "availability": {
     "title": "Availability schedule:",
