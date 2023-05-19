@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
@@ -12,26 +11,23 @@ import {
   Radio,
   UserIcon,
 } from 'components/AppointmentsScore/styles';
-import { patientList } from 'utils/mock/patientList';
-import { roles, routes } from 'utils/constants';
-import { getSortedPatientList } from 'utils/functions/sort';
 
-export default function AppointmentsScore() {
+import { roles, routes } from 'utils/constants';
+
+import { IAppointmentsScoreProps } from './types';
+
+export default function AppointmentsScore({
+  quantity,
+}: IAppointmentsScoreProps) {
   const user = useAppSelector(getUserSelector);
   const { t } = useTranslation();
-
-  const sortedPatientList = useMemo(() => getSortedPatientList(user), [user]);
 
   return (
     <Appointments>
       <CountList>
         <h2>{t('dashboard.latest')}</h2>
         <UserIcon />
-        <p data-testid="patient-count">
-          {user.role === roles.remote
-            ? sortedPatientList.length
-            : patientList.length}
-        </p>
+        <p data-testid="patient-count">{quantity}</p>
       </CountList>
       {user.role === roles.remote ? (
         <>
