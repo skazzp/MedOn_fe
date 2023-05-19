@@ -7,6 +7,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     background-color: ${({ theme }) => theme.colors.gray_100};
     box-sizing: border-box;
+    font-family: ${({ theme }) => theme.fontFamily.sf_pro_text};
   }
 
   *, *:before, *:after {

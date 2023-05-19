@@ -14,6 +14,7 @@ import { TextareaAntD } from 'components/common';
 import { PatientNotes } from 'components/PatientNotes';
 import PatientCardInfo from 'components/PatientCardInfo';
 import { ShowMore } from 'components/ShowMore';
+import { PatientCardCalendar } from 'components/PatientCardCalendar';
 import { NewPatientForm } from 'components/NewPatientForm';
 
 import { addPatientNoteSchema } from 'validation/addPatientNoteSchema';
@@ -34,7 +35,6 @@ import { defaultOrder, defaultPage, defaultPageSize } from 'utils/constants';
 import {
   AddNoteForm,
   Buttons,
-  Calendar,
   Container,
   StyledSelect,
   Top,
@@ -115,9 +115,7 @@ export default function PatientCard() {
           <PatientCardInfo {...patient?.data} />
           <h4>{t('patient-card.overview')}</h4>
           <ShowMore text={patient?.data?.overview} />
-          {/* TODO: add calendar here */}
-          <Calendar>Calendar</Calendar>
-          {/* TODO: add calendar here */}
+          <PatientCardCalendar />
           <Button
             isfullwidth="true"
             textcolor={theme.colors.blue_500}

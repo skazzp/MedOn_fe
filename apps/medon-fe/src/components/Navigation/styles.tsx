@@ -23,22 +23,25 @@ export const NavContainer = styled.nav`
 export const NavLinkStyled = styled(NavLink)`
   text-decoration: none;
   color: ${theme.colors.navi_text};
-  font-family: ${theme.fontFamily.roboto};
-  font-weight: 700;
+  font-family: ${theme.fontFamily.sf_pro_text};
+  font-weight: ${theme.fontWeight.medium};
+  font-size: ${theme.fontSizes.lg};
   display: flex;
   align-items: center;
   padding: 10px 15px 10px 10px;
   border-radius: 8px;
   margin-bottom: 16px;
-  transition: all 0.7s;
+  transition: color 0.3s, background-color 0.3s, fill 0.3s;
 
   &.active {
     background-color: ${theme.colors.navi_hover};
     color: ${theme.colors.icon_active};
+    font-weight: ${theme.fontWeight.bold};
   }
 
   &.active svg {
     fill: ${theme.colors.icon_active};
+    stroke: ${theme.colors.icon_active};
   }
 
   &:hover {

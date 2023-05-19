@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
@@ -9,7 +8,7 @@ import { toastConfig } from 'utils/toastConfig';
 
 import Button from 'components/Button';
 import Input from 'components/Input';
-import LinkHome from 'components/LinkHome';
+import { Link } from 'components/Link';
 import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
 import Logo from 'assets/svgs/logo_medon.svg';
 import {
@@ -99,18 +98,30 @@ export default function ResendConfirmation() {
             </>
           )}
         </Form>
-        <LinkHome
+        <Link
           bgcolor={theme.colors.black}
           textcolor={theme.colors.white}
           to="/"
           isfullwidth="true"
         >
           {t('re-confirm-account.send-email.home-link')}
-        </LinkHome>
+        </Link>
       </Content>
       <Footer>
-        <Link to="#">{t('re-confirm-account.footer.linkTerm')}</Link>
-        <Link to="#">{t('re-confirm-account.footer.linkPrivacy')}</Link>
+        <Link
+          bgcolor={theme.colors.transparent}
+          textcolor={theme.colors.blue_300}
+          to="#"
+        >
+          {t('re-confirm-account.footer.linkTerm')}
+        </Link>
+        <Link
+          bgcolor={theme.colors.transparent}
+          textcolor={theme.colors.blue_300}
+          to="#"
+        >
+          {t('re-confirm-account.footer.linkPrivacy')}
+        </Link>
       </Footer>
     </Container>
   );

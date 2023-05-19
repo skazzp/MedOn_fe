@@ -1,7 +1,10 @@
 import * as yup from 'yup';
 
 export const emailSchema = yup.object().shape({
-  email: yup.string().required('validation.email.required'),
+  email: yup
+    .string()
+    .email('validation.email.matches')
+    .required('validation.email.required'),
 });
 
 export const passwordSchema = yup.object().shape({

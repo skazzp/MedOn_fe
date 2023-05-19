@@ -17,9 +17,11 @@ export const Form = styled.form`
   flex-direction: column;
   width: 27rem;
   grid-gap: 2rem;
+
   input {
     width: 100%;
   }
+
   label {
     font-family: ${theme.fontFamily.sf_pro_text};
     font-size: ${theme.fontSizes.sm};

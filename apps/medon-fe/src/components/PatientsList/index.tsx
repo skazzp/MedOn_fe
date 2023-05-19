@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 import { Input, Pagination, Spin } from 'antd';
-import LinkHome from 'components/LinkHome';
+import { Link } from 'components/Link';
 import PatientListCard from 'components/PatientListCard';
 import { ReactComponent as Plus } from 'assets/svgs/plus_listcard.svg';
 import { useGetPatientsQuery } from 'redux/api/patientApi';
@@ -50,14 +50,14 @@ export default function PatientsList() {
           onBlur={() => setSearchPhrase('')}
         />
         {role === roles.local ? (
-          <LinkHome
+          <Link
             textcolor={theme.colors.white}
             bgcolor={theme.colors.btnGradient}
             to={routes.addPatient}
           >
             {t('patient-list.link')}
             <Plus />
-          </LinkHome>
+          </Link>
         ) : null}
       </Choose>
       {isFetching ? (

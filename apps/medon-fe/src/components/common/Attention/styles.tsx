@@ -20,7 +20,7 @@ export const Wrapper = styled.div`
 export const InfoText = styled.div`
   p {
     margin: 0;
-    font-family: ${theme.fontFamily.roboto};
+    font-family: ${theme.fontFamily.sf_pro_text};
   }
 `;
 
