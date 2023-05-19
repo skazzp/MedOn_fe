@@ -53,6 +53,7 @@ export const RemoteAssign = styled.span`
 export const Patient = styled.span`
   display: flex;
   gap: 0.5rem;
+  font-weight: ${({ theme }) => theme.fontWeight.medium};
 `;
 
 export const Name = styled.span`
@@ -64,4 +65,14 @@ export const Body = styled.div`
   display: flex;
   justify-content: space-between;
   padding-top: 0.5rem;
+`;
+
+export const Time = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: ${({ theme }) => theme.fontWeight.medium};
+  > svg {
+    margin-bottom: 0.1rem;
+    margin-right: 0.3rem;
+  }
 `;

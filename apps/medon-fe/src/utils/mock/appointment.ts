@@ -21,8 +21,8 @@ export const appointmentCardMock: IAppointmentsCardProps[] = [
   {
     id: 124,
     link: '',
-    startTime: new Date('2022-03-01T10:00:00Z'),
-    endTime: new Date('2022-03-01T11:00:00Z'),
+    startTime: new Date('2022-03-01T11:00:00Z'),
+    endTime: new Date('2022-03-01T12:00:00Z'),
     localDoctorId: 456,
     remoteDoctor: {
       lastName: 'Smith',
@@ -37,9 +37,9 @@ export const appointmentCardMock: IAppointmentsCardProps[] = [
   },
   {
     id: 125,
-    link: 'http://example.com',
-    startTime: new Date('2022-03-01T10:00:00Z'),
-    endTime: new Date('2022-03-01T11:00:00Z'),
+    link: 'http://www.google.com',
+    startTime: new Date('2022-03-01T12:00:00Z'),
+    endTime: new Date('2022-03-01T13:00:00Z'),
     localDoctorId: 456,
     remoteDoctor: {
       lastName: 'Smith',
@@ -55,8 +55,8 @@ export const appointmentCardMock: IAppointmentsCardProps[] = [
   {
     id: 126,
     link: '',
-    startTime: new Date('2022-03-01T10:00:00Z'),
-    endTime: new Date('2022-03-01T11:00:00Z'),
+    startTime: new Date('2022-03-01T13:00:00Z'),
+    endTime: new Date('2022-03-01T14:00:00Z'),
     localDoctorId: 456,
     remoteDoctor: {
       lastName: 'Smith',
@@ -72,8 +72,8 @@ export const appointmentCardMock: IAppointmentsCardProps[] = [
   {
     id: 127,
     link: '',
-    startTime: new Date('2022-03-01T10:00:00Z'),
-    endTime: new Date('2022-03-01T11:00:00Z'),
+    startTime: new Date('2022-03-01T14:00:00Z'),
+    endTime: new Date('2022-03-01T15:00:00Z'),
     localDoctorId: 456,
     remoteDoctor: {
       lastName: 'Smith',
@@ -88,9 +88,9 @@ export const appointmentCardMock: IAppointmentsCardProps[] = [
   },
   {
     id: 128,
-    link: 'http://example.com',
-    startTime: new Date('2022-03-01T10:00:00Z'),
-    endTime: new Date('2022-03-01T11:00:00Z'),
+    link: 'http://www.google.com',
+    startTime: new Date('2022-03-01T15:00:00Z'),
+    endTime: new Date('2022-03-01T16:00:00Z'),
     localDoctorId: 456,
     remoteDoctor: {
       lastName: 'Smith',
