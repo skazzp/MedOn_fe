@@ -8,7 +8,7 @@ describe('AppointmentsScore', () => {
   test('renders patient count', () => {
     render(
       <TestWrapper>
-        <AppointmentsScore />
+        <AppointmentsScore quantity={6} />
       </TestWrapper>
     );
     const patientCount = screen.getByTestId(/patient-count/i);
@@ -19,7 +19,7 @@ describe('AppointmentsScore', () => {
   test('renders latest appointments heading', () => {
     render(
       <TestWrapper>
-        <AppointmentsScore />
+        <AppointmentsScore quantity={6} />
       </TestWrapper>
     );
     const heading = screen.getByRole('heading', { level: 2 });
@@ -30,7 +30,7 @@ describe('AppointmentsScore', () => {
   test('renders manage availability link when remote', () => {
     render(
       <TestWrapper>
-        <AppointmentsScore />
+        <AppointmentsScore quantity={6} />
       </TestWrapper>
     );
     const manageLink = screen.getByText(/Latest Appointments/i);
@@ -41,7 +41,7 @@ describe('AppointmentsScore', () => {
   test('does not render radio buttons when not remote', () => {
     render(
       <TestWrapper>
-        <AppointmentsScore />
+        <AppointmentsScore quantity={6} />
       </TestWrapper>
     );
     const listRadio = screen.queryByLabelText(/List/i);
@@ -56,7 +56,7 @@ describe('AppointmentsScore', () => {
 
     render(
       <TestWrapper>
-        <AppointmentsScore />
+        <AppointmentsScore quantity={6} />
       </TestWrapper>
     );
 
