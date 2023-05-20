@@ -18,6 +18,7 @@ export interface IAppointmentsCardProps {
     gender?: string;
     overview?: string;
   };
+  role?: string;
 }
 
 export interface AddLink {

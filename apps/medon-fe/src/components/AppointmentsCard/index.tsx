@@ -17,7 +17,7 @@ import { InputAntD } from 'components/common';
 import { useModal } from 'hooks/useModal';
 
 import { getAgeByDateOfBirth } from 'utils/functions/getAgeByDateOfBirth';
-import { timeFormat } from 'utils/constants';
+import { roles, timeFormat } from 'utils/constants';
 
 import { addLinkSchema } from 'validation/addLinkDashBoard';
 
@@ -42,6 +42,7 @@ export function AppointmentsCard({
   patient,
   isLinkAdded,
   remoteDoctor,
+  role,
   ...rest
 }: IAppointmentsCardProps) {
   const theme = useTheme();
@@ -89,7 +90,7 @@ export function AppointmentsCard({
               {t('appointment.prefix-doctor')} {remoteDoctor?.lastName}
             </strong>
           </RemoteAssign>
-          {isLinkAdded && (
+          {isLinkAdded && role === roles.local && (
             <Button
               textcolor={theme.colors.blue_500}
               bgcolor={theme.colors.blue_100}

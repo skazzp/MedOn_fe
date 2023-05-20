@@ -34,6 +34,7 @@ export default function Dashboard() {
               .map((appointment) => (
                 <AppointmentsCard
                   key={appointment.id}
+                  role={user.role?.toString()}
                   isLinkAdded={appointment.link === ''}
                   {...appointment}
                 />
