@@ -100,7 +100,7 @@ export default function AvatarUpload() {
       />
       {selectedImage && (
         <Modal
-          title={t('logout.title')}
+          title={t('avatar.modalTitle')}
           centered
           width={550}
           open={isModalOpen}
