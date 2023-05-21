@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { Modal } from 'antd';
+import { Modal, Spin } from 'antd';
 import { t } from 'i18next';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
@@ -8,13 +8,19 @@ import { toast } from 'react-toastify';
 import { useUpdatePhotoMutation } from 'redux/api/userApi';
 import { toastConfig } from 'utils/toastConfig';
 import { MAX_FILE_SIZE, fileTypes, imgFileType } from 'utils/constants/file';
-import { Input, Label, LabelContainer, StyledEditIcon } from './styled';
+import {
+  Input,
+  Label,
+  LabelContainer,
+  LoaderBox,
+  StyledEditIcon,
+} from './styled';
 
 export default function AvatarUpload() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cropper, setCropper] = useState<Cropper | null>(null);
-  const [updatePhoto] = useUpdatePhotoMutation();
+  const [updatePhoto, { isLoading }] = useUpdatePhotoMutation();
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length) {
@@ -101,19 +107,25 @@ export default function AvatarUpload() {
           onOk={handleSubmit}
           onCancel={handleCancel}
         >
-          <Cropper
-            src={URL.createObjectURL(selectedImage)}
-            style={{ height: 500, width: 500 }}
-            initialAspectRatio={1}
-            aspectRatio={1}
-            minCropBoxHeight={100}
-            minCropBoxWidth={100}
-            guides={false}
-            checkOrientation={false}
-            onInitialized={(instance) => {
-              setCropper(instance);
-            }}
-          />
+          {isLoading ? (
+            <LoaderBox>
+              <Spin size="large" />
+            </LoaderBox>
+          ) : (
+            <Cropper
+              src={URL.createObjectURL(selectedImage)}
+              style={{ height: 500, width: 500 }}
+              initialAspectRatio={1}
+              aspectRatio={1}
+              minCropBoxHeight={100}
+              minCropBoxWidth={100}
+              guides={false}
+              checkOrientation={false}
+              onInitialized={(instance) => {
+                setCropper(instance);
+              }}
+            />
+          )}
         </Modal>
       )}
     </LabelContainer>

@@ -38,3 +38,11 @@ export const StyledEditIcon = styled(EditOutlined)`
     height: 20px;
   }
 `;
+
+export const LoaderBox = styled.div`
+  width: 500px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
