@@ -82,7 +82,11 @@ export default function Navigation() {
         </Ul>
         <UserBlock>
           <UserAvatar
-            src={user.photo || profileImagePlaceholder}
+            src={
+              user.photo
+                ? process.env.NX_AWS_BUCKET_URL + user.photo
+                : profileImagePlaceholder
+            }
             alt={t<string>('navigation.img-alt')}
           />
           <BlockName>

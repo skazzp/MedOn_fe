@@ -384,5 +384,15 @@
     "dateOldest": "Date (Oldest)",
     "dateLatest": "Date (Latest)"
   },
+  "avatar": {
+    "modalTitle": "Edit photo",
+    "errors": {
+      "size": "File size is greater than maximum limit",
+      "type": "Wrong file type",
+      "noFile": "Please choose a file",
+      "catchError": "Something went wrong, try again"
+    },
+    "success": "Photo updated successfully"
+  },
   "defaultLanguage": "en-US"
 }
