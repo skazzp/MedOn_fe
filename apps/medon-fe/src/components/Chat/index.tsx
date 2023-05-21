@@ -25,16 +25,28 @@ const Chat = () => {
   }, [socket]);
 
   useEffect(() => {
-    setValue('messages', JSON.stringify(messages));
+    const chatText = messages.reduce(
+      (acc, message) =>
+        acc +
+        `[${new Date(message.createdAt).toLocaleTimeString()}] ${
+          message.sender.lastName
+        }: ${message.value}\n`,
+      ''
+    );
+
+    setValue('messages', chatText);
   }, [messages]);
 
   const onChatOpen = () => {
-    socket?.emit('joinRoom', 3);
+    socket?.emit('joinRoomByAppointmentId', 3);
+    socket?.emit('getAllMessages', {}, (response: any) => {
+      setMessages(response);
+    });
   };
 
   const onSubmitHandler = () => {
     socket?.emit('sendMessage', {
-      message: getValues('message'),
+      value: getValues('message'),
       appointment: 3,
       sender: 1,
       recipient: 2,
