@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
+import { Skeleton } from 'antd';
 
 import RegistrationPage from 'pages/RegistrationPage';
 import Login from 'pages/Login';
@@ -9,15 +10,16 @@ import ResendConfirmation from 'pages/ResendConfirmation';
 import UpdatePassword from 'pages/UpdatePassword';
 import ProfilePage from 'pages/ProfilePage';
 import { PatientsPage } from 'pages/PatientsPage';
+import BookAppointment from 'pages/BookAppointment';
 import { DashboardPage } from 'pages/Dashboard';
 import AvailabilityPage from 'pages/AvailabilityPage';
+import AppointmentsPage from 'pages/AppointmentsPage';
 
 import PatientCard from 'components/PatientCard';
 import { PublicRoute } from 'components/Routes/PublicRoute';
 import { PrivateRoute } from 'components/Routes/PrivateRoute';
 import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
-import SelectTimeSlot from 'components/SelectTimeSlot';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { getTokenSelector } from 'redux/features/userSlice/userSelectors';
@@ -26,8 +28,7 @@ import { logout, setUser } from 'redux/features/userSlice/userSlice';
 import { persistedStore } from 'redux/store';
 
 import { routes } from 'utils/constants/routes';
-import AppointmentsPage from 'pages/AppointmentsPage';
-import { Skeleton } from 'antd';
+
 import { SkeletonContainer } from 'components/PatientCard/styles';
 
 function App() {
@@ -103,6 +104,10 @@ function App() {
       <Route
         path={routes.updatePassword}
         element={<PrivateRoute component={<UpdatePassword />} />}
+      />
+      <Route
+        path={routes.appointments}
+        element={<PrivateRoute component={<BookAppointment />} />}
       />
       <Route
         path={routes.patients}

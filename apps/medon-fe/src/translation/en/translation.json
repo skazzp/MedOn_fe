@@ -342,6 +342,21 @@
       "updateSuccess": "Patient card updated successfully!"
     }
   },
+  "patient-info": {
+    "back": "Back to Dashboard",
+    "none": "Choose date on calendar",
+    "day": "Select a day of appointment",
+    "time": "Select a time of appointment",
+    "remote-doctor": "Select a Remote Doctor",
+    "previous": "Previous step",
+    "next": "Next step",
+    "booking": "Booking Appointment",
+    "date": "Date: ",
+    "select": "You selected:",
+    "cancel": "Cancel",
+    "step": "Step",
+    "end-steps": " /3"
+  },
   "dashboard": {
     "welcome": "Welcome",
     "latest": "Latest Appointments",
@@ -361,6 +376,7 @@
     "availableDr": "Available Dr:",
     "searchPlaceholder": "Find a doctor by name...",
     "filterLabel": "Speciality:",
+    "cant-pickDay": "you already choose the day and you cant choose a previous day",
     "columns": {
       "name": "Name",
       "speciality": "Speciality",
@@ -397,5 +413,6 @@
     "dateOldest": "Date (Oldest)",
     "dateLatest": "Date (Latest)"
   },
-  "defaultLanguage": "en-US"
+  "defaultLanguage": "en-US",
+  "not-one": "You are not the chosen one"
 }
