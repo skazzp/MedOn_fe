@@ -76,9 +76,23 @@ export const StyledDatePicker = styled(DatePicker)`
   }
 `;
 
+export const AvatarChangeBox = styled.div`
+  position: relative;
+  margin-bottom: 30px;
+`;
+
 export const ImageContainer = styled.div`
+  position: relative;
+  width: 250px;
+  height: 250px;
   display: flex;
-  margin-bottom: 2rem;
+  border-radius: 50%;
+  overflow: hidden;
+`;
+
+export const UserPhoto = styled.img`
+  width: 250px;
+  height: 250px;
 `;
 
 export const AntInputDisabledStyle = {

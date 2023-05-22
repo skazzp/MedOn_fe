@@ -19,7 +19,8 @@ import { timezoneOptions } from 'utils/timezones/timezoneOptions';
 import { formFields } from 'utils/constants/userFormFields';
 import { countryOptions } from 'utils/countries/countryOptions';
 import { routes } from 'utils/constants/routes';
-import { FormProfileData } from './types';
+
+import AvatarUpload from 'components/AvatarUpload';
 import {
   Container,
   Label,
@@ -29,7 +30,10 @@ import {
   ButtonContainer,
   ImageContainer,
   LabelText,
+  UserPhoto,
+  AvatarChangeBox,
 } from './styles';
+import { FormProfileData } from './types';
 
 interface IProps {
   submitForm: (values: FormProfileData) => void;
@@ -90,9 +94,19 @@ export default function ProfileForm({
   return (
     <Container>
       <>
-        <ImageContainer>
-          <img src={profile_pic} alt={`${t('profileForm.profilePicAlt')}`} />
-        </ImageContainer>
+        <AvatarChangeBox>
+          <ImageContainer>
+            <UserPhoto
+              src={
+                user.photo
+                  ? process.env.NX_PUBLIC_S3_BUCKET_URL + user.photo
+                  : profile_pic
+              }
+              alt={`${t('profileForm.profilePicAlt')}`}
+            />
+          </ImageContainer>
+          <AvatarUpload />
+        </AvatarChangeBox>
         <Form onSubmit={onSubmit}>
           <InputContainer>
             <Label htmlFor="firstName">
