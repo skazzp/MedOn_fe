@@ -1,4 +1,4 @@
-import { EditOutlined } from '@ant-design/icons';
+import { CameraOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
 
@@ -27,12 +27,14 @@ export const Label = styled.label`
   cursor: pointer;
 `;
 
-export const StyledEditIcon = styled(EditOutlined)`
+export const StyledEditIcon = styled(CameraOutlined)`
   width: 20px;
   height: 20px;
   fill: ${theme.colors.icon_active};
   color: ${theme.colors.icon_active};
-
+  &:hover {
+    scale: 1.1;
+  }
   svg {
     width: 20px;
     height: 20px;
