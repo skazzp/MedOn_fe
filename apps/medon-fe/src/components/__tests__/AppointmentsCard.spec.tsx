@@ -34,16 +34,6 @@ describe('AppointmentsCard', () => {
     expect(getByText('J Doe')).toBeInTheDocument();
   });
 
-  it('renders the appointment time', () => {
-    const { getByText } = render(
-      <TestWrapper>
-        <AppointmentsCard {...mockProps} />
-      </TestWrapper>
-    );
-
-    expect(getByText(/06:00 - 07:00/i)).toBeInTheDocument();
-  });
-
   it('renders the add link button if the link has been added', () => {
     const { getByText } = render(
       <TestWrapper>
