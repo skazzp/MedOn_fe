@@ -84,7 +84,7 @@ export default function Navigation() {
           <UserAvatar
             src={
               user.photo
-                ? process.env.NX_AWS_BUCKET_URL + user.photo
+                ? process.env.NX_PUBLIC_S3_BUCKET_URL + user.photo
                 : profileImagePlaceholder
             }
             alt={t<string>('navigation.img-alt')}

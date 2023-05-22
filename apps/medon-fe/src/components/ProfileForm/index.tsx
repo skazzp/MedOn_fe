@@ -99,7 +99,7 @@ export default function ProfileForm({
             <UserPhoto
               src={
                 user.photo
-                  ? process.env.NX_AWS_BUCKET_URL + user.photo
+                  ? process.env.NX_PUBLIC_S3_BUCKET_URL + user.photo
                   : profile_pic
               }
               alt={`${t('profileForm.profilePicAlt')}`}
