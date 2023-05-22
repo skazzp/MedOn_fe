@@ -6,5 +6,6 @@ import { ReactComponent as Phone } from './phone.svg';
 import { ReactComponent as Edit } from './edit.svg';
 import { ReactComponent as AddNote } from './addnote.svg';
 import { ReactComponent as Close } from './close.svg';
+import { ReactComponent as FemaleSex } from './genderFemale.svg';
 
-export { Age, Location, Mail, MaleSex, Phone, Edit, AddNote, Close };
+export { Age, Location, Mail, MaleSex, Phone, Edit, AddNote, FemaleSex, Close };

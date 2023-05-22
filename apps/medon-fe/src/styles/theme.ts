@@ -39,6 +39,7 @@ export const theme = {
     lightBlue: '#4D92FF',
     grayBack: '#F2F2F2',
     grayBorder: '#d8dbe8',
+    invisible: 'rgba(0, 0, 0, 0)',
     transparent: 'transparent',
     primary_hover: '#4096ff',
   },

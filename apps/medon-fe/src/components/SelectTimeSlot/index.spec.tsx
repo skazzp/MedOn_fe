@@ -4,25 +4,49 @@ import { TestWrapper } from 'utils/tests/TestWrapper';
 import SelectTimeSlot from './index';
 
 it('should render successfully', () => {
-  const { baseElement } = render(<SelectTimeSlot />, {
-    wrapper: TestWrapper,
-  });
+  const { baseElement } = render(
+    <SelectTimeSlot
+      selectedTime={'00:00 - 01:00'}
+      selectTimeAppointments={() => {}}
+      isActive={' '}
+      setIsActive={() => {}}
+    />,
+    {
+      wrapper: TestWrapper,
+    }
+  );
 
   expect(baseElement).toBeTruthy();
 });
 
 it('should render 24 time slots', async () => {
-  render(<SelectTimeSlot />, {
-    wrapper: TestWrapper,
-  });
+  render(
+    <SelectTimeSlot
+      selectedTime={'00:00 - 01:00'}
+      selectTimeAppointments={() => {}}
+      isActive={' '}
+      setIsActive={() => {}}
+    />,
+    {
+      wrapper: TestWrapper,
+    }
+  );
 
   expect(await screen.findAllByText('Available Dr:')).toHaveLength(24);
 });
 
 it('click on slot should change style', async () => {
-  render(<SelectTimeSlot />, {
-    wrapper: TestWrapper,
-  });
+  render(
+    <SelectTimeSlot
+      selectedTime={'00:00 - 01:00'}
+      selectTimeAppointments={() => {}}
+      isActive={' '}
+      setIsActive={() => {}}
+    />,
+    {
+      wrapper: TestWrapper,
+    }
+  );
 
   expect(screen.getByText('00:00 - 01:00')).toBeTruthy();
 
