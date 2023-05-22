@@ -2,20 +2,18 @@ import styled from 'styled-components';
 import { theme } from 'styles/theme';
 
 export const Container = styled.div`
-  width: calc(100% - 50px);
-  height: 250px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  align-items: center;
   gap: 10px;
-  margin-top: 20px; // TODO: remove after combined with page components
+  padding: 0 30px;
 `;
 
 export const TimeSlot = styled.div`
-  width: calc((100% - 100px) / 6);
-  height: 60px;
+  width: 100%;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
