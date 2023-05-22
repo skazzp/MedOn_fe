@@ -7,7 +7,12 @@ import { toast } from 'react-toastify';
 
 import { useUpdatePhotoMutation } from 'redux/api/userApi';
 import { toastConfig } from 'utils/toastConfig';
-import { MAX_FILE_SIZE, fileTypes, imgFileType } from 'utils/constants/file';
+import {
+  MAX_FILE_SIZE,
+  fileTypes,
+  imageQuality,
+  imgFileType,
+} from 'utils/constants/file';
 import {
   Input,
   Label,
@@ -48,7 +53,7 @@ export default function AvatarUpload() {
   const handleSubmit = async () => {
     if (cropper && selectedImage) {
       const file = await fetch(
-        cropper.getCroppedCanvas().toDataURL(selectedImage.type, 0.9)
+        cropper.getCroppedCanvas().toDataURL(selectedImage.type, imageQuality)
       )
         .then((res) => res.blob())
         .then(
