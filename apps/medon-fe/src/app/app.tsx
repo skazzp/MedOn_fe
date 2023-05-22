@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
+import { Skeleton } from 'antd';
 
 import RegistrationPage from 'pages/RegistrationPage';
 import Login from 'pages/Login';
@@ -12,6 +13,7 @@ import { PatientsPage } from 'pages/PatientsPage';
 import BookAppointment from 'pages/BookAppointment';
 import { DashboardPage } from 'pages/Dashboard';
 import AvailabilityPage from 'pages/AvailabilityPage';
+import AppointmentsPage from 'pages/AppointmentsPage';
 
 import PatientCard from 'components/PatientCard';
 import { PublicRoute } from 'components/Routes/PublicRoute';
@@ -28,7 +30,7 @@ import { logout, setUser } from 'redux/features/userSlice/userSlice';
 import { persistedStore } from 'redux/store';
 
 import { routes } from 'utils/constants/routes';
-import { Skeleton } from 'antd';
+
 import { SkeletonContainer } from 'components/PatientCard/styles';
 
 function App() {
@@ -96,6 +98,10 @@ function App() {
       <Route
         path={routes.resendConfirmation}
         element={<ResendConfirmation />}
+      />
+      <Route
+        path={routes.appointments}
+        element={<PrivateRoute component={<AppointmentsPage />} />}
       />
       <Route
         path={routes.updatePassword}

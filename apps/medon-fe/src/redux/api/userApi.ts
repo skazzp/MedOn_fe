@@ -5,7 +5,6 @@ import {
   UpdateProfileData,
   UpdateProfileResponse,
   UserDataResponse,
-  UserResponse,
 } from './types';
 
 export interface MessageResponse {
@@ -46,6 +45,16 @@ export const userApi = createApi({
       },
       invalidatesTags: ['user'],
     }),
+    updatePhoto: builder.mutation<UpdateProfileResponse, FormData>({
+      query(body) {
+        return {
+          url: 'user/update-photo',
+          method: 'PATCH',
+          body,
+        };
+      },
+      invalidatesTags: ['user'],
+    }),
     updateUserPassword: builder.mutation<MessageResponse, UpdatePasswordData>({
       query(data) {
         return {
@@ -63,4 +72,5 @@ export const {
   useGetUserQuery,
   useUpdateUserMutation,
   useUpdateUserPasswordMutation,
+  useUpdatePhotoMutation,
 } = userApi;

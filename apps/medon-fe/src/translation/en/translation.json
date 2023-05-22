@@ -388,6 +388,19 @@
     "doctorPicAlt": "Doctor photo",
     "errorAsync": "Error occured while changing availability schedule, try again!"
   },
+  "appointments": {
+    "title": "Appointments",
+    "view": {
+      "list": "List",
+      "month": "Month"
+    },
+    "details": {
+      "patient": "Patient:",
+      "doctor": "Doctor:",
+      "date": "Date:",
+      "starts": "starts at"
+    }
+  },
   "availability": {
     "title": "Availability schedule:",
     "message": "Select day or availability slot to start editing",
@@ -399,6 +412,16 @@
     "sortBy": "Sort By: ",
     "dateOldest": "Date (Oldest)",
     "dateLatest": "Date (Latest)"
+  },
+  "avatar": {
+    "modalTitle": "Edit photo",
+    "errors": {
+      "size": "File size is greater than maximum limit",
+      "type": "Wrong file type",
+      "noFile": "Please choose a file",
+      "catchError": "Something went wrong, try again"
+    },
+    "success": "Photo updated successfully"
   },
   "defaultLanguage": "en-US",
   "not-one": "You are not the chosen one"
