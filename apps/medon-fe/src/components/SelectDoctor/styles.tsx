@@ -68,12 +68,6 @@ export const ColumnName = styled(ColumnText)`
   font-weight: ${(p) => p.theme.fontWeight.medium};
 `;
 
-export const TextBox = styled.div`
-  width: calc(100% - 50px);
-  font-family: ${(p) => p.theme.fontFamily.sf_pro_text};
-  font-size: ${(p) => p.theme.fontSizes.sm};
-`;
-
 export const List = styled.ul`
   list-style: none;
   width: 100%;
