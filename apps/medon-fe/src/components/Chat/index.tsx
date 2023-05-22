@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { InputAntD, TextareaAntD } from 'components/common';
 import { Button } from 'antd';
 import { useForm } from 'react-hook-form';
+import { Wrapper } from './styles';
 
 const Chat = () => {
   const { control, handleSubmit, getValues, setValue } = useForm();
@@ -54,7 +55,7 @@ const Chat = () => {
   };
 
   return (
-    <div>
+    <Wrapper>
       <form
         name="contact"
         method="post"
@@ -69,7 +70,7 @@ const Chat = () => {
         <Button htmlType="submit">Send</Button>
         <Button onClick={onChatOpen}>Join Chat</Button>
       </form>
-    </div>
+    </Wrapper>
   );
 };
 

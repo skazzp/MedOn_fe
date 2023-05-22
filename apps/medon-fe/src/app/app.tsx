@@ -62,11 +62,11 @@ function App() {
     <Routes>
       <Route
         path={routes.home}
-        element={<PublicRoute component={<Chat />} />}
+        element={<PublicRoute component={<Login />} />}
       />
       <Route
         path={routes.login}
-        element={<PublicRoute component={<Chat />} />}
+        element={<PublicRoute component={<Login />} />}
       />
       <Route
         path={routes.register}
