@@ -388,6 +388,19 @@
     "doctorPicAlt": "Doctor photo",
     "errorAsync": "Error occured while changing availability schedule, try again!"
   },
+  "appointments": {
+    "title": "Appointments",
+    "view": {
+      "list": "List",
+      "month": "Month"
+    },
+    "details": {
+      "patient": "Patient:",
+      "doctor": "Doctor:",
+      "date": "Date:",
+      "starts": "starts at"
+    }
+  },
   "availability": {
     "title": "Availability schedule:",
     "message": "Select day or availability slot to start editing",
