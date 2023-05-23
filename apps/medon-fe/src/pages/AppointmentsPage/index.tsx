@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
 import dayjs from 'dayjs';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { dayjsLocalizer, Views, Event } from 'react-big-calendar';
-import AppointmentsList from 'components/AppointmentsList';
+
+import { AppointmentsCard } from 'components/AppointmentsCard';
+
+import { appointmentCardMock } from 'utils/mock/appointment';
+
 import {
   Container,
   Header,
@@ -15,14 +19,17 @@ import {
   Details,
   ProfileIcon,
   Entity,
+  AppointmentContainer,
 } from './styles';
 
 const AppointmentsPage = () => {
-  const localizer = dayjsLocalizer(dayjs);
-  const { t } = useTranslation();
   const [isMonthView, setIsMonthView] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+
+  const { t } = useTranslation();
+
+  const localizer = dayjsLocalizer(dayjs);
 
   const handleEventClick = (event: Event) => {
     setSelectedEvent(event);
@@ -40,7 +47,7 @@ const AppointmentsPage = () => {
           <h2>{t('appointments.title')}</h2>
           <UserIcon />
           {
-            //TODO: MED-133 populate with real events from db
+            // TODO: MED-133 populate with real events from db
           }
           <span>20</span>
         </Title>
@@ -56,10 +63,21 @@ const AppointmentsPage = () => {
           </ViewItem>
         </View>
       </Header>
-      {!isMonthView && <AppointmentsList />}
+      {!isMonthView && (
+        <AppointmentContainer>
+          {/* sort and pagination on backend */}
+          {appointmentCardMock.map((appointment) => (
+            <AppointmentsCard
+              key={appointment.id}
+              isLinkAdded
+              {...appointment}
+            />
+          ))}
+        </AppointmentContainer>
+      )}
 
       {
-        //TODO: MED-133 populate with real events from db
+        // TODO: MED-133 populate with real events from db
         isMonthView && (
           <>
             <StyledCalendar
@@ -87,7 +105,7 @@ const AppointmentsPage = () => {
               onCancel={handleCloseModal}
             >
               {
-                //TODO: MED-133 integrate with real data
+                // TODO: MED-133 integrate with real data
               }
               <Details>
                 <span>{t('appointments.details.patient')}</span>

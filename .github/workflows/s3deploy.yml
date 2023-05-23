@@ -19,6 +19,7 @@ jobs:
           touch ./apps/medon-fe/.env
           echo NX_API_URL=${{ vars.NX_API_URL }} >> ./apps/medon-fe/.env
           echo NX_API_GOOGLE_ROUTE=${{ vars.NX_API_GOOGLE_ROUTE }} >> ./apps/medon-fe/.env
+          echo NX_PUBLIC_S3_BUCKET_URL=${{ vars.NX_PUBLIC_S3_BUCKET_URL }} >> ./apps/medon-fe/.env
           cat ./apps/medon-fe/.env
       - name: Build
         run: npm run build

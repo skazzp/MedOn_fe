@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import { useAppSelector } from 'redux/hooks';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 import { t } from 'i18next';
@@ -6,12 +6,10 @@ import { t } from 'i18next';
 import { Wrapper, Choose } from 'pages/BookAppointment/styles';
 
 import BookAppointmentCalendar from 'components/BookAppointmentCalendar';
-import PatientInfo from 'components/PatientInfo';
 import Steps from 'components/Steps';
 import SelectTimeSlot from 'components/SelectTimeSlot';
 import SelectDoctor from 'components/SelectDoctor';
 
-import { patient } from 'utils/mock/patientNote';
 import { roles } from 'utils/constants';
 import { steps } from 'utils/constants/steps';
 import { IAvailability } from 'redux/api/types';
@@ -44,59 +42,47 @@ export default function BookAppointment() {
   return (
     <Wrapper>
       {user.role === roles.local ? (
-        <>
-          <PatientInfo
-            firstName={patient.firstName}
-            lastName={patient.lastName}
-            phoneNumber={patient.phoneNumber}
-            email={patient.email}
-            gender={patient.gender}
-            dateOfBirth={patient.dateOfBirth.toString()}
-            city={patient.city}
-            country={patient.country}
+        <Choose>
+          <Steps
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+            currentStep={currentStep}
+            onCurrentStepChange={handleCurrentStepChange}
+            selectedTime={selectedTime}
+            selectedDoctor={selectedDoctor}
+            isActiveDoc={isActiveDoc}
+            selectTimeAppointments={handleSelectTime}
+            selectDoctorAppointments={handleSelectDoctor}
+            data={data}
+            setData={setData}
           />
-          <Choose>
-            <Steps
-              selectedDate={selectedDate}
+          {currentStep === steps.one && (
+            <BookAppointmentCalendar
               setSelectedDate={setSelectedDate}
-              currentStep={currentStep}
-              onCurrentStepChange={handleCurrentStepChange}
+              selectedDate={selectedDate}
+            />
+          )}
+          {currentStep === steps.two && (
+            <SelectTimeSlot
               selectedTime={selectedTime}
+              selectTimeAppointments={handleSelectTime}
+              isActive={isActive}
+              setIsActive={setIsActive}
+              data={data}
+              setSelectedDoctorsById={setSelectedDoctorsById}
+            />
+          )}
+          {currentStep === steps.three && (
+            <SelectDoctor
+              selectDoctorAppointments={handleSelectDoctor}
               selectedDoctor={selectedDoctor}
               isActiveDoc={isActiveDoc}
-              selectTimeAppointments={handleSelectTime}
-              selectDoctorAppointments={handleSelectDoctor}
+              setIsActiveDoc={setIsActiveDoc}
               data={data}
-              setData={setData}
+              selectedDoctorsById={selectedDoctorsById}
             />
-            {currentStep === steps.one && (
-              <BookAppointmentCalendar
-                setSelectedDate={setSelectedDate}
-                selectedDate={selectedDate}
-              />
-            )}
-            {currentStep === steps.two && (
-              <SelectTimeSlot
-                selectedTime={selectedTime}
-                selectTimeAppointments={handleSelectTime}
-                isActive={isActive}
-                setIsActive={setIsActive}
-                data={data}
-                setSelectedDoctorsById={setSelectedDoctorsById}
-              />
-            )}
-            {currentStep === steps.three && (
-              <SelectDoctor
-                selectDoctorAppointments={handleSelectDoctor}
-                selectedDoctor={selectedDoctor}
-                isActiveDoc={isActiveDoc}
-                setIsActiveDoc={setIsActiveDoc}
-                data={data}
-                selectedDoctorsById={selectedDoctorsById}
-              />
-            )}
-          </Choose>
-        </>
+          )}
+        </Choose>
       ) : (
         t('not-one')
       )}
