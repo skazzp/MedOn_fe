@@ -57,6 +57,7 @@ import {
   Title,
   Wrapper,
 } from './styles';
+import { SubmitAddNote } from './types';
 
 export function PatientCardCalendar() {
   const [event, setEvent] = useState<Event>();
