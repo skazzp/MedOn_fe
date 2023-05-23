@@ -20,7 +20,6 @@ import { PublicRoute } from 'components/Routes/PublicRoute';
 import { PrivateRoute } from 'components/Routes/PrivateRoute';
 import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
-import SelectTimeSlot from 'components/SelectTimeSlot';
 import { PatientCardCalendar } from 'components/PatientCardCalendar';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
@@ -108,10 +107,6 @@ function App() {
         element={<PrivateRoute component={<UpdatePassword />} />}
       />
       <Route
-        path={routes.appointments}
-        element={<PrivateRoute component={<BookAppointment />} />}
-      />
-      <Route
         path={routes.patients}
         element={<PrivateRoute component={<PatientsPage />} />}
       >
@@ -121,7 +116,7 @@ function App() {
           <Route index element={<PatientCardCalendar />} />
           <Route
             path={routes.patientCardAppointment}
-            element={<SelectTimeSlot />}
+            element={<BookAppointment />}
           />
         </Route>
       </Route>
