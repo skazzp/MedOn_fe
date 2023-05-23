@@ -3,3 +3,7 @@ export interface UseModalReturn {
   showModal: () => void;
   hideModal: () => void;
 }
+
+export interface SubmitAddNote {
+  note: string;
+}

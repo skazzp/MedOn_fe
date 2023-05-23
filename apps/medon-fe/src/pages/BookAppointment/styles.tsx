@@ -3,8 +3,8 @@ import { theme } from 'styles/theme';
 
 export const Wrapper = styled.div`
   display: flex;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   flex-direction: column;
   margin: 0 20px;
   overflow: auto;
