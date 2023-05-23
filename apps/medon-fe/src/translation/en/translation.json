@@ -355,7 +355,9 @@
     "select": "You selected:",
     "cancel": "Cancel",
     "step": "Step",
-    "end-steps": " /3"
+    "end-steps": " /3",
+    "have-doctor": " There are doctors available for that day",
+    "dont-have-doctor": " No meetings available on this day"
   },
   "dashboard": {
     "welcome": "Welcome",

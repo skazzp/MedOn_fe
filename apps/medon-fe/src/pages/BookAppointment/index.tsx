@@ -14,6 +14,7 @@ import SelectDoctor from 'components/SelectDoctor';
 import { patient } from 'utils/mock/patientNote';
 import { roles } from 'utils/constants';
 import { steps } from 'utils/constants/steps';
+import { IAvailability } from 'redux/api/types';
 
 export default function BookAppointment() {
   const user = useAppSelector(getUserSelector);
@@ -23,6 +24,8 @@ export default function BookAppointment() {
   const [isActive, setIsActive] = useState<string>('');
   const [selectedDoctor, setSelectedDoctor] = useState<number | null>(null);
   const [isActiveDoc, setIsActiveDoc] = useState<number | null>(null);
+  const [data, setData] = useState<IAvailability[]>([]);
+  const [selectedDoctorsById, setSelectedDoctorsById] = useState<number[]>([]);
 
   const handleCurrentStepChange = (step: number) => {
     setCurrentStep(step);
@@ -63,6 +66,8 @@ export default function BookAppointment() {
               isActiveDoc={isActiveDoc}
               selectTimeAppointments={handleSelectTime}
               selectDoctorAppointments={handleSelectDoctor}
+              data={data}
+              setData={setData}
             />
             {currentStep === steps.one && (
               <BookAppointmentCalendar
@@ -76,6 +81,8 @@ export default function BookAppointment() {
                 selectTimeAppointments={handleSelectTime}
                 isActive={isActive}
                 setIsActive={setIsActive}
+                data={data}
+                setSelectedDoctorsById={setSelectedDoctorsById}
               />
             )}
             {currentStep === steps.three && (
@@ -84,6 +91,8 @@ export default function BookAppointment() {
                 selectedDoctor={selectedDoctor}
                 isActiveDoc={isActiveDoc}
                 setIsActiveDoc={setIsActiveDoc}
+                data={data}
+                selectedDoctorsById={selectedDoctorsById}
               />
             )}
           </Choose>

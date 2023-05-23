@@ -1,10 +1,12 @@
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+import { useNavigate } from 'react-router-dom';
 
-import {
-  positionBooking,
-  positionNext,
-  positionPrevious,
-} from 'utils/constants/position';
+import { useGetAvailabilityByDayMutation } from 'redux/api/availabilityApi';
+
 import {
   Button,
   Cancel,
@@ -12,14 +14,20 @@ import {
   StepsScore,
   Wrapper,
 } from 'components/Steps/styles';
-import { StepsProps } from 'components/BookAppointmentCalendar/types';
+import { StepsProps } from 'components/Steps/types';
 import { steps } from 'utils/constants/steps';
-import { useNavigate } from 'react-router-dom';
-import { routes } from 'utils/constants';
-import getDoctorFullName from './hook';
+import getDoctorFullName from 'components/Steps/hook';
+
+import { dateToTextFormat, routes } from 'utils/constants';
+import {
+  positionBooking,
+  positionNext,
+  positionPrevious,
+} from 'utils/constants/position';
 
 function Steps(props: StepsProps) {
   const {
+    setData,
     selectedDate,
     setSelectedDate,
     currentStep,
@@ -32,6 +40,50 @@ function Steps(props: StepsProps) {
   } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
+  const userTimezone = dayjs.tz.guess();
+
+  const dateInText = dayjs(selectedDate).format(dateToTextFormat);
+  const [isSlotAvailable, setIsSlotAvailable] = useState<boolean>(false);
+
+  const [getAvailabilityByDay, { data }] = useGetAvailabilityByDayMutation();
+
+  const isButtonActive = Boolean(selectedDate && isSlotAvailable);
+  const noMeetingsMessage = !isSlotAvailable
+    ? t('patient-info.dont-have-doctor')
+    : '';
+
+  const handleFetchAvailability = useCallback(() => {
+    if (selectedDate) {
+      getAvailabilityByDay({
+        day: dayjs(selectedDate).tz(userTimezone).toDate(),
+        timezone: userTimezone,
+      });
+    }
+  }, [selectedDate, getAvailabilityByDay, userTimezone]);
+
+  useEffect(() => {
+    if (selectedDate) {
+      handleFetchAvailability();
+    }
+  }, [selectedDate, handleFetchAvailability]);
+
+  useEffect(() => {
+    if (selectedDate && data && data.data) {
+      const selectedDay = dayjs(selectedDate).startOf('day');
+      const SlotIsAvailable = data.data.some((slot) => {
+        const slotStartTime = dayjs(slot.startTime);
+        const slotDay = slotStartTime.startOf('day');
+
+        return slotDay.isSame(selectedDay, 'day');
+      });
+
+      setData(data.data);
+      setIsSlotAvailable(SlotIsAvailable);
+    }
+  }, [selectedDate, data, setData]);
 
   const handleNextStep = () => {
     onCurrentStepChange(currentStep + steps.one);
@@ -93,6 +145,7 @@ function Steps(props: StepsProps) {
           buttonType="next"
           disabled={
             (currentStep === steps.one && !selectedDate) ||
+            !isButtonActive ||
             (currentStep === steps.two && !selectedTime)
           }
           position={positionNext}
@@ -114,9 +167,17 @@ function Steps(props: StepsProps) {
       <Selected>
         <div>{t('patient-info.select')}</div>
         {t('patient-info.date')}
-        {selectedDate ? selectedDate.toDateString() : t('patient-info.none')}
+        {selectedDate ? dateInText : t('patient-info.none')}
         {selectedTime ? `, ${selectedTime}` : ''}
-        {selectedDoctor ? `, ${getDoctorFullName(selectedDoctor)}` : ''}
+        {selectedDoctor && data?.data
+          ? `, ${getDoctorFullName(selectedDoctor, data.data)}`
+          : ''}
+
+        {selectedDate && (
+          <div>
+            {isButtonActive ? t('patient-info.have-doctor') : noMeetingsMessage}
+          </div>
+        )}
       </Selected>
       <Cancel disabled={!selectedDate} onClick={handleCancel}>
         {t('patient-info.cancel')}

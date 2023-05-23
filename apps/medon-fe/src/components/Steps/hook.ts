@@ -1,16 +1,16 @@
-import { mockDoctors } from "components/SelectDoctor/mockData";
-import { specialityOptions } from "utils/constants";
-import { Doctor } from "./types";
+import { IAvailability } from "redux/api/types";
 
-const getDoctorFullName = (doctorId: number) => {
-    const doctor: Doctor | undefined = mockDoctors.find((doctors) => doctors.id === doctorId);
+const getDoctorFullName = (doctorId: number, doctors: IAvailability[]) => {
+    const doctor = doctors.find((availability) => availability.doctor.id === doctorId);
 
-    if (doctor) {
-        return `${doctor.firstName} ${doctor.lastName} ${specialityOptions[doctor.specialityId].label
-            } ${doctor.city} ${doctor.country}`;
+    if (doctor && doctor.doctor) {
+        const { firstName, lastName, city, country } = doctor.doctor;
+
+        return `${firstName} ${lastName} ${doctor.doctor.speciality.name} ${city} ${country}`;
     }
 
     return '';
 };
+
 
 export default getDoctorFullName;
