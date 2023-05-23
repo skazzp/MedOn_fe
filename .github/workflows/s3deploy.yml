@@ -12,13 +12,14 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --force
 
       - name: Create env file
         run: |
           touch ./apps/medon-fe/.env
           echo NX_API_URL=${{ vars.NX_API_URL }} >> ./apps/medon-fe/.env
           echo NX_API_GOOGLE_ROUTE=${{ vars.NX_API_GOOGLE_ROUTE }} >> ./apps/medon-fe/.env
+          echo NX_PUBLIC_S3_BUCKET_URL=${{ vars.NX_PUBLIC_S3_BUCKET_URL }} >> ./apps/medon-fe/.env
           cat ./apps/medon-fe/.env
       - name: Build
         run: npm run build

@@ -237,6 +237,11 @@
       "required": "Please add a note about the patient",
       "minLength": "Note must be at least 10 characters",
       "maxLength": "Note must be less than 200 characters"
+    },
+    "link": {
+      "required": "Link is required",
+      "url": "Please enter a valid URL",
+      "min": "URL must be at least 8 characters long"
     }
   },
   "re-confirm-account": {
@@ -342,6 +347,21 @@
       "updateSuccess": "Patient card updated successfully!"
     }
   },
+  "patient-info": {
+    "back": "Back to Dashboard",
+    "none": "Choose date on calendar",
+    "day": "Select a day of appointment",
+    "time": "Select a time of appointment",
+    "remote-doctor": "Select a Remote Doctor",
+    "previous": "Previous step",
+    "next": "Next step",
+    "booking": "Booking Appointment",
+    "date": "Date: ",
+    "select": "You selected:",
+    "cancel": "Cancel",
+    "step": "Step",
+    "end-steps": " /3"
+  },
   "dashboard": {
     "welcome": "Welcome",
     "latest": "Latest Appointments",
@@ -349,6 +369,7 @@
     "appointments": "Appointments:",
     "manage": "Manage Availability",
     "book": "Book an appointment",
+    "prefix-doctor": "Dr. ",
     "month": "Month",
     "list": "List"
   },
@@ -361,6 +382,7 @@
     "availableDr": "Available Dr:",
     "searchPlaceholder": "Find a doctor by name...",
     "filterLabel": "Speciality:",
+    "cant-pickDay": "you already choose the day and you cant choose a previous day",
     "columns": {
       "name": "Name",
       "speciality": "Speciality",
@@ -370,7 +392,27 @@
     "visited": "You previously visited:",
     "prefix-doctor": "Dr. ",
     "doctorPicAlt": "Doctor photo",
-    "errorAsync": "Error occured while changing availability schedule, try again!"
+    "errorAsync": "Error occured while changing availability schedule, try again!",
+    "preffix-id": "# ",
+    "preffix-overview": "Overview: ",
+    "preffix-remote": "Remote - ",
+    "suffix-age": "y.o.",
+    "add-link": "Add Link",
+    "modal-title": "Add Link to Zoom Call",
+    "modal-placeholder": "Add link to zoom meeting"
+  },
+  "appointments": {
+    "title": "Appointments",
+    "view": {
+      "list": "List",
+      "month": "Month"
+    },
+    "details": {
+      "patient": "Patient:",
+      "doctor": "Doctor:",
+      "date": "Date:",
+      "starts": "starts at"
+    }
   },
   "availability": {
     "title": "Availability schedule:",
@@ -384,5 +426,16 @@
     "dateOldest": "Date (Oldest)",
     "dateLatest": "Date (Latest)"
   },
-  "defaultLanguage": "en-US"
+  "avatar": {
+    "modalTitle": "Edit photo",
+    "errors": {
+      "size": "File size is greater than maximum limit",
+      "type": "Wrong file type",
+      "noFile": "Please choose a file",
+      "catchError": "Something went wrong, try again"
+    },
+    "success": "Photo updated successfully"
+  },
+  "defaultLanguage": "en-US",
+  "not-one": "You are not the chosen one"
 }

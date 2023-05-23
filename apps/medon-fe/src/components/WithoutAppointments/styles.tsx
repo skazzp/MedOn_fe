@@ -49,8 +49,11 @@ export const IconUser = styled.div`
   margin-bottom: 150px;
   grid-column-start: 2;
   grid-row-start: 2;
+  height: 200px;
   svg {
     fill: ${theme.colors.gray_500};
+    width: 200px;
+    height: 200px;
   }
 `;
 
@@ -79,7 +82,7 @@ export const Wrapper = styled.div`
 
 export const Manage = styled(Link)`
   font-weight: ${theme.fontWeight.bold};
-  font-size: ${theme.fontSizes.xxl};
+  font-size: ${theme.fontSizes.xl};
   font-family: ${theme.fontFamily.sf_pro_text};
   line-height: 20px;
   display: flex;
