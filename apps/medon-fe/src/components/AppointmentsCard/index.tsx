@@ -72,7 +72,7 @@ export function AppointmentsCard({
             </Number>
             <Patient>
               <Name>
-                {patient?.firstName?.charAt(0)} {patient?.lastName}
+                {patient?.firstName?.charAt(0)}. {patient?.lastName}
               </Name>
               {patient?.gender},{' '}
               {getAgeByDateOfBirth(String(patient?.dateOfBirth))}{' '}

@@ -6,7 +6,6 @@ export const appointmentCardMock: IAppointmentsCardProps[] = [
     link: '',
     startTime: new Date('2022-03-01T10:00:00Z'),
     endTime: new Date('2022-03-01T11:00:00Z'),
-    localDoctorId: 456,
     remoteDoctor: {
       lastName: 'Smith',
     },
@@ -23,7 +22,6 @@ export const appointmentCardMock: IAppointmentsCardProps[] = [
     link: '',
     startTime: new Date('2022-03-01T11:00:00Z'),
     endTime: new Date('2022-03-01T12:00:00Z'),
-    localDoctorId: 456,
     remoteDoctor: {
       lastName: 'Smith',
     },
@@ -40,7 +38,6 @@ export const appointmentCardMock: IAppointmentsCardProps[] = [
     link: 'http://www.google.com',
     startTime: new Date('2022-03-01T12:00:00Z'),
     endTime: new Date('2022-03-01T13:00:00Z'),
-    localDoctorId: 456,
     remoteDoctor: {
       lastName: 'Smith',
     },
@@ -57,7 +54,6 @@ export const appointmentCardMock: IAppointmentsCardProps[] = [
     link: '',
     startTime: new Date('2022-03-01T13:00:00Z'),
     endTime: new Date('2022-03-01T14:00:00Z'),
-    localDoctorId: 456,
     remoteDoctor: {
       lastName: 'Smith',
     },
@@ -74,7 +70,6 @@ export const appointmentCardMock: IAppointmentsCardProps[] = [
     link: '',
     startTime: new Date('2022-03-01T14:00:00Z'),
     endTime: new Date('2022-03-01T15:00:00Z'),
-    localDoctorId: 456,
     remoteDoctor: {
       lastName: 'Smith',
     },
@@ -91,7 +86,6 @@ export const appointmentCardMock: IAppointmentsCardProps[] = [
     link: 'http://www.google.com',
     startTime: new Date('2022-03-01T15:00:00Z'),
     endTime: new Date('2022-03-01T16:00:00Z'),
-    localDoctorId: 456,
     remoteDoctor: {
       lastName: 'Smith',
     },

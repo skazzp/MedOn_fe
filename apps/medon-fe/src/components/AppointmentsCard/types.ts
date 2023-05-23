@@ -3,7 +3,6 @@ export interface IAppointmentsCardProps {
   link?: string;
   startTime?: Date;
   endTime?: Date;
-  localDoctorId?: number;
   // REMOTE DOCTOR
   remoteDoctor?: {
     lastName?: string;
