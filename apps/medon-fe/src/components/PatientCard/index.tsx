@@ -3,10 +3,11 @@ import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import AnimateHeight, { Height } from 'react-animate-height';
 import { toast } from 'react-toastify';
+import { io, Socket } from 'socket.io-client';
 
 import { LinkGoBack } from 'components/common/LinkGoBack';
 import Button from 'components/Button';
@@ -16,6 +17,7 @@ import PatientCardInfo from 'components/PatientCardInfo';
 import { ShowMore } from 'components/ShowMore';
 import { PatientCardCalendar } from 'components/PatientCardCalendar';
 import { NewPatientForm } from 'components/NewPatientForm';
+import { Chat } from 'components/Chat';
 
 import { addPatientNoteSchema } from 'validation/addPatientNoteSchema';
 
@@ -43,6 +45,7 @@ import {
   EditBtn,
 } from './styles';
 import { SubmitAddNote } from './types';
+import { useSocket } from 'components/PatientCard/hooks/useSocket';
 
 export default function PatientCard() {
   const [height, setHeight] = useState<Height>(0);
@@ -76,6 +79,10 @@ export default function PatientCard() {
   const theme = useTheme();
   const { handleSubmit, control, reset } = useForm<SubmitAddNote>({
     resolver: yupResolver(addPatientNoteSchema),
+  });
+  const { messages, socket, onSubmitMessage } = useSocket({
+    appointmentId: 3,
+    senderId: 1,
   });
 
   const handleAddNote: SubmitHandler<SubmitAddNote> = ({ note }) => {
@@ -181,6 +188,8 @@ export default function PatientCard() {
       ) : (
         <NewPatientForm patient={patient?.data} setEditInfo={setEditInfo} />
       )}
+      <Chat onSubmitMessage={onSubmitMessage} />
+      <Button>Join Chat</Button>
     </Container>
   );
 }

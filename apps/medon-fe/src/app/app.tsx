@@ -28,7 +28,6 @@ import { persistedStore } from 'redux/store';
 import { routes } from 'utils/constants/routes';
 import { Skeleton } from 'antd';
 import { SkeletonContainer } from 'components/PatientCard/styles';
-import Chat from 'components/Chat';
 
 function App() {
   const isLoggedIn = useAppSelector(getTokenSelector);
