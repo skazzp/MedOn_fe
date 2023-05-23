@@ -7,7 +7,3 @@ export interface IPatientCardProps {
   age: string;
   location: string;
 }
-
-export interface SubmitAddNote {
-  note: string;
-}
