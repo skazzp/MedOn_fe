@@ -21,6 +21,7 @@ import { PrivateRoute } from 'components/Routes/PrivateRoute';
 import PatientsList from 'components/PatientsList';
 import { NewPatientForm } from 'components/NewPatientForm';
 import { PatientCardCalendar } from 'components/PatientCardCalendar';
+import { SkeletonContainer } from 'components/PatientCard/styles';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { getTokenSelector } from 'redux/features/userSlice/userSelectors';
@@ -29,8 +30,6 @@ import { logout, setUser } from 'redux/features/userSlice/userSlice';
 import { persistedStore } from 'redux/store';
 
 import { routes } from 'utils/constants/routes';
-
-import { SkeletonContainer } from 'components/PatientCard/styles';
 
 function App() {
   const isLoggedIn = useAppSelector(getTokenSelector);
