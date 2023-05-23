@@ -97,10 +97,10 @@ function App() {
         path={routes.resendConfirmation}
         element={<ResendConfirmation />}
       />
-      {/* <Route
+      <Route
         path={routes.appointments}
         element={<PrivateRoute component={<AppointmentsPage />} />}
-      /> */}
+      />
       <Route
         path={routes.updatePassword}
         element={<PrivateRoute component={<UpdatePassword />} />}

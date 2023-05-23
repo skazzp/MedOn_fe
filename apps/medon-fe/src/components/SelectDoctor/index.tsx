@@ -31,7 +31,6 @@ export default function SelectDoctor({
   isActiveDoc,
   setIsActiveDoc,
   data,
-  selectedDoctorsById,
 }: SelectDoctorProps) {
   const { t } = useTranslation();
 
@@ -39,7 +38,7 @@ export default function SelectDoctor({
 
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedSpeciality, setSelectedSpeciality] = useState<number | string>(
-    ''
+    'all'
   );
 
   const doctors = data.map((avails: IAvailability) => avails.doctor);
@@ -49,29 +48,18 @@ export default function SelectDoctor({
   const handleSearch = (value: string) => {
     setSearchQuery(value);
   };
-  const handleSpecialityChange = (value: any) => {
+  const handleSpecialityChange = (value: number | string) => {
     setSelectedSpeciality(value);
   };
 
   const filteredDoctors = uniqueDoctors.filter((doctor: Doctor) => {
-    if (
-      (selectedSpeciality === 'all' && searchQuery === '') ||
-      !selectedSpeciality
-    ) {
-      return true;
-    }
-
-    if (
-      selectedSpeciality !== 'all' &&
-      doctor.specialityId !== selectedSpeciality
-    ) {
-      return false;
-    }
-
     const fullName = `${doctor.firstName} ${doctor.lastName}`.toLowerCase();
     const lowerCaseSearchQuery = searchQuery.toLowerCase();
 
-    return fullName.includes(lowerCaseSearchQuery);
+    return selectedSpeciality === 'all'
+      ? fullName.includes(lowerCaseSearchQuery)
+      : fullName.includes(lowerCaseSearchQuery) &&
+          doctor.specialityId === selectedSpeciality;
   });
 
   const selectDoctor = (key: number) => {
@@ -104,7 +92,9 @@ export default function SelectDoctor({
           <Text>{t('appointment.filterLabel')} </Text>
           <StyledSelect
             defaultValue="all"
-            onChange={handleSpecialityChange}
+            onSelect={(value) =>
+              handleSpecialityChange(value as number | string)
+            }
             size="large"
             options={[
               { value: 'all', label: t('appointment.allLabel') },
@@ -119,31 +109,29 @@ export default function SelectDoctor({
         <ColumnName>{t('appointment.columns.located')}</ColumnName>
       </TitleBox>
       <List>
-        {filteredDoctors
-          .filter((doctor: Doctor) => selectedDoctorsById.includes(doctor.id))
-          .map((doctor: Doctor) => (
-            <ListItem key={doctor.id}>
-              <ItemWrap
-                onClick={() => selectDoctor(doctor.id)}
-                style={isActiveDoc === doctor.id ? SlotActive : {}}
-              >
-                <ColumnText>
-                  <DoctorPic
-                    src={doctor.photo || doctorImagePlaceholder}
-                    alt={`${t('appointment.doctorPicAlt')}`}
-                  />
-                  {t('appointment.prefix-doctor')}
-                  {doctor.firstName[0]}. {doctor.lastName}
-                </ColumnText>
-                <ColumnText>
-                  {specialityOptions.length ? doctor.speciality.name : ''}
-                </ColumnText>
-                <ColumnText>
-                  {doctor.country}, {doctor.city}
-                </ColumnText>
-              </ItemWrap>
-            </ListItem>
-          ))}
+        {filteredDoctors.map((doctor: Doctor) => (
+          <ListItem key={doctor.id}>
+            <ItemWrap
+              onClick={() => selectDoctor(doctor.id)}
+              style={isActiveDoc === doctor.id ? SlotActive : {}}
+            >
+              <ColumnText>
+                <DoctorPic
+                  src={doctor.photo || doctorImagePlaceholder}
+                  alt={`${t('appointment.doctorPicAlt')}`}
+                />
+                {t('appointment.prefix-doctor')}
+                {doctor.firstName[0]}. {doctor.lastName}
+              </ColumnText>
+              <ColumnText>
+                {specialityOptions.length ? doctor.speciality.name : ''}
+              </ColumnText>
+              <ColumnText>
+                {doctor.country}, {doctor.city}
+              </ColumnText>
+            </ItemWrap>
+          </ListItem>
+        ))}
       </List>
     </Container>
   );
