@@ -168,3 +168,13 @@ export const Entity = styled.div`
   display: flex;
   gap: 4px;
 `;
+
+export const AppointmentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 0 auto;
+  gap: 1rem;
+  margin-bottom: 3rem;
+`;

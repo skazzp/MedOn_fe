@@ -42,6 +42,8 @@ import {
 
 import { addPatientNoteSchema } from 'validation/addPatientNoteSchema';
 
+import { useModal } from 'hooks/useModal';
+
 import {
   AddNoteForm,
   Buttons,
@@ -55,9 +57,7 @@ import {
   Title,
   Wrapper,
 } from './styles';
-import { useModal } from './hooks';
 import { SubmitAddNote } from './types';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 export function PatientCardCalendar() {
   const [event, setEvent] = useState<Event>();
