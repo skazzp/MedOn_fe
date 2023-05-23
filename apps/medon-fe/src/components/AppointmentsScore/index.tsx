@@ -8,7 +8,6 @@ import {
   Availability,
   CountList,
   IconCalendar,
-  Radio,
   UserIcon,
 } from 'components/AppointmentsScore/styles';
 
@@ -29,24 +28,11 @@ export default function AppointmentsScore({
         <UserIcon />
         <p data-testid="patient-count">{quantity}</p>
       </CountList>
-      {user.role === roles.remote ? (
-        <>
-          <Radio>
-            <input type="radio" name="choice" id="list" checked={true} />
-            <label htmlFor="list" data-checked={true} data-testid="list">
-              {t('dashboard.list')}
-            </label>
-            <input type="radio" name="choice" id="month" data-testid="month" />
-            <label htmlFor="month">{t('dashboard.month')}</label>
-          </Radio>
-
-          <Availability to={routes.availability}>
-            {t('dashboard.manage')}
-            <IconCalendar />
-          </Availability>
-        </>
-      ) : (
-        ''
+      {user.role === roles.remote && (
+        <Availability to={routes.availability}>
+          {t('dashboard.manage')}
+          <IconCalendar />
+        </Availability>
       )}
     </Appointments>
   );
