@@ -7,7 +7,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import AnimateHeight, { Height } from 'react-animate-height';
 import { toast } from 'react-toastify';
-import { io, Socket } from 'socket.io-client';
 
 import { LinkGoBack } from 'components/common/LinkGoBack';
 import Button from 'components/Button';
@@ -80,7 +79,9 @@ export default function PatientCard() {
   const { handleSubmit, control, reset } = useForm<SubmitAddNote>({
     resolver: yupResolver(addPatientNoteSchema),
   });
-  const { messages, socket, onSubmitMessage } = useSocket({
+
+  //TODO: Replace with real appointmentId and user.id
+  const { history, onSubmitMessage, isHistoryReady, reply } = useSocket({
     appointmentId: 3,
     senderId: 1,
   });
@@ -188,8 +189,13 @@ export default function PatientCard() {
       ) : (
         <NewPatientForm patient={patient?.data} setEditInfo={setEditInfo} />
       )}
-      <Chat onSubmitMessage={onSubmitMessage} />
-      <Button>Join Chat</Button>
+      {isHistoryReady && (
+        <Chat
+          onSubmitMessage={onSubmitMessage}
+          history={history}
+          reply={reply}
+        />
+      )}
     </Container>
   );
 }

@@ -1,10 +1,11 @@
-import { EventHandler, MouseEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { ChatMessage } from 'components/Chat/types';
 
 interface ISocket {
-  socket: Socket | null;
-  messages: ChatMessage[];
+  history: ChatMessage[];
+  isHistoryReady: boolean;
+  reply: ChatMessage | null;
   onSubmitMessage: (msg: string) => void;
 }
 
@@ -15,14 +16,17 @@ interface ISocketProps {
 
 export function useSocket({ appointmentId, senderId }: ISocketProps): ISocket {
   const [socket, setSocket] = useState<Socket | null>(null);
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [history, setHistory] = useState<ChatMessage[]>([]);
+  const [isHistoryReady, setIsHistoryReady] = useState<boolean>(false);
+  const [reply, setReply] = useState<ChatMessage | null>(null);
 
   useEffect(() => {
     const socket = io(`${process.env.NX_API_URL}/chat`);
 
     socket.emit('joinRoomByAppointmentId', appointmentId);
     socket.emit('getAllMessages', {}, (response: ChatMessage[]) => {
-      setMessages(response);
+      setHistory(response);
+      setIsHistoryReady(true);
     });
 
     setSocket(socket);
@@ -32,13 +36,12 @@ export function useSocket({ appointmentId, senderId }: ISocketProps): ISocket {
   }, []);
 
   useEffect(() => {
-    socket?.on('message', (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
+    socket?.on('message', (message: ChatMessage) => {
+      setReply(message);
     });
   }, [socket]);
 
   const onSubmitMessage = (message: string): void => {
-    console.log(message);
     socket?.emit('sendMessage', {
       value: message,
       appointmentId,
@@ -46,5 +49,5 @@ export function useSocket({ appointmentId, senderId }: ISocketProps): ISocket {
     });
   };
 
-  return { socket, messages, onSubmitMessage };
+  return { history, isHistoryReady, onSubmitMessage, reply };
 }

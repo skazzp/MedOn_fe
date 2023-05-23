@@ -1,8 +1,16 @@
-import styled from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
+import { theme } from 'styles/theme';
 
-export const Wrapper = styled.div`
-  width: 40%;
-  position: absolute;
-  top: 0;
-  right: 0;
+export const GlobalStyle = createGlobalStyle`
+  .rcw-header {
+    background: ${theme.colors.blue_300} !important;
+  }
+
+  .rcw-message-text {
+    background: ${theme.colors.blue_100} !important;
+  }
+
+  .rcw-launcher {
+    background: ${theme.colors.blue_300} !important;
+  }
 `;
