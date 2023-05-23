@@ -25,20 +25,14 @@ export default function Dashboard() {
           <Attention />
           <AppointmentsScore quantity={appointmentCardMock.length} />
           <AppointmentContainer>
-            {appointmentCardMock
-              .sort(
-                (a, b) =>
-                  Number(a.startTime?.getHours()) -
-                  Number(b.startTime?.getHours())
-              )
-              .map((appointment) => (
-                <AppointmentsCard
-                  key={appointment.id}
-                  role={user.role?.toString()}
-                  isLinkAdded={appointment.link === ''}
-                  {...appointment}
-                />
-              ))}
+            {appointmentCardMock.map((appointment) => (
+              <AppointmentsCard
+                key={appointment.id}
+                role={user.role?.toString()}
+                isLinkAdded={appointment.link === ''}
+                {...appointment}
+              />
+            ))}
           </AppointmentContainer>
         </>
       ) : (

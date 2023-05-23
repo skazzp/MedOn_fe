@@ -1,12 +1,9 @@
-import { useState } from 'react';
 import dayjs from 'dayjs';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { dayjsLocalizer, Views, Event } from 'react-big-calendar';
 
 import { AppointmentsCard } from 'components/AppointmentsCard';
-
-import { useAppSelector } from 'redux/hooks';
-import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 
 import { appointmentCardMock } from 'utils/mock/appointment';
 
@@ -30,7 +27,6 @@ const AppointmentsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
-  const user = useAppSelector(getUserSelector);
   const { t } = useTranslation();
 
   const localizer = dayjsLocalizer(dayjs);
@@ -72,8 +68,7 @@ const AppointmentsPage = () => {
           {appointmentCardMock.map((appointment) => (
             <AppointmentsCard
               key={appointment.id}
-              role={user.role?.toString()}
-              isLinkAdded={appointment.link === ''}
+              isLinkAdded
               {...appointment}
             />
           ))}
