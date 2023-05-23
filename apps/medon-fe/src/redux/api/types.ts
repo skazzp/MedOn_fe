@@ -13,7 +13,7 @@ export interface IUser {
   country: string | null;
   city: string;
   timeZone: string | null;
-  id: string;
+  id: number | null;
 }
 
 export interface RegisterData {
@@ -152,3 +152,12 @@ export interface Doctor {
   };
 }
 
+export interface Appointment {
+  link?: string;
+  startTime: Date | string;
+  endTime: Date | string;
+  localDoctorId: number | null;
+  remoteDoctorId: number;
+  patientId: number;
+  timezone?: string;
+}

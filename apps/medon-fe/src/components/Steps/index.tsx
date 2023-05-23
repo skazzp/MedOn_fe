@@ -3,9 +3,14 @@ import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { useGetAvailabilityByDayMutation } from 'redux/api/availabilityApi';
+import { getUserSelector } from 'redux/features/userSlice/userSelectors';
+import { useAppSelector } from 'redux/hooks';
+import { Appointment } from 'redux/api/types';
+import { useCreateAppointmentMutation } from 'redux/api/appointmentsApi';
 
 import {
   Button,
@@ -24,6 +29,7 @@ import {
   positionNext,
   positionPrevious,
 } from 'utils/constants/position';
+import { toastConfig } from 'utils/toastConfig';
 
 function Steps(props: StepsProps) {
   const {
@@ -44,11 +50,15 @@ function Steps(props: StepsProps) {
   dayjs.extend(utc);
   dayjs.extend(timezone);
   const userTimezone = dayjs.tz.guess();
-
+  const user = useAppSelector(getUserSelector);
+  const { id } = useParams();
+  console.log(id);
   const dateInText = dayjs(selectedDate).format(dateToTextFormat);
   const [isSlotAvailable, setIsSlotAvailable] = useState<boolean>(false);
 
   const [getAvailabilityByDay, { data }] = useGetAvailabilityByDayMutation();
+  const [createAppointment, { isLoading: createLoading }] =
+    useCreateAppointmentMutation();
 
   const isButtonActive = Boolean(selectedDate && isSlotAvailable);
   const noMeetingsMessage = !isSlotAvailable
@@ -105,8 +115,28 @@ function Steps(props: StepsProps) {
     }
   };
 
-  const handleBooking = () => {
-    // add function when will be booking
+  const handleBooking = async () => {
+    if (selectedDate && selectedTime && selectedDoctor) {
+      const appointmentData: Appointment = {
+        link: '',
+        startTime: selectedTime,
+        endTime: selectedTime,
+        localDoctorId: user.id,
+        remoteDoctorId: selectedDoctor,
+        patientId: selectedDoctor,
+        timezone: userTimezone,
+      };
+
+      try {
+        await createAppointment({
+          dto: appointmentData,
+          timezone: userTimezone,
+        });
+        toast.success('Appointment created successfully', toastConfig);
+      } catch (error) {
+        toast.error('Failed to create appointment', toastConfig);
+      }
+    }
   };
 
   const renderStepContent = () => {

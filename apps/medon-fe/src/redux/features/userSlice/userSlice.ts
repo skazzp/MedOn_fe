@@ -21,7 +21,7 @@ export const initialState: IUserState = {
     country: null,
     city: '',
     timeZone: null,
-    id: '',
+    id: null,
   },
   token: null,
   isVerified: false,

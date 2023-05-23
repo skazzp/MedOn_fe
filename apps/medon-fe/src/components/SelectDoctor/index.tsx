@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Doctor, IAvailability } from 'redux/api/types';
 
@@ -31,6 +31,7 @@ export default function SelectDoctor({
   isActiveDoc,
   setIsActiveDoc,
   data,
+  selectedDoctorsById,
 }: SelectDoctorProps) {
   const { t } = useTranslation();
 
@@ -109,29 +110,31 @@ export default function SelectDoctor({
         <ColumnName>{t('appointment.columns.located')}</ColumnName>
       </TitleBox>
       <List>
-        {filteredDoctors.map((doctor: Doctor) => (
-          <ListItem key={doctor.id}>
-            <ItemWrap
-              onClick={() => selectDoctor(doctor.id)}
-              style={isActiveDoc === doctor.id ? SlotActive : {}}
-            >
-              <ColumnText>
-                <DoctorPic
-                  src={doctor.photo || doctorImagePlaceholder}
-                  alt={`${t('appointment.doctorPicAlt')}`}
-                />
-                {t('appointment.prefix-doctor')}
-                {doctor.firstName[0]}. {doctor.lastName}
-              </ColumnText>
-              <ColumnText>
-                {specialityOptions.length ? doctor.speciality.name : ''}
-              </ColumnText>
-              <ColumnText>
-                {doctor.country}, {doctor.city}
-              </ColumnText>
-            </ItemWrap>
-          </ListItem>
-        ))}
+        {filteredDoctors
+          .filter((doctor: Doctor) => selectedDoctorsById.includes(doctor.id))
+          .map((doctor: Doctor) => (
+            <ListItem key={doctor.id}>
+              <ItemWrap
+                onClick={() => selectDoctor(doctor.id)}
+                style={isActiveDoc === doctor.id ? SlotActive : {}}
+              >
+                <ColumnText>
+                  <DoctorPic
+                    src={doctor.photo || doctorImagePlaceholder}
+                    alt={`${t('appointment.doctorPicAlt')}`}
+                  />
+                  {t('appointment.prefix-doctor')}
+                  {doctor.firstName[0]}. {doctor.lastName}
+                </ColumnText>
+                <ColumnText>
+                  {specialityOptions.length ? doctor.speciality.name : ''}
+                </ColumnText>
+                <ColumnText>
+                  {doctor.country}, {doctor.city}
+                </ColumnText>
+              </ItemWrap>
+            </ListItem>
+          ))}
       </List>
     </Container>
   );
