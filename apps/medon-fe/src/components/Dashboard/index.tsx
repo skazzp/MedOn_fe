@@ -25,6 +25,7 @@ export default function Dashboard() {
           <Attention />
           <AppointmentsScore quantity={appointmentCardMock.length} />
           <AppointmentContainer>
+            {/* sort and pagination on backend */}
             {appointmentCardMock.map((appointment) => (
               <AppointmentsCard
                 key={appointment.id}

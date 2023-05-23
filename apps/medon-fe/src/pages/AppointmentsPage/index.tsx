@@ -65,6 +65,7 @@ const AppointmentsPage = () => {
       </Header>
       {!isMonthView && (
         <AppointmentContainer>
+          {/* sort and pagination on backend */}
           {appointmentCardMock.map((appointment) => (
             <AppointmentsCard
               key={appointment.id}
