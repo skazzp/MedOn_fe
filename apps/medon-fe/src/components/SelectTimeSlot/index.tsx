@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { timeSlots } from 'utils/constants/options/hourOptions';
+import dayjs from 'dayjs';
 import { Container, DrText, SlotActive, TimeSlot, TimeText } from './styles';
 import { SelectTimeSlotProps } from './types';
 
 export default function SelectTimeSlot({
-  selectedTime,
+  setStartTime,
+  setEndTime,
   setIsActive,
   isActive,
   selectTimeAppointments,
   data,
   setSelectedDoctorsById,
+  selectedDate,
 }: SelectTimeSlotProps) {
   const { t } = useTranslation();
   const [timeSlotsAvailability, setTimeSlotsAvailability] = useState<{
@@ -41,6 +44,14 @@ export default function SelectTimeSlot({
 
   const selectTime = (time: string) => {
     const doctorAvailability = Object.entries(timeSlotsAvailability);
+    const start = dayjs(selectedDate)
+      .hour(+time.split(':')[0])
+      .minute(0)
+      .toDate();
+    const end = dayjs(selectedDate)
+      .hour(+time.split(':')[0] + 1)
+      .minute(0)
+      .toDate();
 
     if (
       doctorAvailability.some(
@@ -58,6 +69,8 @@ export default function SelectTimeSlot({
 
       setSelectedDoctorsById(selectedDoctorsIds);
     }
+    setStartTime(start);
+    setEndTime(end);
   };
 
   return (

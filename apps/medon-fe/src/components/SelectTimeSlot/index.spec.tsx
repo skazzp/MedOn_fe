@@ -12,6 +12,9 @@ it('should render successfully', () => {
       setIsActive={() => {}}
       data={[]}
       setSelectedDoctorsById={() => {}}
+      setEndTime={() => {}}
+      setStartTime={() => {}}
+      selectedDate={null}
     />,
     {
       wrapper: TestWrapper,
@@ -30,6 +33,9 @@ it('should render 24 time slots', async () => {
       setIsActive={() => {}}
       data={[]}
       setSelectedDoctorsById={() => {}}
+      setEndTime={() => {}}
+      setStartTime={() => {}}
+      selectedDate={null}
     />,
     {
       wrapper: TestWrapper,
@@ -48,6 +54,9 @@ it('click on slot should change style', async () => {
       setIsActive={() => {}}
       data={[]}
       setSelectedDoctorsById={() => {}}
+      setEndTime={() => {}}
+      setStartTime={() => {}}
+      selectedDate={null}
     />,
     {
       wrapper: TestWrapper,

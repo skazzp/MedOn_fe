@@ -31,7 +31,7 @@ export const appointmentsApi = createApi({
                 query: (body: { dto: Appointment; timezone: string }) => ({
                     url: 'appointments',
                     method: 'POST',
-                    body,
+                    body: { ...body.dto, timezone: body.timezone },
                 }),
                 invalidatesTags: ['appointment'],
             }),

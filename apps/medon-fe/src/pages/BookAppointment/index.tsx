@@ -18,12 +18,14 @@ export default function BookAppointment() {
   const user = useAppSelector(getUserSelector);
   const [selectedDate, setSelectedDate] = useState<null | Date>(null);
   const [currentStep, setCurrentStep] = useState<number>(1);
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [selectedTime, setSelectedTime] = useState<Date | string | null>(null);
   const [isActive, setIsActive] = useState<string>('');
   const [selectedDoctor, setSelectedDoctor] = useState<number | null>(null);
   const [isActiveDoc, setIsActiveDoc] = useState<number | null>(null);
   const [data, setData] = useState<IAvailability[]>([]);
   const [selectedDoctorsById, setSelectedDoctorsById] = useState<number[]>([]);
+  const [startTime, setStartTime] = useState<string | Date>('');
+  const [endTime, setEndTime] = useState<string | Date>('');
 
   const handleCurrentStepChange = (step: number) => {
     setCurrentStep(step);
@@ -55,6 +57,8 @@ export default function BookAppointment() {
             selectDoctorAppointments={handleSelectDoctor}
             data={data}
             setData={setData}
+            startTime={startTime}
+            endTime={endTime}
           />
           {currentStep === steps.one && (
             <BookAppointmentCalendar
@@ -70,6 +74,9 @@ export default function BookAppointment() {
               setIsActive={setIsActive}
               data={data}
               setSelectedDoctorsById={setSelectedDoctorsById}
+              setStartTime={setStartTime}
+              setEndTime={setEndTime}
+              selectedDate={selectedDate}
             />
           )}
           {currentStep === steps.three && (

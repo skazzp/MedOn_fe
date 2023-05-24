@@ -158,6 +158,6 @@ export interface Appointment {
   endTime: Date | string;
   localDoctorId: number | null;
   remoteDoctorId: number;
-  patientId: number;
+  patientId: number | null;
   timezone?: string;
 }

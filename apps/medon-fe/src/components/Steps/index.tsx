@@ -43,6 +43,8 @@ function Steps(props: StepsProps) {
     isActiveDoc,
     selectTimeAppointments,
     selectDoctorAppointments,
+    startTime,
+    endTime,
   } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -52,7 +54,7 @@ function Steps(props: StepsProps) {
   const userTimezone = dayjs.tz.guess();
   const user = useAppSelector(getUserSelector);
   const { id } = useParams();
-  console.log(id);
+
   const dateInText = dayjs(selectedDate).format(dateToTextFormat);
   const [isSlotAvailable, setIsSlotAvailable] = useState<boolean>(false);
 
@@ -119,11 +121,11 @@ function Steps(props: StepsProps) {
     if (selectedDate && selectedTime && selectedDoctor) {
       const appointmentData: Appointment = {
         link: '',
-        startTime: selectedTime,
-        endTime: selectedTime,
+        startTime,
+        endTime,
         localDoctorId: user.id,
         remoteDoctorId: selectedDoctor,
-        patientId: selectedDoctor,
+        patientId: Number(id),
         timezone: userTimezone,
       };
 
@@ -133,6 +135,7 @@ function Steps(props: StepsProps) {
           timezone: userTimezone,
         });
         toast.success('Appointment created successfully', toastConfig);
+        navigate(`${routes.dashboard}`);
       } catch (error) {
         toast.error('Failed to create appointment', toastConfig);
       }
