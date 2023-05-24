@@ -5,6 +5,11 @@ export interface IAppointmentsCardProps {
   endTime?: Date;
   // REMOTE DOCTOR
   remoteDoctor?: {
+    firstName?: string;
+    lastName?: string;
+  };
+  localDoctor?: {
+    firstName?: string;
     lastName?: string;
   };
   isLinkAdded?: boolean;
