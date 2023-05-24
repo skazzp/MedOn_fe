@@ -32,6 +32,10 @@ export const StyledButton = styled(Button)`
   color: ${theme.colors.white};
   min-width: 10rem;
   padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   font-size: ${theme.fontSizes.sm};
   font-weight: bold;
   width: 200px;
