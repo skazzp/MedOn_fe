@@ -17,6 +17,7 @@ import { authApi } from 'redux/api/authApi';
 import { userApi } from 'redux/api/userApi';
 import { patientApi } from 'redux/api/patientApi';
 import { availabilityApi } from './api/availabilityApi';
+import { appointmentApi } from './api/appointmentApi';
 
 const persistConfig = {
   key: 'medon',
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   [userApi.reducerPath]: userApi.reducer,
   [patientApi.reducerPath]: patientApi.reducer,
   [availabilityApi.reducerPath]: availabilityApi.reducer,
+  [appointmentApi.reducerPath]: appointmentApi.reducer,
   userState: persistReducer(persistConfig, userReducer),
 });
 
@@ -44,6 +46,7 @@ export const store = configureStore({
       userApi.middleware,
       patientApi.middleware,
       availabilityApi.middleware,
+      appointmentApi.middleware,
     ]),
   devTools: process.env.NODE_ENV !== 'production',
 });

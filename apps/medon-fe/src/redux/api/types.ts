@@ -136,3 +136,8 @@ export interface IAvailability {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface AppointmentRequest {
+  offset: number;
+  limit: number;
+}
