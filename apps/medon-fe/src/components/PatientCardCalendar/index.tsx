@@ -18,7 +18,6 @@ import { PatientNotes } from 'components/PatientNotes';
 import Button from 'components/Button';
 import { TextareaAntD } from 'components/common';
 
-import { eventsCard } from 'utils/mock/patientCalendar';
 import { getDateAndHourEvent } from 'utils/functions/getDateAndHourEvent';
 import { getDayPropGetter } from 'utils/functions/getDayPropGetter';
 import { getEventPropGetter } from 'utils/functions/getEventPropGetter';
@@ -58,6 +57,7 @@ import {
   Wrapper,
 } from './styles';
 import { SubmitAddNote } from './types';
+import useGetPatientAppointments from './hooks';
 
 export function PatientCardCalendar() {
   const [event, setEvent] = useState<Event>();
@@ -84,6 +84,8 @@ export function PatientCardCalendar() {
   });
   const [sendData, { isLoading: isNoteSending }] =
     useCreatePatientNoteMutation();
+  const appointments = useGetPatientAppointments(id as string);
+
   const { handleSubmit, control, reset } = useForm<SubmitAddNote>({
     resolver: yupResolver(addPatientNoteSchema),
   });
@@ -124,8 +126,7 @@ export function PatientCardCalendar() {
         localizer={dayjsLocalizer(dayjs)}
         defaultView={Views.WEEK}
         views={[Views.WEEK]}
-        // mock
-        events={eventsCard}
+        events={appointments}
         dayPropGetter={getDayPropGetter}
         eventPropGetter={getEventPropGetter}
         onSelectEvent={handleEventSelect}
@@ -152,8 +153,8 @@ export function PatientCardCalendar() {
       <StyledModal
         title={`${t('patient-card.calendar.prefix-modal')} ${event?.title}`}
         open={isVisible}
-        onOk={showModal}
-        onCancel={hideModal}
+        onOk={hideModal}
+        cancelButtonProps={{ style: { display: 'none' } }}
       >
         <p>
           <strong>{t('patient-card.calendar.modal-title')} </strong>

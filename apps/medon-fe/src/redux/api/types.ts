@@ -136,3 +136,13 @@ export interface IAvailability {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface Appointment {
+  link?: string;
+  startTime: Date | string;
+  endTime: Date | string;
+  localDoctorId: number | null;
+  remoteDoctorId: number;
+  patientId: number | null;
+  timezone?: string;
+}
