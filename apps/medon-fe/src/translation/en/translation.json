@@ -371,7 +371,9 @@
     "book": "Book an appointment",
     "prefix-doctor": "Dr. ",
     "month": "Month",
-    "list": "List"
+    "list": "List",
+    "link-success": "Link added successfully!",
+    "link-error": "Error occured while adding link!"
   },
   "attention": {
     "call-time-left": "You will have a video-call in 5 minutes with:",

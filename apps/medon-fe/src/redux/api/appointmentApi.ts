@@ -29,6 +29,7 @@ export const appointmentApi = createApi({
           },
         };
       },
+      providesTags: ['appointment'],
     }),
     getPastAppointments: builder.query<
       IServerResponse<IAppointmentsCardProps[]>,
@@ -55,6 +56,7 @@ export const appointmentApi = createApi({
           body: { link },
         };
       },
+      invalidatesTags: ['appointment'],
     }),
   }),
 });
