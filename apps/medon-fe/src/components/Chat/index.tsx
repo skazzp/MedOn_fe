@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import dayjs from 'dayjs';
 import {
   Widget,
   addResponseMessage,
@@ -6,25 +7,19 @@ import {
   dropMessages,
   renderCustomComponent,
 } from 'react-chat-widget';
-import { ChatMessage } from 'components/Chat/types';
+import { IChatProps, ICustomTimeStampProps } from 'components/Chat/types';
 import 'react-chat-widget/lib/styles.css';
-import { GlobalStyle } from './styles';
-import dayjs from 'dayjs';
-import { IUser } from 'redux/api/types';
+import { GlobalStyle, DateWrapper, DateWrapperReply } from './styles';
 
-export interface IChatProps {
-  onSubmitMessage: (message: string) => void;
-  history: ChatMessage[];
-  reply: ChatMessage | null;
-  user: IUser;
-  patientFullName?: string;
-}
-
-function CustomTimeStampFragment({ date }: { date: Date }) {
+function CustomTimeStampFragment({ date, isReply }: ICustomTimeStampProps) {
   return (
-    <div style={{ fontSize: 12, marginTop: -4 }}>
-      {dayjs(date).format('hh:mm')}
-    </div>
+    <>
+      {isReply ? (
+        <DateWrapperReply>{dayjs(date).format('hh:mm')}</DateWrapperReply>
+      ) : (
+        <DateWrapper>{dayjs(date).format('hh:mm')}</DateWrapper>
+      )}
+    </>
   );
 }
 
@@ -41,6 +36,7 @@ export function Chat({
         addUserMessage(message.value);
         renderCustomComponent(CustomTimeStampFragment, {
           date: message.createdAt,
+          isReply: false,
         });
       } else {
         addResponseMessage(
@@ -48,6 +44,7 @@ export function Chat({
         );
         renderCustomComponent(CustomTimeStampFragment, {
           date: message.createdAt,
+          isReply: true,
         });
       }
     });
@@ -59,6 +56,7 @@ export function Chat({
       addResponseMessage(`**Dr. ${reply.sender.lastName}:** ${reply.value}`);
       renderCustomComponent(CustomTimeStampFragment, {
         date: reply.createdAt,
+        isReply: true,
       });
     }
   }, [reply]);

@@ -1,6 +1,16 @@
+import { IUser } from 'redux/api/types';
+
 export interface IChatProps {
-  messages: ChatMessage[];
-  onSubmit: (message: string) => void;
+  onSubmitMessage: (message: string) => void;
+  history: ChatMessage[];
+  reply: ChatMessage | null;
+  user: IUser;
+  patientFullName?: string;
+}
+
+export interface ICustomTimeStampProps {
+  date: Date;
+  isReply: boolean;
 }
 
 export interface Appointment {
