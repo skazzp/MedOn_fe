@@ -9,16 +9,19 @@ import {
 } from 'react-chat-widget';
 import { useTranslation } from 'react-i18next';
 import { IChatProps, ICustomTimeStampProps } from 'components/Chat/types';
-import 'react-chat-widget/lib/styles.css';
+import { TimeFormat } from 'utils/constants/timeFormats';
 import { GlobalStyle, DateWrapper, DateWrapperReply } from './styles';
+import 'react-chat-widget/lib/styles.css';
 
 function CustomTimeStampFragment({ date, isReply }: ICustomTimeStampProps) {
   return (
     <>
       {isReply ? (
-        <DateWrapperReply>{dayjs(date).format('hh:mm')}</DateWrapperReply>
+        <DateWrapperReply>
+          {dayjs(date).format(TimeFormat.hh_mm)}
+        </DateWrapperReply>
       ) : (
-        <DateWrapper>{dayjs(date).format('hh:mm')}</DateWrapper>
+        <DateWrapper>{dayjs(date).format(TimeFormat.hh_mm)}</DateWrapper>
       )}
     </>
   );

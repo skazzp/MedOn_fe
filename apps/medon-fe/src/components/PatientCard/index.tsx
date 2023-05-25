@@ -30,7 +30,7 @@ export default function PatientCard() {
 
   const user = useAppSelector(getUserSelector);
 
-  //TODO: Replace with real appointmentId and user.id
+  //TODO: Replace with real appointmentId
   const { history, onSubmitMessage, isHistoryReady, reply } = useSocket({
     appointmentId: 3,
     userId: Number(user.id),
