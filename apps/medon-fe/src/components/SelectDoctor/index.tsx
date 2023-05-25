@@ -1,4 +1,6 @@
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Doctor, IAvailability } from 'redux/api/types';
 
 import useSpecOptions from 'components/RegistrationForm/hooks';
 import {
@@ -18,7 +20,7 @@ import {
   Text,
   TitleBox,
 } from 'components/SelectDoctor/styles';
-import { mockDoctors } from 'components/SelectDoctor/mockData';
+import { filterUniqueDoctors } from 'components/SelectDoctor/hook';
 import { SelectDoctorProps } from 'components/SelectDoctor/types';
 
 import doctorImagePlaceholder from 'assets/images/Avatar.svg';
@@ -28,10 +30,47 @@ export default function SelectDoctor({
   selectedDoctor,
   isActiveDoc,
   setIsActiveDoc,
+  data,
+  selectedDoctorsById,
 }: SelectDoctorProps) {
   const { t } = useTranslation();
 
   const { specialityOptions } = useSpecOptions();
+
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [selectedSpeciality, setSelectedSpeciality] = useState<number | string>(
+    'all'
+  );
+
+  const doctors = data.map((avails: IAvailability) => avails.doctor);
+
+  const uniqueDoctors = filterUniqueDoctors(doctors);
+
+  const handleSearch = (value: string) => {
+    setSearchQuery(value);
+  };
+  const handleSpecialityChange = (value: number | string) => {
+    setSelectedSpeciality(value);
+  };
+
+  const filteredDoctors = useMemo(() => {
+    const fullNameSearchQuery = searchQuery.toLowerCase();
+    const filteredBySpeciality =
+      selectedSpeciality === 'all'
+        ? uniqueDoctors
+        : uniqueDoctors.filter(
+            (doctor) => doctor.specialityId === selectedSpeciality
+          );
+
+    return filteredBySpeciality.filter((doctor) => {
+      const fullName = `${doctor.firstName} ${doctor.lastName}`.toLowerCase();
+
+      return (
+        fullName.includes(fullNameSearchQuery) &&
+        selectedDoctorsById.includes(doctor.id)
+      );
+    });
+  }, [searchQuery, selectedSpeciality, uniqueDoctors, selectedDoctorsById]);
 
   const selectDoctor = (key: number) => {
     if (key === selectedDoctor) {
@@ -53,7 +92,9 @@ export default function SelectDoctor({
         <SearchBox>
           <StyledSearch
             placeholder={`${t('appointment.searchPlaceholder')}`}
-            onSearch={() => {}}
+            onSearch={handleSearch}
+            onChange={(e) => handleSearch(e.target.value)}
+            value={searchQuery}
             size="large"
           />
         </SearchBox>
@@ -61,7 +102,9 @@ export default function SelectDoctor({
           <Text>{t('appointment.filterLabel')} </Text>
           <StyledSelect
             defaultValue="all"
-            onChange={() => {}}
+            onSelect={(value) =>
+              handleSpecialityChange(value as number | string)
+            }
             size="large"
             options={[
               { value: 'all', label: t('appointment.allLabel') },
@@ -76,7 +119,7 @@ export default function SelectDoctor({
         <ColumnName>{t('appointment.columns.located')}</ColumnName>
       </TitleBox>
       <List>
-        {mockDoctors.map((doctor) => (
+        {filteredDoctors.map((doctor: Doctor) => (
           <ListItem key={doctor.id}>
             <ItemWrap
               onClick={() => selectDoctor(doctor.id)}
@@ -91,9 +134,7 @@ export default function SelectDoctor({
                 {doctor.firstName[0]}. {doctor.lastName}
               </ColumnText>
               <ColumnText>
-                {specialityOptions.length
-                  ? specialityOptions[doctor.specialityId].label
-                  : ''}
+                {specialityOptions.length ? doctor.speciality.name : ''}
               </ColumnText>
               <ColumnText>
                 {doctor.country}, {doctor.city}

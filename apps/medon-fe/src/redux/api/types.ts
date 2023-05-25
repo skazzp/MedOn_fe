@@ -13,7 +13,7 @@ export interface IUser {
   country: string | null;
   city: string;
   timeZone: string | null;
-  id: string;
+  id: number | null;
 }
 
 export interface RegisterData {
@@ -135,4 +135,29 @@ export interface IAvailability {
   isAvailable: boolean;
   createdAt: Date;
   updatedAt: Date;
+  doctor: Doctor;
+}
+
+export interface Doctor {
+  id: number;
+  firstName: string;
+  lastName: string;
+  city: string;
+  country: string;
+  photo: string | null;
+  role: string;
+  specialityId: number;
+  speciality: {
+    name: string;
+  };
+}
+
+export interface Appointment {
+  link?: string;
+  startTime: Date | string;
+  endTime: Date | string;
+  localDoctorId: number | null;
+  remoteDoctorId: number;
+  patientId: number | null;
+  timezone?: string;
 }

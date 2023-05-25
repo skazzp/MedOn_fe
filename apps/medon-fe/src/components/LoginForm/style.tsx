@@ -65,4 +65,5 @@ export const GoogleBtn = styled(Button)`
   justify-content: center;
   height: 58px !important;
   text-decoration: none;
+  gap: 8px;
 `;

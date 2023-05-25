@@ -36,7 +36,7 @@ export default function AvatarUpload() {
 
         return;
       }
-      if (file.type.split('/')[0] !== imgFileType) {
+      if (!imgFileType.includes(file.type)) {
         toast.error(t('avatar.errors.type'), toastConfig);
 
         return;
@@ -46,6 +46,7 @@ export default function AvatarUpload() {
 
         return;
       }
+
       setSelectedImage(file);
     }
   };
@@ -68,7 +69,7 @@ export default function AvatarUpload() {
 
         formData.append('file', file);
         try {
-          await updatePhoto(formData);
+          await updatePhoto(formData).unwrap();
           setSelectedImage(null);
           toast.success(t('avatar.success'), toastConfig);
         } catch (error) {

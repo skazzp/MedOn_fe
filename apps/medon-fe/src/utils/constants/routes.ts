@@ -17,6 +17,7 @@ export const routes = {
   patientCardAppointment: 'appointment',
   addPatient: '/patients/add-new',
   withoutAppointments: '/dashboard/withoutAppointments',
+  appointment: '/appointment',
 };
 
 export const localDoctorRoutes = [routes.addPatient];
