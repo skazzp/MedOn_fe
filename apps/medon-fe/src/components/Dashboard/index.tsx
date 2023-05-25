@@ -1,18 +1,50 @@
+import { Skeleton } from 'antd';
+import { useState } from 'react';
+import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 import { useAppSelector } from 'redux/hooks';
 
-import { AppointmentContainer, Container } from 'components/Dashboard/styles';
+import {
+  AppointmentContainer,
+  Container,
+  SkeletonContainer,
+} from 'components/Dashboard/styles';
 import WithoutAppointments from 'components/WithoutAppointments';
 import Attention from 'components/common/Attention';
 import AppointmentsScore from 'components/AppointmentsScore';
+import Button from 'components/Button';
 import { AppointmentsCard } from 'components/AppointmentsCard';
 
-import { appointmentCardMock } from 'utils/mock/appointment';
+import { useGetFutureAppointmentsQuery } from 'redux/api/appointmentApi';
+
+import { defaultLimit, defaultMore, defaultOffset } from 'utils/constants';
+
+// TODO:  add filter to localDoctor and notification => Attention
 
 export default function Dashboard() {
+  const [limit, setLimit] = useState<number>(defaultLimit);
+
   const user = useAppSelector(getUserSelector);
   const { t } = useTranslation();
+  const { data: getFutureAppointments, isLoading } =
+    useGetFutureAppointmentsQuery({
+      limit,
+      offset: defaultOffset,
+    });
+  const theme = useTheme();
+
+  if (isLoading) {
+    return (
+      <SkeletonContainer>
+        <Skeleton active avatar round />
+        <Skeleton active title />
+        <Skeleton active paragraph />
+        <Skeleton active paragraph />
+        <Skeleton active paragraph />
+      </SkeletonContainer>
+    );
+  }
 
   return (
     <Container>
@@ -20,13 +52,12 @@ export default function Dashboard() {
         {t('dashboard.welcome')}, {t('dashboard.prefix-doctor')}
         {`${user.lastName || 'Anonymous'}`}
       </h1>
-      {appointmentCardMock.length ? (
+      {getFutureAppointments?.data?.length ? (
         <>
           <Attention />
-          <AppointmentsScore quantity={appointmentCardMock.length} />
+          <AppointmentsScore quantity={getFutureAppointments.data.length} />
           <AppointmentContainer>
-            {/* sort and pagination on backend */}
-            {appointmentCardMock.map((appointment) => (
+            {getFutureAppointments.data.map((appointment) => (
               <AppointmentsCard
                 key={appointment.id}
                 role={user.role?.toString()}
@@ -34,6 +65,15 @@ export default function Dashboard() {
                 {...appointment}
               />
             ))}
+            {getFutureAppointments.data.length === limit && (
+              <Button
+                bgcolor={theme.colors.white}
+                textcolor={theme.colors.blue_400}
+                onClick={() => setLimit((prev) => prev + defaultMore)}
+              >
+                {t('appointments.more')}
+              </Button>
+            )}
           </AppointmentContainer>
         </>
       ) : (

@@ -20,4 +20,19 @@ export const AppointmentContainer = styled.div`
   margin: 0 auto;
   gap: 1rem;
   margin-bottom: 3rem;
+  > button {
+    margin: 0 auto;
+    border: 2px solid ${theme.colors.blue_400};
+  }
+`;
+
+export const SkeletonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 `;
