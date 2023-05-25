@@ -41,6 +41,15 @@ export const appointmentsApi = createApi({
                 method: 'DELETE',
             }),
         }),
+            getAppointmentsByPatientsId: builder.query<
+      IServerResponse<Appointment[]>,
+      string
+    >({
+      query: (id) => ({
+        url: `appointments/patient/${id}`,
+        method: 'GET',
+      }),
+    }),
     }),
 });
 
@@ -49,6 +58,7 @@ export const {
     useGetAppointmentByIdQuery,
     useCreateAppointmentMutation,
     useDeleteAppointmentMutation,
+    useGetAppointmentsByPatientsIdQuery,
 } = appointmentsApi;
 
 export const appointmentsApiReducer = appointmentsApi.reducer;
