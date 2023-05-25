@@ -10,12 +10,7 @@ import { AppointmentsCard } from 'components/AppointmentsCard';
 
 import { useModal } from 'hooks/useModal';
 
-import {
-  timeFormat,
-  dateInputFormat,
-  defaultLimit,
-  arrayLength,
-} from 'utils/constants';
+import { timeFormat, dateInputFormat, defaultLimit } from 'utils/constants';
 
 import {
   Container,
@@ -73,11 +68,7 @@ const AppointmentsPage = () => {
         <Title>
           <h2>{t('appointments.title')}</h2>
           <UserIcon />
-          <span>
-            {Number(getPastAppointments?.data?.length) < limit
-              ? limit - arrayLength
-              : limit}
-          </span>
+          <span>{getPastAppointments?.data?.length}</span>
         </Title>
         <View>
           <ViewItem

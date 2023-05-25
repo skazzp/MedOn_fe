@@ -6,4 +6,3 @@ export const defaultCalendarLimit = 100;
 export const defaultLimit = 15;
 export const defaultMore = 5;
 export const defaultOffset = 0;
-export const arrayLength = 1;
