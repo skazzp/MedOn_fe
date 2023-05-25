@@ -56,7 +56,7 @@ import {
   Title,
   Wrapper,
 } from './styles';
-import { SubmitAddNote } from './types';
+import { ParamsType, SubmitAddNote } from './types';
 import useGetPatientAppointments from './hooks';
 
 export function PatientCardCalendar() {
@@ -64,7 +64,7 @@ export function PatientCardCalendar() {
   const [height, setHeight] = useState<Height>(0);
   const [textValue, setTextValue] = useState<string>('');
 
-  const { id } = useParams();
+  const { id = '' } = useParams<ParamsType>();
   const { role } = useAppSelector((state) => state.userState.user);
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -84,7 +84,7 @@ export function PatientCardCalendar() {
   });
   const [sendData, { isLoading: isNoteSending }] =
     useCreatePatientNoteMutation();
-  const appointments = useGetPatientAppointments(id as string);
+  const appointments = useGetPatientAppointments(id);
 
   const { handleSubmit, control, reset } = useForm<SubmitAddNote>({
     resolver: yupResolver(addPatientNoteSchema),

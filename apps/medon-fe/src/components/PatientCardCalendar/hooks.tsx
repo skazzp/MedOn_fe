@@ -10,7 +10,7 @@ const emptyArray: Event[] = [];
 const useGetPatientAppointments = (id: string) => {
   const user = useAppSelector(getUserSelector);
 
-  const { appointments } = useGetAppointmentsByPatientsIdQuery(id as string, {
+  const { appointments } = useGetAppointmentsByPatientsIdQuery(id, {
     skip: !id,
     selectFromResult: ({ data }) => ({
       appointments:
