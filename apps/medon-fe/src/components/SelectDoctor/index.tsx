@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Doctor, IAvailability } from 'redux/api/types';
 
@@ -53,15 +53,24 @@ export default function SelectDoctor({
     setSelectedSpeciality(value);
   };
 
-  const filteredDoctors = uniqueDoctors.filter((doctor: Doctor) => {
-    const fullName = `${doctor.firstName} ${doctor.lastName}`.toLowerCase();
-    const lowerCaseSearchQuery = searchQuery.toLowerCase();
+  const filteredDoctors = useMemo(() => {
+    const fullNameSearchQuery = searchQuery.toLowerCase();
+    const filteredBySpeciality =
+      selectedSpeciality === 'all'
+        ? uniqueDoctors
+        : uniqueDoctors.filter(
+            (doctor) => doctor.specialityId === selectedSpeciality
+          );
 
-    return selectedSpeciality === 'all'
-      ? fullName.includes(lowerCaseSearchQuery)
-      : fullName.includes(lowerCaseSearchQuery) &&
-          doctor.specialityId === selectedSpeciality;
-  });
+    return filteredBySpeciality.filter((doctor) => {
+      const fullName = `${doctor.firstName} ${doctor.lastName}`.toLowerCase();
+
+      return (
+        fullName.includes(fullNameSearchQuery) &&
+        selectedDoctorsById.includes(doctor.id)
+      );
+    });
+  }, [searchQuery, selectedSpeciality, uniqueDoctors, selectedDoctorsById]);
 
   const selectDoctor = (key: number) => {
     if (key === selectedDoctor) {
@@ -110,31 +119,29 @@ export default function SelectDoctor({
         <ColumnName>{t('appointment.columns.located')}</ColumnName>
       </TitleBox>
       <List>
-        {filteredDoctors
-          .filter((doctor: Doctor) => selectedDoctorsById.includes(doctor.id))
-          .map((doctor: Doctor) => (
-            <ListItem key={doctor.id}>
-              <ItemWrap
-                onClick={() => selectDoctor(doctor.id)}
-                style={isActiveDoc === doctor.id ? SlotActive : {}}
-              >
-                <ColumnText>
-                  <DoctorPic
-                    src={doctor.photo || doctorImagePlaceholder}
-                    alt={`${t('appointment.doctorPicAlt')}`}
-                  />
-                  {t('appointment.prefix-doctor')}
-                  {doctor.firstName[0]}. {doctor.lastName}
-                </ColumnText>
-                <ColumnText>
-                  {specialityOptions.length ? doctor.speciality.name : ''}
-                </ColumnText>
-                <ColumnText>
-                  {doctor.country}, {doctor.city}
-                </ColumnText>
-              </ItemWrap>
-            </ListItem>
-          ))}
+        {filteredDoctors.map((doctor: Doctor) => (
+          <ListItem key={doctor.id}>
+            <ItemWrap
+              onClick={() => selectDoctor(doctor.id)}
+              style={isActiveDoc === doctor.id ? SlotActive : {}}
+            >
+              <ColumnText>
+                <DoctorPic
+                  src={doctor.photo || doctorImagePlaceholder}
+                  alt={`${t('appointment.doctorPicAlt')}`}
+                />
+                {t('appointment.prefix-doctor')}
+                {doctor.firstName[0]}. {doctor.lastName}
+              </ColumnText>
+              <ColumnText>
+                {specialityOptions.length ? doctor.speciality.name : ''}
+              </ColumnText>
+              <ColumnText>
+                {doctor.country}, {doctor.city}
+              </ColumnText>
+            </ItemWrap>
+          </ListItem>
+        ))}
       </List>
     </Container>
   );
