@@ -1,5 +1,5 @@
 export interface IAppointmentsCardProps {
-  id?: number;
+  id: string;
   link?: string;
   startTime?: Date;
   endTime?: Date;
@@ -16,6 +16,7 @@ export interface IAppointmentsCardProps {
   // I NEED TO ADD THIS
   // PATIENT
   patient?: {
+    id?: string;
     dateOfBirth?: Date;
     firstName?: string;
     lastName?: string;
