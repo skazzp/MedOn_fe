@@ -13,8 +13,10 @@ import { Chat } from 'components/Chat';
 import { useSocket } from 'components/PatientCard/hooks/useSocket';
 
 import { useGetPatientByIdQuery } from 'redux/api/patientApi';
+import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 
 import { Container, Top, SkeletonContainer, EditBtn } from './styles';
+import { useAppSelector } from 'redux/hooks';
 
 export default function PatientCard() {
   const [editInfo, setEditInfo] = useState<boolean>(false);
@@ -26,10 +28,12 @@ export default function PatientCard() {
     { id }
   );
 
+  const user = useAppSelector(getUserSelector);
+
   //TODO: Replace with real appointmentId and user.id
   const { history, onSubmitMessage, isHistoryReady, reply } = useSocket({
     appointmentId: 3,
-    senderId: 1,
+    senderId: Number(user.id),
   });
 
   if (isPatientLoading)
@@ -67,6 +71,8 @@ export default function PatientCard() {
           onSubmitMessage={onSubmitMessage}
           history={history}
           reply={reply}
+          user={user}
+          patientFullName={`${patient?.data?.firstName} ${patient?.data?.lastName}`}
         />
       )}
     </Container>

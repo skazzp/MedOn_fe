@@ -24,10 +24,14 @@ export function useSocket({ appointmentId, senderId }: ISocketProps): ISocket {
     const socket = io(`${process.env.NX_API_URL}/chat`);
 
     socket.emit('joinRoomByAppointmentId', appointmentId);
-    socket.emit('getAllMessages', {}, (response: ChatMessage[]) => {
-      setHistory(response);
-      setIsHistoryReady(true);
-    });
+    socket.emit(
+      'getMessagesByAppointmentId',
+      appointmentId,
+      (response: ChatMessage[]) => {
+        setHistory(response);
+        setIsHistoryReady(true);
+      }
+    );
 
     setSocket(socket);
     return () => {

@@ -1,41 +1,83 @@
 import React, { useEffect } from 'react';
-import { addResponseMessage, addUserMessage } from 'react-chat-widget';
-import { Widget } from 'react-chat-widget';
+import {
+  Widget,
+  addResponseMessage,
+  addUserMessage,
+  dropMessages,
+  renderCustomComponent,
+} from 'react-chat-widget';
 import { ChatMessage } from 'components/Chat/types';
-import { dataToChatMessage } from 'components/Chat/utils/dataToChatMessage';
 import 'react-chat-widget/lib/styles.css';
 import { GlobalStyle } from './styles';
+import dayjs from 'dayjs';
+import { IUser } from 'redux/api/types';
 
 export interface IChatProps {
   onSubmitMessage: (message: string) => void;
   history: ChatMessage[];
   reply: ChatMessage | null;
+  user: IUser;
+  patientFullName?: string;
 }
 
-export function Chat({ onSubmitMessage, history, reply }: IChatProps) {
+function CustomTimeStampFragment({ date }: { date: Date }) {
+  return (
+    <div style={{ fontSize: 12, marginTop: -4 }}>
+      {dayjs(date).format('hh:mm')}
+    </div>
+  );
+}
+
+export function Chat({
+  onSubmitMessage,
+  history,
+  reply,
+  user,
+  patientFullName,
+}: IChatProps) {
   useEffect(() => {
     history.forEach((message) => {
-      // TODO: replace with real user.id
-      if (message.sender.id === 1) addUserMessage(dataToChatMessage(message));
-      else {
-        addResponseMessage(dataToChatMessage(message));
+      if (message.sender.id === Number(user.id)) {
+        addUserMessage(message.value);
+        renderCustomComponent(CustomTimeStampFragment, {
+          date: message.createdAt,
+        });
+      } else {
+        addResponseMessage(
+          `**Dr. ${message.sender.lastName}:** ${message.value}`
+        );
+        renderCustomComponent(CustomTimeStampFragment, {
+          date: message.createdAt,
+        });
       }
     });
+    return () => dropMessages();
   }, []);
 
   useEffect(() => {
-    if (reply) addResponseMessage(dataToChatMessage(reply));
+    if (reply) {
+      addResponseMessage(`**Dr. ${reply.sender.lastName}:** ${reply.value}`);
+      renderCustomComponent(CustomTimeStampFragment, {
+        date: reply.createdAt,
+      });
+    }
   }, [reply]);
+
+  const handleNewUserMessage = (message: string) => {
+    onSubmitMessage(message);
+    renderCustomComponent(CustomTimeStampFragment, { date: new Date() });
+  };
 
   return (
     <>
       <GlobalStyle />
       <Widget
-        title="MedON"
-        subtitle="Appointment chat"
+        title="Appointment chat"
+        subtitle={`Patient: ${patientFullName}`}
         senderPlaceHolder="Type a message..."
-        handleNewUserMessage={onSubmitMessage}
+        handleNewUserMessage={handleNewUserMessage}
         showTimeStamp={false}
+        emojis={true}
       />
     </>
   );
