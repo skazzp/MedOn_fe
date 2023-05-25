@@ -10,6 +10,11 @@ it('should render successfully', () => {
       selectTimeAppointments={() => {}}
       isActive={' '}
       setIsActive={() => {}}
+      data={[]}
+      setSelectedDoctorsById={() => {}}
+      setEndTime={() => {}}
+      setStartTime={() => {}}
+      selectedDate={null}
     />,
     {
       wrapper: TestWrapper,
@@ -26,6 +31,11 @@ it('should render 24 time slots', async () => {
       selectTimeAppointments={() => {}}
       isActive={' '}
       setIsActive={() => {}}
+      data={[]}
+      setSelectedDoctorsById={() => {}}
+      setEndTime={() => {}}
+      setStartTime={() => {}}
+      selectedDate={null}
     />,
     {
       wrapper: TestWrapper,
@@ -42,6 +52,11 @@ it('click on slot should change style', async () => {
       selectTimeAppointments={() => {}}
       isActive={' '}
       setIsActive={() => {}}
+      data={[]}
+      setSelectedDoctorsById={() => {}}
+      setEndTime={() => {}}
+      setStartTime={() => {}}
+      selectedDate={null}
     />,
     {
       wrapper: TestWrapper,

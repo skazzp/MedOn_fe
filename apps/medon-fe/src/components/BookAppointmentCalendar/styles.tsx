@@ -15,7 +15,7 @@ export const StyledCalendar = styled(Calendar)`
   margin: 0 auto;
 
   .selected-day {
-    background-color: ${theme.colors.icon_active};
+    background-color: ${theme.colors.icon_active} !important;
   }
 
   .rbc-header {

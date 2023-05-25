@@ -67,6 +67,17 @@ export const availabilityApi = createApi({
       },
       invalidatesTags: ['availability'],
     }),
+    getAvailabilityByDay: builder.mutation<
+      IServerResponse<IAvailability[]>,
+      { day: Date; timezone?: string }
+    >({
+      query: ({ day, timezone }) => ({
+        url: 'availability/day',
+        method: 'POST',
+        body: { day, timezone },
+      }),
+      invalidatesTags: ['availability'],
+    }),
   }),
 });
 
@@ -75,4 +86,5 @@ export const {
   useGetAvailabilityQuery,
   useRemoveAvailabilityMutation,
   useUpdateAvailabilityMutation,
+  useGetAvailabilityByDayMutation,
 } = availabilityApi;
