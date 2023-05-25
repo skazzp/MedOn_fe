@@ -25,8 +25,8 @@ const useGetPatientAppointments = (id: string) => {
               resource: {
                 link: elem.link,
                 isColor:
-                  elem.localDoctorId === +user.id ||
-                  elem.remoteDoctorId === +user.id,
+                  elem.localDoctorId === user.id ||
+                  elem.remoteDoctorId === user.id,
               },
             }))
           : emptyArray,
