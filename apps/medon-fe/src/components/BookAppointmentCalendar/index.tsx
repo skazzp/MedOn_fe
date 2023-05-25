@@ -15,6 +15,7 @@ import {
   timeFormat,
   weekdayFormat,
 } from 'utils/constants/dateFormat';
+import { getDayPropGetter } from 'utils/functions/getDayPropGetter';
 
 const mLocalizer = dayjsLocalizer(dayjs);
 
@@ -84,9 +85,16 @@ function BookAppointmentCalendar({
   );
 
   const DayPropGetter = useCallback(
-    (date: Date) => ({
-      className: dayjs(date).isSame(selectedDate, 'day') ? 'selected-day' : '',
-    }),
+    (date: Date) => {
+      const { style } = getDayPropGetter(date);
+
+      return {
+        className: `
+      ${dayjs(date).isSame(selectedDate, 'day') ? 'selected-day' : ''}
+    `,
+        style,
+      };
+    },
     [selectedDate]
   );
 

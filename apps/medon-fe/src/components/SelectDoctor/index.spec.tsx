@@ -11,6 +11,8 @@ it('should render successfully', () => {
       selectedDoctor={2}
       isActiveDoc={1}
       setIsActiveDoc={() => {}}
+      data={[]}
+      selectedDoctorsById={[]}
     />,
     {
       wrapper: TestWrapper,
@@ -27,6 +29,8 @@ it('should render search bar and filter', async () => {
       selectedDoctor={2}
       isActiveDoc={1}
       setIsActiveDoc={() => {}}
+      data={[]}
+      selectedDoctorsById={[]}
     />,
     {
       wrapper: TestWrapper,

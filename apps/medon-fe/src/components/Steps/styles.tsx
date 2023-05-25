@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
 import { cross, smallArrowRight, union } from 'utils/constants';

@@ -22,19 +22,17 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <StrictMode>
-    <GoogleOAuthProvider clientId={`${process.env.NX_GOOGLE_CLIENT_ID}`}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistedStore}>
-          <ThemeProvider theme={theme}>
-            <BrowserRouter>
-              <ToastContainer autoClose={msgTime} />
-              <GlobalStyle />
-              <App />
-            </BrowserRouter>
-          </ThemeProvider>
-        </PersistGate>
-      </Provider>
-    </GoogleOAuthProvider>
-  </StrictMode>
+  <GoogleOAuthProvider clientId={`${process.env.NX_GOOGLE_CLIENT_ID}`}>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistedStore}>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <ToastContainer autoClose={msgTime} />
+            <GlobalStyle />
+            <App />
+          </BrowserRouter>
+        </ThemeProvider>
+      </PersistGate>
+    </Provider>
+  </GoogleOAuthProvider>
 );
