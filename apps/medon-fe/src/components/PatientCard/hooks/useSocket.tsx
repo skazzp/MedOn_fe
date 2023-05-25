@@ -11,10 +11,10 @@ interface ISocket {
 
 interface ISocketProps {
   appointmentId: number;
-  senderId: number;
+  userId: number;
 }
 
-export function useSocket({ appointmentId, senderId }: ISocketProps): ISocket {
+export function useSocket({ appointmentId, userId }: ISocketProps): ISocket {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [history, setHistory] = useState<ChatMessage[]>([]);
   const [isHistoryReady, setIsHistoryReady] = useState<boolean>(false);
@@ -49,7 +49,7 @@ export function useSocket({ appointmentId, senderId }: ISocketProps): ISocket {
     socket?.emit('sendMessage', {
       value: message,
       appointmentId,
-      senderId,
+      senderId: userId,
     });
   };
 

@@ -33,7 +33,7 @@ export default function PatientCard() {
   //TODO: Replace with real appointmentId and user.id
   const { history, onSubmitMessage, isHistoryReady, reply } = useSocket({
     appointmentId: 3,
-    senderId: Number(user.id),
+    userId: Number(user.id),
   });
 
   if (isPatientLoading)

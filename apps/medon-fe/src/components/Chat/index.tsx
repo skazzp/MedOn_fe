@@ -7,6 +7,7 @@ import {
   dropMessages,
   renderCustomComponent,
 } from 'react-chat-widget';
+import { useTranslation } from 'react-i18next';
 import { IChatProps, ICustomTimeStampProps } from 'components/Chat/types';
 import 'react-chat-widget/lib/styles.css';
 import { GlobalStyle, DateWrapper, DateWrapperReply } from './styles';
@@ -40,7 +41,9 @@ export function Chat({
         });
       } else {
         addResponseMessage(
-          `**Dr. ${message.sender.lastName}:** ${message.value}`
+          `**${t('chat.doctor.prefix')} ${message.sender.lastName}:** ${
+            message.value
+          }`
         );
         renderCustomComponent(CustomTimeStampFragment, {
           date: message.createdAt,
@@ -53,7 +56,11 @@ export function Chat({
 
   useEffect(() => {
     if (reply) {
-      addResponseMessage(`**Dr. ${reply.sender.lastName}:** ${reply.value}`);
+      addResponseMessage(
+        `**${t('chat.doctor.prefix')} ${reply.sender.lastName}:** ${
+          reply.value
+        }`
+      );
       renderCustomComponent(CustomTimeStampFragment, {
         date: reply.createdAt,
         isReply: true,
@@ -66,13 +73,15 @@ export function Chat({
     renderCustomComponent(CustomTimeStampFragment, { date: new Date() });
   };
 
+  const { t } = useTranslation();
+
   return (
     <>
       <GlobalStyle />
       <Widget
-        title="Appointment chat"
-        subtitle={`Patient: ${patientFullName}`}
-        senderPlaceHolder="Type a message..."
+        title={t('chat.title')}
+        subtitle={`${t('chat.subtitle.prefix')} ${patientFullName}`}
+        senderPlaceHolder={t('chat.placeholder')}
         handleNewUserMessage={handleNewUserMessage}
         showTimeStamp={false}
         emojis={true}
