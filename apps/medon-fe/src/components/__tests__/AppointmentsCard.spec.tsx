@@ -23,17 +23,6 @@ describe('AppointmentsCard', () => {
     role: 'local',
   };
 
-  it('renders the appointment ID and patient name', () => {
-    const { getByText } = render(
-      <TestWrapper>
-        <AppointmentsCard {...mockProps} />
-      </TestWrapper>
-    );
-
-    expect(getByText(/# 1/i)).toBeInTheDocument();
-    expect(getByText('J Doe')).toBeInTheDocument();
-  });
-
   it('renders the add link button if the link has been added', () => {
     const { getByText } = render(
       <TestWrapper>

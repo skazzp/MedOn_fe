@@ -1,50 +1,37 @@
-import { useTranslation } from 'react-i18next';
-
-import { SelectTimeSlotProps } from 'components/SelectTimeSlot/types';
-import {
-  Container,
-  DrText,
-  SlotActive,
-  TimeSlot,
-  TimeText,
-} from 'components/SelectTimeSlot/styles';
-
 import { timeSlots } from 'utils/constants/options/hourOptions';
+import { useSelectTimeSlot } from './hook';
+import { Container, DrText, SlotActive, TimeSlot, TimeText } from './styles';
+import { SelectTimeSlotProps } from './types';
 
-export default function SelectTimeSlot({
-  selectedTime,
-  setIsActive,
-  isActive,
-  selectTimeAppointments,
-}: SelectTimeSlotProps) {
-  const { t } = useTranslation();
-
-  const selectTime = (time: string) => {
-    if (time === selectedTime) {
-      selectTimeAppointments('');
-    } else {
-      selectTimeAppointments(time);
-    }
-
-    if (time === isActive) {
-      setIsActive('');
-    } else {
-      setIsActive(time);
-    }
-  };
+export default function SelectTimeSlot(
+  props: SelectTimeSlotProps,
+  isActive: string | ''
+) {
+  const { timeSlotsAvailability, selectTime, t } = useSelectTimeSlot(props);
 
   return (
     <Container>
-      {timeSlots.map((timeSlot) => (
+      {timeSlots.map((timeSlot, index) => (
         <TimeSlot
           onClick={() => selectTime(timeSlot)}
           key={timeSlot}
           style={isActive === timeSlot ? SlotActive : {}}
+          disabled={
+            !Object.values(timeSlotsAvailability).some(
+              (availability) => availability[index]
+            )
+          }
         >
           <TimeText>{timeSlot}</TimeText>
           <DrText>
             <span>{t('appointment.availableDr')}</span>
-            <span> 0</span> {/* value will come from db */}
+            <span>
+              {
+                Object.values(timeSlotsAvailability).filter(
+                  (availability) => availability[index]
+                ).length
+              }
+            </span>
           </DrText>
         </TimeSlot>
       ))}

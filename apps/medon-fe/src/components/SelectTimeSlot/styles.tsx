@@ -1,5 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { theme } from 'styles/theme';
+
+interface TimeSlotProps extends React.HTMLAttributes<HTMLDivElement> {
+  disabled?: boolean;
+}
 
 export const Container = styled.div`
   width: 100%;
@@ -11,7 +15,7 @@ export const Container = styled.div`
   padding: 0 30px;
 `;
 
-export const TimeSlot = styled.div`
+export const TimeSlot = styled.div<TimeSlotProps>`
   width: 100%;
   height: 80px;
   display: flex;
@@ -26,6 +30,12 @@ export const TimeSlot = styled.div`
     border-color: ${(p) => p.theme.colors.icon_active};
     cursor: pointer;
   }
+  ${(p) =>
+    p.disabled &&
+    css`
+      opacity: 0.5;
+      pointer-events: none;
+    `}
 `;
 
 export const TimeText = styled.p`

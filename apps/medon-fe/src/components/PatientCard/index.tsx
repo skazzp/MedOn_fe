@@ -9,10 +9,14 @@ import { LinkGoBack } from 'components/common/LinkGoBack';
 import PatientCardInfo from 'components/PatientCardInfo';
 import { ShowMore } from 'components/ShowMore';
 import { NewPatientForm } from 'components/NewPatientForm';
+import { Chat } from 'components/Chat';
+import { useSocket } from 'components/PatientCard/hooks/useSocket';
 
 import { useGetPatientByIdQuery } from 'redux/api/patientApi';
+import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 
 import { Container, Top, SkeletonContainer, EditBtn } from './styles';
+import { useAppSelector } from 'redux/hooks';
 
 export default function PatientCard() {
   const [editInfo, setEditInfo] = useState<boolean>(false);
@@ -23,6 +27,14 @@ export default function PatientCard() {
   const { data: patient, isLoading: isPatientLoading } = useGetPatientByIdQuery(
     { id }
   );
+
+  const user = useAppSelector(getUserSelector);
+
+  //TODO: Replace with real appointmentId
+  const { history, onSubmitMessage, isHistoryReady, reply } = useSocket({
+    appointmentId: 3,
+    userId: Number(user.id),
+  });
 
   if (isPatientLoading)
     return (
@@ -53,6 +65,15 @@ export default function PatientCard() {
         </>
       ) : (
         <NewPatientForm patient={patient?.data} setEditInfo={setEditInfo} />
+      )}
+      {isHistoryReady && (
+        <Chat
+          onSubmitMessage={onSubmitMessage}
+          history={history}
+          reply={reply}
+          user={user}
+          patientFullName={`${patient?.data?.firstName} ${patient?.data?.lastName}`}
+        />
       )}
     </Container>
   );

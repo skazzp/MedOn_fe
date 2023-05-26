@@ -360,7 +360,9 @@
     "select": "You selected:",
     "cancel": "Cancel",
     "step": "Step",
-    "end-steps": " /3"
+    "end-steps": " /3",
+    "have-doctor": " There are doctors available for that day",
+    "dont-have-doctor": " No meetings available on this day"
   },
   "dashboard": {
     "welcome": "Welcome",
@@ -440,6 +442,16 @@
       "catchError": "Something went wrong, try again"
     },
     "success": "Photo updated successfully"
+  },
+  "chat": {
+    "doctor": {
+      "prefix": "Dr."
+    },
+    "subtitle": {
+      "prefix": "Patient:"
+    },
+    "title": "Appointment chat",
+    "placeholder": "Type a message"
   },
   "defaultLanguage": "en-US",
   "not-one": "You are not the chosen one"
