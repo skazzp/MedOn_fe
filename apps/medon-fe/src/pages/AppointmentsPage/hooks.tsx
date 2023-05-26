@@ -10,7 +10,7 @@ import {
 } from 'utils/constants';
 import { getCapitalize } from 'utils/functions/getCapitalize';
 
-import { useGetPastAppointmentsQuery } from 'redux/api/appointmentApi';
+import { useGetPastAppointmentsQuery } from 'redux/api/appointmentsApi';
 import {
   IAppointmentsCalendarQueryProps,
   IAppointmentsListQueryProps,

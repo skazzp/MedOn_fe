@@ -16,7 +16,7 @@ import AppointmentsScore from 'components/AppointmentsScore';
 import Button from 'components/Button';
 import { AppointmentsCard } from 'components/AppointmentsCard';
 
-import { useGetFutureAppointmentsQuery } from 'redux/api/appointmentApi';
+import { useGetFutureAppointmentsQuery } from 'redux/api/appointmentsApi';
 
 import { defaultLimit, defaultMore, defaultOffset } from 'utils/constants';
 

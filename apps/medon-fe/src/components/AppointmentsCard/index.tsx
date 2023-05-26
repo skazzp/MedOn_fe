@@ -26,7 +26,7 @@ import {
 } from 'utils/constants';
 import { toastConfig } from 'utils/toastConfig';
 
-import { useSendLinkMutation } from 'redux/api/appointmentApi';
+import { useSendLinkMutation } from 'redux/api/appointmentsApi';
 
 import { addLinkSchema } from 'validation/addLinkDashBoard';
 
