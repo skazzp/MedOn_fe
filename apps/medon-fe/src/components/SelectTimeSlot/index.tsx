@@ -9,30 +9,33 @@ export default function SelectTimeSlot(props: SelectTimeSlotProps) {
 
   return (
     <Container>
-      {timeSlots.map((timeSlot, index) => (
-        <TimeSlot
-          onClick={() => selectTime(timeSlot)}
-          key={timeSlot}
-          style={isActive === timeSlot ? SlotActive : {}}
-          disabled={
-            !Object.values(timeSlotsAvailability).some(
-              (availability) => availability[index]
-            )
-          }
-        >
-          <TimeText>{timeSlot}</TimeText>
-          <DrText>
-            <span>{t('appointment.availableDr')}</span>
-            <span>
-              {
-                Object.values(timeSlotsAvailability).filter(
-                  (availability) => availability[index]
-                ).length
-              }
-            </span>
-          </DrText>
-        </TimeSlot>
-      ))}
+      {timeSlots.map((timeSlot, index) => {
+        const isSlotAvailable = Object.values(timeSlotsAvailability).some(
+          (availability) => availability[index]
+        );
+
+        if (!isSlotAvailable) {
+          return null;
+        }
+
+        const doctorCount = Object.values(timeSlotsAvailability)
+          .map((availability) => availability[index])
+          .filter(Boolean).length;
+
+        return (
+          <TimeSlot
+            onClick={() => selectTime(timeSlot)}
+            key={timeSlot}
+            style={isActive === timeSlot ? SlotActive : {}}
+          >
+            <TimeText>{timeSlot}</TimeText>
+            <DrText>
+              <span>{t('appointment.availableDr')}</span>
+              <span>{doctorCount}</span>
+            </DrText>
+          </TimeSlot>
+        );
+      })}
     </Container>
   );
 }
