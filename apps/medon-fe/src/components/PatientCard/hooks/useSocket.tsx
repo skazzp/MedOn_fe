@@ -10,8 +10,8 @@ interface ISocket {
 }
 
 interface ISocketProps {
-  appointmentId: number;
-  userId: number;
+  appointmentId: number | null;
+  userId: number | null;
 }
 
 export function useSocket({ appointmentId, userId }: ISocketProps): ISocket {
@@ -21,23 +21,26 @@ export function useSocket({ appointmentId, userId }: ISocketProps): ISocket {
   const [reply, setReply] = useState<ChatMessage | null>(null);
 
   useEffect(() => {
-    const socket = io(`${process.env.NX_API_URL}/chat`);
+    if (appointmentId) {
+      const socket = io(`${process.env.NX_API_URL}/chat`);
 
-    socket.emit('joinRoomByAppointmentId', appointmentId);
-    socket.emit(
-      'getMessagesByAppointmentId',
-      appointmentId,
-      (response: ChatMessage[]) => {
-        setHistory(response);
-        setIsHistoryReady(true);
-      }
-    );
+      socket.emit('joinRoomByAppointmentId', appointmentId);
+      socket.emit(
+        'getMessagesByAppointmentId',
+        appointmentId,
+        (response: ChatMessage[]) => {
+          setHistory(response);
+          setIsHistoryReady(true);
+        }
+      );
 
-    setSocket(socket);
-    return () => {
-      socket.close();
-    };
-  }, []);
+      setSocket(socket);
+      return () => {
+        socket.removeAllListeners();
+        socket.close();
+      };
+    }
+  }, [appointmentId]);
 
   useEffect(() => {
     socket?.on('message', (message: ChatMessage) => {

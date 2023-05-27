@@ -7,5 +7,17 @@ import { ReactComponent as Edit } from './edit.svg';
 import { ReactComponent as AddNote } from './addnote.svg';
 import { ReactComponent as Close } from './close.svg';
 import { ReactComponent as FemaleSex } from './genderFemale.svg';
+import { ReactComponent as ChatIcon } from './chat.svg';
 
-export { Age, Location, Mail, MaleSex, Phone, Edit, AddNote, FemaleSex, Close };
+export {
+  Age,
+  Location,
+  Mail,
+  MaleSex,
+  Phone,
+  Edit,
+  AddNote,
+  FemaleSex,
+  Close,
+  ChatIcon,
+};
