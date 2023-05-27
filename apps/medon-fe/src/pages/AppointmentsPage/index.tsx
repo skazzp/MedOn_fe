@@ -26,6 +26,7 @@ import {
   Entity,
   AppointmentContainer,
   ListContainer,
+  NotAppointment,
 } from './styles';
 import {
   useGetCalendarEvents,
@@ -84,15 +85,19 @@ const AppointmentsPage = () => {
       </Header>
       {!isMonthView && (
         <ListContainer>
-          <AppointmentContainer>
-            {getPastAppointments?.data?.map((appointment) => (
-              <AppointmentsCard
-                key={appointment.id}
-                isLinkAdded
-                {...appointment}
-              />
-            ))}
-          </AppointmentContainer>
+          {getPastAppointments?.data?.length ? (
+            <AppointmentContainer>
+              {getPastAppointments?.data?.map((appointment) => (
+                <AppointmentsCard
+                  key={appointment.id}
+                  isLinkAdded
+                  {...appointment}
+                />
+              ))}
+            </AppointmentContainer>
+          ) : (
+            <NotAppointment>{t('appointment.not-appointment')}</NotAppointment>
+          )}
           {Number(getPastAppointments?.data?.length) > limit && (
             <Button
               bgcolor={theme.colors.white}

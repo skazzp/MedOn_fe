@@ -41,7 +41,7 @@ export const appointmentsApi = createApi({
         method: 'POST',
         body: { ...body.dto, timezone: body.timezone },
       }),
-      invalidatesTags: ['appointment'],
+      invalidatesTags: ['appointment', 'appointments'],
     }),
     deleteAppointment: builder.mutation<void, number>({
       query: (id) => ({

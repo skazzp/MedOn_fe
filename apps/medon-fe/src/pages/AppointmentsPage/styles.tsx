@@ -187,3 +187,13 @@ export const ListContainer = styled.div`
     border: 2px solid ${theme.colors.blue_400};
   }
 `;
+
+export const NotAppointment = styled.h4`
+  display: flex;
+  font-size: ${theme.fontSizes.xxl};
+  color: ${theme.colors.blue_500};
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 0;
+`;
