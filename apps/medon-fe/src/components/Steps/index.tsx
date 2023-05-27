@@ -194,7 +194,9 @@ function Steps(props: StepsProps) {
           position={positionBooking}
           onClick={handleBooking}
           disabled={
-            currentStep === steps.three && (!isActiveDoc || !selectedDoctor)
+            (currentStep === steps.three &&
+              (!isActiveDoc || !selectedDoctor)) ||
+            createLoading
           }
         >
           {t('patient-info.booking')}

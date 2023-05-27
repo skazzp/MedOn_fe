@@ -27,13 +27,16 @@ export function useSelectTimeSlot({
         const { doctor } = slot;
         const startTime = new Date(slot.startTime).getHours();
         const endTime = new Date(slot.endTime).getHours();
+        const { isAvailable } = slot;
 
         if (!availability[doctor.id]) {
           availability[doctor.id] = timeSlots.map(() => false);
         }
 
-        for (let i = startTime; i < endTime; i += 1) {
-          availability[doctor.id][i] = true;
+        if (isAvailable) {
+          for (let i = startTime; i < endTime; i += 1) {
+            availability[doctor.id][i] = true;
+          }
         }
       });
 
@@ -76,5 +79,6 @@ export function useSelectTimeSlot({
     selectTime,
     t,
     isActive,
+    data,
   };
 }
