@@ -119,6 +119,9 @@ export const appointmentsApi = createApi({
 export const {
   useGetAppointmentsQuery,
   useGetAppointmentByIdQuery,
+  useGetPastAppointmentsQuery,
+  useGetFutureAppointmentsQuery,
+  useSendLinkMutation,
   useCreateAppointmentMutation,
   useDeleteAppointmentMutation,
   useGetAppointmentsByPatientsIdQuery,
