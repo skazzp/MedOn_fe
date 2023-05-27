@@ -153,6 +153,7 @@ export interface Doctor {
 }
 
 export interface Appointment {
+  id?: number;
   link?: string;
   startTime: Date | string;
   endTime: Date | string;
