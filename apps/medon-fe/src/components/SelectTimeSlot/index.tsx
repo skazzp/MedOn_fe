@@ -3,11 +3,9 @@ import { useSelectTimeSlot } from './hook';
 import { Container, DrText, SlotActive, TimeSlot, TimeText } from './styles';
 import { SelectTimeSlotProps } from './types';
 
-export default function SelectTimeSlot(
-  props: SelectTimeSlotProps,
-  isActive: string | ''
-) {
-  const { timeSlotsAvailability, selectTime, t } = useSelectTimeSlot(props);
+export default function SelectTimeSlot(props: SelectTimeSlotProps) {
+  const { timeSlotsAvailability, selectTime, t, isActive } =
+    useSelectTimeSlot(props);
 
   return (
     <Container>
