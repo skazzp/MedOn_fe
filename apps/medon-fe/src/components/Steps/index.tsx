@@ -130,8 +130,6 @@ function Steps(props: StepsProps) {
         timezone: userTimezone,
       };
 
-      console.log('startTime', startTime);
-      console.log('endTime', endTime);
       try {
         await createAppointment({
           dto: appointmentData,
