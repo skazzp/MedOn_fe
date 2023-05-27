@@ -12,6 +12,7 @@ export function useSelectTimeSlot({
   data,
   setSelectedDoctorsById,
   selectedDate,
+  isActive,
 }: SelectTimeSlotProps) {
   const { t } = useTranslation();
   const [timeSlotsAvailability, setTimeSlotsAvailability] = useState<{
@@ -58,7 +59,6 @@ export function useSelectTimeSlot({
     ) {
       selectTimeAppointments(time);
       setIsActive(time);
-
       const selectedDoctorsIds = doctorAvailability
         .filter(
           ([doctorId, availability]) => availability[timeSlots.indexOf(time)]
@@ -75,5 +75,6 @@ export function useSelectTimeSlot({
     timeSlotsAvailability,
     selectTime,
     t,
+    isActive,
   };
 }

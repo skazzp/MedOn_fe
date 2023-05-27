@@ -18,6 +18,7 @@ import {
   Selected,
   StepsScore,
   Wrapper,
+  Meet,
 } from 'components/Steps/styles';
 import { StepsProps } from 'components/Steps/types';
 import { steps } from 'utils/constants/steps';
@@ -113,7 +114,7 @@ function Steps(props: StepsProps) {
       onCurrentStepChange(steps.one);
       selectTimeAppointments('');
       selectDoctorAppointments(null);
-      navigate(routes.patientCard);
+      navigate(`${routes.patientCard}/${id}`);
     }
   };
 
@@ -129,6 +130,8 @@ function Steps(props: StepsProps) {
         timezone: userTimezone,
       };
 
+      console.log('startTime', startTime);
+      console.log('endTime', endTime);
       try {
         await createAppointment({
           dto: appointmentData,
@@ -192,7 +195,9 @@ function Steps(props: StepsProps) {
           buttonType="booking"
           position={positionBooking}
           onClick={handleBooking}
-          disabled={currentStep === steps.three && !isActiveDoc}
+          disabled={
+            currentStep === steps.three && (!isActiveDoc || !selectedDoctor)
+          }
         >
           {t('patient-info.booking')}
         </Button>
@@ -207,9 +212,9 @@ function Steps(props: StepsProps) {
           : ''}
 
         {selectedDate && (
-          <div>
+          <Meet isButtonActive={isButtonActive}>
             {isButtonActive ? t('patient-info.have-doctor') : noMeetingsMessage}
-          </div>
+          </Meet>
         )}
       </Selected>
       <Cancel disabled={!selectedDate} onClick={handleCancel}>

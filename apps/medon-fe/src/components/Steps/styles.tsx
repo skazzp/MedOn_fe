@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { theme } from 'styles/theme';
 import { cross, smallArrowRight, union } from 'utils/constants';
 import { steps } from 'utils/constants/steps';
@@ -93,6 +93,11 @@ export const Button = styled.button<ButtonProps>`
     padding-right: 30px;
       &[disabled] {
     background: ${theme.colors.gray_500};
+    background-image: url(${smallArrowRight});
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: 85px;
+    padding-right: 30px;
   }
   `}
   ${(props) =>
@@ -108,5 +113,12 @@ export const Button = styled.button<ButtonProps>`
     background-position-x: 155px;
     padding-right: 24px;
     font-size: 14px;
+        &[disabled] {
+    background: ${theme.colors.gray_500};
+  }
   `}
+`;
+
+export const Meet = styled.div<{ isButtonActive: boolean }>`
+  color: ${(props) => (props.isButtonActive ? 'green' : 'red')};
 `;
