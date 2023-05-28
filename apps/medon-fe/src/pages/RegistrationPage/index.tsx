@@ -2,14 +2,16 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
+
 import RegistrationForm from 'components/RegistrationForm';
 import RegistrationConfirmation from 'components/RegistrationConfirmation';
 import TermsAndConditions from 'components/TermsAndConditions';
 import PrivacyPolicy from 'components/PrivacyPolicy';
 import { FormData } from 'components/RegistrationForm/types';
+import Logo from 'components/Logo';
+
 import { useRegisterUserMutation } from 'redux/api/authApi';
 import { roles } from 'utils/constants/roles';
-import logo from 'assets/images/logo.svg';
 import { toastConfig } from 'utils/toastConfig';
 import {
   Container,
@@ -20,7 +22,6 @@ import {
   Text,
   Title,
 } from './styles';
-import Logo from 'components/Logo';
 
 export default function RegistrationPage() {
   const { t } = useTranslation();
@@ -55,9 +56,6 @@ export default function RegistrationPage() {
   return (
     <Container>
       <RegContainer>
-        {/* <div>
-          <img src={logo} alt={`${t('logoAlt')}`} />
-        </div> */}
         <Logo />
         <FormContainer>
           {!isSuccess ? (
