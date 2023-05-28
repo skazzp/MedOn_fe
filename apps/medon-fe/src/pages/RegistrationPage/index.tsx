@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
 import RegistrationForm from 'components/RegistrationForm';
 import RegistrationConfirmation from 'components/RegistrationConfirmation';
+import TermsAndConditions from 'components/TermsAndConditions';
+import PrivacyPolicy from 'components/PrivacyPolicy';
 import { FormData } from 'components/RegistrationForm/types';
 import { useRegisterUserMutation } from 'redux/api/authApi';
 import { roles } from 'utils/constants/roles';
@@ -11,12 +13,14 @@ import logo from 'assets/images/logo.svg';
 import { toastConfig } from 'utils/toastConfig';
 import {
   Container,
+  Footer,
   FormContainer,
   RegContainer,
   Sidebar,
   Text,
   Title,
 } from './styles';
+import Logo from 'components/Logo';
 
 export default function RegistrationPage() {
   const { t } = useTranslation();
@@ -51,9 +55,10 @@ export default function RegistrationPage() {
   return (
     <Container>
       <RegContainer>
-        <div>
+        {/* <div>
           <img src={logo} alt={`${t('logoAlt')}`} />
-        </div>
+        </div> */}
+        <Logo />
         <FormContainer>
           {!isSuccess ? (
             <>
@@ -65,8 +70,12 @@ export default function RegistrationPage() {
             <RegistrationConfirmation email={email}></RegistrationConfirmation>
           )}
         </FormContainer>
+        <Footer>
+          <TermsAndConditions />
+          <PrivacyPolicy />
+        </Footer>
       </RegContainer>
-      <Sidebar></Sidebar>;
+      <Sidebar></Sidebar>
     </Container>
   );
 }

@@ -1,7 +1,7 @@
 import LoginForm from 'components/LoginForm';
 import { FormContainer } from 'components/LoginForm/style';
 import Logo from 'components/Logo';
-import { Title, Text } from 'components/LoginComponent/style';
+import { Title, Text, Footer, Wrapper } from 'components/LoginComponent/style';
 import { useVerifyEmailQuery } from 'redux/api/authApi';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -10,6 +10,8 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from 'redux/hooks';
 import { setIsVerified, setToken } from 'redux/features/userSlice/userSlice';
+import TermsAndConditions from 'components/TermsAndConditions';
+import PrivacyPolicy from 'components/PrivacyPolicy';
 
 export default function LoginComponent() {
   const { t } = useTranslation();
@@ -43,11 +45,17 @@ export default function LoginComponent() {
   }, [authToken, dispatch]);
 
   return (
-    <FormContainer>
+    <Wrapper>
       <Logo />
-      <Title>{t('login.login-title')}</Title>
-      <Text>{t('login.login-text')}</Text>
-      <LoginForm />
-    </FormContainer>
+      <FormContainer>
+        <Title>{t('login.login-title')}</Title>
+        <Text>{t('login.login-text')}</Text>
+        <LoginForm />
+      </FormContainer>
+      <Footer>
+        <TermsAndConditions />
+        <PrivacyPolicy />
+      </Footer>
+    </Wrapper>
   );
 }

@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
 
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 50vw;
+  padding: 1.6rem 2rem;
+`;
+
 export const Title = styled.h1`
   color: ${theme.colors.title};
   font-family: ${theme.fontFamily.sf_pro_text};
@@ -18,4 +26,10 @@ export const Text = styled.div`
   line-height: 24px;
   text-align: left;
   margin-bottom: 2.5rem;
+`;
+
+export const Footer = styled.footer`
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
 `;
