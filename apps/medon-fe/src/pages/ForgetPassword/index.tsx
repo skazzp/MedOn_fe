@@ -10,13 +10,7 @@ import { Link } from 'components/Link';
 import { InputAntD } from 'components/common';
 
 import { SubmitSendEmail } from 'pages/ForgetPassword/types';
-import {
-  Container,
-  Content,
-  Footer,
-  Form,
-  Header,
-} from 'pages/ForgetPassword/styles';
+import { Container, Content, Form, Header } from 'pages/ForgetPassword/styles';
 
 import RightArrow from 'assets/svgs/arrow/right-arrow.svg';
 import Logo from 'assets/svgs/logo_medon.svg';
@@ -112,22 +106,6 @@ export default function ForgetPassword() {
           {t('forget-password.send-email.home-link')}
         </Link>
       </Content>
-      <Footer>
-        <Link
-          bgcolor={theme.colors.transparent}
-          textcolor={theme.colors.blue_300}
-          to="#"
-        >
-          {t('forget-password.footer.linkTerm')}
-        </Link>
-        <Link
-          bgcolor={theme.colors.transparent}
-          textcolor={theme.colors.blue_300}
-          to="#"
-        >
-          {t('forget-password.footer.linkPrivacy')}
-        </Link>
-      </Footer>
     </Container>
   );
 }
