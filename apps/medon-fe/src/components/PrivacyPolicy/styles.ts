@@ -8,7 +8,13 @@ export const BtnStyled = styled.button`
   font-size: 14px;
   line-height: 20px;
   font-family: ${theme.fontFamily.sf_pro_text};
+  font-weight: ${theme.fontWeight.medium};
   width: 160px;
+  margin-right: 20px;
+  &:hover {
+    text-decoration: underline;
+    color: ${theme.colors.icon_active};
+  }
 `;
 
 export const Container = styled.div`

@@ -68,10 +68,12 @@ export default function RegistrationPage() {
             <RegistrationConfirmation email={email}></RegistrationConfirmation>
           )}
         </FormContainer>
-        <Footer>
-          <TermsAndConditions />
-          <PrivacyPolicy />
-        </Footer>
+        {!isSuccess && (
+          <Footer>
+            <TermsAndConditions />
+            <PrivacyPolicy />
+          </Footer>
+        )}
       </RegContainer>
       <Sidebar></Sidebar>
     </Container>
