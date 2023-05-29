@@ -36,7 +36,7 @@ export default function PatientCard() {
 
   const { data: activeAppointment } = useGetActiveAppointmentByDoctorIdQuery(
     user.id,
-    { pollingInterval: 60000 }
+    { pollingInterval: 6000 }
   );
 
   useEffect(() => {
