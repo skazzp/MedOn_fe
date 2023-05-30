@@ -19,6 +19,7 @@ import {
   StepsScore,
   Wrapper,
   Meet,
+  LoadingSpinner,
 } from 'components/Steps/styles';
 import { StepsProps } from 'components/Steps/types';
 import { steps } from 'utils/constants/steps';
@@ -31,6 +32,7 @@ import {
   positionPrevious,
 } from 'utils/constants/position';
 import { toastConfig } from 'utils/toastConfig';
+import { Spin } from 'antd';
 
 function Steps(props: StepsProps) {
   const {
@@ -59,7 +61,8 @@ function Steps(props: StepsProps) {
   const dateInText = dayjs(selectedDate).format(dateToTextFormat);
   const [isSlotAvailable, setIsSlotAvailable] = useState<boolean>(false);
 
-  const [getAvailabilityByDay, { data }] = useGetAvailabilityByDayMutation();
+  const [getAvailabilityByDay, { data, isLoading }] =
+    useGetAvailabilityByDayMutation();
   const [createAppointment, { isLoading: createLoading }] =
     useCreateAppointmentMutation();
 
@@ -213,7 +216,12 @@ function Steps(props: StepsProps) {
 
         {selectedDate && (
           <Meet isButtonActive={isButtonActive}>
-            {isButtonActive ? t('patient-info.have-doctor') : noMeetingsMessage}
+            {isButtonActive && isLoading ? (
+              <LoadingSpinner />
+            ) : (
+              isButtonActive && t('patient-info.have-doctor')
+            )}
+            {!isButtonActive && noMeetingsMessage}
           </Meet>
         )}
       </Selected>

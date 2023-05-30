@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { theme } from 'styles/theme';
 import { cross, smallArrowRight, union } from 'utils/constants';
 import { steps } from 'utils/constants/steps';
@@ -117,6 +117,21 @@ export const Button = styled.button<ButtonProps>`
     background: ${theme.colors.gray_500};
   }
   `}
+`;
+
+const spinAnimation = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
+export const LoadingSpinner = styled.div`
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid ${theme.colors.load_border};
+  border-top-color: ${theme.colors.load_border_top_color};
+  border-radius: 50%;
+  animation: ${spinAnimation} 0.8s linear infinite;
 `;
 
 export const Meet = styled.div<{ isButtonActive: boolean }>`
