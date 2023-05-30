@@ -36,7 +36,8 @@ export default function PatientCard() {
 
   const { data: activeAppointment } = useGetActiveAppointmentByDoctorIdQuery(
     user.id,
-    { pollingInterval: 60000 }
+    //TODO: remove auto-fetching when notification-socket feature will be integrated
+    { pollingInterval: 6000 }
   );
 
   useEffect(() => {

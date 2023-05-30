@@ -6,6 +6,7 @@ import {
   addUserMessage,
   dropMessages,
   renderCustomComponent,
+  markAllAsRead,
 } from 'react-chat-widget';
 import { useTranslation } from 'react-i18next';
 import { IChatProps, ICustomTimeStampProps } from 'components/Chat/types';
@@ -55,6 +56,7 @@ export function Chat({
           isReply: true,
         });
       }
+      markAllAsRead();
     });
     return () => dropMessages();
   }, []);
