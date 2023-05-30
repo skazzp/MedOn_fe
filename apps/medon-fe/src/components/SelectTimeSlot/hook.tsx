@@ -80,5 +80,6 @@ export function useSelectTimeSlot({
     t,
     isActive,
     data,
+    selectedDate,
   };
 }

@@ -1,10 +1,11 @@
 import { timeSlots } from 'utils/constants/options/hourOptions';
+import dayjs from 'dayjs';
 import { useSelectTimeSlot } from './hook';
 import { Container, DrText, SlotActive, TimeSlot, TimeText } from './styles';
 import { SelectTimeSlotProps } from './types';
 
 export default function SelectTimeSlot(props: SelectTimeSlotProps) {
-  const { timeSlotsAvailability, selectTime, t, isActive } =
+  const { timeSlotsAvailability, selectTime, t, isActive, selectedDate } =
     useSelectTimeSlot(props);
 
   return (
@@ -21,6 +22,17 @@ export default function SelectTimeSlot(props: SelectTimeSlotProps) {
         const doctorCount = Object.values(timeSlotsAvailability)
           .map((availability) => availability[index])
           .filter(Boolean).length;
+
+        const currentTime = dayjs();
+        const selectedDateTime = dayjs(selectedDate)
+          .hour(+timeSlot.split(':')[0])
+          .minute(0);
+        const isPastTime = selectedDateTime.isBefore(currentTime, 'hour');
+        const isToday = selectedDateTime.isSame(currentTime, 'day');
+
+        if (isToday && isPastTime) {
+          return null;
+        }
 
         return (
           <TimeSlot
