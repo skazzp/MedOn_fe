@@ -6,11 +6,12 @@ import {
   addUserMessage,
   dropMessages,
   renderCustomComponent,
+  markAllAsRead,
 } from 'react-chat-widget';
 import { useTranslation } from 'react-i18next';
 import { IChatProps, ICustomTimeStampProps } from 'components/Chat/types';
 import { TimeFormat } from 'utils/constants/timeFormats';
-import { GlobalStyle, DateWrapper, DateWrapperReply } from './styles';
+import { GlobalStyle, DateWrapperReply, DateWrapperMessage } from './styles';
 import 'react-chat-widget/lib/styles.css';
 
 function CustomTimeStampFragment({ date, isReply }: ICustomTimeStampProps) {
@@ -21,7 +22,9 @@ function CustomTimeStampFragment({ date, isReply }: ICustomTimeStampProps) {
           {dayjs(date).format(TimeFormat.hh_mm)}
         </DateWrapperReply>
       ) : (
-        <DateWrapper>{dayjs(date).format(TimeFormat.hh_mm)}</DateWrapper>
+        <DateWrapperMessage>
+          {dayjs(date).format(TimeFormat.hh_mm)}
+        </DateWrapperMessage>
       )}
     </>
   );
@@ -53,6 +56,7 @@ export function Chat({
           isReply: true,
         });
       }
+      markAllAsRead();
     });
     return () => dropMessages();
   }, []);
@@ -88,6 +92,8 @@ export function Chat({
         handleNewUserMessage={handleNewUserMessage}
         showTimeStamp={false}
         emojis={true}
+        resizable={true}
+        launcherOpenImg="assets/svgs/patientCard/chat-white.svg"
       />
     </>
   );
