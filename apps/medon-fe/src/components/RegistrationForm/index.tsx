@@ -1,10 +1,11 @@
 import { Controller, useForm } from 'react-hook-form';
-import { Input } from 'antd';
+import { Checkbox, Input } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 
 import { DatepickerAntD, SelectAntD, InputAntD } from 'components/common';
+import TermsAndConditions from 'components/TermsAndConditions';
 
 import { registrationFormSchema } from 'validation/registrationFormSchema';
 import { countryOptions } from 'utils/countries/countryOptions';
@@ -20,6 +21,8 @@ import {
   BackBtn,
   Btn,
   BtnContainer,
+  CheckboxText,
+  CheckboxWrapper,
   Container,
   Form,
   InputContainer,
@@ -50,10 +53,13 @@ export default function RegistrationForm({ submitForm }: IProps) {
       speciality: null,
       city: '',
       timezone: DEFAULT_TIMEZONE,
+      agreement: false,
     },
   });
   const { specialityOptions } = useSpecOptions();
   const role = watch(formFields.role);
+  const checkbox = watch(formFields.agreement);
+
   const onSubmit = handleSubmit(submitForm);
 
   return (
@@ -197,8 +203,22 @@ export default function RegistrationForm({ submitForm }: IProps) {
             options={timezoneOptions}
           />
         </Label>
+        <Label htmlFor="agreement">
+          <CheckboxWrapper>
+            <Controller
+              name="agreement"
+              control={control}
+              render={({ field }) => (
+                <Checkbox {...field} id="agreement">
+                  <CheckboxText>I have read and agreed</CheckboxText>
+                  <TermsAndConditions />
+                </Checkbox>
+              )}
+            />
+          </CheckboxWrapper>
+        </Label>
         <BtnContainer>
-          <Btn type="primary" htmlType="submit">
+          <Btn type="primary" htmlType="submit" disabled={!checkbox}>
             {t('regForm.submitBtn')}
           </Btn>
           <NavLink to="/">

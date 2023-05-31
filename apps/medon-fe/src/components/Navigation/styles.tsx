@@ -110,6 +110,11 @@ export const BlockName = styled.span`
   flex-direction: column;
 `;
 
+export const LogoWrapper = styled.div`
+  padding: 20px;
+`;
+
+
 export const Dashboard = styled(Icon).attrs(() => ({
   children: <DashboardIcon />,
 }))``;
@@ -137,3 +142,4 @@ export const Logout = styled(Icon).attrs(() => ({
 export const Availability = styled(Icon).attrs(() => ({
   children: <AvailabilityIcon />,
 }))``;
+

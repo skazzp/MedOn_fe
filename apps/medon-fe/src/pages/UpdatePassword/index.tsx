@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { SubmitResetPasswordForm } from 'pages/UpdatePassword/types';
-import { Container, Content, Footer, Form } from 'pages/UpdatePassword/styles';
+import { Container, Content, Form } from 'pages/UpdatePassword/styles';
 
 import Button from 'components/Button';
 import { Link } from 'components/Link';
@@ -98,22 +98,6 @@ export default function UpdatePassword() {
           {t('update-password.reset-password.home-link')}
         </Link>
       </Content>
-      <Footer>
-        <Link
-          bgcolor={theme.colors.transparent}
-          textcolor={theme.colors.blue_300}
-          to="#"
-        >
-          {t('update-password.footer.linkTerm')}
-        </Link>
-        <Link
-          bgcolor={theme.colors.transparent}
-          textcolor={theme.colors.blue_300}
-          to="#"
-        >
-          {t('update-password.footer.linkPrivacy')}
-        </Link>
-      </Footer>
     </Container>
   );
 }
