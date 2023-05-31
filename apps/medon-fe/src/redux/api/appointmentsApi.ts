@@ -1,7 +1,11 @@
+import { IAppointmentsCardProps } from 'components/AppointmentsCard/types';
+
+import { IServerResponse } from 'interfaces/index';
+
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { prepareHeaders } from 'redux/api/utils/prepareHeaders';
-import { IServerResponse } from 'interfaces/index';
-import { Appointment } from './types';
+
+import { Appointment, AppointmentRequest } from './types';
 
 export const appointmentsApi = createApi({
   reducerPath: 'appointmentsApi',
@@ -9,7 +13,7 @@ export const appointmentsApi = createApi({
     baseUrl: process.env.NX_API_URL,
     prepareHeaders,
   }),
-  tagTypes: ['appointment'],
+  tagTypes: ['appointment', 'appointments'],
   endpoints: (builder) => ({
     getAppointments: builder.query<
       IServerResponse<Appointment[]>,
@@ -54,13 +58,55 @@ export const appointmentsApi = createApi({
         method: 'GET',
       }),
     }),
-
+    getFutureAppointments: builder.query<
+      IServerResponse<IAppointmentsCardProps[]>,
+      AppointmentRequest
+    >({
+      query({ offset = 0, limit }) {
+        return {
+          url: 'appointments/future',
+          params: {
+            offset,
+            limit,
+          },
+        };
+      },
+      providesTags: ['appointments'],
+    }),
+    getPastAppointments: builder.query<
+      IServerResponse<IAppointmentsCardProps[]>,
+      AppointmentRequest
+    >({
+      query({ offset = 0, limit }) {
+        return {
+          url: 'appointments/past',
+          params: {
+            offset,
+            limit,
+          },
+        };
+      },
+    }),
+    sendLink: builder.mutation<
+      IServerResponse<void>,
+      { link: string; id: string }
+    >({
+      query({ link, id }) {
+        return {
+          url: `appointments/link/${id}`,
+          method: 'PATCH',
+          body: { link },
+        };
+      },
+      invalidatesTags: ['appointments'],
+    }),
     getActiveAppointmentByDoctorId: builder.query<
       IServerResponse<Appointment>,
       number | null
     >({
       query: (id) => {
         if (!id) throw new Error('params is not provided!');
+
         return {
           url: `appointments/active/${id}`,
           method: 'GET',
@@ -77,6 +123,9 @@ export const {
   useDeleteAppointmentMutation,
   useGetAppointmentsByPatientsIdQuery,
   useGetActiveAppointmentByDoctorIdQuery,
+  useGetFutureAppointmentsQuery,
+  useGetPastAppointmentsQuery,
+  useSendLinkMutation,
 } = appointmentsApi;
 
 export const appointmentsApiReducer = appointmentsApi.reducer;

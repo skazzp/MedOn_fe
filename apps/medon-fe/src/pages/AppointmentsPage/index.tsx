@@ -1,11 +1,16 @@
 import dayjs from 'dayjs';
+import { useTheme } from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { dayjsLocalizer, Views, Event } from 'react-big-calendar';
+import { Skeleton } from 'antd';
 
+import Button from 'components/Button';
 import { AppointmentsCard } from 'components/AppointmentsCard';
 
-import { appointmentCardMock } from 'utils/mock/appointment';
+import { useModal } from 'hooks/useModal';
+
+import { timeFormat, dateInputFormat, defaultLimit } from 'utils/constants';
 
 import {
   Container,
@@ -20,25 +25,42 @@ import {
   ProfileIcon,
   Entity,
   AppointmentContainer,
+  ListContainer,
 } from './styles';
+import {
+  useGetCalendarEvents,
+  useGetPastAppointmentsCalendarQuery,
+  useGetPastAppointmentsListQuery,
+} from './hooks';
+
+// TODO: improve Skeleton and add filter to localDoctor
 
 const AppointmentsPage = () => {
   const [isMonthView, setIsMonthView] = useState<boolean>(false);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+  const [limit, setLimit] = useState<number>(defaultLimit);
 
   const { t } = useTranslation();
+  const theme = useTheme();
+
+  const { data: getPastAppointments } = useGetPastAppointmentsListQuery({
+    limit,
+  });
+  const { data: getPastCalendarAppointments, isFetching: isCalendarFetching } =
+    useGetPastAppointmentsCalendarQuery({ skip: !isMonthView });
+  const events = useGetCalendarEvents(getPastCalendarAppointments?.data);
+  const { hideModal, isVisible, showModal } = useModal(false);
 
   const localizer = dayjsLocalizer(dayjs);
 
   const handleEventClick = (event: Event) => {
     setSelectedEvent(event);
-    setIsModalOpen(true);
+    showModal();
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+  if (isCalendarFetching) {
+    return <Skeleton />;
+  }
 
   return (
     <Container>
@@ -46,10 +68,7 @@ const AppointmentsPage = () => {
         <Title>
           <h2>{t('appointments.title')}</h2>
           <UserIcon />
-          {
-            // TODO: MED-133 populate with real events from db
-          }
-          <span>20</span>
+          <span>{getPastAppointments?.data?.length}</span>
         </Title>
         <View>
           <ViewItem
@@ -64,67 +83,75 @@ const AppointmentsPage = () => {
         </View>
       </Header>
       {!isMonthView && (
-        <AppointmentContainer>
-          {/* sort and pagination on backend */}
-          {appointmentCardMock.map((appointment) => (
-            <AppointmentsCard
-              key={appointment.id}
-              isLinkAdded
-              {...appointment}
-            />
-          ))}
-        </AppointmentContainer>
+        <ListContainer>
+          <AppointmentContainer>
+            {getPastAppointments?.data?.map((appointment) => (
+              <AppointmentsCard
+                key={appointment.id}
+                isLinkAdded
+                {...appointment}
+              />
+            ))}
+          </AppointmentContainer>
+          {Number(getPastAppointments?.data?.length) > limit && (
+            <Button
+              bgcolor={theme.colors.white}
+              textcolor={theme.colors.blue_400}
+              onClick={() => setLimit((prev) => prev + limit)}
+            >
+              {t('appointments.more')}
+            </Button>
+          )}
+        </ListContainer>
       )}
-
-      {
-        // TODO: MED-133 populate with real events from db
-        isMonthView && (
+      {isMonthView &&
+        (!isCalendarFetching ? (
           <>
             <StyledCalendar
               defaultView={Views.MONTH}
-              events={[
-                {
-                  start: dayjs('2023-05-18T10:00:00').toDate(),
-                  end: dayjs('2023-05-18T11:00:00').toDate(),
-                  title: 'Appointment title',
-                },
-              ]}
+              events={events}
               localizer={localizer}
               views={[Views.MONTH]}
               selectable
               popup
-              step={60}
               timeslots={1}
               onSelectEvent={handleEventClick}
             />
             <StyledModal
               title={selectedEvent?.title}
               centered
-              open={isModalOpen}
-              onOk={handleCloseModal}
-              onCancel={handleCloseModal}
+              open={isVisible}
+              onOk={hideModal}
+              onCancel={hideModal}
             >
-              {
-                // TODO: MED-133 integrate with real data
-              }
               <Details>
                 <span>{t('appointments.details.patient')}</span>
                 <Entity>
-                  <p>Adam Smith</p>
+                  <p>{selectedEvent?.resource?.patient}</p>
                   <ProfileIcon />
                 </Entity>
                 <span>{t('appointments.details.doctor')}</span>
-                <p>Local/Dr.Martines</p>
+                <p>
+                  {t('appointments.details.local')}{' '}
+                  {selectedEvent?.resource?.localDoctor}
+                </p>
+                <span>{t('appointments.details.doctor')}</span>
+                <p>
+                  {t('appointments.details.remote')}{' '}
+                  {selectedEvent?.resource?.remoteDoctor}
+                </p>
                 <span>{t('appointments.details.date')}</span>
                 <p>
-                  {new Date('2023-05-18T10:00:00').toDateString()}{' '}
-                  {t('appointments.details.starts')} 10:00
+                  {dayjs(selectedEvent?.start).format(dateInputFormat)}{' '}
+                  {t('appointments.details.starts')}{' '}
+                  {dayjs(selectedEvent?.start).format(timeFormat)}
                 </p>
               </Details>
             </StyledModal>
           </>
-        )
-      }
+        ) : (
+          <Skeleton />
+        ))}
     </Container>
   );
 };

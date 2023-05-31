@@ -162,3 +162,8 @@ export interface Appointment {
   patientId: number | null;
   timezone?: string;
 }
+
+export interface AppointmentRequest {
+  offset: number;
+  limit: number;
+}
