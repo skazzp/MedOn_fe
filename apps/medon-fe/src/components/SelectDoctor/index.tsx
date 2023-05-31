@@ -156,9 +156,7 @@ export default function SelectDoctor({
           </ListItem>
         ))}
         {filteredDoctors.length > visibleDoctors && (
-          <LoadMore onClick={showMoreDoctors}>
-            {t('patient-list.load-more')}
-          </LoadMore>
+          <LoadMore onClick={showMoreDoctors}>{t('load-more')}</LoadMore>
         )}
       </List>
     </Container>
