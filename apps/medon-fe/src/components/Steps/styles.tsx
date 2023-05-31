@@ -56,6 +56,7 @@ export const Selected = styled.div`
   font-size: 14px;
   line-height: 20px;
   color: ${theme.colors.gray_500};
+  width: 40vw;
 `;
 
 export const Button = styled.button<ButtonProps>`

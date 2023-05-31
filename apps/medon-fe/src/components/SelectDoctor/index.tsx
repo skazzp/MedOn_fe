@@ -25,6 +25,7 @@ import { filterUniqueDoctors } from 'components/SelectDoctor/hook';
 import { SelectDoctorProps } from 'components/SelectDoctor/types';
 
 import doctorImagePlaceholder from 'assets/images/Avatar.svg';
+import { numberOfDoctors } from 'utils/constants/position';
 
 export default function SelectDoctor({
   selectDoctorAppointments,
@@ -42,7 +43,7 @@ export default function SelectDoctor({
   const [selectedSpeciality, setSelectedSpeciality] = useState<number | string>(
     'all'
   );
-  const [visibleDoctors, setVisibleDoctors] = useState<number>(3);
+  const [visibleDoctors, setVisibleDoctors] = useState<number>(numberOfDoctors);
 
   const doctors = data.map((avails: IAvailability) => avails.doctor);
 

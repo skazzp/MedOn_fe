@@ -19,9 +19,10 @@ export default function SelectTimeSlot(props: SelectTimeSlotProps) {
           return null;
         }
 
-        const doctorCount = Object.values(timeSlotsAvailability)
-          .map((availability) => availability[index])
-          .filter(Boolean).length;
+        const doctorCount = Object.values(timeSlotsAvailability).reduce(
+          (count, availability) => count + Number(availability[index]),
+          0
+        );
 
         const currentTime = dayjs();
         const selectedDateTime = dayjs(selectedDate)
