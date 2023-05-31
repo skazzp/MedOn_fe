@@ -3,8 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { Age, Location, Mail, MaleSex, Phone } from 'assets/svgs/patientCard';
 import { getAgeByDateOfBirth } from 'utils/functions/getAgeByDateOfBirth';
 
-import { Info, Wrapper } from './styles';
+import { Info, Wrapper, Header, StyledButton } from './styles';
 import { IPatientCardInfoProps } from './types';
+import React from 'react';
+import { ChatIcon } from 'assets/svgs/patientCard';
+import { toggleWidget } from 'react-chat-widget';
 
 export default function PatientCardInfo({
   phoneNumber,
@@ -15,14 +18,24 @@ export default function PatientCardInfo({
   country,
   firstName,
   lastName,
+  activeAppointmentId,
 }: IPatientCardInfoProps) {
   const { t } = useTranslation();
 
   return (
     <>
-      <h1>
-        {firstName} {lastName}
-      </h1>
+      <Header>
+        <h1>
+          {firstName} {lastName}
+        </h1>
+        {activeAppointmentId && (
+          <StyledButton size="large" onClick={toggleWidget}>
+            <span>Chat</span>
+            <ChatIcon />
+          </StyledButton>
+        )}
+      </Header>
+
       <Wrapper>
         <Info>
           <Phone />
