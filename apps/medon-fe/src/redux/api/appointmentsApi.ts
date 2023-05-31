@@ -100,6 +100,19 @@ export const appointmentsApi = createApi({
       },
       invalidatesTags: ['appointments'],
     }),
+    getActiveAppointmentByDoctorId: builder.query<
+      IServerResponse<Appointment>,
+      number | null
+    >({
+      query: (id) => {
+        if (!id) throw new Error('params is not provided!');
+
+        return {
+          url: `appointments/active/${id}`,
+          method: 'GET',
+        };
+      },
+    }),
   }),
 });
 
@@ -109,6 +122,7 @@ export const {
   useCreateAppointmentMutation,
   useDeleteAppointmentMutation,
   useGetAppointmentsByPatientsIdQuery,
+  useGetActiveAppointmentByDoctorIdQuery,
   useGetFutureAppointmentsQuery,
   useGetPastAppointmentsQuery,
   useSendLinkMutation,
