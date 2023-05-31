@@ -9,7 +9,7 @@ export function HelpPage() {
   return (
     <div>
       <Wrapper>
-        <h1>FAQ</h1>
+        <h1>{t('help.title')}</h1>
         <Collapse defaultActiveKey={['1']}>
           <Panel header={t('help.headers.1')} key="1">
             <section
