@@ -163,7 +163,7 @@ export function useCalendar() {
       );
 
       if (appointmentAlreadySet?.length) {
-        toast.error(t('availability.timeUsed'), toastConfig);
+        toast.error(t('availability.appointmentSet'), toastConfig);
 
         return;
       }
@@ -237,7 +237,7 @@ export function useCalendar() {
     );
 
     if (appointmentAlreadySet?.length) {
-      toast.error(t('availability.timeUsed'), toastConfig);
+      toast.error(t('availability.appointmentSet'), toastConfig);
 
       return;
     }
