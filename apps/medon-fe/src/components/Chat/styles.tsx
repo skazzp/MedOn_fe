@@ -17,19 +17,20 @@ export const GlobalStyle = createGlobalStyle`
 
   .rcw-message {
     position: relative;
+    margin: 20px 10px !important;
   }
 `;
 
 export const DateWrapper = styled.div`
   font-size: ${theme.fontSizes.sm};
-  margin-top: -4px;
   position: absolute;
+  top: -14px;
+`;
+
+export const DateWrapperMessage = styled(DateWrapper)`
   right: 0;
 `;
 
-export const DateWrapperReply = styled.div`
-  font-size: ${theme.fontSizes.sm};
-  margin-top: -4px;
-  position: absolute;
+export const DateWrapperReply = styled(DateWrapper)`
   left: 0;
 `;

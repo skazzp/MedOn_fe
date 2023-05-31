@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Skeleton } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useParams } from 'react-router-dom';
@@ -17,9 +17,13 @@ import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 
 import { Container, Top, SkeletonContainer, EditBtn } from './styles';
 import { useAppSelector } from 'redux/hooks';
+import { useGetActiveAppointmentByDoctorIdQuery } from 'redux/api/appointmentsApi';
 
 export default function PatientCard() {
   const [editInfo, setEditInfo] = useState<boolean>(false);
+  const [activeAppointmentId, setActiveAppointmentId] = useState<number | null>(
+    null
+  );
 
   const { id } = useParams();
   const { t } = useTranslation();
@@ -30,10 +34,26 @@ export default function PatientCard() {
 
   const user = useAppSelector(getUserSelector);
 
-  //TODO: Replace with real appointmentId
+  const { data: activeAppointment } = useGetActiveAppointmentByDoctorIdQuery(
+    user.id,
+    //TODO: remove auto-fetching when notification-socket feature will be integrated
+    { pollingInterval: 6000 }
+  );
+
+  useEffect(() => {
+    if (activeAppointment && activeAppointment.data && id) {
+      console.log(JSON.stringify(activeAppointment));
+      if (
+        activeAppointment.data.patientId === Number(id) &&
+        activeAppointment.data.id
+      )
+        setActiveAppointmentId(activeAppointment.data.id);
+    } else setActiveAppointmentId(null);
+  }, [activeAppointment, id]);
+
   const { history, onSubmitMessage, isHistoryReady, reply } = useSocket({
-    appointmentId: 3,
-    userId: Number(user.id),
+    appointmentId: activeAppointmentId,
+    userId: user.id,
   });
 
   if (isPatientLoading)
@@ -58,7 +78,10 @@ export default function PatientCard() {
               <Edit />
             </EditBtn>
           </Top>
-          <PatientCardInfo {...patient?.data} />
+          <PatientCardInfo
+            {...patient?.data}
+            activeAppointmentId={activeAppointmentId}
+          />
           <h4>{t('patient-card.overview')}</h4>
           <ShowMore text={patient?.data?.overview} />
           <Outlet />
@@ -66,7 +89,7 @@ export default function PatientCard() {
       ) : (
         <NewPatientForm patient={patient?.data} setEditInfo={setEditInfo} />
       )}
-      {isHistoryReady && (
+      {activeAppointmentId && isHistoryReady && (
         <Chat
           onSubmitMessage={onSubmitMessage}
           history={history}
