@@ -420,7 +420,9 @@
     "title": "Availability schedule:",
     "message": "Select day or availability slot to start editing",
     "timeUsed": "That time is already used",
+    "appointmentSet": "There is an appointment set on that time",
     "badDate": "Select a day in the future",
+    "badTime": "Select time in the future",
     "validationTime": "Wrong time"
   },
   "select-options": {
