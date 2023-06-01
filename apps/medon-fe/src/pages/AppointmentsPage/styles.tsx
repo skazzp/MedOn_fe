@@ -3,8 +3,6 @@ import { Calendar } from 'react-big-calendar';
 import styled from 'styled-components';
 
 import { ReactComponent as InfoIcon } from 'assets/images/dashboard/User.svg';
-import { ReactComponent as RightArrow } from 'assets/svgs/appointments/arrowRight.svg';
-import { ReactComponent as LeftArrow } from 'assets/svgs/appointments/arrowLeft.svg';
 
 import { Icon } from 'components/AppointmentsScore/styles';
 
@@ -168,14 +166,6 @@ export const CalendarContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-`;
-
-export const StyledRightArror = styled(RightArrow)`
-  fill: ${theme.colors.gray_700};
-`;
-
-export const StyledLeftArrow = styled(LeftArrow)`
-  fill: ${theme.colors.gray_700};
 `;
 
 export const NotFound = styled.h3`

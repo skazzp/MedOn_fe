@@ -13,6 +13,8 @@ import { useModal } from 'hooks/useModal';
 
 import { Filter, ShowAll } from 'interfaces/Filter';
 
+import { AppointmentsPageModal } from 'pages/AppointmentsPageModal';
+
 import {
   useGetAllCalendarAppointmentsQuery,
   useGetAllListAppointmentsQuery,
@@ -20,7 +22,7 @@ import {
 import { useAppSelector } from 'redux/hooks';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 
-import { defaultLimit, roles } from 'utils/constants';
+import { defaultLimit, roles, defaultPage } from 'utils/constants';
 import { getEventPropGetter } from 'utils/functions/getEventPropGetter';
 import { options } from 'utils/constants/options/appointmentFilter';
 
@@ -38,19 +40,16 @@ import {
   Buttons,
   SubHeader,
   CalendarContainer,
-  StyledRightArror,
-  StyledLeftArrow,
   NotFound,
 } from './styles';
 import { useGetCalendarEvents } from './hooks';
-import { AppointmentsPageModal } from 'pages/AppointmentsPageModal';
 
 const AppointmentsPage = () => {
   const [isMonthView, setIsMonthView] = useState<boolean>(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [filter, setFilter] = useState<Filter>(Filter.today);
   const [showAll, setShowAll] = useState<ShowAll>(ShowAll.false);
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number>(defaultPage);
   const [limit, setLimit] = useState<number>(defaultLimit);
 
   const { t } = useTranslation();
@@ -84,17 +83,26 @@ const AppointmentsPage = () => {
     showModal();
   };
 
-  const resetPage = () => {
-    setPage(1);
-  };
-
-  const handleSetPage = (newPage: number) => {
-    if (filter !== Filter.today)
-      if (newPage < 1) {
-        setPage(1);
-      } else {
-        setPage(newPage);
+  const handleButtonClick = (button: Filter) => {
+    if (filter === button && filter !== Filter.today) {
+      setPage((prev) => prev + 1);
+    } else {
+      setPage(defaultPage);
+      setFilter(button);
+      switch (button) {
+        case Filter.today:
+          setFilter(Filter.today);
+          break;
+        case Filter.past:
+          setFilter(Filter.past);
+          break;
+        case Filter.future:
+          setFilter(Filter.future);
+          break;
+        default:
+          break;
       }
+    }
   };
 
   return (
@@ -110,62 +118,33 @@ const AppointmentsPage = () => {
           </span>
         </Title>
         {!isMonthView && (
-          <>
-            <Buttons>
-              <Button
-                bgcolor={theme.colors.gray_100}
-                textcolor={theme.colors.black}
-                type="button"
-                onClick={() => {
-                  resetPage();
-                  setFilter(Filter.today);
-                }}
-                autoFocus
-              >
-                {t('appointments.buttons.today')}
-              </Button>
-              <Button
-                bgcolor={theme.colors.gray_100}
-                textcolor={theme.colors.gray_700}
-                type="button"
-                onClick={() => {
-                  resetPage();
-                  setFilter(Filter.future);
-                }}
-              >
-                {t('appointments.buttons.future')}
-              </Button>
-              <Button
-                bgcolor={theme.colors.gray_100}
-                textcolor={theme.colors.gray_700}
-                type="button"
-                onClick={() => {
-                  resetPage();
-                  setFilter(Filter.past);
-                }}
-              >
-                {t('appointments.buttons.past')}
-              </Button>
-            </Buttons>
-            <Buttons>
-              <Button
-                type="button"
-                bgcolor={theme.colors.gray_100}
-                textcolor={theme.colors.gray_700}
-                onClick={() => handleSetPage(page - 1)}
-              >
-                <StyledLeftArrow />
-              </Button>
-              <Button
-                bgcolor={theme.colors.gray_100}
-                textcolor={theme.colors.gray_700}
-                type="button"
-                onClick={() => handleSetPage(page + 1)}
-              >
-                <StyledRightArror />
-              </Button>
-            </Buttons>
-          </>
+          <Buttons>
+            <Button
+              bgcolor={theme.colors.gray_100}
+              textcolor={theme.colors.black}
+              type="button"
+              onClick={() => handleButtonClick(Filter.today)}
+              autoFocus
+            >
+              {t('appointments.buttons.today')}
+            </Button>
+            <Button
+              bgcolor={theme.colors.gray_100}
+              textcolor={theme.colors.gray_700}
+              type="button"
+              onClick={() => handleButtonClick(Filter.future)}
+            >
+              {t('appointments.buttons.future')}
+            </Button>
+            <Button
+              bgcolor={theme.colors.gray_100}
+              textcolor={theme.colors.gray_700}
+              type="button"
+              onClick={() => handleButtonClick(Filter.past)}
+            >
+              {t('appointments.buttons.past')}
+            </Button>
+          </Buttons>
         )}
         <View>
           <ViewItem
