@@ -132,17 +132,17 @@ const AppointmentsPage = () => {
               bgcolor={theme.colors.gray_100}
               textcolor={theme.colors.gray_700}
               type="button"
-              onClick={() => handleButtonClick(Filter.future)}
+              onClick={() => handleButtonClick(Filter.past)}
             >
-              {t('appointments.buttons.future')}
+              {t('appointments.buttons.past')}
             </Button>
             <Button
               bgcolor={theme.colors.gray_100}
               textcolor={theme.colors.gray_700}
               type="button"
-              onClick={() => handleButtonClick(Filter.past)}
+              onClick={() => handleButtonClick(Filter.future)}
             >
-              {t('appointments.buttons.past')}
+              {t('appointments.buttons.future')}
             </Button>
           </Buttons>
         )}
