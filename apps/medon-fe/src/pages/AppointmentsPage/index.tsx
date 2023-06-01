@@ -13,7 +13,7 @@ import { useModal } from 'hooks/useModal';
 
 import { Filter, ShowAll } from 'interfaces/Filter';
 
-import { AppointmentsPageModal } from 'pages/AppointmentsPageModal';
+import { AppointmentsPageModal } from 'components/AppointmentsPageModal';
 
 import {
   useGetAllCalendarAppointmentsQuery,
