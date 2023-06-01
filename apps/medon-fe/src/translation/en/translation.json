@@ -419,7 +419,13 @@
       "starts": "starts at",
       "local": "Local/Dr.",
       "remote": "Remote/Dr."
-    }
+    },
+    "buttons": {
+      "today": "Today",
+      "future": "Future",
+      "past": "Past"
+    },
+    "not-found": "Appointment not found based on requirements"
   },
   "availability": {
     "title": "Availability schedule:",
