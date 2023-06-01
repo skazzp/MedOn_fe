@@ -7,7 +7,7 @@ export const Container = styled.div`
   justify-content: flex-start;
   width: calc(100% - 100px);
   margin: 0 auto;
-  min-height: 100vh;
+  min-height: 80vh;
   height: 100%;
   font-family: ${theme.fontFamily.sf_pro_text};
 `;
