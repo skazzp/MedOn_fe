@@ -401,6 +401,7 @@
     "preffix-id": "# ",
     "preffix-overview": "Overview: ",
     "preffix-remote": "Remote - ",
+    "preffix-local": "Local - ",
     "suffix-age": "y.o.",
     "add-link": "Add Link",
     "modal-title": "Add Link to Zoom Call",
