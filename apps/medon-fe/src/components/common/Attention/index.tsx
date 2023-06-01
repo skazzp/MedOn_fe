@@ -14,29 +14,30 @@ import {
 import { patientList } from 'utils/mock/patientList';
 import { Gender, addressing, routes } from 'utils/constants';
 
-export function Attention() {
+interface IAttentionProps {
+  startTime: string | Date;
+  title: string;
+  lastName: string | undefined;
+  link: string;
+}
+
+export function Attention({ title, lastName, link }: IAttentionProps) {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const user = useAppSelector(getUserSelector);
+  console.log(link);
 
   return (
     <Call>
       <Wrapper>
         <Info />
         <InfoText>
-          <p>{t('attention.call-time-left')}</p>
+          <p>{title}</p>
           <p>
-            <Name>{`${
-              patientList[0].gender === Gender.Male
-                ? addressing.mr
-                : addressing.ms
-            } ${patientList[0].lastName} `}</Name>
-            {t('attention.and')}
-            <Name> Dr. {`${user.lastName || 'Anonymous'}`}</Name>
+            <Name> Dr. {lastName}</Name>
           </p>
         </InfoText>
       </Wrapper>
-      <InfoButton onClick={() => navigate(routes.patientCard)}>
+      <InfoButton onClick={() => navigate(link)}>
         {t('attention.detail')}
       </InfoButton>
     </Call>

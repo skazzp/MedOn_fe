@@ -68,7 +68,15 @@ export const PrivateRoute = ({ component }: IProps) => {
     <Container>
       <Navigation />
       <Wrapper>
-        <Attention />
+        {activeAppointments && activeAppointments.data && (
+          <Attention
+            startTime={activeAppointments.data[0].startTime}
+            title="Your next appointment after 5 min with"
+            lastName={`${activeAppointments.data[0].localDoctorId}`}
+            link={`${routes.patientCard}/${activeAppointments.data[0].patientId}`}
+          />
+        )}
+
         {component}
       </Wrapper>
     </Container>

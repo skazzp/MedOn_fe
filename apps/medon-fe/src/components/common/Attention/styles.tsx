@@ -6,7 +6,7 @@ import Button from 'components/Button';
 export const Call = styled.div`
   display: flex;
   align-items: center;
-  margin: 40px 60px 20px;
+  margin: 40px 40px 20px;
   padding: 16px 20px;
   justify-content: space-between;
   border: 1.5px solid ${theme.colors.attentionSuccess};
