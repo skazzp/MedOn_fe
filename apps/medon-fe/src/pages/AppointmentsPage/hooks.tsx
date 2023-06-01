@@ -3,18 +3,8 @@ import { Event } from 'react-big-calendar';
 
 import { IAppointmentsCardProps } from 'components/AppointmentsCard/types';
 
-import {
-  defaultCalendarLimit,
-  defaultOffset,
-  timeFormat,
-} from 'utils/constants';
+import { timeFormat } from 'utils/constants';
 import { getCapitalize } from 'utils/functions/getCapitalize';
-
-import { useGetPastAppointmentsQuery } from 'redux/api/appointmentsApi';
-import {
-  IAppointmentsCalendarQueryProps,
-  IAppointmentsListQueryProps,
-} from './types';
 
 export function useGetCalendarEvents(
   getPastAppointments?: IAppointmentsCardProps[]
@@ -42,27 +32,4 @@ export function useGetCalendarEvents(
   });
 
   return events;
-}
-
-export function useGetPastAppointmentsListQuery({
-  limit,
-}: IAppointmentsListQueryProps) {
-  return useGetPastAppointmentsQuery({
-    offset: defaultOffset,
-    limit,
-  });
-}
-
-export function useGetPastAppointmentsCalendarQuery({
-  skip,
-}: IAppointmentsCalendarQueryProps) {
-  return useGetPastAppointmentsQuery(
-    {
-      offset: defaultOffset,
-      limit: defaultCalendarLimit,
-    },
-    {
-      skip,
-    }
-  );
 }
