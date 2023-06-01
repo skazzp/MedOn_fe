@@ -3,18 +3,17 @@ export interface IAppointmentsCardProps {
   link?: string;
   startTime?: Date;
   endTime?: Date;
-  // REMOTE DOCTOR
   remoteDoctor?: {
+    id?: string;
     firstName?: string;
     lastName?: string;
   };
   localDoctor?: {
+    id?: string;
     firstName?: string;
     lastName?: string;
   };
   isLinkAdded?: boolean;
-  // I NEED TO ADD THIS
-  // PATIENT
   patient?: {
     id?: string;
     dateOfBirth?: Date;
