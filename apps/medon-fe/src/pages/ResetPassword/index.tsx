@@ -15,7 +15,6 @@ import { SubmitResetPasswordForm } from 'pages/ResetPassword/types';
 import {
   Container,
   Content,
-  Footer,
   Form,
   Header,
 } from 'pages/ResetPassword/styles';
@@ -107,22 +106,6 @@ export default function ResetPassword() {
           {t('forget-password.send-email.home-link')}
         </Link>
       </Content>
-      <Footer>
-        <Link
-          bgcolor={theme.colors.transparent}
-          textcolor={theme.colors.blue_300}
-          to="#"
-        >
-          {t('forget-password.footer.linkTerm')}
-        </Link>
-        <Link
-          bgcolor={theme.colors.transparent}
-          textcolor={theme.colors.blue_300}
-          to="#"
-        >
-          {t('forget-password.footer.linkPrivacy')}
-        </Link>
-      </Footer>
     </Container>
   );
 }

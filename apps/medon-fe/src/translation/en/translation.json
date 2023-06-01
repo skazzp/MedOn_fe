@@ -461,6 +461,11 @@
     "title": "Appointment chat",
     "placeholder": "Type a message"
   },
+  "help": {
+      "title": "FAQ"
+  },
   "defaultLanguage": "en-US",
-  "not-one": "You are not the chosen one"
+  "not-one": "You are not the chosen one",
+  "privacyPolicy": "Privacy policy",
+  "termsConditions": "Terms and conditions"
 }
