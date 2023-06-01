@@ -1,14 +1,19 @@
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { io } from 'socket.io-client';
+
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { useGetUserQuery } from 'redux/api/userApi';
+import { getTokenSelector } from 'redux/features/userSlice/userSelectors';
+import { useGetActiveAppointmentsQuery } from 'redux/api/appointmentsApi';
 
 import Navigation from 'components/Navigation';
-import { useGetUserQuery } from 'redux/api/userApi';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { getTokenSelector } from 'redux/features/userSlice/userSelectors';
+import Attention from 'components/common/Attention';
+
 import { localDoctorRoutes, routes } from 'utils/constants/routes';
 import { roles } from 'utils/constants/roles';
-import Container from './styles';
-import { useGetActiveAppointmentsQuery } from 'redux/api/appointmentsApi';
+
+import { Container, Wrapper } from './styles';
 
 interface IProps {
   component: React.ReactElement;
@@ -20,13 +25,27 @@ export const PrivateRoute = ({ component }: IProps) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { data: response } = useGetUserQuery(null, { skip: !isLoggedIn });
-  const { data: activeAppointments } = useGetActiveAppointmentsQuery({
+
+  const { data: activeAppointments, refetch } = useGetActiveAppointmentsQuery({
     userId: Number(response?.data.id),
   });
 
-  console.log(activeAppointments);
+  useEffect(() => {
+    console.log(activeAppointments);
+  }, [activeAppointments]);
 
-  useEffect(() => {}, [response]);
+  useEffect(() => {
+    const client = io(`${process.env.NX_API_URL}/notification`);
+
+    if (response && response.data) {
+      client.emit('subscribeToAppointments', response.data.id);
+      client.on('appointmentsHaveChanged', () => refetch());
+    }
+
+    return () => {
+      client.close();
+    };
+  }, [response]);
 
   useEffect(() => {
     if (response) {
@@ -48,7 +67,10 @@ export const PrivateRoute = ({ component }: IProps) => {
   return isLoggedIn ? (
     <Container>
       <Navigation />
-      {component}
+      <Wrapper>
+        <Attention />
+        {component}
+      </Wrapper>
     </Container>
   ) : (
     <Navigate to={routes.login} />

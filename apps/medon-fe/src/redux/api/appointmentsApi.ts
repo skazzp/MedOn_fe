@@ -125,7 +125,7 @@ export const {
   useGetActiveAppointmentsQuery,
 } = appointmentsApi;
 
-export const updateQueryData = appointmentsApi.util.updateQueryData;
+export const updateQueryAppointmentsData = appointmentsApi.util.updateQueryData;
 
 export const appointmentsApiReducer = appointmentsApi.reducer;
 export const appointmentsApiMiddleware = appointmentsApi.middleware;

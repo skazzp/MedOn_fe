@@ -55,7 +55,6 @@ export default function Dashboard() {
       </h1>
       {getFutureAppointments?.data?.length ? (
         <>
-          <Attention />
           <AppointmentsScore quantity={getFutureAppointments.data.length} />
           <AppointmentContainer>
             {getFutureAppointments.data.map((appointment) => (
