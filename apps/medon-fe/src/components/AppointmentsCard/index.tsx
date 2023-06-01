@@ -1,8 +1,9 @@
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
-import { Modal } from 'antd';
+import { Modal, Skeleton } from 'antd';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -17,7 +18,15 @@ import { InputAntD } from 'components/common';
 import { useModal } from 'hooks/useModal';
 
 import { getAgeByDateOfBirth } from 'utils/functions/getAgeByDateOfBirth';
-import { roles, timeFormat } from 'utils/constants';
+import {
+  appointmentTimeFormat,
+  roles,
+  routes,
+  timeFormat,
+} from 'utils/constants';
+import { toastConfig } from 'utils/toastConfig';
+
+import { useSendLinkMutation } from 'redux/api/appointmentsApi';
 
 import { addLinkSchema } from 'validation/addLinkDashBoard';
 
@@ -51,20 +60,32 @@ export function AppointmentsCard({
     resolver: yupResolver(addLinkSchema),
   });
 
+  const [sendLink, { isLoading }] = useSendLinkMutation();
   const { hideModal, isVisible, showModal } = useModal(false);
 
-  const addLinkSubmit: SubmitHandler<AddLink> = () => {
-    // TODO: Integration add Link to DashBoard
+  const addLinkSubmit: SubmitHandler<AddLink> = ({ link: linkValue }) => {
+    sendLink({ id, link: linkValue })
+      .unwrap()
+      .then(() => {
+        toast.success(t('dashboard.link-success'), toastConfig);
+        hideModal();
+      })
+      .catch(() => {
+        toast.error(t('dashboard.link-error'), toastConfig);
+      });
   };
+
+  if (isLoading) <Skeleton avatar />;
 
   return (
     <>
       <Time>
         <Clock />
         {dayjs(startTime).format(timeFormat)} -{' '}
-        {dayjs(endTime).format(timeFormat)}
+        {dayjs(endTime).format(timeFormat)} /{' '}
+        {dayjs(startTime).format(appointmentTimeFormat)}
       </Time>
-      <Container isLinkAdded={isLinkAdded} {...rest}>
+      <Container isLinkAdded={isLinkAdded} id={id} {...rest}>
         <Header>
           <Info>
             <Number>
@@ -99,7 +120,7 @@ export function AppointmentsCard({
               {t('appointment.add-link')}
             </Button>
           )}
-          <Link to="#">
+          <Link to={`${routes.patientCard}/${patient?.id}`}>
             <Profile />
           </Link>
         </Header>

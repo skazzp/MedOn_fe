@@ -3,6 +3,7 @@ import { DateLocalizer, Event } from 'react-big-calendar';
 import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 import { useForm } from 'react-hook-form';
@@ -32,6 +33,7 @@ import { checkDates, convertSlotToArray, joinConsecutiveDates } from './utils';
 dayjs.extend(isBetween);
 dayjs.extend(utc);
 dayjs.extend(timezone);
+dayjs.extend(isSameOrAfter);
 
 export function useCalendar() {
   const { t } = useTranslation();
@@ -106,7 +108,7 @@ export function useCalendar() {
   const handleSelectDay = useCallback(
     (event: Event) => {
       setEditIndex(null);
-      if (!dayjs(event.start).isAfter(dayjs())) {
+      if (!dayjs(event.start).isSameOrAfter(dayjs(), 'day')) {
         toast.warning(t('availability.badDate'), toastConfig);
         setSelectedDay(undefined);
       } else {
@@ -120,6 +122,12 @@ export function useCalendar() {
 
   const handleSelectEvent = useCallback(
     (event: Event) => {
+      if (dayjs(event.start).isBefore(dayjs())) {
+        setSelectedDay(undefined);
+
+        return;
+      }
+
       const index = timeSlots.findIndex(
         (object) =>
           dayjs(object.start).isSame(event.start) &&
@@ -147,6 +155,19 @@ export function useCalendar() {
         timeSlots[editIndex] as CalendarSlot
       ).map((e) => ({ startTime: e.startTime, endTime: e.endTime }));
 
+      const startTimes = arrayToRemove.map((e) => dayjs(e.startTime).valueOf());
+
+      const appointmentAlreadySet = availabilityResponse?.data?.filter(
+        (e) =>
+          startTimes.includes(dayjs(e.startTime).valueOf()) && !e.isAvailable
+      );
+
+      if (appointmentAlreadySet?.length) {
+        toast.error(t('availability.appointmentSet'), toastConfig);
+
+        return;
+      }
+
       try {
         await removeSlot({ dto: arrayToRemove, timezone: tZone });
         setSelectedDay(undefined);
@@ -158,6 +179,12 @@ export function useCalendar() {
   };
 
   const handleSubmitEvent = async (data: SelectHours) => {
+    if (dayjs(selectedDay).hour(data.start).minute(0).isBefore(dayjs())) {
+      toast.error(t('availability.badTime'), toastConfig);
+
+      return;
+    }
+
     const title = `${dayjs()
       .hour(data.start)
       .minute(0)
@@ -202,6 +229,18 @@ export function useCalendar() {
             endTime: e.endTime,
           }))
         : [];
+
+    const startTimes = arrayToRemove.map((e) => dayjs(e.startTime).valueOf());
+
+    const appointmentAlreadySet = availabilityResponse?.data?.filter(
+      (e) => startTimes.includes(dayjs(e.startTime).valueOf()) && !e.isAvailable
+    );
+
+    if (appointmentAlreadySet?.length) {
+      toast.error(t('availability.appointmentSet'), toastConfig);
+
+      return;
+    }
 
     const title = `${dayjs()
       .hour(data.start)

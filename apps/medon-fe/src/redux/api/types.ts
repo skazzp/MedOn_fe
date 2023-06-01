@@ -153,6 +153,7 @@ export interface Doctor {
 }
 
 export interface Appointment {
+  id?: number;
   link?: string;
   startTime: Date | string;
   endTime: Date | string;
@@ -160,4 +161,9 @@ export interface Appointment {
   remoteDoctorId: number;
   patientId: number | null;
   timezone?: string;
+}
+
+export interface AppointmentRequest {
+  offset: number;
+  limit: number;
 }

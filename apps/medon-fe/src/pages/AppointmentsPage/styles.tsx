@@ -178,3 +178,12 @@ export const AppointmentContainer = styled.div`
   gap: 1rem;
   margin-bottom: 3rem;
 `;
+
+export const ListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  > button {
+    margin: 0 auto;
+    border: 2px solid ${theme.colors.blue_400};
+  }
+`;

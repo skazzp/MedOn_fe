@@ -14,6 +14,7 @@ import BookAppointment from 'pages/BookAppointment';
 import { DashboardPage } from 'pages/Dashboard';
 import AvailabilityPage from 'pages/AvailabilityPage';
 import AppointmentsPage from 'pages/AppointmentsPage';
+import { HelpPage } from 'pages/HelpPage';
 
 import PatientCard from 'components/PatientCard';
 import { PublicRoute } from 'components/Routes/PublicRoute';
@@ -104,6 +105,10 @@ function App() {
       <Route
         path={routes.updatePassword}
         element={<PrivateRoute component={<UpdatePassword />} />}
+      />
+      <Route
+        path={routes.help}
+        element={<PrivateRoute component={<HelpPage />} />}
       />
       <Route
         path={routes.patients}

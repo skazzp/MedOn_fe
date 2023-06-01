@@ -373,7 +373,9 @@
     "book": "Book an appointment",
     "prefix-doctor": "Dr. ",
     "month": "Month",
-    "list": "List"
+    "list": "List",
+    "link-success": "Link added successfully!",
+    "link-error": "Error occured while adding link!"
   },
   "attention": {
     "call-time-left": "You will have a video-call in 5 minutes with:",
@@ -409,18 +411,23 @@
       "list": "List",
       "month": "Month"
     },
+    "more": "Load More",
     "details": {
       "patient": "Patient:",
       "doctor": "Doctor:",
       "date": "Date:",
-      "starts": "starts at"
+      "starts": "starts at",
+      "local": "Local/Dr.",
+      "remote": "Remote/Dr."
     }
   },
   "availability": {
     "title": "Availability schedule:",
     "message": "Select day or availability slot to start editing",
     "timeUsed": "That time is already used",
+    "appointmentSet": "There is an appointment set on that time",
     "badDate": "Select a day in the future",
+    "badTime": "Select time in the future",
     "validationTime": "Wrong time"
   },
   "select-options": {
@@ -448,7 +455,12 @@
     "title": "Appointment chat",
     "placeholder": "Type a message"
   },
+  "help": {
+    "title": "FAQ"
+  },
   "defaultLanguage": "en-US",
   "not-one": "You are not the chosen one",
-  "load-more":"Load More"
+  "load-more": "Load More",
+  "privacyPolicy": "Privacy policy",
+  "termsConditions": "Terms and conditions"
 }

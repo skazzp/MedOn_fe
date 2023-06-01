@@ -7,12 +7,14 @@ export const Container = styled.div`
 
 export const RegContainer = styled.div`
   padding: 1.6rem 2rem;
+  min-width: 50vw;
+  width: 50%;
 `;
 
 export const FormContainer = styled.div`
   margin-top: 1rem;
   min-width: 27rem;
-  width: 50vw;
+  width: 100%;
   background-color: ${(p) => p.theme.colors.background_main};
   display: flex;
   align-items: center;
@@ -48,4 +50,10 @@ export const Sidebar = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url(${authPicture});
+`;
+
+export const Footer = styled.footer`
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
 `;
