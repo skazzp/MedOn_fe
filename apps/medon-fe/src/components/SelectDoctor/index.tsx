@@ -140,7 +140,10 @@ export default function SelectDoctor({
             >
               <ColumnText>
                 <DoctorPic
-                  src={doctor.photo || doctorImagePlaceholder}
+                  src={
+                    `${process.env.NX_PUBLIC_S3_BUCKET_URL}${doctor.photo}` ||
+                    doctorImagePlaceholder
+                  }
                   alt={`${t('appointment.doctorPicAlt')}`}
                 />
                 {t('appointment.prefix-doctor')}
