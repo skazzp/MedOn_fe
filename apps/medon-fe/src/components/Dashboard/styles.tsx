@@ -36,3 +36,15 @@ export const SkeletonContainer = styled.div`
   height: 100%;
   overflow: hidden;
 `;
+
+export const NotFound = styled.h2`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  color: ${theme.colors.blue_500};
+  font-size: ${theme.fontSizes.xxl};
+  flex: 0.9;
+`;

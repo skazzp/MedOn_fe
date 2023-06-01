@@ -8,9 +8,9 @@ import { useAppSelector } from 'redux/hooks';
 import {
   AppointmentContainer,
   Container,
+  NotFound,
   SkeletonContainer,
 } from 'components/Dashboard/styles';
-import WithoutAppointments from 'components/WithoutAppointments';
 import Attention from 'components/common/Attention';
 import AppointmentsScore from 'components/AppointmentsScore';
 import Button from 'components/Button';
@@ -52,32 +52,32 @@ export default function Dashboard() {
         {t('dashboard.welcome')}, {t('dashboard.prefix-doctor')}
         {`${user.lastName || 'Anonymous'}`}
       </h1>
+      <Attention />
+      <AppointmentsScore
+        quantity={Number(getFutureAppointments?.data?.length)}
+      />
       {getFutureAppointments?.data?.length ? (
-        <>
-          <Attention />
-          <AppointmentsScore quantity={getFutureAppointments.data.length} />
-          <AppointmentContainer>
-            {getFutureAppointments.data.map((appointment) => (
-              <AppointmentsCard
-                key={appointment.id}
-                role={user.role?.toString()}
-                isLinkAdded={appointment.link === ''}
-                {...appointment}
-              />
-            ))}
-            {getFutureAppointments.data.length === limit && (
-              <Button
-                bgcolor={theme.colors.white}
-                textcolor={theme.colors.blue_400}
-                onClick={() => setLimit((prev) => prev + defaultMore)}
-              >
-                {t('appointments.more')}
-              </Button>
-            )}
-          </AppointmentContainer>
-        </>
+        <AppointmentContainer>
+          {getFutureAppointments?.data?.map((appointment) => (
+            <AppointmentsCard
+              key={appointment.id}
+              role={user.role?.toString()}
+              isLinkAdded={appointment.link === ''}
+              {...appointment}
+            />
+          ))}
+          {getFutureAppointments?.data?.length === limit && (
+            <Button
+              bgcolor={theme.colors.white}
+              textcolor={theme.colors.blue_400}
+              onClick={() => setLimit((prev) => prev + defaultMore)}
+            >
+              {t('appointments.more')}
+            </Button>
+          )}
+        </AppointmentContainer>
       ) : (
-        <WithoutAppointments />
+        <NotFound>{t('dashboard.no-appointments')}</NotFound>
       )}
     </Container>
   );
