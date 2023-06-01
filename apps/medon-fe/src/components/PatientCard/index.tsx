@@ -17,7 +17,6 @@ import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 
 import { Container, Top, SkeletonContainer, EditBtn } from './styles';
 import { useAppSelector } from 'redux/hooks';
-import { useGetActiveAppointmentByDoctorIdQuery } from 'redux/api/appointmentsApi';
 
 export default function PatientCard() {
   const [editInfo, setEditInfo] = useState<boolean>(false);
@@ -33,22 +32,6 @@ export default function PatientCard() {
   );
 
   const user = useAppSelector(getUserSelector);
-
-  const { data: activeAppointment } = useGetActiveAppointmentByDoctorIdQuery(
-    user.id
-    //TODO: remove auto-fetching when notification-socket feature will be integrated
-    // { pollingInterval: 6000 }
-  );
-
-  useEffect(() => {
-    if (activeAppointment && activeAppointment.data && id) {
-      if (
-        activeAppointment.data.patientId === Number(id) &&
-        activeAppointment.data.id
-      )
-        setActiveAppointmentId(activeAppointment.data.id);
-    } else setActiveAppointmentId(null);
-  }, [activeAppointment, id]);
 
   const { history, onSubmitMessage, isHistoryReady, reply } = useSocket({
     appointmentId: activeAppointmentId,
@@ -88,7 +71,7 @@ export default function PatientCard() {
       ) : (
         <NewPatientForm patient={patient?.data} setEditInfo={setEditInfo} />
       )}
-      {activeAppointmentId && isHistoryReady && (
+      {isHistoryReady && (
         <Chat
           onSubmitMessage={onSubmitMessage}
           history={history}

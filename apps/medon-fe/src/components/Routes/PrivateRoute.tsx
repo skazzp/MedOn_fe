@@ -8,6 +8,7 @@ import { getTokenSelector } from 'redux/features/userSlice/userSelectors';
 import { localDoctorRoutes, routes } from 'utils/constants/routes';
 import { roles } from 'utils/constants/roles';
 import Container from './styles';
+import { useGetActiveAppointmentsQuery } from 'redux/api/appointmentsApi';
 
 interface IProps {
   component: React.ReactElement;
@@ -19,6 +20,13 @@ export const PrivateRoute = ({ component }: IProps) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { data: response } = useGetUserQuery(null, { skip: !isLoggedIn });
+  const { data: activeAppointments } = useGetActiveAppointmentsQuery({
+    userId: Number(response?.data.id),
+  });
+
+  console.log(activeAppointments);
+
+  useEffect(() => {}, [response]);
 
   useEffect(() => {
     if (response) {
