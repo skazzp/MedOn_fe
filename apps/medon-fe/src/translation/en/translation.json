@@ -369,6 +369,7 @@
     "latest": "Latest Appointments",
     "show": "Full list",
     "appointments": "Appointments:",
+    "no-appointments": "You don't have future appointments",
     "manage": "Manage Availability",
     "book": "Book an appointment",
     "prefix-doctor": "Dr. ",
