@@ -1,4 +1,5 @@
 import { Dayjs } from 'dayjs';
+import { Filter, ShowAll } from 'interfaces/Filter';
 import { Gender } from 'utils/constants';
 
 export interface IUser {
@@ -163,7 +164,17 @@ export interface Appointment {
   timezone?: string;
 }
 
-export interface AppointmentRequest {
+export interface AppointmentFutureRequest {
   offset: number;
   limit: number;
+}
+
+export interface AppointmentListRequest {
+  page: number;
+  filter: Filter;
+  showAll?: ShowAll;
+}
+
+export interface AppointmentCalendarRequest {
+  showAll?: ShowAll;
 }
