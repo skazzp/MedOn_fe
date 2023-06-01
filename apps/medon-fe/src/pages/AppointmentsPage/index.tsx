@@ -20,12 +20,7 @@ import {
 import { useAppSelector } from 'redux/hooks';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 
-import {
-  timeFormat,
-  dateInputFormat,
-  defaultLimit,
-  roles,
-} from 'utils/constants';
+import { defaultLimit, roles } from 'utils/constants';
 import { getEventPropGetter } from 'utils/functions/getEventPropGetter';
 import { options } from 'utils/constants/options/appointmentFilter';
 
@@ -37,10 +32,6 @@ import {
   ViewItem,
   Title,
   StyledCalendar,
-  StyledModal,
-  Details,
-  ProfileIcon,
-  Entity,
   AppointmentContainer,
   ListContainer,
   StyledSelect,
@@ -52,6 +43,7 @@ import {
   NotFound,
 } from './styles';
 import { useGetCalendarEvents } from './hooks';
+import { AppointmentsPageModal } from 'pages/AppointmentsPageModal';
 
 const AppointmentsPage = () => {
   const [isMonthView, setIsMonthView] = useState<boolean>(false);
@@ -243,37 +235,11 @@ const AppointmentsPage = () => {
               onSelectEvent={handleEventClick}
             />
             <Legend />
-            <StyledModal
-              title={selectedEvent?.title}
-              centered
-              open={isVisible}
-              onOk={hideModal}
-              onCancel={hideModal}
-            >
-              <Details>
-                <span>{t('appointments.details.patient')}</span>
-                <Entity>
-                  <p>{selectedEvent?.resource?.patient}</p>
-                  <ProfileIcon />
-                </Entity>
-                <span>{t('appointments.details.doctor')}</span>
-                <p>
-                  {t('appointments.details.local')}{' '}
-                  {selectedEvent?.resource?.localDoctor}
-                </p>
-                <span>{t('appointments.details.doctor')}</span>
-                <p>
-                  {t('appointments.details.remote')}{' '}
-                  {selectedEvent?.resource?.remoteDoctor}
-                </p>
-                <span>{t('appointments.details.date')}</span>
-                <p>
-                  {dayjs(selectedEvent?.start).format(dateInputFormat)}{' '}
-                  {t('appointments.details.starts')}{' '}
-                  {dayjs(selectedEvent?.start).format(timeFormat)}
-                </p>
-              </Details>
-            </StyledModal>
+            <AppointmentsPageModal
+              selectedEvent={selectedEvent}
+              hideModal={hideModal}
+              isVisible={isVisible}
+            />
           </CalendarContainer>
         ) : (
           <Skeleton />
