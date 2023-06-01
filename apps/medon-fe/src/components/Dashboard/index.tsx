@@ -1,9 +1,9 @@
 import { Skeleton } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
-import { useAppSelector } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import {
   AppointmentContainer,
@@ -19,6 +19,7 @@ import { AppointmentsCard } from 'components/AppointmentsCard';
 import { useGetFutureAppointmentsQuery } from 'redux/api/appointmentsApi';
 
 import { defaultLimit, defaultMore, defaultOffset } from 'utils/constants';
+import { subscribeToAppointments } from 'redux/features/appointmentsSlice/appointmentsSlice';
 
 // TODO:  add filter to localDoctor and notification => Attention
 
@@ -26,6 +27,13 @@ export default function Dashboard() {
   const [limit, setLimit] = useState<number>(defaultLimit);
 
   const user = useAppSelector(getUserSelector);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (user.id) dispatch(subscribeToAppointments(user.id));
+  }, [user]);
+
   const { t } = useTranslation();
   const { data: getFutureAppointments, isLoading } =
     useGetFutureAppointmentsQuery({

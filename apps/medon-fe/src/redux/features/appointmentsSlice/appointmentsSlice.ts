@@ -5,48 +5,31 @@ import { AppDispatch, RootState } from 'redux/store';
 
 interface IAppointmentsState {
   appointments: Appointment[];
-  socket: Socket | null;
+  isConnected: boolean;
 }
 
-const init: IAppointmentsState = { appointments: [], socket: null };
+const init: IAppointmentsState = { appointments: [], isConnected: false };
 
 export const subscribeToAppointments = createAsyncThunk<
-  Socket,
-  number,
+  boolean,
+  number | null,
   { dispatch: AppDispatch; state: RootState }
 >(
   'notification/subscribeToAppointments',
-  async (userId: number, { dispatch, getState }) => {
-    const { socket } = getState().appointments;
+  async (userId: number | null, { dispatch, getState }) => {
+    const { isConnected } = getState().appointments;
+    if (!isConnected) {
+      console.log('Socket connection');
+      const client = io(`${process.env.NX_API_URL}/notification`);
 
-    if (socket) return socket;
-
-    const client = io(`${process.env.NX_API_URL}/notification`);
-
-    client.emit('subscribeToAppointments', userId);
-
-    client.on('appointments', (data) => {
-      dispatch(setAppointments(data));
-    });
-
-    return client;
+      client.emit('subscribeToAppointments', userId);
+      client.on('appointments', (data) => {
+        dispatch(setAppointments(data));
+      });
+    }
+    return true;
   }
 );
-
-export const unsubscribeToAppointments = createAsyncThunk<
-  null,
-  number,
-  { dispatch: AppDispatch; state: RootState }
->('notification/subscribeToAppointments', async (_, { dispatch, getState }) => {
-  const { socket } = getState().appointments;
-
-  if (socket) {
-    socket.removeAllListeners();
-    socket.close();
-  }
-
-  return null;
-});
 
 export const appointmentsSlice = createSlice({
   initialState: init,
@@ -58,15 +41,11 @@ export const appointmentsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(subscribeToAppointments.fulfilled, (state, action) => {
-      state.socket = action.payload;
+      state.isConnected = action.payload;
     });
 
     builder.addCase(subscribeToAppointments.rejected, (state, action) => {
-      state.socket = null;
-    });
-
-    builder.addCase(unsubscribeToAppointments.fulfilled, (state, action) => {
-      state.socket = action.payload;
+      state.isConnected = false;
     });
   },
 });

@@ -35,14 +35,13 @@ export default function PatientCard() {
   const user = useAppSelector(getUserSelector);
 
   const { data: activeAppointment } = useGetActiveAppointmentByDoctorIdQuery(
-    user.id,
+    user.id
     //TODO: remove auto-fetching when notification-socket feature will be integrated
-    { pollingInterval: 6000 }
+    // { pollingInterval: 6000 }
   );
 
   useEffect(() => {
     if (activeAppointment && activeAppointment.data && id) {
-      console.log(JSON.stringify(activeAppointment));
       if (
         activeAppointment.data.patientId === Number(id) &&
         activeAppointment.data.id
