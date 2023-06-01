@@ -1,11 +1,17 @@
+import { Modal, Select } from 'antd';
+import { Calendar } from 'react-big-calendar';
 import styled from 'styled-components';
-import { theme } from 'styles/theme';
-import { Icon } from 'components/AppointmentsScore/styles';
+
 import { ReactComponent as InfoIcon } from 'assets/images/dashboard/User.svg';
 import { ReactComponent as Profile } from 'assets/svgs/profile_listcard.svg';
+import { ReactComponent as RightArrow } from 'assets/svgs/appointments/arrowRight.svg';
+import { ReactComponent as LeftArrow } from 'assets/svgs/appointments/arrowLeft.svg';
+
+import { Icon } from 'components/AppointmentsScore/styles';
+
 import { StyledDivProps } from 'pages/AppointmentsPage/types';
-import { Calendar } from 'react-big-calendar';
-import { Modal, Select } from 'antd';
+
+import { theme } from 'styles/theme';
 
 export const Container = styled.div`
   font-family: ${theme.fontFamily.sf_pro_text};
@@ -224,6 +230,23 @@ export const CalendarContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+`;
+
+export const StyledRightArror = styled(RightArrow)`
+  fill: ${theme.colors.gray_700};
+`;
+
+export const StyledLeftArrow = styled(LeftArrow)`
+  fill: ${theme.colors.gray_700};
+`;
+
+export const NotFound = styled.h3`
+  display: flex;
+  justify-content: center;
+  width: calc(100% - 2rem);
+  padding: 5rem 0;
+  color: ${theme.colors.blue_500};
+  font-size: ${theme.fontSizes.xxl};
 `;
 
 export const UserIcon = styled(Icon).attrs(() => ({

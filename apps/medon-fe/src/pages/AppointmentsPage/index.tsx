@@ -27,6 +27,7 @@ import {
   roles,
 } from 'utils/constants';
 import { getEventPropGetter } from 'utils/functions/getEventPropGetter';
+import { options } from 'utils/constants/options/appointmentFilter';
 
 import {
   Container,
@@ -46,6 +47,9 @@ import {
   Buttons,
   SubHeader,
   CalendarContainer,
+  StyledRightArror,
+  StyledLeftArrow,
+  NotFound,
 } from './styles';
 import { useGetCalendarEvents } from './hooks';
 
@@ -126,7 +130,7 @@ const AppointmentsPage = () => {
                 }}
                 autoFocus
               >
-                Today
+                {t('appointments.buttons.today')}
               </Button>
               <Button
                 bgcolor={theme.colors.gray_100}
@@ -137,7 +141,7 @@ const AppointmentsPage = () => {
                   setFilter(Filter.future);
                 }}
               >
-                Future
+                {t('appointments.buttons.future')}
               </Button>
               <Button
                 bgcolor={theme.colors.gray_100}
@@ -148,7 +152,7 @@ const AppointmentsPage = () => {
                   setFilter(Filter.past);
                 }}
               >
-                Past
+                {t('appointments.buttons.past')}
               </Button>
             </Buttons>
             <Buttons>
@@ -158,7 +162,7 @@ const AppointmentsPage = () => {
                 textcolor={theme.colors.gray_700}
                 onClick={() => handleSetPage(page - 1)}
               >
-                {'<'}
+                <StyledLeftArrow />
               </Button>
               <Button
                 bgcolor={theme.colors.gray_100}
@@ -166,7 +170,7 @@ const AppointmentsPage = () => {
                 type="button"
                 onClick={() => handleSetPage(page + 1)}
               >
-                {'>'}
+                <StyledRightArror />
               </Button>
             </Buttons>
           </>
@@ -186,10 +190,7 @@ const AppointmentsPage = () => {
       <SubHeader>
         {user.role === roles.local && (
           <StyledSelect
-            options={[
-              { label: 'All', value: ShowAll.true },
-              { label: 'Mine', value: ShowAll.false },
-            ]}
+            options={options}
             defaultValue={ShowAll.false}
             onChange={(value) => setShowAll(value as ShowAll)}
           />
@@ -199,13 +200,19 @@ const AppointmentsPage = () => {
         <ListContainer>
           {!isListFetching ? (
             <AppointmentContainer>
-              {listAppointments?.data?.slice(0, limit).map((appointment) => (
-                <AppointmentsCard
-                  key={appointment.id}
-                  isLinkAdded
-                  {...appointment}
-                />
-              ))}
+              {listAppointments?.data?.length ? (
+                listAppointments?.data
+                  ?.slice(0, limit)
+                  .map((appointment) => (
+                    <AppointmentsCard
+                      key={appointment.id}
+                      isLinkAdded
+                      {...appointment}
+                    />
+                  ))
+              ) : (
+                <NotFound>{t('appointments.not-found')}</NotFound>
+              )}
             </AppointmentContainer>
           ) : (
             <Skeleton />
