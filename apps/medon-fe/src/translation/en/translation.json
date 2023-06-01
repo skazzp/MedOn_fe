@@ -369,6 +369,7 @@
     "latest": "Latest Appointments",
     "show": "Full list",
     "appointments": "Appointments:",
+    "no-appointments": "You don't have future appointments",
     "manage": "Manage Availability",
     "book": "Book an appointment",
     "prefix-doctor": "Dr. ",
@@ -456,7 +457,7 @@
     "placeholder": "Type a message"
   },
   "help": {
-      "title": "FAQ"
+    "title": "FAQ"
   },
   "defaultLanguage": "en-US",
   "not-one": "You are not the chosen one",

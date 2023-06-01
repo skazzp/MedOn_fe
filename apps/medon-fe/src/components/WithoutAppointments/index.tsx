@@ -7,7 +7,6 @@ import {
   Score,
   UserIcon,
   Block,
-  IconCircle,
   Manage,
   IconUnion,
   Wrapper,
@@ -29,7 +28,6 @@ export function WithoutAppointments() {
       </Score>
       <Block>
         <Wrapper>
-          <IconCircle />
           {user.role === roles.remote ? (
             <TextWrap>
               <Manage to={routes.availability}>
