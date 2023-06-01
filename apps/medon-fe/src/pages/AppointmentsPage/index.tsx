@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { dayjsLocalizer, Views, Event } from 'react-big-calendar';
 
 import Button from 'components/Button';
+import { Legend } from 'components/Legend';
 import { AppointmentsCard } from 'components/AppointmentsCard';
 
 import { useModal } from 'hooks/useModal';
@@ -16,8 +17,16 @@ import {
   useGetAllCalendarAppointmentsQuery,
   useGetAllListAppointmentsQuery,
 } from 'redux/api/appointmentsApi';
+import { useAppSelector } from 'redux/hooks';
+import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 
-import { timeFormat, dateInputFormat, defaultLimit } from 'utils/constants';
+import {
+  timeFormat,
+  dateInputFormat,
+  defaultLimit,
+  roles,
+} from 'utils/constants';
+import { getEventPropGetter } from 'utils/functions/getEventPropGetter';
 
 import {
   Container,
@@ -35,8 +44,8 @@ import {
   ListContainer,
   StyledSelect,
   Buttons,
-  ChoosePage,
   SubHeader,
+  CalendarContainer,
 } from './styles';
 import { useGetCalendarEvents } from './hooks';
 
@@ -44,18 +53,19 @@ const AppointmentsPage = () => {
   const [isMonthView, setIsMonthView] = useState<boolean>(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [filter, setFilter] = useState<Filter>(Filter.today);
-  const [showAll, setShowAll] = useState<ShowAll>(ShowAll.true);
+  const [showAll, setShowAll] = useState<ShowAll>(ShowAll.false);
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(defaultLimit);
 
   const { t } = useTranslation();
   const theme = useTheme();
 
-  const { data: listAppointments } = useGetAllListAppointmentsQuery({
-    filter,
-    showAll,
-    page,
-  });
+  const { data: listAppointments, isFetching: isListFetching } =
+    useGetAllListAppointmentsQuery({
+      filter,
+      showAll,
+      page,
+    });
 
   const { data: calendarAppointments, isFetching: isCalendarFetching } =
     useGetAllCalendarAppointmentsQuery(
@@ -68,6 +78,7 @@ const AppointmentsPage = () => {
     );
 
   const events = useGetCalendarEvents(calendarAppointments?.data);
+  const user = useAppSelector(getUserSelector);
   const { hideModal, isVisible, showModal } = useModal(false);
 
   const localizer = dayjsLocalizer(dayjs);
@@ -102,7 +113,6 @@ const AppointmentsPage = () => {
               : listAppointments?.data?.length}
           </span>
         </Title>
-
         {!isMonthView && (
           <>
             <Buttons>
@@ -174,26 +184,32 @@ const AppointmentsPage = () => {
         </View>
       </Header>
       <SubHeader>
-        <StyledSelect
-          options={[
-            { label: 'All', value: 'true' },
-            { label: 'Mine', value: 'false' },
-          ]}
-          defaultValue={'true'}
-          onChange={(value) => setShowAll(value as ShowAll)}
-        />
+        {user.role === roles.local && (
+          <StyledSelect
+            options={[
+              { label: 'All', value: ShowAll.true },
+              { label: 'Mine', value: ShowAll.false },
+            ]}
+            defaultValue={ShowAll.false}
+            onChange={(value) => setShowAll(value as ShowAll)}
+          />
+        )}
       </SubHeader>
       {!isMonthView && (
         <ListContainer>
-          <AppointmentContainer>
-            {listAppointments?.data?.slice(0, limit).map((appointment) => (
-              <AppointmentsCard
-                key={appointment.id}
-                isLinkAdded
-                {...appointment}
-              />
-            ))}
-          </AppointmentContainer>
+          {!isListFetching ? (
+            <AppointmentContainer>
+              {listAppointments?.data?.slice(0, limit).map((appointment) => (
+                <AppointmentsCard
+                  key={appointment.id}
+                  isLinkAdded
+                  {...appointment}
+                />
+              ))}
+            </AppointmentContainer>
+          ) : (
+            <Skeleton />
+          )}
           {Number(listAppointments?.data?.length) > limit && (
             <Button
               bgcolor={theme.colors.white}
@@ -207,17 +223,19 @@ const AppointmentsPage = () => {
       )}
       {isMonthView &&
         (!isCalendarFetching ? (
-          <>
+          <CalendarContainer>
             <StyledCalendar
               defaultView={Views.MONTH}
               events={events}
               localizer={localizer}
               views={[Views.MONTH]}
               selectable
+              eventPropGetter={getEventPropGetter}
               popup
               timeslots={1}
               onSelectEvent={handleEventClick}
             />
+            <Legend />
             <StyledModal
               title={selectedEvent?.title}
               centered
@@ -249,7 +267,7 @@ const AppointmentsPage = () => {
                 </p>
               </Details>
             </StyledModal>
-          </>
+          </CalendarContainer>
         ) : (
           <Skeleton />
         ))}
