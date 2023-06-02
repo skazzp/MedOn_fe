@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
-import { Button, Input, Spin } from 'antd';
+import { Input, Spin } from 'antd';
 import { Link } from 'components/Link';
 import PatientListCard from 'components/PatientListCard';
 import { ReactComponent as Plus } from 'assets/svgs/plus_listcard.svg';
@@ -10,7 +10,7 @@ import { defaultLimit, roles, routes } from 'utils/constants';
 import { useDebounce } from 'hooks/useDebounce';
 import { IPatient } from 'interfaces/patients';
 import { useAppSelector } from 'redux/hooks';
-import { Choose, Content, Wrapper, SpinWrapper } from './styles';
+import { Choose, Content, Wrapper, SpinWrapper, StyledButton } from './styles';
 
 export default function PatientsList() {
   const theme = useTheme();
@@ -85,16 +85,15 @@ export default function PatientsList() {
                 />
               ))}
               {data.total > page * defaultLimit && (
-                <Button
+                <StyledButton
                   type="primary"
                   size="large"
-                  style={{ width: '200px' }}
                   onClick={() => {
                     setPage((prev) => prev + 1);
                   }}
                 >
                   {t('patient-list.load-more')}
-                </Button>
+                </StyledButton>
               )}
             </>
           ) : (

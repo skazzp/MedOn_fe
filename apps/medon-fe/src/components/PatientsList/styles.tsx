@@ -1,3 +1,4 @@
+import { Button } from 'antd';
 import styled from 'styled-components';
 
 export const Content = styled.div`
@@ -58,4 +59,10 @@ export const SpinWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const StyledButton = styled(Button)`
+  width: 200px;
+  font-size: ${({ theme }) => theme.fontSizes.md} !important;
+  font-family: ${({ theme }) => theme.fontFamily.sf_pro_text} !important;
 `;
