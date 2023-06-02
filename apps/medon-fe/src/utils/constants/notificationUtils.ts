@@ -1,7 +1,5 @@
-export const getTimeDifference = (time: Date | string): string => {
-  const seconds = Math.trunc(
-    (new Date(time).getTime() - new Date().getTime()) / 1000
-  );
+export const formatTimeDifference = (time: Date | string): string => {
+  const seconds = getTimeDifference(time);
 
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
@@ -11,4 +9,8 @@ export const getTimeDifference = (time: Date | string): string => {
     remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds;
 
   return minutesString + ':' + secondsString;
+};
+
+export const getTimeDifference = (time: Date | string): number => {
+  return Math.trunc((new Date(time).getTime() - new Date().getTime()) / 1000);
 };

@@ -15,6 +15,7 @@ import { roles } from 'utils/constants/roles';
 
 import { Container, Wrapper } from './styles';
 import { useNotification } from './hooks/useNotification';
+import { getTimeDifference } from 'utils/constants';
 
 interface IProps {
   component: React.ReactElement;
@@ -57,12 +58,14 @@ export const PrivateRoute = ({ component }: IProps) => {
     <Container>
       <Navigation />
       <Wrapper>
-        {activeAppointments?.data?.[0] && response?.data && (
-          <Attention
-            appointment={activeAppointments.data[0]}
-            user={response.data}
-          />
-        )}
+        {activeAppointments?.data?.[0] &&
+          response?.data &&
+          getTimeDifference(activeAppointments.data[0].startTime) < 5 * 60 && (
+            <Attention
+              appointment={activeAppointments.data[0]}
+              user={response.data}
+            />
+          )}
         {component}
       </Wrapper>
     </Container>

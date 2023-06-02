@@ -7,4 +7,4 @@ export * from './routes';
 export * from './toast';
 export * from './urls';
 export * from './pagination';
-export * from './getTimeDifference';
+export * from './notificationUtils';

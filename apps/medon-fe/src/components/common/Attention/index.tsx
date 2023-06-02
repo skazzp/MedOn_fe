@@ -9,7 +9,7 @@ import {
   Name,
   InfoButton,
 } from 'components/common/Attention/styles';
-import { roles, routes, getTimeDifference } from 'utils/constants';
+import { roles, routes, formatTimeDifference } from 'utils/constants';
 import { Appointment, IUser } from 'redux/api/types';
 import { useEffect, useState } from 'react';
 
@@ -23,19 +23,22 @@ export function Attention({ appointment, user }: IAttentionProps) {
   const { t } = useTranslation();
 
   const [time, setTime] = useState<string>(
-    getTimeDifference(appointment.startTime)
+    formatTimeDifference(appointment.startTime)
   );
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTime(getTimeDifference(appointment.startTime));
+      setTime(formatTimeDifference(appointment.startTime));
     }, 1000);
     return () => {
       clearInterval(interval);
     };
   }, []);
 
-  const title = `You will have an appointment in ${time} minutes with:`;
+  let title: string;
+  if (new Date(appointment.startTime) < new Date()) {
+    title = 'Appointment has already started with:';
+  } else title = `You will have an appointment in ${time} minutes with:`;
 
   const anotherDoctorLastName =
     user.role === roles.local
