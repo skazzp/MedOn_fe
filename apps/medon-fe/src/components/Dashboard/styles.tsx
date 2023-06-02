@@ -7,7 +7,7 @@ export const Container = styled.div`
   justify-content: flex-start;
   width: calc(100% - 100px);
   margin: 0 auto;
-  min-height: 100vh;
+  min-height: 80vh;
   height: 100%;
   font-family: ${theme.fontFamily.sf_pro_text};
 `;
@@ -35,4 +35,16 @@ export const SkeletonContainer = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+`;
+
+export const NotFound = styled.h2`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  color: ${theme.colors.blue_500};
+  font-size: ${theme.fontSizes.xxl};
+  flex: 0.9;
 `;

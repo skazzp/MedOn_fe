@@ -1,3 +1,4 @@
+
 export const FIRST_NAME = 'firstName';
 export const LAST_NAME = 'lastName';
 export const PASSWORD = 'password';
@@ -20,6 +21,7 @@ interface IFormFields {
   city: 'city';
   timezone: 'timezone';
   birthday: 'birthday';
+  agreement: 'agreement';
 }
 
 export const formFields: IFormFields = {
@@ -33,4 +35,5 @@ export const formFields: IFormFields = {
   city: 'city',
   timezone: 'timezone',
   birthday: 'birthday',
+  agreement: 'agreement',
 };

@@ -80,12 +80,34 @@ export const BtnContainer = styled.div`
 `;
 
 export const Btn = styled(Button)`
-  background: ${theme.colors.btnGradient};
+  background: ${theme.colors.btnGradient} !important;
   font-family: ${theme.fontFamily.sf_pro_text};
   color: ${theme.colors.white};
   min-width: 10rem;
+  transition: all 0.3s ease-in;
+
+  &:disabled {
+    background: ${theme.colors.gray_500} !important;
+  }
 `;
 
 export const BackBtn = styled(Btn)`
-  background: ${theme.colors.black};
+  background: ${theme.colors.black} !important;
+
+  &:hover {
+    background: ${theme.colors.btnGradient} !important;
+  }
+`;
+
+export const CheckboxText = styled.p`
+  font-size: 14px;
+  line-height: 20px;
+  font-family: ${theme.fontFamily.sf_pro_text};
+  display: inline;
+`;
+
+export const CheckboxWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;

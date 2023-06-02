@@ -4,12 +4,11 @@ import styled from 'styled-components';
 
 export const FormContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   flex-direction: column;
   margin: 0 auto;
   height: 100%;
   align-items: flex-start;
-  margin-left: 20vw;
 `;
 
 export const Form = styled.form`

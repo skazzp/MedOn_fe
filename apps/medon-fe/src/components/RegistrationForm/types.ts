@@ -12,4 +12,5 @@ export interface FormData {
   country: string;
   city: string;
   timezone: string;
+  agreement: boolean;
 }
