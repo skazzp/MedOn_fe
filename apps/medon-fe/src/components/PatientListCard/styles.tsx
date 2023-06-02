@@ -2,20 +2,23 @@ import styled from 'styled-components';
 
 import { ReactComponent as Profile } from 'assets/svgs/profile_listcard.svg';
 import { ReactComponent as Camera } from 'assets/images/Camera.svg';
+import { Link } from 'react-router-dom';
 
-export const Container = styled.section`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  border: 1px solid ${({ theme }) => theme.colors.gray_300};
+  border: 2px solid ${({ theme }) => theme.colors.blue_250};
+  background: ${({ theme }) => theme.colors.blue_200};
   border-radius: 0.5rem;
+  min-height: 100px;
 `;
 
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 5rem;
+  margin-left: 3rem;
   padding: 0.5rem 0;
 `;
 
@@ -23,30 +26,37 @@ export const Text = styled.div`
   display: flex;
   gap: 1rem;
   align-items: center;
-  & > span:first-child {
-    color: ${({ theme }) => theme.colors.blue_500};
-    font-size: ${({ theme }) => theme.fontSizes.sm};
-    font-weight: 700;
-  }
+
   & > span:last-child {
     color: ${({ theme }) => theme.colors.black};
-    font-size: ${({ theme }) => theme.fontSizes.sm};
+    font-size: ${({ theme }) => theme.fontSizes.md};
     font-weight: 500;
   }
+
   div {
     display: flex;
     align-items: center;
     margin-left: 20vw;
   }
+
   p {
     margin: 0 10px 0 0;
   }
-  span {
-    color: ${({ theme }) => theme.colors.blue_500};
-  }
+
   a {
     text-decoration: none;
   }
+`;
+
+export const StyledLink = styled(Link)`
+  color: ${({ theme }) => theme.colors.blue_500};
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
+`;
+
+export const GenderText = styled.span`
+  color: ${({ theme }) => theme.colors.black};
+  text-transform: capitalize;
 `;
 
 export const Options = styled.div`
@@ -70,6 +80,7 @@ export const ProfileIcon = styled(Profile)`
   align-items: center;
   width: 1.5rem;
   height: 1.5rem;
+
   &:hover {
     filter: brightness(1.2);
   }

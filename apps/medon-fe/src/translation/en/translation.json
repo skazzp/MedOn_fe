@@ -121,7 +121,8 @@
     "no-data": "No patients are registered",
     "load-more": "Load More",
     "overview": "Overview: ",
-    "preffix-remote": "Remote "
+    "preffix-remote": "Remote ",
+    "no-overview": "No information available"
   },
   "patient-card": {
     "button": "Add Patient Note +",
@@ -456,7 +457,7 @@
     "placeholder": "Type a message"
   },
   "help": {
-      "title": "FAQ"
+    "title": "FAQ"
   },
   "defaultLanguage": "en-US",
   "not-one": "You are not the chosen one",

@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
-import { Input, Pagination, Spin } from 'antd';
+import { Button, Input, Spin } from 'antd';
 import { Link } from 'components/Link';
 import PatientListCard from 'components/PatientListCard';
 import { ReactComponent as Plus } from 'assets/svgs/plus_listcard.svg';
 import { useGetPatientsQuery } from 'redux/api/patientApi';
-import {
-  defaultPageSize,
-  defaultPage,
-  pageSizeOptions,
-} from 'utils/constants/pagination';
-import { roles, routes } from 'utils/constants';
+import { defaultLimit, roles, routes } from 'utils/constants';
 import { useDebounce } from 'hooks/useDebounce';
+import { IPatient } from 'interfaces/patients';
 import { useAppSelector } from 'redux/hooks';
 import { Choose, Content, Wrapper, SpinWrapper } from './styles';
 
@@ -20,7 +16,7 @@ export default function PatientsList() {
   const theme = useTheme();
   const { t } = useTranslation();
   const [page, setPage] = useState<number>(1);
-  const [limit, setLimit] = useState<number>(5);
+  const [patients, setPatients] = useState<IPatient[]>([]);
   const [searchPhrase, setSearchPhrase] = useState<string>('');
   const debouncedSearch = useDebounce<string>(searchPhrase);
 
@@ -28,14 +24,20 @@ export default function PatientsList() {
 
   const { data, isFetching } = useGetPatientsQuery({
     page,
-    limit,
+    limit: defaultLimit,
     name: debouncedSearch,
   });
 
-  function handlePaginationChange(pageNumber: number, pageSize: number): void {
-    setPage(pageNumber);
-    setLimit(pageSize);
-  }
+  useEffect(() => {
+    setPage(1);
+    setPatients([]);
+  }, [searchPhrase]);
+
+  useEffect(() => {
+    if (data) {
+      setPatients((prev) => prev.concat(data?.patients));
+    }
+  }, [data]);
 
   return (
     <Content>
@@ -44,10 +46,10 @@ export default function PatientsList() {
         <Input.Search
           placeholder={`${t('patient-list.placeholder')}`}
           size="large"
+          allowClear
           loading={isFetching}
           value={searchPhrase}
           onChange={(e) => setSearchPhrase(e.target.value)}
-          onBlur={() => setSearchPhrase('')}
         />
         {role === roles.local ? (
           <Link
@@ -68,7 +70,7 @@ export default function PatientsList() {
         <Wrapper>
           {data && data.total > 0 ? (
             <>
-              {data.patients.map((patient) => (
+              {patients.map((patient) => (
                 <PatientListCard
                   id={patient.id}
                   key={patient.id}
@@ -82,16 +84,18 @@ export default function PatientsList() {
                   time={''}
                 />
               ))}
-              <Pagination
-                current={page}
-                pageSize={limit}
-                total={data.total}
-                showSizeChanger={true}
-                defaultCurrent={defaultPage}
-                defaultPageSize={defaultPageSize}
-                pageSizeOptions={pageSizeOptions}
-                onChange={handlePaginationChange}
-              />
+              {data.total > page * defaultLimit && (
+                <Button
+                  type="primary"
+                  size="large"
+                  style={{ width: '200px' }}
+                  onClick={() => {
+                    setPage((prev) => prev + 1);
+                  }}
+                >
+                  {t('patient-list.load-more')}
+                </Button>
+              )}
             </>
           ) : (
             <h4>{t('patient-list.no-data')}</h4>

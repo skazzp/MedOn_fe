@@ -20,7 +20,7 @@ export const Choose = styled.div`
   flex-shrink: 1;
   display: flex;
   width: 100%;
-  gap: 4rem;
+  gap: 2rem;
   margin-bottom: 4rem;
   > a {
     display: flex;
@@ -39,6 +39,7 @@ export const Choose = styled.div`
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100%;
   gap: 3rem;
