@@ -32,7 +32,6 @@ import {
   positionPrevious,
 } from 'utils/constants/position';
 import { toastConfig } from 'utils/toastConfig';
-import { Spin } from 'antd';
 
 function Steps(props: StepsProps) {
   const {
@@ -89,15 +88,21 @@ function Steps(props: StepsProps) {
   useEffect(() => {
     if (selectedDate && data && data.data) {
       const selectedDay = dayjs(selectedDate).startOf('day');
-      const SlotIsAvailable = data.data.some((slot) => {
+      const currentTime = dayjs();
+
+      const areAnySlotsAvailable = data.data.some((slot) => {
         const slotStartTime = dayjs(slot.startTime);
         const slotDay = slotStartTime.startOf('day');
 
-        return slotDay.isSame(selectedDay, 'day');
+        return (
+          slot.isAvailable &&
+          slotDay.isSame(selectedDay, 'day') &&
+          slotStartTime.isSameOrAfter(currentTime)
+        );
       });
 
       setData(data.data);
-      setIsSlotAvailable(SlotIsAvailable);
+      setIsSlotAvailable(areAnySlotsAvailable);
     }
   }, [selectedDate, data, setData]);
 
