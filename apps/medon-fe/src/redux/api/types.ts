@@ -157,8 +157,11 @@ export interface Appointment {
   link?: string;
   startTime: Date | string;
   endTime: Date | string;
+  localDoctor?: IUser;
   localDoctorId: number | null;
+  remoteDoctor?: IUser;
   remoteDoctorId: number;
+  patient?: IPatient;
   patientId: number | null;
   timezone?: string;
 }

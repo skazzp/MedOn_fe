@@ -6,6 +6,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { prepareHeaders } from 'redux/api/utils/prepareHeaders';
 
 import { Appointment, AppointmentRequest } from './types';
+import { unitOfTime } from 'moment';
 
 export const appointmentsApi = createApi({
   reducerPath: 'appointmentsApi',
@@ -103,12 +104,15 @@ export const appointmentsApi = createApi({
 
     getActiveAppointments: builder.query<
       IServerResponse<Appointment[]>,
-      { userId: number }
+      { userId: number | undefined | null }
     >({
-      query: ({ userId }) => ({
-        url: `appointments/active/${userId}`,
-        method: 'GET',
-      }),
+      query: ({ userId }) => {
+        if (!userId) throw new Error('Bad params!');
+        return {
+          url: `appointments/active/${userId}`,
+          method: 'GET',
+        };
+      },
     }),
   }),
 });

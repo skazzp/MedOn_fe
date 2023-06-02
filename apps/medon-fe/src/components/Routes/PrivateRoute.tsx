@@ -14,6 +14,7 @@ import { localDoctorRoutes, routes } from 'utils/constants/routes';
 import { roles } from 'utils/constants/roles';
 
 import { Container, Wrapper } from './styles';
+import { useNotification } from './hooks/useNotification';
 
 interface IProps {
   component: React.ReactElement;
@@ -24,28 +25,16 @@ export const PrivateRoute = ({ component }: IProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { data: response } = useGetUserQuery(null, { skip: !isLoggedIn });
 
+  const { data: response } = useGetUserQuery(null, { skip: !isLoggedIn });
   const { data: activeAppointments, refetch } = useGetActiveAppointmentsQuery({
-    userId: Number(response?.data.id),
+    userId: response?.data.id,
   });
+  useNotification(response?.data.id, refetch);
 
   useEffect(() => {
     console.log(activeAppointments);
   }, [activeAppointments]);
-
-  useEffect(() => {
-    const client = io(`${process.env.NX_API_URL}/notification`);
-
-    if (response && response.data) {
-      client.emit('subscribeToAppointments', response.data.id);
-      client.on('appointmentsHaveChanged', () => refetch());
-    }
-
-    return () => {
-      client.close();
-    };
-  }, [response]);
 
   useEffect(() => {
     if (response) {
@@ -68,15 +57,12 @@ export const PrivateRoute = ({ component }: IProps) => {
     <Container>
       <Navigation />
       <Wrapper>
-        {activeAppointments && activeAppointments.data && (
+        {activeAppointments?.data?.[0] && response?.data && (
           <Attention
-            startTime={activeAppointments.data[0].startTime}
-            title="Your next appointment after 5 min with"
-            lastName={`${activeAppointments.data[0].localDoctorId}`}
-            link={`${routes.patientCard}/${activeAppointments.data[0].patientId}`}
+            appointment={activeAppointments.data[0]}
+            user={response.data}
           />
         )}
-
         {component}
       </Wrapper>
     </Container>
