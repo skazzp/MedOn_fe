@@ -143,10 +143,10 @@ function Steps(props: StepsProps) {
           dto: appointmentData,
           timezone: userTimezone,
         });
-        toast.success('Appointment created successfully', toastConfig);
+        toast.success(t('appointments.create.success'), toastConfig);
         navigate(`${routes.dashboard}`);
       } catch (error) {
-        toast.error('Failed to create appointment', toastConfig);
+        toast.error(t('appointments.create.error'), toastConfig);
       }
     }
   };

@@ -421,6 +421,10 @@
       "starts": "starts at",
       "local": "Local/Dr.",
       "remote": "Remote/Dr."
+    },
+    "create": {
+      "success": "Appointment created successfully",
+      "error": "Failed to create appointment"
     }
   },
   "availability": {
