@@ -424,7 +424,8 @@
     },
     "create": {
       "success": "Appointment created successfully",
-      "error": "Failed to create appointment"
+      "error": "Failed to create appointment",
+      "have": "You already have an appointment at this time"
     }
   },
   "availability": {

@@ -21,11 +21,11 @@ import {
   Meet,
   LoadingSpinner,
 } from 'components/Steps/styles';
-import { StepsProps } from 'components/Steps/types';
+import { StepsProps, IServerResponse } from 'components/Steps/types';
 import { steps } from 'utils/constants/steps';
 import getDoctorFullName from 'components/Steps/hook';
 
-import { dateToTextFormat, routes } from 'utils/constants';
+import { HttpStatus, dateToTextFormat, routes } from 'utils/constants';
 import {
   positionBooking,
   positionNext,
@@ -139,12 +139,21 @@ function Steps(props: StepsProps) {
       };
 
       try {
-        await createAppointment({
+        const response: IServerResponse = await createAppointment({
           dto: appointmentData,
           timezone: userTimezone,
         });
-        toast.success(t('appointments.create.success'), toastConfig);
-        navigate(`${routes.dashboard}`);
+
+        if (
+          response.error &&
+          'status' in response.error &&
+          response.error.status === HttpStatus.Conflict
+        ) {
+          toast.error(t('appointments.create.have'), toastConfig);
+        } else {
+          toast.success(t('appointments.create.success'), toastConfig);
+          navigate(`${routes.dashboard}`);
+        }
       } catch (error) {
         toast.error(t('appointments.create.error'), toastConfig);
       }
