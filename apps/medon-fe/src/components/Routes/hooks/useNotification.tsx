@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { io } from 'socket.io-client';
 import { useGetActiveAppointmentsQuery } from 'redux/api/appointmentsApi';
-import { setActiveAppointment } from 'redux/features/appointmentsSlice/activeAppointmentSlice';
+import { setCurrentAppointment } from 'redux/features/currentAppointmentSlice/currentAppointmentSlice';
 import { useAppDispatch } from 'redux/hooks';
 import {
-  activeAppointmentTimeFlag,
-  activeAppointmentTimeout,
+  currentAppointmentTimeFlag,
+  currentAppointmentTimeout,
   getTimeDifference,
 } from 'utils/constants';
 
@@ -21,13 +21,13 @@ export function useNotification(userId: number | null | undefined) {
       if (
         appointments?.data?.[0] &&
         getTimeDifference(appointments.data[0].startTime) <
-          activeAppointmentTimeFlag
+          currentAppointmentTimeFlag
       )
-        dispatch(setActiveAppointment(appointments?.data?.[0]));
+        dispatch(setCurrentAppointment(appointments?.data?.[0]));
       else {
-        dispatch(setActiveAppointment(null));
+        dispatch(setCurrentAppointment(null));
       }
-    }, activeAppointmentTimeout);
+    }, currentAppointmentTimeout);
 
     return () => {
       clearInterval(interval);

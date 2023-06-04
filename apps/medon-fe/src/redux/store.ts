@@ -13,7 +13,7 @@ import {
 } from 'redux-persist';
 
 import userReducer from 'redux/features/userSlice/userSlice';
-import activeAppointmentReducer from 'redux/features/appointmentsSlice/activeAppointmentSlice';
+import currentAppointmentReducer from 'redux/features/currentAppointmentSlice/currentAppointmentSlice';
 import { authApi } from 'redux/api/authApi';
 import { userApi } from 'redux/api/userApi';
 import { patientApi } from 'redux/api/patientApi';
@@ -33,7 +33,7 @@ const rootReducer = combineReducers({
   [availabilityApi.reducerPath]: availabilityApi.reducer,
   [appointmentsApi.reducerPath]: appointmentsApi.reducer,
   userState: persistReducer(persistConfig, userReducer),
-  appointmentState: activeAppointmentReducer,
+  appointmentState: currentAppointmentReducer,
 });
 
 export const store = configureStore({

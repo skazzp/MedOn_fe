@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'redux/hooks';
-import { getActiveAppointment } from 'redux/features/appointmentsSlice/activeAppointmentSlice';
+import { getCurrentAppointment } from 'redux/features/currentAppointmentSlice/currentAppointmentSlice';
 import { IUser } from 'redux/api/types';
 import {
   roles,
@@ -23,50 +23,50 @@ export function Attention({ user }: { user: IUser }) {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const activeAppointment = useAppSelector(getActiveAppointment);
+  const currentAppointment = useAppSelector(getCurrentAppointment);
 
   const [time, setTime] = useState<string>(formatTimeDifference(''));
   const [title, setTitle] = useState<string>('');
 
   useEffect(() => {
-    if (activeAppointment) {
+    if (currentAppointment) {
       const interval = setInterval(() => {
-        setTime(formatTimeDifference(activeAppointment?.startTime));
+        setTime(formatTimeDifference(currentAppointment?.startTime));
       }, countDownTimeout);
       return () => {
         clearInterval(interval);
       };
     }
-  }, [activeAppointment]);
+  }, [currentAppointment]);
 
   useEffect(() => {
-    if (activeAppointment) {
+    if (currentAppointment) {
       setTitle(
-        new Date(activeAppointment?.startTime) < new Date()
+        new Date(currentAppointment?.startTime) < new Date()
           ? 'Appointment has already started with:'
           : `You will have an appointment in ${time} minutes with:`
       );
     }
-  }, [time, activeAppointment]);
+  }, [time, currentAppointment]);
 
   const anotherDoctorLastName = useMemo(
     () =>
       user.role === roles.local
-        ? activeAppointment?.remoteDoctor?.lastName
-        : activeAppointment?.localDoctor?.lastName,
-    [user, activeAppointment]
+        ? currentAppointment?.remoteDoctor?.lastName
+        : currentAppointment?.localDoctor?.lastName,
+    [user, currentAppointment]
   );
 
   return (
     <>
-      {activeAppointment && (
+      {currentAppointment && (
         <Call>
           <Wrapper>
             <Info />
             <InfoText>
               <p>{title}</p>
               <p>
-                <Name>{`${activeAppointment.patient?.firstName} ${activeAppointment.patient?.lastName}`}</Name>
+                <Name>{`${currentAppointment.patient?.firstName} ${currentAppointment.patient?.lastName}`}</Name>
                 <span> and </span>
                 <Name> Dr. {anotherDoctorLastName}</Name>
               </p>
@@ -74,7 +74,7 @@ export function Attention({ user }: { user: IUser }) {
           </Wrapper>
           <InfoButton
             onClick={() =>
-              navigate(`${routes.patientCard}/${activeAppointment.patientId}`)
+              navigate(`${routes.patientCard}/${currentAppointment.patientId}`)
             }
           >
             {t('attention.detail')}
