@@ -28,14 +28,8 @@ export const PrivateRoute = ({ component }: IProps) => {
   const { pathname } = useLocation();
 
   const { data: response } = useGetUserQuery(null, { skip: !isLoggedIn });
-  const { data: activeAppointments, refetch } = useGetActiveAppointmentsQuery({
-    userId: response?.data.id,
-  });
-  useNotification(response?.data.id, refetch);
 
-  useEffect(() => {
-    console.log(activeAppointments);
-  }, [activeAppointments]);
+  useNotification(response?.data.id);
 
   useEffect(() => {
     if (response) {
@@ -58,14 +52,7 @@ export const PrivateRoute = ({ component }: IProps) => {
     <Container>
       <Navigation />
       <Wrapper>
-        {activeAppointments?.data?.[0] &&
-          response?.data &&
-          getTimeDifference(activeAppointments.data[0].startTime) < 5 * 60 && (
-            <Attention
-              appointment={activeAppointments.data[0]}
-              user={response.data}
-            />
-          )}
+        {response?.data && <Attention user={response.data} />}
         {component}
       </Wrapper>
     </Container>

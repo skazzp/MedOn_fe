@@ -14,3 +14,7 @@ export const formatTimeDifference = (time: Date | string): string => {
 export const getTimeDifference = (time: Date | string): number => {
   return Math.trunc((new Date(time).getTime() - new Date().getTime()) / 1000);
 };
+
+export const activeAppointmentTimeFlag = 8 * 60;
+export const activeAppointmentTimeout = 30000;
+export const countDownTimeout = 1000;
