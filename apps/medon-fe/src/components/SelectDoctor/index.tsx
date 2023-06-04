@@ -90,7 +90,7 @@ export default function SelectDoctor({
   };
   const showMoreDoctors = () => {
     const remainingDoctors = filteredDoctors.length - visibleDoctors;
-    const showCount = Math.min(3, remainingDoctors);
+    const showCount = Math.min(numberOfDoctors, remainingDoctors);
 
     if (showCount > 0) {
       setVisibleDoctors((prevCount) => prevCount + showCount);
