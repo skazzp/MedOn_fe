@@ -18,12 +18,14 @@ import {
   Selected,
   StepsScore,
   Wrapper,
+  Meet,
+  LoadingSpinner,
 } from 'components/Steps/styles';
-import { StepsProps } from 'components/Steps/types';
+import { StepsProps, IServerResponse } from 'components/Steps/types';
 import { steps } from 'utils/constants/steps';
 import getDoctorFullName from 'components/Steps/hook';
 
-import { dateToTextFormat, routes } from 'utils/constants';
+import { HttpStatus, dateToTextFormat, routes } from 'utils/constants';
 import {
   positionBooking,
   positionNext,
@@ -58,7 +60,8 @@ function Steps(props: StepsProps) {
   const dateInText = dayjs(selectedDate).format(dateToTextFormat);
   const [isSlotAvailable, setIsSlotAvailable] = useState<boolean>(false);
 
-  const [getAvailabilityByDay, { data }] = useGetAvailabilityByDayMutation();
+  const [getAvailabilityByDay, { data, isLoading }] =
+    useGetAvailabilityByDayMutation();
   const [createAppointment, { isLoading: createLoading }] =
     useCreateAppointmentMutation();
 
@@ -85,15 +88,21 @@ function Steps(props: StepsProps) {
   useEffect(() => {
     if (selectedDate && data && data.data) {
       const selectedDay = dayjs(selectedDate).startOf('day');
-      const SlotIsAvailable = data.data.some((slot) => {
+      const currentTime = dayjs();
+
+      const areAnySlotsAvailable = data.data.some((slot) => {
         const slotStartTime = dayjs(slot.startTime);
         const slotDay = slotStartTime.startOf('day');
 
-        return slotDay.isSame(selectedDay, 'day');
+        return (
+          slot.isAvailable &&
+          slotDay.isSame(selectedDay, 'day') &&
+          slotStartTime.isSameOrAfter(currentTime)
+        );
       });
 
       setData(data.data);
-      setIsSlotAvailable(SlotIsAvailable);
+      setIsSlotAvailable(areAnySlotsAvailable);
     }
   }, [selectedDate, data, setData]);
 
@@ -113,7 +122,7 @@ function Steps(props: StepsProps) {
       onCurrentStepChange(steps.one);
       selectTimeAppointments('');
       selectDoctorAppointments(null);
-      navigate(routes.patientCard);
+      navigate(`${routes.patientCard}/${id}`);
     }
   };
 
@@ -130,14 +139,23 @@ function Steps(props: StepsProps) {
       };
 
       try {
-        await createAppointment({
+        const response: IServerResponse = await createAppointment({
           dto: appointmentData,
           timezone: userTimezone,
         });
-        toast.success('Appointment created successfully', toastConfig);
-        navigate(`${routes.dashboard}`);
+
+        if (
+          response.error &&
+          'status' in response.error &&
+          response.error.status === HttpStatus.Conflict
+        ) {
+          toast.error(t('appointments.create.have'), toastConfig);
+        } else {
+          toast.success(t('appointments.create.success'), toastConfig);
+          navigate(`${routes.dashboard}`);
+        }
       } catch (error) {
-        toast.error('Failed to create appointment', toastConfig);
+        toast.error(t('appointments.create.error'), toastConfig);
       }
     }
   };
@@ -192,7 +210,11 @@ function Steps(props: StepsProps) {
           buttonType="booking"
           position={positionBooking}
           onClick={handleBooking}
-          disabled={currentStep === steps.three && !isActiveDoc}
+          disabled={
+            (currentStep === steps.three &&
+              (!isActiveDoc || !selectedDoctor)) ||
+            createLoading
+          }
         >
           {t('patient-info.booking')}
         </Button>
@@ -207,9 +229,14 @@ function Steps(props: StepsProps) {
           : ''}
 
         {selectedDate && (
-          <div>
-            {isButtonActive ? t('patient-info.have-doctor') : noMeetingsMessage}
-          </div>
+          <Meet isButtonActive={isButtonActive}>
+            {isButtonActive && isLoading ? (
+              <LoadingSpinner />
+            ) : (
+              isButtonActive && t('patient-info.have-doctor')
+            )}
+            {!isButtonActive && noMeetingsMessage}
+          </Meet>
         )}
       </Selected>
       <Cancel disabled={!selectedDate} onClick={handleCancel}>

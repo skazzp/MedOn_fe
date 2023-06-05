@@ -7,6 +7,7 @@ export const BtnStyled = styled.button`
   font-family: ${theme.fontFamily.sf_pro_text};
   font-weight: ${theme.fontWeight.medium};
   font-size: ${theme.fontSizes.lg};
+  background-color: transparent;
   margin: 0;
   cursor: pointer;
   display: flex;

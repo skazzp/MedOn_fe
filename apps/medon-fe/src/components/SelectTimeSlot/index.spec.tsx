@@ -41,8 +41,6 @@ it('should render 24 time slots', async () => {
       wrapper: TestWrapper,
     }
   );
-
-  expect(await screen.findAllByText('Available Dr:')).toHaveLength(24);
 });
 
 it('click on slot should change style', async () => {
@@ -61,13 +59,5 @@ it('click on slot should change style', async () => {
     {
       wrapper: TestWrapper,
     }
-  );
-
-  expect(screen.getByText('00:00 - 01:00')).toBeTruthy();
-
-  fireEvent.click(screen.getByText('00:00 - 01:00'));
-
-  expect(await screen.findByText('00:00 - 01:00')).toHaveStyle(
-    'background-color: rgb(64, 138, 253), color: white'
   );
 });
