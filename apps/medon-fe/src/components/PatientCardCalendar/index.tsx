@@ -48,6 +48,7 @@ import {
   Buttons,
   Dot,
   Legend,
+  MedicalTitle,
   StyledCalendar,
   StyledModal,
   StyledSelect,
@@ -216,7 +217,7 @@ export function PatientCardCalendar() {
           </Buttons>
         </AddNoteForm>
       </AnimateHeight>
-      <h5>{t('patient-card.medical')}</h5>
+      <MedicalTitle>{t('patient-card.medical')}</MedicalTitle>
       <Wrapper>
         <Input.Search
           size="large"
