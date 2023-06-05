@@ -87,6 +87,8 @@ export const Manage = styled(Link)`
   justify-content: center;
   text-decoration: none;
   color: ${theme.colors.icon_active};
+  width: fit-content;
+  margin: 0 auto;
 `;
 
 export const TextWrap = styled.div`
