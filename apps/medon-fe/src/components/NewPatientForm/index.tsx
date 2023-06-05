@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { genderOption, routes } from 'utils/constants/';
+import { genderOption, routes, maxLengthTextArea } from 'utils/constants/';
 import { toastConfig } from 'utils/toastConfig';
 import { countryOptionsWithCode } from 'utils/countries/countryOptions';
 import { newPatientSchema } from 'validation/newPatientSchema';
@@ -227,6 +227,8 @@ export function NewPatientForm({ patient, setEditInfo }: Props) {
                   name="overview"
                   control={control}
                   placeholder={`${t('new-patient.placeholders.overview')}`}
+                  showCount
+                  maxLength={maxLengthTextArea}
                 />
               </InputWrapper>
             </SectionWrapper>
