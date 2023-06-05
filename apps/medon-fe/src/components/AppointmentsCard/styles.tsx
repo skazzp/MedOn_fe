@@ -39,6 +39,8 @@ export const Number = styled.span`
 export const Info = styled.span`
   display: flex;
   gap: 2.5rem;
+  width: 15rem;
+  white-space: nowrap;
 `;
 
 export const RemoteAssign = styled.span`
