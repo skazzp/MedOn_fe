@@ -143,7 +143,6 @@ export const StyledCancelBtn = styled(Button)`
 
 export const ButtonContainer = styled.div`
   display: flex;
-  /* padding: 24px; */
   justify-content: space-between;
   gap: 16px;
   margin-top: 16px;
