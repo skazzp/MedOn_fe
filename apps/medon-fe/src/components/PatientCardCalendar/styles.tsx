@@ -141,6 +141,7 @@ export const Buttons = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
+  margin-top: 1rem;
   > button:first-child {
     padding: 0 5rem;
   }
