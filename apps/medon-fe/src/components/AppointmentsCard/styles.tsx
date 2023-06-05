@@ -25,6 +25,7 @@ export const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid ${({ theme }) => theme.colors.gray_300};
+  flex-wrap: wrap;
   > button {
     width: fit-content;
     height: fit-content;
@@ -39,7 +40,7 @@ export const Number = styled.span`
 export const Info = styled.span`
   display: flex;
   gap: 2.5rem;
-  width: 15rem;
+  width: 17rem;
   white-space: nowrap;
 `;
 
