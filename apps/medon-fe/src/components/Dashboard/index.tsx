@@ -11,7 +11,6 @@ import {
   SkeletonContainer,
 } from 'components/Dashboard/styles';
 import WithoutAppointments from 'components/WithoutAppointments';
-import Attention from 'components/common/Attention';
 import AppointmentsScore from 'components/AppointmentsScore';
 import Button from 'components/Button';
 import { AppointmentsCard } from 'components/AppointmentsCard';
@@ -20,7 +19,7 @@ import { useGetFutureAppointmentsQuery } from 'redux/api/appointmentsApi';
 
 import { defaultLimit, defaultMore, defaultOffset } from 'utils/constants';
 
-// TODO:  add filter to localDoctor and notification => Attention
+// TODO:  add filter to localDoctor and notification => NotificationUpcoming
 
 export default function Dashboard() {
   const [limit, setLimit] = useState<number>(defaultLimit);

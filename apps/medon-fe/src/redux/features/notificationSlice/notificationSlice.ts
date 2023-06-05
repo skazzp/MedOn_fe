@@ -12,9 +12,9 @@ const init: INotification = {
   upcomingAppointment: null,
 };
 
-export const currentAppointmentSlice = createSlice({
+export const notificationSlice = createSlice({
   initialState: init,
-  name: 'currentAppointment',
+  name: 'notification',
   reducers: {
     setCurrentAppointment: (
       state,
@@ -31,9 +31,9 @@ export const currentAppointmentSlice = createSlice({
   },
 });
 
-export default currentAppointmentSlice.reducer;
+export default notificationSlice.reducer;
 
-export const { setCurrentAppointment } = currentAppointmentSlice.actions;
+export const { setCurrentAppointment, setUpcomingAppointment } =
+  notificationSlice.actions;
 
-export const getCurrentAppointment = (state: RootState) =>
-  state.appointmentState.currentAppointment;
+export const getNotification = (state: RootState) => state.notificationState;

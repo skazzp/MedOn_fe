@@ -1,5 +1,9 @@
-export const formatTimeDifference = (time: Date | string): string => {
-  const seconds = getTimeDifference(time);
+export const formatTimeDifference = (
+  time: Date | string,
+  type: 'countdown' | 'counter' = 'countdown'
+): string => {
+  const seconds =
+    type === 'countdown' ? getTimeDifference(time) : -getTimeDifference(time);
 
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
@@ -15,6 +19,6 @@ export const getTimeDifference = (time: Date | string): number => {
   return Math.trunc((new Date(time).getTime() - new Date().getTime()) / 1000);
 };
 
-export const currentAppointmentTimeFlag = 9 * 60;
-export const currentAppointmentTimeout = 30000;
-export const countDownTimeout = 1000;
+export const notificationTimeFlag = 5 * 60;
+export const notificationTimeout = 30000;
+export const timerTimeout = 1000;

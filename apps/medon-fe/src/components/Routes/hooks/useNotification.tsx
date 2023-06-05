@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
 import { io } from 'socket.io-client';
 import { useGetActiveAppointmentsQuery } from 'redux/api/appointmentsApi';
-import { setCurrentAppointment } from 'redux/features/currentAppointmentSlice/currentAppointmentSlice';
+import {
+  setCurrentAppointment,
+  setUpcomingAppointment,
+} from 'redux/features/notificationSlice/notificationSlice';
 import { useAppDispatch } from 'redux/hooks';
 import {
-  currentAppointmentTimeFlag,
-  currentAppointmentTimeout,
+  notificationTimeFlag,
+  notificationTimeout,
   getTimeDifference,
 } from 'utils/constants';
 
@@ -18,16 +21,28 @@ export function useNotification(userId: number | null | undefined) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (
-        appointments?.data?.[0] &&
-        getTimeDifference(appointments.data[0].startTime) <
-          currentAppointmentTimeFlag
-      )
-        dispatch(setCurrentAppointment(appointments?.data?.[0]));
-      else {
-        dispatch(setCurrentAppointment(null));
-      }
-    }, currentAppointmentTimeout);
+      const upcoming = appointments?.data?.filter((appointment) => {
+        console.log(getTimeDifference(appointment.startTime));
+        return (
+          getTimeDifference(appointment.startTime) < notificationTimeFlag &&
+          getTimeDifference(appointment.startTime) > 0
+        );
+      });
+
+      upcoming?.length
+        ? dispatch(setUpcomingAppointment(upcoming[0]))
+        : dispatch(setUpcomingAppointment(null));
+
+      const current = appointments?.data?.filter(
+        (appointment) =>
+          getTimeDifference(appointment.startTime) < 0 &&
+          getTimeDifference(appointment.endTime) > 0
+      );
+
+      current?.length
+        ? dispatch(setCurrentAppointment(current[0]))
+        : dispatch(setCurrentAppointment(null));
+    }, notificationTimeout);
 
     return () => {
       clearInterval(interval);

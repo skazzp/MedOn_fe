@@ -16,7 +16,7 @@ import { useSocket } from 'components/PatientCard/hooks/useSocket';
 import { useAppSelector } from 'redux/hooks';
 import { useGetPatientByIdQuery } from 'redux/api/patientApi';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
-import { getCurrentAppointment } from 'redux/features/currentAppointmentSlice/currentAppointmentSlice';
+import { getNotification } from 'redux/features/notificationSlice/notificationSlice';
 
 import {
   Container,
@@ -38,7 +38,7 @@ export default function PatientCard() {
 
   const user = useAppSelector(getUserSelector);
 
-  const currentAppointment = useAppSelector(getCurrentAppointment);
+  const { currentAppointment } = useAppSelector(getNotification);
 
   const { history, onSubmitMessage, isHistoryReady, reply } = useSocket({
     appointmentId: currentAppointment?.id,
@@ -68,12 +68,13 @@ export default function PatientCard() {
             </EditBtn>
           </Top>
           <PatientCardInfo {...patient?.data} />
-          {currentAppointment && isHistoryReady && (
-            <StyledButton size="large" onClick={toggleWidget}>
-              <span>Chat</span>
-              <ChatIcon />
-            </StyledButton>
-          )}
+          {currentAppointment?.patientId === patient?.data?.id &&
+            isHistoryReady && (
+              <StyledButton size="large" onClick={toggleWidget}>
+                <span>Chat</span>
+                <ChatIcon />
+              </StyledButton>
+            )}
           <h4>{t('patient-card.overview')}</h4>
           <ShowMore text={patient?.data?.overview} />
           <Outlet />
@@ -81,15 +82,16 @@ export default function PatientCard() {
       ) : (
         <NewPatientForm patient={patient?.data} setEditInfo={setEditInfo} />
       )}
-      {currentAppointment && isHistoryReady && (
-        <Chat
-          onSubmitMessage={onSubmitMessage}
-          history={history}
-          reply={reply}
-          user={user}
-          patientFullName={`${patient?.data?.firstName} ${patient?.data?.lastName}`}
-        />
-      )}
+      {currentAppointment?.patientId === patient?.data?.id &&
+        isHistoryReady && (
+          <Chat
+            onSubmitMessage={onSubmitMessage}
+            history={history}
+            reply={reply}
+            user={user}
+            patientFullName={`${patient?.data?.firstName} ${patient?.data?.lastName}`}
+          />
+        )}
     </Container>
   );
 }
