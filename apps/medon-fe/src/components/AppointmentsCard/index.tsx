@@ -30,6 +30,8 @@ import { useSendLinkMutation } from 'redux/api/appointmentsApi';
 import { useAppSelector } from 'redux/hooks';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 
+import { getCapitalize } from 'utils/functions/getCapitalize';
+
 import { addLinkSchema } from 'validation/addLinkDashBoard';
 
 import { AddLink, IAppointmentsCardProps } from './types';
@@ -99,7 +101,7 @@ export function AppointmentsCard({
               <Name>
                 {patient?.firstName?.charAt(0)}. {patient?.lastName}
               </Name>
-              {patient?.gender},{' '}
+              {getCapitalize(patient?.gender)},{' '}
               {getAgeByDateOfBirth(String(patient?.dateOfBirth))}{' '}
               {t('appointment.suffix-age')}
             </Patient>
