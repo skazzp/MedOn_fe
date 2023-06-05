@@ -117,13 +117,11 @@ function Steps(props: StepsProps) {
   };
 
   const handleCancel = () => {
-    if (selectedDate) {
-      setSelectedDate(null);
-      onCurrentStepChange(steps.one);
-      selectTimeAppointments('');
-      selectDoctorAppointments(null);
-      navigate(`${routes.patientCard}/${id}`);
-    }
+    setSelectedDate(null);
+    onCurrentStepChange(steps.one);
+    selectTimeAppointments('');
+    selectDoctorAppointments(null);
+    navigate(`${routes.patientCard}/${id}`);
   };
 
   const handleBooking = async () => {
@@ -239,9 +237,7 @@ function Steps(props: StepsProps) {
           </Meet>
         )}
       </Selected>
-      <Cancel disabled={!selectedDate} onClick={handleCancel}>
-        {t('patient-info.cancel')}
-      </Cancel>
+      <Cancel onClick={handleCancel}>{t('patient-info.cancel')}</Cancel>
     </Wrapper>
   );
 }
