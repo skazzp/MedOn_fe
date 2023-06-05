@@ -108,6 +108,7 @@ const AppointmentsPage = () => {
         (!isCalendarFetching ? (
           <>
             <StyledCalendar
+              data-testid="appointments-month"
               defaultView={Views.MONTH}
               events={events}
               localizer={localizer}
