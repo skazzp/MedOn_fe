@@ -30,7 +30,12 @@ export const newPatientSchema = yup.object({
 
   country: yup.string().label('Country').max(4).required(),
 
-  city: yup.string().label('City').max(40).required(),
+  city: yup
+    .string()
+    .label('City')
+    .max(40)
+    .matches(/^[a-zA-Z\s]+$/, { message: 'Only letters are required' })
+    .required(),
 
   phoneNumber: yup
     .string()
