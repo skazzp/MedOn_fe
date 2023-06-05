@@ -13,6 +13,7 @@ export const Container = styled.div`
     font-weight: 700;
     font-size: ${({ theme }) => theme.fontSizes.sm};
     cursor: pointer;
+    width: 75px;
   }
   > p {
     margin: 0;
