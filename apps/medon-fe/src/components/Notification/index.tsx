@@ -42,13 +42,15 @@ export function Notification({
     [user, appointment]
   );
 
-  const renderingCondition =
-    (type === NotificationType.Current &&
-      new Date().getTime() < new Date(appointment.endTime).getTime()) ||
-    (type === NotificationType.Upcoming &&
-      new Date().getTime() < new Date(appointment.startTime).getTime());
+  const isCurrentAppointmentNotFinished =
+    type === NotificationType.Current &&
+    new Date().getTime() < new Date(appointment.endTime).getTime();
 
-  return renderingCondition ? (
+  const isUpcomingAppointmentNotStarted =
+    type === NotificationType.Upcoming &&
+    new Date().getTime() < new Date(appointment.startTime).getTime();
+
+  return isCurrentAppointmentNotFinished || isUpcomingAppointmentNotStarted ? (
     <Wrapper type={type}>
       <Content>
         <InfoIcon />
