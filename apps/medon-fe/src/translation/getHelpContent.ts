@@ -37,7 +37,7 @@ const helpData = {
       id: 5,
       title: 'How to create a patient card?',
       description:
-        '<p>To create a patient card</p><ol><li>Go to the <strong>"Patient List"</strong> section in the left menu.</li><li>Click the <strong>"Create Patient"</strong> button in the upper right corner.</li><li>Fill in all the required information and click on the <strong>"Save Patient" button</strong></li></ol>',
+        '<p>To create a patient card</p><ol><li>Go to the <strong>"Patient List"</strong> section in the left menu.</li><li>Click the <strong>"Create Patient"</strong> button in the upper right corner.</li><li>Fill in all the required information and click on the <strong>"Save Patient" button.</strong></li></ol>',
     },
     {
       id: 6,
@@ -49,13 +49,13 @@ const helpData = {
       id: 7,
       title: 'How can a remote doctor create his availability time?',
       description:
-        '<p>In order for a remote doctor to create a schedule of its availability:</p><ol><li>Go to <strong>"Availability"</strong> in the left menu</li><li>Select the day you want on the calendar and click in the cell.</li><li>Select the desired time interval and <strong>click save</strong></li></ol>',
+        '<p>In order for a remote doctor to create a schedule of its availability:</p><ol><li>Go to <strong>"Availability"</strong> in the left menu</li><li>Select the day you want on the calendar and click in the cell.</li><li>Select the desired time interval and <strong>click "Save".</strong></li></ol>',
     },
     {
       id: 8,
       title: 'What a dashboard is?',
       description:
-        '<p>The Dashboard contains all the information about upcoming appointments. In case if there are no upcoming appointments, a button will be displayed:</p><p>For a Remote Doctor, <strong>"Manage Availability"</strong> will redirect you to a calendar to select a date and time.</p><p>For a local doctor - <strong>"Book an appointment"</strong>, which will redirect you to the list of patients for further booking an appointment with a remote doctor.</p>',
+        '<p>The Dashboard contains all the information about upcoming appointments. In case if there are no upcoming appointments, a button will be displayed:</p><p>For a Remote Doctor, <strong>"Manage Availability"</strong> will redirect you to a calendar to select a date and time.</p><p>For a local doctor - <strong>"Book an appointment".</strong>, which will redirect you to the list of patients for further booking an appointment with a remote doctor.</p>',
     },
     {
       id: 9,
