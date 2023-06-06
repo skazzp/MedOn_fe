@@ -57,6 +57,7 @@ export function AppointmentsCard({
   remoteDoctor,
   localDoctor,
   role,
+  meetingCount,
   ...rest
 }: IAppointmentsCardProps) {
   const theme = useTheme();
@@ -91,11 +92,16 @@ export function AppointmentsCard({
         {dayjs(endTime).format(timeFormat)} /{' '}
         {dayjs(startTime).format(appointmentTimeFormat)}
       </Time>
-      <Container isLinkAdded={isLinkAdded} id={id} {...rest}>
+      <Container
+        isLinkAdded={isLinkAdded}
+        id={id}
+        meetingCount={meetingCount}
+        {...rest}
+      >
         <Header>
           <Info>
             <Number>
-              {t('appointment.preffix-id')} {id}
+              {t('appointment.preffix-id')} {meetingCount}
             </Number>
             <Patient>
               <Name>

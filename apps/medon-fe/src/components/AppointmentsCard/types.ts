@@ -24,6 +24,7 @@ export interface IAppointmentsCardProps {
     overview?: string;
   };
   role?: string;
+  meetingCount?: number;
 }
 
 export interface AddLink {
