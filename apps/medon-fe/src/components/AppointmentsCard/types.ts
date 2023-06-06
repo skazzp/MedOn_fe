@@ -25,7 +25,3 @@ export interface IAppointmentsCardProps {
   };
   role?: string;
 }
-
-export interface AddLink {
-  link: string;
-}
