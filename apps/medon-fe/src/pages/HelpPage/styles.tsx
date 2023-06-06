@@ -6,6 +6,10 @@ export const Wrapper = styled.div`
   padding: 40px 120px 120px;
   width: 100%;
 
+  .ant-collapse-header {
+    align-items: center !important;
+  }
+
   h3 {
     font-size: ${theme.fontSizes.md};
     font-family: ${theme.fontFamily.sf_pro_text} !important;
