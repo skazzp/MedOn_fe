@@ -3,26 +3,22 @@ import { Event } from 'react-big-calendar';
 
 import { IAppointmentsCardProps } from 'components/AppointmentsCard/types';
 
-import {
-  defaultCalendarLimit,
-  defaultOffset,
-  timeFormat,
-} from 'utils/constants';
+import { getUserSelector } from 'redux/features/userSlice/userSelectors';
+import { useAppSelector } from 'redux/hooks';
+
+import { timeFormat } from 'utils/constants';
 import { getCapitalize } from 'utils/functions/getCapitalize';
 
-import { useGetPastAppointmentsQuery } from 'redux/api/appointmentsApi';
-import {
-  IAppointmentsCalendarQueryProps,
-  IAppointmentsListQueryProps,
-} from './types';
-
 export function useGetCalendarEvents(
-  getPastAppointments?: IAppointmentsCardProps[]
+  getCalendarAppointments?: IAppointmentsCardProps[]
 ) {
-  if (!getPastAppointments) {
+  const user = useAppSelector(getUserSelector);
+
+  if (!getCalendarAppointments) {
     return [];
   }
-  const events = getPastAppointments.map((appointment): Event => {
+
+  const events = getCalendarAppointments.map((appointment): Event => {
     const start = appointment.startTime;
     const end = appointment.endTime;
     const title = `${dayjs(appointment.startTime).format(timeFormat)} - ${dayjs(
@@ -36,33 +32,13 @@ export function useGetCalendarEvents(
       )} ${getCapitalize(appointment.patient?.lastName)}`,
       localDoctor: getCapitalize(appointment.localDoctor?.lastName),
       remoteDoctor: getCapitalize(appointment.remoteDoctor?.lastName),
+      isColor:
+        user.id === Number(appointment.localDoctor?.id) ||
+        user.id === Number(appointment.remoteDoctor?.id),
     };
 
     return { start, end, title, resource };
   });
 
   return events;
-}
-
-export function useGetPastAppointmentsListQuery({
-  limit,
-}: IAppointmentsListQueryProps) {
-  return useGetPastAppointmentsQuery({
-    offset: defaultOffset,
-    limit,
-  });
-}
-
-export function useGetPastAppointmentsCalendarQuery({
-  skip,
-}: IAppointmentsCalendarQueryProps) {
-  return useGetPastAppointmentsQuery(
-    {
-      offset: defaultOffset,
-      limit: defaultCalendarLimit,
-    },
-    {
-      skip,
-    }
-  );
 }

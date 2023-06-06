@@ -1,16 +1,30 @@
 import dayjs from 'dayjs';
+import { Skeleton } from 'antd';
 import { useTheme } from 'styled-components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { dayjsLocalizer, Views, Event } from 'react-big-calendar';
-import { Skeleton } from 'antd';
 
 import Button from 'components/Button';
+import { Legend } from 'components/Legend';
 import { AppointmentsCard } from 'components/AppointmentsCard';
 
 import { useModal } from 'hooks/useModal';
 
-import { timeFormat, dateInputFormat, defaultLimit } from 'utils/constants';
+import { Filter, ShowAll } from 'interfaces/Filter';
+
+import { AppointmentsPageModal } from 'components/AppointmentsPageModal';
+
+import {
+  useGetAllCalendarAppointmentsQuery,
+  useGetAllListAppointmentsQuery,
+} from 'redux/api/appointmentsApi';
+import { useAppSelector } from 'redux/hooks';
+import { getUserSelector } from 'redux/features/userSlice/userSelectors';
+
+import { defaultLimit, roles, defaultPage } from 'utils/constants';
+import { getEventPropGetter } from 'utils/functions/getEventPropGetter';
+import { options } from 'utils/constants/options/appointmentFilter';
 
 import {
   Container,
@@ -20,35 +34,46 @@ import {
   ViewItem,
   Title,
   StyledCalendar,
-  StyledModal,
-  Details,
-  ProfileIcon,
-  Entity,
   AppointmentContainer,
   ListContainer,
+  StyledSelect,
+  Buttons,
+  SubHeader,
+  CalendarContainer,
+  NotFound,
 } from './styles';
-import {
-  useGetCalendarEvents,
-  useGetPastAppointmentsCalendarQuery,
-  useGetPastAppointmentsListQuery,
-} from './hooks';
-
-// TODO: improve Skeleton and add filter to localDoctor
+import { useGetCalendarEvents } from './hooks';
 
 const AppointmentsPage = () => {
   const [isMonthView, setIsMonthView] = useState<boolean>(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+  const [filter, setFilter] = useState<Filter>(Filter.today);
+  const [showAll, setShowAll] = useState<ShowAll>(ShowAll.false);
+  const [page, setPage] = useState<number>(defaultPage);
   const [limit, setLimit] = useState<number>(defaultLimit);
 
   const { t } = useTranslation();
   const theme = useTheme();
 
-  const { data: getPastAppointments } = useGetPastAppointmentsListQuery({
-    limit,
-  });
-  const { data: getPastCalendarAppointments, isFetching: isCalendarFetching } =
-    useGetPastAppointmentsCalendarQuery({ skip: !isMonthView });
-  const events = useGetCalendarEvents(getPastCalendarAppointments?.data);
+  const { data: listAppointments, isFetching: isListFetching } =
+    useGetAllListAppointmentsQuery({
+      filter,
+      showAll,
+      page,
+    });
+
+  const { data: calendarAppointments, isFetching: isCalendarFetching } =
+    useGetAllCalendarAppointmentsQuery(
+      {
+        showAll,
+      },
+      {
+        skip: !isMonthView,
+      }
+    );
+
+  const events = useGetCalendarEvents(calendarAppointments?.data);
+  const user = useAppSelector(getUserSelector);
   const { hideModal, isVisible, showModal } = useModal(false);
 
   const localizer = dayjsLocalizer(dayjs);
@@ -58,9 +83,27 @@ const AppointmentsPage = () => {
     showModal();
   };
 
-  if (isCalendarFetching) {
-    return <Skeleton />;
-  }
+  const handleButtonClick = (button: Filter) => {
+    if (filter === button && filter !== Filter.today) {
+      setPage((prev) => prev + 1);
+    } else {
+      setPage(defaultPage);
+      setFilter(button);
+      switch (button) {
+        case Filter.today:
+          setFilter(Filter.today);
+          break;
+        case Filter.past:
+          setFilter(Filter.past);
+          break;
+        case Filter.future:
+          setFilter(Filter.future);
+          break;
+        default:
+          break;
+      }
+    }
+  };
 
   return (
     <Container>
@@ -68,8 +111,41 @@ const AppointmentsPage = () => {
         <Title>
           <h2>{t('appointments.title')}</h2>
           <UserIcon />
-          <span>{getPastAppointments?.data?.length}</span>
+          <span>
+            {limit < Number(listAppointments?.data?.length)
+              ? limit
+              : listAppointments?.data?.length}
+          </span>
         </Title>
+        {!isMonthView && (
+          <Buttons>
+            <Button
+              bgcolor={theme.colors.gray_100}
+              textcolor={theme.colors.black}
+              type="button"
+              onClick={() => handleButtonClick(Filter.today)}
+              autoFocus
+            >
+              {t('appointments.buttons.today')}
+            </Button>
+            <Button
+              bgcolor={theme.colors.gray_100}
+              textcolor={theme.colors.gray_700}
+              type="button"
+              onClick={() => handleButtonClick(Filter.past)}
+            >
+              {t('appointments.buttons.past')}
+            </Button>
+            <Button
+              bgcolor={theme.colors.gray_100}
+              textcolor={theme.colors.gray_700}
+              type="button"
+              onClick={() => handleButtonClick(Filter.future)}
+            >
+              {t('appointments.buttons.future')}
+            </Button>
+          </Buttons>
+        )}
         <View>
           <ViewItem
             isActive={!isMonthView}
@@ -82,18 +158,37 @@ const AppointmentsPage = () => {
           </ViewItem>
         </View>
       </Header>
+      <SubHeader>
+        {user.role === roles.local && (
+          <StyledSelect
+            options={options}
+            defaultValue={ShowAll.false}
+            onChange={(value) => setShowAll(value as ShowAll)}
+          />
+        )}
+      </SubHeader>
       {!isMonthView && (
         <ListContainer>
-          <AppointmentContainer>
-            {getPastAppointments?.data?.map((appointment) => (
-              <AppointmentsCard
-                key={appointment.id}
-                isLinkAdded
-                {...appointment}
-              />
-            ))}
-          </AppointmentContainer>
-          {Number(getPastAppointments?.data?.length) > limit && (
+          {!isListFetching ? (
+            <AppointmentContainer>
+              {listAppointments?.data?.length ? (
+                listAppointments?.data
+                  ?.slice(0, limit)
+                  .map((appointment) => (
+                    <AppointmentsCard
+                      key={appointment.id}
+                      isLinkAdded
+                      {...appointment}
+                    />
+                  ))
+              ) : (
+                <NotFound>{t('appointments.not-found')}</NotFound>
+              )}
+            </AppointmentContainer>
+          ) : (
+            <Skeleton />
+          )}
+          {Number(listAppointments?.data?.length) > limit && (
             <Button
               bgcolor={theme.colors.white}
               textcolor={theme.colors.blue_400}
@@ -106,49 +201,25 @@ const AppointmentsPage = () => {
       )}
       {isMonthView &&
         (!isCalendarFetching ? (
-          <>
+          <CalendarContainer>
             <StyledCalendar
               defaultView={Views.MONTH}
               events={events}
               localizer={localizer}
               views={[Views.MONTH]}
               selectable
+              eventPropGetter={getEventPropGetter}
               popup
               timeslots={1}
               onSelectEvent={handleEventClick}
             />
-            <StyledModal
-              title={selectedEvent?.title}
-              centered
-              open={isVisible}
-              onOk={hideModal}
-              onCancel={hideModal}
-            >
-              <Details>
-                <span>{t('appointments.details.patient')}</span>
-                <Entity>
-                  <p>{selectedEvent?.resource?.patient}</p>
-                  <ProfileIcon />
-                </Entity>
-                <span>{t('appointments.details.doctor')}</span>
-                <p>
-                  {t('appointments.details.local')}{' '}
-                  {selectedEvent?.resource?.localDoctor}
-                </p>
-                <span>{t('appointments.details.doctor')}</span>
-                <p>
-                  {t('appointments.details.remote')}{' '}
-                  {selectedEvent?.resource?.remoteDoctor}
-                </p>
-                <span>{t('appointments.details.date')}</span>
-                <p>
-                  {dayjs(selectedEvent?.start).format(dateInputFormat)}{' '}
-                  {t('appointments.details.starts')}{' '}
-                  {dayjs(selectedEvent?.start).format(timeFormat)}
-                </p>
-              </Details>
-            </StyledModal>
-          </>
+            <Legend />
+            <AppointmentsPageModal
+              selectedEvent={selectedEvent}
+              hideModal={hideModal}
+              isVisible={isVisible}
+            />
+          </CalendarContainer>
         ) : (
           <Skeleton />
         ))}
