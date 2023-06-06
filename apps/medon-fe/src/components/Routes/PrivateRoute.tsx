@@ -14,6 +14,7 @@ import { roles } from 'utils/constants/roles';
 
 import { Container, Wrapper } from './styles';
 import { useNotification } from './hooks/useNotification';
+import { NotificationType, TimerType } from 'components/Notification/types';
 
 interface IProps {
   component: React.ReactElement;
@@ -51,26 +52,26 @@ export const PrivateRoute = ({ component }: IProps) => {
     <Container>
       <Navigation />
       <Wrapper>
-        {response?.data && notifications.currentAppointment && (
-          <Notification
-            user={response.data}
-            appointment={notifications.currentAppointment}
-            timerType="counter"
-            renderTitle={(timer: string) =>
-              `Your appointment has already started and lasts ${timer} minutes with:`
-            }
-            type="current"
-          />
-        )}
         {response?.data && notifications.upcomingAppointment && (
           <Notification
             user={response.data}
             appointment={notifications.upcomingAppointment}
-            timerType="countdown"
+            timerType={TimerType.CountDown}
             renderTitle={(timer: string) =>
               `You will have an appointment in ${timer} minutes with:`
             }
-            type="upcoming"
+            type={NotificationType.Upcoming}
+          />
+        )}
+        {response?.data && notifications.currentAppointment && (
+          <Notification
+            user={response.data}
+            appointment={notifications.currentAppointment}
+            timerType={TimerType.Counter}
+            renderTitle={(timer: string) =>
+              `Your appointment has already started and lasts ${timer} minutes with:`
+            }
+            type={NotificationType.Current}
           />
         )}
         {component}

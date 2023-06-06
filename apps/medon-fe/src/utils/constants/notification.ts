@@ -20,5 +20,5 @@ export const getTimeDifference = (time: Date | string): number => {
 };
 
 export const notificationTimeFlag = 5 * 60;
-export const notificationTimeout = 30000;
+export const notificationTimeout = 1000;
 export const timerTimeout = 1000;

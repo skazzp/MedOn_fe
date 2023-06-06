@@ -21,13 +21,11 @@ export function useNotification(userId: number | null | undefined) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const upcoming = appointments?.data?.filter((appointment) => {
-        console.log(getTimeDifference(appointment.startTime));
-        return (
+      const upcoming = appointments?.data?.filter(
+        (appointment) =>
           getTimeDifference(appointment.startTime) < notificationTimeFlag &&
           getTimeDifference(appointment.startTime) > 0
-        );
-      });
+      );
 
       upcoming?.length
         ? dispatch(setUpcomingAppointment(upcoming[0]))

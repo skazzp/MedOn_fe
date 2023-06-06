@@ -1,62 +1,72 @@
-import styled, { DefaultTheme, ThemedStyledProps } from 'styled-components';
-import { ReactComponent as InfoIcon } from 'assets/images/dashboard/Info.svg';
+import styled, {
+  DefaultTheme,
+  keyframes,
+  ThemedStyledProps,
+} from 'styled-components';
+
 import { theme } from 'styles/theme';
-import Button from 'components/Button';
 
 interface CallProps {
   type: 'current' | 'upcoming';
 }
 
-const notificationColor = (props: ThemedStyledProps<CallProps, DefaultTheme>) =>
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const borderColor = (props: ThemedStyledProps<CallProps, DefaultTheme>) =>
   props.type === 'current' ? theme.colors.blue_500 : theme.colors.green_500;
 
-export const Call = styled.div<CallProps>`
+const bgColor = (props: ThemedStyledProps<CallProps, DefaultTheme>) =>
+  props.type === 'current' ? theme.colors.blue_100 : theme.colors.green_100;
+
+export const Wrapper = styled.div<CallProps>`
+  animation: ${fadeIn} 0.5s ease-in-out;
+  font-family: ${theme.fontFamily.sf_pro_text};
   display: flex;
+  flex-direction: row;
   align-items: center;
-  margin: 40px 40px 20px;
-  padding: 16px 20px;
-  justify-content: space-between;
-  border: 1.5px solid ${notificationColor};
-  border-radius: 4px;
+  padding: 20px 20px;
+  margin: 20px 40px 10px 40px;
+  border: 2px solid ${borderColor};
+  border-radius: 5px;
+
+  button {
+    padding: 10px 25px;
+    border: none;
+    color: ${borderColor};
+    background-color: ${bgColor};
+    border-radius: 5px;
+
+    :hover {
+      cursor: pointer;
+    }
+  }
 
   svg {
-    fill: ${notificationColor};
+    & path {
+      fill: ${borderColor};
+    }
+  }
+
+  p {
+    margin: 2px;
   }
 
   span {
-    color: ${notificationColor};
+    color: ${borderColor};
     font-weight: ${theme.fontWeight.bold};
-  }
-
-  button {
-    padding: 12px 24px;
-    color: ${notificationColor};
-    font-weight: ${theme.fontWeight.bold};
-    background-color: ${theme.colors.attentionBnt};
-    transition: all 0.7s;
-    &:hover {
-      background-color: ${notificationColor};
-      color: ${theme.colors.navi_hover};
-    }
   }
 `;
 
-export const Wrapper = styled.div`
+export const Content = styled.div`
+  flex-grow: 1;
+  gap: 10px;
   display: flex;
   align-items: center;
 `;
-
-export const InfoText = styled.div`
-  p {
-    margin: 0;
-    font-family: ${theme.fontFamily.sf_pro_text};
-  }
-`;
-
-export const Icon = styled.div`
-  margin-right: 16px;
-`;
-
-export const Info = styled(Icon).attrs(() => ({
-  children: <InfoIcon />,
-}))``;

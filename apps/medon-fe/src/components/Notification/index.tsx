@@ -1,14 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { INotification } from 'components/Notification/types';
+import { INotification, NotificationType } from 'components/Notification/types';
 import {
+  formatTimeDifference,
   roles,
   routes,
-  formatTimeDifference,
   timerTimeout,
 } from 'utils/constants';
-import { Call, Info, InfoText, Wrapper } from 'components/Notification/styles';
+import { ReactComponent as InfoIcon } from 'assets/images/dashboard/Info.svg';
+import { Content, Wrapper } from 'components/Notification/styles';
 
 export function Notification({
   user,
@@ -20,7 +21,9 @@ export function Notification({
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const [timer, setTimer] = useState<string>(formatTimeDifference(''));
+  const [timer, setTimer] = useState<string>(
+    formatTimeDifference(appointment.startTime, timerType)
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,26 +42,37 @@ export function Notification({
     [user, appointment]
   );
 
-  return (
-    <Call type={type}>
-      <Wrapper>
-        <Info />
-        <InfoText>
+  const renderingCondition =
+    (type === NotificationType.Current &&
+      new Date().getTime() < new Date(appointment.endTime).getTime()) ||
+    (type === NotificationType.Upcoming &&
+      new Date().getTime() < new Date(appointment.startTime).getTime());
+
+  return renderingCondition ? (
+    <Wrapper type={type}>
+      <Content>
+        <InfoIcon />
+        <div>
           <p>{renderTitle(timer)}</p>
           <p>
-            <span>{`${appointment.patient?.firstName} ${appointment.patient?.lastName}`}</span>
-            <span> and </span>
-            <span>Dr. {doctor}</span>
+            {t('notification.patient')}{' '}
+            <span>
+              {appointment.patient?.firstName} {appointment.patient?.lastName}
+            </span>{' '}
+            {t('notification.and')}{' '}
+            <span>
+              {t('notification.doctor-prefix')} {doctor}
+            </span>
           </p>
-        </InfoText>
-      </Wrapper>
+        </div>
+      </Content>
       <button
         onClick={() =>
           navigate(`${routes.patientCard}/${appointment.patientId}`)
         }
       >
-        {t('attention.detail')}
+        {t('notification.details')}
       </button>
-    </Call>
-  );
+    </Wrapper>
+  ) : null;
 }
