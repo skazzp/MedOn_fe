@@ -12,6 +12,7 @@ export function useSelectTimeSlot({
   data,
   setSelectedDoctorsById,
   selectedDate,
+  isActive,
 }: SelectTimeSlotProps) {
   const { t } = useTranslation();
   const [timeSlotsAvailability, setTimeSlotsAvailability] = useState<{
@@ -26,13 +27,16 @@ export function useSelectTimeSlot({
         const { doctor } = slot;
         const startTime = new Date(slot.startTime).getHours();
         const endTime = new Date(slot.endTime).getHours();
+        const { isAvailable } = slot;
 
         if (!availability[doctor.id]) {
           availability[doctor.id] = timeSlots.map(() => false);
         }
 
-        for (let i = startTime; i < endTime; i += 1) {
-          availability[doctor.id][i] = true;
+        if (isAvailable) {
+          for (let i = startTime; i < endTime; i += 1) {
+            availability[doctor.id][i] = true;
+          }
         }
       });
 
@@ -58,7 +62,6 @@ export function useSelectTimeSlot({
     ) {
       selectTimeAppointments(time);
       setIsActive(time);
-
       const selectedDoctorsIds = doctorAvailability
         .filter(
           ([doctorId, availability]) => availability[timeSlots.indexOf(time)]
@@ -75,5 +78,8 @@ export function useSelectTimeSlot({
     timeSlotsAvailability,
     selectTime,
     t,
+    isActive,
+    data,
+    selectedDate,
   };
 }

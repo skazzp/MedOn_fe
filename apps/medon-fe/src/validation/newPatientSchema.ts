@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 import { isValidPhoneNumber } from 'react-phone-number-input';
+import { maxLengthTextArea } from 'utils/constants';
 
 export const newPatientSchema = yup.object({
   firstName: yup
@@ -30,7 +31,12 @@ export const newPatientSchema = yup.object({
 
   country: yup.string().label('Country').max(4).required(),
 
-  city: yup.string().label('City').max(40).required(),
+  city: yup
+    .string()
+    .label('City')
+    .max(40)
+    .matches(/^[a-zA-Z\s]+$/, { message: 'Only letters are required' })
+    .required(),
 
   phoneNumber: yup
     .string()
@@ -39,5 +45,5 @@ export const newPatientSchema = yup.object({
       value ? isValidPhoneNumber(value) : false
     ),
 
-  overview: yup.string().label('Overview').max(400).required(),
+  overview: yup.string().label('Overview').max(maxLengthTextArea).required(),
 });

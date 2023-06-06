@@ -19,11 +19,13 @@ import {
   StyledSelect,
   Text,
   TitleBox,
+  LoadMore,
 } from 'components/SelectDoctor/styles';
 import { filterUniqueDoctors } from 'components/SelectDoctor/hook';
 import { SelectDoctorProps } from 'components/SelectDoctor/types';
 
 import doctorImagePlaceholder from 'assets/images/Avatar.svg';
+import { numberOfDoctors } from 'utils/constants/position';
 
 export default function SelectDoctor({
   selectDoctorAppointments,
@@ -41,6 +43,7 @@ export default function SelectDoctor({
   const [selectedSpeciality, setSelectedSpeciality] = useState<number | string>(
     'all'
   );
+  const [visibleDoctors, setVisibleDoctors] = useState<number>(numberOfDoctors);
 
   const doctors = data.map((avails: IAvailability) => avails.doctor);
 
@@ -85,6 +88,16 @@ export default function SelectDoctor({
       setIsActiveDoc(key);
     }
   };
+  const showMoreDoctors = () => {
+    const remainingDoctors = filteredDoctors.length - visibleDoctors;
+    const showCount = Math.min(numberOfDoctors, remainingDoctors);
+
+    if (showCount > 0) {
+      setVisibleDoctors((prevCount) => prevCount + showCount);
+    }
+  };
+
+  const visibleFilteredDoctors = filteredDoctors.slice(0, visibleDoctors);
 
   return (
     <Container>
@@ -119,7 +132,7 @@ export default function SelectDoctor({
         <ColumnName>{t('appointment.columns.located')}</ColumnName>
       </TitleBox>
       <List>
-        {filteredDoctors.map((doctor: Doctor) => (
+        {visibleFilteredDoctors.map((doctor: Doctor) => (
           <ListItem key={doctor.id}>
             <ItemWrap
               onClick={() => selectDoctor(doctor.id)}
@@ -127,7 +140,11 @@ export default function SelectDoctor({
             >
               <ColumnText>
                 <DoctorPic
-                  src={doctor.photo || doctorImagePlaceholder}
+                  src={
+                    doctor.photo
+                      ? `${process.env.NX_PUBLIC_S3_BUCKET_URL}${doctor.photo}`
+                      : doctorImagePlaceholder
+                  }
                   alt={`${t('appointment.doctorPicAlt')}`}
                 />
                 {t('appointment.prefix-doctor')}
@@ -142,6 +159,9 @@ export default function SelectDoctor({
             </ItemWrap>
           </ListItem>
         ))}
+        {filteredDoctors.length > visibleDoctors && (
+          <LoadMore onClick={showMoreDoctors}>{t('load-more')}</LoadMore>
+        )}
       </List>
     </Container>
   );

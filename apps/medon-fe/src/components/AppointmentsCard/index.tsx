@@ -27,6 +27,10 @@ import {
 import { toastConfig } from 'utils/toastConfig';
 
 import { useSendLinkMutation } from 'redux/api/appointmentsApi';
+import { useAppSelector } from 'redux/hooks';
+import { getUserSelector } from 'redux/features/userSlice/userSelectors';
+
+import { getCapitalize } from 'utils/functions/getCapitalize';
 
 import { addLinkSchema } from 'validation/addLinkDashBoard';
 
@@ -51,6 +55,7 @@ export function AppointmentsCard({
   patient,
   isLinkAdded,
   remoteDoctor,
+  localDoctor,
   role,
   ...rest
 }: IAppointmentsCardProps) {
@@ -62,6 +67,7 @@ export function AppointmentsCard({
 
   const [sendLink, { isLoading }] = useSendLinkMutation();
   const { hideModal, isVisible, showModal } = useModal(false);
+  const user = useAppSelector(getUserSelector);
 
   const addLinkSubmit: SubmitHandler<AddLink> = ({ link: linkValue }) => {
     sendLink({ id, link: linkValue })
@@ -95,7 +101,7 @@ export function AppointmentsCard({
               <Name>
                 {patient?.firstName?.charAt(0)}. {patient?.lastName}
               </Name>
-              {patient?.gender},{' '}
+              {getCapitalize(patient?.gender)},{' '}
               {getAgeByDateOfBirth(String(patient?.dateOfBirth))}{' '}
               {t('appointment.suffix-age')}
             </Patient>
@@ -106,10 +112,21 @@ export function AppointmentsCard({
                 <Camera />
               </Link>
             )}
-            {t('appointment.preffix-remote')}
-            <strong>
-              {t('appointment.prefix-doctor')} {remoteDoctor?.lastName}
-            </strong>
+            {user.role === roles.local ? (
+              <>
+                {t('appointment.preffix-remote')}
+                <strong>
+                  {t('appointment.prefix-doctor')} {remoteDoctor?.lastName}
+                </strong>
+              </>
+            ) : (
+              <>
+                {t('appointment.preffix-local')}
+                <strong>
+                  {t('appointment.prefix-doctor')} {localDoctor?.lastName}
+                </strong>
+              </>
+            )}
           </RemoteAssign>
           {isLinkAdded && role === roles.local && (
             <Button

@@ -81,4 +81,5 @@ export const Body = styled.div`
   margin: 0 1rem;
   padding: 1rem 0;
   border-top: 1px solid ${({ theme }) => theme.colors.gray_300};
+  word-break: break-word;
 `;

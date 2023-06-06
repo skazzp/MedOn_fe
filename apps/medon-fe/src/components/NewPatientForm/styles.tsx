@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 import { Button } from 'antd';
-import PhoneNumberInput from 'react-phone-number-input';
 
 export const Container = styled.div`
-  max-width: 600px;
-  min-width: 400px;
+  max-width: 900px;
+  min-width: 600px;
   width: 80%;
+  padding: 50px;
   margin: 40px auto 0px;
+  border: 1px solid ${(p) => p.theme.colors.gray_400};
+  border-radius: 4px;
+  background-color: ${(p) => p.theme.colors.white};
   display: flex;
   flex-direction: column;
   font-family: ${({ theme }) => theme.fontFamily.sf_pro_text};
@@ -31,6 +34,7 @@ export const InputsWrapper = styled.div`
   flex-direction: row;
   gap: 40px;
 `;
+
 export const ButtonsWrapper = styled.div`
   margin-top: 40px;
   display: flex;
@@ -42,6 +46,7 @@ export const ButtonsWrapper = styled.div`
     width: 140px;
   }
 `;
+
 export const SectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -50,7 +55,7 @@ export const SectionWrapper = styled.div`
 `;
 
 export const Label = styled.span`
-  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
   display: block;
   margin-bottom: 4px;
 `;

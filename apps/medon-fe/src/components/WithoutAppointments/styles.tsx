@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
 import { ReactComponent as InfoIcon } from 'assets/images/dashboard/User.svg';
-import { ReactComponent as CircleIcon } from 'assets/images/dashboard/UserCircle.svg';
 import { ReactComponent as UnionIcon } from 'assets/images/dashboard/Union.svg';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +10,6 @@ export const Container = styled.div`
   justify-content: flex-start;
   width: calc(100% - 100px);
   margin: 0 auto;
-  min-height: 100vh;
   height: 100%;
 `;
 
@@ -98,10 +96,6 @@ export const TextWrap = styled.div`
 
 export const UserIcon = styled(Icon).attrs(() => ({
   children: <InfoIcon />,
-}))``;
-
-export const IconCircle = styled(IconUser).attrs(() => ({
-  children: <CircleIcon />,
 }))``;
 
 export const IconUnion = styled(IconBlue).attrs(() => ({

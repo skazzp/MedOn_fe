@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { Button } from 'antd';
+import { theme } from 'styles/theme';
 
 export const Container = styled.div`
   position: relative;
@@ -75,4 +77,23 @@ export const EditBtn = styled.button`
   font-family: ${({ theme }) => theme.fontFamily.sf_pro_text};
   font-size: ${({ theme }) => theme.fontSizes.sm};
   font-weight: ${({ theme }) => theme.fontWeight.medium};
+`;
+
+export const StyledButton = styled(Button)`
+  position: absolute;
+  right: 0px;
+  top: 60px;
+  display: flex;
+  font-weight: ${theme.fontWeight.medium};
+  padding: 14px 28px !important;
+  gap: 5px;
+  color: ${theme.colors.blue_500};
+  justify-content: center;
+  align-items: center;
+  border-color: ${theme.colors.blue_500};
+
+  &:hover {
+    border-color: ${theme.colors.blue_500} !important;
+    color: ${theme.colors.blue_500} !important;
+  }
 `;

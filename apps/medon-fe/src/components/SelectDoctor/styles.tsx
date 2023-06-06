@@ -8,7 +8,7 @@ export const Container = styled.div`
   width: 100%;
   padding-left: 25px;
   padding-right: 25px;
-  min-height: 60vh;
+  min-height: 30vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -72,6 +72,8 @@ export const List = styled.ul`
   list-style: none;
   width: 100%;
   padding: 0;
+  overflow: auto;
+  max-height: 30vh;
 `;
 
 export const ListItem = styled.li`
@@ -101,6 +103,24 @@ export const DoctorPic = styled.img`
   width: 25px;
   height: 25px;
   margin-right: 15px;
+`;
+
+export const LoadMore = styled.button`
+  margin: 0 auto;
+  display: flex;
+  margin-top: 12px;
+  padding: 10px 60px;
+  border-radius: 8px;
+  font-weight: ${(p) => p.theme.fontWeight.bold};
+  color: ${(p) => p.theme.colors.icon_active};
+  border: 1.5px solid ${(p) => p.theme.colors.icon_active};
+  cursor: pointer;
+  background-color: inherit;
+  transition: all 0.7s;
+  &:hover {
+    color: ${(p) => p.theme.colors.white};
+    background-color: ${(p) => p.theme.colors.icon_active};
+  }
 `;
 
 export const SlotActive = {
