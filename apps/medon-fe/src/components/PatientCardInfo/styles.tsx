@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { Button } from 'antd';
-import { theme } from 'styles/theme';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -20,21 +18,5 @@ export const Header = styled.div`
 
   h1 {
     display: inline-block;
-  }
-`;
-
-export const StyledButton = styled(Button)`
-  display: flex;
-  font-weight: ${theme.fontWeight.medium};
-  padding: 14px 28px !important;
-  gap: 5px;
-  color: ${theme.colors.blue_500};
-  justify-content: center;
-  align-items: center;
-  border-color: ${theme.colors.blue_500};
-
-  &:hover {
-    border-color: ${theme.colors.blue_500} !important;
-    color: ${theme.colors.blue_500} !important;
   }
 `;

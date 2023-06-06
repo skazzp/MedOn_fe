@@ -379,10 +379,11 @@
     "link-success": "Link added successfully!",
     "link-error": "Error occured while adding link!"
   },
-  "attention": {
-    "call-time-left": "You will have a video-call in 5 minutes with:",
-    "detail": "Detail",
-    "and": "and"
+  "notification": {
+    "details": "Details",
+    "and": "and",
+    "patient": "patient",
+    "doctor-prefix": "Dr."
   },
   "appointment": {
     "availableDr": "Available Dr:",

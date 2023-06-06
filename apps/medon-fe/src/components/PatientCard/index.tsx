@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Skeleton } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useParams } from 'react-router-dom';
+import { toggleWidget } from 'react-chat-widget';
 
-import { Edit } from 'assets/svgs/patientCard';
+import { ChatIcon, Edit } from 'assets/svgs/patientCard';
 
 import { LinkGoBack } from 'components/common/LinkGoBack';
 import PatientCardInfo from 'components/PatientCardInfo';
@@ -12,18 +13,21 @@ import { NewPatientForm } from 'components/NewPatientForm';
 import { Chat } from 'components/Chat';
 import { useSocket } from 'components/PatientCard/hooks/useSocket';
 
+import { useAppSelector } from 'redux/hooks';
 import { useGetPatientByIdQuery } from 'redux/api/patientApi';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
+import { getNotification } from 'redux/features/notificationSlice/notificationSlice';
 
-import { Container, Top, SkeletonContainer, EditBtn } from './styles';
-import { useAppSelector } from 'redux/hooks';
-import { useGetActiveAppointmentByDoctorIdQuery } from 'redux/api/appointmentsApi';
+import {
+  Container,
+  Top,
+  SkeletonContainer,
+  EditBtn,
+  StyledButton,
+} from './styles';
 
 export default function PatientCard() {
   const [editInfo, setEditInfo] = useState<boolean>(false);
-  const [activeAppointmentId, setActiveAppointmentId] = useState<number | null>(
-    null
-  );
 
   const { id } = useParams();
   const { t } = useTranslation();
@@ -34,25 +38,10 @@ export default function PatientCard() {
 
   const user = useAppSelector(getUserSelector);
 
-  const { data: activeAppointment } = useGetActiveAppointmentByDoctorIdQuery(
-    user.id,
-    //TODO: remove auto-fetching when notification-socket feature will be integrated
-    { pollingInterval: 6000 }
-  );
-
-  useEffect(() => {
-    if (activeAppointment && activeAppointment.data && id) {
-      console.log(JSON.stringify(activeAppointment));
-      if (
-        activeAppointment.data.patientId === Number(id) &&
-        activeAppointment.data.id
-      )
-        setActiveAppointmentId(activeAppointment.data.id);
-    } else setActiveAppointmentId(null);
-  }, [activeAppointment, id]);
+  const { currentAppointment } = useAppSelector(getNotification);
 
   const { history, onSubmitMessage, isHistoryReady, reply } = useSocket({
-    appointmentId: activeAppointmentId,
+    appointmentId: currentAppointment?.id,
     userId: user.id,
   });
 
@@ -78,10 +67,14 @@ export default function PatientCard() {
               <Edit />
             </EditBtn>
           </Top>
-          <PatientCardInfo
-            {...patient?.data}
-            activeAppointmentId={activeAppointmentId}
-          />
+          <PatientCardInfo {...patient?.data} />
+          {currentAppointment?.patientId === patient?.data?.id &&
+            isHistoryReady && (
+              <StyledButton size="large" onClick={toggleWidget}>
+                <span>Chat</span>
+                <ChatIcon />
+              </StyledButton>
+            )}
           <h4>{t('patient-card.overview')}</h4>
           <ShowMore text={patient?.data?.overview} />
           <Outlet />
@@ -89,15 +82,16 @@ export default function PatientCard() {
       ) : (
         <NewPatientForm patient={patient?.data} setEditInfo={setEditInfo} />
       )}
-      {activeAppointmentId && isHistoryReady && (
-        <Chat
-          onSubmitMessage={onSubmitMessage}
-          history={history}
-          reply={reply}
-          user={user}
-          patientFullName={`${patient?.data?.firstName} ${patient?.data?.lastName}`}
-        />
-      )}
+      {currentAppointment?.patientId === patient?.data?.id &&
+        isHistoryReady && (
+          <Chat
+            onSubmitMessage={onSubmitMessage}
+            history={history}
+            reply={reply}
+            user={user}
+            patientFullName={`${patient?.data?.firstName} ${patient?.data?.lastName}`}
+          />
+        )}
     </Container>
   );
 }

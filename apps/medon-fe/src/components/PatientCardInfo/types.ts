@@ -7,5 +7,4 @@ export interface IPatientCardInfoProps {
   country?: string;
   firstName?: string;
   lastName?: string;
-  activeAppointmentId?: number | null;
 }
