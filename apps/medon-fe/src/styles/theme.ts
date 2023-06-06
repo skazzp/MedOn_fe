@@ -46,6 +46,8 @@ export const theme = {
     invisible: 'rgba(0, 0, 0, 0)',
     transparent: 'transparent',
     primary_hover: '#4096ff',
+    load_border: '#ccc',
+    load_border_top_color: '#888',
   },
   fontFamily: {
     sf_pro_text: 'SF Pro Text, sans-serif',

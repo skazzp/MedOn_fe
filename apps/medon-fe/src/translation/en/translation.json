@@ -402,6 +402,7 @@
     "preffix-id": "# ",
     "preffix-overview": "Overview: ",
     "preffix-remote": "Remote - ",
+    "preffix-local": "Local - ",
     "suffix-age": "y.o.",
     "add-link": "Add Link",
     "modal-title": "Add Link to Zoom Call",
@@ -421,6 +422,11 @@
       "starts": "starts at",
       "local": "Local/Dr.",
       "remote": "Remote/Dr."
+    },
+    "create": {
+      "success": "Appointment created successfully",
+      "error": "Failed to create appointment",
+      "have": "You already have an appointment at this time"
     }
   },
   "availability": {
@@ -462,6 +468,7 @@
   },
   "defaultLanguage": "en-US",
   "not-one": "You are not the chosen one",
+  "load-more": "Load More",
   "privacyPolicy": "Privacy policy",
   "termsConditions": "Terms and conditions"
 }

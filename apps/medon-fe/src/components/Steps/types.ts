@@ -1,3 +1,5 @@
+import { SerializedError } from "@reduxjs/toolkit";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 import { BookAppointmentCalendarProps } from "components/BookAppointmentCalendar/types";
 import { IAvailability } from "redux/api/types";
 
@@ -27,4 +29,18 @@ export interface StepsProps extends BookAppointmentCalendarProps {
     setData: React.Dispatch<React.SetStateAction<IAvailability[]>>;
     startTime: Date | string;
     endTime: Date | string;
+}
+
+export interface IServerResponse {
+    error?: {
+        status: number;
+        data: {
+            statusCode: number;
+            message: string;
+            timestamp: string;
+            path: string;
+            method: string;
+        };
+    } | FetchBaseQueryError | SerializedError;
+    data?: object;
 }
