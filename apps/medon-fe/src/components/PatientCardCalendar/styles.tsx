@@ -182,3 +182,7 @@ export const Subtitle = styled.div`
 export const TextSubtitle = styled.legend`
   font-size: ${({ theme }) => theme.fontSizes.xs};
 `;
+
+export const MedicalTitle = styled.h5`
+  width: 100%;
+`;
