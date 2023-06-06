@@ -63,6 +63,7 @@ export const SpinWrapper = styled.div`
 
 export const StyledButton = styled(Button)`
   width: 200px;
+  background: ${({ theme }) => theme.colors.btnGradient} !important;
   font-size: ${({ theme }) => theme.fontSizes.md} !important;
   font-family: ${({ theme }) => theme.fontFamily.sf_pro_text} !important;
 `;
