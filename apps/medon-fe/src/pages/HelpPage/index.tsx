@@ -10,19 +10,17 @@ export function HelpPage() {
   const content = getHelpContent(i18n.language);
 
   return (
-    <div>
-      <Wrapper>
-        <h1>{t('help.title')}</h1>
-        <Collapse defaultActiveKey={['1']}>
-          {content.map((section) => (
-            <Panel header={section.title} key={section.id}>
-              <div
-                dangerouslySetInnerHTML={{ __html: section.description }}
-              ></div>
-            </Panel>
-          ))}
-        </Collapse>
-      </Wrapper>
-    </div>
+    <Wrapper>
+      <h1>{t('help.title')}</h1>
+      <Collapse>
+        {content.map((section) => (
+          <Panel header={section.title} key={section.id}>
+            <div
+              dangerouslySetInnerHTML={{ __html: section.description }}
+            ></div>
+          </Panel>
+        ))}
+      </Collapse>
+    </Wrapper>
   );
 }
