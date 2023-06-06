@@ -6,7 +6,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { prepareHeaders } from 'redux/api/utils/prepareHeaders';
 
 import { Appointment, AppointmentRequest } from './types';
-import { unitOfTime } from 'moment';
 
 export const appointmentsApi = createApi({
   reducerPath: 'appointmentsApi',
@@ -128,8 +127,6 @@ export const {
   useSendLinkMutation,
   useGetActiveAppointmentsQuery,
 } = appointmentsApi;
-
-export const updateQueryAppointmentsData = appointmentsApi.util.updateQueryData;
 
 export const appointmentsApiReducer = appointmentsApi.reducer;
 export const appointmentsApiMiddleware = appointmentsApi.middleware;

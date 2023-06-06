@@ -19,8 +19,6 @@ import { useGetFutureAppointmentsQuery } from 'redux/api/appointmentsApi';
 
 import { defaultLimit, defaultMore, defaultOffset } from 'utils/constants';
 
-// TODO:  add filter to localDoctor and notification => NotificationUpcoming
-
 export default function Dashboard() {
   const [limit, setLimit] = useState<number>(defaultLimit);
 
