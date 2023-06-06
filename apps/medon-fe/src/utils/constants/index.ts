@@ -7,4 +7,5 @@ export * from './routes';
 export * from './toast';
 export * from './urls';
 export * from './pagination';
+export * from './notification';
 export * from './input';

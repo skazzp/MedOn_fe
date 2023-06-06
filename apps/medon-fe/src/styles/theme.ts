@@ -7,6 +7,7 @@ export const theme = {
     yellow_300: '#FFF9E9',
     yellow_500: '#FFC107',
     yellow_700: '#EEB200',
+    green_100: '#E6F6ED',
     green_300: '#CEDEC4',
     green_500: '#00A344',
     green_700: '#00662B',

@@ -10,7 +10,7 @@ interface ISocket {
 }
 
 interface ISocketProps {
-  appointmentId: number | null;
+  appointmentId: number | undefined;
   userId: number | null;
 }
 

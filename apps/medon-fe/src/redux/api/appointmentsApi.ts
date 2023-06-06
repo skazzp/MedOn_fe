@@ -100,15 +100,15 @@ export const appointmentsApi = createApi({
       },
       invalidatesTags: ['appointments'],
     }),
-    getActiveAppointmentByDoctorId: builder.query<
-      IServerResponse<Appointment>,
-      number | null
-    >({
-      query: (id) => {
-        if (!id) throw new Error('params is not provided!');
 
+    getActiveAppointments: builder.query<
+      IServerResponse<Appointment[]>,
+      { userId: number | undefined | null }
+    >({
+      query: ({ userId }) => {
+        if (!userId) throw new Error('Bad params!');
         return {
-          url: `appointments/active/${id}`,
+          url: `appointments/active/${userId}`,
           method: 'GET',
         };
       },
@@ -122,10 +122,10 @@ export const {
   useCreateAppointmentMutation,
   useDeleteAppointmentMutation,
   useGetAppointmentsByPatientsIdQuery,
-  useGetActiveAppointmentByDoctorIdQuery,
   useGetFutureAppointmentsQuery,
   useGetPastAppointmentsQuery,
   useSendLinkMutation,
+  useGetActiveAppointmentsQuery,
 } = appointmentsApi;
 
 export const appointmentsApiReducer = appointmentsApi.reducer;
