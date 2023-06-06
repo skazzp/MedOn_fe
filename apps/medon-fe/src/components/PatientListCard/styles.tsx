@@ -18,7 +18,7 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 3rem;
+  margin-left: 2rem;
   padding: 0.5rem 0;
 `;
 

@@ -9,8 +9,8 @@ export const Content = styled.div`
   justify-content: flex-start;
   width: calc(100% - 100px);
   margin: 0 auto;
-  min-height: 100vh;
   height: 100%;
+
   > h2 {
     font-size: 1.75rem;
     font-weight: 700;
