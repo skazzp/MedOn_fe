@@ -25,6 +25,7 @@ import {
   defaultOrder,
   defaultPage,
   defaultPageSize,
+  maxLengthTextArea,
   roles,
   routes,
 } from 'utils/constants';
@@ -195,6 +196,8 @@ export function PatientCardCalendar() {
             control={control}
             minRows={6}
             placeholder={`${t('patient-card.notes.placeholder')}`}
+            showCount
+            maxLength={maxLengthTextArea}
           />
           <Buttons>
             <Button
