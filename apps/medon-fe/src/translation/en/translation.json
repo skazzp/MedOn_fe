@@ -434,46 +434,47 @@
       "past": "Past"
     },
     "not-found": "Appointment not found based on requirements",
-  "availability": {
-    "title": "Availability schedule:",
-    "message": "Select day or availability slot to start editing",
-    "timeUsed": "That time is already used",
-    "appointmentSet": "There is an appointment set on that time",
-    "badDate": "Select a day in the future",
-    "badTime": "Select time in the future",
-    "validationTime": "Wrong time"
-  },
-  "select-options": {
-    "sortBy": "Sort By: ",
-    "dateOldest": "Date (Oldest)",
-    "dateLatest": "Date (Latest)"
-  },
-  "avatar": {
-    "modalTitle": "Edit photo",
-    "errors": {
-      "size": "File size is greater than maximum limit",
-      "type": "Wrong file type",
-      "noFile": "Please choose a file",
-      "catchError": "Something went wrong, try again"
+    "availability": {
+      "title": "Availability schedule:",
+      "message": "Select day or availability slot to start editing",
+      "timeUsed": "That time is already used",
+      "appointmentSet": "There is an appointment set on that time",
+      "badDate": "Select a day in the future",
+      "badTime": "Select time in the future",
+      "validationTime": "Wrong time"
     },
-    "success": "Photo updated successfully"
-  },
-  "chat": {
-    "doctor": {
-      "prefix": "Dr."
+    "select-options": {
+      "sortBy": "Sort By: ",
+      "dateOldest": "Date (Oldest)",
+      "dateLatest": "Date (Latest)"
     },
-    "subtitle": {
-      "prefix": "Patient:"
+    "avatar": {
+      "modalTitle": "Edit photo",
+      "errors": {
+        "size": "File size is greater than maximum limit",
+        "type": "Wrong file type",
+        "noFile": "Please choose a file",
+        "catchError": "Something went wrong, try again"
+      },
+      "success": "Photo updated successfully"
     },
-    "title": "Appointment chat",
-    "placeholder": "Type a message"
-  },
-  "help": {
-    "title": "FAQ"
-  },
-  "defaultLanguage": "en-US",
-  "not-one": "You are not the chosen one",
-  "load-more": "Load More",
-  "privacyPolicy": "Privacy policy",
-  "termsConditions": "Terms and conditions"
+    "chat": {
+      "doctor": {
+        "prefix": "Dr."
+      },
+      "subtitle": {
+        "prefix": "Patient:"
+      },
+      "title": "Appointment chat",
+      "placeholder": "Type a message"
+    },
+    "help": {
+      "title": "FAQ"
+    },
+    "defaultLanguage": "en-US",
+    "not-one": "You are not the chosen one",
+    "load-more": "Load More",
+    "privacyPolicy": "Privacy policy",
+    "termsConditions": "Terms and conditions"
+  }
 }
