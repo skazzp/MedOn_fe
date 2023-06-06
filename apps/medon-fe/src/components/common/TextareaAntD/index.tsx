@@ -14,6 +14,8 @@ interface ITextAreaAntDProps {
   disabled?: boolean;
   size?: 'small' | 'middle' | 'large';
   minRows?: number;
+  showCount?: boolean;
+  maxLength?: number;
 }
 
 export function TextareaAntD<
@@ -26,6 +28,7 @@ export function TextareaAntD<
   disabled = false,
   size = 'middle',
   minRows = 4,
+  ...rest
 }: UseControllerProps<TFieldValues, TName> & ITextAreaAntDProps) {
   const { field, fieldState } = useController({
     name,
@@ -43,6 +46,7 @@ export function TextareaAntD<
         autoSize={{ minRows }}
         placeholder={placeholder}
         status={fieldState.error ? 'error' : undefined}
+        {...rest}
         {...field}
       />
       {fieldState.error?.message && (

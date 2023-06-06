@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 import { isValidPhoneNumber } from 'react-phone-number-input';
+import { maxLengthTextArea } from 'utils/constants';
 
 export const newPatientSchema = yup.object({
   firstName: yup
@@ -44,5 +45,5 @@ export const newPatientSchema = yup.object({
       value ? isValidPhoneNumber(value) : false
     ),
 
-  overview: yup.string().label('Overview').max(400).required(),
+  overview: yup.string().label('Overview').max(maxLengthTextArea).required(),
 });
