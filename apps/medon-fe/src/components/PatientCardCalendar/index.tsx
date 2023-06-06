@@ -25,6 +25,7 @@ import {
   defaultOrder,
   defaultPage,
   defaultPageSize,
+  maxLengthTextArea,
   roles,
   routes,
 } from 'utils/constants';
@@ -48,6 +49,7 @@ import {
   Buttons,
   Dot,
   Legend,
+  MedicalTitle,
   StyledCalendar,
   StyledModal,
   StyledSelect,
@@ -194,6 +196,8 @@ export function PatientCardCalendar() {
             control={control}
             minRows={6}
             placeholder={`${t('patient-card.notes.placeholder')}`}
+            showCount
+            maxLength={maxLengthTextArea}
           />
           <Buttons>
             <Button
@@ -216,7 +220,7 @@ export function PatientCardCalendar() {
           </Buttons>
         </AddNoteForm>
       </AnimateHeight>
-      <h5>{t('patient-card.medical')}</h5>
+      <MedicalTitle>{t('patient-card.medical')}</MedicalTitle>
       <Wrapper>
         <Input.Search
           size="large"

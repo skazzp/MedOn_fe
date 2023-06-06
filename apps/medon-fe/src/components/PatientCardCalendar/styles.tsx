@@ -141,6 +141,7 @@ export const Buttons = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
+  margin-top: 1rem;
   > button:first-child {
     padding: 0 5rem;
   }
@@ -181,4 +182,8 @@ export const Subtitle = styled.div`
 
 export const TextSubtitle = styled.legend`
   font-size: ${({ theme }) => theme.fontSizes.xs};
+`;
+
+export const MedicalTitle = styled.h5`
+  width: 100%;
 `;

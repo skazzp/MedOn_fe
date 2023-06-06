@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  word-break: break-word;
 
   > button {
     background-color: transparent;
@@ -15,6 +16,7 @@ export const Container = styled.div`
     padding: 0;
     margin-top: 5px;
     cursor: pointer;
+    width: 75px;
   }
   > p {
     margin: 0;
