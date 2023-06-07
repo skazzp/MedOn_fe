@@ -437,7 +437,7 @@
       "future": "Future",
       "past": "Past"
     },
-    "not-found": "Appointment not found based on requirements",
+    "not-found": "Appointments not found",
     "availability": {
       "title": "Availability schedule:",
       "message": "Select day or availability slot to start editing",
