@@ -84,17 +84,17 @@ export const appointmentsApi = createApi({
       IServerResponse<IAppointmentsCardProps[]>,
       AppointmentListRequest
     >({
-      query({ filter, page = 1, showAll }) {
+      query({ filter, page = 1, showAll, limit }) {
         return {
           url: 'appointments/list',
           params: {
             filter,
             page,
             showAll,
+            limit,
           },
         };
       },
-      providesTags: ['appointment'],
     }),
     getAllCalendarAppointments: builder.query<
       IServerResponse<IAppointmentsCardProps[]>,

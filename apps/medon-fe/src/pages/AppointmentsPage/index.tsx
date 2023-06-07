@@ -50,16 +50,16 @@ const AppointmentsPage = () => {
   const [filter, setFilter] = useState<Filter>(Filter.today);
   const [showAll, setShowAll] = useState<ShowAll>(ShowAll.false);
   const [page, setPage] = useState<number>(defaultPage);
-  const [limit, setLimit] = useState<number>(defaultLimit);
 
   const { t } = useTranslation();
   const theme = useTheme();
 
-  const { data: listAppointments, isFetching: isListFetching } =
+  const { data: listAppointments, isLoading: isListLoading } =
     useGetAllListAppointmentsQuery({
       filter,
       showAll,
       page,
+      limit: defaultLimit,
     });
 
   const { data: calendarAppointments, isFetching: isCalendarFetching } =
@@ -84,24 +84,19 @@ const AppointmentsPage = () => {
   };
 
   const handleButtonClick = (button: Filter) => {
-    if (filter === button && filter !== Filter.today) {
-      setPage((prev) => prev + 1);
-    } else {
-      setPage(defaultPage);
-      setFilter(button);
-      switch (button) {
-        case Filter.today:
-          setFilter(Filter.today);
-          break;
-        case Filter.past:
-          setFilter(Filter.past);
-          break;
-        case Filter.future:
-          setFilter(Filter.future);
-          break;
-        default:
-          break;
-      }
+    setPage(defaultPage);
+    switch (button) {
+      case Filter.today:
+        setFilter(Filter.today);
+        break;
+      case Filter.past:
+        setFilter(Filter.past);
+        break;
+      case Filter.future:
+        setFilter(Filter.future);
+        break;
+      default:
+        break;
     }
   };
 
@@ -111,11 +106,7 @@ const AppointmentsPage = () => {
         <Title>
           <h2>{t('appointments.title')}</h2>
           <UserIcon />
-          <span>
-            {limit < Number(listAppointments?.data?.length)
-              ? limit
-              : listAppointments?.data?.length}
-          </span>
+          <span>{listAppointments?.data?.length}</span>
         </Title>
         {!isMonthView && (
           <Buttons>
@@ -169,18 +160,16 @@ const AppointmentsPage = () => {
       </SubHeader>
       {!isMonthView && (
         <ListContainer>
-          {!isListFetching ? (
+          {!isListLoading ? (
             <AppointmentContainer>
               {listAppointments?.data?.length ? (
-                listAppointments?.data
-                  ?.slice(0, limit)
-                  .map((appointment) => (
-                    <AppointmentsCard
-                      key={appointment.id}
-                      isLinkAdded
-                      {...appointment}
-                    />
-                  ))
+                listAppointments?.data.map((appointment) => (
+                  <AppointmentsCard
+                    key={appointment.id}
+                    isLinkAdded
+                    {...appointment}
+                  />
+                ))
               ) : (
                 <NotFound>{t('appointments.not-found')}</NotFound>
               )}
@@ -188,11 +177,11 @@ const AppointmentsPage = () => {
           ) : (
             <Skeleton />
           )}
-          {Number(listAppointments?.data?.length) > limit && (
+          {Number(listAppointments?.data?.length) >= defaultLimit * page && (
             <Button
               bgcolor={theme.colors.white}
               textcolor={theme.colors.blue_400}
-              onClick={() => setLimit((prev) => prev + limit)}
+              onClick={() => setPage((prev) => prev + 1)}
             >
               {t('appointments.more')}
             </Button>
