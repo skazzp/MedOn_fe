@@ -3,7 +3,12 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import { CheckOutlined } from '@ant-design/icons';
+import {
+  CheckOutlined,
+  CloseOutlined,
+  SettingOutlined,
+  UnlockOutlined,
+} from '@ant-design/icons';
 
 import { InputAntD } from 'components/common/InputAntD';
 import { SelectAntD } from 'components/common/SelectAntD';
@@ -32,6 +37,14 @@ import {
   LabelText,
   UserPhoto,
   AvatarChangeBox,
+  MainInfoBox,
+  DrNameText,
+  EmailText,
+  EmailLabel,
+  EditBtnStyled,
+  EditBtnText,
+  EditBtnIcon,
+  StyledCancelBtn,
 } from './styles';
 import { FormProfileData } from './types';
 
@@ -73,6 +86,21 @@ export default function ProfileForm({
     navigate(routes.updatePassword);
   };
 
+  const handleCancel = () => {
+    setDisabled(true);
+    reset({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      role: user.role,
+      country: user.country,
+      city: user.city,
+      timezone: user.timeZone,
+      speciality: user.specialityId,
+      birthday: user.dateOfBirth,
+    });
+  };
+
   const onSubmit = handleSubmit(submitForm);
 
   useEffect(() => {
@@ -93,7 +121,7 @@ export default function ProfileForm({
 
   return (
     <Container>
-      <>
+      <MainInfoBox>
         <AvatarChangeBox>
           <ImageContainer>
             <UserPhoto
@@ -107,151 +135,158 @@ export default function ProfileForm({
           </ImageContainer>
           <AvatarUpload />
         </AvatarChangeBox>
-        <Form onSubmit={onSubmit}>
+        <DrNameText>{`${t('profilePage.dr')} ${user.firstName} ${
+          user.lastName
+        }`}</DrNameText>
+        <EmailLabel>{t('profilePage.email')}</EmailLabel>
+        <EmailText>{user.email}</EmailText>
+        <EditBtnStyled
+          type="button"
+          onClick={() => {
+            setDisabled(false);
+          }}
+          disabled={!disabled}
+        >
+          <EditBtnIcon>
+            <SettingOutlined />
+          </EditBtnIcon>
+          <EditBtnText>{t('profileForm.editProfileBtn')}</EditBtnText>
+        </EditBtnStyled>
+        <EditBtnStyled
+          type="button"
+          onClick={handleUpdatePassword}
+          disabled={!disabled}
+        >
+          <EditBtnIcon>
+            <UnlockOutlined />
+          </EditBtnIcon>
+          <EditBtnText>{t('profileForm.changePasswordBtn')}</EditBtnText>
+        </EditBtnStyled>
+      </MainInfoBox>
+      <Form onSubmit={onSubmit}>
+        <InputContainer>
+          <Label htmlFor="firstName">
+            <LabelText>{t('profileForm.firstName.label')}</LabelText>
+            <InputAntD
+              name={formFields.firstName}
+              control={control}
+              disabled={disabled}
+              placeholder={`${t('profileForm.firstName.placeholder')}`}
+              size="large"
+            />
+          </Label>
+        </InputContainer>
+        <InputContainer>
+          <Label htmlFor="lastName">
+            <LabelText>{t('profileForm.lastName.label')}</LabelText>
+            <InputAntD
+              name={formFields.lastName}
+              control={control}
+              disabled={disabled}
+              placeholder={`${t('profileForm.lastName.placeholder')}`}
+              size="large"
+            />
+          </Label>
+        </InputContainer>
+        {!user.role && (
           <InputContainer>
-            <Label htmlFor="firstName">
-              <LabelText>{t('profileForm.firstName.label')}</LabelText>
-              <InputAntD
-                name={formFields.firstName}
-                control={control}
-                disabled={disabled}
-                placeholder={`${t('profileForm.firstName.placeholder')}`}
-                size="large"
-              />
-            </Label>
-          </InputContainer>
-          <InputContainer>
-            <Label htmlFor="lastName">
-              <LabelText>{t('profileForm.lastName.label')}</LabelText>
-              <InputAntD
-                name={formFields.lastName}
-                control={control}
-                disabled={disabled}
-                placeholder={`${t('profileForm.lastName.placeholder')}`}
-                size="large"
-              />
-            </Label>
-          </InputContainer>
-          <InputContainer>
-            <Label htmlFor="email">
-              <LabelText>{t('profileForm.email.label')}</LabelText>
-              <InputAntD
-                name={formFields.email}
-                control={control}
-                disabled={true}
-                placeholder={`${t('profileForm.email.placeholder')}`}
-                size="large"
-              />
-            </Label>
-          </InputContainer>
-          {!user.role && (
-            <InputContainer>
-              <Label htmlFor="role">
-                <LabelText>{t('profileForm.role.label')}</LabelText>
-                <SelectAntD
-                  name={formFields.role}
-                  control={control}
-                  disabled={disabled}
-                  size="large"
-                  placeholder={`${t('profileForm.role.placeholder')}`}
-                  options={rolesOptions}
-                />
-              </Label>
-            </InputContainer>
-          )}
-          {role === roles.remote && (
-            <InputContainer>
-              <Label htmlFor="speciality">
-                <LabelText>{t('profileForm.speciality.label')}</LabelText>
-                <SelectAntD
-                  name={formFields.speciality}
-                  control={control}
-                  disabled={disabled}
-                  size="large"
-                  placeholder={`${t('profileForm.speciality.placeholder')}`}
-                  options={specialityOptions}
-                />
-              </Label>
-            </InputContainer>
-          )}
-          <InputContainer>
-            <Label htmlFor="birthday">
-              <LabelText>{t('profileForm.birthday.label')}</LabelText>
-              <DatepickerAntD
-                name={formFields.birthday}
-                control={control}
-                disabled={disabled}
-                placeholder={`${t('profileForm.birthday.placeholder')}`}
-                size="large"
-              />
-            </Label>
-          </InputContainer>
-          <InputContainer>
-            <Label htmlFor="country">
-              <LabelText>{t('profileForm.country.label')}</LabelText>
+            <Label htmlFor="role">
+              <LabelText>{t('profileForm.role.label')}</LabelText>
               <SelectAntD
-                name={formFields.country}
+                name={formFields.role}
                 control={control}
                 disabled={disabled}
                 size="large"
-                placeholder={`${t('profileForm.country.placeholder')}`}
-                options={countryOptions}
+                placeholder={`${t('profileForm.role.placeholder')}`}
+                options={rolesOptions}
               />
             </Label>
           </InputContainer>
+        )}
+        {role === roles.remote && (
           <InputContainer>
-            <Label htmlFor="city">
-              <LabelText>{t('profileForm.city.label')}</LabelText>
-              <InputAntD
-                name={formFields.city}
-                control={control}
-                disabled={disabled}
-                size="large"
-                placeholder={`${t('profileForm.city.placeholder')}`}
-              />
-            </Label>
-          </InputContainer>
-          <InputContainer>
-            <Label htmlFor="timezone">
-              <LabelText>{t('profileForm.timezone.label')}</LabelText>
+            <Label htmlFor="speciality">
+              <LabelText>{t('profileForm.speciality.label')}</LabelText>
               <SelectAntD
-                name={formFields.timezone}
+                name={formFields.speciality}
                 control={control}
                 disabled={disabled}
                 size="large"
-                placeholder={`${t('profileForm.timezone.placeholder')}`}
-                options={timezoneOptions}
+                placeholder={`${t('profileForm.speciality.placeholder')}`}
+                options={specialityOptions}
               />
             </Label>
           </InputContainer>
+        )}
+        <InputContainer>
+          <Label htmlFor="birthday">
+            <LabelText>{t('profileForm.birthday.label')}</LabelText>
+            <DatepickerAntD
+              name={formFields.birthday}
+              control={control}
+              disabled={disabled}
+              placeholder={`${t('profileForm.birthday.placeholder')}`}
+              size="large"
+            />
+          </Label>
+        </InputContainer>
+        <InputContainer>
+          <Label htmlFor="country">
+            <LabelText>{t('profileForm.country.label')}</LabelText>
+            <SelectAntD
+              name={formFields.country}
+              control={control}
+              disabled={disabled}
+              size="large"
+              placeholder={`${t('profileForm.country.placeholder')}`}
+              options={countryOptions}
+            />
+          </Label>
+        </InputContainer>
+        <InputContainer>
+          <Label htmlFor="city">
+            <LabelText>{t('profileForm.city.label')}</LabelText>
+            <InputAntD
+              name={formFields.city}
+              control={control}
+              disabled={disabled}
+              size="large"
+              placeholder={`${t('profileForm.city.placeholder')}`}
+            />
+          </Label>
+        </InputContainer>
+        <InputContainer>
+          <Label htmlFor="timezone">
+            <LabelText>{t('profileForm.timezone.label')}</LabelText>
+            <SelectAntD
+              name={formFields.timezone}
+              control={control}
+              disabled={disabled}
+              size="large"
+              placeholder={`${t('profileForm.timezone.placeholder')}`}
+              options={timezoneOptions}
+            />
+          </Label>
+        </InputContainer>
+
+        {!disabled && (
           <ButtonContainer>
-            {disabled && (
-              <StyledButton
-                size="large"
-                htmlType="button"
-                onClick={() => {
-                  setDisabled(false);
-                }}
-              >
-                {t('profileForm.editProfileBtn')}
-              </StyledButton>
-            )}
-            {!disabled && (
-              <StyledButton size="large" htmlType="submit">
-                <CheckOutlined />
-                {t('profileForm.profileBtn')}
-              </StyledButton>
-            )}
-            <StyledButton
+            <StyledButton size="large" htmlType="submit">
+              <CheckOutlined />
+              {t('profileForm.profileBtn')}
+            </StyledButton>
+            <StyledCancelBtn
+              type="default"
               size="large"
               htmlType="button"
-              onClick={handleUpdatePassword}
+              onClick={handleCancel}
             >
-              {t('profileForm.changePasswordBtn')}
-            </StyledButton>
+              <CloseOutlined />
+              {t('profileForm.cancelBtn')}
+            </StyledCancelBtn>
           </ButtonContainer>
-        </Form>
-      </>
+        )}
+      </Form>
     </Container>
   );
 }
