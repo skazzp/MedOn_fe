@@ -1,50 +1,48 @@
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
-import { Modal, Skeleton } from 'antd';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { ReactComponent as Profile } from 'assets/svgs/profile_listcard.svg';
 import { ReactComponent as Camera } from 'assets/images/Camera.svg';
 import { ReactComponent as Clock } from 'assets/images/Time.svg';
 
 import Button from 'components/Button';
+import { AddLinkModal } from 'components/AppointmentsCardAddModal';
+import { RemoteAppointmentModal } from 'components/AppointmentsCardRemoveModal';
 import { ShowMore } from 'components/ShowMore';
-import { InputAntD } from 'components/common';
 
 import { useModal } from 'hooks/useModal';
 
-import { getAgeByDateOfBirth } from 'utils/functions/getAgeByDateOfBirth';
+import {
+  getAgeByDateOfBirth,
+  getCapitalize,
+  isDeleteAvailable,
+} from 'utils/functions';
+
 import {
   appointmentTimeFormat,
   roles,
   routes,
   timeFormat,
 } from 'utils/constants';
-import { toastConfig } from 'utils/toastConfig';
 
-import { useSendLinkMutation } from 'redux/api/appointmentsApi';
 import { useAppSelector } from 'redux/hooks';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 
-import { getCapitalize } from 'utils/functions/getCapitalize';
-
-import { addLinkSchema } from 'validation/addLinkDashBoard';
-
-import { AddLink, IAppointmentsCardProps } from './types';
+import { IAppointmentsCardProps } from './types';
 import {
   Body,
   Container,
   Header,
+  Icons,
   Info,
   Name,
   Number,
   Patient,
   RemoteAssign,
   Time,
+  TrashBin,
 } from './styles';
 
 export function AppointmentsCard({
@@ -62,27 +60,19 @@ export function AppointmentsCard({
 }: IAppointmentsCardProps) {
   const theme = useTheme();
   const { t } = useTranslation();
-  const { handleSubmit, control } = useForm<AddLink>({
-    resolver: yupResolver(addLinkSchema),
-  });
 
-  const [sendLink, { isLoading }] = useSendLinkMutation();
-  const { hideModal, isVisible, showModal } = useModal(false);
+  const {
+    hideModal: hideAddModal,
+    isVisible: isAddVisible,
+    showModal: showAddModal,
+  } = useModal(false);
+  const {
+    hideModal: hideRemoveModal,
+    isVisible: isRemoveVisible,
+    showModal: showRemoveModal,
+  } = useModal(false);
+
   const user = useAppSelector(getUserSelector);
-
-  const addLinkSubmit: SubmitHandler<AddLink> = ({ link: linkValue }) => {
-    sendLink({ id, link: linkValue })
-      .unwrap()
-      .then(() => {
-        toast.success(t('dashboard.link-success'), toastConfig);
-        hideModal();
-      })
-      .catch(() => {
-        toast.error(t('dashboard.link-error'), toastConfig);
-      });
-  };
-
-  if (isLoading) <Skeleton avatar />;
 
   return (
     <>
@@ -138,14 +128,19 @@ export function AppointmentsCard({
             <Button
               textcolor={theme.colors.blue_500}
               bgcolor={theme.colors.blue_100}
-              onClick={() => showModal()}
+              onClick={showAddModal}
             >
               {t('appointment.add-link')}
             </Button>
           )}
-          <Link to={`${routes.patientCard}/${patient?.id}`}>
-            <Profile />
-          </Link>
+          <Icons>
+            <Link to={`${routes.patientCard}/${patient?.id}`}>
+              <Profile />
+            </Link>
+            {isDeleteAvailable(endTime) && (
+              <TrashBin onClick={showRemoveModal} />
+            )}
+          </Icons>
         </Header>
         <Body>
           <ShowMore
@@ -153,18 +148,17 @@ export function AppointmentsCard({
             prefix={`${t('appointment.preffix-overview')}`}
           />
         </Body>
-        <Modal
-          title={t('appointment.modal-title')}
-          open={isVisible}
-          onOk={handleSubmit(addLinkSubmit)}
-          onCancel={hideModal}
-        >
-          <InputAntD
-            control={control}
-            name="link"
-            placeholder={`${t('appointment.modal-placeholder')}`}
-          />
-        </Modal>
+        <AddLinkModal
+          id={id}
+          hideAddModal={hideAddModal}
+          isAddVisible={isAddVisible}
+        />
+        <RemoteAppointmentModal
+          id={id}
+          hideRemoveModal={hideRemoveModal}
+          isRemoveVisible={isRemoveVisible}
+          showRemoveModal={showRemoveModal}
+        />
       </Container>
     </>
   );
