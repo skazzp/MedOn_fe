@@ -1,11 +1,15 @@
 import { Skeleton } from 'antd';
-import { InputAntD } from 'components/common';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useSendLinkMutation } from 'redux/api/appointmentsApi';
-import { addLinkSchema } from 'validation/addLinkDashBoard';
 import { toast } from 'react-toastify';
+
+import { InputAntD } from 'components/common';
+
+import { useSendLinkMutation } from 'redux/api/appointmentsApi';
+
+import { addLinkSchema } from 'validation/addLinkDashBoard';
+
 import { toastConfig } from 'utils/toastConfig';
 
 import { AddLink, AppointmentsCardAddModalProps } from './types';
