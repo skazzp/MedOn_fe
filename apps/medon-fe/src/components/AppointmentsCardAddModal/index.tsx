@@ -28,8 +28,8 @@ export function AddLinkModal({
 
   const [sendLink, { isLoading }] = useSendLinkMutation();
 
-  const addLinkSubmit: SubmitHandler<AddLink> = ({ link: linkValue }) => {
-    sendLink({ id, link: linkValue })
+  const addLinkSubmit: SubmitHandler<AddLink> = ({ link }) => {
+    sendLink({ id, link })
       .unwrap()
       .then(() => {
         toast.success(t('dashboard.link-success'), toastConfig);
