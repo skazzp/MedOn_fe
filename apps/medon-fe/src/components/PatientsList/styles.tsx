@@ -1,3 +1,4 @@
+import { Button } from 'antd';
 import styled from 'styled-components';
 
 export const Content = styled.div`
@@ -8,8 +9,8 @@ export const Content = styled.div`
   justify-content: flex-start;
   width: calc(100% - 100px);
   margin: 0 auto;
-  min-height: 100vh;
   height: 100%;
+
   > h2 {
     font-size: 1.75rem;
     font-weight: 700;
@@ -20,7 +21,7 @@ export const Choose = styled.div`
   flex-shrink: 1;
   display: flex;
   width: 100%;
-  gap: 4rem;
+  gap: 2rem;
   margin-bottom: 4rem;
   > a {
     display: flex;
@@ -39,6 +40,7 @@ export const Choose = styled.div`
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100%;
   gap: 3rem;
@@ -57,4 +59,11 @@ export const SpinWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const StyledButton = styled(Button)`
+  width: 200px;
+  background: ${({ theme }) => theme.colors.btnGradient} !important;
+  font-size: ${({ theme }) => theme.fontSizes.md} !important;
+  font-family: ${({ theme }) => theme.fontFamily.sf_pro_text} !important;
 `;

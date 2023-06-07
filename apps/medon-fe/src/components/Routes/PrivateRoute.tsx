@@ -8,13 +8,13 @@ import { getNotification } from 'redux/features/notificationSlice/notificationSl
 
 import Navigation from 'components/Navigation';
 import { Notification } from 'components/Notification';
+import { NotificationType, TimerType } from 'components/Notification/types';
 
 import { localDoctorRoutes, routes } from 'utils/constants/routes';
 import { roles } from 'utils/constants/roles';
 
 import { Container, Wrapper } from './styles';
 import { useNotification } from './hooks/useNotification';
-import { NotificationType, TimerType } from 'components/Notification/types';
 
 interface IProps {
   component: React.ReactElement;

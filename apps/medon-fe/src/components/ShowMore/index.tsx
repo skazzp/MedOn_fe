@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useShowMoreText } from './hooks';
-import { Container } from './styles';
+import { Container, PrefixText } from './styles';
 import { IShowMoreProps } from './types';
 
 export function ShowMore({ text, prefix }: IShowMoreProps) {
@@ -11,7 +11,8 @@ export function ShowMore({ text, prefix }: IShowMoreProps) {
   return (
     <Container>
       <p>
-        <strong>{prefix}</strong> {formatedText}
+        <PrefixText>{prefix}</PrefixText>{' '}
+        {formatedText || `${t('patient-list.no-overview')}`}
       </p>
       {isShowMorePossible && (
         <button type="button" onClick={handleShowToggle}>

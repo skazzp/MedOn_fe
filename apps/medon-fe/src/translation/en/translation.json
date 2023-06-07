@@ -121,7 +121,8 @@
     "no-data": "No patients are registered",
     "load-more": "Load More",
     "overview": "Overview: ",
-    "preffix-remote": "Remote "
+    "preffix-remote": "Remote ",
+    "no-overview": "No information available"
   },
   "patient-card": {
     "button": "Add Patient Note +",
@@ -264,6 +265,8 @@
     }
   },
   "profilePage": {
+    "dr": "Dr. ",
+    "email": "Email:",
     "fillProfile": "You need to fill your profile before start working!",
     "updateError": "Profile update error, try again!",
     "profileUpdated": "Profile updated!"
@@ -273,6 +276,7 @@
     "profileBtn": "Update Profile",
     "changePasswordBtn": "Change Password",
     "editProfileBtn": "Edit Profile",
+    "cancelBtn": "Cancel",
     "firstName": {
       "label": "First Name",
       "placeholder": "Enter your first name"

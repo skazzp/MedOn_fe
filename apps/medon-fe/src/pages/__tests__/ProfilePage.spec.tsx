@@ -13,7 +13,6 @@ describe('ProfilePage component', () => {
     );
     const firstNameInput = screen.getByLabelText(/First Name/i);
     const lastNameInput = screen.getByLabelText(/Last Name/i);
-    const emailInput = screen.getByLabelText(/Email/i);
     const birthdayInput = screen.getByLabelText(/Birth Date/i);
     const roleInput = screen.getByLabelText(/Role/i);
     const countryInput = screen.getByLabelText(/Country/i);
@@ -22,7 +21,6 @@ describe('ProfilePage component', () => {
 
     expect(firstNameInput).toBeInTheDocument();
     expect(lastNameInput).toBeInTheDocument();
-    expect(emailInput).toBeInTheDocument();
     expect(birthdayInput).toBeInTheDocument();
     expect(roleInput).toBeInTheDocument();
     expect(countryInput).toBeInTheDocument();

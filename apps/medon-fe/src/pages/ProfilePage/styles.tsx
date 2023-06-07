@@ -18,5 +18,5 @@ export const ProfileFormWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.background_main};
-  padding: 40px;
+  margin: 25px;
 `;
