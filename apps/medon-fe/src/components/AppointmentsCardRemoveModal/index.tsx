@@ -1,4 +1,3 @@
-import { Modal } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
@@ -7,6 +6,7 @@ import { useDeleteAppointmentMutation } from 'redux/api/appointmentsApi';
 import { toastConfig } from 'utils/toastConfig';
 
 import { AppointmentsCardRemoveModalProps } from './types';
+import { StyledModal } from './styles';
 
 export function RemoteAppointmentModal({
   id,
@@ -30,13 +30,13 @@ export function RemoteAppointmentModal({
   };
 
   return (
-    <Modal
+    <StyledModal
       title={t('appointment.remove-modal-title')}
       open={isRemoveVisible}
       onOk={handleDeleteAppointment}
       onCancel={hideRemoveModal}
     >
       <span>{t('appointment.remove-modal-message')}</span>
-    </Modal>
+    </StyledModal>
   );
 }

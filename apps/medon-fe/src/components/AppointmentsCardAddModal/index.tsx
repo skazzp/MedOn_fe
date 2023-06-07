@@ -1,4 +1,4 @@
-import { Modal, Skeleton } from 'antd';
+import { Skeleton } from 'antd';
 import { InputAntD } from 'components/common';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { toastConfig } from 'utils/toastConfig';
 
 import { AddLink, AppointmentsCardAddModalProps } from './types';
+import { StyledModal } from './styles';
 
 export function AddLinkModal({
   id,
@@ -38,7 +39,7 @@ export function AddLinkModal({
   if (isLoading) <Skeleton avatar />;
 
   return (
-    <Modal
+    <StyledModal
       title={t('appointment.modal-title')}
       open={isAddVisible}
       onOk={handleSubmit(addLinkSubmit)}
@@ -49,6 +50,6 @@ export function AddLinkModal({
         name="link"
         placeholder={`${t('appointment.modal-placeholder')}`}
       />
-    </Modal>
+    </StyledModal>
   );
 }
