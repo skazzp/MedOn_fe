@@ -7,3 +7,4 @@ export const dayFormat = 'dddd Do';
 export const dateFormatCalendar = 'D';
 export const timeFormat = 'HH:mm';
 export const appointmentTimeFormat = 'MMMM DD, YYYY - dddd';
+export const dateNoteFormat = 'MMM D, YYYY';
