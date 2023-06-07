@@ -128,7 +128,7 @@ export function AppointmentsCard({
             <Button
               textcolor={theme.colors.blue_500}
               bgcolor={theme.colors.blue_100}
-              onClick={() => showAddModal()}
+              onClick={showAddModal}
             >
               {t('appointment.add-link')}
             </Button>
@@ -138,7 +138,7 @@ export function AppointmentsCard({
               <Profile />
             </Link>
             {isDeleteAvailable(endTime) && (
-              <TrashBin onClick={() => showRemoveModal()} />
+              <TrashBin onClick={showRemoveModal} />
             )}
           </Icons>
         </Header>
