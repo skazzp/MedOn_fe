@@ -406,7 +406,11 @@
     "suffix-age": "y.o.",
     "add-link": "Add Link",
     "modal-title": "Add Link to Zoom Call",
-    "modal-placeholder": "Add link to zoom meeting"
+    "modal-placeholder": "Add link to zoom meeting",
+    "remove-modal-title": "Remove Appointment",
+    "remove-modal-message": "Are you sure you want to remove this appointment?",
+    "remove-modal-success": "Appointment removed successfully!",
+    "remove-modal-error": "Error occured while removing appointment!"
   },
   "appointments": {
     "title": "Appointments",
