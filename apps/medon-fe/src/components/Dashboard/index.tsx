@@ -54,9 +54,10 @@ export default function Dashboard() {
         <>
           <AppointmentsScore quantity={getFutureAppointments.data.length} />
           <AppointmentContainer>
-            {getFutureAppointments.data.map((appointment) => (
+            {getFutureAppointments.data.map((appointment, index) => (
               <AppointmentsCard
                 key={appointment.id}
+                meetingCount={index + 1}
                 role={user.role?.toString()}
                 isLinkAdded={appointment.link === ''}
                 {...appointment}
