@@ -5,7 +5,7 @@ import PatientCardNotes from 'components/PatientCardNotes';
 import { PatientNote } from 'interfaces/patients';
 
 import { formatDate, formatTime } from 'utils/functions';
-import { defaultLimit } from 'utils/constants';
+import { defaultLimit, defaultPage } from 'utils/constants';
 
 import { IPatientNotesProps } from './types';
 import { BtnContainer, StyledButton } from './styles';
@@ -14,7 +14,7 @@ export function PatientNotes({
   notes = [],
   isFetching,
   total = 0,
-  page = 1,
+  page = defaultPage,
   setPage,
 }: IPatientNotesProps) {
   const { t } = useTranslation();

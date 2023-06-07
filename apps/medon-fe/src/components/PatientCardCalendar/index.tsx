@@ -24,6 +24,7 @@ import { getEventPropGetter } from 'utils/functions/getEventPropGetter';
 import {
   defaultLimit,
   defaultOrder,
+  defaultPage,
   maxLengthTextArea,
   roles,
   routes,
@@ -70,7 +71,7 @@ export function PatientCardCalendar() {
   const { role } = useAppSelector((state) => state.userState.user);
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number>(defaultPage);
   const order = searchParams.get('order') || defaultOrder;
   const theme = useTheme();
 
