@@ -13,7 +13,12 @@ import { ShowMore } from 'components/ShowMore';
 
 import { useModal } from 'hooks/useModal';
 
-import { getAgeByDateOfBirth } from 'utils/functions/getAgeByDateOfBirth';
+import {
+  getAgeByDateOfBirth,
+  getCapitalize,
+  isDeleteAvailable,
+} from 'utils/functions';
+
 import {
   appointmentTimeFormat,
   roles,
@@ -23,8 +28,6 @@ import {
 
 import { useAppSelector } from 'redux/hooks';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
-
-import { getCapitalize } from 'utils/functions/getCapitalize';
 
 import { IAppointmentsCardProps } from './types';
 import {
@@ -122,7 +125,7 @@ export function AppointmentsCard({
             <Link to={`${routes.patientCard}/${patient?.id}`}>
               <Profile />
             </Link>
-            <TrashBin />
+            {isDeleteAvailable(endTime) && <TrashBin />}
           </Icons>
         </Header>
         <Body>

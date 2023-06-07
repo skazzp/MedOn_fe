@@ -1,4 +1,5 @@
-import { formatTime } from './formatTime';
-import { formatDate } from './formatDate';
-
-export { formatTime, formatDate };
+export * from './formatTime';
+export * from './formatDate';
+export * from './isDeleteAvailable';
+export * from './getCapitalize';
+export * from './getAgeByDateOfBirth';
