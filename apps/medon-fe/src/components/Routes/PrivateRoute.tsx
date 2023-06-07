@@ -36,7 +36,11 @@ export const PrivateRoute = ({ component }: IProps) => {
       if (!response.data.isVerified) {
         navigate(routes.resendConfirmation);
       }
-      if (!response.data.role && pathname !== routes.profile) {
+      if (
+        !response.data.role &&
+        pathname !== routes.profile &&
+        pathname !== routes.help
+      ) {
         navigate(routes.profile);
       }
       if (

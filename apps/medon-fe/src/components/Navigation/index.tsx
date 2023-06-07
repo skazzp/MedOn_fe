@@ -40,17 +40,20 @@ export default function Navigation() {
       to: routes.dashboard,
       icon: <Dashboard />,
       label: 'navigation.dashboard',
+      disabled: !user.role,
     },
     {
       to: routes.appointments,
       icon: <Briefcase />,
       label: 'navigation.appointments',
+      disabled: !user.role,
     },
     { to: routes.profile, icon: <Profile />, label: 'navigation.profile' },
     {
       to: routes.patients,
       icon: <Patient />,
       label: 'navigation.patient',
+      disabled: !user.role,
     },
     ...(user.role === roles.remote
       ? [
@@ -71,8 +74,8 @@ export default function Navigation() {
           <Logo />
         </LogoWrapper>
         <Ul>
-          {navItems.map(({ to, icon, label }) => (
-            <NavLinkStyled to={to} key={to}>
+          {navItems.map(({ to, icon, label, disabled }) => (
+            <NavLinkStyled to={to} key={to} disabled={disabled}>
               <li>
                 {icon}
                 <div>{t(label)}</div>

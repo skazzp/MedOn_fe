@@ -20,7 +20,7 @@ export const NavContainer = styled.nav`
   background-color: ${theme.colors.background_navi};
 `;
 
-export const NavLinkStyled = styled(NavLink)`
+export const NavLinkStyled = styled(NavLink)<{ disabled?: boolean }>`
   text-decoration: none;
   color: ${theme.colors.navi_text};
   font-family: ${theme.fontFamily.sf_pro_text};
@@ -32,6 +32,8 @@ export const NavLinkStyled = styled(NavLink)`
   border-radius: 8px;
   margin-bottom: 16px;
   transition: color 0.3s, background-color 0.3s, fill 0.3s;
+  cursor: ${(p) => (p.disabled === true ? 'not-allowed' : 'pointer')};
+  pointer-events: ${(p) => (p.disabled === true ? 'none' : 'all')};
 
   &.active {
     background-color: ${theme.colors.navi_hover};
@@ -45,9 +47,11 @@ export const NavLinkStyled = styled(NavLink)`
   }
 
   &:hover {
+    cursor: ${(p) => (p.disabled === true ? 'not-allowed' : 'pointer')};
     background-color: ${theme.colors.navi_hover};
     color: ${theme.colors.icon_active};
   }
+
   &:hover svg {
     fill: ${theme.colors.icon_active};
   }
@@ -114,7 +118,6 @@ export const LogoWrapper = styled.div`
   padding: 20px;
 `;
 
-
 export const Dashboard = styled(Icon).attrs(() => ({
   children: <DashboardIcon />,
 }))``;
@@ -142,4 +145,3 @@ export const Logout = styled(Icon).attrs(() => ({
 export const Availability = styled(Icon).attrs(() => ({
   children: <AvailabilityIcon />,
 }))``;
-
