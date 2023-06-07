@@ -236,7 +236,7 @@
     "note": {
       "required": "Please add a note about the patient",
       "minLength": "Note must be at least 10 characters",
-      "maxLength": "Note must be less than 200 characters"
+      "maxLength": "Note must be less than 1200 characters"
     },
     "link": {
       "required": "Link is required",
