@@ -121,7 +121,8 @@
     "no-data": "No patients are registered",
     "load-more": "Load More",
     "overview": "Overview: ",
-    "preffix-remote": "Remote "
+    "preffix-remote": "Remote ",
+    "no-overview": "No information available"
   },
   "patient-card": {
     "button": "Add Patient Note +",

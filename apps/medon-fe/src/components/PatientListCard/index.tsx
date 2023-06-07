@@ -9,9 +9,11 @@ import {
   Body,
   CameraIcon,
   Container,
+  GenderText,
   Header,
   Options,
   ProfileIcon,
+  StyledLink,
   Text,
 } from './styles';
 
@@ -44,12 +46,12 @@ export default function PatientListCard({
     <Container>
       <Header>
         <Text>
-          <Link to={`${routes.patientCard}/${id}`}>
+          <StyledLink to={`${routes.patientCard}/${id}`}>
             <span>{`${firstName} ${lastName}`}</span>
-          </Link>
+          </StyledLink>
           <span>
-            {gender}, {getAgeByDateOfBirth(dateOfBirth)}{' '}
-            {t('patient-list.age-suffix')}
+            <GenderText>{gender}</GenderText>,{' '}
+            {getAgeByDateOfBirth(dateOfBirth)} {t('patient-list.age-suffix')}
           </span>
           {doctorLink}
         </Text>
@@ -60,7 +62,7 @@ export default function PatientListCard({
         </Options>
       </Header>
       <Body>
-        <ShowMore text={overview} />
+        <ShowMore text={overview} prefix={`${t('patient-list.overview')}`} />
       </Body>
     </Container>
   );
