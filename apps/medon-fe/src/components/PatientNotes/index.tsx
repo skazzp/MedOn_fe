@@ -1,11 +1,16 @@
 import { Skeleton } from 'antd';
 import { useTranslation } from 'react-i18next';
+import dayjs from 'dayjs';
 
 import PatientCardNotes from 'components/PatientCardNotes';
 import { PatientNote } from 'interfaces/patients';
 
-import { formatDate, formatTime } from 'utils/functions';
-import { defaultLimit, defaultPage } from 'utils/constants';
+import {
+  dateNoteFormat,
+  defaultLimit,
+  defaultPage,
+  timeFormat,
+} from 'utils/constants';
 
 import { IPatientNotesProps } from './types';
 import { BtnContainer, StyledButton } from './styles';
@@ -33,8 +38,8 @@ export function PatientNotes({
         <PatientCardNotes
           key={note.id}
           note={note.note}
-          date={formatDate(note.createdAt)}
-          time={formatTime(note.createdAt)}
+          date={dayjs(note.createdAt).format(dateNoteFormat)}
+          time={dayjs(note.createdAt).format(timeFormat)}
           doctor={note.doctor}
         />
       ))}
