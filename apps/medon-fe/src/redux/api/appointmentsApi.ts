@@ -5,7 +5,12 @@ import { IServerResponse } from 'interfaces/index';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { prepareHeaders } from 'redux/api/utils/prepareHeaders';
 
-import { Appointment, AppointmentRequest } from './types';
+import {
+  Appointment,
+  AppointmentCalendarRequest,
+  AppointmentFutureRequest,
+  AppointmentListRequest,
+} from './types';
 
 export const appointmentsApi = createApi({
   reducerPath: 'appointmentsApi',
@@ -60,7 +65,7 @@ export const appointmentsApi = createApi({
     }),
     getFutureAppointments: builder.query<
       IServerResponse<IAppointmentsCardProps[]>,
-      AppointmentRequest
+      AppointmentFutureRequest
     >({
       query({ offset = 0, limit }) {
         return {
@@ -73,19 +78,35 @@ export const appointmentsApi = createApi({
       },
       providesTags: ['appointments'],
     }),
-    getPastAppointments: builder.query<
+    getAllListAppointments: builder.query<
       IServerResponse<IAppointmentsCardProps[]>,
-      AppointmentRequest
+      AppointmentListRequest
     >({
-      query({ offset = 0, limit }) {
+      query({ filter, page = 1, showAll }) {
         return {
-          url: 'appointments/past',
+          url: 'appointments/list',
           params: {
-            offset,
-            limit,
+            filter,
+            page,
+            showAll,
           },
         };
       },
+      providesTags: ['appointments'],
+    }),
+    getAllCalendarAppointments: builder.query<
+      IServerResponse<IAppointmentsCardProps[]>,
+      AppointmentCalendarRequest
+    >({
+      query({ showAll }) {
+        return {
+          url: 'appointments/calendar',
+          params: {
+            showAll,
+          },
+        };
+      },
+      providesTags: ['appointments'],
     }),
     sendLink: builder.mutation<
       IServerResponse<void>,
@@ -100,15 +121,16 @@ export const appointmentsApi = createApi({
       },
       invalidatesTags: ['appointments'],
     }),
-    getActiveAppointmentByDoctorId: builder.query<
-      IServerResponse<Appointment>,
-      number | null
+
+    getActiveAppointments: builder.query<
+      IServerResponse<Appointment[]>,
+      { userId: number | undefined | null }
     >({
-      query: (id) => {
-        if (!id) throw new Error('params is not provided!');
+      query: ({ userId }) => {
+        if (!userId) throw new Error('Bad params!');
 
         return {
-          url: `appointments/active/${id}`,
+          url: `appointments/active/${userId}`,
           method: 'GET',
         };
       },
@@ -122,10 +144,11 @@ export const {
   useCreateAppointmentMutation,
   useDeleteAppointmentMutation,
   useGetAppointmentsByPatientsIdQuery,
-  useGetActiveAppointmentByDoctorIdQuery,
   useGetFutureAppointmentsQuery,
-  useGetPastAppointmentsQuery,
   useSendLinkMutation,
+  useGetActiveAppointmentsQuery,
+  useGetAllListAppointmentsQuery,
+  useGetAllCalendarAppointmentsQuery,
 } = appointmentsApi;
 
 export const appointmentsApiReducer = appointmentsApi.reducer;

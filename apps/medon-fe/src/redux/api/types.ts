@@ -1,4 +1,5 @@
 import { Dayjs } from 'dayjs';
+import { Filter, ShowAll } from 'interfaces/Filter';
 import { Gender } from 'utils/constants';
 
 export interface IUser {
@@ -157,13 +158,26 @@ export interface Appointment {
   link?: string;
   startTime: Date | string;
   endTime: Date | string;
+  localDoctor?: IUser;
   localDoctorId: number | null;
+  remoteDoctor?: IUser;
   remoteDoctorId: number;
+  patient?: IPatient;
   patientId: number | null;
   timezone?: string;
 }
 
-export interface AppointmentRequest {
+export interface AppointmentFutureRequest {
   offset: number;
   limit: number;
+}
+
+export interface AppointmentListRequest {
+  page: number;
+  filter: Filter;
+  showAll?: ShowAll;
+}
+
+export interface AppointmentCalendarRequest {
+  showAll?: ShowAll;
 }

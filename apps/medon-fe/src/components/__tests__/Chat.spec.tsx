@@ -20,7 +20,7 @@ describe('It', () => {
       country: null,
       city: 'Ukraine',
       timeZone: null,
-      id: '2',
+      id: 2,
     },
     patientFullName: 'Test patient Name',
   };

@@ -378,10 +378,11 @@
     "link-success": "Link added successfully!",
     "link-error": "Error occured while adding link!"
   },
-  "attention": {
-    "call-time-left": "You will have a video-call in 5 minutes with:",
-    "detail": "Detail",
-    "and": "and"
+  "notification": {
+    "details": "Details",
+    "and": "and",
+    "patient": "patient",
+    "doctor-prefix": "Dr."
   },
   "appointment": {
     "availableDr": "Available Dr:",
@@ -426,48 +427,54 @@
       "success": "Appointment created successfully",
       "error": "Failed to create appointment",
       "have": "You already have an appointment at this time"
-    }
-  },
-  "availability": {
-    "title": "Availability schedule:",
-    "message": "Select day or availability slot to start editing",
-    "timeUsed": "That time is already used",
-    "appointmentSet": "There is an appointment set on that time",
-    "badDate": "Select a day in the future",
-    "badTime": "Select time in the future",
-    "validationTime": "Wrong time"
-  },
-  "select-options": {
-    "sortBy": "Sort By: ",
-    "dateOldest": "Date (Oldest)",
-    "dateLatest": "Date (Latest)"
-  },
-  "avatar": {
-    "modalTitle": "Edit photo",
-    "errors": {
-      "size": "File size is greater than maximum limit",
-      "type": "Wrong file type",
-      "noFile": "Please choose a file",
-      "catchError": "Something went wrong, try again"
     },
-    "success": "Photo updated successfully"
-  },
-  "chat": {
-    "doctor": {
-      "prefix": "Dr."
+    "buttons": {
+      "today": "Today",
+      "future": "Future",
+      "past": "Past"
     },
-    "subtitle": {
-      "prefix": "Patient:"
+    "not-found": "Appointment not found based on requirements",
+    "availability": {
+      "title": "Availability schedule:",
+      "message": "Select day or availability slot to start editing",
+      "timeUsed": "That time is already used",
+      "appointmentSet": "There is an appointment set on that time",
+      "badDate": "Select a day in the future",
+      "badTime": "Select time in the future",
+      "validationTime": "Wrong time"
     },
-    "title": "Appointment chat",
-    "placeholder": "Type a message"
-  },
-  "help": {
-    "title": "FAQ"
-  },
-  "defaultLanguage": "en-US",
-  "not-one": "You are not the chosen one",
-  "load-more": "Load More",
-  "privacyPolicy": "Privacy policy",
-  "termsConditions": "Terms and conditions"
+    "select-options": {
+      "sortBy": "Sort By: ",
+      "dateOldest": "Date (Oldest)",
+      "dateLatest": "Date (Latest)"
+    },
+    "avatar": {
+      "modalTitle": "Edit photo",
+      "errors": {
+        "size": "File size is greater than maximum limit",
+        "type": "Wrong file type",
+        "noFile": "Please choose a file",
+        "catchError": "Something went wrong, try again"
+      },
+      "success": "Photo updated successfully"
+    },
+    "chat": {
+      "doctor": {
+        "prefix": "Dr."
+      },
+      "subtitle": {
+        "prefix": "Patient:"
+      },
+      "title": "Appointment chat",
+      "placeholder": "Type a message"
+    },
+    "help": {
+      "title": "FAQ"
+    },
+    "defaultLanguage": "en-US",
+    "not-one": "You are not the chosen one",
+    "load-more": "Load More",
+    "privacyPolicy": "Privacy policy",
+    "termsConditions": "Terms and conditions"
+  }
 }

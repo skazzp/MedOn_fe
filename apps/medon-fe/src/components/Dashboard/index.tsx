@@ -1,9 +1,9 @@
 import { Skeleton } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
-import { useAppSelector } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 import {
   AppointmentContainer,
@@ -11,7 +11,6 @@ import {
   SkeletonContainer,
 } from 'components/Dashboard/styles';
 import WithoutAppointments from 'components/WithoutAppointments';
-import Attention from 'components/common/Attention';
 import AppointmentsScore from 'components/AppointmentsScore';
 import Button from 'components/Button';
 import { AppointmentsCard } from 'components/AppointmentsCard';
@@ -20,12 +19,11 @@ import { useGetFutureAppointmentsQuery } from 'redux/api/appointmentsApi';
 
 import { defaultLimit, defaultMore, defaultOffset } from 'utils/constants';
 
-// TODO:  add filter to localDoctor and notification => Attention
-
 export default function Dashboard() {
   const [limit, setLimit] = useState<number>(defaultLimit);
 
   const user = useAppSelector(getUserSelector);
+
   const { t } = useTranslation();
   const { data: getFutureAppointments, isLoading } =
     useGetFutureAppointmentsQuery({
@@ -54,7 +52,6 @@ export default function Dashboard() {
       </h1>
       {getFutureAppointments?.data?.length ? (
         <>
-          <Attention />
           <AppointmentsScore quantity={getFutureAppointments.data.length} />
           <AppointmentContainer>
             {getFutureAppointments.data.map((appointment) => (

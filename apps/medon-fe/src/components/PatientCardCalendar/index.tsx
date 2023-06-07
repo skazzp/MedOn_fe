@@ -17,6 +17,7 @@ import { Link } from 'components/Link';
 import { PatientNotes } from 'components/PatientNotes';
 import Button from 'components/Button';
 import { TextareaAntD } from 'components/common';
+import { Legend } from 'components/Legend';
 
 import { getDateAndHourEvent } from 'utils/functions/getDateAndHourEvent';
 import { getDayPropGetter } from 'utils/functions/getDayPropGetter';
@@ -47,14 +48,10 @@ import { useModal } from 'hooks/useModal';
 import {
   AddNoteForm,
   Buttons,
-  Dot,
-  Legend,
   MedicalTitle,
   StyledCalendar,
   StyledModal,
   StyledSelect,
-  Subtitle,
-  TextSubtitle,
   Title,
   Wrapper,
 } from './styles';
@@ -137,21 +134,7 @@ export function PatientCardCalendar() {
         timeslots={1}
         step={60}
       />
-      <Legend>
-        <legend>{t('patient-card.calendar.legend-title')}</legend>
-        <Subtitle>
-          <Dot color={theme.colors.purple} />
-          <TextSubtitle>
-            {t('patient-card.calendar.appointment-you')}
-          </TextSubtitle>
-        </Subtitle>
-        <Subtitle>
-          <Dot color={theme.colors.blue_500} />
-          <TextSubtitle>
-            {t('patient-card.calendar.appointment-others')}
-          </TextSubtitle>
-        </Subtitle>
-      </Legend>
+      <Legend />
       <StyledModal
         title={`${t('patient-card.calendar.prefix-modal')} ${event?.title}`}
         open={isVisible}
