@@ -140,6 +140,7 @@ export function PatientCardCalendar() {
         open={isVisible}
         onOk={hideModal}
         cancelButtonProps={{ style: { display: 'none' } }}
+        onCancel={hideModal}
       >
         <p>
           <strong>{t('patient-card.calendar.modal-title')} </strong>
