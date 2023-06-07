@@ -433,7 +433,8 @@
       "future": "Future",
       "past": "Past"
     },
-    "not-found": "Appointment not found based on requirements",
+    "not-found": "Appointment not found based on requirements"
+  },
     "availability": {
       "title": "Availability schedule:",
       "message": "Select day or availability slot to start editing",
@@ -476,5 +477,4 @@
     "load-more": "Load More",
     "privacyPolicy": "Privacy policy",
     "termsConditions": "Terms and conditions"
-  }
 }
