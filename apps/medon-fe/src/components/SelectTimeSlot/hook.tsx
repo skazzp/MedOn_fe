@@ -34,7 +34,7 @@ export function useSelectTimeSlot({
         }
 
         if (isAvailable) {
-          for (let i = startTime; i < endTime; i += 1) {
+          for (let i = startTime; i <= endTime; i += 1) {
             availability[doctor.id][i] = true;
           }
         }

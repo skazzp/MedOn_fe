@@ -3,8 +3,8 @@ import { ShowMoreTextHookReturnType } from './types';
 
 export function useShowMoreText(
   initialText?: string,
-  minChars = 50,
-  showChars = 50
+  minChars = 300,
+  showChars = 300
 ): ShowMoreTextHookReturnType {
   const [showMore, setShowMore] = useState(false);
   const [isShowMorePossible, setIsShowMorePossible] = useState(false);
