@@ -92,7 +92,6 @@ export function Chat({
         handleNewUserMessage={handleNewUserMessage}
         showTimeStamp={false}
         emojis={true}
-        resizable={true}
         launcherOpenImg="assets/svgs/patientCard/chat-white.svg"
       />
     </>
