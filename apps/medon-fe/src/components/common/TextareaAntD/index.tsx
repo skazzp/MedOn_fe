@@ -1,4 +1,3 @@
-import { Input } from 'antd';
 import {
   useController,
   FieldValues,
@@ -7,7 +6,7 @@ import {
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { Container, ErrorMsg } from './styles';
+import { Container, ErrorMsg, StyledTextarea } from './styles';
 
 interface ITextAreaAntDProps {
   placeholder?: string;
@@ -27,7 +26,7 @@ export function TextareaAntD<
   placeholder,
   disabled = false,
   size = 'middle',
-  minRows = 4,
+  minRows = 3,
   ...rest
 }: UseControllerProps<TFieldValues, TName> & ITextAreaAntDProps) {
   const { field, fieldState } = useController({
@@ -39,13 +38,14 @@ export function TextareaAntD<
 
   return (
     <Container>
-      <Input.TextArea
+      <StyledTextarea
         id={name}
         size={size}
         disabled={disabled}
         autoSize={{ minRows }}
         placeholder={placeholder}
         status={fieldState.error ? 'error' : undefined}
+        classNames={{ count: 'countMore', textarea: 'textarea' }}
         {...rest}
         {...field}
       />
