@@ -25,7 +25,7 @@ describe('RemoteAppointmentModal', () => {
     ).toBeInTheDocument();
   });
 
-  it('calls hideAddModal when cancel button is clicked', () => {
+  it('calls hideRemoveModal when cancel button is clicked', () => {
     render(
       <TestWrapper>
         <RemoteAppointmentModal {...defaultProps} />
