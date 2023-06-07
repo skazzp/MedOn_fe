@@ -82,16 +82,16 @@ export default function PatientCard() {
       ) : (
         <NewPatientForm patient={patient?.data} setEditInfo={setEditInfo} />
       )}
-      {currentAppointment?.patientId === patient?.data?.id &&
-        isHistoryReady && (
-          <Chat
-            onSubmitMessage={onSubmitMessage}
-            history={history}
-            reply={reply}
-            user={user}
-            patientFullName={`${patient?.data?.firstName} ${patient?.data?.lastName}`}
-          />
-        )}
+      {/*      {currentAppointment?.patientId === patient?.data?.id &&
+        isHistoryReady && (*/}
+      <Chat
+        onSubmitMessage={onSubmitMessage}
+        history={history}
+        reply={reply}
+        user={user}
+        patientFullName={`${patient?.data?.firstName} ${patient?.data?.lastName}`}
+      />
+      {/*   )}*/}
     </Container>
   );
 }

@@ -1,20 +1,30 @@
-import { Pagination, Skeleton } from 'antd';
+import { Skeleton } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { useSearchParams } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 import PatientCardNotes from 'components/PatientCardNotes';
 import { PatientNote } from 'interfaces/patients';
 
-import { formatDate, formatTime } from 'utils/functions';
-import { defaultPage, defaultPageSize, pageSizeOptions } from 'utils/constants';
+import {
+  dateNoteFormat,
+  defaultLimit,
+  defaultPage,
+  timeFormat,
+} from 'utils/constants';
 
 import { IPatientNotesProps } from './types';
+import { BtnContainer, StyledButton } from './styles';
 
-export function PatientNotes({ notes, isFetching, total }: IPatientNotesProps) {
+export function PatientNotes({
+  notes = [],
+  isFetching,
+  total = 0,
+  page = defaultPage,
+  setPage,
+}: IPatientNotesProps) {
   const { t } = useTranslation();
-  const [searchParams, setSearchParams] = useSearchParams();
 
-  if (isFetching) {
+  if (isFetching && !notes.length) {
     return <Skeleton active />;
   }
 
@@ -28,25 +38,24 @@ export function PatientNotes({ notes, isFetching, total }: IPatientNotesProps) {
         <PatientCardNotes
           key={note.id}
           note={note.note}
-          date={formatDate(note.createdAt)}
-          time={formatTime(note.createdAt)}
+          date={dayjs(note.createdAt).format(dateNoteFormat)}
+          time={dayjs(note.createdAt).format(timeFormat)}
           doctor={note.doctor}
         />
       ))}
-      <Pagination
-        total={total}
-        current={Number(searchParams.get('page')) || defaultPage}
-        pageSize={Number(searchParams.get('limit')) || defaultPageSize}
-        defaultCurrent={1}
-        onChange={(pageValue, pageSize) => {
-          setSearchParams({
-            page: pageValue.toString(),
-            limit: pageSize.toString(),
-          });
-        }}
-        showSizeChanger
-        pageSizeOptions={pageSizeOptions}
-      />
+      {total > page * defaultLimit && (
+        <BtnContainer>
+          <StyledButton
+            type="primary"
+            size="large"
+            onClick={() => {
+              setPage((prev) => prev + 1);
+            }}
+          >
+            {t('patient-list.load-more')}
+          </StyledButton>
+        </BtnContainer>
+      )}
     </>
   );
 }

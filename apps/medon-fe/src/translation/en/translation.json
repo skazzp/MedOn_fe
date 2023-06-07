@@ -121,7 +121,8 @@
     "no-data": "No patients are registered",
     "load-more": "Load More",
     "overview": "Overview: ",
-    "preffix-remote": "Remote "
+    "preffix-remote": "Remote ",
+    "no-overview": "No information available"
   },
   "patient-card": {
     "button": "Add Patient Note +",
@@ -264,6 +265,8 @@
     }
   },
   "profilePage": {
+    "dr": "Dr. ",
+    "email": "Email:",
     "fillProfile": "You need to fill your profile before start working!",
     "updateError": "Profile update error, try again!",
     "profileUpdated": "Profile updated!"
@@ -273,6 +276,7 @@
     "profileBtn": "Update Profile",
     "changePasswordBtn": "Change Password",
     "editProfileBtn": "Edit Profile",
+    "cancelBtn": "Cancel",
     "firstName": {
       "label": "First Name",
       "placeholder": "Enter your first name"
@@ -406,7 +410,11 @@
     "suffix-age": "y.o.",
     "add-link": "Add Link",
     "modal-title": "Add Link to Zoom Call",
-    "modal-placeholder": "Add link to zoom meeting"
+    "modal-placeholder": "Add link to zoom meeting",
+    "remove-modal-title": "Remove Appointment",
+    "remove-modal-message": "Are you sure you want to remove this appointment?",
+    "remove-modal-success": "Appointment removed successfully!",
+    "remove-modal-error": "Appointment cannot be removed!"
   },
   "appointments": {
     "title": "Appointments",
@@ -435,46 +443,46 @@
     },
     "not-found": "Appointment not found based on requirements"
   },
-    "availability": {
-      "title": "Availability schedule:",
-      "message": "Select day or availability slot to start editing",
-      "timeUsed": "That time is already used",
-      "appointmentSet": "There is an appointment set on that time",
-      "badDate": "Select a day in the future",
-      "badTime": "Select time in the future",
-      "validationTime": "Wrong time"
+  "availability": {
+    "title": "Availability schedule:",
+    "message": "Select day or availability slot to start editing",
+    "timeUsed": "That time is already used",
+    "appointmentSet": "There is an appointment set on that time",
+    "badDate": "Select a day in the future",
+    "badTime": "Select time in the future",
+    "validationTime": "Wrong time"
+  },
+  "select-options": {
+    "sortBy": "Sort By: ",
+    "dateOldest": "Date (Oldest)",
+    "dateLatest": "Date (Latest)"
+  },
+  "avatar": {
+    "modalTitle": "Edit photo",
+    "errors": {
+      "size": "File size is greater than maximum limit",
+      "type": "Wrong file type",
+      "noFile": "Please choose a file",
+      "catchError": "Something went wrong, try again"
     },
-    "select-options": {
-      "sortBy": "Sort By: ",
-      "dateOldest": "Date (Oldest)",
-      "dateLatest": "Date (Latest)"
+    "success": "Photo updated successfully"
+  },
+  "chat": {
+    "doctor": {
+      "prefix": "Dr."
     },
-    "avatar": {
-      "modalTitle": "Edit photo",
-      "errors": {
-        "size": "File size is greater than maximum limit",
-        "type": "Wrong file type",
-        "noFile": "Please choose a file",
-        "catchError": "Something went wrong, try again"
-      },
-      "success": "Photo updated successfully"
+    "subtitle": {
+      "prefix": "Patient:"
     },
-    "chat": {
-      "doctor": {
-        "prefix": "Dr."
-      },
-      "subtitle": {
-        "prefix": "Patient:"
-      },
-      "title": "Appointment chat",
-      "placeholder": "Type a message"
-    },
-    "help": {
-      "title": "FAQ"
-    },
-    "defaultLanguage": "en-US",
-    "not-one": "You are not the chosen one",
-    "load-more": "Load More",
-    "privacyPolicy": "Privacy policy",
-    "termsConditions": "Terms and conditions"
+    "title": "Appointment chat",
+    "placeholder": "Type a message"
+  },
+  "help": {
+    "title": "FAQ"
+  },
+  "defaultLanguage": "en-US",
+  "not-one": "You are not the chosen one",
+  "load-more": "Load More",
+  "privacyPolicy": "Privacy policy",
+  "termsConditions": "Terms and conditions"
 }
