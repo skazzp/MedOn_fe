@@ -112,7 +112,7 @@ export function PatientCardCalendar() {
   };
 
   useEffect(() => {
-    setPage(1);
+    setPage(defaultPage);
     setNotes([]);
   }, [text, order]);
 
