@@ -32,7 +32,7 @@ export const Form = styled.form`
 `;
 
 export const SendButton = styled(Input)`
-  background: ${theme.colors.blue_300};
+  background: ${theme.colors.btnGradient} !important;
   color: ${theme.colors.white};
   cursor: pointer;
   font-weight: 500;

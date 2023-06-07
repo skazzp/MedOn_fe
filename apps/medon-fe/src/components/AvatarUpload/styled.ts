@@ -25,16 +25,19 @@ export const Label = styled.label`
   width: 20px;
   height: 20px;
   cursor: pointer;
+  transition: all 0.2s ease-in;
+
+  &:hover {
+    color: ${theme.colors.blue_500};
+    fill: ${theme.colors.blue_500};
+    scale: 1.1;
+  }
 `;
 
 export const StyledEditIcon = styled(CameraOutlined)`
-  width: 20px;
-  height: 20px;
   fill: ${theme.colors.icon_active};
   color: ${theme.colors.icon_active};
-  &:hover {
-    scale: 1.1;
-  }
+
   svg {
     width: 20px;
     height: 20px;
