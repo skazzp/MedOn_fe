@@ -9,6 +9,7 @@ import { ReactComponent as Clock } from 'assets/images/Time.svg';
 
 import Button from 'components/Button';
 import { AddLinkModal } from 'components/AppointmentsCardAddModal';
+import { RemoteAppointmentModal } from 'components/AppointmentsCardRemoveModal';
 import { ShowMore } from 'components/ShowMore';
 
 import { useModal } from 'hooks/useModal';
@@ -63,6 +64,11 @@ export function AppointmentsCard({
     hideModal: hideAddModal,
     isVisible: isAddVisible,
     showModal: showAddModal,
+  } = useModal(false);
+  const {
+    hideModal: hideRemoveModal,
+    isVisible: isRemoveVisible,
+    showModal: showRemoveModal,
   } = useModal(false);
 
   const user = useAppSelector(getUserSelector);
@@ -125,7 +131,9 @@ export function AppointmentsCard({
             <Link to={`${routes.patientCard}/${patient?.id}`}>
               <Profile />
             </Link>
-            {isDeleteAvailable(endTime) && <TrashBin />}
+            {isDeleteAvailable(endTime) && (
+              <TrashBin onClick={() => showRemoveModal()} />
+            )}
           </Icons>
         </Header>
         <Body>
@@ -135,9 +143,15 @@ export function AppointmentsCard({
           />
         </Body>
         <AddLinkModal
-          hideAddModal={hideAddModal}
           id={id}
+          hideAddModal={hideAddModal}
           isAddVisible={isAddVisible}
+        />
+        <RemoteAppointmentModal
+          id={id}
+          hideRemoveModal={hideRemoveModal}
+          isRemoveVisible={isRemoveVisible}
+          showRemoveModal={showRemoveModal}
         />
       </Container>
     </>
