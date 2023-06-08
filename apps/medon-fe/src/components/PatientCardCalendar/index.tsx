@@ -187,7 +187,7 @@ export function PatientCardCalendar() {
               {t('patient-card.calendar.modal-name-link')}
             </Link>
           ) : (
-            <p>{t('patient-card.calendar.modal-link-unavailable')}</p>
+            <span>{t('patient-card.calendar.modal-link-unavailable')}</span>
           )}
         </p>
       </StyledModal>
