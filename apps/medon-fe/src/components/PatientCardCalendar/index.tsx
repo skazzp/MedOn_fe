@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Views, dayjsLocalizer, Event } from 'react-big-calendar';
 import AnimateHeight, { Height } from 'react-animate-height';
@@ -45,6 +45,7 @@ import { addPatientNoteSchema } from 'validation/addPatientNoteSchema';
 
 import { useModal } from 'hooks/useModal';
 
+import { PatientNote } from 'interfaces/patients';
 import {
   AddNoteForm,
   Buttons,
@@ -62,6 +63,7 @@ export function PatientCardCalendar() {
   const [event, setEvent] = useState<Event>();
   const [height, setHeight] = useState<Height>(0);
   const [textValue, setTextValue] = useState<string>('');
+  const [notes, setNotes] = useState<PatientNote[]>([]);
   const { id = '' } = useParams<ParamsType>();
   const { role } = useAppSelector((state) => state.userState.user);
   const { t } = useTranslation();
@@ -72,7 +74,7 @@ export function PatientCardCalendar() {
 
   const text = useDebounce(textValue, 1000);
   const { hideModal, isVisible, showModal } = useModal(false);
-  const { data: notes, isFetching } = useGetPatientNotesQuery({
+  const { data: response, isFetching } = useGetPatientNotesQuery({
     id,
     order,
     text,
@@ -87,12 +89,15 @@ export function PatientCardCalendar() {
     resolver: yupResolver(addPatientNoteSchema),
   });
 
+  const total = response?.data?.total || 0;
+  const newNotes = response?.data?.notes;
   const handleEventSelect = (eventValue: Event) => {
     showModal();
     setEvent(eventValue);
   };
 
   const handleAddNote: SubmitHandler<SubmitAddNote> = ({ note }) => {
+    setPage(defaultPage);
     sendData({ note, patientId: id })
       .unwrap()
       .then(() => {
@@ -103,6 +108,20 @@ export function PatientCardCalendar() {
         toast.error(err.data.message, toastConfig);
       });
   };
+
+  useEffect(() => {
+    setPage(defaultPage);
+    setNotes([]);
+  }, [text, order]);
+
+  useEffect(() => {
+    if (newNotes && page !== defaultPage) {
+      setNotes((prev) => prev.concat(newNotes));
+    }
+    if (newNotes && page === defaultPage) {
+      setNotes(newNotes);
+    }
+  }, [newNotes, page]);
 
   return (
     <>
@@ -223,8 +242,8 @@ export function PatientCardCalendar() {
       </Wrapper>
       <PatientNotes
         isFetching={isFetching}
-        notes={notes?.data?.notes}
-        total={notes?.data?.total}
+        notes={notes}
+        total={total}
         page={page}
         setPage={setPage}
       />

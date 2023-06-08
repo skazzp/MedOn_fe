@@ -174,6 +174,7 @@ export interface AppointmentFutureRequest {
 
 export interface AppointmentListRequest {
   page: number;
+  limit: number;
   filter: Filter;
   showAll?: ShowAll;
 }
