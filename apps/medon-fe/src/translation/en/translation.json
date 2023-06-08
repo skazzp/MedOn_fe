@@ -359,7 +359,7 @@
     "remote-doctor": "Select a Remote Doctor",
     "previous": "Previous step",
     "next": "Next step",
-    "booking": "Booking Appointment",
+    "booking": "Book Appointment",
     "date": "Date: ",
     "select": "You selected:",
     "cancel": "Cancel",
@@ -441,7 +441,7 @@
       "future": "Future",
       "past": "Past"
     },
-    "not-found": "Appointment not found based on requirements"
+    "not-found": "Appointments not found"
   },
   "availability": {
     "title": "Availability schedule:",
