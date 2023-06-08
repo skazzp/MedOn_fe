@@ -97,6 +97,7 @@ export function PatientCardCalendar() {
   };
 
   const handleAddNote: SubmitHandler<SubmitAddNote> = ({ note }) => {
+    setPage(defaultPage);
     sendData({ note, patientId: id })
       .unwrap()
       .then(() => {
@@ -114,10 +115,13 @@ export function PatientCardCalendar() {
   }, [text, order]);
 
   useEffect(() => {
-    if (newNotes) {
+    if (newNotes && page !== defaultPage) {
       setNotes((prev) => prev.concat(newNotes));
     }
-  }, [newNotes]);
+    if (newNotes && page === defaultPage) {
+      setNotes(newNotes);
+    }
+  }, [newNotes, page]);
 
   return (
     <>

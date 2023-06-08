@@ -34,6 +34,7 @@ export const Cancel = styled.button`
   background-position-y: center;
   background-position-x: 5px;
   transition: all 0.7s;
+  cursor: pointer;
   :hover {
     background: ${theme.colors.blue_700};
     background-image: url(${cross});
@@ -76,6 +77,7 @@ export const Button = styled.button<ButtonProps>`
   font-size: ${theme.fontSizes.md};
   line-height: 20px;
   color: ${theme.colors.white};
+  cursor: pointer;
   &:hover {
     background-color: ${theme.colors.blue_700};
     background-position-x: ${({ buttonType }) =>
