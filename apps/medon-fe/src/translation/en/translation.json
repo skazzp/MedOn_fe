@@ -144,6 +144,7 @@
       "modal-end": "End Appointment:",
       "modal-link": "Zoom Link:",
       "modal-name-link": "Link",
+      "modal-link-unavailable": "This link is for doctors who have this appointment",
       "legend-title": "Legend:",
       "appointment-you": "Appointments with you",
       "appointment-others": "Appointments with other doctors"
