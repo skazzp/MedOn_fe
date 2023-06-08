@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { timeSlots } from 'utils/constants/options/hourOptions';
+import { endOfDayHour, timeSlots } from 'utils/constants/options/hourOptions';
 import dayjs from 'dayjs';
 import { SelectTimeSlotProps } from './types';
 
@@ -34,8 +34,9 @@ export function useSelectTimeSlot({
         }
 
         if (isAvailable) {
-          for (let i = startTime; i < endTime; i += 1) {
-            availability[doctor.id][i] = true;
+          availability[doctor.id][startTime] = true;
+          for (let i = startTime + 1; i <= endTime; i += 1) {
+            availability[doctor.id][i % endOfDayHour] = true;
           }
         }
       });
