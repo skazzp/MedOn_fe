@@ -173,13 +173,22 @@ export function PatientCardCalendar() {
         </p>
         <p>
           <strong>{t('patient-card.calendar.modal-link')} </strong>
-          <Link
-            bgcolor={theme.colors.transparent}
-            textcolor={theme.colors.blue_300}
-            to={event?.resource.link}
-          >
-            {t('patient-card.calendar.modal-name-link')}
-          </Link>
+          {appointments.some(
+            (appointment) =>
+              appointment &&
+              appointment.resource &&
+              appointment.resource.isColor
+          ) ? (
+            <Link
+              bgcolor={theme.colors.transparent}
+              textcolor={theme.colors.blue_300}
+              to={event?.resource.link}
+            >
+              {t('patient-card.calendar.modal-name-link')}
+            </Link>
+          ) : (
+            <p>{t('patient-card.calendar.modal-link-unavailable')}</p>
+          )}
         </p>
       </StyledModal>
       <Button
