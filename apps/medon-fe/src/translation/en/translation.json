@@ -441,7 +441,7 @@
       "future": "Future",
       "past": "Past"
     },
-    "not-found": "Appointment not found based on requirements"
+    "not-found": "Appointments not found"
   },
   "availability": {
     "title": "Availability schedule:",
