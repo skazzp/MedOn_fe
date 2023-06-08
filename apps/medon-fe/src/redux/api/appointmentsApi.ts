@@ -18,7 +18,7 @@ export const appointmentsApi = createApi({
     baseUrl: process.env.NX_API_URL,
     prepareHeaders,
   }),
-  tagTypes: ['appointment', 'appointments'],
+  tagTypes: ['appointment'],
   endpoints: (builder) => ({
     getAppointments: builder.query<
       IServerResponse<Appointment[]>,
@@ -48,11 +48,12 @@ export const appointmentsApi = createApi({
       }),
       invalidatesTags: ['appointment'],
     }),
-    deleteAppointment: builder.mutation<void, number>({
-      query: (id) => ({
+    deleteAppointment: builder.mutation<IServerResponse<void>, { id: string }>({
+      query: ({ id }) => ({
         url: `appointments/${id}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['appointment'],
     }),
     getAppointmentsByPatientsId: builder.query<
       IServerResponse<Appointment[]>,
@@ -62,6 +63,7 @@ export const appointmentsApi = createApi({
         url: `appointments/patient/${id}`,
         method: 'GET',
       }),
+      providesTags: ['appointment'],
     }),
     getFutureAppointments: builder.query<
       IServerResponse<IAppointmentsCardProps[]>,
@@ -76,7 +78,7 @@ export const appointmentsApi = createApi({
           },
         };
       },
-      providesTags: ['appointments'],
+      providesTags: ['appointment'],
     }),
     getAllListAppointments: builder.query<
       IServerResponse<IAppointmentsCardProps[]>,
@@ -92,7 +94,7 @@ export const appointmentsApi = createApi({
           },
         };
       },
-      providesTags: ['appointments'],
+      providesTags: ['appointment'],
     }),
     getAllCalendarAppointments: builder.query<
       IServerResponse<IAppointmentsCardProps[]>,
@@ -106,7 +108,7 @@ export const appointmentsApi = createApi({
           },
         };
       },
-      providesTags: ['appointments'],
+      providesTags: ['appointment'],
     }),
     sendLink: builder.mutation<
       IServerResponse<void>,
@@ -119,7 +121,7 @@ export const appointmentsApi = createApi({
           body: { link },
         };
       },
-      invalidatesTags: ['appointments'],
+      invalidatesTags: ['appointment'],
     }),
 
     getActiveAppointments: builder.query<

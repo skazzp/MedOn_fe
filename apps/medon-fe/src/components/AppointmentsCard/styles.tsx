@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { DeleteOutlined } from '@ant-design/icons';
+
 import { IAppointmentsCardProps } from './types';
 
 export const Container = styled.div<IAppointmentsCardProps>`
@@ -77,5 +79,21 @@ export const Time = styled.div`
   > svg {
     margin-bottom: 0.1rem;
     margin-right: 0.3rem;
+  }
+`;
+
+export const TrashBin = styled(DeleteOutlined)`
+  cursor: pointer;
+  color: ${({ theme }) => theme.colors.blue_400};
+  font-size: 1.25rem;
+`;
+
+export const Icons = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  > a {
+    height: 1.5rem;
   }
 `;
