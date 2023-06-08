@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Views, dayjsLocalizer, Event } from 'react-big-calendar';
 import AnimateHeight, { Height } from 'react-animate-height';
@@ -45,7 +45,6 @@ import { addPatientNoteSchema } from 'validation/addPatientNoteSchema';
 
 import { useModal } from 'hooks/useModal';
 
-import { PatientNote } from 'interfaces/patients';
 import {
   AddNoteForm,
   Buttons,
@@ -63,7 +62,6 @@ export function PatientCardCalendar() {
   const [event, setEvent] = useState<Event>();
   const [height, setHeight] = useState<Height>(0);
   const [textValue, setTextValue] = useState<string>('');
-  const [notes, setNotes] = useState<PatientNote[]>([]);
   const { id = '' } = useParams<ParamsType>();
   const { role } = useAppSelector((state) => state.userState.user);
   const { t } = useTranslation();
@@ -74,7 +72,7 @@ export function PatientCardCalendar() {
 
   const text = useDebounce(textValue, 1000);
   const { hideModal, isVisible, showModal } = useModal(false);
-  const { data: response, isFetching } = useGetPatientNotesQuery({
+  const { data: notes, isFetching } = useGetPatientNotesQuery({
     id,
     order,
     text,
@@ -89,8 +87,6 @@ export function PatientCardCalendar() {
     resolver: yupResolver(addPatientNoteSchema),
   });
 
-  const total = response?.data?.total || 0;
-  const newNotes = response?.data?.notes;
   const handleEventSelect = (eventValue: Event) => {
     showModal();
     setEvent(eventValue);
@@ -107,17 +103,6 @@ export function PatientCardCalendar() {
         toast.error(err.data.message, toastConfig);
       });
   };
-
-  useEffect(() => {
-    setPage(defaultPage);
-    setNotes([]);
-  }, [text, order]);
-
-  useEffect(() => {
-    if (newNotes) {
-      setNotes((prev) => prev.concat(newNotes));
-    }
-  }, [newNotes]);
 
   return (
     <>
@@ -238,8 +223,8 @@ export function PatientCardCalendar() {
       </Wrapper>
       <PatientNotes
         isFetching={isFetching}
-        notes={notes}
-        total={total}
+        notes={notes?.data?.notes}
+        total={notes?.data?.total}
         page={page}
         setPage={setPage}
       />
