@@ -97,6 +97,7 @@ export function PatientCardCalendar() {
   };
 
   const handleAddNote: SubmitHandler<SubmitAddNote> = ({ note }) => {
+    setPage(defaultPage);
     sendData({ note, patientId: id })
       .unwrap()
       .then(() => {
