@@ -45,6 +45,7 @@ import {
   EditBtnText,
   EditBtnIcon,
   StyledCancelBtn,
+  Capitalize,
 } from './styles';
 import { FormProfileData } from './types';
 
@@ -140,6 +141,16 @@ export default function ProfileForm({
         }`}</DrNameText>
         <EmailLabel>{t('profilePage.email')}</EmailLabel>
         <EmailText>{user.email}</EmailText>
+        {user.role && (
+          <>
+            <EmailLabel>{t('profilePage.role')}</EmailLabel>
+            <EmailText>
+              <Capitalize>{user.role}</Capitalize>
+              {t('profilePage.doctor')}
+            </EmailText>
+          </>
+        )}
+
         <EditBtnStyled
           type="button"
           onClick={() => {
