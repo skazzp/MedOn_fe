@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { DeleteOutlined } from '@ant-design/icons';
 
 import { IAppointmentsCardProps } from './types';
@@ -13,9 +14,10 @@ export const Container = styled.div<IAppointmentsCardProps>`
   padding: 0.875rem 0.75rem;
   border-radius: 0.5rem;
   > div:first-child {
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.875rem;
   }
   > div:last-child {
+    padding-top: 0.875rem;
     strong {
       color: ${({ theme }) => theme.colors.blue_900};
     }
@@ -42,17 +44,29 @@ export const Number = styled.span`
 export const Info = styled.span`
   display: flex;
   gap: 2.5rem;
-  width: 17rem;
+  width: 40%;
   white-space: nowrap;
 `;
 
-export const RemoteAssign = styled.span`
+export const RemoteAssign = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: space-between;
+  width: 40%;
   > strong {
     color: ${({ theme }) => theme.colors.blue_300};
   }
+  > button {
+    width: fit-content;
+    height: fit-content;
+    padding: 0.25rem 0.5rem;
+  }
+`;
+
+export const DocInfoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 `;
 
 export const Patient = styled.span`
@@ -96,4 +110,8 @@ export const Icons = styled.div`
   > a {
     height: 1.5rem;
   }
+`;
+
+export const StyledZoomLink = styled(Link)`
+  display: flex;
 `;

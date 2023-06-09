@@ -22,6 +22,7 @@ export const Appointments = styled.div`
 
 export const Icon = styled.div`
   margin-left: 16px;
+  display: flex;
   svg {
     fill: ${theme.colors.lightBlue};
   }

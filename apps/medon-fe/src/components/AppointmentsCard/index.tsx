@@ -34,6 +34,7 @@ import { IAppointmentsCardProps } from './types';
 import {
   Body,
   Container,
+  DocInfoWrapper,
   Header,
   Icons,
   Info,
@@ -41,6 +42,7 @@ import {
   Number,
   Patient,
   RemoteAssign,
+  StyledZoomLink,
   Time,
   TrashBin,
 } from './styles';
@@ -103,36 +105,39 @@ export function AppointmentsCard({
             </Patient>
           </Info>
           <RemoteAssign>
-            {!isLinkAdded && (
-              <Link to={String(link)}>
-                <Camera />
-              </Link>
-            )}
-            {user.role === roles.local ? (
-              <>
-                {t('appointment.preffix-remote')}
-                <strong>
-                  {t('appointment.prefix-doctor')} {remoteDoctor?.lastName}
-                </strong>
-              </>
-            ) : (
-              <>
-                {t('appointment.preffix-local')}
-                <strong>
-                  {t('appointment.prefix-doctor')} {localDoctor?.lastName}
-                </strong>
-              </>
+            <DocInfoWrapper>
+              {!isLinkAdded && (
+                <StyledZoomLink to={String(link)}>
+                  <Camera />
+                </StyledZoomLink>
+              )}
+              {user.role === roles.local ? (
+                <>
+                  {t('appointment.preffix-remote')}
+                  <strong>
+                    {t('appointment.prefix-doctor')} {remoteDoctor?.lastName}
+                  </strong>
+                </>
+              ) : (
+                <>
+                  {t('appointment.preffix-local')}
+                  <strong>
+                    {t('appointment.prefix-doctor')} {localDoctor?.lastName}
+                  </strong>
+                </>
+              )}
+            </DocInfoWrapper>
+            {isLinkAdded && role === roles.local && (
+              <Button
+                textcolor={theme.colors.blue_500}
+                bgcolor={theme.colors.blue_100}
+                onClick={showAddModal}
+              >
+                {t('appointment.add-link')}
+              </Button>
             )}
           </RemoteAssign>
-          {isLinkAdded && role === roles.local && (
-            <Button
-              textcolor={theme.colors.blue_500}
-              bgcolor={theme.colors.blue_100}
-              onClick={showAddModal}
-            >
-              {t('appointment.add-link')}
-            </Button>
-          )}
+
           <Icons>
             <Link to={`${routes.patientCard}/${patient?.id}`}>
               <Profile />
