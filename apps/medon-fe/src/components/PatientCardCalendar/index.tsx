@@ -1,3 +1,4 @@
+import { PlusOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -61,7 +62,8 @@ import useGetPatientAppointments from './hooks';
 
 export function PatientCardCalendar() {
   const [event, setEvent] = useState<Event>();
-  const [height, setHeight] = useState<Height>(0);
+  const [noteHeight, setNoteHeight] = useState<Height>(0);
+  const [calendarHeight, setCalendarHeight] = useState<Height>(0);
   const [textValue, setTextValue] = useState<string>('');
   const [notes, setNotes] = useState<PatientNote[]>([]);
   const { id = '' } = useParams<ParamsType>();
@@ -138,20 +140,31 @@ export function PatientCardCalendar() {
           </Link>
         )}
       </Title>
-      <StyledCalendar
-        localizer={dayjsLocalizer(dayjs)}
-        defaultView={Views.WEEK}
-        views={[Views.WEEK]}
-        events={appointments}
-        dayPropGetter={getDayPropGetter}
-        eventPropGetter={getEventPropGetter}
-        onSelectEvent={handleEventSelect}
-        popup
-        selectable
-        timeslots={1}
-        step={60}
-      />
-      <Legend />
+      <Button
+        isfullwidth="true"
+        textcolor={theme.colors.blue_500}
+        bgcolor={theme.colors.blue_100}
+        onClick={() => setCalendarHeight(calendarHeight === 0 ? 'auto' : 0)}
+      >
+        Calendar
+        <PlusOutlined style={{}} />
+      </Button>
+      <AnimateHeight height={calendarHeight}>
+        <StyledCalendar
+          localizer={dayjsLocalizer(dayjs)}
+          defaultView={Views.WEEK}
+          views={[Views.WEEK]}
+          events={appointments}
+          dayPropGetter={getDayPropGetter}
+          eventPropGetter={getEventPropGetter}
+          onSelectEvent={handleEventSelect}
+          popup
+          selectable
+          timeslots={1}
+          step={60}
+        />
+        <Legend />
+      </AnimateHeight>
       <StyledModal
         title={`${t('patient-card.calendar.prefix-modal')} ${event?.title}`}
         open={isVisible}
@@ -191,15 +204,18 @@ export function PatientCardCalendar() {
           )}
         </p>
       </StyledModal>
+
       <Button
         isfullwidth="true"
         textcolor={theme.colors.blue_500}
         bgcolor={theme.colors.blue_100}
-        onClick={() => setHeight(height === 0 ? 'auto' : 0)}
+        onClick={() => setNoteHeight(noteHeight === 0 ? 'auto' : 0)}
       >
         {t('patient-card.button')}
+        <PlusOutlined />
       </Button>
-      <AnimateHeight height={height}>
+
+      <AnimateHeight height={noteHeight}>
         <AddNoteForm onSubmit={handleSubmit(handleAddNote)}>
           <TextareaAntD
             name="note"
@@ -222,7 +238,7 @@ export function PatientCardCalendar() {
               type="button"
               textcolor={theme.colors.gray_700}
               bgcolor={theme.colors.gray_400}
-              onClick={() => setHeight(height === 0 ? 'auto' : 0)}
+              onClick={() => setNoteHeight(noteHeight === 0 ? 'auto' : 0)}
             >
               <Close />
               {t('patient-card.notes.cancel-button')}

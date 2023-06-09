@@ -125,7 +125,7 @@
     "no-overview": "No information available"
   },
   "patient-card": {
-    "button": "Add Patient Note +",
+    "button": "Add Patient Note",
     "modal": "Add Note",
     "overview": "Overview",
     "suffix-age": "years",
