@@ -1,9 +1,9 @@
 import { Skeleton } from 'antd';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { useAppSelector } from 'redux/hooks';
 
 import {
   AppointmentContainer,
