@@ -230,6 +230,7 @@
       "required": "Country is required"
     },
     "city": {
+      "matches": "Must consist only of Latin letters",
       "required": "City is required"
     },
     "timezone": {
@@ -268,9 +269,11 @@
   "profilePage": {
     "dr": "Dr. ",
     "email": "Email:",
+    "role": "Role:",
     "fillProfile": "You need to fill your profile before start working!",
     "updateError": "Profile update error, try again!",
-    "profileUpdated": "Profile updated!"
+    "profileUpdated": "Profile updated!",
+    "doctor": " doctor"
   },
   "profileForm": {
     "profilePicAlt": "User's profile avatar",

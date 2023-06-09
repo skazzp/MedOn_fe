@@ -34,6 +34,9 @@ export const profileFormSchema = yup.object({
     .typeError('validation.birthday.required')
     .required('validation.birthday.required'),
   country: yup.string().required('validation.country.required'),
-  city: yup.string().required('validation.city.required'),
+  city: yup
+    .string()
+    .matches(/^[a-zA-Z]+$/, 'validation.city.matches')
+    .required('validation.city.required'),
   timezone: yup.string().required('validation.timezone.required'),
 });

@@ -25,11 +25,12 @@ export const DrNameText = styled.p`
   font-weight: ${theme.fontWeight.bold};
   line-height: 1.5;
   margin-top: 0;
-  margin-bottom: 12px;
+  margin-bottom: 0;
 `;
 
 export const EmailLabel = styled.p`
-  margin: 0;
+  margin-top: 12px;
+  margin-bottom: 0;
   font-size: ${theme.fontSizes.md};
 `;
 
@@ -39,6 +40,10 @@ export const EmailText = styled.p`
   line-height: 1.8;
   margin-top: 8px;
   margin-bottom: 0;
+`;
+
+export const Capitalize = styled.span`
+  text-transform: capitalize;
 `;
 
 export const EditBtnStyled = styled.button`
