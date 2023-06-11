@@ -164,9 +164,10 @@ const AppointmentsPage = () => {
           {!isListLoading ? (
             <AppointmentContainer>
               {listAppointments?.data?.length ? (
-                listAppointments?.data.map((appointment) => (
+                listAppointments?.data.map((appointment, index) => (
                   <AppointmentsCard
                     key={appointment.id}
+                    meetingCount={index + 1}
                     isLinkAdded
                     {...appointment}
                   />

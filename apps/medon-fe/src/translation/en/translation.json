@@ -154,7 +154,14 @@
       "empty-notes": "No notes added yet",
       "add-button": "Add Note",
       "cancel-button": "Cancel",
-      "placeholder": "Add a note about the patient"
+      "placeholder": "Add a note about the patient",
+      "save-success": "Changes have been successfully saved.",
+      "error": "Failed to update note"
+    },
+    "buttons": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "edit": "Edit note"
     }
   },
   "show": {
