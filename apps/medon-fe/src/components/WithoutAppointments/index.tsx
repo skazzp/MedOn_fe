@@ -37,7 +37,7 @@ export function WithoutAppointments() {
             </TextWrap>
           ) : (
             <TextWrap>
-              <Manage to={routes.appointments}>
+              <Manage to={routes.patients}>
                 {t('dashboard.book')}
                 <IconUnion />
               </Manage>
