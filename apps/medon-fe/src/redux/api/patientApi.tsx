@@ -31,6 +31,7 @@ export const patientApi = createApi({
           body: dto,
         };
       },
+      invalidatesTags: ['patientInfo'],
     }),
     getPatients: builder.query<IPatientsResponse, IPatientsParams>({
       query: ({ page = 1, limit = 5, name = '' }) => ({
@@ -40,6 +41,7 @@ export const patientApi = createApi({
       providesTags: (result, error, arg) => [
         { type: 'PatientsQuery', page: arg.page },
         { type: 'PatientsQuery', limit: arg.limit },
+        'patientInfo',
       ],
     }),
     getPatientById: builder.query<IServerResponse<IPatient>, { id?: string }>({
