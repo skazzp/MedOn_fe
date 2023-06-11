@@ -34,7 +34,7 @@ export default function PatientListCard({
   const location = useLocation();
 
   const { data: notes } = useGetPatientNotesQuery({
-    id: id.toString(),
+    id: String(id),
     page: 1,
     limit: 1,
   });
@@ -72,7 +72,7 @@ export default function PatientListCard({
       <Body>
         <ShowMore
           overview={overview}
-          lastNote={notes?.data?.total ? notes.data.notes[0].note : ''}
+          lastNote={notes?.data?.notes[0]?.note}
           prefixOverview={`${t('patient-list.overview')}`}
           prefixLastNote={`${t('patient-list.last-note')}`}
         />

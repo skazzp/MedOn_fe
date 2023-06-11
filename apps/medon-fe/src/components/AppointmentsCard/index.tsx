@@ -174,7 +174,7 @@ export function AppointmentsCard({
         <Body>
           <ShowMore
             overview={patient?.overview}
-            lastNote={notes?.data?.notes ? notes?.data?.notes[0]?.note : ''}
+            lastNote={notes?.data?.notes[0]?.note}
             prefixOverview={`${t('appointment.preffix-overview')}`}
             prefixLastNote={`${t('appointment.preffix-last-note')}`}
           />

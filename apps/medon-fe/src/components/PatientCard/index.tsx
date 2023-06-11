@@ -89,7 +89,7 @@ export default function PatientCard() {
             prefixOverview={`${t('patient-list.overview')}`}
             prefixLastNote={`${t('patient-list.last-note')}`}
             overview={patient?.data?.overview}
-            lastNote={notes?.data?.notes[0].note}
+            lastNote={notes?.data?.notes[0]?.note}
           />
           <Outlet />
         </>
