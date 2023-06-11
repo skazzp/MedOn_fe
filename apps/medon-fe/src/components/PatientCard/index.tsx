@@ -76,7 +76,7 @@ export default function PatientCard() {
               </StyledButton>
             )}
           <h4>{t('patient-card.overview')}</h4>
-          <ShowMore text={patient?.data?.overview} />
+          <ShowMore overview={patient?.data?.overview} />
           <Outlet />
         </>
       ) : (

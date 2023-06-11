@@ -62,7 +62,10 @@ export default function PatientListCard({
         </Options>
       </Header>
       <Body>
-        <ShowMore text={overview} prefix={`${t('patient-list.overview')}`} />
+        <ShowMore
+          overview={overview}
+          prefixOverview={`${t('patient-list.overview')}`}
+        />
       </Body>
     </Container>
   );

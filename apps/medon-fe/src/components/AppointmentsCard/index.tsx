@@ -144,8 +144,8 @@ export function AppointmentsCard({
         </Header>
         <Body>
           <ShowMore
-            text={patient?.overview}
-            prefix={`${t('appointment.preffix-overview')}`}
+            overview={patient?.overview}
+            prefixOverview={`${t('appointment.preffix-overview')}`}
           />
         </Body>
         <AddLinkModal
