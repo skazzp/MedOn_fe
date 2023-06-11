@@ -85,7 +85,6 @@ export default function PatientCard() {
                 <ChatIcon />
               </StyledButton>
             )}
-          <h4>{t('patient-card.overview')}</h4>
           <ShowMore
             prefixOverview={`${t('patient-list.overview')}`}
             prefixLastNote={`${t('patient-list.last-note')}`}
