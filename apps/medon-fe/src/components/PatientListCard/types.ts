@@ -8,6 +8,7 @@ export interface IPatientListCardProps {
   gender: string;
   dateOfBirth: string;
   overview?: string;
+  note?: string;
 }
 
 export interface ShowMoreTextHookReturnType {

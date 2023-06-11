@@ -76,7 +76,11 @@ export default function PatientCard() {
               </StyledButton>
             )}
           <h4>{t('patient-card.overview')}</h4>
-          <ShowMore overview={patient?.data?.overview} />
+          <ShowMore
+            prefixOverview={`${t('patient-list.overview')}`}
+            prefixLastNote={`${t('patient-list.last-note')}`}
+            overview={patient?.data?.overview}
+          />
           <Outlet />
         </>
       ) : (
