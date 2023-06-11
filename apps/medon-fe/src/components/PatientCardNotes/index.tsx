@@ -54,9 +54,9 @@ export default function PatientCardNotes({
         updatedNote: editedNote,
       });
       setEditMode(false);
-      toast.success(t('patient-card.note.save-success'));
+      toast.success(t('patient-card.notes.save-success'));
     } catch (error) {
-      toast.error(t('patient-card.note.error'));
+      toast.error(t('patient-card.notes.error'));
     }
   };
 
