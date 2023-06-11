@@ -1,4 +1,3 @@
-import { PlusOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,7 +11,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useTheme } from 'styled-components';
 
 import { AddNote, Close } from 'assets/svgs/patientCard';
-import Plus from 'assets/svgs/plus_listcard.svg';
 
 import { Link } from 'components/Link';
 import { PatientNotes } from 'components/PatientNotes';
@@ -50,9 +48,13 @@ import { PatientNote } from 'interfaces/patients';
 import {
   AddNoteForm,
   Buttons,
+  ContainerTitle,
   MedicalTitle,
   StyledCalendar,
   StyledModal,
+  StyledPlus,
+  StyledPlusBook,
+  StyledPlusNote,
   StyledSelect,
   Title,
   Wrapper,
@@ -128,7 +130,13 @@ export function PatientCardCalendar() {
   return (
     <>
       <Title>
-        <h2>{t('patient-card.calendar.title')}</h2>
+        <ContainerTitle>
+          <h2>{t('patient-card.calendar.title')}</h2>
+          <StyledPlus
+            isCalendarOpen={calendarHeight === 'auto'}
+            onClick={() => setCalendarHeight(calendarHeight === 0 ? 'auto' : 0)}
+          />
+        </ContainerTitle>
         {role === roles.local && (
           <Link
             to={`${routes.patientCardAppointment}`}
@@ -136,19 +144,10 @@ export function PatientCardCalendar() {
             textcolor={theme.colors.white}
           >
             {t('patient-card.calendar.link')}
-            <img src={Plus} alt={`${t('patient-card.alt-image')}`} />
+            <StyledPlusBook />
           </Link>
         )}
       </Title>
-      <Button
-        isfullwidth="true"
-        textcolor={theme.colors.blue_500}
-        bgcolor={theme.colors.blue_100}
-        onClick={() => setCalendarHeight(calendarHeight === 0 ? 'auto' : 0)}
-      >
-        Calendar
-        <PlusOutlined style={{}} />
-      </Button>
       <AnimateHeight height={calendarHeight}>
         <StyledCalendar
           localizer={dayjsLocalizer(dayjs)}
@@ -212,7 +211,7 @@ export function PatientCardCalendar() {
         onClick={() => setNoteHeight(noteHeight === 0 ? 'auto' : 0)}
       >
         {t('patient-card.button')}
-        <PlusOutlined />
+        <StyledPlusNote isAddNotesOpen={noteHeight === 'auto'} />
       </Button>
 
       <AnimateHeight height={noteHeight}>

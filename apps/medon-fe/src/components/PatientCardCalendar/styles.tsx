@@ -1,3 +1,4 @@
+import { ReactComponent as Plus } from 'assets/svgs/plus_listcard.svg';
 import { Modal, Select } from 'antd';
 import { Calendar } from 'react-big-calendar';
 import styled from 'styled-components';
@@ -185,4 +186,34 @@ export const TextSubtitle = styled.legend`
 
 export const MedicalTitle = styled.h5`
   width: 100%;
+`;
+
+export const ContainerTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+export const StyledPlus = styled(Plus)<{ isCalendarOpen: boolean }>`
+  fill: ${({ theme }) => theme.colors.black};
+  width: 32px;
+  height: 32px;
+  transform: ${({ isCalendarOpen }) => isCalendarOpen && 'rotate(45deg)'};
+  transition: transform 0.25s ease-in-out;
+  cursor: pointer;
+  padding: 0.25rem;
+`;
+
+export const StyledPlusBook = styled(Plus)`
+  fill: ${({ theme }) => theme.colors.white};
+`;
+
+export const StyledPlusNote = styled(Plus)<{ isAddNotesOpen: boolean }>`
+  fill: ${({ theme }) => theme.colors.blue_400};
+  transform: ${({ isAddNotesOpen }) => isAddNotesOpen && 'rotate(45deg)'};
+  transition: transform 0.25s ease-in-out;
+  cursor: pointer;
+  padding: 0.25rem;
+  width: 24px;
+  height: 24px;
 `;
