@@ -36,6 +36,7 @@ import {
   SectionWrapper,
   InputsWrapper,
   InputWrapper,
+  OverviewWrapper,
 } from './styles';
 
 interface Props {
@@ -177,7 +178,9 @@ export function NewPatientForm({ patient, setEditInfo }: Props) {
                   options={genderOption}
                 />
               </InputWrapper>
+            </SectionWrapper>
 
+            <SectionWrapper>
               <InputWrapper>
                 <Label>{t('new-patient.labels.date-of-birth')}</Label>
                 <DatepickerAntD
@@ -187,9 +190,7 @@ export function NewPatientForm({ patient, setEditInfo }: Props) {
                   placeholder={`${t('new-patient.placeholders.date-of-birth')}`}
                 />
               </InputWrapper>
-            </SectionWrapper>
 
-            <SectionWrapper>
               <InputWrapper>
                 <Label>{t('new-patient.labels.country')}</Label>
                 <SelectAntD
@@ -219,20 +220,23 @@ export function NewPatientForm({ patient, setEditInfo }: Props) {
                   control={control}
                 />
               </InputWrapper>
-
-              <InputWrapper>
-                <Label>{t('new-patient.labels.overview')}</Label>
-                <TextareaAntD
-                  size="large"
-                  name="overview"
-                  control={control}
-                  placeholder={`${t('new-patient.placeholders.overview')}`}
-                  showCount
-                  maxLength={maxLengthTextArea}
-                />
-              </InputWrapper>
             </SectionWrapper>
           </InputsWrapper>
+
+          <OverviewWrapper>
+            <InputWrapper>
+              <Label>{t('new-patient.labels.overview')}</Label>
+              <TextareaAntD
+                size="large"
+                name="overview"
+                control={control}
+                placeholder={`${t('new-patient.placeholders.overview')}`}
+                showCount
+                minRows={8}
+                maxLength={maxLengthTextArea}
+              />
+            </InputWrapper>
+          </OverviewWrapper>
 
           <ButtonsWrapper>
             <StyledButton

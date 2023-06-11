@@ -41,6 +41,7 @@ import {
   SubHeader,
   CalendarContainer,
   NotFound,
+  CountText,
 } from './styles';
 import { useGetCalendarEvents } from './hooks';
 
@@ -106,7 +107,7 @@ const AppointmentsPage = () => {
         <Title>
           <h2>{t('appointments.title')}</h2>
           <UserIcon />
-          <span>{listAppointments?.data?.length}</span>
+          <CountText>{listAppointments?.data?.length}</CountText>
         </Title>
         {!isMonthView && (
           <Buttons>

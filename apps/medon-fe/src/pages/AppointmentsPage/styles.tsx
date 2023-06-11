@@ -42,6 +42,10 @@ export const Title = styled.div`
   }
 `;
 
+export const CountText = styled.span`
+  margin-left: 5px;
+`;
+
 export const View = styled.div`
   width: fit-content;
   height: fit-content;

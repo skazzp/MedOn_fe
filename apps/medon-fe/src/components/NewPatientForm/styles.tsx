@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { Button } from 'antd';
 
 export const Container = styled.div`
-  max-width: 900px;
+  max-width: 1000px;
   min-width: 600px;
   width: 80%;
-  padding: 50px;
+  padding: 30px 50px;
   margin: 40px auto 0px;
   border: 1px solid ${(p) => p.theme.colors.gray_400};
   border-radius: 4px;
@@ -19,6 +19,7 @@ export const Header = styled.h1`
   font-family: ${({ theme }) => theme.fontFamily.sf_pro_text};
   font-size: ${({ theme }) => theme.fontSizes.xxl};
   font-weight: 400;
+  margin-top: 0px;
   margin-bottom: 40px;
   text-align: center;
 `;
@@ -35,8 +36,13 @@ export const InputsWrapper = styled.div`
   gap: 40px;
 `;
 
+export const OverviewWrapper = styled.div`
+  width: 100%;
+  margin-top: 24px;
+`;
+
 export const ButtonsWrapper = styled.div`
-  margin-top: 40px;
+  margin-top: 30px;
   display: flex;
   flex-direction: row;
   justify-content: end;

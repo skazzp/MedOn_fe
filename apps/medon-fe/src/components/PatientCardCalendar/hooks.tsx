@@ -19,8 +19,8 @@ const useGetPatientAppointments = (id: string) => {
               title: `${dayjs(elem.startTime).format(timeFormat)} - ${dayjs(
                 elem.endTime
               ).format(timeFormat)}`,
-              start: elem.startTime,
-              end: elem.endTime,
+              start: dayjs(elem.startTime),
+              end: dayjs(elem.endTime),
               allDay: true,
               resource: {
                 link: elem.link,

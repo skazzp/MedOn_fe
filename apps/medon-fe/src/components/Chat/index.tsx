@@ -10,7 +10,7 @@ import {
 } from 'react-chat-widget';
 import { useTranslation } from 'react-i18next';
 import { IChatProps, ICustomTimeStampProps } from 'components/Chat/types';
-import { TimeFormat } from 'utils/constants/timeFormats';
+import { timeFormat } from 'utils/constants';
 import { GlobalStyle, DateWrapperReply, DateWrapperMessage } from './styles';
 import 'react-chat-widget/lib/styles.css';
 
@@ -18,12 +18,10 @@ function CustomTimeStampFragment({ date, isReply }: ICustomTimeStampProps) {
   return (
     <>
       {isReply ? (
-        <DateWrapperReply>
-          {dayjs(date).format(TimeFormat.hh_mm)}
-        </DateWrapperReply>
+        <DateWrapperReply>{dayjs(date).format(timeFormat)}</DateWrapperReply>
       ) : (
         <DateWrapperMessage>
-          {dayjs(date).format(TimeFormat.hh_mm)}
+          {dayjs(date).format(timeFormat)}
         </DateWrapperMessage>
       )}
     </>
@@ -37,6 +35,8 @@ export function Chat({
   user,
   patientFullName,
 }: IChatProps) {
+  const { t } = useTranslation();
+
   useEffect(() => {
     history.forEach((message) => {
       if (message.sender.id === Number(user.id)) {
@@ -58,6 +58,7 @@ export function Chat({
       }
       markAllAsRead();
     });
+
     return () => dropMessages();
   }, []);
 
@@ -79,8 +80,6 @@ export function Chat({
     onSubmitMessage(message);
     renderCustomComponent(CustomTimeStampFragment, { date: new Date() });
   };
-
-  const { t } = useTranslation();
 
   return (
     <>

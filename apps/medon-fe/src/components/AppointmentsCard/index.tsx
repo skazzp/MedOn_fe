@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
@@ -36,6 +36,7 @@ import { IAppointmentsCardProps } from './types';
 import {
   Body,
   Container,
+  DocInfoWrapper,
   Header,
   Icons,
   Info,
@@ -43,6 +44,7 @@ import {
   Number,
   Patient,
   RemoteAssign,
+  StyledZoomLink,
   Time,
   TrashBin,
 } from './styles';
@@ -63,6 +65,7 @@ export function AppointmentsCard({
 }: IAppointmentsCardProps) {
   const theme = useTheme();
   const { t } = useTranslation();
+  const location = useLocation();
 
   const {
     hideModal: hideAddModal,
@@ -111,37 +114,54 @@ export function AppointmentsCard({
               {t('appointment.suffix-age')}
             </Patient>
           </Info>
-          <RemoteAssign>
-            {!isLinkAdded && (
-              <Link to={String(link)}>
-                <Camera />
-              </Link>
+          {user.role === roles.local &&
+            location.pathname === routes.appointments && (
+              <RemoteAssign>
+                <DocInfoWrapper>
+                  <>
+                    {t('appointment.preffix-local')}
+                    <strong>
+                      {t('appointment.prefix-doctor')} {localDoctor?.lastName}
+                    </strong>
+                  </>
+                </DocInfoWrapper>
+              </RemoteAssign>
             )}
-            {user.role === roles.local ? (
-              <>
-                {t('appointment.preffix-remote')}
-                <strong>
-                  {t('appointment.prefix-doctor')} {remoteDoctor?.lastName}
-                </strong>
-              </>
-            ) : (
-              <>
-                {t('appointment.preffix-local')}
-                <strong>
-                  {t('appointment.prefix-doctor')} {localDoctor?.lastName}
-                </strong>
-              </>
+
+          <RemoteAssign>
+            <DocInfoWrapper>
+              {!isLinkAdded && (
+                <StyledZoomLink to={String(link)}>
+                  <Camera />
+                </StyledZoomLink>
+              )}
+              {user.role === roles.local ? (
+                <>
+                  {t('appointment.preffix-remote')}
+                  <strong>
+                    {t('appointment.prefix-doctor')} {remoteDoctor?.lastName}
+                  </strong>
+                </>
+              ) : (
+                <>
+                  {t('appointment.preffix-local')}
+                  <strong>
+                    {t('appointment.prefix-doctor')} {localDoctor?.lastName}
+                  </strong>
+                </>
+              )}
+            </DocInfoWrapper>
+            {isLinkAdded && role === roles.local && (
+              <Button
+                textcolor={theme.colors.blue_500}
+                bgcolor={theme.colors.blue_100}
+                onClick={showAddModal}
+              >
+                {t('appointment.add-link')}
+              </Button>
             )}
           </RemoteAssign>
-          {isLinkAdded && role === roles.local && (
-            <Button
-              textcolor={theme.colors.blue_500}
-              bgcolor={theme.colors.blue_100}
-              onClick={showAddModal}
-            >
-              {t('appointment.add-link')}
-            </Button>
-          )}
+
           <Icons>
             <Link to={`${routes.patientCard}/${patient?.id}`}>
               <Profile />
