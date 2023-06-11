@@ -44,7 +44,7 @@ export const Number = styled.span`
 export const Info = styled.span`
   display: flex;
   gap: 2.5rem;
-  width: 40%;
+  width: 30%;
   white-space: nowrap;
 `;
 
@@ -52,7 +52,7 @@ export const RemoteAssign = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 40%;
+  min-width: 30%;
   > strong {
     color: ${({ theme }) => theme.colors.blue_300};
   }
@@ -67,6 +67,9 @@ export const DocInfoWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  > strong {
+    color: ${({ theme }) => theme.colors.blue_300};
+  }
 `;
 
 export const Patient = styled.span`

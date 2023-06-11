@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
@@ -62,6 +62,7 @@ export function AppointmentsCard({
 }: IAppointmentsCardProps) {
   const theme = useTheme();
   const { t } = useTranslation();
+  const location = useLocation();
 
   const {
     hideModal: hideAddModal,
@@ -104,6 +105,20 @@ export function AppointmentsCard({
               {t('appointment.suffix-age')}
             </Patient>
           </Info>
+          {user.role === roles.local &&
+            location.pathname === routes.appointments && (
+              <RemoteAssign>
+                <DocInfoWrapper>
+                  <>
+                    {t('appointment.preffix-local')}
+                    <strong>
+                      {t('appointment.prefix-doctor')} {localDoctor?.lastName}
+                    </strong>
+                  </>
+                </DocInfoWrapper>
+              </RemoteAssign>
+            )}
+
           <RemoteAssign>
             <DocInfoWrapper>
               {!isLinkAdded && (
