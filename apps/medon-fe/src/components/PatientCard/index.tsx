@@ -14,9 +14,14 @@ import { Chat } from 'components/Chat';
 import { useSocket } from 'components/PatientCard/hooks/useSocket';
 
 import { useAppSelector } from 'redux/hooks';
-import { useGetPatientByIdQuery } from 'redux/api/patientApi';
+import {
+  useGetPatientByIdQuery,
+  useGetPatientNotesQuery,
+} from 'redux/api/patientApi';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
 import { getNotification } from 'redux/features/notificationSlice/notificationSlice';
+
+import { defaultPage } from 'utils/constants';
 
 import {
   Container,
@@ -35,6 +40,11 @@ export default function PatientCard() {
   const { data: patient, isLoading: isPatientLoading } = useGetPatientByIdQuery(
     { id }
   );
+  const { data: notes, isLoading: isNotesLoading } = useGetPatientNotesQuery({
+    id,
+    page: defaultPage,
+    limit: 1,
+  });
 
   const user = useAppSelector(getUserSelector);
 
@@ -45,7 +55,7 @@ export default function PatientCard() {
     userId: user.id,
   });
 
-  if (isPatientLoading)
+  if (isPatientLoading || isNotesLoading)
     return (
       <SkeletonContainer>
         <Skeleton active avatar round />
@@ -80,6 +90,7 @@ export default function PatientCard() {
             prefixOverview={`${t('patient-list.overview')}`}
             prefixLastNote={`${t('patient-list.last-note')}`}
             overview={patient?.data?.overview}
+            lastNote={notes?.data?.notes[0].note}
           />
           <Outlet />
         </>
