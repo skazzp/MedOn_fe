@@ -56,6 +56,7 @@ export function AppointmentsCard({
   localDoctor,
   role,
   meetingCount,
+  note,
   ...rest
 }: IAppointmentsCardProps) {
   const theme = useTheme();
@@ -145,7 +146,9 @@ export function AppointmentsCard({
         <Body>
           <ShowMore
             overview={patient?.overview}
+            lastNote={note}
             prefixOverview={`${t('appointment.preffix-overview')}`}
+            prefixLastNote={`${t('appointment.preffix-last-note')}`}
           />
         </Body>
         <AddLinkModal
