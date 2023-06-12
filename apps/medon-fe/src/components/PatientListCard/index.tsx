@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 
 import { ShowMore } from 'components/ShowMore';
 
+import { useGetPatientNotesQuery } from 'redux/api/patientApi';
+
 import { routes } from 'utils/constants/routes';
 import { getAgeByDateOfBirth } from 'utils/functions/getAgeByDateOfBirth';
 import {
@@ -30,6 +32,12 @@ export default function PatientListCard({
 }: IPatientListCardProps) {
   const { t } = useTranslation();
   const location = useLocation();
+
+  const { data: notes } = useGetPatientNotesQuery({
+    id: String(id),
+    page: 1,
+    limit: 1,
+  });
 
   let doctorLink = null;
 
@@ -62,7 +70,12 @@ export default function PatientListCard({
         </Options>
       </Header>
       <Body>
-        <ShowMore text={overview} prefix={`${t('patient-list.overview')}`} />
+        <ShowMore
+          overview={overview}
+          lastNote={notes?.data?.notes[0]?.note}
+          prefixOverview={`${t('patient-list.overview')}`}
+          prefixLastNote={`${t('patient-list.last-note')}`}
+        />
       </Body>
     </Container>
   );

@@ -79,7 +79,10 @@ export default function PatientCardNotes({
         {editMode ? (
           <TextArea value={editedNote} onChange={handleNoteChange} />
         ) : (
-          <ShowMore text={editedNote} prefix={`${t('show.prefix.note')}`} />
+          <ShowMore
+            overview={editedNote}
+            prefixOverview={`${t('show.prefix.note')}`}
+          />
         )}
         <BlocksButton>
           {editMode ? (

@@ -25,7 +25,6 @@ export const Time = styled.span`
 export const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  line-height: 1.5;
   padding: 1rem 0;
   margin: 1rem 0;
   border-top: 1px solid ${({ theme }) => theme.colors.gray_400};
