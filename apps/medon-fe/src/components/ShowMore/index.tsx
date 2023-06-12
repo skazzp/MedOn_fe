@@ -20,18 +20,15 @@ export function ShowMore({
 
   useEffect(() => {
     if (animateHeightRef.current) {
-      setAllHeight(animateHeightRef.current.offsetHeight);
+      setAllHeight(animateHeightRef.current?.offsetHeight);
+      if (allHeight > twoRowHeightPixel) {
+        setHeight(twoRowHeightPixel);
+        setIsButtonShow(true);
+      } else {
+        setIsButtonShow(false);
+      }
     }
-  }, [animateHeightRef]);
-
-  useEffect(() => {
-    if (allHeight > twoRowHeightPixel) {
-      setHeight(twoRowHeightPixel);
-      setIsButtonShow(true);
-    } else {
-      setIsButtonShow(false);
-    }
-  }, [allHeight]);
+  }, [allHeight, animateHeightRef]);
 
   const { t } = useTranslation();
 
