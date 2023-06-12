@@ -1,6 +1,8 @@
 import { Button } from 'antd';
 import styled from 'styled-components';
 
+import { ReactComponent as Plus } from 'assets/svgs/plus_listcard.svg';
+
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -66,4 +68,10 @@ export const StyledButton = styled(Button)`
   background: ${({ theme }) => theme.colors.btnGradient} !important;
   font-size: ${({ theme }) => theme.fontSizes.md} !important;
   font-family: ${({ theme }) => theme.fontFamily.sf_pro_text} !important;
+`;
+
+export const StyledPlus = styled(Plus)`
+  fill: ${({ theme }) => theme.colors.white};
+  width: 14px;
+  height: 14px;
 `;

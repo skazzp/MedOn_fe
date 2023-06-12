@@ -14,3 +14,16 @@ export interface ShowMoreTextHookReturnType {
   isShowMorePossible?: boolean;
   handleShowToggle?: () => void;
 }
+
+export interface IPatientNote {
+  id: number;
+  note: string;
+  doctorId: number;
+  patientId: number;
+  createdAt: string;
+  updatedAt: string;
+  doctor: {
+    firstName: string;
+    lastName: string;
+  };
+}

@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 import { Input, Spin } from 'antd';
 import { Link } from 'components/Link';
 import PatientListCard from 'components/PatientListCard';
-import { ReactComponent as Plus } from 'assets/svgs/plus_listcard.svg';
 import { useGetPatientsQuery } from 'redux/api/patientApi';
-import { defaultLimit, roles, routes } from 'utils/constants';
+import { defaultLimit, defaultPage, roles, routes } from 'utils/constants';
 import { useDebounce } from 'hooks/useDebounce';
 import { IPatient } from 'interfaces/patients';
 import { useAppSelector } from 'redux/hooks';
-import { Choose, Content, Wrapper, SpinWrapper, StyledButton } from './styles';
+import {
+  Choose,
+  Content,
+  Wrapper,
+  SpinWrapper,
+  StyledButton,
+  StyledPlus,
+} from './styles';
 
 export default function PatientsList() {
   const theme = useTheme();
@@ -29,7 +35,7 @@ export default function PatientsList() {
   });
 
   useEffect(() => {
-    setPage(1);
+    setPage(defaultPage);
     setPatients([]);
   }, [searchPhrase]);
 
@@ -58,7 +64,7 @@ export default function PatientsList() {
             to={routes.addPatient}
           >
             {t('patient-list.link')}
-            <Plus />
+            <StyledPlus />
           </Link>
         ) : null}
       </Choose>

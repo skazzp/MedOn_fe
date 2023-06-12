@@ -24,4 +24,5 @@ export interface IAppointmentsCardProps {
   };
   role?: string;
   meetingCount?: number;
+  note?: string;
 }

@@ -22,6 +22,7 @@ import {
 
 import {
   appointmentTimeFormat,
+  defaultPage,
   roles,
   routes,
   timeFormat,
@@ -29,6 +30,7 @@ import {
 
 import { useAppSelector } from 'redux/hooks';
 import { getUserSelector } from 'redux/features/userSlice/userSelectors';
+import { useGetPatientNotesQuery } from 'redux/api/patientApi';
 
 import { IAppointmentsCardProps } from './types';
 import {
@@ -58,6 +60,7 @@ export function AppointmentsCard({
   localDoctor,
   role,
   meetingCount,
+  note,
   ...rest
 }: IAppointmentsCardProps) {
   const theme = useTheme();
@@ -76,6 +79,12 @@ export function AppointmentsCard({
   } = useModal(false);
 
   const user = useAppSelector(getUserSelector);
+
+  const { data: notes } = useGetPatientNotesQuery({
+    id: patient?.id,
+    page: defaultPage,
+    limit: 1,
+  });
 
   return (
     <>
@@ -164,8 +173,10 @@ export function AppointmentsCard({
         </Header>
         <Body>
           <ShowMore
-            text={patient?.overview}
-            prefix={`${t('appointment.preffix-overview')}`}
+            overview={patient?.overview}
+            lastNote={notes?.data?.notes[0]?.note}
+            prefixOverview={`${t('appointment.preffix-overview')}`}
+            prefixLastNote={`${t('appointment.preffix-last-note')}`}
           />
         </Body>
         <AddLinkModal

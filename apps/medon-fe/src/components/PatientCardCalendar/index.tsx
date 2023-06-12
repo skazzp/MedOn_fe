@@ -11,7 +11,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useTheme } from 'styled-components';
 
 import { AddNote, Close } from 'assets/svgs/patientCard';
-import Plus from 'assets/svgs/plus_listcard.svg';
 
 import { Link } from 'components/Link';
 import { PatientNotes } from 'components/PatientNotes';
@@ -49,9 +48,13 @@ import { PatientNote } from 'interfaces/patients';
 import {
   AddNoteForm,
   Buttons,
+  ContainerTitle,
   MedicalTitle,
   StyledCalendar,
   StyledModal,
+  StyledPlus,
+  StyledPlusBook,
+  StyledPlusNote,
   StyledSelect,
   Title,
   Wrapper,
@@ -61,7 +64,8 @@ import useGetPatientAppointments from './hooks';
 
 export function PatientCardCalendar() {
   const [event, setEvent] = useState<Event>();
-  const [height, setHeight] = useState<Height>(0);
+  const [noteHeight, setNoteHeight] = useState<Height>(0);
+  const [calendarHeight, setCalendarHeight] = useState<Height>(0);
   const [textValue, setTextValue] = useState<string>('');
   const [notes, setNotes] = useState<PatientNote[]>([]);
   const { id = '' } = useParams<ParamsType>();
@@ -126,7 +130,13 @@ export function PatientCardCalendar() {
   return (
     <>
       <Title>
-        <h2>{t('patient-card.calendar.title')}</h2>
+        <ContainerTitle>
+          <h2>{t('patient-card.calendar.title')}</h2>
+          <StyledPlus
+            isCalendarOpen={calendarHeight === 'auto'}
+            onClick={() => setCalendarHeight(calendarHeight === 0 ? 'auto' : 0)}
+          />
+        </ContainerTitle>
         {role === roles.local && (
           <Link
             to={`${routes.patientCardAppointment}`}
@@ -134,24 +144,26 @@ export function PatientCardCalendar() {
             textcolor={theme.colors.white}
           >
             {t('patient-card.calendar.link')}
-            <img src={Plus} alt={`${t('patient-card.alt-image')}`} />
+            <StyledPlusBook />
           </Link>
         )}
       </Title>
-      <StyledCalendar
-        localizer={dayjsLocalizer(dayjs)}
-        defaultView={Views.WEEK}
-        views={[Views.WEEK]}
-        events={appointments}
-        dayPropGetter={getDayPropGetter}
-        eventPropGetter={getEventPropGetter}
-        onSelectEvent={handleEventSelect}
-        popup
-        selectable
-        timeslots={1}
-        step={60}
-      />
-      <Legend />
+      <AnimateHeight height={calendarHeight}>
+        <StyledCalendar
+          localizer={dayjsLocalizer(dayjs)}
+          defaultView={Views.WEEK}
+          views={[Views.WEEK]}
+          events={appointments}
+          dayPropGetter={getDayPropGetter}
+          eventPropGetter={getEventPropGetter}
+          onSelectEvent={handleEventSelect}
+          popup
+          selectable
+          timeslots={1}
+          step={60}
+        />
+        <Legend />
+      </AnimateHeight>
       <StyledModal
         title={`${t('patient-card.calendar.prefix-modal')} ${event?.title}`}
         open={isVisible}
@@ -205,15 +217,18 @@ export function PatientCardCalendar() {
           </span>
         </p>
       </StyledModal>
+
       <Button
         isfullwidth="true"
         textcolor={theme.colors.blue_500}
         bgcolor={theme.colors.blue_100}
-        onClick={() => setHeight(height === 0 ? 'auto' : 0)}
+        onClick={() => setNoteHeight(noteHeight === 0 ? 'auto' : 0)}
       >
         {t('patient-card.button')}
+        <StyledPlusNote isAddNotesOpen={noteHeight === 'auto'} />
       </Button>
-      <AnimateHeight height={height}>
+
+      <AnimateHeight height={noteHeight}>
         <AddNoteForm onSubmit={handleSubmit(handleAddNote)}>
           <TextareaAntD
             name="note"
@@ -236,7 +251,7 @@ export function PatientCardCalendar() {
               type="button"
               textcolor={theme.colors.gray_700}
               bgcolor={theme.colors.gray_400}
-              onClick={() => setHeight(height === 0 ? 'auto' : 0)}
+              onClick={() => setNoteHeight(noteHeight === 0 ? 'auto' : 0)}
             >
               <Close />
               {t('patient-card.notes.cancel-button')}

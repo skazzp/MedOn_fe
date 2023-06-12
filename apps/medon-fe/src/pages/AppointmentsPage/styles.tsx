@@ -25,6 +25,10 @@ export const Header = styled.div`
 
 export const StyledSelect = styled(Select)`
   width: 100px;
+  .ant-select-selector {
+    font-family: ${theme.fontFamily.sf_pro_text};
+    font-size: ${theme.fontSizes.md};
+  }
 `;
 
 export const Title = styled.div`

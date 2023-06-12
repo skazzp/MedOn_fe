@@ -121,11 +121,13 @@
     "no-data": "No patients are registered",
     "load-more": "Load More",
     "overview": "Overview: ",
+    "last-note": "Last Note: ",
     "preffix-remote": "Remote ",
-    "no-overview": "No information available"
+    "no-overview": "No information available",
+    "no-last-note": "This patient do not have any notes"
   },
   "patient-card": {
-    "button": "Add Patient Note +",
+    "button": "Add Patient Note",
     "modal": "Add Note",
     "overview": "Overview",
     "suffix-age": "years",
@@ -157,7 +159,14 @@
       "empty-notes": "No notes added yet",
       "add-button": "Add Note",
       "cancel-button": "Cancel",
-      "placeholder": "Add a note about the patient"
+      "placeholder": "Add a note about the patient",
+      "save-success": "Changes have been successfully saved.",
+      "error": "Failed to update note"
+    },
+    "buttons": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "edit": "Edit note"
     }
   },
   "show": {
@@ -421,7 +430,8 @@
     "remove-modal-title": "Remove Appointment",
     "remove-modal-message": "Are you sure you want to remove this appointment?",
     "remove-modal-success": "Appointment removed successfully!",
-    "remove-modal-error": "Appointment cannot be removed!"
+    "remove-modal-error": "Appointment cannot be removed!",
+    "preffix-last-note": "Last Note: "
   },
   "appointments": {
     "title": "Appointments",
