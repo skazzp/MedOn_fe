@@ -127,7 +127,7 @@
     "no-last-note": "This patient do not have any notes"
   },
   "patient-card": {
-    "button": "Add Patient Note +",
+    "button": "Add Patient Note",
     "modal": "Add Note",
     "overview": "Overview",
     "suffix-age": "years",

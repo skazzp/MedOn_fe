@@ -7,6 +7,7 @@ export const StyledLink = styled(Link)<LinkStyledProps>`
   text-decoration: transparent;
   display: flex;
   justify-content: center;
+  align-items: center;
   cursor: pointer;
   font-family: ${({ theme }) => theme.fontFamily.sf_pro_text};
   background: ${({ bgcolor }) => bgcolor};
