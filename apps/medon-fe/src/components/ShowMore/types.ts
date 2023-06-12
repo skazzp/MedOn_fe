@@ -1,11 +1,6 @@
-export interface ShowMoreTextHookReturnType {
-  formatedText?: string;
-  showMore?: boolean;
-  isShowMorePossible?: boolean;
-  handleShowToggle?: () => void;
-}
-
 export interface IShowMoreProps {
-  text?: string;
-  prefix?: string;
+  overview?: string;
+  lastNote?: string;
+  prefixOverview?: string;
+  prefixLastNote?: string;
 }
