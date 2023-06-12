@@ -82,6 +82,19 @@ export const patientApi = createApi({
       },
       invalidatesTags: ['patientInfo'],
     }),
+    updatePatientNote: builder.mutation<
+      IServerResponse<PatientNote>,
+      { patientId: number; noteId: number; updatedNote: string }
+    >({
+      query({ patientId, noteId, updatedNote }) {
+        return {
+          url: `patient-notes/update/${patientId}/${noteId}`,
+          method: 'PATCH',
+          body: { note: updatedNote, patientId, noteId },
+        };
+      },
+      invalidatesTags: ['notes'],
+    }),
   }),
 });
 
@@ -92,4 +105,5 @@ export const {
   useCreatePatientNoteMutation,
   useGetPatientNotesQuery,
   useUpdatePatientMutation,
+  useUpdatePatientNoteMutation,
 } = patientApi;
