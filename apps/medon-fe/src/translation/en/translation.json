@@ -147,7 +147,10 @@
       "modal-link-unavailable": "This link is for doctors who have this appointment",
       "legend-title": "Legend:",
       "appointment-you": "Appointments with you",
-      "appointment-others": "Appointments with other doctors"
+      "appointment-others": "Appointments with other doctors",
+      "prefix-doctor": "Dr. ",
+      "local-doctor": "Local Doctor: ",
+      "remote-doctor": "Remote Doctor: "
     },
     "notes": {
       "prefix-doctor": "Dr. ",

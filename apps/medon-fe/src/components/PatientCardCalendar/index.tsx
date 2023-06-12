@@ -190,6 +190,20 @@ export function PatientCardCalendar() {
             <span>{t('patient-card.calendar.modal-link-unavailable')}</span>
           )}
         </p>
+        <p>
+          <strong>{t('patient-card.calendar.local-doctor')}</strong>
+          <span>
+            <strong>{t('patient-card.calendar.prefix-doctor')}</strong>
+            {event?.resource.localDoctor}
+          </span>
+        </p>
+        <p>
+          <strong>{t('patient-card.calendar.remote-doctor')}</strong>
+          <span>
+            <strong>{t('patient-card.calendar.prefix-doctor')}</strong>
+            {event?.resource.remoteDoctor}
+          </span>
+        </p>
       </StyledModal>
       <Button
         isfullwidth="true"

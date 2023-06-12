@@ -27,6 +27,8 @@ const useGetPatientAppointments = (id: string) => {
                 isColor:
                   elem.localDoctorId === user.id ||
                   elem.remoteDoctorId === user.id,
+                localDoctor: `${elem.localDoctor?.firstName} ${elem.localDoctor?.lastName}`,
+                remoteDoctor: `${elem.remoteDoctor?.firstName} ${elem.remoteDoctor?.lastName}`,
               },
             }))
           : emptyArray,
