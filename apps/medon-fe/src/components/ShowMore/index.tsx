@@ -13,22 +13,20 @@ export function ShowMore({
   prefixLastNote,
 }: IShowMoreProps) {
   const [height, setHeight] = useState<Height>(twoRowHeightPixel);
-  const [allHeight, setAllHeight] = useState<number>(0);
+  const [allHeight, setAllHeight] = useState<number | null>(null);
   const [isButtonShow, setIsButtonShow] = useState<boolean>(false);
 
   const animateHeightRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (animateHeightRef.current) {
-      setAllHeight(animateHeightRef.current?.offsetHeight);
-      if (allHeight > twoRowHeightPixel) {
-        setHeight(twoRowHeightPixel);
-        setIsButtonShow(true);
-      } else {
-        setIsButtonShow(false);
-      }
+    setAllHeight(Number(animateHeightRef.current?.offsetHeight));
+    if (Number(allHeight) > twoRowHeightPixel) {
+      setHeight(twoRowHeightPixel);
+      setIsButtonShow(true);
+    } else {
+      setIsButtonShow(false);
     }
-  }, [allHeight, animateHeightRef]);
+  }, [allHeight, animateHeightRef, overview, lastNote]);
 
   const { t } = useTranslation();
 
