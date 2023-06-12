@@ -193,14 +193,14 @@ export function PatientCardCalendar() {
         <p>
           <strong>{t('patient-card.calendar.local-doctor')}</strong>
           <span>
-            <strong>{t('patient-card.calendar.prefix-doctor')}</strong>
+            {t('patient-card.calendar.prefix-doctor')}
             {event?.resource.localDoctor}
           </span>
         </p>
         <p>
           <strong>{t('patient-card.calendar.remote-doctor')}</strong>
           <span>
-            <strong>{t('patient-card.calendar.prefix-doctor')}</strong>
+            {t('patient-card.calendar.prefix-doctor')}
             {event?.resource.remoteDoctor}
           </span>
         </p>
