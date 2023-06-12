@@ -13,7 +13,7 @@ import { NotificationType, TimerType } from 'components/Notification/types';
 import { localDoctorRoutes, routes } from 'utils/constants/routes';
 import { roles } from 'utils/constants/roles';
 
-import { Container, Wrapper } from './styles';
+import { Container, Wrapper, NotificationContainer } from './styles';
 import { useNotification } from './hooks/useNotification';
 
 interface IProps {
@@ -56,28 +56,31 @@ export const PrivateRoute = ({ component }: IProps) => {
     <Container>
       <Navigation />
       <Wrapper>
-        {response?.data && notifications.upcomingAppointment && (
-          <Notification
-            user={response.data}
-            appointment={notifications.upcomingAppointment}
-            timerType={TimerType.CountDown}
-            renderTitle={(timer: string) =>
-              `You will have an appointment in ${timer} minutes with:`
-            }
-            type={NotificationType.Upcoming}
-          />
-        )}
-        {response?.data && notifications.currentAppointment && (
-          <Notification
-            user={response.data}
-            appointment={notifications.currentAppointment}
-            timerType={TimerType.Counter}
-            renderTitle={(timer: string) =>
-              `Your appointment has already started and lasts ${timer} minutes with:`
-            }
-            type={NotificationType.Current}
-          />
-        )}
+        <NotificationContainer>
+          {response?.data && notifications.upcomingAppointment && (
+            <Notification
+              user={response.data}
+              appointment={notifications.upcomingAppointment}
+              timerType={TimerType.CountDown}
+              renderTitle={(timer: string) =>
+                `You will have an appointment in ${timer} minutes with:`
+              }
+              type={NotificationType.Upcoming}
+            />
+          )}
+          {response?.data && notifications.currentAppointment && (
+            <Notification
+              user={response.data}
+              appointment={notifications.currentAppointment}
+              timerType={TimerType.Counter}
+              renderTitle={(timer: string) =>
+                `Your appointment has already started and lasts ${timer} minutes with:`
+              }
+              type={NotificationType.Current}
+            />
+          )}
+        </NotificationContainer>
+
         {component}
       </Wrapper>
     </Container>
