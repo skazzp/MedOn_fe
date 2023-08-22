@@ -45,6 +45,7 @@ function App() {
     }
     if (error) {
       persistedStore.purge();
+      
       dispatch(logout());
     }
   }, [data, error, dispatch, isLoggedIn]);
