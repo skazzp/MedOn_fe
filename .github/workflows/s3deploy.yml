@@ -2,7 +2,10 @@ name: Deploy WebSite
 on:
   push:
     branches:
-      - develop
+      - 'develop'
+  pull_request:
+    branches:
+      - 'develop'
 
 jobs:
   deploy:
