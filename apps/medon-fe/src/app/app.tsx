@@ -44,7 +44,6 @@ function App() {
       dispatch(setUser(data.data));
     }
     if (error) {
-      console.log(error)
       persistedStore.purge();
       dispatch(logout());
     }
