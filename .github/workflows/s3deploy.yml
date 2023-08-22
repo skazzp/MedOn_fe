@@ -2,7 +2,7 @@ name: Deploy WebSite
 on:
   push:
     branches:
-      - deploy-client
+      - develop
 
 jobs:
   deploy:
@@ -17,9 +17,9 @@ jobs:
       - name: Create env file
         run: |
           touch ./apps/medon-fe/.env
-          echo NX_API_URL=${{ vars.NX_API_URL }} >> ./apps/medon-fe/.env
-          echo NX_API_GOOGLE_ROUTE=${{ vars.NX_API_GOOGLE_ROUTE }} >> ./apps/medon-fe/.env
-          echo NX_PUBLIC_S3_BUCKET_URL=${{ vars.NX_PUBLIC_S3_BUCKET_URL }} >> ./apps/medon-fe/.env
+          echo NX_API_URL=${{ secrets.NX_API_URL }} >> ./apps/medon-fe/.env
+          echo NX_API_GOOGLE_ROUTE=${{ secrets.NX_API_GOOGLE_ROUTE }} >> ./apps/medon-fe/.env
+          echo NX_PUBLIC_S3_BUCKET_URL=${{ secrets.NX_PUBLIC_S3_BUCKET_URL }} >> ./apps/medon-fe/.env
           cat ./apps/medon-fe/.env
       - name: Build
         run: npm run build
@@ -28,7 +28,7 @@ jobs:
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@master
         env:
-          AWS_S3_BUCKET: ${{ vars.S3_BUCKET }}
+          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SOURCE_DIR: 'dist/apps/medon-fe'
